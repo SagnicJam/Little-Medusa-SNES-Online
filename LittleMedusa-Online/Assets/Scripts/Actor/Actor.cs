@@ -704,9 +704,9 @@ public abstract class Actor : TileData
         //Debug.Log("acurrentMovePointCellPosition " + currentMovePointCellPosition + "  previousMovePointCellPosition " + previousMovePointCellPosition);
     }
 
-    public bool IsActorInputMovableInDirection(FaceDirection direction)
+    public bool IsActorPathBlockedForInputDrivenMovementByAnotherActor(FaceDirection direction)
     {
-        Vector3Int cellPos =  GridManager.instance.grid.WorldToCell(actorTransform.position+ GridManager.instance.GetFacingDirectionOffsetVector3(direction));
+        Vector3Int cellPos =  GridManager.instance.grid.WorldToCell(actorTransform.position+ GridManager.instance.GetFacingDirectionOffsetVector3(direction));        
         Actor actor = GridManager.instance.GetActorOnPos(cellPos);
         if (!isInFlyingState)
         {

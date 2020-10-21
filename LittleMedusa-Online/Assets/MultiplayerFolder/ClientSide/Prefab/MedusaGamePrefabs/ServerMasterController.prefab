@@ -311,7 +311,8 @@ MonoBehaviour:
   projectileThrownType: 2
   petrificationTimeTickRate: 1000
   maxHP: 8
-  walkSpeed: 4.5
+  walkSpeed: 4
+  damagePerStoppedHit: 0
   primaryMoveAnimationSpeed: 0.2
   normalAnimationSpeed: 0.1
   primaryMoveDamage: 23

@@ -57,6 +57,10 @@ public class Hero : Actor
     public void SetActorAnimationState(PlayerAnimationEvents playerAnimationEvents)
     {
         primaryMoveUseAnimationAction.isBeingUsed = playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed;
+        if(playerAnimationEvents.isPlacingBoulderAnimationPlayed)
+        {
+            Debug.LogError("playerAnimationEvents.isPlacingBoulderAnimationPlayed ");
+        }
         isPlacingBoulderAnimationPlayed = playerAnimationEvents.isPlacingBoulderAnimationPlayed;
     }
 
@@ -137,7 +141,7 @@ public class Hero : Actor
                     {
                         //play animation here 
                         //send command to server of placement
-
+                        Debug.LogError("chala");
                         isPlacingBoulderAnimationPlayed = true;
                     }
                     else
@@ -322,7 +326,8 @@ public class Hero : Actor
             if (inputs[(int)EnumData.Inputs.Up])
             {
                 Facing = FaceDirection.Up;
-                if (IsActorInputMovableInDirection(Facing))
+                Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                if (IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
                 {
                     currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 }
@@ -330,7 +335,7 @@ public class Hero : Actor
             else if (inputs[(int)EnumData.Inputs.Left])
             {
                 Facing = FaceDirection.Left;
-                if (IsActorInputMovableInDirection(Facing))
+                if (IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
                 {
                     currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 }
@@ -338,7 +343,7 @@ public class Hero : Actor
             else if (inputs[(int)EnumData.Inputs.Down])
             {
                 Facing = FaceDirection.Down;
-                if (IsActorInputMovableInDirection(Facing))
+                if (IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
                 {
                     currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 }
@@ -346,7 +351,7 @@ public class Hero : Actor
             else if (inputs[(int)EnumData.Inputs.Right])
             {
                 Facing = FaceDirection.Right;
-                if (IsActorInputMovableInDirection(Facing))
+                if (IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
                 {
                     currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 }
