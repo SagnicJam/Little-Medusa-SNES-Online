@@ -1,0 +1,56 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ClientSend : MonoBehaviour
+{
+
+    private static void SendTCPData(Packet packet)
+    {
+        packet.WriteLength();
+        Client.instance.tcp.SendData(packet);
+    }
+
+    private static void SendUDPData(Packet packet)
+    {
+        packet.WriteLength();
+        Client.instance.udp.SendData(packet);
+    }
+
+    #region Packets
+    public static void WelcomeReceived()
+    {
+        using (Packet packet = new Packet((int)ClientPackets.welcomeReceived))
+        {
+            packet.Write(Client.instance.myID);
+            packet.Write(UIManager.instance.usernameField.text);
+            SendTCPData(packet);
+        }
+    }
+
+    public static void PlayerMovement(List<InputCommands>inputCommands)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.playerMovement))
+        {
+            packet.Write(inputCommands.Count);
+
+            for (int i = 0; i < inputCommands.Count; i++)
+            {
+                packet.Write(inputCommands[i].commands.Length);
+                foreach (bool input in inputCommands[i].commands)
+                {
+                    packet.Write(input);
+                }
+                packet.Write(inputCommands[i].sequenceNumber);
+                Debug.LogWarning("<color=green>Sending inputs packet to server </color>playerMovingCommandSequenceNumber : " + inputCommands[i].sequenceNumber+" w "+inputCommands[i].commands[0]+" a "+inputCommands[i].commands[1] + " s " + inputCommands[i].commands[2] + " d " + inputCommands[i].commands[3]);
+
+                for (int j = 0; j < inputCommands[i].inputCommandHistoryList.Count; j++)
+                {
+
+                }
+            }
+            SendUDPData(packet);
+        }
+    }
+    #endregion
+}

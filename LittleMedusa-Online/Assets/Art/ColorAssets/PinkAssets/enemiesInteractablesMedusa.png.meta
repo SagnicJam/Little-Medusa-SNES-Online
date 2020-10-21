@@ -1,0 +1,3731 @@
+fileFormatVersion: 2
+guid: 8e34980fdb1e55847988ce0586fb2f16
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7128403793546860397
+    second: enemiesInteractablesMedusa_0
+  - first:
+      213: 1255341559169742518
+    second: enemiesInteractablesMedusa_1
+  - first:
+      213: -6817569768849651576
+    second: enemiesInteractablesMedusa_2
+  - first:
+      213: 5820510911423901815
+    second: enemiesInteractablesMedusa_3
+  - first:
+      213: 7006804058624909361
+    second: enemiesInteractablesMedusa_4
+  - first:
+      213: 8104844613138589786
+    second: enemiesInteractablesMedusa_5
+  - first:
+      213: -1951399406356728115
+    second: enemiesInteractablesMedusa_6
+  - first:
+      213: -4000758670133409779
+    second: enemiesInteractablesMedusa_7
+  - first:
+      213: 8624944161861121019
+    second: enemiesInteractablesMedusa_8
+  - first:
+      213: -454400905257895371
+    second: enemiesInteractablesMedusa_9
+  - first:
+      213: -1152203642188442334
+    second: enemiesInteractablesMedusa_10
+  - first:
+      213: -121633663736385482
+    second: enemiesInteractablesMedusa_11
+  - first:
+      213: -8278534672046034793
+    second: enemiesInteractablesMedusa_12
+  - first:
+      213: 8161326168823955075
+    second: enemiesInteractablesMedusa_13
+  - first:
+      213: 4130237427140984302
+    second: enemiesInteractablesMedusa_14
+  - first:
+      213: -4582381342387592128
+    second: enemiesInteractablesMedusa_15
+  - first:
+      213: -7353274011384497836
+    second: enemiesInteractablesMedusa_16
+  - first:
+      213: -7190919060804520981
+    second: enemiesInteractablesMedusa_17
+  - first:
+      213: 4756717387361153914
+    second: enemiesInteractablesMedusa_18
+  - first:
+      213: -8520558439623955099
+    second: enemiesInteractablesMedusa_19
+  - first:
+      213: 8450522983228015108
+    second: enemiesInteractablesMedusa_20
+  - first:
+      213: -4497520559056431738
+    second: enemiesInteractablesMedusa_21
+  - first:
+      213: -4321898254495637320
+    second: enemiesInteractablesMedusa_22
+  - first:
+      213: 8599813833102577452
+    second: enemiesInteractablesMedusa_23
+  - first:
+      213: 556155277839197334
+    second: enemiesInteractablesMedusa_24
+  - first:
+      213: 324673946444733190
+    second: enemiesInteractablesMedusa_25
+  - first:
+      213: 9136854023962592569
+    second: enemiesInteractablesMedusa_26
+  - first:
+      213: -8696682573477391892
+    second: enemiesInteractablesMedusa_27
+  - first:
+      213: 8411867806688940998
+    second: enemiesInteractablesMedusa_28
+  - first:
+      213: -3905478272961665791
+    second: enemiesInteractablesMedusa_29
+  - first:
+      213: -743918109432047298
+    second: enemiesInteractablesMedusa_30
+  - first:
+      213: 8395305771306155385
+    second: enemiesInteractablesMedusa_31
+  - first:
+      213: 5654621328120817800
+    second: enemiesInteractablesMedusa_32
+  - first:
+      213: -7143205821527280932
+    second: enemiesInteractablesMedusa_33
+  - first:
+      213: 5016864819308590154
+    second: enemiesInteractablesMedusa_34
+  - first:
+      213: -5476527439175454258
+    second: enemiesInteractablesMedusa_35
+  - first:
+      213: 3539505675550606513
+    second: enemiesInteractablesMedusa_36
+  - first:
+      213: 8682575820102020123
+    second: enemiesInteractablesMedusa_37
+  - first:
+      213: 4149107491421283024
+    second: enemiesInteractablesMedusa_38
+  - first:
+      213: -910170060553884126
+    second: enemiesInteractablesMedusa_39
+  - first:
+      213: 7499382238968646585
+    second: enemiesInteractablesMedusa_40
+  - first:
+      213: -1175007136607600408
+    second: enemiesInteractablesMedusa_41
+  - first:
+      213: 3157666826438250744
+    second: enemiesInteractablesMedusa_42
+  - first:
+      213: 7718515357799426450
+    second: enemiesInteractablesMedusa_43
+  - first:
+      213: 7314403207331579959
+    second: enemiesInteractablesMedusa_44
+  - first:
+      213: 5422875375241223520
+    second: enemiesInteractablesMedusa_45
+  - first:
+      213: -2147399170553428388
+    second: enemiesInteractablesMedusa_46
+  - first:
+      213: -2792017365267415079
+    second: enemiesInteractablesMedusa_47
+  - first:
+      213: 570508353877135545
+    second: enemiesInteractablesMedusa_48
+  - first:
+      213: -2184302080082805109
+    second: enemiesInteractablesMedusa_49
+  - first:
+      213: 3618618958871115234
+    second: enemiesInteractablesMedusa_50
+  - first:
+      213: -4681229050164237915
+    second: enemiesInteractablesMedusa_51
+  - first:
+      213: -1536776252824179767
+    second: enemiesInteractablesMedusa_52
+  - first:
+      213: -2615669361444931076
+    second: enemiesInteractablesMedusa_53
+  - first:
+      213: 2395341351078700872
+    second: enemiesInteractablesMedusa_54
+  - first:
+      213: -9186328622268647156
+    second: enemiesInteractablesMedusa_55
+  - first:
+      213: 2528335122740360581
+    second: enemiesInteractablesMedusa_56
+  - first:
+      213: -2687521320619258062
+    second: enemiesInteractablesMedusa_57
+  - first:
+      213: -6815898031259212021
+    second: enemiesInteractablesMedusa_58
+  - first:
+      213: -8518229212058281051
+    second: enemiesInteractablesMedusa_59
+  - first:
+      213: -1614596074030133927
+    second: enemiesInteractablesMedusa_60
+  - first:
+      213: 4827823560564451538
+    second: enemiesInteractablesMedusa_61
+  - first:
+      213: 8280197234311336818
+    second: enemiesInteractablesMedusa_62
+  - first:
+      213: 8136782221255399912
+    second: enemiesInteractablesMedusa_63
+  - first:
+      213: -1886230143502148885
+    second: enemiesInteractablesMedusa_64
+  - first:
+      213: -4822584269212022201
+    second: enemiesInteractablesMedusa_65
+  - first:
+      213: -2234567924194102891
+    second: enemiesInteractablesMedusa_66
+  - first:
+      213: 4330291472140271275
+    second: enemiesInteractablesMedusa_67
+  - first:
+      213: -1511600425969100397
+    second: enemiesInteractablesMedusa_68
+  - first:
+      213: 8266594858856756167
+    second: enemiesInteractablesMedusa_69
+  - first:
+      213: 3042096729039127943
+    second: enemiesInteractablesMedusa_70
+  - first:
+      213: -4434409120874694286
+    second: enemiesInteractablesMedusa_71
+  - first:
+      213: -1084372850274298548
+    second: enemiesInteractablesMedusa_72
+  - first:
+      213: 8030553017410919156
+    second: enemiesInteractablesMedusa_73
+  - first:
+      213: -9062529124756593654
+    second: enemiesInteractablesMedusa_74
+  - first:
+      213: 1505707590315746829
+    second: enemiesInteractablesMedusa_75
+  - first:
+      213: -9059354557470316385
+    second: enemiesInteractablesMedusa_76
+  - first:
+      213: 8284882201603193243
+    second: enemiesInteractablesMedusa_77
+  - first:
+      213: -1169456896180375617
+    second: enemiesInteractablesMedusa_78
+  - first:
+      213: -2062275497743174988
+    second: enemiesInteractablesMedusa_79
+  - first:
+      213: -9013729807080187174
+    second: enemiesInteractablesMedusa_80
+  - first:
+      213: 6834207645310268006
+    second: enemiesInteractablesMedusa_81
+  - first:
+      213: 757339195626414102
+    second: enemiesInteractablesMedusa_82
+  - first:
+      213: 3756761428728007288
+    second: enemiesInteractablesMedusa_83
+  - first:
+      213: -6004311240128084489
+    second: enemiesInteractablesMedusa_84
+  - first:
+      213: 4795728080198389794
+    second: enemiesInteractablesMedusa_85
+  - first:
+      213: 7582583585962691251
+    second: enemiesInteractablesMedusa_86
+  - first:
+      213: -3219659161172526423
+    second: enemiesInteractablesMedusa_87
+  - first:
+      213: -8783499355894366432
+    second: enemiesInteractablesMedusa_88
+  - first:
+      213: 6853669573219874356
+    second: enemiesInteractablesMedusa_89
+  - first:
+      213: -295879850061160071
+    second: enemiesInteractablesMedusa_90
+  - first:
+      213: -144401756098466388
+    second: enemiesInteractablesMedusa_91
+  - first:
+      213: -3737052396098159323
+    second: enemiesInteractablesMedusa_92
+  - first:
+      213: 1504332266923474549
+    second: enemiesInteractablesMedusa_93
+  - first:
+      213: -2136825039796454927
+    second: enemiesInteractablesMedusa_94
+  - first:
+      213: -521360818189637849
+    second: enemiesInteractablesMedusa_95
+  - first:
+      213: -4026030120715517606
+    second: enemiesInteractablesMedusa_96
+  - first:
+      213: 4288539390687470845
+    second: enemiesInteractablesMedusa_97
+  - first:
+      213: 1475547728937427075
+    second: enemiesInteractablesMedusa_98
+  - first:
+      213: 7417442413566737738
+    second: enemiesInteractablesMedusa_99
+  - first:
+      213: -76712688229028969
+    second: enemiesInteractablesMedusa_100
+  - first:
+      213: 5538629461689938256
+    second: enemiesInteractablesMedusa_101
+  - first:
+      213: -780489540235199957
+    second: enemiesInteractablesMedusa_102
+  - first:
+      213: 9156589114686444239
+    second: enemiesInteractablesMedusa_103
+  - first:
+      213: 2035935349078449006
+    second: enemiesInteractablesMedusa_104
+  - first:
+      213: 5133664070094070203
+    second: enemiesInteractablesMedusa_105
+  - first:
+      213: 156852214212844182
+    second: enemiesInteractablesMedusa_106
+  - first:
+      213: 1058704559291966562
+    second: enemiesInteractablesMedusa_107
+  - first:
+      213: 1759351943954279435
+    second: enemiesInteractablesMedusa_108
+  - first:
+      213: 1044403825733697277
+    second: enemiesInteractablesMedusa_109
+  - first:
+      213: -4312922424068064166
+    second: enemiesInteractablesMedusa_110
+  - first:
+      213: -6252163841692530361
+    second: enemiesInteractablesMedusa_111
+  - first:
+      213: 6000547941346750167
+    second: enemiesInteractablesMedusa_112
+  - first:
+      213: 5706276426653920116
+    second: enemiesInteractablesMedusa_113
+  - first:
+      213: 3053573657157783048
+    second: enemiesInteractablesMedusa_114
+  - first:
+      213: 6724275190763062662
+    second: enemiesInteractablesMedusa_115
+  - first:
+      213: 4299814595202790064
+    second: enemiesInteractablesMedusa_116
+  - first:
+      213: 3124614492009000968
+    second: enemiesInteractablesMedusa_117
+  - first:
+      213: -245464303183561775
+    second: enemiesInteractablesMedusa_118
+  - first:
+      213: 3617738639044145670
+    second: enemiesInteractablesMedusa_119
+  - first:
+      213: 5988138533177014437
+    second: enemiesInteractablesMedusa_120
+  - first:
+      213: 8332858638021077745
+    second: enemiesInteractablesMedusa_121
+  - first:
+      213: 3317484089128515017
+    second: enemiesInteractablesMedusa_122
+  - first:
+      213: -9097498559642338597
+    second: enemiesInteractablesMedusa_123
+  - first:
+      213: -2448998323040975488
+    second: enemiesInteractablesMedusa_124
+  - first:
+      213: 4178729015329992119
+    second: enemiesInteractablesMedusa_125
+  - first:
+      213: 4185792479102870514
+    second: enemiesInteractablesMedusa_126
+  - first:
+      213: -8534980539063045737
+    second: enemiesInteractablesMedusa_127
+  - first:
+      213: -2256317845470355808
+    second: enemiesInteractablesMedusa_128
+  - first:
+      213: -2576202670843241535
+    second: enemiesInteractablesMedusa_129
+  - first:
+      213: -8086380909766165873
+    second: enemiesInteractablesMedusa_130
+  - first:
+      213: 1106158767430278069
+    second: enemiesInteractablesMedusa_131
+  - first:
+      213: 1102528592907449352
+    second: enemiesInteractablesMedusa_132
+  - first:
+      213: 2134681345617179234
+    second: enemiesInteractablesMedusa_133
+  - first:
+      213: 2328955994180946313
+    second: enemiesInteractablesMedusa_134
+  - first:
+      213: 3830249940648136866
+    second: enemiesInteractablesMedusa_135
+  - first:
+      213: 1901582062538155293
+    second: enemiesInteractablesMedusa_136
+  - first:
+      213: -8085820770240457157
+    second: enemiesInteractablesMedusa_137
+  - first:
+      213: -2741398861896264355
+    second: enemiesInteractablesMedusa_138
+  - first:
+      213: -7646735965968240678
+    second: enemiesInteractablesMedusa_139
+  - first:
+      213: 5644074882602766700
+    second: enemiesInteractablesMedusa_140
+  - first:
+      213: 402570333176671086
+    second: enemiesInteractablesMedusa_141
+  - first:
+      213: 4168223966472634968
+    second: enemiesInteractablesMedusa_142
+  - first:
+      213: -1215574582329287582
+    second: enemiesInteractablesMedusa_143
+  - first:
+      213: 6124174069693226887
+    second: enemiesInteractablesMedusa_144
+  - first:
+      213: 8899177877129136443
+    second: enemiesInteractablesMedusa_145
+  - first:
+      213: -5745978536526593425
+    second: enemiesInteractablesMedusa_146
+  - first:
+      213: -3406459901070908066
+    second: enemiesInteractablesMedusa_147
+  - first:
+      213: 379492476698421914
+    second: enemiesInteractablesMedusa_148
+  - first:
+      213: 3730826005098091469
+    second: enemiesInteractablesMedusa_149
+  - first:
+      213: 3954893875924862814
+    second: enemiesInteractablesMedusa_150
+  - first:
+      213: -432631150577191746
+    second: enemiesInteractablesMedusa_151
+  - first:
+      213: -2527307739630114281
+    second: enemiesInteractablesMedusa_152
+  - first:
+      213: 7695107853497496733
+    second: enemiesInteractablesMedusa_153
+  - first:
+      213: -2698262031099605032
+    second: enemiesInteractablesMedusa_154
+  - first:
+      213: 4634313309096310081
+    second: enemiesInteractablesMedusa_155
+  - first:
+      213: -2103435064602109346
+    second: enemiesInteractablesMedusa_156
+  - first:
+      213: 47675565547089910
+    second: enemiesInteractablesMedusa_157
+  - first:
+      213: -3824983009013884975
+    second: enemiesInteractablesMedusa_158
+  - first:
+      213: -6098260296327023747
+    second: enemiesInteractablesMedusa_159
+  - first:
+      213: 3265633182647568033
+    second: enemiesInteractablesMedusa_160
+  - first:
+      213: 6818684692162753827
+    second: enemiesInteractablesMedusa_161
+  - first:
+      213: 9177940144999156079
+    second: enemiesInteractablesMedusa_162
+  - first:
+      213: 5655700192051210935
+    second: enemiesInteractablesMedusa_163
+  - first:
+      213: 3050735075678550366
+    second: enemiesInteractablesMedusa_164
+  - first:
+      213: 1185096992526901246
+    second: enemiesInteractablesMedusa_13
+  - first:
+      213: -5889830386639849651
+    second: enemiesInteractablesMedusa_39
+  - first:
+      213: -5036111380126087034
+    second: enemiesInteractablesMedusa_40
+  - first:
+      213: -8483194396795290149
+    second: enemiesInteractablesMedusa_41
+  - first:
+      213: 1472541028099126991
+    second: enemiesInteractablesMedusa_28
+  - first:
+      213: 7507428229492962402
+    second: enemiesInteractablesMedusa_37
+  - first:
+      213: -2859970437522627264
+    second: enemiesInteractablesMedusa_38
+  - first:
+      213: -8065711429698062930
+    second: enemiesInteractablesMedusa_43
+  - first:
+      213: 4492806108252865529
+    second: enemiesInteractablesMedusa_74
+  - first:
+      213: -460527281067599538
+    second: enemiesInteractablesMedusa_86
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 1
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 512
+    resizeAlgorithm: 1
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 512
+    resizeAlgorithm: 1
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 512
+    resizeAlgorithm: 1
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 512
+    resizeAlgorithm: 1
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 368
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 398a7168482d21d90800000000000000
+      internalID: -7128403793546860397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 368
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b6f81a3f7edb6110800000000000000
+      internalID: 1255341559169742518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 368
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88846409a602361a0800000000000000
+      internalID: -6817569768849651576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 368
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 770f4b6e5db96c050800000000000000
+      internalID: 5820510911423901815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 368
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1306a1dea2b2d3160800000000000000
+      internalID: 7006804058624909361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eedf2ca9e0d815930800000000000000
+      internalID: 4130237427140984302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_15
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0442c95927c1860c0800000000000000
+      internalID: -4582381342387592128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_16
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 459b057fe3ce3f990800000000000000
+      internalID: -7353274011384497836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_17
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 352
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be3392c9639b43c90800000000000000
+      internalID: -7190919060804520981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a73f59af241430240800000000000000
+      internalID: 4756717387361153914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_19
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56de1463e35e0c980800000000000000
+      internalID: -8520558439623955099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_20
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 402849561e9464570800000000000000
+      internalID: 8450522983228015108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_21
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 336
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 685dc6361e89591c0800000000000000
+      internalID: -4497520559056431738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b028699f688504c0800000000000000
+      internalID: -4321898254495637320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_23
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2fc1901e1da85770800000000000000
+      internalID: 8599813833102577452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_24
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 694609f474cd7b700800000000000000
+      internalID: 556155277839197334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_25
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60b99adeb39718400800000000000000
+      internalID: 324673946444733190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_26
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93583ee5350acce70800000000000000
+      internalID: 9136854023962592569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_27
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce1dc83c64d2f4780800000000000000
+      internalID: -8696682573477391892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_29
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1052d1ee334fcc9c0800000000000000
+      internalID: -3905478272961665791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_30
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e399251cb621da5f0800000000000000
+      internalID: -743918109432047298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_31
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97d7d776e1e128470800000000000000
+      internalID: 8395305771306155385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_32
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8882df17320497e40800000000000000
+      internalID: 5654621328120817800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_33
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd23d52d62c3edc90800000000000000
+      internalID: -7143205821527280932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_34
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a44fa0109fb7f9540800000000000000
+      internalID: 5016864819308590154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_35
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec174495f477ff3b0800000000000000
+      internalID: -5476527439175454258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_36
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 312
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b44ca7a8a9de1130800000000000000
+      internalID: 3539505675550606513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_53
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf9b33df29643bbd0800000000000000
+      internalID: -2615669361444931076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_54
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 847a9da8446fd3120800000000000000
+      internalID: 2395341351078700872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_55
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c097caf0aca938080800000000000000
+      internalID: -9186328622268647156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_56
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58535100663761320800000000000000
+      internalID: 2528335122740360581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_57
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23f4336199104bad0800000000000000
+      internalID: -2687521320619258062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_58
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b07a28d4ad01961a0800000000000000
+      internalID: -6815898031259212021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_59
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ab19e3c9ab29c980800000000000000
+      internalID: -8518229212058281051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_60
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95d81b7dc6dc799e0800000000000000
+      internalID: -1614596074030133927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_61
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d8a4bd03ffdff240800000000000000
+      internalID: 4827823560564451538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_62
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2739c45a38b29e270800000000000000
+      internalID: 8280197234311336818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_63
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e954a8d158abe070800000000000000
+      internalID: 8136782221255399912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_64
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bea9beb9da3c2d5e0800000000000000
+      internalID: -1886230143502148885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_65
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74a0b36882db21db0800000000000000
+      internalID: -4822584269212022201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_66
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 591bdebef483df0e0800000000000000
+      internalID: -2234567924194102891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_67
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 288
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baef2daa629481c30800000000000000
+      internalID: 4330291472140271275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_68
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39958cfdb67b50be0800000000000000
+      internalID: -1511600425969100397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_69
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c33a30d938d8b270800000000000000
+      internalID: 8266594858856756167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_70
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78541ca7bd2b73a20800000000000000
+      internalID: 3042096729039127943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_71
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 279f2892660d572c0800000000000000
+      internalID: -4434409120874694286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_72
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c45925f43a883f0f0800000000000000
+      internalID: -1084372850274298548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_73
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fa18b0fb61427f60800000000000000
+      internalID: 8030553017410919156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_75
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d062168631955e410800000000000000
+      internalID: 1505707590315746829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_76
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f986aab4705b64280800000000000000
+      internalID: -9059354557470316385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_77
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b99b3889770d9f270800000000000000
+      internalID: 8284882201603193243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_78
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbfa903262145cfe0800000000000000
+      internalID: -1169456896180375617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_79
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b2b6087c535163e0800000000000000
+      internalID: -2062275497743174988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ada92ab4f7cc8e280800000000000000
+      internalID: -9013729807080187174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_81
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6623afbe4abf7de50800000000000000
+      internalID: 6834207645310268006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_82
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 610eac16cfb928a00800000000000000
+      internalID: 757339195626414102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_83
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87ac8318d92b22430800000000000000
+      internalID: 3756761428728007288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_84
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 248
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f5c7434db66caca0800000000000000
+      internalID: -6004311240128084489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_92
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52dfb8f35a2532cc0800000000000000
+      internalID: -3737052396098159323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_93
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57eb12af93670e410800000000000000
+      internalID: 1504332266923474549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_94
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f9b5cb92f87852e0800000000000000
+      internalID: -2136825039796454927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_95
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 232
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 727efff1911c3c8f0800000000000000
+      internalID: -521360818189637849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_98
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 216
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 380237877d23a7410800000000000000
+      internalID: 1475547728937427075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_99
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 216
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4dbf8a639c00f660800000000000000
+      internalID: 7417442413566737738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_100
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 216
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79be75c67367feef0800000000000000
+      internalID: -76712688229028969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_101
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 216
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 051ba86862a2ddc40800000000000000
+      internalID: 5538629461689938256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_110
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5c3b99f7eb6524c0800000000000000
+      internalID: -4312922424068064166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_111
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 192
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74900628c1adb39a0800000000000000
+      internalID: -6252163841692530361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_112
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7deaca57f8a364350800000000000000
+      internalID: 6000547941346750167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_113
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 192
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47b64e84d24c03f40800000000000000
+      internalID: 5706276426653920116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_114
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 168
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80e416a0019706a20800000000000000
+      internalID: 3053573657157783048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_115
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 168
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6858765c8ac615d50800000000000000
+      internalID: 6724275190763062662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_116
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 168
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b23a1bc7920cab30800000000000000
+      internalID: 4299814595202790064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_117
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 168
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 800fb38535cdc5b20800000000000000
+      internalID: 3124614492009000968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_122
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c5f388c3321a0e20800000000000000
+      internalID: 3317484089128515017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_123
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 144
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdaf3e7b2413fb180800000000000000
+      internalID: -9097498559642338597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_124
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 144
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0858d932009630ed0800000000000000
+      internalID: -2448998323040975488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_125
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 144
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bdac5b46e3ddf930800000000000000
+      internalID: 4178729015329992119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_126
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f3ad6c151ce61a30800000000000000
+      internalID: 4185792479102870514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_127
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 120
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79176448b68ad8980800000000000000
+      internalID: -8534980539063045737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_128
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 120
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ae5d50cfd2ffa0e0800000000000000
+      internalID: -2256317845470355808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_129
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 120
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cbd9f6f15d7f3cd0800000000000000
+      internalID: -2576202670843241535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_130
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 120
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8a33e2f76767cf80800000000000000
+      internalID: -8086380909766165873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_136
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1567d49fc6c36a10800000000000000
+      internalID: 1901582062538155293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_137
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 96
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b36975899d469cf80800000000000000
+      internalID: -8085820770240457157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_138
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d555309724894f9d0800000000000000
+      internalID: -2741398861896264355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_139
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 96
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adf6241372651e590800000000000000
+      internalID: -7646735965968240678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_140
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c611e3fb338c35e40800000000000000
+      internalID: 5644074882602766700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_141
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6b2b1ac597369500800000000000000
+      internalID: 402570333176671086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_142
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8520fd10d9188d930800000000000000
+      internalID: 4168223966472634968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_143
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26cd4469b59612fe0800000000000000
+      internalID: -1215574582329287582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_148
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9aea8c956a344500800000000000000
+      internalID: 379492476698421914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_149
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc359a02c7e86c330800000000000000
+      internalID: 3730826005098091469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_150
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e578ed6b60b92e630800000000000000
+      internalID: 3954893875924862814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_151
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb4f31fb24cfef9f0800000000000000
+      internalID: -432631150577191746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_152
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71a604540033decd0800000000000000
+      internalID: -2527307739630114281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_153
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d94790482d38aca60800000000000000
+      internalID: 7695107853497496733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_154
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8df426d8af8dd8ad0800000000000000
+      internalID: -2698262031099605032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_155
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 145fc86a663605040800000000000000
+      internalID: 4634313309096310081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_156
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5a5a4604f81fc2e0800000000000000
+      internalID: -2103435064602109346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_157
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ff66ec9ca069a000800000000000000
+      internalID: 47675565547089910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_158
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d792db083eeaeac0800000000000000
+      internalID: -3824983009013884975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_159
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d733f890290ae5ba0800000000000000
+      internalID: -6098260296327023747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_160
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a6cf6ad31cd15d20800000000000000
+      internalID: 3265633182647568033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_161
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32531cfb995d0ae50800000000000000
+      internalID: 6818684692162753827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_162
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f69c8706fe79e5f70800000000000000
+      internalID: 9177940144999156079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_163
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ba22570c551d7e40800000000000000
+      internalID: 5655700192051210935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_164
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e59f4a94363665a20800000000000000
+      internalID: 3050735075678550366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 216
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a582dddfb313a7070800000000000000
+      internalID: 8104844613138589786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_6
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 216
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc6f231349c3be4e0800000000000000
+      internalID: -1951399406356728115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 216
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0842aabf237a78c0800000000000000
+      internalID: -4000758670133409779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_8
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 216
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf3bf4fa405f1b770800000000000000
+      internalID: 8624944161861121019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_9
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53abc70c8c4a1b9f0800000000000000
+      internalID: -454400905257895371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_10
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 225527e54ec8200f0800000000000000
+      internalID: -1152203642188442334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_11
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6307348c3dedf4ef0800000000000000
+      internalID: -121633663736385482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_12
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 790f0fbc39cbc1d80800000000000000
+      internalID: -8278534672046034793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_13
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 198
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eff13ff8f6f427010800000000000000
+      internalID: 1185096992526901246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_39
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 198
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d47b701187e134ea0800000000000000
+      internalID: -5889830386639849651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_40
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 198
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 688484ad1632c1ab0800000000000000
+      internalID: -5036111380126087034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_41
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 198
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bddbe6a54a3a54a80800000000000000
+      internalID: -8483194396795290149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_42
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 144
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f013e4af3942db20800000000000000
+      internalID: 3157666826438250744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_44
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 144
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7380af4b6faf18560800000000000000
+      internalID: 7314403207331579959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_45
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 144
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06d57721c6ce14b40800000000000000
+      internalID: 5422875375241223520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_46
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 144
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c56c130f4d7e232e0800000000000000
+      internalID: -2147399170553428388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_47
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9df7380cff2c049d0800000000000000
+      internalID: -2792017365267415079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_48
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b05d3e335adae700800000000000000
+      internalID: 570508353877135545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_49
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8e7482c4dccfa1e0800000000000000
+      internalID: -2184302080082805109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_50
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 264
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e5b10555cae73230800000000000000
+      internalID: 3618618958871115234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_28
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 133
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc6790163448f6410800000000000000
+      internalID: 1472541028099126991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_37
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 133
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 264faabd23ebf2860800000000000000
+      internalID: 7507428229492962402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_38
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 133
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04568533a085f48d0800000000000000
+      internalID: -2859970437522627264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_43
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 124
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea5f90c4036d01090800000000000000
+      internalID: -8065711429698062930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_51
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 124
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a9a8b82bfee80fb0800000000000000
+      internalID: -4681229050164237915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_52
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 124
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cba827e3264caae0800000000000000
+      internalID: -1536776252824179767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_74
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 116
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f30e1ff957a95e30800000000000000
+      internalID: 4492806108252865529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_86
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 116
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e49d69ab0e0eb99f0800000000000000
+      internalID: -460527281067599538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_87
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 116
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9aaba782d097153d0800000000000000
+      internalID: -3219659161172526423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_88
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 116
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02f3b0f6fddba1680800000000000000
+      internalID: -8783499355894366432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_89
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 116
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4367caf1a202d1f50800000000000000
+      internalID: 6853669573219874356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_90
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 116
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 971a8e018d2d4ebf0800000000000000
+      internalID: -295879850061160071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_85
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2205793b749dd8240800000000000000
+      internalID: 4795728080198389794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_91
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cadeece2e5bfefdf0800000000000000
+      internalID: -144401756098466388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_96
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a518abf9feaa028c0800000000000000
+      internalID: -4026030120715517606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_97
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df4623baad3f38b30800000000000000
+      internalID: 4288539390687470845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_102
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2a7f5bf5e42b25f0800000000000000
+      internalID: -780489540235199957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemiesInteractablesMedusa_103
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3333333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc2181f394db21f70800000000000000
+      internalID: 9156589114686444239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
