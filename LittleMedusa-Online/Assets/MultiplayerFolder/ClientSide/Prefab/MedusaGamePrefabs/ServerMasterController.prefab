@@ -309,10 +309,11 @@ MonoBehaviour:
   actorTransform: {fileID: 7561869929165017049}
   frameLooper: {fileID: 5542236158264742172}
   projectileThrownType: 2
+  invincibilityTickTimer: 1000
   petrificationTimeTickRate: 1000
   maxHP: 8
   walkSpeed: 4
-  damagePerStoppedHit: 0
+  damagePerStoppedHit: 2
   primaryMoveAnimationSpeed: 0.2
   normalAnimationSpeed: 0.1
   primaryMoveDamage: 23
@@ -356,6 +357,7 @@ MonoBehaviour:
   isPetrified: 0
   isInFlyingState: 0
   isFiringPrimaryProjectile: 0
+  isInvincible: 0
   triggerFaceChangeEvent: 0
   currentHP: 0
   chainIDLinkedTo: -1
@@ -370,8 +372,6 @@ MonoBehaviour:
   actorMePushing: {fileID: 0}
   playerStates: 0
   primaryMoveAttackRateTickRate: 20
-  isPlacingBoulderAnimationPlayed: 0
-  isRemovingBoulderAnimationPlayed: 0
 --- !u!114 &5542236158264742172
 MonoBehaviour:
   m_ObjectHideFlags: 0

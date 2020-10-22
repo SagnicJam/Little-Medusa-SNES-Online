@@ -71,15 +71,15 @@ public class ClientMasterController : MonoBehaviour
 
                 PositionUpdates positionUpdates = new PositionUpdates(updateCorrespondingToSeq.positionUpdates.updatedActorPosition
                     , updateCorrespondingToSeq.positionUpdates.updatedBlockActorPosition
-                    , updateCorrespondingToSeq.positionUpdates.updatedPreviousBlockActorPosition);
+                    , updateCorrespondingToSeq.positionUpdates.updatedPreviousBlockActorPosition, updateCorrespondingToSeq.positionUpdates.Facing
+                    ,updateCorrespondingToSeq.positionUpdates.previousFacing);
 
                 PlayerEvents playerEvents = new PlayerEvents(updateCorrespondingToSeq.playerEvents.firedPrimaryMoveProjectile);
 
-                PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(updateCorrespondingToSeq.playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed
-                    ,updateCorrespondingToSeq.playerAnimationEvents.isPlacingBoulderAnimationPlayed);
+                PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(updateCorrespondingToSeq.playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed);
 
                 PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates( updateCorrespondingToSeq.playerAuthoratativeStates.isPetrified
-                    , updateCorrespondingToSeq.playerAuthoratativeStates.isPushed);
+                    , updateCorrespondingToSeq.playerAuthoratativeStates.isPushed,updateCorrespondingToSeq.playerAuthoratativeStates.isInvincible, updateCorrespondingToSeq.playerAuthoratativeStates.currentHP);
 
                 PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(serverSequenceNumberToBeProcessed
                     , playerSequenceNumberProcessed
@@ -293,8 +293,9 @@ public class ClientMasterController : MonoBehaviour
             if (Vector3.Distance(serverPlayer.actorTransform.position, localPlayer.actorTransform.position) >= positionThreshold)
             {
                 Debug.Log(serverPlayer.actorTransform.position + "local---server" + localPlayer.actorTransform.position + "<color=red>Corrected player position</color>" + playerStateUpdates.playerProcessedSequenceNumber);
-                Debug.Break();
-                PositionUpdates positionUpdates = new PositionUpdates(serverPlayer.actorTransform.position, serverPlayer.currentMovePointCellPosition, serverPlayer.previousMovePointCellPosition);
+                //Debug.Break();
+                PositionUpdates positionUpdates = new PositionUpdates(serverPlayer.actorTransform.position, serverPlayer.currentMovePointCellPosition, serverPlayer.previousMovePointCellPosition,
+                    (int)serverPlayer.Facing,(int)serverPlayer.PreviousFacingDirection);
                 localPlayer.SetActorPositionalState(positionUpdates);
             }
         }
@@ -359,11 +360,15 @@ public struct PlayerAuthoratativeStates
 {
     public bool isPetrified;
     public bool isPushed;
+    public bool isInvincible;
+    public int currentHP;
 
-    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed)
+    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isInvincible, int currentHP)
     {
         this.isPetrified = isPetrified;
         this.isPushed = isPushed;
+        this.isInvincible = isInvincible;
+        this.currentHP = currentHP;
     }
 }
 
@@ -372,24 +377,26 @@ public struct PositionUpdates
     public Vector3 updatedActorPosition;
     public Vector3Int updatedBlockActorPosition;
     public Vector3Int updatedPreviousBlockActorPosition;
+    public int Facing;
+    public int previousFacing;
 
-    public PositionUpdates(Vector3 updatedActorPosition, Vector3Int updatedBlockActorPosition, Vector3Int updatedPreviousBlockActorPosition)
+    public PositionUpdates(Vector3 updatedActorPosition, Vector3Int updatedBlockActorPosition, Vector3Int updatedPreviousBlockActorPosition,int Facing,int previousFacing)
     {
         this.updatedActorPosition = updatedActorPosition;
         this.updatedBlockActorPosition = updatedBlockActorPosition;
         this.updatedPreviousBlockActorPosition = updatedPreviousBlockActorPosition;
+        this.Facing = Facing;
+        this.previousFacing = previousFacing;
     }
 }
 
 public struct PlayerAnimationEvents
 {
-    public bool isPlacingBoulderAnimationPlayed;
     public bool isPrimaryMoveAnimationBeingPlayed;
 
-    public PlayerAnimationEvents(bool isPrimaryMoveAnimationBeingPlayed,bool isPlacingBoulderAnimationPlayed)
+    public PlayerAnimationEvents(bool isPrimaryMoveAnimationBeingPlayed)
     {
         this.isPrimaryMoveAnimationBeingPlayed = isPrimaryMoveAnimationBeingPlayed;
-        this.isPlacingBoulderAnimationPlayed = isPlacingBoulderAnimationPlayed;
     }
 }
 

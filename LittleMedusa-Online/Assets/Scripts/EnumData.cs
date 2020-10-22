@@ -130,10 +130,4 @@ public class EnumData
         ProjectileAttack,
         TouchAttack
     }
-
-    public enum PlayerAnimation
-    {
-        PlayerWalk=0,
-        PlayerFiringPrimaryProjectile
-    }
 }

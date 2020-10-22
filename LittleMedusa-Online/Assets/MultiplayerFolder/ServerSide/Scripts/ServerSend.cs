@@ -85,13 +85,14 @@ public class ServerSend
             packet.Write(serverMasterController.serverInstanceHero.actorTransform.position);
             packet.Write(serverMasterController.serverInstanceHero.currentMovePointCellPosition);
             packet.Write(serverMasterController.serverInstanceHero.previousMovePointCellPosition);
-            packet.Write(serverMasterController.serverInstanceHero.isFiringPrimaryProjectile);
-            packet.Write(serverMasterController.serverInstanceHero.primaryMoveUseAnimationAction.isBeingUsed);
-            packet.Write(serverMasterController.serverInstanceHero.isPlacingBoulderAnimationPlayed);
-            packet.Write(serverMasterController.serverInstanceHero.isPetrified);
-            packet.Write(serverMasterController.serverInstanceHero.isPushed);
             packet.Write((int)serverMasterController.serverInstanceHero.Facing);
             packet.Write((int)serverMasterController.serverInstanceHero.PreviousFacingDirection);
+            packet.Write(serverMasterController.serverInstanceHero.isFiringPrimaryProjectile);
+            packet.Write(serverMasterController.serverInstanceHero.primaryMoveUseAnimationAction.isBeingUsed);
+            packet.Write(serverMasterController.serverInstanceHero.isPetrified);
+            packet.Write(serverMasterController.serverInstanceHero.isPushed);
+            packet.Write(serverMasterController.serverInstanceHero.isInvincible);
+            packet.Write(serverMasterController.serverInstanceHero.currentHP);
             packet.Write(serverMasterController.playerSequenceNumberProcessed);
             packet.Write(serverMasterController.serverLocalSequenceNumber);
 
@@ -183,11 +184,14 @@ public class ServerSend
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.positionUpdates.updatedActorPosition);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.positionUpdates.updatedBlockActorPosition);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.positionUpdates.updatedPreviousBlockActorPosition);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.positionUpdates.Facing);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.positionUpdates.previousFacing);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerEvents.firedPrimaryMoveProjectile);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed);
-                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAnimationEvents.isPlacingBoulderAnimationPlayed);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPetrified);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPushed);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isInvincible);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.currentHP);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerProcessedSequenceNumber);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerServerSequenceNumber);
                 //Debug.LogError("<color=green>#######Processing and sending packet player.processedInputSequenceNumber: </color>" + playerUpdatedPosition[i].sequenceNumber + "position " + playerUpdatedPosition[i].playerUpdatedPosition + " playerid: " + playerUpdatedPosition[i].playerId);
@@ -204,11 +208,14 @@ public class ServerSend
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.positionUpdates.updatedActorPosition);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.positionUpdates.updatedBlockActorPosition);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.positionUpdates.updatedPreviousBlockActorPosition);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.positionUpdates.Facing);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.positionUpdates.previousFacing);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerEvents.firedPrimaryMoveProjectile);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed);
-                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAnimationEvents.isPlacingBoulderAnimationPlayed);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPetrified);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPushed);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isInvincible);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.currentHP);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerProcessedSequenceNumber);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerServerSequenceNumber);
                 }

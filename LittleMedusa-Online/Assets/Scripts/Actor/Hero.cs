@@ -8,13 +8,8 @@ public class Hero : Actor
     public EnumData.PlayerStates playerStates;
     public int primaryMoveAttackRateTickRate;
 
-    [Header("Live Data")]
-    public bool isPlacingBoulderAnimationPlayed;
-    public bool isRemovingBoulderAnimationPlayed;
-
     [Header("Hero Actions")]
     public WaitingForNextAction waitingActionForPrimaryMove = new WaitingForNextAction();
-    readonly BoulderRemoveAction boulderRemoveAction = new BoulderRemoveAction();
 
     public override void Start()
     {
@@ -25,7 +20,6 @@ public class Hero : Actor
         primaryMoveUseAnimationAction.SetAnimationSpeedAndSpritesOnUsage(primaryMoveAnimationSpeed,normalAnimationSpeed);
         rangedAttack = new Attack(primaryMoveDamage,ownerId,EnumData.AttackTypes.ProjectileAttack,projectileThrownType);
 
-        boulderRemoveAction.Initialise(this);
 
     }
 
@@ -43,6 +37,8 @@ public class Hero : Actor
     {
         isPetrified = playerAuthoratativeStates.isPetrified;
         isPushed = playerAuthoratativeStates.isPushed;
+        isInvincible = playerAuthoratativeStates.isInvincible;
+        currentHP = playerAuthoratativeStates.currentHP;
     }
 
     //authoratatively is performed(but is locally is also done)-correction happens
@@ -52,16 +48,19 @@ public class Hero : Actor
         currentMovePointCellPosition = positionUpdates.updatedBlockActorPosition;
         previousMovePointCellPosition = positionUpdates.updatedPreviousBlockActorPosition;
         Facing = GridManager.instance.GetFaceDirectionFromCurrentPrevPoint(currentMovePointCellPosition, previousMovePointCellPosition, this);
+        if(isClient()&&!hasAuthority())
+        {
+            if (Facing != (FaceDirection)positionUpdates.Facing || PreviousFacingDirection != (FaceDirection)positionUpdates.previousFacing)
+            {
+                Facing = (FaceDirection)positionUpdates.Facing;
+                PreviousFacingDirection = (FaceDirection)positionUpdates.previousFacing;
+            }
+        }
     }
 
     public void SetActorAnimationState(PlayerAnimationEvents playerAnimationEvents)
     {
         primaryMoveUseAnimationAction.isBeingUsed = playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed;
-        if(playerAnimationEvents.isPlacingBoulderAnimationPlayed)
-        {
-            Debug.LogError("playerAnimationEvents.isPlacingBoulderAnimationPlayed ");
-        }
-        isPlacingBoulderAnimationPlayed = playerAnimationEvents.isPlacingBoulderAnimationPlayed;
     }
 
     //authoratatively is performed(but is locally is also done)
@@ -100,6 +99,14 @@ public class Hero : Actor
             petrificationAction.Perform();
             return;
         }
+        if(isInvincible)
+        {
+            if(!waitingForInvinciblityToOver.Perform())
+            {
+                MakeUnInvincible();
+            }
+            return;
+        }
     }
 
     
@@ -132,44 +139,6 @@ public class Hero : Actor
                     primaryMoveUseAnimationAction.CancelMoveUsage();
                 }
             }
-            else if(completedMotionToMovePoint)
-            {
-                if (inputs[(int)EnumData.Inputs.PlaceRemovalBoulder])
-                {
-                    Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                    if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellToCheckFor))
-                    {
-                        //play animation here 
-                        //send command to server of placement
-                        Debug.LogError("chala");
-                        isPlacingBoulderAnimationPlayed = true;
-                    }
-                    else
-                    {
-                        isPlacingBoulderAnimationPlayed = false;
-                    }
-
-                    if (GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.Boulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderDisappearing))
-                    {
-                        isRemovingBoulderAnimationPlayed = true;
-                    }
-                    else
-                    {
-                        isRemovingBoulderAnimationPlayed = false;
-                    }
-                }
-                else if (!inputs[(int)EnumData.Inputs.PlaceRemovalBoulder] && previousInputs[(int)EnumData.Inputs.PlaceRemovalBoulder] != inputs[(int)EnumData.Inputs.PlaceRemovalBoulder])
-                {
-                    if (isPlacingBoulderAnimationPlayed)
-                    {
-                        isPlacingBoulderAnimationPlayed = false;
-                    }
-                    if (isRemovingBoulderAnimationPlayed)
-                    {
-                        isRemovingBoulderAnimationPlayed = false;
-                    }
-                }
-            }
 
         }
         
@@ -195,16 +164,6 @@ public class Hero : Actor
         if (primaryMoveUseAnimationAction.isBeingUsed)
         {
             primaryMoveUseAnimationAction.Perform();
-        }
-        else if(isPlacingBoulderAnimationPlayed)
-        {
-            Vector3Int celllocationToSpawn = GridManager.instance.grid.WorldToCell(actorTransform.transform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-            GridManager.instance.PlaceBoulderAnimation(celllocationToSpawn);
-        }
-        else if (isRemovingBoulderAnimationPlayed)
-        {
-            Vector3Int celllocationToSpawn = GridManager.instance.grid.WorldToCell(actorTransform.transform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-            GridManager.instance.RemoveBoulderAnimation(celllocationToSpawn);
         }
         else
         {
@@ -274,7 +233,7 @@ public class Hero : Actor
                             }
                         }
                     }
-                    else if (inputs[(int)EnumData.Inputs.PlaceRemovalBoulder])
+                    else if (inputs[(int)EnumData.Inputs.PlaceRemovalBoulder] && previousInputs[(int)EnumData.Inputs.PlaceRemovalBoulder] != inputs[(int)EnumData.Inputs.PlaceRemovalBoulder])
                     {
                         Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                         if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellToCheckFor))
@@ -327,7 +286,7 @@ public class Hero : Actor
             {
                 Facing = FaceDirection.Up;
                 Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                if (IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
+                if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
                 {
                     currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 }
@@ -335,7 +294,7 @@ public class Hero : Actor
             else if (inputs[(int)EnumData.Inputs.Left])
             {
                 Facing = FaceDirection.Left;
-                if (IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
+                if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
                 {
                     currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 }
@@ -343,7 +302,7 @@ public class Hero : Actor
             else if (inputs[(int)EnumData.Inputs.Down])
             {
                 Facing = FaceDirection.Down;
-                if (IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
+                if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
                 {
                     currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 }
@@ -351,7 +310,7 @@ public class Hero : Actor
             else if (inputs[(int)EnumData.Inputs.Right])
             {
                 Facing = FaceDirection.Right;
-                if (IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
+                if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
                 {
                     currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 }

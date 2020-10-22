@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
 
     public ClientMasterController masterController;
 
-    public void Initialise(int id,string username,int facing,int previousFacing, PlayerStateUpdates playerStateUpdates,bool hasAuthority)
+    public void Initialise(int id,string username, PlayerStateUpdates playerStateUpdates,bool hasAuthority)
     {
         this.id = id;
         this.username = username;
@@ -24,15 +24,6 @@ public class PlayerManager : MonoBehaviour
             masterController.localPlayer.InitialiseActor(playerStateUpdates);
             masterController.serverPlayer.InitialiseActor(playerStateUpdates);
 
-            masterController.clientPlayer.Facing = (FaceDirection)facing;
-            masterController.localPlayer.Facing = (FaceDirection)facing;
-            masterController.serverPlayer.Facing = (FaceDirection)facing;
-
-            masterController.clientPlayer.PreviousFacingDirection = (FaceDirection)previousFacing;
-            masterController.localPlayer.PreviousFacingDirection = (FaceDirection)previousFacing;
-            masterController.serverPlayer.PreviousFacingDirection = (FaceDirection)previousFacing;
-
-
         }
         else
         {
@@ -40,10 +31,6 @@ public class PlayerManager : MonoBehaviour
             masterController.clientPlayer.InitialiseClientActor(masterController,id);
 
             masterController.clientPlayer.InitialiseActor(playerStateUpdates);
-
-            masterController.clientPlayer.Facing = (FaceDirection)facing;
-
-            masterController.clientPlayer.PreviousFacingDirection = (FaceDirection)previousFacing;
         }
         masterController.latestPlayerStateUpdate = playerStateUpdates;
         masterController.hasAuthority = hasAuthority;

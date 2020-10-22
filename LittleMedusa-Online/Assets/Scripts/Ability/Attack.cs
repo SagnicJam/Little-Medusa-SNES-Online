@@ -26,6 +26,10 @@ public class Attack
         {
             return;
         }
+        if(actorHit.isInvincible)
+        {
+            return;
+        }
         //if(actorHit is Boss&&attackType!=EnumData.AttackTypes.TouchAttack)
         //{
         //    return;

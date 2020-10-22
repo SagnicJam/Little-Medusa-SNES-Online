@@ -26,24 +26,25 @@ public class ClientHandle : MonoBehaviour
         Vector3 position = packet.ReadVector3();
         Vector3Int blockposition = packet.ReadVector3Int();
         Vector3Int previousBlockposition = packet.ReadVector3Int();
-        bool isFiringPrimaryProjectile = packet.ReadBool();
-        bool isPrimaryMoveAnimationBeingPlayed = packet.ReadBool();
-        bool isPlacingBoulderAnimationPlayed = packet.ReadBool();
-        bool isPetrified = packet.ReadBool();
-        bool isPushed = packet.ReadBool();
         int faceDirection = packet.ReadInt();
         int previousfaceDirection = packet.ReadInt();
+        bool isFiringPrimaryProjectile = packet.ReadBool();
+        bool isPrimaryMoveAnimationBeingPlayed = packet.ReadBool();
+        bool isPetrified = packet.ReadBool();
+        bool isPushed = packet.ReadBool();
+        bool isInvincible = packet.ReadBool();
+        int currentHP = packet.ReadInt();
         int playerProcessingSequenceNumber = packet.ReadInt();
         int playerServerSequenceNumber = packet.ReadInt();
         Debug.Log("<color=red>Sequence no spawned on: </color>"+playerProcessingSequenceNumber);
 
-        PositionUpdates positionUpdates = new PositionUpdates(position, blockposition, previousBlockposition);
+        PositionUpdates positionUpdates = new PositionUpdates(position, blockposition, previousBlockposition,faceDirection,previousfaceDirection);
         PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile);
-        PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isPrimaryMoveAnimationBeingPlayed, isPlacingBoulderAnimationPlayed);
-        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed);
+        PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isPrimaryMoveAnimationBeingPlayed);
+        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isInvincible, currentHP);
 
         PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(playerServerSequenceNumber, playerProcessingSequenceNumber, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
-        ClientSideGameManager.instance.SpawnPlayer(id,username, faceDirection, previousfaceDirection, playerStateUpdates);
+        ClientSideGameManager.instance.SpawnPlayer(id,username, playerStateUpdates);
     }
 
     public static void SpawnGridWorld(Packet packet)
@@ -135,18 +136,21 @@ public class ClientHandle : MonoBehaviour
             Vector3 position = packet.ReadVector3();
             Vector3Int blockposition = packet.ReadVector3Int();
             Vector3Int previousBlockposition = packet.ReadVector3Int();
+            int Facing = packet.ReadInt();
+            int previousFacing = packet.ReadInt();
             bool isFiringPrimaryProjectile = packet.ReadBool();
             bool isPrimaryMoveAnimationBeingPlayed = packet.ReadBool();
-            bool isPlacingBoulderAnimationPlayed = packet.ReadBool();
             bool isPetrified = packet.ReadBool();
             bool isPushed = packet.ReadBool();
+            bool isInvincible = packet.ReadBool();
+            int currentHP = packet.ReadInt();
             int playerProcessedsequenceNumberReceived = packet.ReadInt();
             int playerServerSequenceNumberReceived = packet.ReadInt();
 
-            PositionUpdates positionUpdates = new PositionUpdates(position, blockposition, previousBlockposition);
+            PositionUpdates positionUpdates = new PositionUpdates(position, blockposition, previousBlockposition, Facing,previousFacing);
             PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile);
-            PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isPrimaryMoveAnimationBeingPlayed, isPlacingBoulderAnimationPlayed);
-            PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed);
+            PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isPrimaryMoveAnimationBeingPlayed);
+            PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isInvincible, currentHP);
 
             PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(playerServerSequenceNumberReceived, playerProcessedsequenceNumberReceived, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
             //Debug.LogError("<color=blue>Receiving updated position for movement </color>playerUpdatedPositionSequenceNumber: " + sequenceNumberReceived + " position: " + position);
@@ -180,18 +184,21 @@ public class ClientHandle : MonoBehaviour
                 Vector3 previousHistoryPositionUpdate = packet.ReadVector3();
                 Vector3Int previousHistoryBlockPositionUpdate = packet.ReadVector3Int();
                 Vector3Int previousHistoryPreviousBlockPositionUpdate = packet.ReadVector3Int();
+                int Facing = packet.ReadInt();
+                int previousFacing = packet.ReadInt();
                 bool isFiringPrimaryProjectile = packet.ReadBool();
                 bool isPrimaryMoveAnimationBeingPlayed = packet.ReadBool();
-                bool isPlacingBoulderAnimationPlayed = packet.ReadBool();
                 bool isPetrified = packet.ReadBool();
                 bool isPushed = packet.ReadBool();
+                bool isInvincible = packet.ReadBool();
+                int currentHP = packet.ReadInt();
                 int previousHistoryPlayerProcessingSequenceNo = packet.ReadInt();
                 int previousHistoryServerSequenceNo = packet.ReadInt();
 
-                PositionUpdates positionUpdates = new PositionUpdates(previousHistoryPositionUpdate, previousHistoryBlockPositionUpdate, previousHistoryPreviousBlockPositionUpdate);
+                PositionUpdates positionUpdates = new PositionUpdates(previousHistoryPositionUpdate, previousHistoryBlockPositionUpdate, previousHistoryPreviousBlockPositionUpdate, Facing, previousFacing);
                 PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile);
-                PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isPrimaryMoveAnimationBeingPlayed, isPlacingBoulderAnimationPlayed);
-                PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed);
+                PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isPrimaryMoveAnimationBeingPlayed);
+                PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isInvincible, currentHP);
 
                 PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(previousHistoryServerSequenceNo, previousHistoryPlayerProcessingSequenceNo, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
                 if (ClientSideGameManager.players.ContainsKey(previousHistoryPlayerId))

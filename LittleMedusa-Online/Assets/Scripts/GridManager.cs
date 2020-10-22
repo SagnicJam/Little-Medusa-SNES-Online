@@ -270,7 +270,6 @@ public class GridManager : MonoBehaviour
         fL.onPlayOneShotAnimation.RemoveAllListeners();
         fL.onPlayOneShotAnimation.AddListener(() =>
         {
-            
             Destroy(g);
         });
     }
@@ -286,11 +285,28 @@ public class GridManager : MonoBehaviour
         });
     }
 
-    public void SetTile(Vector3Int cellPos, EnumData.TileType tType, bool HasTile)
+    public void SetTile(Vector3Int cellPos, EnumData.TileType tType, bool HasTile,bool playAnimation)
     {
         Vector3 worldPos = Vector3.zero;
         Vector3Int fireCellPos = Vector3Int.zero;
         GameObject fire = null;
+
+        if(playAnimation)
+        {
+            if (tType == EnumData.TileType.Boulder)
+            {
+                if (HasTile)
+                {
+                    PlaceBoulderAnimation(cellPos);
+                }
+                else
+                {
+                    RemoveBoulderAnimation(cellPos);
+                }
+            }
+        }
+        
+
         if (((int)tType - 1) > gameStateDependentTileArray.Length - 1)
         {
             Debug.LogError("index more thean range: " + tType);

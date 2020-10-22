@@ -237,7 +237,7 @@ public class ServerMasterController : MonoBehaviour
                 //do server rollback here to check to check if damage actually occured on server
                 Vector3Int cellPointToPlaceBoulder = placeBoulderCommand.boulderCellPos;
 
-                GridManager.instance.SetTile(cellPointToPlaceBoulder, EnumData.TileType.Boulder, true);
+                GridManager.instance.SetTile(cellPointToPlaceBoulder, EnumData.TileType.Boulder, true,false);
             }
         }
 
@@ -250,7 +250,7 @@ public class ServerMasterController : MonoBehaviour
                 placeBoulderCommandFromClientToServerDic.Remove(placeBoulderCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
                 Vector3Int cellPointToPlaceBoulder = placeBoulderCommand.boulderCellPos;
-                GridManager.instance.SetTile(cellPointToPlaceBoulder, EnumData.TileType.Boulder, true);
+                GridManager.instance.SetTile(cellPointToPlaceBoulder, EnumData.TileType.Boulder, true,false);
                 //Send Command for spawning on clients world
             }
         }
@@ -300,7 +300,7 @@ public class ServerMasterController : MonoBehaviour
                 //do server rollback here to check to check if damage actually occured on server
                 Vector3Int cellPointToRemoveBoulder = removeBoulderCommand.removalCellPos;
 
-                GridManager.instance.SetTile(cellPointToRemoveBoulder, EnumData.TileType.Boulder, false);
+                GridManager.instance.SetTile(cellPointToRemoveBoulder, EnumData.TileType.Boulder, false,false);
             }
         }
 
@@ -313,7 +313,7 @@ public class ServerMasterController : MonoBehaviour
                 removeBoulderCommandFromClientToServerDic.Remove(removeBoulderCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
                 Vector3Int cellPointToRemoveBoulder = removeBoulderCommand.removalCellPos;
-                GridManager.instance.SetTile(cellPointToRemoveBoulder, EnumData.TileType.Boulder, false);
+                GridManager.instance.SetTile(cellPointToRemoveBoulder, EnumData.TileType.Boulder, false,false);
                 //Send Command for spawning on clients world
             }
         }
@@ -410,10 +410,7 @@ public class ServerMasterController : MonoBehaviour
 
         for (int i = 0; i < (int)currentInputProcessingModeOnServer; i++)
         {
-            CheckForPushRequestOnServer(playerSequenceNumberProcessed + 1);
-            CheckForPlaceBoulderRequestOnServer(playerSequenceNumberProcessed + 1);
-            CheckForRemovingBoulderRequestOnServer(playerSequenceNumberProcessed + 1);
-            CheckForPetrificationRequestOnPlayer(playerSequenceNumberProcessed + 1);
+            
 
             InputCommands inputPackageCorrespondingToSeq;
 
@@ -450,15 +447,21 @@ public class ServerMasterController : MonoBehaviour
                     serverInstanceHero.ProcessInputAnimationControl();
                 }
             }
+
+            CheckForPushRequestOnServer(playerSequenceNumberProcessed);
+            CheckForPlaceBoulderRequestOnServer(playerSequenceNumberProcessed);
+            CheckForRemovingBoulderRequestOnServer(playerSequenceNumberProcessed);
+            CheckForPetrificationRequestOnPlayer(playerSequenceNumberProcessed);
         }
 
         serverLocalSequenceNumber++;
 
         //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
-        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(serverInstanceHero.isPetrified, serverInstanceHero.isPushed);
-        PositionUpdates positionUpdates = new PositionUpdates(serverInstanceHero.actorTransform.position, serverInstanceHero.currentMovePointCellPosition, serverInstanceHero.previousMovePointCellPosition);
+        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(serverInstanceHero.isPetrified, serverInstanceHero.isPushed,serverInstanceHero.isInvincible,serverInstanceHero.currentHP);
+        PositionUpdates positionUpdates = new PositionUpdates(serverInstanceHero.actorTransform.position, serverInstanceHero.currentMovePointCellPosition
+            , serverInstanceHero.previousMovePointCellPosition,(int)serverInstanceHero.Facing,(int)serverInstanceHero.PreviousFacingDirection);
         PlayerEvents playerEvents = new PlayerEvents(serverInstanceHero.isFiringPrimaryProjectile);
-        PlayerAnimationEvents playerAnimationEvents = new PlayerAnimationEvents(serverInstanceHero.primaryMoveUseAnimationAction.isBeingUsed,serverInstanceHero.isPlacingBoulderAnimationPlayed);
+        PlayerAnimationEvents playerAnimationEvents = new PlayerAnimationEvents(serverInstanceHero.primaryMoveUseAnimationAction.isBeingUsed);
 
         PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(serverLocalSequenceNumber,playerSequenceNumberProcessed, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimationEvents);
         PlayerStateServerUpdates playerStateServerUpdates = new PlayerStateServerUpdates(id, playerStateUpdates);

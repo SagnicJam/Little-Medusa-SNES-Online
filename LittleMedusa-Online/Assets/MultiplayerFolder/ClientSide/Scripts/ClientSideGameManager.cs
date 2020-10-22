@@ -35,25 +35,25 @@ public class ClientSideGameManager : MonoBehaviour
         }
     }
 
-    public void SpawnPlayer(int id,string username,int facing,int previousFacing,PlayerStateUpdates playerStateUpdates)
+    public void SpawnPlayer(int id,string username,PlayerStateUpdates playerStateUpdates)
     {
         GameObject player;
         if(id == Client.instance.myID)
         {
             player = Instantiate(localPlayerPrefab,Vector3.zero,Quaternion.identity);
-            player.GetComponent<PlayerManager>().Initialise(id,username,facing, previousFacing, playerStateUpdates, true);
+            player.GetComponent<PlayerManager>().Initialise(id,username, playerStateUpdates, true);
         }
         else
         {
             player = Instantiate(playerPrefab,Vector3.zero, Quaternion.identity);
-            player.GetComponent<PlayerManager>().Initialise(id, username, facing, previousFacing, playerStateUpdates, false);
+            player.GetComponent<PlayerManager>().Initialise(id, username, playerStateUpdates, false);
         }
         players.Add(id,player.GetComponent<PlayerManager>());
     }
 
     public void SpawnWorldGridElements(WorldUpdate worldUpdates)
     {
-        UpdateWorld(worldUpdates);
+        UpdateWorldStart(worldUpdates);
         serverWorldSequenceNumberProcessed = worldUpdates.sequenceNumber;
         Debug.Log("<color=blue>spawned grid world serverWorldSequenceNumberProcessed. </color>"+ serverWorldSequenceNumberProcessed);
     }
@@ -129,6 +129,19 @@ public class ClientSideGameManager : MonoBehaviour
         }
     }
 
+    void UpdateWorldStart(WorldUpdate newWorldUpdate)
+    {
+        for (int i = 0; i < newWorldUpdate.worldGridItems.Length; i++)
+        {
+            for (int j = 0; j < newWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Count; j++)
+            {
+                //delete old
+                GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true,false);
+            }
+        }
+        latestWorldUpdate = newWorldUpdate;
+    }
+
     void UpdateWorld(WorldUpdate newWorldUpdate)
     {
         if(latestWorldUpdate.worldGridItems!=null)
@@ -137,21 +150,27 @@ public class ClientSideGameManager : MonoBehaviour
             {
                 for (int j = 0; j < latestWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Count; j++)
                 {
-                    GridManager.instance.SetTile(latestWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j]
-                        , (EnumData.TileType)latestWorldUpdate.worldGridItems[i].tileType, false);
+                    if(!newWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Contains(latestWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j]))
+                    {
+                        //delete old
+                        GridManager.instance.SetTile(latestWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)latestWorldUpdate.worldGridItems[i].tileType, false,true);
+                    }
+                }
+            }
+            for (int i = 0; i < newWorldUpdate.worldGridItems.Length; i++)
+            {
+                for (int j = 0; j < newWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Count; j++)
+                {
+                    if (!latestWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Contains(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j]))
+                    {
+                        //add new
+                        GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true,true);
+                    }
                 }
             }
         }
 
-
-        for (int i = 0; i < newWorldUpdate.worldGridItems.Length; i++)
-        {
-            for (int j = 0; j < newWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Count; j++)
-            {
-                GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j]
-                    , (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true);
-            }
-        }
+        
 
         latestWorldUpdate = newWorldUpdate;
     }

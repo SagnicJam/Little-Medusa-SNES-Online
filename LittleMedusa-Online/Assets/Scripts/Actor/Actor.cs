@@ -10,8 +10,10 @@ public abstract class Actor : TileData
 
     [Header("Tweak params")]
     public EnumData.Projectiles projectileThrownType;
+    public int invincibilityTickTimer;
     public int petrificationTimeTickRate;
     public int maxHP;
+    public int maxStockLives;
     public int walkSpeed;
     public int damagePerStoppedHit;
     public float primaryMoveAnimationSpeed;
@@ -38,8 +40,10 @@ public abstract class Actor : TileData
     public bool isPetrified;
     public bool isInFlyingState;
     public bool isFiringPrimaryProjectile;
+    public bool isInvincible;
     public bool triggerFaceChangeEvent;
     public int currentHP;
+    public int currentStockLives;
     public int chainIDLinkedTo = -1;
     public bool isHeadCollisionWithOtherActor;
     public List<Mapper> mapperList = new List<Mapper>();
@@ -64,11 +68,13 @@ public abstract class Actor : TileData
     public PetrificationAction petrificationAction = new PetrificationAction();
     public MoveUseAnimationAction primaryMoveUseAnimationAction = new MoveUseAnimationAction();
     public InteractWithTileAction dropAction = new InteractWithTileAction();
+    public WaitingForNextAction waitingForInvinciblityToOver = new WaitingForNextAction();
 
     public virtual void Awake()
     {
         walkAction.Initialise(this);
         petrificationAction.Initialise(this);
+        waitingForInvinciblityToOver.Initialise(this);
         primaryMoveUseAnimationAction.Initialise(this);
         dropAction.Initialise(this);
     }
@@ -440,14 +446,13 @@ public abstract class Actor : TileData
     }
 
 
-    public abstract bool CanOccupy(Vector3Int pos);
+    public abstract bool CanOccupy(Vector3Int cellPos);
 
     public abstract void OnCantOccupySpace();
 
     public void StopPush(Actor actorToStop)
     {
         actorToStop.isPushed = false;
-        actorToStop.TakeDamage();
         List<Mapper> mapsToDelete = new List<Mapper>();
         foreach (Mapper m in actorToStop.mapperList)
         {
@@ -467,6 +472,7 @@ public abstract class Actor : TileData
         {
             actorPushingMe.StopPush(actorPushingMe);
         }
+        actorToStop.TakeDamage();
     }
 
     public void TakeDamage()
@@ -476,6 +482,22 @@ public abstract class Actor : TileData
         {
             //Death occurs
         }
+        else
+        {
+            UnPetrify();
+            MakeInvincible();
+        }
+    }
+
+    public void MakeUnInvincible()
+    {
+        isInvincible = false;
+    }
+
+    void MakeInvincible()
+    {
+        isInvincible = true;
+        waitingForInvinciblityToOver.ReInitialiseTimerToBegin(invincibilityTickTimer);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -714,12 +736,12 @@ public abstract class Actor : TileData
             {
                 if (actor.ownerId != ownerId)
                 {
-                    return false;
+                    return true;
                 }
             }
         }
 
-        return true;
+        return false;
     }
 }
 public enum FaceDirection

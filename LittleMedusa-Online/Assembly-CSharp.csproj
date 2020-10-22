@@ -83,7 +83,6 @@
     <Compile Include="Assets\MultiplayerFolder\Util\ThreadManager.cs" />
     <Compile Include="Assets\Scripts\Ability\Attack.cs" />
     <Compile Include="Assets\Scripts\Action\Actions.cs" />
-    <Compile Include="Assets\Scripts\Action\BoulderRemoveAction.cs" />
     <Compile Include="Assets\Scripts\Action\InteractWithTileAction.cs" />
     <Compile Include="Assets\Scripts\Action\MoveUseAnimationAction.cs" />
     <Compile Include="Assets\Scripts\Action\PetrificationAction.cs" />
