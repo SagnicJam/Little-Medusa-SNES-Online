@@ -312,6 +312,7 @@ MonoBehaviour:
   invincibilityTickTimer: 1000
   petrificationTimeTickRate: 1000
   maxHP: 8
+  maxStockLives: 2
   walkSpeed: 4
   damagePerStoppedHit: 2
   primaryMoveAnimationSpeed: 0.2
@@ -360,6 +361,7 @@ MonoBehaviour:
   isInvincible: 0
   triggerFaceChangeEvent: 0
   currentHP: 0
+  currentStockLives: 0
   chainIDLinkedTo: -1
   isHeadCollisionWithOtherActor: 0
   headOnCollisionCell: {x: 0, y: 0, z: 0}

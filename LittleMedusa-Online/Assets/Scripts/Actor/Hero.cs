@@ -39,6 +39,7 @@ public class Hero : Actor
         isPushed = playerAuthoratativeStates.isPushed;
         isInvincible = playerAuthoratativeStates.isInvincible;
         currentHP = playerAuthoratativeStates.currentHP;
+        currentStockLives = playerAuthoratativeStates.currentStockLives;
     }
 
     //authoratatively is performed(but is locally is also done)-correction happens
@@ -148,6 +149,11 @@ public class Hero : Actor
 
     public void ProcessInputAnimationControl()
     {
+        if (triggerFaceChangeEvent)
+        {
+            UpdateBasicWalkingSprite();
+            triggerFaceChangeEvent = false;
+        }
         if (isPushed)
         {
             return;
@@ -155,11 +161,6 @@ public class Hero : Actor
         if (isPetrified)
         {
             return;
-        }
-        if (triggerFaceChangeEvent)
-        {
-            UpdateBasicWalkingSprite();
-            triggerFaceChangeEvent = false;
         }
         if (primaryMoveUseAnimationAction.isBeingUsed)
         {

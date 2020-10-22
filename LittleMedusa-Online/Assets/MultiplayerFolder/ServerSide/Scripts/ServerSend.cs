@@ -93,6 +93,7 @@ public class ServerSend
             packet.Write(serverMasterController.serverInstanceHero.isPushed);
             packet.Write(serverMasterController.serverInstanceHero.isInvincible);
             packet.Write(serverMasterController.serverInstanceHero.currentHP);
+            packet.Write(serverMasterController.serverInstanceHero.currentStockLives);
             packet.Write(serverMasterController.playerSequenceNumberProcessed);
             packet.Write(serverMasterController.serverLocalSequenceNumber);
 
@@ -192,6 +193,7 @@ public class ServerSend
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPushed);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isInvincible);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.currentHP);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.currentStockLives);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerProcessedSequenceNumber);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerServerSequenceNumber);
                 //Debug.LogError("<color=green>#######Processing and sending packet player.processedInputSequenceNumber: </color>" + playerUpdatedPosition[i].sequenceNumber + "position " + playerUpdatedPosition[i].playerUpdatedPosition + " playerid: " + playerUpdatedPosition[i].playerId);
@@ -216,6 +218,7 @@ public class ServerSend
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPushed);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isInvincible);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.currentHP);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.currentStockLives);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerProcessedSequenceNumber);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerServerSequenceNumber);
                 }

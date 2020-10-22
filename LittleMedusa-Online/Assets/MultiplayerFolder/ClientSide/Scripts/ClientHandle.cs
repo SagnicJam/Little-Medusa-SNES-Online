@@ -34,6 +34,7 @@ public class ClientHandle : MonoBehaviour
         bool isPushed = packet.ReadBool();
         bool isInvincible = packet.ReadBool();
         int currentHP = packet.ReadInt();
+        int currentStockLives = packet.ReadInt();
         int playerProcessingSequenceNumber = packet.ReadInt();
         int playerServerSequenceNumber = packet.ReadInt();
         Debug.Log("<color=red>Sequence no spawned on: </color>"+playerProcessingSequenceNumber);
@@ -41,7 +42,7 @@ public class ClientHandle : MonoBehaviour
         PositionUpdates positionUpdates = new PositionUpdates(position, blockposition, previousBlockposition,faceDirection,previousfaceDirection);
         PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile);
         PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isPrimaryMoveAnimationBeingPlayed);
-        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isInvincible, currentHP);
+        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isInvincible, currentHP, currentStockLives);
 
         PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(playerServerSequenceNumber, playerProcessingSequenceNumber, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
         ClientSideGameManager.instance.SpawnPlayer(id,username, playerStateUpdates);
@@ -144,13 +145,14 @@ public class ClientHandle : MonoBehaviour
             bool isPushed = packet.ReadBool();
             bool isInvincible = packet.ReadBool();
             int currentHP = packet.ReadInt();
+            int currentStockLives = packet.ReadInt();
             int playerProcessedsequenceNumberReceived = packet.ReadInt();
             int playerServerSequenceNumberReceived = packet.ReadInt();
 
             PositionUpdates positionUpdates = new PositionUpdates(position, blockposition, previousBlockposition, Facing,previousFacing);
             PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile);
             PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isPrimaryMoveAnimationBeingPlayed);
-            PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isInvincible, currentHP);
+            PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isInvincible, currentHP, currentStockLives);
 
             PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(playerServerSequenceNumberReceived, playerProcessedsequenceNumberReceived, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
             //Debug.LogError("<color=blue>Receiving updated position for movement </color>playerUpdatedPositionSequenceNumber: " + sequenceNumberReceived + " position: " + position);
@@ -192,13 +194,14 @@ public class ClientHandle : MonoBehaviour
                 bool isPushed = packet.ReadBool();
                 bool isInvincible = packet.ReadBool();
                 int currentHP = packet.ReadInt();
+                int currentStockLives = packet.ReadInt();
                 int previousHistoryPlayerProcessingSequenceNo = packet.ReadInt();
                 int previousHistoryServerSequenceNo = packet.ReadInt();
 
                 PositionUpdates positionUpdates = new PositionUpdates(previousHistoryPositionUpdate, previousHistoryBlockPositionUpdate, previousHistoryPreviousBlockPositionUpdate, Facing, previousFacing);
                 PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile);
                 PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isPrimaryMoveAnimationBeingPlayed);
-                PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isInvincible, currentHP);
+                PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isInvincible, currentHP, currentStockLives);
 
                 PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(previousHistoryServerSequenceNo, previousHistoryPlayerProcessingSequenceNo, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
                 if (ClientSideGameManager.players.ContainsKey(previousHistoryPlayerId))

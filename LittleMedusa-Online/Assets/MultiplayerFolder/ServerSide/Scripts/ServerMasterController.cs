@@ -43,6 +43,7 @@ public class ServerMasterController : MonoBehaviour
         serverInstanceHero.actorTransform.position = position;
         serverInstanceHero.movePoint.position = position;
         serverInstanceHero.InitialiseHP();
+        serverInstanceHero.InitialiseStockLives();
         serverInstanceHero.InitialiseServerActor(this,id);
     }
 
@@ -457,7 +458,12 @@ public class ServerMasterController : MonoBehaviour
         serverLocalSequenceNumber++;
 
         //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
-        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(serverInstanceHero.isPetrified, serverInstanceHero.isPushed,serverInstanceHero.isInvincible,serverInstanceHero.currentHP);
+        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(serverInstanceHero.isPetrified
+            , serverInstanceHero.isPushed
+            ,serverInstanceHero.isInvincible
+            ,serverInstanceHero.currentHP
+            ,serverInstanceHero.currentStockLives);
+
         PositionUpdates positionUpdates = new PositionUpdates(serverInstanceHero.actorTransform.position, serverInstanceHero.currentMovePointCellPosition
             , serverInstanceHero.previousMovePointCellPosition,(int)serverInstanceHero.Facing,(int)serverInstanceHero.PreviousFacingDirection);
         PlayerEvents playerEvents = new PlayerEvents(serverInstanceHero.isFiringPrimaryProjectile);

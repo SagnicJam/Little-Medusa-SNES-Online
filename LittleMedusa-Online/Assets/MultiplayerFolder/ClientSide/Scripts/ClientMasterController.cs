@@ -69,24 +69,13 @@ public class ClientMasterController : MonoBehaviour
                 playerSequenceNumberProcessed = updateCorrespondingToSeq.playerProcessedSequenceNumber;
                 latestPlayerStateUpdate = updateCorrespondingToSeq;
 
-                PositionUpdates positionUpdates = new PositionUpdates(updateCorrespondingToSeq.positionUpdates.updatedActorPosition
-                    , updateCorrespondingToSeq.positionUpdates.updatedBlockActorPosition
-                    , updateCorrespondingToSeq.positionUpdates.updatedPreviousBlockActorPosition, updateCorrespondingToSeq.positionUpdates.Facing
-                    ,updateCorrespondingToSeq.positionUpdates.previousFacing);
-
-                PlayerEvents playerEvents = new PlayerEvents(updateCorrespondingToSeq.playerEvents.firedPrimaryMoveProjectile);
-
-                PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(updateCorrespondingToSeq.playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed);
-
-                PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates( updateCorrespondingToSeq.playerAuthoratativeStates.isPetrified
-                    , updateCorrespondingToSeq.playerAuthoratativeStates.isPushed,updateCorrespondingToSeq.playerAuthoratativeStates.isInvincible, updateCorrespondingToSeq.playerAuthoratativeStates.currentHP);
 
                 PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(serverSequenceNumberToBeProcessed
                     , playerSequenceNumberProcessed
-                    , playerAuthoratativeStates
-                    , positionUpdates
-                    , playerEvents
-                    , playerAnimtaionEvents);
+                    , updateCorrespondingToSeq.playerAuthoratativeStates
+                    , updateCorrespondingToSeq.positionUpdates
+                    , updateCorrespondingToSeq.playerEvents
+                    , updateCorrespondingToSeq.playerAnimationEvents);
 
                 SetPlayerStateUpdatesReceivedFromServer(playerStateUpdates);
             }
@@ -362,13 +351,15 @@ public struct PlayerAuthoratativeStates
     public bool isPushed;
     public bool isInvincible;
     public int currentHP;
+    public int currentStockLives;
 
-    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isInvincible, int currentHP)
+    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isInvincible, int currentHP,int currentStockLives)
     {
         this.isPetrified = isPetrified;
         this.isPushed = isPushed;
         this.isInvincible = isInvincible;
         this.currentHP = currentHP;
+        this.currentStockLives = currentStockLives;
     }
 }
 

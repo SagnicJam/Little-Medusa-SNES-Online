@@ -140,6 +140,11 @@ public abstract class Actor : TileData
         currentHP = maxHP;
     }
 
+    public void InitialiseStockLives()
+    {
+        currentStockLives = maxStockLives;
+    }
+
     public bool completedMotionToMovePoint
     {
         get
@@ -481,11 +486,21 @@ public abstract class Actor : TileData
         if (currentHP<=0)
         {
             //Death occurs
+            if(currentStockLives>0)
+            {
+                currentStockLives--;
+                InitialiseHP();
+                Debug.LogError("Respawn Player");
+            }
+            else
+            {
+                Debug.LogError("Game Over");
+            }
         }
         else
         {
             UnPetrify();
-            MakeInvincible();
+            //MakeInvincible();
         }
     }
 
