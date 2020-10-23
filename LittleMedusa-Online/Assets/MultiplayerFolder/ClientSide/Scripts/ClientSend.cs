@@ -70,6 +70,16 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    public static void RespawnPlayer(RespawnPlayerCommand respawnPlayerCommand)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.playerRespawnCommand))
+        {
+            packet.Write(respawnPlayerCommand.respawnCellPostion);
+            packet.Write(respawnPlayerCommand.sequenceNumber);
+            SendTCPData(packet);
+        }
+    }
+
     public static void PlayerInput(List<InputCommands>inputCommands,List<PreviousInputPacks>previousInputPacks)
     {
         using (Packet packet = new Packet((int)ClientPackets.playerInputs))

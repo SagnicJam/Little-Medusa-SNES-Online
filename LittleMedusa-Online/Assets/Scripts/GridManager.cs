@@ -459,6 +459,22 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    public bool IsCellBlockedForFlyingUnitsAtPos(Vector3Int cellPosToCheckFor)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+
+            if (td != null && td.blockFlyingUnits)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<Vector3Int> GetAllPositionForTileMap(Tilemap tilemap)
     {
         List<Vector3Int> cellPositions = new List<Vector3Int>();

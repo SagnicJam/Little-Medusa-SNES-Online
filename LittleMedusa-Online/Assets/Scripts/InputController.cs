@@ -13,6 +13,7 @@ public class InputController : MonoBehaviour
     public bool shoot;
     public bool push;
     public bool placeORRemovalBoulder;
+    public bool respawnPlayer;
 
     private void FixedUpdate()
     {
@@ -25,6 +26,7 @@ public class InputController : MonoBehaviour
             shoot = false;
             push = false;
             placeORRemovalBoulder = false;
+            respawnPlayer = false;
         }
         else
         {
@@ -35,6 +37,7 @@ public class InputController : MonoBehaviour
             shoot = Input.GetKey(KeyCode.J);
             push = Input.GetKey(KeyCode.J);
             placeORRemovalBoulder = Input.GetKey(KeyCode.K);
+            respawnPlayer = Input.GetKey(KeyCode.KeypadEnter);
         }
     }
 }

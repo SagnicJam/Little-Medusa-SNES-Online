@@ -31,13 +31,31 @@ public class Hero : Actor
         SetAuthoratativeStates(playerStateUpdates.playerAuthoratativeStates);
     }
 
-
     //authoratatively is performed
     public void SetAuthoratativeStates(PlayerAuthoratativeStates playerAuthoratativeStates)
     {
         isPetrified = playerAuthoratativeStates.isPetrified;
         isPushed = playerAuthoratativeStates.isPushed;
         isInvincible = playerAuthoratativeStates.isInvincible;
+        
+        if(actorCollider2D!=null)
+        {
+            if (!isRespawnningPlayer && isRespawnningPlayer != playerAuthoratativeStates.isRespawnningPlayer)
+            {
+                //enable crosshair locally
+                //disable collider
+                SetRespawnState();
+            }
+            if (isRespawnningPlayer && isRespawnningPlayer != playerAuthoratativeStates.isRespawnningPlayer)
+            {
+                //disable crosshair locally
+                //enable back collider
+                SetSpawnState();
+            }
+        }
+        
+
+        isRespawnningPlayer = playerAuthoratativeStates.isRespawnningPlayer;
         currentHP = playerAuthoratativeStates.currentHP;
         currentStockLives = playerAuthoratativeStates.currentStockLives;
     }
@@ -83,6 +101,7 @@ public class Hero : Actor
                     StopPush(this);
                     return;
                 }
+                
                 Mapper m = GetMapper();
                 if (m is OneDNonCheckingMapper oneDNonCheckingMapper)
                 {
@@ -247,6 +266,20 @@ public class Hero : Actor
                         {
                             RemoveBoulderCommand removeBoulderCommand = new RemoveBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
                             ClientSend.RemoveBoulderCommand(removeBoulderCommand);
+                        }
+                    }
+                    else if (inputs[(int)EnumData.Inputs.RespawnPlayer] && previousInputs[(int)EnumData.Inputs.RespawnPlayer] != inputs[(int)EnumData.Inputs.RespawnPlayer])
+                    {
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                        if(isRespawnningPlayer&&!IsPlayerSpawnable(cellToCheckFor))
+                        {
+                            //Respawn player command
+                            RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                            ClientSend.RespawnPlayer(respawnPlayerCommand);
+                        }
+                        else
+                        {
+                            Debug.LogError("Invalid location to spawn player");
                         }
                     }
                 }
@@ -508,6 +541,17 @@ public class Hero : Actor
     
     public override bool CanOccupy(Vector3Int pos)
     {
+        if (isRespawnningPlayer)
+        {
+            if (GridManager.instance.IsCellBlockedForFlyingUnitsAtPos(pos))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         //if (isInFlyingState)
         //{
         //    //if (GridManager.instance.IsCellBlockedForFlyingUnitsAtPos(pos))
@@ -519,7 +563,8 @@ public class Hero : Actor
         //        return true;
         //    //}
         //}
-        /*else */if (GridManager.instance.IsCellBlockedForUnitMotionAtPos(pos))
+        /*else */
+        else if (GridManager.instance.IsCellBlockedForUnitMotionAtPos(pos))
         {
             return false;
         }
@@ -543,7 +588,15 @@ public class Hero : Actor
 
     public override void OnCantOccupySpace()
     {
-        currentMovePointCellPosition = previousMovePointCellPosition;
-        actorTransform.position = GridManager.instance.cellToworld(previousMovePointCellPosition);
+        if(isPetrified)
+        {
+            currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actorTransform.position);
+            previousMovePointCellPosition = currentMovePointCellPosition;
+        }
+        else
+        {
+            currentMovePointCellPosition = previousMovePointCellPosition;
+            actorTransform.position = GridManager.instance.cellToworld(previousMovePointCellPosition);
+        }
     }
 }

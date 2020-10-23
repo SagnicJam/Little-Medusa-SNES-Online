@@ -248,13 +248,14 @@ MonoBehaviour:
   movePoint: {fileID: 3120245020949755150}
   actorTransform: {fileID: 3120245021199493874}
   frameLooper: {fileID: 6824960385572969362}
+  actorCollider2D: {fileID: 1978482911545761097}
   projectileThrownType: 2
   invincibilityTickTimer: 1000
   petrificationTimeTickRate: 1000
   maxHP: 8
   maxStockLives: 2
   walkSpeed: 4
-  damagePerStoppedHit: 2
+  damagePerStoppedHit: 8
   primaryMoveAnimationSpeed: 0.2
   normalAnimationSpeed: 0.1
   primaryMoveDamage: 23
@@ -299,6 +300,7 @@ MonoBehaviour:
   isInFlyingState: 0
   isFiringPrimaryProjectile: 0
   isInvincible: 0
+  isRespawnningPlayer: 0
   triggerFaceChangeEvent: 0
   currentHP: 0
   currentStockLives: 0
@@ -751,13 +753,14 @@ MonoBehaviour:
   movePoint: {fileID: 4309584410218135170}
   actorTransform: {fileID: 4309584410355565421}
   frameLooper: {fileID: 8144042283862135355}
+  actorCollider2D: {fileID: 0}
   projectileThrownType: 2
   invincibilityTickTimer: 1000
   petrificationTimeTickRate: 1000
   maxHP: 8
   maxStockLives: 2
   walkSpeed: 4
-  damagePerStoppedHit: 2
+  damagePerStoppedHit: 8
   primaryMoveAnimationSpeed: 0.2
   normalAnimationSpeed: 0.1
   primaryMoveDamage: 23
@@ -802,6 +805,7 @@ MonoBehaviour:
   isInFlyingState: 0
   isFiringPrimaryProjectile: 0
   isInvincible: 0
+  isRespawnningPlayer: 0
   triggerFaceChangeEvent: 0
   currentHP: 0
   currentStockLives: 0
@@ -896,13 +900,14 @@ MonoBehaviour:
   movePoint: {fileID: 4309584410610694026}
   actorTransform: {fileID: 4309584410505519486}
   frameLooper: {fileID: 8378923909811213302}
+  actorCollider2D: {fileID: 0}
   projectileThrownType: 2
   invincibilityTickTimer: 1000
   petrificationTimeTickRate: 1000
   maxHP: 8
   maxStockLives: 2
   walkSpeed: 4
-  damagePerStoppedHit: 2
+  damagePerStoppedHit: 8
   primaryMoveAnimationSpeed: 0.2
   normalAnimationSpeed: 0.1
   primaryMoveDamage: 23
@@ -947,6 +952,7 @@ MonoBehaviour:
   isInFlyingState: 0
   isFiringPrimaryProjectile: 0
   isInvincible: 0
+  isRespawnningPlayer: 0
   triggerFaceChangeEvent: 0
   currentHP: 0
   currentStockLives: 0

@@ -107,7 +107,8 @@ public class ClientMasterController : MonoBehaviour
                 localInputController.right,
                 localInputController.shoot,
                 localInputController.push,
-                localInputController.placeORRemovalBoulder
+                localInputController.placeORRemovalBoulder,
+                localInputController.respawnPlayer
             };
             localSequenceNumber++;
 
@@ -350,14 +351,16 @@ public struct PlayerAuthoratativeStates
     public bool isPetrified;
     public bool isPushed;
     public bool isInvincible;
+    public bool isRespawnningPlayer;
     public int currentHP;
     public int currentStockLives;
 
-    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isInvincible, int currentHP,int currentStockLives)
+    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isInvincible,bool isRespawnningPlayer, int currentHP,int currentStockLives)
     {
         this.isPetrified = isPetrified;
         this.isPushed = isPushed;
         this.isInvincible = isInvincible;
+        this.isRespawnningPlayer = isRespawnningPlayer;
         this.currentHP = currentHP;
         this.currentStockLives = currentStockLives;
     }
@@ -451,6 +454,17 @@ public struct RemoveBoulderCommand
     }
 }
 
+public struct RespawnPlayerCommand
+{
+    public int sequenceNumber;
+    public Vector3Int respawnCellPostion;
+
+    public RespawnPlayerCommand(int sequenceNumber, Vector3Int respawnCellPostion)
+    {
+        this.sequenceNumber = sequenceNumber;
+        this.respawnCellPostion = respawnCellPostion;
+    }
+}
 
 public struct InputCommands
 {

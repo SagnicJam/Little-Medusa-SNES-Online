@@ -327,13 +327,14 @@ MonoBehaviour:
   movePoint: {fileID: 632477325527600913}
   actorTransform: {fileID: 632477326203761406}
   frameLooper: {fileID: 7092370211676962068}
+  actorCollider2D: {fileID: 4818192695451518446}
   projectileThrownType: 2
   invincibilityTickTimer: 1000
   petrificationTimeTickRate: 1000
   maxHP: 8
   maxStockLives: 2
   walkSpeed: 4
-  damagePerStoppedHit: 2
+  damagePerStoppedHit: 8
   primaryMoveAnimationSpeed: 0.2
   normalAnimationSpeed: 0.1
   primaryMoveDamage: 23
@@ -378,6 +379,7 @@ MonoBehaviour:
   isInFlyingState: 0
   isFiringPrimaryProjectile: 0
   isInvincible: 0
+  isRespawnningPlayer: 0
   triggerFaceChangeEvent: 0
   currentHP: 0
   currentStockLives: 0

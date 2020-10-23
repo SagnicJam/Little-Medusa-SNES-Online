@@ -9,6 +9,7 @@ public abstract class Actor : TileData
     public FrameLooper frameLooper;
 
     [Header("Tweak params")]
+    public BoxCollider2D actorCollider2D;
     public EnumData.Projectiles projectileThrownType;
     public int invincibilityTickTimer;
     public int petrificationTimeTickRate;
@@ -41,6 +42,7 @@ public abstract class Actor : TileData
     public bool isInFlyingState;
     public bool isFiringPrimaryProjectile;
     public bool isInvincible;
+    public bool isRespawnningPlayer;
     public bool triggerFaceChangeEvent;
     public int currentHP;
     public int currentStockLives;
@@ -257,8 +259,6 @@ public abstract class Actor : TileData
                     break;
             }
         }
-
-
     }
 
     public void Fire(Actor firingActor)
@@ -440,8 +440,10 @@ public abstract class Actor : TileData
     {
         this.actorPushingMe = actorPushingMe;
         actorTransform.position = this.actorPushingMe.actorTransform.transform.position + GridManager.instance.GetFacingDirectionOffsetVector3(this.actorPushingMe.Facing);
+
         currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(this.actorPushingMe.Facing));
         previousMovePointCellPosition = GridManager.instance.grid.WorldToCell(actorTransform.position);
+
         actorPushingMe.isHeadCollisionWithOtherActor = false;
     }
 
@@ -457,7 +459,7 @@ public abstract class Actor : TileData
 
     public void StopPush(Actor actorToStop)
     {
-        actorToStop.isPushed = false;
+       
         List<Mapper> mapsToDelete = new List<Mapper>();
         foreach (Mapper m in actorToStop.mapperList)
         {
@@ -477,20 +479,23 @@ public abstract class Actor : TileData
         {
             actorPushingMe.StopPush(actorPushingMe);
         }
+        actorToStop.isPushed = false;
         actorToStop.TakeDamage();
     }
 
-    public void TakeDamage()
+
+    void TakeDamage()
     {
         currentHP -= damagePerStoppedHit;
-        if (currentHP<=0)
+        if (currentHP <= 0)
         {
             //Death occurs
-            if(currentStockLives>0)
+            if (currentStockLives > 0)
             {
                 currentStockLives--;
-                InitialiseHP();
                 Debug.LogError("Respawn Player");
+                UnPetrify();
+                RespawnPlayer();
             }
             else
             {
@@ -500,8 +505,33 @@ public abstract class Actor : TileData
         else
         {
             UnPetrify();
-            //MakeInvincible();
+            MakeInvincible();
         }
+    }
+
+    void RespawnPlayer()
+    {
+        isRespawnningPlayer = true;
+        SetRespawnState();
+    }
+
+    public void SpawnPlayer()
+    {
+        isRespawnningPlayer = false;
+        InitialiseHP();
+        SetSpawnState();
+    }
+
+    public void SetRespawnState()
+    {
+        actorCollider2D.enabled = false;
+        Debug.LogError("Collider off");
+    }
+
+    public void SetSpawnState()
+    {
+        actorCollider2D.enabled = true;
+        Debug.LogError("Collider on");
     }
 
     public void MakeUnInvincible()
@@ -521,6 +551,7 @@ public abstract class Actor : TileData
         {
             return;
         }
+
         if (isDead)
         {
             return;
@@ -528,7 +559,6 @@ public abstract class Actor : TileData
 
         if (isPetrified && !isPushed)
             return;
-
 
         if (collider.GetComponent<Actor>() == null)
         {
@@ -545,7 +575,7 @@ public abstract class Actor : TileData
             }
         }
 
-        if (collidedActorWithMyHead != null && collidedActorWithMyHead.gameObject.GetInstanceID() != actorTransform.gameObject.GetInstanceID() && GridManager.instance.IsHeadCollision(collidedActorWithMyHead.actorTransform.position, actorTransform.position, Facing))
+        if (collidedActorWithMyHead != null &&!collidedActorWithMyHead.isInvincible&& collidedActorWithMyHead.gameObject.GetInstanceID() != actorTransform.gameObject.GetInstanceID() && GridManager.instance.IsHeadCollision(collidedActorWithMyHead.actorTransform.position, actorTransform.position, Facing))
         {
             if (collidedActorWithMyHead.isDead)
             {
@@ -557,6 +587,7 @@ public abstract class Actor : TileData
     }
     public virtual void OnHeadCollision(Actor collidedActorWithMyHead)
     {
+        
         //Debug.Break();
         if (collidedActorWithMyHead.isPushed)
         {
@@ -741,21 +772,43 @@ public abstract class Actor : TileData
         //Debug.Log("acurrentMovePointCellPosition " + currentMovePointCellPosition + "  previousMovePointCellPosition " + previousMovePointCellPosition);
     }
 
-    public bool IsActorPathBlockedForInputDrivenMovementByAnotherActor(FaceDirection direction)
+    public bool IsPlayerSpawnable(Vector3Int cellPos)
     {
-        Vector3Int cellPos =  GridManager.instance.grid.WorldToCell(actorTransform.position+ GridManager.instance.GetFacingDirectionOffsetVector3(direction));        
-        Actor actor = GridManager.instance.GetActorOnPos(cellPos);
-        if (!isInFlyingState)
+        if (GridManager.instance.IsCellBlockedForUnitMotionAtPos(cellPos))
         {
+            return false;
+        }
+        else
+        {
+            Actor actor = GridManager.instance.GetActorOnPos(cellPos);
             if (actor != null)
             {
                 if (actor.ownerId != ownerId)
                 {
-                    return true;
+                    return false;
                 }
             }
         }
+        return true;
+    }
 
+    public bool IsActorPathBlockedForInputDrivenMovementByAnotherActor(FaceDirection direction)
+    {
+        if(!isRespawnningPlayer)
+        {
+            if (!isInFlyingState)
+            {
+                Vector3Int cellPos = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(direction));
+                Actor actor = GridManager.instance.GetActorOnPos(cellPos);
+                if (actor != null)
+                {
+                    if (actor.ownerId != ownerId)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 }

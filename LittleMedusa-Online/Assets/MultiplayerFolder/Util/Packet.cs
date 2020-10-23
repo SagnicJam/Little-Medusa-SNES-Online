@@ -23,7 +23,8 @@ public enum ClientPackets
     playerPetrifyCommand,
     playerPushCommand,
     playerPlaceBoulderCommand,
-    playerRemoveBoulderCommand
+    playerRemoveBoulderCommand,
+    playerRespawnCommand
 }
 
 public class Packet : IDisposable

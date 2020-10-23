@@ -26,6 +26,15 @@ public class ServerHandle
         Server.clients[fromClient].serverMasterController.AccumulatePetrificationRequestFromServer(petrificationCommand);
     }
 
+    public static void PlayerRespawnCommandReceived(int fromClient,Packet packet)
+    {
+        Vector3Int cellPostionToRespawnPlayerOn = packet.ReadVector3Int();
+        int sequenceNumber = packet.ReadInt();
+
+        RespawnPlayerCommand respawnCommand = new RespawnPlayerCommand(sequenceNumber,cellPostionToRespawnPlayerOn);
+        Server.clients[fromClient].serverMasterController.AccumulateRespawnningRequestFromServer(respawnCommand);
+    }
+
     public static void PlayerPushCommandReceived(int fromClient,Packet packet)
     {
         int playerIdToPush = packet.ReadInt();

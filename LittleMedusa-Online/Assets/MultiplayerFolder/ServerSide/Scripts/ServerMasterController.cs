@@ -21,6 +21,7 @@ public class ServerMasterController : MonoBehaviour
     private Dictionary<int, PlaceBoulderCommand> placeBoulderCommandFromClientToServerDic = new Dictionary<int, PlaceBoulderCommand>();
     private Dictionary<int, RemoveBoulderCommand> removeBoulderCommandFromClientToServerDic = new Dictionary<int, RemoveBoulderCommand>();
     private Dictionary<int, PetrificationCommand> petrificationRequestReceivedFromServerDic = new Dictionary<int, PetrificationCommand>();
+    private Dictionary<int, RespawnPlayerCommand> respawnCommandRequestReceivedFromServerDic = new Dictionary<int, RespawnPlayerCommand>();
     private List<PlayerStateServerUpdates> playerStateListOnServer = new List<PlayerStateServerUpdates>();
     private List<PreviousPlayerUpdatedStatePacks> previousPlayerUpdatedStatePacks = new List<PreviousPlayerUpdatedStatePacks>();
 
@@ -47,6 +48,7 @@ public class ServerMasterController : MonoBehaviour
         serverInstanceHero.InitialiseServerActor(this,id);
     }
 
+    #region ReliableDataCheckForImplementation
     public void CheckForPetrificationRequestOnPlayer(int sequenceNoToCheck)
     {
         List<int> toDiscardSequences = new List<int>();
@@ -90,7 +92,7 @@ public class ServerMasterController : MonoBehaviour
                 petrificationRequestReceivedFromServerDic.Remove(petrificationCommand.sequenceNoForPetrificationCommand);
                 //do server rollback here to check to check if damage actually occured on server
                 int playerIdPetrified = petrificationCommand.playerIdPetrified;
-                Server.clients[playerIdPetrified].serverMasterController.serverInstanceHero.Petrify();
+                PetrifyPlayerRequestImplementation(playerIdPetrified);
             }
         }
 
@@ -103,31 +105,12 @@ public class ServerMasterController : MonoBehaviour
                 petrificationRequestReceivedFromServerDic.Remove(petrificationCommand.sequenceNoForPetrificationCommand);
                 //do server rollback here to check to check if damage actually occured on server
                 int playerIdPetrified = petrificationCommand.playerIdPetrified;
-                Server.clients[playerIdPetrified].serverMasterController.serverInstanceHero.Petrify();
+                PetrifyPlayerRequestImplementation(playerIdPetrified);
             }
         }
     }
 
-    public void AccumulatePetrificationRequestFromServer(PetrificationCommand petrificationCommand)
-    {
-        if (petrificationCommand.sequenceNoForPetrificationCommand > playerSequenceNumberProcessed)
-        {
-            PetrificationCommand dataPackage;
-            if (petrificationRequestReceivedFromServerDic.TryGetValue(petrificationCommand.sequenceNoForPetrificationCommand, out dataPackage))
-            {
-                Debug.Log("<color=orange>AccumulatePetrificationRequestFromServer dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNoForPetrificationCommand);
-            }
-            else
-            {
-                Debug.Log("<color=green>AccumulatePetrificationRequestFromServer Added successfully to processing buffer dic </color>" + playerSequenceNumberProcessed);
-                petrificationRequestReceivedFromServerDic.Add(petrificationCommand.sequenceNoForPetrificationCommand, petrificationCommand);
-            }
-        }
-        else
-        {
-            Debug.Log("<color=red>AccumulatePetrificationRequestFromServer Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + petrificationCommand.sequenceNoForPetrificationCommand);
-        }
-    }
+    
 
     public void CheckForPushRequestOnServer(int sequenceNoToCheck)
     {
@@ -174,7 +157,8 @@ public class ServerMasterController : MonoBehaviour
                 int playerIdToPush = pushCommand.playerIdToPush;
                 int directionOfPush = pushCommand.directionOfPush;
 
-                serverInstanceHero.InitialisePush(playerIdToPush, directionOfPush);
+                PushPlayerRequestImplementation(playerIdToPush, directionOfPush);
+
             }
         }
 
@@ -189,7 +173,8 @@ public class ServerMasterController : MonoBehaviour
                 int playerIdToPush = pushCommand.playerIdToPush;
                 int directionOfPush = pushCommand.directionOfPush;
 
-                serverInstanceHero.InitialisePush(playerIdToPush, directionOfPush);
+                PushPlayerRequestImplementation(playerIdToPush, directionOfPush);
+
             }
         }
     }
@@ -237,8 +222,7 @@ public class ServerMasterController : MonoBehaviour
                 placeBoulderCommandFromClientToServerDic.Remove(placeBoulderCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
                 Vector3Int cellPointToPlaceBoulder = placeBoulderCommand.boulderCellPos;
-
-                GridManager.instance.SetTile(cellPointToPlaceBoulder, EnumData.TileType.Boulder, true,false);
+                PlaceBoulderRequestImplementation(cellPointToPlaceBoulder);
             }
         }
 
@@ -251,8 +235,7 @@ public class ServerMasterController : MonoBehaviour
                 placeBoulderCommandFromClientToServerDic.Remove(placeBoulderCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
                 Vector3Int cellPointToPlaceBoulder = placeBoulderCommand.boulderCellPos;
-                GridManager.instance.SetTile(cellPointToPlaceBoulder, EnumData.TileType.Boulder, true,false);
-                //Send Command for spawning on clients world
+                PlaceBoulderRequestImplementation(cellPointToPlaceBoulder);
             }
         }
     }
@@ -300,8 +283,7 @@ public class ServerMasterController : MonoBehaviour
                 removeBoulderCommandFromClientToServerDic.Remove(removeBoulderCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
                 Vector3Int cellPointToRemoveBoulder = removeBoulderCommand.removalCellPos;
-
-                GridManager.instance.SetTile(cellPointToRemoveBoulder, EnumData.TileType.Boulder, false,false);
+                RemoveBoulderRequestImplementation(cellPointToRemoveBoulder);
             }
         }
 
@@ -314,9 +296,92 @@ public class ServerMasterController : MonoBehaviour
                 removeBoulderCommandFromClientToServerDic.Remove(removeBoulderCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
                 Vector3Int cellPointToRemoveBoulder = removeBoulderCommand.removalCellPos;
-                GridManager.instance.SetTile(cellPointToRemoveBoulder, EnumData.TileType.Boulder, false,false);
-                //Send Command for spawning on clients world
+                RemoveBoulderRequestImplementation(cellPointToRemoveBoulder);
             }
+        }
+    }
+
+    public void CheckForRespawnningRequestOnServer(int sequenceNoToCheck)
+    {
+        List<int> toDiscardSequences = new List<int>();
+        foreach (KeyValuePair<int, RespawnPlayerCommand> kvp in respawnCommandRequestReceivedFromServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
+            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (KeyValuePair<int, RespawnPlayerCommand> kvp in respawnCommandRequestReceivedFromServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
+            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (int i in toDiscardSequences)
+        {
+            if (respawnCommandRequestReceivedFromServerDic.ContainsKey(i))
+            {
+                //Debug.Log("<color=red>discarding seq </color>" + i);
+                respawnCommandRequestReceivedFromServerDic.Remove(i);
+            }
+            else
+            {
+                Debug.LogError("Could not find the key: " + i);
+            }
+        }
+
+        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
+            RespawnPlayerCommand respawnPlayerCommand;
+            if (respawnCommandRequestReceivedFromServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out respawnPlayerCommand))
+            {
+                respawnCommandRequestReceivedFromServerDic.Remove(respawnPlayerCommand.sequenceNumber);
+                //do server rollback here to check to check if damage actually occured on server
+                Vector3Int cellPointToRespawnPlayerOver = respawnPlayerCommand.respawnCellPostion;
+                RespawnPlayerRequestImplementation(cellPointToRespawnPlayerOver);
+            }
+        }
+
+        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
+            RespawnPlayerCommand respawnPlayerCommand;
+            if (respawnCommandRequestReceivedFromServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out respawnPlayerCommand))
+            {
+                respawnCommandRequestReceivedFromServerDic.Remove(respawnPlayerCommand.sequenceNumber);
+                //do server rollback here to check to check if damage actually occured on server
+                Vector3Int cellPointToRespawnPlayerOver = respawnPlayerCommand.respawnCellPostion;
+                RespawnPlayerRequestImplementation(cellPointToRespawnPlayerOver);
+            }
+        }
+    }
+    #endregion
+
+    #region ReliableDataAccumulation
+    public void AccumulatePetrificationRequestFromServer(PetrificationCommand petrificationCommand)
+    {
+        if (petrificationCommand.sequenceNoForPetrificationCommand > playerSequenceNumberProcessed)
+        {
+            PetrificationCommand dataPackage;
+            if (petrificationRequestReceivedFromServerDic.TryGetValue(petrificationCommand.sequenceNoForPetrificationCommand, out dataPackage))
+            {
+                Debug.Log("<color=orange>AccumulatePetrificationRequestFromServer dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNoForPetrificationCommand);
+            }
+            else
+            {
+                Debug.Log("<color=green>AccumulatePetrificationRequestFromServer Added successfully to processing buffer dic </color>" + petrificationCommand.sequenceNoForPetrificationCommand);
+                petrificationRequestReceivedFromServerDic.Add(petrificationCommand.sequenceNoForPetrificationCommand, petrificationCommand);
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>AccumulatePetrificationRequestFromServer Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + petrificationCommand.sequenceNoForPetrificationCommand);
         }
     }
 
@@ -383,7 +448,29 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
+    public void AccumulateRespawnningRequestFromServer(RespawnPlayerCommand respawnPlayerCommand)
+    {
+        if (respawnPlayerCommand.sequenceNumber > playerSequenceNumberProcessed)
+        {
+            RespawnPlayerCommand dataPackage;
+            if (respawnCommandRequestReceivedFromServerDic.TryGetValue(respawnPlayerCommand.sequenceNumber, out dataPackage))
+            {
+                Debug.Log("<color=orange>AccumulateRespawnningRequestFromServer dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNumber);
+            }
+            else
+            {
+                Debug.Log("<color=green>AccumulateRespawnningRequestFromServer Added successfully to processing buffer dic </color>" + respawnPlayerCommand.sequenceNumber);
+                respawnCommandRequestReceivedFromServerDic.Add(respawnPlayerCommand.sequenceNumber, respawnPlayerCommand);
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>AccumulateRespawnningRequestFromServer Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + respawnPlayerCommand.sequenceNumber);
+        }
+    }
+    #endregion
 
+    #region UnReliableDataAccumulation
     public void AccumulateInputsToBePlayedOnServerFromClient(InputCommands inputCommands)
     {
         if (inputCommands.sequenceNumber > playerSequenceNumberProcessed)
@@ -404,6 +491,188 @@ public class ServerMasterController : MonoBehaviour
             //Debug.Log("<color=red>Already processed this sequence no </color>" + playerSequenceNumberProcessed);
         }
     }
+    #endregion
+
+    #region ServerRequestsImplementation
+    void PushPlayerRequestImplementation(int playerIdToPush, int directionOfPush)
+    {
+        if (serverInstanceHero.isPetrified)
+        {
+            Debug.LogError("PushPlayerRequestImplementation server player is petrified hence request failed");
+            return;
+        }
+        if (serverInstanceHero.isPushed)
+        {
+            Debug.LogError("PushPlayerRequestImplementation server player is pushed hence request failed");
+            return;
+        }
+        if (serverInstanceHero.isInFlyingState)
+        {
+            Debug.LogError("PushPlayerRequestImplementation server player is isInFlyingState hence request failed");
+            return;
+        }
+
+        if (serverInstanceHero.completedMotionToMovePoint)
+        {
+            Vector3Int cellPos = serverInstanceHero.currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)directionOfPush));
+            Actor actorToPush = GridManager.instance.GetActorOnPos(cellPos);
+
+            if (actorToPush != null)
+            {
+                if (actorToPush.ownerId == playerIdToPush)
+                {
+                    if (serverInstanceHero.IsActorAbleToPush((FaceDirection)directionOfPush))
+                    {
+                        if (serverInstanceHero.IsActorPushableInDirection(actorToPush, (FaceDirection)directionOfPush))
+                        {
+                            serverInstanceHero.InitialisePush(playerIdToPush, directionOfPush);
+                        }
+                        else
+                        {
+                            Debug.LogError(playerIdToPush + " IsActorPushableInDirection " + directionOfPush + " Not possible");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("IsActorAbleToPush " + directionOfPush + " Not possible");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Actor to push id :" + actorToPush.ownerId + " requested actor to push id: " + playerIdToPush);
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("PushPlayerRequestImplementation Server hero has not completed motion to movepoint hence request failed");
+        }
+    }
+
+    void PlaceBoulderRequestImplementation(Vector3Int cellPositionToPlaceBoulder)
+    {
+        if (serverInstanceHero.isPetrified)
+        {
+            Debug.LogError("PlaceBoulderRequestImplementation server player is petrified hence request failed");
+            return;
+        }
+        if (serverInstanceHero.isPushed)
+        {
+            Debug.LogError("PlaceBoulderRequestImplementation server player is pushed hence request failed");
+            return;
+        }
+        if (serverInstanceHero.isInFlyingState)
+        {
+            Debug.LogError("PlaceBoulderRequestImplementation server player is isInFlyingState hence request failed");
+            return;
+        }
+
+        if (serverInstanceHero.completedMotionToMovePoint)
+        {
+            if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellPositionToPlaceBoulder))
+            {
+                GridManager.instance.SetTile(cellPositionToPlaceBoulder, EnumData.TileType.Boulder, true, false);
+            }
+            else
+            {
+                Debug.LogError("Cell is blocked for boulder placement : " + cellPositionToPlaceBoulder);
+            }
+        }
+        else
+        {
+            Debug.LogError("PlaceBoulderRequestImplementation Server hero has not completed motion to movepoint hence request failed");
+        }
+    }
+
+    void RemoveBoulderRequestImplementation(Vector3Int cellPositionToRemoveBoulder)
+    {
+        if (serverInstanceHero.isPetrified)
+        {
+            Debug.LogError("RemoveBoulderRequestImplementation server player is petrified hence request failed");
+            return;
+        }
+        if (serverInstanceHero.isPushed)
+        {
+            Debug.LogError("RemoveBoulderRequestImplementation server player is pushed hence request failed");
+            return;
+        }
+        if (serverInstanceHero.isInFlyingState)
+        {
+            Debug.LogError("RemoveBoulderRequestImplementation server player is isInFlyingState hence request failed");
+            return;
+        }
+        if (serverInstanceHero.completedMotionToMovePoint)
+        {
+            if (GridManager.instance.HasTileAtCellPoint(cellPositionToRemoveBoulder, EnumData.TileType.Boulder))
+            {
+                GridManager.instance.SetTile(cellPositionToRemoveBoulder, EnumData.TileType.Boulder, false, false);
+            }
+            else
+            {
+                Debug.LogError("Doesnot have any tile at cell point: " + cellPositionToRemoveBoulder);
+            }
+        }
+        else
+        {
+            Debug.LogError("RemoveBoulderRequestImplementation Server hero has not completed motion to movepoint hence request failed");
+        }
+        
+    }
+
+    void PetrifyPlayerRequestImplementation(int playerIdToPetrify)
+    {
+        if (!serverInstanceHero.isPushed)
+        {
+            Server.clients[playerIdToPetrify].serverMasterController.serverInstanceHero.Petrify();
+        }
+        else
+        {
+            Debug.LogError("I was pushed when i implemented the petrification command hence failed");
+        }
+    }
+
+    void RespawnPlayerRequestImplementation(Vector3Int cellPostionToRespawnPlayerOn)
+    {
+        if(serverInstanceHero.isPetrified)
+        {
+            Debug.LogError("RespawnPlayerRequestImplementation server player is petrified hence request failed");
+            return;
+        }
+        if(serverInstanceHero.isPushed)
+        {
+            Debug.LogError("RespawnPlayerRequestImplementation server player is pushed hence request failed");
+            return;
+        }
+        if (serverInstanceHero.isInFlyingState)
+        {
+            Debug.LogError("RespawnPlayerRequestImplementation server player is isInFlyingState hence request failed");
+            return;
+        }
+        if (serverInstanceHero.completedMotionToMovePoint)
+        {
+            if (serverInstanceHero.isRespawnningPlayer)
+            {
+                if (!serverInstanceHero.IsPlayerSpawnable(cellPostionToRespawnPlayerOn))
+                {
+                    //Respawn here
+                    serverInstanceHero.SpawnPlayer();
+                }
+                else
+                {
+                    Debug.LogError("Invalid location to spawn player");
+                }
+            }
+            else
+            {
+                Debug.LogError("Is respawnning player is false");
+            }
+        }
+        else
+        {
+            Debug.LogError("RespawnPlayerRequestImplementation Server hero has not completed motion to movepoint hence request failed");
+        }
+    }
+    #endregion
 
     private void FixedUpdate()
     {
@@ -411,7 +680,11 @@ public class ServerMasterController : MonoBehaviour
 
         for (int i = 0; i < (int)currentInputProcessingModeOnServer; i++)
         {
-            
+            CheckForPushRequestOnServer(playerSequenceNumberProcessed+1);
+            CheckForPlaceBoulderRequestOnServer(playerSequenceNumberProcessed+1);
+            CheckForRemovingBoulderRequestOnServer(playerSequenceNumberProcessed+1);
+            CheckForPetrificationRequestOnPlayer(playerSequenceNumberProcessed+1);
+            CheckForRespawnningRequestOnServer(playerSequenceNumberProcessed+1);
 
             InputCommands inputPackageCorrespondingToSeq;
 
@@ -449,10 +722,7 @@ public class ServerMasterController : MonoBehaviour
                 }
             }
 
-            CheckForPushRequestOnServer(playerSequenceNumberProcessed);
-            CheckForPlaceBoulderRequestOnServer(playerSequenceNumberProcessed);
-            CheckForRemovingBoulderRequestOnServer(playerSequenceNumberProcessed);
-            CheckForPetrificationRequestOnPlayer(playerSequenceNumberProcessed);
+            
         }
 
         serverLocalSequenceNumber++;
@@ -461,7 +731,8 @@ public class ServerMasterController : MonoBehaviour
         PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(serverInstanceHero.isPetrified
             , serverInstanceHero.isPushed
             ,serverInstanceHero.isInvincible
-            ,serverInstanceHero.currentHP
+            ,serverInstanceHero.isRespawnningPlayer
+            , serverInstanceHero.currentHP
             ,serverInstanceHero.currentStockLives);
 
         PositionUpdates positionUpdates = new PositionUpdates(serverInstanceHero.actorTransform.position, serverInstanceHero.currentMovePointCellPosition

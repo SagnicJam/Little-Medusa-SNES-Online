@@ -12,7 +12,8 @@ public class EnumData
         Right,
         Shoot,
         Push,
-        PlaceRemovalBoulder
+        PlaceRemovalBoulder,
+        RespawnPlayer
     }
 
     public enum PlayerStates

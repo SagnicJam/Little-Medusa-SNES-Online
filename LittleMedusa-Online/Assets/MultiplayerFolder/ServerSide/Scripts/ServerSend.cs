@@ -92,6 +92,7 @@ public class ServerSend
             packet.Write(serverMasterController.serverInstanceHero.isPetrified);
             packet.Write(serverMasterController.serverInstanceHero.isPushed);
             packet.Write(serverMasterController.serverInstanceHero.isInvincible);
+            packet.Write(serverMasterController.serverInstanceHero.isRespawnningPlayer);
             packet.Write(serverMasterController.serverInstanceHero.currentHP);
             packet.Write(serverMasterController.serverInstanceHero.currentStockLives);
             packet.Write(serverMasterController.playerSequenceNumberProcessed);
@@ -192,6 +193,7 @@ public class ServerSend
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPetrified);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPushed);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isInvincible);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.currentHP);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.currentStockLives);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerProcessedSequenceNumber);
@@ -217,6 +219,7 @@ public class ServerSend
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPetrified);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPushed);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isInvincible);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.currentHP);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.currentStockLives);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerProcessedSequenceNumber);
