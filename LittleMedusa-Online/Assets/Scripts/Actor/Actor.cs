@@ -477,7 +477,7 @@ public abstract class Actor : TileData
             actorToStop.mapperList.Remove(mapsToDelete[i]);
         }
 
-        OnCantOccupySpace();
+        actorToStop.OnCantOccupySpace();
         if (actorPushingMe != null)
         {
             actorPushingMe.StopPush(actorPushingMe);

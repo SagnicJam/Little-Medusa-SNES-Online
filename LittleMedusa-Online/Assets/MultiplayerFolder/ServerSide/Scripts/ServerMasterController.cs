@@ -689,7 +689,6 @@ public class ServerMasterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        serverInstanceHero.ProcessAuthoratativeEvents();
 
         for (int i = 0; i < (int)currentInputProcessingModeOnServer; i++)
         {
@@ -773,6 +772,7 @@ public class ServerMasterController : MonoBehaviour
 
             //Debug.Log("<color=red>--------------------------------------------------------------------</color>");
         }
+        serverInstanceHero.ProcessAuthoratativeEvents();
 
         UpdateClientInputsProcessMode();
         snapShotBufferSize = GetTheLastestSequenceNoInDic() - playerSequenceNumberProcessed;

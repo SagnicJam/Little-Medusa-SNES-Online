@@ -67,13 +67,11 @@ public class Hero : Actor
         currentMovePointCellPosition = positionUpdates.updatedBlockActorPosition;
         previousMovePointCellPosition = positionUpdates.updatedPreviousBlockActorPosition;
         Facing = GridManager.instance.GetFaceDirectionFromCurrentPrevPoint(currentMovePointCellPosition, previousMovePointCellPosition, this);
-        if(isClient()&&!hasAuthority())
+
+        if (Facing != (FaceDirection)positionUpdates.Facing || PreviousFacingDirection != (FaceDirection)positionUpdates.previousFacing)
         {
-            if (Facing != (FaceDirection)positionUpdates.Facing || PreviousFacingDirection != (FaceDirection)positionUpdates.previousFacing)
-            {
-                Facing = (FaceDirection)positionUpdates.Facing;
-                PreviousFacingDirection = (FaceDirection)positionUpdates.previousFacing;
-            }
+            Facing = (FaceDirection)positionUpdates.Facing;
+            PreviousFacingDirection = (FaceDirection)positionUpdates.previousFacing;
         }
     }
 
@@ -114,6 +112,11 @@ public class Hero : Actor
             }
             else
             {
+                if (GridManager.instance.IsCellBlockedForPetrifiedUnitMotionAtPos(currentMovePointCellPosition))
+                {
+                    StopPush(this);
+                    return;
+                }
                 walkAction.MoveActorToMovePointCell();
             }
             return;
@@ -616,7 +619,7 @@ public class Hero : Actor
 
     public override void OnCantOccupySpace()
     {
-        if(isPetrified)
+        if(isPetrified||isPushed)
         {
             currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actorTransform.position);
             previousMovePointCellPosition = currentMovePointCellPosition;
