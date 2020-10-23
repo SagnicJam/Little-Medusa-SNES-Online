@@ -35,6 +35,9 @@ public abstract class Actor : TileData
     public Sprite[] downPrimaryMoveSprite;
     public Sprite[] upPrimaryMoveSprite;
 
+    [Header("Unit Template")]
+    public Sprite crosshairSprite;
+
     [Header("Live Data")]
     public bool isDead;
     public bool isPushed;
@@ -525,12 +528,38 @@ public abstract class Actor : TileData
     public void SetRespawnState()
     {
         actorCollider2D.enabled = false;
+        if(isClient())
+        {
+            if (hasAuthority())
+            {
+                //crosshair replaces sprite
+                frameLooper.spriteRenderer.sprite = crosshairSprite;
+            }
+            else
+            {
+                //sprite enabled false
+                frameLooper.spriteRenderer.enabled = false;
+            }
+
+        }
         Debug.LogError("Collider off");
     }
 
     public void SetSpawnState()
     {
         actorCollider2D.enabled = true;
+        if (isClient())
+        {
+            if (hasAuthority())
+            {
+                //sprite replaces crosshair
+            }
+            else
+            {
+                //sprite enabled true
+                frameLooper.spriteRenderer.enabled = true;
+            }
+        }
         Debug.LogError("Collider on");
     }
 

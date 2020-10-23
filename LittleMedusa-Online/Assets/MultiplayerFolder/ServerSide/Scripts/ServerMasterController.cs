@@ -496,6 +496,11 @@ public class ServerMasterController : MonoBehaviour
     #region ServerRequestsImplementation
     void PushPlayerRequestImplementation(int playerIdToPush, int directionOfPush)
     {
+        if (serverInstanceHero.isRespawnningPlayer)
+        {
+            Debug.LogError("PushPlayerRequestImplementation Is respawnning");
+            return;
+        }
         if (serverInstanceHero.isPetrified)
         {
             Debug.LogError("PushPlayerRequestImplementation server player is petrified hence request failed");
@@ -551,6 +556,11 @@ public class ServerMasterController : MonoBehaviour
 
     void PlaceBoulderRequestImplementation(Vector3Int cellPositionToPlaceBoulder)
     {
+        if (serverInstanceHero.isRespawnningPlayer)
+        {
+            Debug.LogError("PlaceBoulderRequestImplementation Is respawnning");
+            return;
+        }
         if (serverInstanceHero.isPetrified)
         {
             Debug.LogError("PlaceBoulderRequestImplementation server player is petrified hence request failed");
@@ -586,6 +596,11 @@ public class ServerMasterController : MonoBehaviour
 
     void RemoveBoulderRequestImplementation(Vector3Int cellPositionToRemoveBoulder)
     {
+        if (serverInstanceHero.isRespawnningPlayer)
+        {
+            Debug.LogError("RemoveBoulderRequestImplementation Is respawnning");
+            return;
+        }
         if (serverInstanceHero.isPetrified)
         {
             Debug.LogError("RemoveBoulderRequestImplementation server player is petrified hence request failed");
@@ -633,7 +648,12 @@ public class ServerMasterController : MonoBehaviour
 
     void RespawnPlayerRequestImplementation(Vector3Int cellPostionToRespawnPlayerOn)
     {
-        if(serverInstanceHero.isPetrified)
+        if (!serverInstanceHero.isRespawnningPlayer)
+        {
+            Debug.LogError("RespawnPlayerRequestImplementation Is not respawnning");
+            return;
+        }
+        if (serverInstanceHero.isPetrified)
         {
             Debug.LogError("RespawnPlayerRequestImplementation server player is petrified hence request failed");
             return;
@@ -650,21 +670,14 @@ public class ServerMasterController : MonoBehaviour
         }
         if (serverInstanceHero.completedMotionToMovePoint)
         {
-            if (serverInstanceHero.isRespawnningPlayer)
+            if (serverInstanceHero.IsPlayerSpawnable(cellPostionToRespawnPlayerOn))
             {
-                if (!serverInstanceHero.IsPlayerSpawnable(cellPostionToRespawnPlayerOn))
-                {
-                    //Respawn here
-                    serverInstanceHero.SpawnPlayer();
-                }
-                else
-                {
-                    Debug.LogError("Invalid location to spawn player");
-                }
+                //Respawn here
+                serverInstanceHero.SpawnPlayer();
             }
             else
             {
-                Debug.LogError("Is respawnning player is false");
+                Debug.LogError("Invalid location to spawn player");
             }
         }
         else

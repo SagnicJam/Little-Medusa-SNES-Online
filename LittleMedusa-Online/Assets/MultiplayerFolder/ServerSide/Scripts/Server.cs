@@ -139,7 +139,8 @@ public class Server
                 { (int)ClientPackets.playerPetrifyCommand,ServerHandle.PlayerPetrificationCommandReceived},
                 { (int)ClientPackets.playerPushCommand,ServerHandle.PlayerPushCommandReceived},
                 { (int)ClientPackets.playerPlaceBoulderCommand,ServerHandle.PlayerPlaceBoulderBoulderCommandReceived},
-                { (int)ClientPackets.playerRemoveBoulderCommand,ServerHandle.PlayerRemoveBoulderBoulderCommandReceived}
+                { (int)ClientPackets.playerRemoveBoulderCommand,ServerHandle.PlayerRemoveBoulderBoulderCommandReceived},
+                { (int)ClientPackets.playerRespawnCommand,ServerHandle.PlayerRespawnCommandReceived}
             };
 
         Debug.Log("Initialise packets");

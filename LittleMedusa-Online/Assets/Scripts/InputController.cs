@@ -37,7 +37,7 @@ public class InputController : MonoBehaviour
             shoot = Input.GetKey(KeyCode.J);
             push = Input.GetKey(KeyCode.J);
             placeORRemovalBoulder = Input.GetKey(KeyCode.K);
-            respawnPlayer = Input.GetKey(KeyCode.KeypadEnter);
+            respawnPlayer = Input.GetKey(KeyCode.Return);
         }
     }
 }
