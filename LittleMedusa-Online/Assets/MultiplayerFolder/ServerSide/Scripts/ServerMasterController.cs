@@ -517,40 +517,33 @@ public class ServerMasterController : MonoBehaviour
             return;
         }
 
-        if (serverInstanceHero.completedMotionToMovePoint)
-        {
-            Vector3Int cellPos = serverInstanceHero.currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)directionOfPush));
-            Actor actorToPush = GridManager.instance.GetActorOnPos(cellPos);
+        Vector3Int cellPos = serverInstanceHero.currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)directionOfPush));
+        Actor actorToPush = GridManager.instance.GetActorOnPos(cellPos);
 
-            if (actorToPush != null)
+        if (actorToPush != null)
+        {
+            if (actorToPush.ownerId == playerIdToPush)
             {
-                if (actorToPush.ownerId == playerIdToPush)
+                if (serverInstanceHero.IsActorAbleToPush((FaceDirection)directionOfPush))
                 {
-                    if (serverInstanceHero.IsActorAbleToPush((FaceDirection)directionOfPush))
+                    if (serverInstanceHero.IsActorPushableInDirection(actorToPush, (FaceDirection)directionOfPush))
                     {
-                        if (serverInstanceHero.IsActorPushableInDirection(actorToPush, (FaceDirection)directionOfPush))
-                        {
-                            serverInstanceHero.InitialisePush(playerIdToPush, directionOfPush);
-                        }
-                        else
-                        {
-                            Debug.LogError(playerIdToPush + " IsActorPushableInDirection " + directionOfPush + " Not possible");
-                        }
+                        serverInstanceHero.InitialisePush(playerIdToPush, directionOfPush);
                     }
                     else
                     {
-                        Debug.LogError("IsActorAbleToPush " + directionOfPush + " Not possible");
+                        Debug.LogError(playerIdToPush + " IsActorPushableInDirection " + directionOfPush + " Not possible");
                     }
                 }
                 else
                 {
-                    Debug.LogError("Actor to push id :" + actorToPush.ownerId + " requested actor to push id: " + playerIdToPush);
+                    Debug.LogError("IsActorAbleToPush " + directionOfPush + " Not possible");
                 }
             }
-        }
-        else
-        {
-            Debug.LogError("PushPlayerRequestImplementation Server hero has not completed motion to movepoint hence request failed");
+            else
+            {
+                Debug.LogError("Actor to push id :" + actorToPush.ownerId + " requested actor to push id: " + playerIdToPush);
+            }
         }
     }
 
@@ -577,20 +570,13 @@ public class ServerMasterController : MonoBehaviour
             return;
         }
 
-        if (serverInstanceHero.completedMotionToMovePoint)
+        if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellPositionToPlaceBoulder))
         {
-            if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellPositionToPlaceBoulder))
-            {
-                GridManager.instance.SetTile(cellPositionToPlaceBoulder, EnumData.TileType.Boulder, true, false);
-            }
-            else
-            {
-                Debug.LogError("Cell is blocked for boulder placement : " + cellPositionToPlaceBoulder);
-            }
+            GridManager.instance.SetTile(cellPositionToPlaceBoulder, EnumData.TileType.Boulder, true, false);
         }
         else
         {
-            Debug.LogError("PlaceBoulderRequestImplementation Server hero has not completed motion to movepoint hence request failed");
+            Debug.LogError("Cell is blocked for boulder placement : " + cellPositionToPlaceBoulder);
         }
     }
 
@@ -616,22 +602,15 @@ public class ServerMasterController : MonoBehaviour
             Debug.LogError("RemoveBoulderRequestImplementation server player is isInFlyingState hence request failed");
             return;
         }
-        if (serverInstanceHero.completedMotionToMovePoint)
+        if (GridManager.instance.HasTileAtCellPoint(cellPositionToRemoveBoulder, EnumData.TileType.Boulder))
         {
-            if (GridManager.instance.HasTileAtCellPoint(cellPositionToRemoveBoulder, EnumData.TileType.Boulder))
-            {
-                GridManager.instance.SetTile(cellPositionToRemoveBoulder, EnumData.TileType.Boulder, false, false);
-            }
-            else
-            {
-                Debug.LogError("Doesnot have any tile at cell point: " + cellPositionToRemoveBoulder);
-            }
+            GridManager.instance.SetTile(cellPositionToRemoveBoulder, EnumData.TileType.Boulder, false, false);
         }
         else
         {
-            Debug.LogError("RemoveBoulderRequestImplementation Server hero has not completed motion to movepoint hence request failed");
+            Debug.LogError("Doesnot have any tile at cell point: " + cellPositionToRemoveBoulder);
         }
-        
+
     }
 
     void PetrifyPlayerRequestImplementation(int playerIdToPetrify)
@@ -668,21 +647,14 @@ public class ServerMasterController : MonoBehaviour
             Debug.LogError("RespawnPlayerRequestImplementation server player is isInFlyingState hence request failed");
             return;
         }
-        if (serverInstanceHero.completedMotionToMovePoint)
+        if (serverInstanceHero.IsPlayerSpawnable(cellPostionToRespawnPlayerOn))
         {
-            if (serverInstanceHero.IsPlayerSpawnable(cellPostionToRespawnPlayerOn))
-            {
-                //Respawn here
-                serverInstanceHero.SpawnPlayer();
-            }
-            else
-            {
-                Debug.LogError("Invalid location to spawn player");
-            }
+            //Respawn here
+            serverInstanceHero.SpawnPlayer();
         }
         else
         {
-            Debug.LogError("RespawnPlayerRequestImplementation Server hero has not completed motion to movepoint hence request failed");
+            Debug.LogError("Invalid location to spawn player");
         }
     }
     #endregion
