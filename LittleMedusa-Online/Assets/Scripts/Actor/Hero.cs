@@ -7,6 +7,11 @@ public class Hero : Actor
     [Header("Tweak Params")]
     public EnumData.PlayerStates playerStates;
     public int primaryMoveAttackRateTickRate;
+    public Color petrificationColor;
+    public Color invincibleColor;
+
+    [Header("Scene References")]
+    public SpriteRenderer statusSprite;
 
     [Header("Hero Actions")]
     public WaitingForNextAction waitingActionForPrimaryMove = new WaitingForNextAction();
@@ -34,6 +39,28 @@ public class Hero : Actor
     //authoratatively is performed
     public void SetAuthoratativeStates(PlayerAuthoratativeStates playerAuthoratativeStates)
     {
+        if(statusSprite!=null)
+        {
+            if (playerAuthoratativeStates.isPetrified && isPetrified != playerAuthoratativeStates.isPetrified)
+            {
+                statusSprite.enabled = true;
+                statusSprite.color = petrificationColor;
+            }
+            if (!playerAuthoratativeStates.isPetrified && isPetrified != playerAuthoratativeStates.isPetrified)
+            {
+                statusSprite.enabled = false;
+            }
+            if (playerAuthoratativeStates.isInvincible && isInvincible != playerAuthoratativeStates.isInvincible)
+            {
+                statusSprite.enabled = true;
+                statusSprite.color = invincibleColor;
+            }
+            if (!playerAuthoratativeStates.isInvincible && isInvincible != playerAuthoratativeStates.isInvincible)
+            {
+                statusSprite.enabled = false;
+            }
+        }
+        
         isPetrified = playerAuthoratativeStates.isPetrified;
         isPushed = playerAuthoratativeStates.isPushed;
         isInvincible = playerAuthoratativeStates.isInvincible;
@@ -112,6 +139,11 @@ public class Hero : Actor
             }
             else
             {
+                if (GridManager.instance.HasTileAtCellPoint(currentMovePointCellPosition, EnumData.TileType.Empty))
+                {
+                    StopPushMeOnly(this);
+                    return;
+                }
                 if (GridManager.instance.IsCellBlockedForPetrifiedUnitMotionAtPos(currentMovePointCellPosition))
                 {
                     StopPush(this);

@@ -34,7 +34,7 @@ public class PlayerManager : MonoBehaviour
         }
         masterController.latestPlayerStateUpdate = playerStateUpdates;
         masterController.hasAuthority = hasAuthority;
-
-        masterController.serverSequenceNumberToBeProcessed = playerStateUpdates.playerProcessedSequenceNumber;
+        masterController.serverSequenceNumberToBeProcessed = playerStateUpdates.playerServerSequenceNumber;
+        masterController.isInitialised = true;
     }
 }

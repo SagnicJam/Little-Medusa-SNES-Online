@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toNetworkTileType: 03000000
   snapShotsInOnePacket: 4
-  packetHistorySize: 2
+  packetHistorySize: 3
   serverWorldSequenceNumber: 0
   serverInstancePlayer: {fileID: 7561869928612098555, guid: adb4e6c65cfdd984dbc2239af0360035,
     type: 3}

@@ -58,7 +58,6 @@ public class ServerSideGameManager : MonoBehaviour
             WorldGridItem worldGridItem = new WorldGridItem((int)toNetworkTileType[i], positionsOfTile);
             worldGridItemList.Add(worldGridItem);
         }
-
         worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray()));
 
         //Local client sending data
@@ -78,7 +77,7 @@ public class ServerSideGameManager : MonoBehaviour
 
         }
     }
-
+    
 
     private void OnApplicationQuit()
     {
@@ -119,3 +118,14 @@ public struct WorldGridItem
         this.cellGridWorldPositionList = cellPositionList;
     }
 }
+//public struct Item
+//{
+//    public int uid;
+//    public Vector3Int cellPosition;
+
+//    public Item(int uid, Vector3Int cellPosition)
+//    {
+//        this.uid = uid;
+//        this.cellPosition = cellPosition;
+//    }
+//}

@@ -80,7 +80,7 @@ public class ServerHandle
                 previousInputs[i] = packet.ReadBool();
             }
             int inputSequenceNumber = packet.ReadInt();
-            Debug.LogWarning("<color=green>receiving inputs packet to server </color>playerMovingCommandSequenceNumber : " + inputSequenceNumber + " w " + inputs[0] + " a " + inputs[1] + " s " + inputs[2] + " d " + inputs[3]);
+            //Debug.LogWarning("<color=green>receiving inputs packet to server </color>playerMovingCommandSequenceNumber : " + inputSequenceNumber + " w " + inputs[0] + " a " + inputs[1] + " s " + inputs[2] + " d " + inputs[3]);
             Server.clients[fromClient].serverMasterController.AccumulateInputsToBePlayedOnServerFromClient(new InputCommands(inputs, previousInputs, inputSequenceNumber));            
         }
         int previousInputPacks = packet.ReadInt();

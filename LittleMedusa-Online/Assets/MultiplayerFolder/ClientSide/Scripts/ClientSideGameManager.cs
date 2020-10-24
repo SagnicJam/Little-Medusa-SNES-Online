@@ -17,10 +17,19 @@ public class ClientSideGameManager : MonoBehaviour
     [Header("Live Data")]
     public ProcessMode currentWorldStateUpdateProcessingMode;
     public int serverWorldSequenceNumberProcessed=0;
+    public int snapShotBufferSize = 0;
+    public int lastSequenceNumberReceivedViaUDPOfWorldUpdate = 0;
     private WorldUpdate latestWorldUpdate;
     private Dictionary<int, WorldUpdate> worldUpdatesFromServerToClientDic = new Dictionary<int, WorldUpdate>();
 
     public static Dictionary<int, PlayerManager> players = new Dictionary<int, PlayerManager>();
+
+    public int dicCount;
+
+    private void Update()
+    {
+        dicCount = worldUpdatesFromServerToClientDic.Count;
+    }
 
     private void Awake()
     {
@@ -51,31 +60,38 @@ public class ClientSideGameManager : MonoBehaviour
         players.Add(id,player.GetComponent<PlayerManager>());
     }
 
+    public bool isWorldInitialised;
+
     public void SpawnWorldGridElements(WorldUpdate worldUpdates)
     {
         UpdateWorldStart(worldUpdates);
         serverWorldSequenceNumberProcessed = worldUpdates.sequenceNumber;
+        isWorldInitialised = true;
         Debug.Log("<color=blue>spawned grid world serverWorldSequenceNumberProcessed. </color>"+ serverWorldSequenceNumberProcessed);
     }
 
     public void AccumulateWorldUpdatesToBePlayedOnClientFromServer(WorldUpdate worldUpdates)
     {
+        if(!isWorldInitialised)
+        {
+            return;
+        }
         if (worldUpdates.sequenceNumber > serverWorldSequenceNumberProcessed)
         {
             WorldUpdate dataPackage;
             if (worldUpdatesFromServerToClientDic.TryGetValue(worldUpdates.sequenceNumber, out dataPackage))
             {
-                //Debug.Log("<color=orange>dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNumber);
+                //Debug.Log("<color=orange>AccumulateWorldUpdatesToBePlayedOnClientFromServer dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNumber);
             }
             else
             {
-                //Debug.Log("<color=green>Added successfully to processing buffer dic </color>" + inputCommands.sequenceNumber + "  processed sequence number: " + playerSequenceNumberProcessed);
+                //Debug.Log("<color=green>AccumulateWorldUpdatesToBePlayedOnClientFromServer Added successfully to processing buffer dic </color>" + worldUpdates.sequenceNumber + "  processed sequence number: " + worldUpdates.sequenceNumber);
                 worldUpdatesFromServerToClientDic.Add(worldUpdates.sequenceNumber, worldUpdates);
             }
         }
         else
         {
-            //Debug.Log("<color=red>Already processed this sequence no </color>" + playerSequenceNumberProcessed);
+            //Debug.Log("<color=red>AccumulateWorldUpdatesToBePlayedOnClientFromServer Already processed this sequence no </color>" + serverWorldSequenceNumberProcessed);
         }
     }
 
@@ -85,6 +101,7 @@ public class ClientSideGameManager : MonoBehaviour
         {
             WorldUpdate worldUpdatePackageCorrespondingToSeq;
 
+
             if (worldUpdatesFromServerToClientDic.TryGetValue(serverWorldSequenceNumberProcessed + 1, out worldUpdatePackageCorrespondingToSeq))
             {
                 worldUpdatesFromServerToClientDic.Remove(worldUpdatePackageCorrespondingToSeq.sequenceNumber);
@@ -93,7 +110,6 @@ public class ClientSideGameManager : MonoBehaviour
 
                 serverWorldSequenceNumberProcessed = worldUpdatePackageCorrespondingToSeq.sequenceNumber;
                 
-                //Debug.Log(serverInstanceHero.movePoint.position + "Block pos "+serverInstanceHero.GetBlockPosition()+"<color=yellow>Processing seqence no </color>" + inputPackageCorrespondingToSeq.sequenceNumber + "<color=green>position </color>" + serverInstanceHero.actorTransform.position + "<color=green>inputs </color>" + inputPackageCorrespondingToSeq.commands[0] + inputPackageCorrespondingToSeq.commands[1] + inputPackageCorrespondingToSeq.commands[2] + inputPackageCorrespondingToSeq.commands[3]+" Previous Commands "+ inputPackageCorrespondingToSeq.previousCommands[0] + inputPackageCorrespondingToSeq.previousCommands[1] + inputPackageCorrespondingToSeq.previousCommands[2] + inputPackageCorrespondingToSeq.previousCommands[3]);
             }
             else
             {
@@ -106,9 +122,22 @@ public class ClientSideGameManager : MonoBehaviour
                 }
             }
         }
+        lastSequenceNumberReceivedViaUDPOfWorldUpdate = GetTheLastestSequenceNoInDic();
+        snapShotBufferSize = lastSequenceNumberReceivedViaUDPOfWorldUpdate - serverWorldSequenceNumberProcessed;
         UpdateWorldStateUpdatesProcessMode();
     }
-
+    int GetTheLastestSequenceNoInDic()
+    {
+        int largestInt = 0;
+        foreach (KeyValuePair<int, WorldUpdate> kvp in worldUpdatesFromServerToClientDic)
+        {
+            if (largestInt < kvp.Key)
+            {
+                largestInt = kvp.Key;
+            }
+        }
+        return largestInt;
+    }
     void UpdateWorldStateUpdatesProcessMode()
     {
         if (worldUpdatesFromServerToClientDic.Count == 0)
@@ -135,7 +164,6 @@ public class ClientSideGameManager : MonoBehaviour
         {
             for (int j = 0; j < newWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Count; j++)
             {
-                //delete old
                 GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true,false);
             }
         }

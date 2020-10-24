@@ -313,9 +313,9 @@ MonoBehaviour:
   invincibilityTickTimer: 1000
   petrificationTimeTickRate: 1000
   maxHP: 8
-  maxStockLives: 2
+  maxStockLives: 5
   walkSpeed: 4
-  damagePerStoppedHit: 8
+  damagePerStoppedHit: 2
   primaryMoveAnimationSpeed: 0.2
   normalAnimationSpeed: 0.1
   primaryMoveDamage: 23
@@ -377,6 +377,9 @@ MonoBehaviour:
   actorMePushing: {fileID: 0}
   playerStates: 0
   primaryMoveAttackRateTickRate: 20
+  petrificationColor: {r: 0, g: 0, b: 0, a: 0}
+  invincibleColor: {r: 0, g: 0, b: 0, a: 0}
+  statusSprite: {fileID: 0}
 --- !u!114 &5542236158264742172
 MonoBehaviour:
   m_ObjectHideFlags: 0

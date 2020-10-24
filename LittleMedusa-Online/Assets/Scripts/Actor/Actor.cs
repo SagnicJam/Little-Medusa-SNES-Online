@@ -483,13 +483,33 @@ public abstract class Actor : TileData
             actorPushingMe.StopPush(actorPushingMe);
         }
         actorToStop.isPushed = false;
-        actorToStop.TakeDamage();
+        actorToStop.TakeDamage(damagePerStoppedHit);
+    }
+
+    public void StopPushMeOnly(Actor actorToStop)
+    {
+        List<Mapper> mapsToDelete = new List<Mapper>();
+        foreach (Mapper m in actorToStop.mapperList)
+        {
+            if (m is OneDNonCheckingMapper)
+            {
+                mapsToDelete.Add(m);
+            }
+        }
+
+        for (int i = 0; i < mapsToDelete.Count; i++)
+        {
+            actorToStop.mapperList.Remove(mapsToDelete[i]);
+        }
+        actorToStop.TakeDamage(maxHP);
+        actorToStop.OnCantOccupySpace();
+        actorToStop.isPushed = false;
     }
 
 
-    void TakeDamage()
+    void TakeDamage(int damageReceived)
     {
-        currentHP -= damagePerStoppedHit;
+        currentHP -= damageReceived;
         if (currentHP <= 0)
         {
             //Death occurs
@@ -542,7 +562,7 @@ public abstract class Actor : TileData
             }
 
         }
-        Debug.LogError("Collider off");
+        //Debug.LogError("Collider off");
     }
 
     public void SetSpawnState()
@@ -560,7 +580,7 @@ public abstract class Actor : TileData
                 frameLooper.spriteRenderer.enabled = true;
             }
         }
-        Debug.LogError("Collider on");
+        //Debug.LogError("Collider on");
     }
 
     public void MakeUnInvincible()

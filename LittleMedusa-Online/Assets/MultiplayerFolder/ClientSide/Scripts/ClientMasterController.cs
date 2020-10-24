@@ -34,7 +34,7 @@ public class ClientMasterController : MonoBehaviour
     public int playerSequenceNumberProcessed = 0;
     public int latestPacketProcessedLocally;
     public int snapShotBufferSize;
-
+    public bool isInitialised;
     public bool hasAuthority;
     public PlayerStateUpdates latestPlayerStateUpdate;
 
@@ -63,7 +63,7 @@ public class ClientMasterController : MonoBehaviour
             PlayerStateUpdates updateCorrespondingToSeq;
             if (playerStateUpdatesDic.TryGetValue(serverSequenceNumberToBeProcessed + 1, out updateCorrespondingToSeq))
             {
-                //Debug.Log("<color=yellow>Remote Client of id "+id+" is Processing seqence no </color>" + updateCorrespondingToSeq.playerServerSequenceNumber+" and the processed sequence no: "+ updateCorrespondingToSeq.playerProcessedSequenceNumber);
+                //Debug.Log("<color=yellow>Remote Client of id " + id + " is Processing seqence no </color>" + updateCorrespondingToSeq.playerServerSequenceNumber + " and the processed sequence no: " + updateCorrespondingToSeq.playerProcessedSequenceNumber);
                 playerStateUpdatesDic.Remove(updateCorrespondingToSeq.playerServerSequenceNumber);
                 serverSequenceNumberToBeProcessed = updateCorrespondingToSeq.playerServerSequenceNumber;
                 playerSequenceNumberProcessed = updateCorrespondingToSeq.playerProcessedSequenceNumber;
@@ -268,6 +268,10 @@ public class ClientMasterController : MonoBehaviour
         clientPlayer.SetAuthoratativeStates(playerStateUpdates.playerAuthoratativeStates);
         if (hasAuthority)
         {
+            if(playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer && localPlayer.isRespawnningPlayer != playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer)
+            {
+                localPlayer.SetActorPositionalState(playerStateUpdates.positionUpdates);
+            }
             localPlayer.SetAuthoratativeStates(playerStateUpdates.playerAuthoratativeStates);
 
             if (localPlayer.isPetrified || localPlayer.isPushed)
@@ -299,6 +303,10 @@ public class ClientMasterController : MonoBehaviour
 
     public void AccumulateDataToBePlayedOnClientFromServer(PlayerStateUpdates playerStateUpdates)
     {
+        if(!isInitialised)
+        {
+            return;
+        }
         //if(!hasAuthority)
         //{
         //    Debug.Log("<color=blue>sequence number accumulated on client </color>" + sequenceNumberProcessedOnServer);

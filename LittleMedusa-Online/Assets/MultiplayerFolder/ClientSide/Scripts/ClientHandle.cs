@@ -38,7 +38,7 @@ public class ClientHandle : MonoBehaviour
         int currentStockLives = packet.ReadInt();
         int playerProcessingSequenceNumber = packet.ReadInt();
         int playerServerSequenceNumber = packet.ReadInt();
-        Debug.Log("<color=red>Sequence no spawned on: </color>"+playerProcessingSequenceNumber);
+        Debug.Log(id+"<color=red>Player id Sequence no spawned on: </color>"+ playerServerSequenceNumber);
 
         PositionUpdates positionUpdates = new PositionUpdates(position, blockposition, previousBlockposition,faceDirection,previousfaceDirection);
         PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile);
