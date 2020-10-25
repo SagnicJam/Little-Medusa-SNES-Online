@@ -72,6 +72,10 @@ public class ClientSideGameManager : MonoBehaviour
 
     public void AccumulateWorldUpdatesToBePlayedOnClientFromServer(WorldUpdate worldUpdates)
     {
+        if (!isWorldInitialised)
+        {
+            return;
+        }
         if (worldUpdates.sequenceNumber > serverWorldSequenceNumberProcessed)
         {
             WorldUpdate dataPackage;

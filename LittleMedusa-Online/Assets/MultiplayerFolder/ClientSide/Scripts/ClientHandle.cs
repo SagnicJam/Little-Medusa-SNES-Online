@@ -76,10 +76,6 @@ public class ClientHandle : MonoBehaviour
 
     public static void WorldStateUpdated(Packet packet)
     {
-        if(!ClientSideGameManager.instance.isWorldInitialised)
-        {
-            return;
-        }
         int dataCount = packet.ReadInt();
         for (int j = 0; j < dataCount; j++)
         {

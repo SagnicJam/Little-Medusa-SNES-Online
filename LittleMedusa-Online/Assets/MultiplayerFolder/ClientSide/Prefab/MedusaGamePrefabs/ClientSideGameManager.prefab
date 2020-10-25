@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ee448e7bf0c3b42bb2b2edadc6e53e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: 34.126.101.118
+  ip: 127.0.0.1
   port: 23456
   myID: 0
 --- !u!114 &9007779058758804908
@@ -423,6 +423,9 @@ MonoBehaviour:
   currentWorldStateUpdateProcessingMode: 0
   serverWorldSequenceNumberProcessed: 0
   snapShotBufferSize: 0
+  lastSequenceNumberReceivedViaUDPOfWorldUpdate: 0
+  dicCount: 0
+  isWorldInitialised: 0
 --- !u!1 &2749289305753258216
 GameObject:
   m_ObjectHideFlags: 0

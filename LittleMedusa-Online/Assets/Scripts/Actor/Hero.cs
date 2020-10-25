@@ -5,7 +5,6 @@ using UnityEngine;
 public class Hero : Actor
 {
     [Header("Tweak Params")]
-    public EnumData.PlayerStates playerStates;
     public int primaryMoveAttackRateTickRate;
     public Color petrificationColor;
     public Color invincibleColor;
@@ -280,7 +279,7 @@ public class Hero : Actor
                 else if (!inputs[(int)EnumData.Inputs.Shoot] && previousInputs[(int)EnumData.Inputs.Shoot] != inputs[(int)EnumData.Inputs.Shoot])
                 {
                     isFiringPrimaryProjectile = false;
-                    waitingActionForPrimaryMove.ReInitialiseTimerToBegin(primaryMoveAttackRateTickRate);
+                    waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
                 }
             }
             
@@ -309,7 +308,7 @@ public class Hero : Actor
                     }
                     else
                     {
-                        if (!inputs[(int)EnumData.Inputs.Push] && previousInputs[(int)EnumData.Inputs.Push] != inputs[(int)EnumData.Inputs.Push])
+                        if (inputs[(int)EnumData.Inputs.Push] && previousInputs[(int)EnumData.Inputs.Push] != inputs[(int)EnumData.Inputs.Push])
                         {
                             Vector3Int cellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                             Actor actorToPush = GridManager.instance.GetActorOnPos(cellPos);

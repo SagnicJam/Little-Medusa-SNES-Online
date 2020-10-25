@@ -27,9 +27,7 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-
             masterController.clientPlayer.InitialiseClientActor(masterController,id);
-
             masterController.clientPlayer.InitialiseActor(playerStateUpdates);
         }
         masterController.latestPlayerStateUpdate = playerStateUpdates;
