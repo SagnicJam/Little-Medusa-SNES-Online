@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : Actor
+public class Poseidanna : Actor
 {
     [Header("Tweak Params")]
     public int primaryMoveAttackRateTickRate;
@@ -21,8 +21,8 @@ public class Hero : Actor
         waitingActionForPrimaryMove.Initialise(this);
         waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
 
-        primaryMoveUseAnimationAction.SetAnimationSpeedAndSpritesOnUsage(primaryMoveAnimationSpeed,normalAnimationSpeed);
-        rangedAttack = new Attack(primaryMoveDamage,ownerId,EnumData.AttackTypes.ProjectileAttack,projectileThrownType);
+        primaryMoveUseAnimationAction.SetAnimationSpeedAndSpritesOnUsage(primaryMoveAnimationSpeed, normalAnimationSpeed);
+        rangedAttack = new Attack(primaryMoveDamage, ownerId, EnumData.AttackTypes.ProjectileAttack, projectileThrownType);
 
 
     }
@@ -38,7 +38,7 @@ public class Hero : Actor
     //authoratatively is performed
     public void SetAuthoratativeStates(PlayerAuthoratativeStates playerAuthoratativeStates)
     {
-        if(statusSprite!=null)
+        if (statusSprite != null)
         {
             if (playerAuthoratativeStates.isPetrified && isPetrified != playerAuthoratativeStates.isPetrified)
             {
@@ -59,12 +59,12 @@ public class Hero : Actor
                 statusSprite.enabled = false;
             }
         }
-        
+
         isPetrified = playerAuthoratativeStates.isPetrified;
         isPushed = playerAuthoratativeStates.isPushed;
         isInvincible = playerAuthoratativeStates.isInvincible;
-        
-        if(actorCollider2D!=null)
+
+        if (actorCollider2D != null)
         {
             if (!isRespawnningPlayer && isRespawnningPlayer != playerAuthoratativeStates.isRespawnningPlayer)
             {
@@ -79,7 +79,7 @@ public class Hero : Actor
                 SetSpawnState();
             }
         }
-        
+
 
         isRespawnningPlayer = playerAuthoratativeStates.isRespawnningPlayer;
         currentHP = playerAuthoratativeStates.currentHP;
@@ -115,7 +115,7 @@ public class Hero : Actor
 
     public void ProcessAuthoratativeEvents()
     {
-        if(isRespawnningPlayer)
+        if (isRespawnningPlayer)
         {
             return;
         }
@@ -129,7 +129,7 @@ public class Hero : Actor
                     StopPush(this);
                     return;
                 }
-                
+
                 Mapper m = GetMapper();
                 if (m is OneDNonCheckingMapper oneDNonCheckingMapper)
                 {
@@ -157,9 +157,9 @@ public class Hero : Actor
             petrificationAction.Perform();
             return;
         }
-        if(isInvincible)
+        if (isInvincible)
         {
-            if(!waitingForInvinciblityToOver.Perform())
+            if (!waitingForInvinciblityToOver.Perform())
             {
                 MakeUnInvincible();
             }
@@ -167,7 +167,7 @@ public class Hero : Actor
         }
     }
 
-    
+
 
     public void ProcessAnimationsInputs(bool[] inputs, bool[] previousInputs)
     {
@@ -183,7 +183,7 @@ public class Hero : Actor
         {
             return;
         }
-        
+
         if (!isInFlyingState)
         {
             if (inputs[(int)EnumData.Inputs.Shoot])
@@ -203,10 +203,10 @@ public class Hero : Actor
             }
 
         }
-        
+
     }
 
-    
+
 
     public void ProcessInputAnimationControl()
     {
@@ -248,7 +248,7 @@ public class Hero : Actor
 
     public void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
     {
-       
+
         if (isPushed)
         {
             return;
@@ -282,14 +282,14 @@ public class Hero : Actor
                     waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
                 }
             }
-            
+
 
 
             if (isClient() && hasAuthority())
             {
                 if (completedMotionToMovePoint)
                 {
-                    if(isRespawnningPlayer)
+                    if (isRespawnningPlayer)
                     {
                         if (inputs[(int)EnumData.Inputs.RespawnPlayer] && previousInputs[(int)EnumData.Inputs.RespawnPlayer] != inputs[(int)EnumData.Inputs.RespawnPlayer])
                         {
@@ -339,7 +339,7 @@ public class Hero : Actor
                             }
                         }
                     }
-                    
+
                 }
             }
         }
@@ -366,7 +366,7 @@ public class Hero : Actor
     }
 
 
-    public void ProcessMovementInputs(bool[] inputs,bool[] previousInputs)
+    public void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {
         if (isPushed)
         {
@@ -382,7 +382,7 @@ public class Hero : Actor
             {
                 Facing = FaceDirection.Up;
                 Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
+                if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing) && CanOccupy(checkForCellPos))
                 {
                     currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 }
@@ -448,7 +448,7 @@ public class Hero : Actor
                 }
             }
         }
-        
+
     }
 
     public void ProcessInputMovementsControl()
@@ -486,7 +486,7 @@ public class Hero : Actor
     {
         collidedActorWithMyHead.SetActorPushingMe(this);
         collidedActorWithMyHead.chainIDLinkedTo = chainIDLinkedTo;
-        StartPush(collidedActorWithMyHead,Facing);
+        StartPush(collidedActorWithMyHead, Facing);
         SetActorMePushing(collidedActorWithMyHead);
         isHeadCollisionWithOtherActor = false;
     }
@@ -494,7 +494,7 @@ public class Hero : Actor
     public override void OnHeadCollidingWithANonPetrifiedNonPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead)
     {
         collidedActorWithMyHead.SetActorPushingMe(this);
-        StartPush(collidedActorWithMyHead,Facing);
+        StartPush(collidedActorWithMyHead, Facing);
         collidedActorWithMyHead.chainIDLinkedTo = chainIDLinkedTo;
         SetActorMePushing(collidedActorWithMyHead);
     }
@@ -523,7 +523,7 @@ public class Hero : Actor
         {
             collidedActorWithMyHead.SetActorPushingMe(this);
             collidedActorWithMyHead.chainIDLinkedTo = chainIDLinkedTo;
-            StartPush(collidedActorWithMyHead,Facing);
+            StartPush(collidedActorWithMyHead, Facing);
             SetActorMePushing(collidedActorWithMyHead);
         }
         else
@@ -583,7 +583,7 @@ public class Hero : Actor
 
     public override void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndAmPetrified(Actor collidedActorWithMyHead)
     {
-        if(!(collidedActorWithMyHead is Hero))
+        if (!(collidedActorWithMyHead is Medusa))
         {
             collidedActorWithMyHead.Die();
         }
@@ -593,14 +593,14 @@ public class Hero : Actor
 
     public override void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead)
     {
-        if (!(collidedActorWithMyHead is Hero))
+        if (!(collidedActorWithMyHead is Medusa))
         {
             collidedActorWithMyHead.Die();
         }
         StopPush(this);
         isHeadCollisionWithOtherActor = false;
     }
-    
+
     public override bool CanOccupy(Vector3Int pos)
     {
         if (isRespawnningPlayer)
@@ -650,7 +650,7 @@ public class Hero : Actor
 
     public override void OnCantOccupySpace()
     {
-        if(isPetrified||isPushed)
+        if (isPetrified || isPushed)
         {
             currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actorTransform.position);
             previousMovePointCellPosition = currentMovePointCellPosition;

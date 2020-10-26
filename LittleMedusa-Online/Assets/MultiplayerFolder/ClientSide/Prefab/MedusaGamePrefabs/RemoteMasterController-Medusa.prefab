@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 373195983313835430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 6541181730469852812}
   m_RootOrder: 0
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -444576245
   m_SortingLayer: 3
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f09ebd5456861034cb99ed08a30c452b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 632477324722974409}
   - component: {fileID: 632477324722974408}
   m_Layer: 0
-  m_Name: RemoteMasterController
+  m_Name: RemoteMasterController-Medusa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,6 +189,7 @@ MonoBehaviour:
   playerSequenceNumberProcessed: 0
   latestPacketProcessedLocally: 0
   snapShotBufferSize: 0
+  isInitialised: 0
   hasAuthority: 0
   dicSize: 0
   sequenceNoList: 
@@ -393,7 +394,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 632477326203761405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41ca6b29b2994fc45af0b704a447e3e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 3eda0c0da25f94849b241857dd39880d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 28
@@ -420,6 +421,7 @@ MonoBehaviour:
   normalAnimationSpeed: 0.1
   primaryMoveDamage: 23
   petrificationSnapSpeed: 6
+  faceDirectionInit: 1
   idleSprite:
   - {fileID: 8599813833102577452, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   leftMoveSprite:
@@ -475,10 +477,9 @@ MonoBehaviour:
   previousMovePointCellPosition: {x: 0, y: 0, z: 0}
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
-  playerStates: 1
   primaryMoveAttackRateTickRate: 20
-  petrificationColor: {r: 0.44313726, g: 0.44313726, b: 0.44313726, a: 1}
-  invincibleColor: {r: 0.9245283, g: 0.9025005, b: 0, a: 1}
+  petrificationColor: {r: 0.7294118, g: 0.7294118, b: 0.7294118, a: 1}
+  invincibleColor: {r: 1, g: 0.972549, b: 0, a: 1}
   statusSprite: {fileID: 7590026886555611796}
 --- !u!114 &7092370211676962068
 MonoBehaviour:
@@ -572,7 +573,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -444576245
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 8599813833102577452, guid: 8e34980fdb1e55847988ce0586fb2f16,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -89,13 +89,15 @@
     <Compile Include="Assets\Scripts\Action\WaitingForNextAction.cs" />
     <Compile Include="Assets\Scripts\Action\WalkAction.cs" />
     <Compile Include="Assets\Scripts\Actor\Actor.cs" />
-    <Compile Include="Assets\Scripts\Actor\Hero.cs" />
+    <Compile Include="Assets\Scripts\Actor\Medusa.cs" />
+    <Compile Include="Assets\Scripts\Actor\Poseidanna.cs" />
     <Compile Include="Assets\Scripts\EnumData.cs" />
     <Compile Include="Assets\Scripts\GameConfig.cs" />
     <Compile Include="Assets\Scripts\GridManager.cs" />
     <Compile Include="Assets\Scripts\Helper\FrameLooper.cs" />
     <Compile Include="Assets\Scripts\Helper\ProjectileUtil.cs" />
-    <Compile Include="Assets\Scripts\InputController.cs" />
+    <Compile Include="Assets\Scripts\InputControllers\MedusaInputController.cs" />
+    <Compile Include="Assets\Scripts\InputControllers\PoseidannaInputController.cs" />
     <Compile Include="Assets\Scripts\Mapper\Mapper.cs" />
     <Compile Include="Assets\Scripts\Mapper\OneDNonCheckingMapper.cs" />
     <Compile Include="Assets\Scripts\MultiplayerManager.cs" />

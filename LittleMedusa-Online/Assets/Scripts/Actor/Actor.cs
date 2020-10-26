@@ -21,6 +21,7 @@ public abstract class Actor : TileData
     public float normalAnimationSpeed;
     public float primaryMoveDamage;
     public float petrificationSnapSpeed;
+    public FaceDirection faceDirectionInit;
 
     [Header("Animation Sprites")]
     public Sprite[] idleSprite;
@@ -98,7 +99,6 @@ public abstract class Actor : TileData
 
     public virtual void Start()
     {
-        
     }
 
     public int GetNetworkSequenceNo()
@@ -826,17 +826,6 @@ public abstract class Actor : TileData
         if (GridManager.instance.IsCellBlockedForUnitMotionAtPos(cellPos))
         {
             return false;
-        }
-        else
-        {
-            Actor actor = GridManager.instance.GetActorOnPos(cellPos);
-            if (actor != null)
-            {
-                if (actor.ownerId != ownerId)
-                {
-                    return false;
-                }
-            }
         }
         return true;
     }

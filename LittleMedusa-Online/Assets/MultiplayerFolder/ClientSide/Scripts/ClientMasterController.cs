@@ -6,10 +6,10 @@ using UnityEngine;
 public class ClientMasterController : MonoBehaviour
 {
     [Header("Scene references")]
-    public Hero localPlayer;
-    public Hero serverPlayer;
-    public Hero clientPlayer;
-    public InputController localInputController;
+    public Medusa localPlayer;
+    public Medusa serverPlayer;
+    public Medusa clientPlayer;
+    public MedusaInputController localInputController;
 
     [Header("Tweak Params")]
     public int packetHistorySize;

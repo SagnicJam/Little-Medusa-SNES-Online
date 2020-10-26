@@ -4,7 +4,7 @@ using UnityEngine;
 public class ServerMasterController : MonoBehaviour
 {
     [Header("Scene references")]
-    public Hero serverInstanceHero;
+    public Medusa serverInstanceHero;
 
     [Header("Tweak params")]
     public int packetHistorySize;
@@ -43,6 +43,7 @@ public class ServerMasterController : MonoBehaviour
         this.username = username;
         serverInstanceHero.actorTransform.position = position;
         serverInstanceHero.movePoint.position = position;
+        serverInstanceHero.Facing = serverInstanceHero.faceDirectionInit;
         serverInstanceHero.InitialiseHP();
         serverInstanceHero.InitialiseStockLives();
         serverInstanceHero.InitialiseServerActor(this,id);
@@ -517,12 +518,11 @@ public class ServerMasterController : MonoBehaviour
             return;
         }
 
-        Vector3Int cellPos = serverInstanceHero.currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)directionOfPush));
-        Actor actorToPush = GridManager.instance.GetActorOnPos(cellPos);
-
-        if (actorToPush != null)
+        if(Server.clients.ContainsKey(playerIdToPush))
         {
-            if (actorToPush.ownerId == playerIdToPush)
+            Actor actorToPush = Server.clients[playerIdToPush].serverMasterController.serverInstanceHero;
+
+            if (actorToPush != null)
             {
                 if (serverInstanceHero.IsActorAbleToPush((FaceDirection)directionOfPush))
                 {
@@ -542,8 +542,12 @@ public class ServerMasterController : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Actor to push id :" + actorToPush.ownerId + " requested actor to push id: " + playerIdToPush);
+                Debug.LogError("Actor to push : " + playerIdToPush + " Does not exists!");
             }
+        }
+        else
+        {
+            Debug.LogError("Does not contain the key in the cdictionary");
         }
     }
 

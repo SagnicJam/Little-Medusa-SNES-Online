@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputController : MonoBehaviour
+public class PoseidannaInputController : MonoBehaviour
 {
     public Actor localPlayer;
 
@@ -10,9 +10,8 @@ public class InputController : MonoBehaviour
     public bool left;
     public bool down;
     public bool right;
-    public bool shoot;
-    public bool push;
-    public bool placeORRemovalBoulder;
+    public bool waterWave;
+    public bool bubbleShield;
     public bool respawnPlayer;
 
     private void FixedUpdate()
@@ -23,9 +22,8 @@ public class InputController : MonoBehaviour
             left = false;
             down = false;
             right = false;
-            shoot = false;
-            push = false;
-            placeORRemovalBoulder = false;
+            waterWave = false;
+            bubbleShield = false;
             respawnPlayer = false;
         }
         else
@@ -34,9 +32,8 @@ public class InputController : MonoBehaviour
             left = Input.GetKey(KeyCode.A);
             down = Input.GetKey(KeyCode.S);
             right = Input.GetKey(KeyCode.D);
-            shoot = Input.GetKey(KeyCode.J);
-            push = Input.GetKey(KeyCode.J);
-            placeORRemovalBoulder = Input.GetKey(KeyCode.K);
+            waterWave = Input.GetKey(KeyCode.J);
+            bubbleShield = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);
         }
     }
