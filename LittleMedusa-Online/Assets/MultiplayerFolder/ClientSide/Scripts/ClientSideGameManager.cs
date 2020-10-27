@@ -97,34 +97,38 @@ public class ClientSideGameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        for (int i = 0; i < (int)currentWorldStateUpdateProcessingMode; i++)
+        if(isWorldInitialised)
         {
-            WorldUpdate worldUpdatePackageCorrespondingToSeq;
-
-
-            if (worldUpdatesFromServerToClientDic.TryGetValue(serverWorldSequenceNumberProcessed + 1, out worldUpdatePackageCorrespondingToSeq))
+            for (int i = 0; i < (int)currentWorldStateUpdateProcessingMode; i++)
             {
-                worldUpdatesFromServerToClientDic.Remove(worldUpdatePackageCorrespondingToSeq.sequenceNumber);
+                WorldUpdate worldUpdatePackageCorrespondingToSeq;
 
-                UpdateWorld(worldUpdatePackageCorrespondingToSeq);
 
-                serverWorldSequenceNumberProcessed = worldUpdatePackageCorrespondingToSeq.sequenceNumber;
-                
-            }
-            else
-            {
-                if (latestWorldUpdate.sequenceNumber != 0)
+                if (worldUpdatesFromServerToClientDic.TryGetValue(serverWorldSequenceNumberProcessed + 1, out worldUpdatePackageCorrespondingToSeq))
                 {
-                    //Debug.LogError("Could not find any inputToProcess for  seq: " + (sequenceNumberProcessed + 1));
-                    serverWorldSequenceNumberProcessed = serverWorldSequenceNumberProcessed + 1;
+                    worldUpdatesFromServerToClientDic.Remove(worldUpdatePackageCorrespondingToSeq.sequenceNumber);
 
-                    UpdateWorld(latestWorldUpdate);
+                    UpdateWorld(worldUpdatePackageCorrespondingToSeq);
+
+                    serverWorldSequenceNumberProcessed = worldUpdatePackageCorrespondingToSeq.sequenceNumber;
+
+                }
+                else
+                {
+                    if (latestWorldUpdate.sequenceNumber != 0)
+                    {
+                        //Debug.LogError("Could not find any inputToProcess for  seq: " + (sequenceNumberProcessed + 1));
+                        serverWorldSequenceNumberProcessed = serverWorldSequenceNumberProcessed + 1;
+
+                        UpdateWorld(latestWorldUpdate);
+                    }
                 }
             }
+            lastSequenceNumberReceivedViaUDPOfWorldUpdate = GetTheLastestSequenceNoInDic();
+            snapShotBufferSize = lastSequenceNumberReceivedViaUDPOfWorldUpdate - serverWorldSequenceNumberProcessed;
+            UpdateWorldStateUpdatesProcessMode();
         }
-        lastSequenceNumberReceivedViaUDPOfWorldUpdate = GetTheLastestSequenceNoInDic();
-        snapShotBufferSize = lastSequenceNumberReceivedViaUDPOfWorldUpdate - serverWorldSequenceNumberProcessed;
-        UpdateWorldStateUpdatesProcessMode();
+        
     }
     int GetTheLastestSequenceNoInDic()
     {

@@ -56,51 +56,57 @@ public class ClientMasterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
-        //Remote clients
-        for (int i = 0; i < (int)currentStateProcessingModeOnClient; i++)
+        if(isInitialised)
         {
-            PlayerStateUpdates updateCorrespondingToSeq;
-            if (playerStateUpdatesDic.TryGetValue(serverSequenceNumberToBeProcessed + 1, out updateCorrespondingToSeq))
+            //Remote clients
+            for (int i = 0; i < (int)currentStateProcessingModeOnClient; i++)
             {
-                //Debug.Log("<color=yellow>Remote Client of id " + id + " is Processing seqence no </color>" + updateCorrespondingToSeq.playerServerSequenceNumber + " and the processed sequence no: " + updateCorrespondingToSeq.playerProcessedSequenceNumber);
-                playerStateUpdatesDic.Remove(updateCorrespondingToSeq.playerServerSequenceNumber);
-                serverSequenceNumberToBeProcessed = updateCorrespondingToSeq.playerServerSequenceNumber;
-                playerSequenceNumberProcessed = updateCorrespondingToSeq.playerProcessedSequenceNumber;
-                latestPlayerStateUpdate = updateCorrespondingToSeq;
-
-
-                PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(serverSequenceNumberToBeProcessed
-                    , playerSequenceNumberProcessed
-                    , updateCorrespondingToSeq.playerAuthoratativeStates
-                    , updateCorrespondingToSeq.positionUpdates
-                    , updateCorrespondingToSeq.playerEvents
-                    , updateCorrespondingToSeq.playerAnimationEvents);
-
-                SetPlayerStateUpdatesReceivedFromServer(playerStateUpdates);
-            }
-            else
-            {
-                if(latestPlayerStateUpdate.playerServerSequenceNumber!=0)
+                PlayerStateUpdates updateCorrespondingToSeq;
+                if (playerStateUpdatesDic.TryGetValue(serverSequenceNumberToBeProcessed + 1, out updateCorrespondingToSeq))
                 {
-                    serverSequenceNumberToBeProcessed = serverSequenceNumberToBeProcessed + 1;
+                    //if(clientPlayer.ownerId==2)
+                    //{
+                    //    Debug.LogError("Processing : "+ updateCorrespondingToSeq.playerServerSequenceNumber);
+                    //}
+                    //Debug.Log("<color=yellow>Remote Client of id " + id + " is Processing seqence no </color>" + updateCorrespondingToSeq.playerServerSequenceNumber + " and the processed sequence no: " + updateCorrespondingToSeq.playerProcessedSequenceNumber);
+                    playerStateUpdatesDic.Remove(updateCorrespondingToSeq.playerServerSequenceNumber);
+                    serverSequenceNumberToBeProcessed = updateCorrespondingToSeq.playerServerSequenceNumber;
+                    playerSequenceNumberProcessed = updateCorrespondingToSeq.playerProcessedSequenceNumber;
+                    latestPlayerStateUpdate = updateCorrespondingToSeq;
+
+
                     PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(serverSequenceNumberToBeProcessed
-                        , latestPlayerStateUpdate.playerProcessedSequenceNumber
-                        , latestPlayerStateUpdate.playerAuthoratativeStates
-                        , latestPlayerStateUpdate.positionUpdates
-                        , latestPlayerStateUpdate.playerEvents
-                        , latestPlayerStateUpdate.playerAnimationEvents);
+                        , playerSequenceNumberProcessed
+                        , updateCorrespondingToSeq.playerAuthoratativeStates
+                        , updateCorrespondingToSeq.positionUpdates
+                        , updateCorrespondingToSeq.playerEvents
+                        , updateCorrespondingToSeq.playerAnimationEvents);
+
                     SetPlayerStateUpdatesReceivedFromServer(playerStateUpdates);
                 }
-                Debug.LogError("latestPlayerStateUpdate.playerServerSequenceNumber "+ latestPlayerStateUpdate.playerServerSequenceNumber);
-                Debug.LogError("Could not find any posudates for  seq: " + (serverSequenceNumberToBeProcessed + 1));
+                else
+                {
+                    Debug.LogError(id + " latestPlayerStateUpdate.playerServerSequenceNumber " + latestPlayerStateUpdate.playerServerSequenceNumber);
+                    Debug.LogError(id + " Could not find any posudates for  seq: " + (serverSequenceNumberToBeProcessed + 1));
+                    if (latestPlayerStateUpdate.playerServerSequenceNumber != 0)
+                    {
+                        serverSequenceNumberToBeProcessed = serverSequenceNumberToBeProcessed + 1;
+                        PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(serverSequenceNumberToBeProcessed
+                            , latestPlayerStateUpdate.playerProcessedSequenceNumber
+                            , latestPlayerStateUpdate.playerAuthoratativeStates
+                            , latestPlayerStateUpdate.positionUpdates
+                            , latestPlayerStateUpdate.playerEvents
+                            , latestPlayerStateUpdate.playerAnimationEvents);
+                        SetPlayerStateUpdatesReceivedFromServer(playerStateUpdates);
+                    }
+                    
+                }
             }
-        }
 
-        if (hasAuthority)
-        {
-            bool[] inputs = new bool[]
+            if (hasAuthority)
             {
+                bool[] inputs = new bool[]
+                {
                 localInputController.up,
                 localInputController.left,
                 localInputController.down,
@@ -109,38 +115,40 @@ public class ClientMasterController : MonoBehaviour
                 localInputController.push,
                 localInputController.placeORRemovalBoulder,
                 localInputController.respawnPlayer
-            };
-            localSequenceNumber++;
+                };
+                localSequenceNumber++;
 
-            ProcessInputsLocally(inputs, previousInputs);
-            RecordLocalClientActions(localSequenceNumber, inputs, previousInputs);
+                ProcessInputsLocally(inputs, previousInputs);
+                RecordLocalClientActions(localSequenceNumber, inputs, previousInputs);
 
-            //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
+                //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
 
-            inputCommandsToBeSentToServerCollection.Add(new InputCommands(inputs, previousInputs, localSequenceNumber));
-            previousInputs = inputs;
+                inputCommandsToBeSentToServerCollection.Add(new InputCommands(inputs, previousInputs, localSequenceNumber));
+                previousInputs = inputs;
 
-            //Local client sending data
-            if (inputCommandsToBeSentToServerCollection.Count >= snapShotsInOnePacket)
-            {
-                if (previousHistoryForInputCommandsToBeSentToServerCollection.Count > packetHistorySize)
+                //Local client sending data
+                if (inputCommandsToBeSentToServerCollection.Count >= snapShotsInOnePacket)
                 {
-                    previousHistoryForInputCommandsToBeSentToServerCollection.RemoveAt(0);
+                    if (previousHistoryForInputCommandsToBeSentToServerCollection.Count > packetHistorySize)
+                    {
+                        previousHistoryForInputCommandsToBeSentToServerCollection.RemoveAt(0);
+                    }
+                    ClientSend.PlayerInput(inputCommandsToBeSentToServerCollection, previousHistoryForInputCommandsToBeSentToServerCollection);
+
+                    previousHistoryForInputCommandsToBeSentToServerCollection.Add(new PreviousInputPacks(inputCommandsToBeSentToServerCollection.ToArray()));
+
+                    inputCommandsToBeSentToServerCollection.Clear();
+
+                    //Debug.Log("<color=red>--------------------------------------------------------------------</color>");
+
                 }
-                ClientSend.PlayerInput(inputCommandsToBeSentToServerCollection, previousHistoryForInputCommandsToBeSentToServerCollection);
-
-                previousHistoryForInputCommandsToBeSentToServerCollection.Add(new PreviousInputPacks(inputCommandsToBeSentToServerCollection.ToArray()));
-
-                inputCommandsToBeSentToServerCollection.Clear();
-
-                //Debug.Log("<color=red>--------------------------------------------------------------------</color>");
 
             }
 
+            UpdateProcessMode();
+            snapShotBufferSize = GetTheLastestSequenceNoInDic() - serverSequenceNumberToBeProcessed;
         }
-
-        UpdateProcessMode();
-        snapShotBufferSize = GetTheLastestSequenceNoInDic() - serverSequenceNumberToBeProcessed;
+        
         //Debug.Log("<color=cyan>Dic Count </color>" + positionUpdates.Count);
     }
 

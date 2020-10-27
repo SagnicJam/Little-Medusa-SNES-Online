@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class Medusa : Actor
 {
     [Header("Tweak Params")]
@@ -10,6 +11,8 @@ public class Medusa : Actor
     public Color invincibleColor;
 
     [Header("Scene References")]
+    public Image healthFillImage;
+    public TextMeshProUGUI currentLifeStockText;
     public SpriteRenderer statusSprite;
 
     [Header("Hero Actions")]
@@ -70,12 +73,20 @@ public class Medusa : Actor
             {
                 //enable crosshair locally
                 //disable collider
+                if(statusSprite!=null)
+                {
+                    statusSprite.gameObject.SetActive(false);
+                }
                 SetRespawnState();
             }
             if (isRespawnningPlayer && isRespawnningPlayer != playerAuthoratativeStates.isRespawnningPlayer)
             {
                 //disable crosshair locally
                 //enable back collider
+                if (statusSprite != null)
+                {
+                    statusSprite.gameObject.SetActive(true);
+                }
                 SetSpawnState();
             }
         }
@@ -84,6 +95,12 @@ public class Medusa : Actor
         isRespawnningPlayer = playerAuthoratativeStates.isRespawnningPlayer;
         currentHP = playerAuthoratativeStates.currentHP;
         currentStockLives = playerAuthoratativeStates.currentStockLives;
+
+        if(healthFillImage!=null)
+        {
+            healthFillImage.fillAmount =  (1f*currentHP) / maxHP;
+            currentLifeStockText.text =  currentStockLives.ToString();
+        }
     }
 
     //authoratatively is performed(but is locally is also done)-correction happens
@@ -261,26 +278,30 @@ public class Medusa : Actor
         {
             if (!isRespawnningPlayer)
             {
-                if (inputs[(int)EnumData.Inputs.Shoot])
+                if(!isInvincible)
                 {
-                    if (IsHeroAbleToFireProjectiles())
+                    if (inputs[(int)EnumData.Inputs.Shoot])
                     {
-                        if (!waitingActionForPrimaryMove.Perform())
+                        if (IsHeroAbleToFireProjectiles())
                         {
-                            isFiringPrimaryProjectile = true;
-                            waitingActionForPrimaryMove.ReInitialiseTimerToBegin(primaryMoveAttackRateTickRate);
-                        }
-                        else
-                        {
-                            isFiringPrimaryProjectile = false;
+                            if (!waitingActionForPrimaryMove.Perform())
+                            {
+                                isFiringPrimaryProjectile = true;
+                                waitingActionForPrimaryMove.ReInitialiseTimerToBegin(primaryMoveAttackRateTickRate);
+                            }
+                            else
+                            {
+                                isFiringPrimaryProjectile = false;
+                            }
                         }
                     }
+                    else if (!inputs[(int)EnumData.Inputs.Shoot] && previousInputs[(int)EnumData.Inputs.Shoot] != inputs[(int)EnumData.Inputs.Shoot])
+                    {
+                        isFiringPrimaryProjectile = false;
+                        waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
+                    }
                 }
-                else if (!inputs[(int)EnumData.Inputs.Shoot] && previousInputs[(int)EnumData.Inputs.Shoot] != inputs[(int)EnumData.Inputs.Shoot])
-                {
-                    isFiringPrimaryProjectile = false;
-                    waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
-                }
+                
             }
             
 

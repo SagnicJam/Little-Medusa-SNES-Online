@@ -47,6 +47,8 @@ public class ServerMasterController : MonoBehaviour
         serverInstanceHero.InitialiseHP();
         serverInstanceHero.InitialiseStockLives();
         serverInstanceHero.InitialiseServerActor(this,id);
+
+        serverLocalSequenceNumber = 1;
     }
 
     #region ReliableDataCheckForImplementation
@@ -528,6 +530,7 @@ public class ServerMasterController : MonoBehaviour
                 {
                     if (serverInstanceHero.IsActorPushableInDirection(actorToPush, (FaceDirection)directionOfPush))
                     {
+                        Debug.Log("Pushing id: "+playerIdToPush+" direction: "+(FaceDirection)directionOfPush);
                         serverInstanceHero.InitialisePush(playerIdToPush, directionOfPush);
                     }
                     else
@@ -576,6 +579,7 @@ public class ServerMasterController : MonoBehaviour
 
         if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellPositionToPlaceBoulder))
         {
+            Debug.Log("Setting tile boulder on "+cellPositionToPlaceBoulder);
             GridManager.instance.SetTile(cellPositionToPlaceBoulder, EnumData.TileType.Boulder, true, false);
         }
         else
@@ -608,6 +612,7 @@ public class ServerMasterController : MonoBehaviour
         }
         if (GridManager.instance.HasTileAtCellPoint(cellPositionToRemoveBoulder, EnumData.TileType.Boulder))
         {
+            Debug.Log("Remove tile boulder on " + cellPositionToRemoveBoulder);
             GridManager.instance.SetTile(cellPositionToRemoveBoulder, EnumData.TileType.Boulder, false, false);
         }
         else
@@ -621,6 +626,7 @@ public class ServerMasterController : MonoBehaviour
     {
         if (!serverInstanceHero.isPushed)
         {
+            Debug.Log("PetrifyPlayerRequestImplementation playerIdToPetrify " + playerIdToPetrify);
             Server.clients[playerIdToPetrify].serverMasterController.serverInstanceHero.Petrify();
         }
         else
@@ -654,6 +660,7 @@ public class ServerMasterController : MonoBehaviour
         if (serverInstanceHero.IsPlayerSpawnable(cellPostionToRespawnPlayerOn))
         {
             //Respawn here
+            Debug.Log("RespawnPlayerRequestImplementation " + cellPostionToRespawnPlayerOn);
             serverInstanceHero.SpawnPlayer();
         }
         else

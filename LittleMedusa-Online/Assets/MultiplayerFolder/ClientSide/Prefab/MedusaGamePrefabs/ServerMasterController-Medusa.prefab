@@ -310,7 +310,7 @@ MonoBehaviour:
   frameLooper: {fileID: 5542236158264742172}
   actorCollider2D: {fileID: 4024801267586753962}
   projectileThrownType: 2
-  invincibilityTickTimer: 1000
+  invincibilityTickTimer: 250
   petrificationTimeTickRate: 1000
   maxHP: 8
   maxStockLives: 5
@@ -379,6 +379,8 @@ MonoBehaviour:
   primaryMoveAttackRateTickRate: 20
   petrificationColor: {r: 0.7294118, g: 0.7294118, b: 0.7294118, a: 1}
   invincibleColor: {r: 1, g: 0.972549, b: 0, a: 1}
+  healthFillImage: {fileID: 0}
+  currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}
 --- !u!114 &5542236158264742172
 MonoBehaviour:
