@@ -4,7 +4,7 @@ using UnityEngine;
 public class ServerMasterController : MonoBehaviour
 {
     [Header("Scene references")]
-    public Medusa serverInstanceHero;
+    public Hero serverInstanceHero;
 
     [Header("Tweak params")]
     public int packetHistorySize;

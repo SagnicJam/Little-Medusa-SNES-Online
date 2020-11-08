@@ -6,9 +6,9 @@ using UnityEngine;
 public class ClientMasterController : MonoBehaviour
 {
     [Header("Scene references")]
-    public Medusa localPlayer;
-    public Medusa serverPlayer;
-    public Medusa clientPlayer;
+    public Hero localPlayer;
+    public Hero serverPlayer;
+    public Hero clientPlayer;
     public MedusaInputController localInputController;
 
     [Header("Tweak Params")]

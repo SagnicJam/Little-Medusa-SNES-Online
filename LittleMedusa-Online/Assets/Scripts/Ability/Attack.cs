@@ -35,7 +35,7 @@ public class Attack
         //    return;
         //}
 
-        if (actorHit is Medusa)
+        if (actorHit is Hero)
         {
             if (attackType == EnumData.AttackTypes.ProjectileAttack && projectiles == EnumData.Projectiles.EyeLaser)
             {

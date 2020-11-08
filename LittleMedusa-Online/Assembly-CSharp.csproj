@@ -89,7 +89,7 @@
     <Compile Include="Assets\Scripts\Action\WaitingForNextAction.cs" />
     <Compile Include="Assets\Scripts\Action\WalkAction.cs" />
     <Compile Include="Assets\Scripts\Actor\Actor.cs" />
-    <Compile Include="Assets\Scripts\Actor\Medusa.cs" />
+    <Compile Include="Assets\Scripts\Actor\Hero.cs" />
     <Compile Include="Assets\Scripts\EnumData.cs" />
     <Compile Include="Assets\Scripts\GameConfig.cs" />
     <Compile Include="Assets\Scripts\GridManager.cs" />

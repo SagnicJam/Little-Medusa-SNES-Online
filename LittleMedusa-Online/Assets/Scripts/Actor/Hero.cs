@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class Medusa : Actor
+public class Hero : Actor
 {
     [Header("Tweak Params")]
     public int primaryMoveAttackRateTickRate;
@@ -604,7 +604,7 @@ public class Medusa : Actor
 
     public override void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndAmPetrified(Actor collidedActorWithMyHead)
     {
-        if(!(collidedActorWithMyHead is Medusa))
+        if(!(collidedActorWithMyHead is Hero))
         {
             collidedActorWithMyHead.Die();
         }
@@ -614,7 +614,7 @@ public class Medusa : Actor
 
     public override void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead)
     {
-        if (!(collidedActorWithMyHead is Medusa))
+        if (!(collidedActorWithMyHead is Hero))
         {
             collidedActorWithMyHead.Die();
         }
