@@ -546,7 +546,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3120245021199493875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eda0c0da25f94849b241857dd39880d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a9bc853f89d1be488f3c42ba72cafaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 28
@@ -755,7 +755,6 @@ MonoBehaviour:
   localPlayer: {fileID: 3884784834467083734}
   serverPlayer: {fileID: 367337360462777490}
   clientPlayer: {fileID: 4709721798304769568}
-  localInputController: {fileID: 3120245021755954388}
   packetHistorySize: 2
   snapShotsInOnePacket: 4
   idealSnapshotBufferCount: 8
@@ -785,6 +784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   localPlayer: {fileID: 3884784834467083734}
+  clientMasterController: {fileID: 3120245021755954391}
   up: 0
   left: 0
   down: 0
@@ -1134,7 +1134,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4309584410355565422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eda0c0da25f94849b241857dd39880d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a9bc853f89d1be488f3c42ba72cafaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 28
@@ -1287,7 +1287,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4309584410505519487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eda0c0da25f94849b241857dd39880d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a9bc853f89d1be488f3c42ba72cafaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 28

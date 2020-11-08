@@ -375,13 +375,32 @@ public abstract class Actor : TileData
 
                     if (actor != null)
                     {
-                        if (IsActorAbleToPush((FaceDirection)pushDirection) && IsActorPushableInDirection(actor, (FaceDirection)pushDirection))
+                        if(IsActorAbleToPush((FaceDirection)pushDirection))
                         {
-                            //Perform push here
-                            actorToPush.chainIDLinkedTo = ++GridManager.chainIDGlobal;
-                            StartPush(actorToPush, (FaceDirection)pushDirection);
+                            if(IsActorPushableInDirection(actor, (FaceDirection)pushDirection))
+                            {
+                                //Perform push here
+                                actorToPush.chainIDLinkedTo = ++GridManager.chainIDGlobal;
+                                StartPush(actorToPush, (FaceDirection)pushDirection);
+                            }
+                            else
+                            {
+                                Debug.LogError("The actor which is to be pushed cant be pushed!");
+                            }
+                        }
+                        else
+                        {
+                            Debug.LogError("Actor cant push in direction");
                         }
                     }
+                    else
+                    {
+                        Debug.LogError("No actor to push");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Not completed motion hence push failed");
                 }
             }
         }
@@ -849,6 +868,9 @@ public abstract class Actor : TileData
         }
         return false;
     }
+
+    #region MultiplayerAbstractFunctions
+    #endregion
 }
 public enum FaceDirection
 {

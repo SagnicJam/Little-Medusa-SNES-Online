@@ -16,6 +16,17 @@ public class EnumData
         RespawnPlayer
     }
 
+    public enum PosidannaInputs
+    {
+        Up = 0,
+        Left,
+        Down,
+        Right,
+        ShootTidalWave,
+        CastBubbleShield,
+        RespawnPlayer
+    }
+
     public enum PlayerStates
     {
         Local,

@@ -293,7 +293,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7561869929165017048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eda0c0da25f94849b241857dd39880d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a9bc853f89d1be488f3c42ba72cafaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 28
@@ -377,8 +377,8 @@ MonoBehaviour:
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
   primaryMoveAttackRateTickRate: 20
-  petrificationColor: {r: 0.7294118, g: 0.7294118, b: 0.7294118, a: 1}
-  invincibleColor: {r: 1, g: 0.972549, b: 0, a: 1}
+  petrificationColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 0.6862745}
+  invincibleColor: {r: 1, g: 0.8520418, b: 0, a: 0.7019608}
   healthFillImage: {fileID: 0}
   currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}

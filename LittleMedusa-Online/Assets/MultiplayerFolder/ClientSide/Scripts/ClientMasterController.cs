@@ -9,7 +9,8 @@ public class ClientMasterController : MonoBehaviour
     public Hero localPlayer;
     public Hero serverPlayer;
     public Hero clientPlayer;
-    public MedusaInputController localInputController;
+    public delegate bool[] GetInputs();
+    public GetInputs getInputs;
 
     [Header("Tweak Params")]
     public int packetHistorySize;
@@ -105,17 +106,7 @@ public class ClientMasterController : MonoBehaviour
 
             if (hasAuthority)
             {
-                bool[] inputs = new bool[]
-                {
-                localInputController.up,
-                localInputController.left,
-                localInputController.down,
-                localInputController.right,
-                localInputController.shoot,
-                localInputController.push,
-                localInputController.placeORRemovalBoulder,
-                localInputController.respawnPlayer
-                };
+                bool[] inputs = getInputs();
                 localSequenceNumber++;
 
                 ProcessInputsLocally(inputs, previousInputs);

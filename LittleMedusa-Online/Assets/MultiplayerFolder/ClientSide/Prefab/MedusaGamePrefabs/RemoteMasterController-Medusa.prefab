@@ -177,7 +177,6 @@ MonoBehaviour:
   localPlayer: {fileID: 0}
   serverPlayer: {fileID: 0}
   clientPlayer: {fileID: 688502578296065083}
-  localInputController: {fileID: 0}
   packetHistorySize: 2
   snapShotsInOnePacket: 4
   idealSnapshotBufferCount: 8
@@ -395,7 +394,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 632477326203761405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eda0c0da25f94849b241857dd39880d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a9bc853f89d1be488f3c42ba72cafaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 28
@@ -447,15 +446,11 @@ MonoBehaviour:
   - {fileID: -2687521320619258062, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   leftPrimaryMoveSprite:
   - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   rightPrimaryMoveSprite:
-  - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   downPrimaryMoveSprite:
   - {fileID: -8696682573477391892, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: -8696682573477391892, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   upPrimaryMoveSprite:
-  - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   crosshairSprite: {fileID: 21300000, guid: 5a0810130c2b57743b60b3e50b2a2a89, type: 3}
   isDead: 0
@@ -478,9 +473,9 @@ MonoBehaviour:
   previousMovePointCellPosition: {x: 0, y: 0, z: 0}
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
-  primaryMoveAttackRateTickRate: 20
-  petrificationColor: {r: 0.3882353, g: 0.3882353, b: 0.3882353, a: 0.5294118}
-  invincibleColor: {r: 1, g: 0.972549, b: 0, a: 0.5294118}
+  primaryMoveAttackRateTickRate: 0
+  petrificationColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0.6509804}
+  invincibleColor: {r: 1, g: 0.9577489, b: 0, a: 0.6509804}
   healthFillImage: {fileID: 803651991368985615}
   currentLifeStockText: {fileID: 615291917568803812}
   statusSprite: {fileID: 7590026886555611796}

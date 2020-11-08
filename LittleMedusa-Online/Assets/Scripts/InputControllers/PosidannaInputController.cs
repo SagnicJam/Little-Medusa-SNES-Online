@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MedusaInputController : MonoBehaviour
+public class PosidannaInputController : MonoBehaviour
 {
     public Actor localPlayer;
     public ClientMasterController clientMasterController;
@@ -11,14 +11,13 @@ public class MedusaInputController : MonoBehaviour
     public bool left;
     public bool down;
     public bool right;
-    public bool shoot;
-    public bool push;
-    public bool placeORRemovalBoulder;
+    public bool shootTidalWave;
+    public bool castBubbleShield;
     public bool respawnPlayer;
 
     private void Awake()
     {
-        clientMasterController.getInputs = GetMedusaInputs;
+        clientMasterController.getInputs = GetPosidannaInputs;
     }
 
     private void FixedUpdate()
@@ -29,9 +28,8 @@ public class MedusaInputController : MonoBehaviour
             left = false;
             down = false;
             right = false;
-            shoot = false;
-            push = false;
-            placeORRemovalBoulder = false;
+            shootTidalWave = false;
+            castBubbleShield = false;
             respawnPlayer = false;
         }
         else
@@ -40,14 +38,13 @@ public class MedusaInputController : MonoBehaviour
             left = Input.GetKey(KeyCode.A);
             down = Input.GetKey(KeyCode.S);
             right = Input.GetKey(KeyCode.D);
-            shoot = Input.GetKey(KeyCode.J);
-            push = Input.GetKey(KeyCode.J);
-            placeORRemovalBoulder = Input.GetKey(KeyCode.K);
+            shootTidalWave = Input.GetKey(KeyCode.J);
+            castBubbleShield = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);
         }
     }
 
-    public bool[] GetMedusaInputs()
+    public bool[] GetPosidannaInputs()
     {
         bool[] inputs = new bool[]
                 {
@@ -55,9 +52,8 @@ public class MedusaInputController : MonoBehaviour
                 left,
                 down,
                 right,
-                shoot,
-                push,
-                placeORRemovalBoulder,
+                shootTidalWave,
+                castBubbleShield,
                 respawnPlayer
                 };
         return inputs;
