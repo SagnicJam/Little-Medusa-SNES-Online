@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 866084665
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7718515357799426450, guid: 8e34980fdb1e55847988ce0586fb2f16,
     type: 3}
@@ -156,8 +156,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ac0f39b8cbe2a44b8a9cf59bfd529c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isServerNetworked: 0
   projectileTileTravelDistance: 4
   projectileSpeed: 6
+  selfDestroyOnTargetTouch: 1
   frameLooper: {fileID: 8787909664814902808}
   isDynamicTravellingSprites: 0
   projectileTravelRightSprite: {fileID: -295879850061160071, guid: 8e34980fdb1e55847988ce0586fb2f16,
@@ -188,3 +190,5 @@ MonoBehaviour:
   - {fileID: 8411867806688940998, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   - {fileID: 8682575820102020123, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   - {fileID: 4149107491421283024, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+  chainIDLinkedTo: -1
+  networkUid: 0

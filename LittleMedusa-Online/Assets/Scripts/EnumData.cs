@@ -117,7 +117,8 @@ public class EnumData
         FireTitanJuggler,
         FioraSpark,
         CardinalProjectile,
-        DispersedBoulder
+        DispersedBoulder,
+        TidalWave
     }
 
     public enum MonsterBreed

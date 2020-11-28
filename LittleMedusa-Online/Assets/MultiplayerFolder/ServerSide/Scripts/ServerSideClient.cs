@@ -231,8 +231,6 @@ public class ServerSideClient
             }
         }
 
-
-
         List<WorldGridItem> worldGridItemList = new List<WorldGridItem>();
 
         for (int i = 0; i < ServerSideGameManager.instance.toNetworkTileType.Count; i++)
@@ -241,7 +239,8 @@ public class ServerSideClient
             WorldGridItem worldGridItem = new WorldGridItem((int)ServerSideGameManager.instance.toNetworkTileType[i], positionsOfTile);
             worldGridItemList.Add(worldGridItem);
         }
-        WorldUpdate worldUpdate = new WorldUpdate(ServerSideGameManager.instance.serverWorldSequenceNumber, worldGridItemList.ToArray());
+
+        WorldUpdate worldUpdate = new WorldUpdate(ServerSideGameManager.instance.serverWorldSequenceNumber, worldGridItemList.ToArray(), ServerSideGameManager.projectilesDic);
 
         ServerSend.SpawnGridWorld(id, worldUpdate);
     }

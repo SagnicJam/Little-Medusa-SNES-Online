@@ -4,8 +4,10 @@ using UnityEngine;
 public class ProjectileUtil : MonoBehaviour
 {
     [Header("Tweak params")]
+    public bool isServerNetworked;
     public int projectileTileTravelDistance;
     public float projectileSpeed;
+    public bool selfDestroyOnTargetTouch;
     
     public FrameLooper frameLooper;
 
@@ -29,13 +31,34 @@ public class ProjectileUtil : MonoBehaviour
     public Sprite[] projectileUpDieAnimationSprites;
     public Sprite[] projectileDownDieAnimationSprites;
 
-    TileBasedProjectileUse pU;
+    public TileBasedProjectileUse pU;
+
+
+    public int chainIDLinkedTo = -1;
+    public static int nextProjectileID=1;
+    public int networkUid;
+
 
     public void Initialise(TileBasedProjectileUse pU)
     {
         this.pU = pU;
+        if (MultiplayerManager.instance.isServer)
+        {
+            if (isServerNetworked)
+            {
+                networkUid = nextProjectileID;
+                nextProjectileID++;
+                ProjectileData projectileData = new ProjectileData(networkUid, (int)pU.projectileTypeThrown, pU.liveProjectile.transform.position);
+                ServerSideGameManager.projectilesDic.Add(networkUid, projectileData);
 
-        if(frameLooper!=null)
+                if(pU.projectileTypeThrown == EnumData.Projectiles.TidalWave)
+                {
+                    chainIDLinkedTo = ++GridManager.chainIDGlobal;
+                }
+            }
+        }
+
+        if (frameLooper!=null)
         {
             if(isDynamicTravellingSprites)
             {
@@ -80,29 +103,61 @@ public class ProjectileUtil : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (MultiplayerManager.instance.isServer)
+        {
+            if (isServerNetworked)
+            {
+                ProjectileData projectileData;
+                if(ServerSideGameManager.projectilesDic.TryGetValue(networkUid,out projectileData))
+                {
+                    projectileData.projectilePosition = pU.liveProjectile.transform.position;
+                    ServerSideGameManager.projectilesDic.Remove(networkUid);
+                    ServerSideGameManager.projectilesDic.Add(networkUid, projectileData);
+                }
+                else
+                {
+                    Debug.LogError("Doesnot contain the key to set projectile position for");
+                }
+            }
+        }
         pU.PerformUsage();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         Actor collidedActorWithMyHead = collision.GetComponent<Actor>();
-
         if (collidedActorWithMyHead != null && pU.onUseOver != null)
         {
             if (pU.gameObjectInstanceId != collidedActorWithMyHead.gameObject.GetInstanceID() && pU.ownerId!= collidedActorWithMyHead.ownerId)
             {
-                if (pU.actorUsing!=null)
+                if (pU.projectileTypeThrown == EnumData.Projectiles.EyeLaser)
                 {
-                    if(pU.actorUsing.isClient()&&pU.actorUsing.hasAuthority())
+                    if (!MultiplayerManager.instance.isServer && pU.actorHadAuthority)
                     {
                         //Send by client to server
                         pU.onUseOver.Invoke(collidedActorWithMyHead);
                     }
+                }
+                else if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave)
+                {
+                    if (MultiplayerManager.instance.isServer)
+                    {
+                        if (GridManager.instance.IsHeadCollision(collidedActorWithMyHead.actorTransform.position, transform.position, pU.tileMovementDirection))
+                        {
+                            collidedActorWithMyHead.StartGettingPushedDueToTidalWave(pU);
+                        }
+                    }
+                }
+                if (selfDestroyOnTargetTouch)
+                {
                     pU.EndOfUse();
                 }
             }
         }
+        
     }
+
+
 
     public void OnProjectileDieBegin()
     {
@@ -130,6 +185,14 @@ public class ProjectileUtil : MonoBehaviour
 
     public void DestroyProjectile()
     {
+        if (MultiplayerManager.instance.isServer)
+        {
+            if (isServerNetworked)
+            {
+                ServerSideGameManager.projectilesDic.Remove(networkUid);
+            }
+        }
+        Debug.Log("Destroy here");
         Destroy(gameObject);
     }
 }

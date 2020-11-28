@@ -373,4 +373,5 @@ public class Medusa : Hero
         }
         return false;
     }
+
 }

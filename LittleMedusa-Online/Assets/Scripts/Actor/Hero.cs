@@ -25,9 +25,7 @@ public abstract class Hero : Actor
         waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
 
         primaryMoveUseAnimationAction.SetAnimationSpeedAndSpritesOnUsage(primaryMoveAnimationSpeed,normalAnimationSpeed);
-        rangedAttack = new Attack(primaryMoveDamage,ownerId,EnumData.AttackTypes.ProjectileAttack,projectileThrownType);
-
-
+        rangedAttack = new Attack(primaryMoveDamage, ownerId, EnumData.AttackTypes.ProjectileAttack, projectileThrownType);
     }
 
     public void InitialiseActor(PlayerStateUpdates playerStateUpdates)
@@ -129,12 +127,45 @@ public abstract class Hero : Actor
         isFiringPrimaryProjectile = playerEvents.firedPrimaryMoveProjectile;
     }
 
+    /// <summary>
+    /// Called on server only
+    /// </summary>
     public abstract void ProcessAuthoratativeEvents();
+
+    /// <summary>
+    /// Called locally on client and on server
+    /// </summary>
+    /// <param name="inputs"></param>
+    /// <param name="previousInputs"></param>
     public abstract void ProcessAnimationsInputs(bool[] inputs, bool[] previousInputs);
+
+    /// <summary>
+    /// Called locally on client,on remote client,on server
+    /// </summary>
     public abstract void ProcessInputAnimationControl();
+
+    /// <summary>
+    /// Called locally on client and on server
+    /// </summary>
+    /// <param name="inputs"></param>
+    /// <param name="previousInputs"></param>
     public abstract void ProcessEventsInputs(bool[] inputs, bool[] previousInputs);
+
+    /// <summary>
+    /// Called locally on client,on remote client,on server
+    /// </summary>
     public abstract void ProcessInputEventControl();
+
+    /// <summary>
+    /// Called locally on client and on server
+    /// </summary>
+    /// <param name="inputs"></param>
+    /// <param name="previousInputs"></param>
     public abstract void ProcessMovementInputs(bool[] inputs, bool[] previousInputs);
+
+    /// <summary>
+    /// Called locally on client and on server
+    /// </summary>
     public abstract void ProcessInputMovementsControl();
     public abstract bool IsHeroAbleToFireProjectiles();
 
@@ -144,19 +175,14 @@ public abstract class Hero : Actor
 
     public override void OnHeadCollidingWithANonPetrifiedNonPushedObjectWhereIAmPushedAndPetrified(Actor collidedActorWithMyHead)
     {
-        collidedActorWithMyHead.SetActorPushingMe(this);
-        collidedActorWithMyHead.chainIDLinkedTo = chainIDLinkedTo;
-        StartPush(collidedActorWithMyHead,Facing);
-        SetActorMePushing(collidedActorWithMyHead);
+        PushActor(collidedActorWithMyHead,Facing);
         isHeadCollisionWithOtherActor = false;
     }
 
     public override void OnHeadCollidingWithANonPetrifiedNonPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead)
     {
-        collidedActorWithMyHead.SetActorPushingMe(this);
-        StartPush(collidedActorWithMyHead,Facing);
-        collidedActorWithMyHead.chainIDLinkedTo = chainIDLinkedTo;
-        SetActorMePushing(collidedActorWithMyHead);
+        PushActor(collidedActorWithMyHead,Facing);
+        isHeadCollisionWithOtherActor = false;
     }
 
     public override void OnHeadCollidingWithANonPetrifiedNonPushedObjectWhereIAmNotPushedAndNotPetrified(Actor collidedActorWithMyHead)
@@ -179,17 +205,7 @@ public abstract class Hero : Actor
 
     public override void OnHeadCollidingWithAPetrifiedNonPushedObjectWhereIAmPushedAndAmPetrified(Actor collidedActorWithMyHead)
     {
-        if (IsActorPushableInDirection(collidedActorWithMyHead, Facing))
-        {
-            collidedActorWithMyHead.SetActorPushingMe(this);
-            collidedActorWithMyHead.chainIDLinkedTo = chainIDLinkedTo;
-            StartPush(collidedActorWithMyHead,Facing);
-            SetActorMePushing(collidedActorWithMyHead);
-        }
-        else
-        {
-            StopPush(this);
-        }
+        PushActor(collidedActorWithMyHead,Facing);
         isHeadCollisionWithOtherActor = false;
     }
 
@@ -260,6 +276,8 @@ public abstract class Hero : Actor
         StopPush(this);
         isHeadCollisionWithOtherActor = false;
     }
+
+    
     
     public override bool CanOccupy(Vector3Int pos)
     {

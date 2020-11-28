@@ -8,6 +8,7 @@ public class Attack
     public float damage;
     public EnumData.AttackTypes attackType;
     public EnumData.Projectiles projectiles;
+    public FaceDirection actorFacingWhenFired;
 
     public bool isInitialised;
 
@@ -35,11 +36,13 @@ public class Attack
         //    return;
         //}
 
-        if (actorHit is Hero)
+        if (attackType == EnumData.AttackTypes.ProjectileAttack)
         {
-            if (attackType == EnumData.AttackTypes.ProjectileAttack && projectiles == EnumData.Projectiles.EyeLaser)
+            switch(projectiles)
             {
-                actorHit.PetrificationCommandRegister(attackingActorOwnerId);
+                case EnumData.Projectiles.EyeLaser:
+                    actorHit.PetrificationCommandRegister(attackingActorOwnerId);
+                    break;
             }
         }
         //if(actorHit is Boss bossHit)

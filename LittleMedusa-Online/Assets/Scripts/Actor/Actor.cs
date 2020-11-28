@@ -50,11 +50,11 @@ public abstract class Actor : TileData
     public bool triggerFaceChangeEvent;
     public int currentHP;
     public int currentStockLives;
-    public int chainIDLinkedTo = -1;
     public bool isHeadCollisionWithOtherActor;
     public List<Mapper> mapperList = new List<Mapper>();
     public Vector3Int headOnCollisionCell;
     public FaceDirection headOnCollisionFaceDirection;
+    public int chainIDLinkedTo = -1;
 
     FaceDirection facing;
     FaceDirection previousFaceDirection;
@@ -304,6 +304,7 @@ public abstract class Actor : TileData
         }
     }
 
+
     public void UnPetrify()
     {
         isPetrified = false;
@@ -322,7 +323,6 @@ public abstract class Actor : TileData
             PetrificationCommand petrificationCommand = new PetrificationCommand(ClientSideGameManager.players[petrifiedByActorId].masterController.localPlayer.GetLocalSequenceNo(), ownerId);
             ClientSend.PetrifyPlayer(petrificationCommand);
         }
-        
     }
 
     void OnPetrified()
@@ -350,6 +350,44 @@ public abstract class Actor : TileData
             }
         }
         return this;
+    }
+    public void PushActor(Actor actor,FaceDirection faceDirectionToPushActor)
+    {
+        if (IsActorPushableInDirection(actor, faceDirectionToPushActor))
+        {
+            actor.SetActorPushingMe(this);
+            actor.chainIDLinkedTo = chainIDLinkedTo;
+            StartPush(actor, faceDirectionToPushActor);
+            SetActorMePushing(actor);
+        }
+        else
+        {
+            StopPush(this);
+        }
+    }
+
+    public void CastBubbleShield(List<BubbleShieldData>bubbleShieldDatas)
+    {
+        //Vector3Int cellPoint = bubbleShieldDatas[0].cellPosition;
+        //Actor actor = GridManager.instance.GetActorOnPos(cellPoint);
+        //if(actor!=null)
+        //{
+
+        //}
+    }
+
+    public void StartGettingPushedDueToTidalWave(TileBasedProjectileUse tileBasedProjectile)
+    {
+        if(IsActorPushableInDirection(this, tileBasedProjectile.actorFacingWhenFired))
+        {
+            this.SetProjectilePushingMe(tileBasedProjectile);
+            this.chainIDLinkedTo = tileBasedProjectile.liveProjectile.chainIDLinkedTo;
+            StartPush(this, tileBasedProjectile.actorFacingWhenFired);
+        }
+        else
+        {
+            StopPush(this);
+        }
     }
 
     public void StartPush(Actor actorToPush, FaceDirection directionOfPush)
@@ -457,6 +495,17 @@ public abstract class Actor : TileData
 
     public Actor actorPushingMe;
     public Actor actorMePushing;
+
+    public TileBasedProjectileUse tilePushingMe;
+
+    public void SetProjectilePushingMe(TileBasedProjectileUse tilePushingMe)
+    {
+        this.tilePushingMe = tilePushingMe;
+        actorTransform.position = this.tilePushingMe.liveProjectile.transform.position + GridManager.instance.GetFacingDirectionOffsetVector3(tilePushingMe.actorFacingWhenFired);
+
+        currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(tilePushingMe.actorFacingWhenFired));
+        previousMovePointCellPosition = GridManager.instance.grid.WorldToCell(actorTransform.position);
+    }
 
     public void SetActorPushingMe(Actor actorPushingMe)
     {
@@ -627,6 +676,22 @@ public abstract class Actor : TileData
 
         if (isPetrified && !isPushed)
             return;
+
+        ProjectileUtil projectileUtilCollidedWithMyHead = collider.GetComponent<ProjectileUtil>();
+        if (projectileUtilCollidedWithMyHead != null)
+        {
+            if(projectileUtilCollidedWithMyHead.pU.gameObjectInstanceId!=this.gameObject.GetInstanceID())
+            {
+                if(GridManager.instance.IsHeadCollision(projectileUtilCollidedWithMyHead.transform.position, actorTransform.position, Facing))
+                {
+                    if(isPushed)
+                    {
+                        StopPush(this);
+                        return;
+                    }
+                }
+            }
+        }
 
         if (collider.GetComponent<Actor>() == null)
         {

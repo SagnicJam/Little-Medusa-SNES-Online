@@ -23,6 +23,7 @@ public class ClientSideGameManager : MonoBehaviour
     private Dictionary<int, WorldUpdate> worldUpdatesFromServerToClientDic = new Dictionary<int, WorldUpdate>();
 
     public static Dictionary<int, PlayerManager> players = new Dictionary<int, PlayerManager>();
+    public readonly static Dictionary<int, ProjectileManager> projectileDatasDic = new Dictionary<int, ProjectileManager>();
 
     public int dicCount;
 
@@ -171,6 +172,30 @@ public class ClientSideGameManager : MonoBehaviour
                 GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true,false);
             }
         }
+
+        foreach(KeyValuePair<int,ProjectileData>kvp in newWorldUpdate.projectileDatas)
+        {
+            ProjectileManager projectileManager;
+            if (projectileDatasDic.TryGetValue(kvp.Key, out projectileManager))
+            {
+                //assign position
+                projectileManager.SetPosition(kvp.Value.projectilePosition);
+            }
+            else
+            {
+                //intantiate here
+                GameObject gToSpawn = Resources.Load("ClientOnly/" + ((EnumData.Projectiles)(kvp.Value.projectileType)).ToString()) as GameObject;
+                if (gToSpawn == null)
+                {
+                    Debug.LogError("gToSpawn is null");
+                    return;
+                }
+                ProjectileManager newProjectileManager = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ProjectileManager>();
+                newProjectileManager.OnInititialise(kvp.Key);
+                newProjectileManager.SetPosition(kvp.Value.projectilePosition);
+                projectileDatasDic.Add(kvp.Key, newProjectileManager);
+            }
+        }
         latestWorldUpdate = newWorldUpdate;
     }
 
@@ -198,6 +223,62 @@ public class ClientSideGameManager : MonoBehaviour
                         //add new
                         GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true,true);
                     }
+                }
+            }
+
+            foreach(KeyValuePair<int,ProjectileData>kvp in latestWorldUpdate.projectileDatas)
+            {
+                if (!newWorldUpdate.projectileDatas.ContainsKey(kvp.Key))
+                {
+                    //delete old
+                    ProjectileManager projectileManagerToRemove;
+                    if (projectileDatasDic.TryGetValue(kvp.Key, out projectileManagerToRemove))
+                    {
+                        Destroy(projectileManagerToRemove.gameObject);
+                        projectileDatasDic.Remove(kvp.Key);
+                    }
+                    else
+                    {
+                        Debug.LogError("Could not find object to remove");
+                    }
+                }
+            }
+
+            foreach (KeyValuePair<int, ProjectileData> kvp in newWorldUpdate.projectileDatas)
+            {
+                if (!latestWorldUpdate.projectileDatas.ContainsKey(kvp.Key))
+                {
+                    //add new
+                    ProjectileManager projectileManagerToAdd;
+                    if (projectileDatasDic.TryGetValue(kvp.Key, out projectileManagerToAdd))
+                    {
+                        Debug.LogError("Already contains item to add");
+                    }
+                    else
+                    {
+                        //intantiate here
+                        GameObject gToSpawn = Resources.Load("ClientOnly/"+((EnumData.Projectiles)(kvp.Value.projectileType)).ToString()) as GameObject;
+                        if (gToSpawn == null)
+                        {
+                            Debug.LogError("gToSpawn is null");
+                            return;
+                        }
+                        ProjectileManager newProjectileManager = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ProjectileManager>();
+                        newProjectileManager.OnInititialise(kvp.Key);
+                        newProjectileManager.SetPosition(kvp.Value.projectilePosition);
+
+                        projectileDatasDic.Add(kvp.Key, newProjectileManager);
+                    }
+                }
+
+                ProjectileManager projectileManager;
+                if(projectileDatasDic.TryGetValue(kvp.Key,out projectileManager))
+                {
+                    projectileManager.SetPosition(kvp.Value.projectilePosition);
+                }
+                else
+                {
+                    Debug.LogError("Could not find the projectile manager top alter");
                 }
             }
         }

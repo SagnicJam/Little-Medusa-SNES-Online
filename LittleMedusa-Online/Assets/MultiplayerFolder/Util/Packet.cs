@@ -21,6 +21,8 @@ public enum ClientPackets
     welcomeReceived = 1,
     playerInputs,
     playerPetrifyCommand,
+    playerFiringTidalWaveCommand,
+    castingBubbleShieldCommand,
     playerPushCommand,
     playerPlaceBoulderCommand,
     playerRemoveBoulderCommand,

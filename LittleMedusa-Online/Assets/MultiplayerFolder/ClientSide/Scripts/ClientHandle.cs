@@ -68,9 +68,23 @@ public class ClientHandle : MonoBehaviour
             worldItems[i] = new WorldGridItem(tileType, cellPositionList);
         }
 
+        Dictionary<int, ProjectileData> keyValuePairs = new Dictionary<int, ProjectileData>();
+
+        ProjectileData[] projectileDatas = new ProjectileData[packet.ReadInt()];
+        for (int i = 0; i < projectileDatas.Length; i++)
+        {
+            int uid = packet.ReadInt();
+
+            int projectileTileType = packet.ReadInt();
+
+            Vector3 projectilePosition = packet.ReadVector3();
+
+            keyValuePairs.Add(uid, new ProjectileData(uid,projectileTileType, projectilePosition));
+        }
+
         int worldUpdateSequenceNumber = packet.ReadInt();
 
-        WorldUpdate worldUpdate = new WorldUpdate(worldUpdateSequenceNumber, worldItems);
+        WorldUpdate worldUpdate = new WorldUpdate(worldUpdateSequenceNumber, worldItems, keyValuePairs);
         ClientSideGameManager.instance.SpawnWorldGridElements(worldUpdate);
     }
 
@@ -95,10 +109,18 @@ public class ClientHandle : MonoBehaviour
 
                 worldItems[i] = new WorldGridItem(tileType, cellPositionList);
             }
-
+            Dictionary<int, ProjectileData> keyValuePairs = new Dictionary<int, ProjectileData>();
+            ProjectileData[] projectileDatas = new ProjectileData[packet.ReadInt()];
+            for (int i = 0; i < projectileDatas.Length; i++)
+            {
+                int projectileId = packet.ReadInt();
+                int projectileTileType = packet.ReadInt();
+                Vector3 projectilePosition = packet.ReadVector3();
+                keyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileTileType, projectilePosition));
+            }
             int worldUpdateSequenceNumber = packet.ReadInt();
             //Debug.LogWarning("<color=green>receiving inputs packet to server </color>playerMovingCommandSequenceNumber : " + worldUpdateSequenceNumber + " w " + inputs[0] + " a " + inputs[1] + " s " + inputs[2] + " d " + inputs[3]);
-             ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(worldUpdateSequenceNumber, worldItems));
+             ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(worldUpdateSequenceNumber, worldItems, keyValuePairs));
         }
 
         int previousWorldUpdatePacks = packet.ReadInt();
@@ -122,8 +144,17 @@ public class ClientHandle : MonoBehaviour
                     previousDataWorldItems[k] = new WorldGridItem(tileType, cellPositionList);
                 }
 
+                Dictionary<int, ProjectileData> previouskeyValuePairs = new Dictionary<int, ProjectileData>();
+                ProjectileData[] previousProjectileDatas = new ProjectileData[packet.ReadInt()];
+                for (int k = 0; k < previousProjectileDatas.Length; k++)
+                {
+                    int projectileId = packet.ReadInt();
+                    int projectileTileType = packet.ReadInt();
+                    Vector3 projectilePosition = packet.ReadVector3();
+                    previouskeyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileTileType, projectilePosition));
+                }
                 int previousSeqNo = packet.ReadInt();
-                ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(previousSeqNo, previousDataWorldItems));
+                ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(previousSeqNo, previousDataWorldItems, previouskeyValuePairs));
             }
         }
     }

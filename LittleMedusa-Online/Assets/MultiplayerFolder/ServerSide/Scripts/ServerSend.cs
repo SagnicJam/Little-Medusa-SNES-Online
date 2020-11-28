@@ -118,6 +118,15 @@ public class ServerSend
                     packet.Write(itemCellPosition);
                 }
             }
+            packet.Write(worldUpdate.projectileDatas.Count);
+            foreach(KeyValuePair<int,ProjectileData>keyValuePair in worldUpdate.projectileDatas)
+            {
+                packet.Write(keyValuePair.Key);
+
+                packet.Write(keyValuePair.Value.projectileType);
+
+                packet.Write(keyValuePair.Value.projectilePosition);
+            }
             packet.Write(worldUpdate.sequenceNumber);
 
             SendTCPData(toClient, packet);
@@ -144,6 +153,16 @@ public class ServerSend
                         packet.Write(itemCellPosition);
                     }
                 }
+
+                packet.Write(worldUpdates[i].projectileDatas.Count);
+                foreach (KeyValuePair<int, ProjectileData> keyValuePair in worldUpdates[i].projectileDatas)
+                {
+                    packet.Write(keyValuePair.Key);
+
+                    packet.Write(keyValuePair.Value.projectileType);
+
+                    packet.Write(keyValuePair.Value.projectilePosition);
+                }
                 packet.Write(worldUpdates[i].sequenceNumber);
                 //Debug.LogWarning("<color=green>Sending inputs packet to server </color>playerMovingCommandSequenceNumber : " + inputCommands[i].sequenceNumber + " w " + inputCommands[i].commands[0] + " a " + inputCommands[i].commands[1] + " s " + inputCommands[i].commands[2] + " d " + inputCommands[i].commands[3] + "<color=green> adding previous : </color>");
             }
@@ -166,6 +185,16 @@ public class ServerSend
                         {
                             packet.Write(itemCellPosition);
                         }
+                    }
+
+                    packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].projectileDatas.Count);
+                    foreach (KeyValuePair<int, ProjectileData> keyValuePair in previousWorldUpdatePacks[i].previousWorldUpdates[j].projectileDatas)
+                    {
+                        packet.Write(keyValuePair.Key);
+
+                        packet.Write(keyValuePair.Value.projectileType);
+
+                        packet.Write(keyValuePair.Value.projectilePosition);
                     }
                     packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].sequenceNumber);
                 }

@@ -217,13 +217,13 @@ public class GridManager : MonoBehaviour
         float angle = Vector2.Angle(lineFacingDirectionOfMotion, lineWithOtherObject);
         Debug.DrawRay(myPosition, lineFacingDirectionOfMotion, Color.red);
         Debug.DrawRay(myPosition, lineWithOtherObject, Color.blue);
-
+        Debug.LogError("Angle : "+angle);
         if (angle <= 45)
         {
-            //Debug.Log("true for : " + transform.parent.name);
+            Debug.Log("true for : " + transform.parent.name);
             return true;
         }
-        //Debug.Log("Faslse for : "+transform.parent.name);
+        Debug.Log("Faslse for : " + transform.parent.name);
         return false;
     }
 
@@ -500,6 +500,7 @@ public class GridManager : MonoBehaviour
         return cellPositions;
     }
 }
+
 [Serializable]
 public struct GameStateDependentTiles
 {

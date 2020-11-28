@@ -21,7 +21,6 @@ public class ClientMasterController : MonoBehaviour
 
     //private float moveSpeed = 5f / Constants.TICKS_PER_SECONDS;
     
-
     private Dictionary<int, InputCommands> localClientInputCommands = new Dictionary<int, InputCommands>();
     private Dictionary<int, PlayerStateUpdates> playerStateUpdatesDic = new Dictionary<int, PlayerStateUpdates>();
     private List<InputCommands> inputCommandsToBeSentToServerCollection = new List<InputCommands>();
@@ -31,7 +30,7 @@ public class ClientMasterController : MonoBehaviour
     public int id;
     public ProcessMode currentStateProcessingModeOnClient;
     public int localSequenceNumber = 0;
-    public int serverSequenceNumberToBeProcessed=0;
+    public int serverSequenceNumberToBeProcessed = 0;
     public int playerSequenceNumberProcessed = 0;
     public int latestPacketProcessedLocally;
     public int snapShotBufferSize;
@@ -420,6 +419,40 @@ public struct PetrificationCommand
     {
         this.sequenceNoForPetrificationCommand = sequenceNoForPetrificationCommand;
         this.playerIdPetrified = playerIdPetrified;
+    }
+}
+
+public struct FireTidalWaveCommand
+{
+    public int sequenceNoForFiringTidalWaveCommand;
+
+    public FireTidalWaveCommand(int sequenceNoForFiringTidalWaveCommand)
+    {
+        this.sequenceNoForFiringTidalWaveCommand = sequenceNoForFiringTidalWaveCommand;
+    }
+}
+
+public struct CastBubbleShieldCommand
+{
+    public int sequenceNoForCastingBubbleShield;
+    public List<BubbleShieldData> bubbleShieldDatas;
+
+    public CastBubbleShieldCommand(int sequenceNoForCastingBubbleShield, List<BubbleShieldData> bubbleShieldDatas)
+    {
+        this.sequenceNoForCastingBubbleShield = sequenceNoForCastingBubbleShield;
+        this.bubbleShieldDatas = bubbleShieldDatas;
+    }
+}
+
+public struct BubbleShieldData
+{
+    public int directionToPush;
+    public Vector3Int cellPosition;
+
+    public BubbleShieldData(int directionToPush, Vector3Int cellPosition)
+    {
+        this.directionToPush = directionToPush;
+        this.cellPosition = cellPosition;
     }
 }
 

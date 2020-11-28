@@ -28,6 +28,32 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    public static void FireTidalWave(FireTidalWaveCommand fireTidalWaveCommand)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.playerFiringTidalWaveCommand))
+        {
+            packet.Write(fireTidalWaveCommand.sequenceNoForFiringTidalWaveCommand);
+            SendTCPData(packet);
+        }
+    }
+
+    public static void CastBubbleShield(CastBubbleShieldCommand castBubbleShieldCommand)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.castingBubbleShieldCommand))
+        {
+            packet.Write(castBubbleShieldCommand.bubbleShieldDatas.Count);
+
+            for(int i=0;i<castBubbleShieldCommand.bubbleShieldDatas.Count;i++)
+            {
+                packet.Write(castBubbleShieldCommand.bubbleShieldDatas[i].directionToPush);
+                packet.Write(castBubbleShieldCommand.bubbleShieldDatas[i].cellPosition);
+            }
+            packet.Write(castBubbleShieldCommand.sequenceNoForCastingBubbleShield);
+
+            SendTCPData(packet);
+        }
+    }
+
     public static void PetrifyPlayer(PetrificationCommand petrificationCommand)
     {
         using (Packet packet = new Packet((int)ClientPackets.playerPetrifyCommand))

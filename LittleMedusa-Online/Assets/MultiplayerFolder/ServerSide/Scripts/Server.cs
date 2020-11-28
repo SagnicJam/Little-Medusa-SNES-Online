@@ -140,7 +140,9 @@ public class Server
                 { (int)ClientPackets.playerPushCommand,ServerHandle.PlayerPushCommandReceived},
                 { (int)ClientPackets.playerPlaceBoulderCommand,ServerHandle.PlayerPlaceBoulderBoulderCommandReceived},
                 { (int)ClientPackets.playerRemoveBoulderCommand,ServerHandle.PlayerRemoveBoulderBoulderCommandReceived},
-                { (int)ClientPackets.playerRespawnCommand,ServerHandle.PlayerRespawnCommandReceived}
+                { (int)ClientPackets.playerRespawnCommand,ServerHandle.PlayerRespawnCommandReceived},
+                { (int)ClientPackets.playerFiringTidalWaveCommand,ServerHandle.PlayerFiringTidalWaveCommandReceived},
+                { (int)ClientPackets.castingBubbleShieldCommand,ServerHandle.PlayerCastingBubbleShieldCommandReceived}
             };
 
         Debug.Log("Initialise packets");

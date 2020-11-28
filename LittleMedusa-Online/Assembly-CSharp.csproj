@@ -70,6 +70,7 @@
     <Compile Include="Assets\MultiplayerFolder\ClientSide\Scripts\ClientSend.cs" />
     <Compile Include="Assets\MultiplayerFolder\ClientSide\Scripts\ClientSideGameManager.cs" />
     <Compile Include="Assets\MultiplayerFolder\ClientSide\Scripts\PlayerManager.cs" />
+    <Compile Include="Assets\MultiplayerFolder\ClientSide\Scripts\ProjectileManager.cs" />
     <Compile Include="Assets\MultiplayerFolder\ClientSide\Scripts\UIManager.cs" />
     <Compile Include="Assets\MultiplayerFolder\Constants\MultiplayerConstants.cs" />
     <Compile Include="Assets\MultiplayerFolder\ServerSide\Scripts\Constants.cs" />

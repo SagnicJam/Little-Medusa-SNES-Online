@@ -13,21 +13,52 @@ public class TileBasedProjectileUse : Use
     public bool destroyAtPreviousCell;
 
     public FaceDirection actorFacingWhenFired;
+    public EnumData.Projectiles projectileTypeThrown;
+    public bool actorHadAuthority;
     public int ownerId;
     public int gameObjectInstanceId;
+
+    public FaceDirection tileMovementDirection;
 
     public override void PerformUsage()
     {
         if(!endTriggered)
         {
-            if (Vector3.Distance(liveProjectile.transform.position, finalPos) >= 0.05f && !GridManager.instance.IsCellBlockedForProjectiles(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position)))
+            //Debug.Log(Vector3.Distance(liveProjectile.transform.position, finalPos) >= 0.05f);
+            //Debug.Log(!GridManager.instance.IsCellBlockedForProjectiles(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position)));
+            
+            if (Vector3.Distance(liveProjectile.transform.position, finalPos) >= 0.05f)
             {
-                liveProjectile.transform.position = Vector3.MoveTowards(liveProjectile.transform.position, finalPos, Time.fixedDeltaTime * liveProjectile.projectileSpeed);
-                if(currentValidPosCell != GridManager.instance.grid.WorldToCell(liveProjectile.transform.position))
+                if (projectileTypeThrown == EnumData.Projectiles.TidalWave)
                 {
-                    previousValidPosCell = currentValidPosCell;
-                    currentValidPosCell = GridManager.instance.grid.WorldToCell(liveProjectile.transform.position);
+                    if (GridManager.instance.HasTileAtCellPoint(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position),EnumData.TileType.Boulder))
+                    {
+                        GridManager.instance.SetTile(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position),EnumData.TileType.Boulder,false,false);
+                    }
+                    liveProjectile.transform.position = Vector3.MoveTowards(liveProjectile.transform.position, finalPos, Time.fixedDeltaTime * liveProjectile.projectileSpeed);
+                    if (currentValidPosCell != GridManager.instance.grid.WorldToCell(liveProjectile.transform.position))
+                    {
+                        previousValidPosCell = currentValidPosCell;
+                        currentValidPosCell = GridManager.instance.grid.WorldToCell(liveProjectile.transform.position);
+                    }
                 }
+                else
+                {
+                    if (!GridManager.instance.IsCellBlockedForProjectiles(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position)))
+                    {
+                        liveProjectile.transform.position = Vector3.MoveTowards(liveProjectile.transform.position, finalPos, Time.fixedDeltaTime * liveProjectile.projectileSpeed);
+                        if (currentValidPosCell != GridManager.instance.grid.WorldToCell(liveProjectile.transform.position))
+                        {
+                            previousValidPosCell = currentValidPosCell;
+                            currentValidPosCell = GridManager.instance.grid.WorldToCell(liveProjectile.transform.position);
+                        }
+                    }
+                    else
+                    {
+                        EndOfUse();
+                    }
+                }
+                
             }
             else
             {
@@ -43,11 +74,14 @@ public class TileBasedProjectileUse : Use
         onUseOver = onDynamicItemUsed;
 
         actorFacingWhenFired = actorUsing.Facing;
+        actorUsing.rangedAttack.actorFacingWhenFired= actorFacingWhenFired;
+        tileMovementDirection = actorFacingWhenFired;
+        projectileTypeThrown = actorUsing.projectileThrownType;
+        actorHadAuthority = actorUsing.hasAuthority();
         gameObjectInstanceId = actorUsing.gameObject.GetInstanceID();
         ownerId = actorUsing.ownerId;
 
-        GameObject gToSpawn = Resources.Load(actorUsing.projectileThrownType.ToString()) as GameObject;
-
+        GameObject gToSpawn = Resources.Load(projectileTypeThrown.ToString()) as GameObject;
         if (gToSpawn==null)
         {
             Debug.LogError("gToSpawn is null");
@@ -56,6 +90,7 @@ public class TileBasedProjectileUse : Use
         liveProjectile = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ProjectileUtil>();
         liveProjectile.transform.position = actorUsing.actorTransform.position;
         finalPos = actorUsing.actorTransform.position + (liveProjectile.projectileTileTravelDistance * GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing));
+
         liveProjectile.Initialise(this);
     }
 

@@ -15,6 +15,7 @@ public class ServerSideGameManager : MonoBehaviour
     public int serverWorldSequenceNumber=0;
     private List<WorldUpdate> worldUpdatesToBeSentFromServerToClient = new List<WorldUpdate>();
     private List<PreviousWorldUpdatePacks> previousHistoryForWorldUpdatesToBeSentToServerCollection = new List<PreviousWorldUpdatePacks>();
+    public static Dictionary<int, ProjectileData> projectilesDic = new Dictionary<int, ProjectileData>();
 
     [Header("Unit Template")]
     public GameObject serverInstancePlayer;
@@ -58,7 +59,8 @@ public class ServerSideGameManager : MonoBehaviour
             WorldGridItem worldGridItem = new WorldGridItem((int)toNetworkTileType[i], positionsOfTile);
             worldGridItemList.Add(worldGridItem);
         }
-        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray()));
+
+        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), projectilesDic));
 
         //Local client sending data
         if (worldUpdatesToBeSentFromServerToClient.Count >= snapShotsInOnePacket)
@@ -89,11 +91,13 @@ public struct WorldUpdate
 {
     public int sequenceNumber;
     public WorldGridItem[] worldGridItems;
+    public Dictionary<int,ProjectileData> projectileDatas;
 
-    public WorldUpdate(int sequenceNumber, WorldGridItem[] worldItems)
+    public WorldUpdate(int sequenceNumber, WorldGridItem[] worldItems, Dictionary<int,ProjectileData> projectileDatas)
     {
         this.sequenceNumber = sequenceNumber;
         this.worldGridItems = worldItems;
+        this.projectileDatas = projectileDatas;
     }
 }
 
@@ -104,6 +108,20 @@ public struct PreviousWorldUpdatePacks
     public PreviousWorldUpdatePacks(WorldUpdate[] previousWorldUpdates)
     {
         this.previousWorldUpdates = previousWorldUpdates;
+    }
+}
+
+public struct ProjectileData
+{
+    public int uid;
+    public int projectileType;
+    public Vector3 projectilePosition;
+
+    public ProjectileData(int uid, int projectileType, Vector3 projectilePosition)
+    {
+        this.uid = uid;
+        this.projectileType = projectileType;
+        this.projectilePosition = projectilePosition;
     }
 }
 

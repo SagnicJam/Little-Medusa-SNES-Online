@@ -20,8 +20,10 @@ public class ServerMasterController : MonoBehaviour
     private Dictionary<int, PushCommand> pushCommandFromClientToServerDic = new Dictionary<int, PushCommand>();
     private Dictionary<int, PlaceBoulderCommand> placeBoulderCommandFromClientToServerDic = new Dictionary<int, PlaceBoulderCommand>();
     private Dictionary<int, RemoveBoulderCommand> removeBoulderCommandFromClientToServerDic = new Dictionary<int, RemoveBoulderCommand>();
-    private Dictionary<int, PetrificationCommand> petrificationRequestReceivedFromServerDic = new Dictionary<int, PetrificationCommand>();
-    private Dictionary<int, RespawnPlayerCommand> respawnCommandRequestReceivedFromServerDic = new Dictionary<int, RespawnPlayerCommand>();
+    private Dictionary<int, PetrificationCommand> petrificationRequestReceivedFromClientToServerDic = new Dictionary<int, PetrificationCommand>();
+    private Dictionary<int, FireTidalWaveCommand> tidalWaveFireRequestReceivedFromClientToServerDic = new Dictionary<int, FireTidalWaveCommand>();
+    private Dictionary<int, CastBubbleShieldCommand> castBubbleShieldRequestReceivedFromClientToServerDic = new Dictionary<int, CastBubbleShieldCommand>();
+    private Dictionary<int, RespawnPlayerCommand> respawnCommandRequestReceivedFromClientToServerDic = new Dictionary<int, RespawnPlayerCommand>();
     private List<PlayerStateServerUpdates> playerStateListOnServer = new List<PlayerStateServerUpdates>();
     private List<PreviousPlayerUpdatedStatePacks> previousPlayerUpdatedStatePacks = new List<PreviousPlayerUpdatedStatePacks>();
 
@@ -52,10 +54,10 @@ public class ServerMasterController : MonoBehaviour
     }
 
     #region ReliableDataCheckForImplementation
-    public void CheckForPetrificationRequestOnPlayer(int sequenceNoToCheck)
+    public void CheckForBubbleShieldRequestForPlayer(int sequenceNoToCheck)
     {
         List<int> toDiscardSequences = new List<int>();
-        foreach (KeyValuePair<int, PetrificationCommand> kvp in petrificationRequestReceivedFromServerDic)
+        foreach (KeyValuePair<int, CastBubbleShieldCommand> kvp in castBubbleShieldRequestReceivedFromClientToServerDic)
         {
             int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
             if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
@@ -64,7 +66,7 @@ public class ServerMasterController : MonoBehaviour
             }
         }
 
-        foreach (KeyValuePair<int, PetrificationCommand> kvp in petrificationRequestReceivedFromServerDic)
+        foreach (KeyValuePair<int, CastBubbleShieldCommand> kvp in castBubbleShieldRequestReceivedFromClientToServerDic)
         {
             int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
             if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
@@ -75,10 +77,128 @@ public class ServerMasterController : MonoBehaviour
 
         foreach (int i in toDiscardSequences)
         {
-            if (petrificationRequestReceivedFromServerDic.ContainsKey(i))
+            if (castBubbleShieldRequestReceivedFromClientToServerDic.ContainsKey(i))
             {
                 //Debug.Log("<color=red>discarding seq </color>" + i);
-                petrificationRequestReceivedFromServerDic.Remove(i);
+                castBubbleShieldRequestReceivedFromClientToServerDic.Remove(i);
+            }
+            else
+            {
+                Debug.LogError("Could not find the key: " + i);
+            }
+        }
+
+        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
+            CastBubbleShieldCommand castBubbleShieldCommand;
+            if (castBubbleShieldRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out castBubbleShieldCommand))
+            {
+                castBubbleShieldRequestReceivedFromClientToServerDic.Remove(castBubbleShieldCommand.sequenceNoForCastingBubbleShield);
+                //do server rollback here to check to check if damage actually occured on server
+                CastBubbleShieldForPlayerImplementation(castBubbleShieldCommand.bubbleShieldDatas);
+            }
+        }
+
+        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
+            CastBubbleShieldCommand castBubbleShieldCommand;
+            if (castBubbleShieldRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out castBubbleShieldCommand))
+            {
+                castBubbleShieldRequestReceivedFromClientToServerDic.Remove(castBubbleShieldCommand.sequenceNoForCastingBubbleShield);
+                //do server rollback here to check to check if damage actually occured on server
+                CastBubbleShieldForPlayerImplementation(castBubbleShieldCommand.bubbleShieldDatas);
+            }
+        }
+    }
+
+    public void CheckForTidalWaveFireRequestOnPlayer(int sequenceNoToCheck)
+    {
+        List<int> toDiscardSequences = new List<int>();
+        foreach (KeyValuePair<int, FireTidalWaveCommand> kvp in tidalWaveFireRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
+            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (KeyValuePair<int, FireTidalWaveCommand> kvp in tidalWaveFireRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
+            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (int i in toDiscardSequences)
+        {
+            if (tidalWaveFireRequestReceivedFromClientToServerDic.ContainsKey(i))
+            {
+                //Debug.Log("<color=red>discarding seq </color>" + i);
+                tidalWaveFireRequestReceivedFromClientToServerDic.Remove(i);
+            }
+            else
+            {
+                Debug.LogError("Could not find the key: " + i);
+            }
+        }
+
+        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
+            FireTidalWaveCommand tidalWaveFireCommand;
+            if (tidalWaveFireRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out tidalWaveFireCommand))
+            {
+                tidalWaveFireRequestReceivedFromClientToServerDic.Remove(tidalWaveFireCommand.sequenceNoForFiringTidalWaveCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                TidalWaveFirePlayerRequestImplementation();
+            }
+        }
+
+        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
+            FireTidalWaveCommand tidalWaveFireCommand;
+            if (tidalWaveFireRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out tidalWaveFireCommand))
+            {
+                tidalWaveFireRequestReceivedFromClientToServerDic.Remove(tidalWaveFireCommand.sequenceNoForFiringTidalWaveCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                TidalWaveFirePlayerRequestImplementation();
+            }
+        }
+    }
+
+    public void CheckForPetrificationRequestOnPlayer(int sequenceNoToCheck)
+    {
+        List<int> toDiscardSequences = new List<int>();
+        foreach (KeyValuePair<int, PetrificationCommand> kvp in petrificationRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
+            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (KeyValuePair<int, PetrificationCommand> kvp in petrificationRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
+            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (int i in toDiscardSequences)
+        {
+            if (petrificationRequestReceivedFromClientToServerDic.ContainsKey(i))
+            {
+                //Debug.Log("<color=red>discarding seq </color>" + i);
+                petrificationRequestReceivedFromClientToServerDic.Remove(i);
             }
             else
             {
@@ -90,9 +210,9 @@ public class ServerMasterController : MonoBehaviour
         {
             int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
             PetrificationCommand petrificationCommand;
-            if (petrificationRequestReceivedFromServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out petrificationCommand))
+            if (petrificationRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out petrificationCommand))
             {
-                petrificationRequestReceivedFromServerDic.Remove(petrificationCommand.sequenceNoForPetrificationCommand);
+                petrificationRequestReceivedFromClientToServerDic.Remove(petrificationCommand.sequenceNoForPetrificationCommand);
                 //do server rollback here to check to check if damage actually occured on server
                 int playerIdPetrified = petrificationCommand.playerIdPetrified;
                 PetrifyPlayerRequestImplementation(playerIdPetrified);
@@ -103,9 +223,9 @@ public class ServerMasterController : MonoBehaviour
         {
             int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
             PetrificationCommand petrificationCommand;
-            if (petrificationRequestReceivedFromServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out petrificationCommand))
+            if (petrificationRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out petrificationCommand))
             {
-                petrificationRequestReceivedFromServerDic.Remove(petrificationCommand.sequenceNoForPetrificationCommand);
+                petrificationRequestReceivedFromClientToServerDic.Remove(petrificationCommand.sequenceNoForPetrificationCommand);
                 //do server rollback here to check to check if damage actually occured on server
                 int playerIdPetrified = petrificationCommand.playerIdPetrified;
                 PetrifyPlayerRequestImplementation(playerIdPetrified);
@@ -307,7 +427,7 @@ public class ServerMasterController : MonoBehaviour
     public void CheckForRespawnningRequestOnServer(int sequenceNoToCheck)
     {
         List<int> toDiscardSequences = new List<int>();
-        foreach (KeyValuePair<int, RespawnPlayerCommand> kvp in respawnCommandRequestReceivedFromServerDic)
+        foreach (KeyValuePair<int, RespawnPlayerCommand> kvp in respawnCommandRequestReceivedFromClientToServerDic)
         {
             int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
             if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
@@ -316,7 +436,7 @@ public class ServerMasterController : MonoBehaviour
             }
         }
 
-        foreach (KeyValuePair<int, RespawnPlayerCommand> kvp in respawnCommandRequestReceivedFromServerDic)
+        foreach (KeyValuePair<int, RespawnPlayerCommand> kvp in respawnCommandRequestReceivedFromClientToServerDic)
         {
             int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
             if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
@@ -327,10 +447,10 @@ public class ServerMasterController : MonoBehaviour
 
         foreach (int i in toDiscardSequences)
         {
-            if (respawnCommandRequestReceivedFromServerDic.ContainsKey(i))
+            if (respawnCommandRequestReceivedFromClientToServerDic.ContainsKey(i))
             {
                 //Debug.Log("<color=red>discarding seq </color>" + i);
-                respawnCommandRequestReceivedFromServerDic.Remove(i);
+                respawnCommandRequestReceivedFromClientToServerDic.Remove(i);
             }
             else
             {
@@ -342,9 +462,9 @@ public class ServerMasterController : MonoBehaviour
         {
             int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
             RespawnPlayerCommand respawnPlayerCommand;
-            if (respawnCommandRequestReceivedFromServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out respawnPlayerCommand))
+            if (respawnCommandRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out respawnPlayerCommand))
             {
-                respawnCommandRequestReceivedFromServerDic.Remove(respawnPlayerCommand.sequenceNumber);
+                respawnCommandRequestReceivedFromClientToServerDic.Remove(respawnPlayerCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
                 Vector3Int cellPointToRespawnPlayerOver = respawnPlayerCommand.respawnCellPostion;
                 RespawnPlayerRequestImplementation(cellPointToRespawnPlayerOver);
@@ -355,9 +475,9 @@ public class ServerMasterController : MonoBehaviour
         {
             int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
             RespawnPlayerCommand respawnPlayerCommand;
-            if (respawnCommandRequestReceivedFromServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out respawnPlayerCommand))
+            if (respawnCommandRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out respawnPlayerCommand))
             {
-                respawnCommandRequestReceivedFromServerDic.Remove(respawnPlayerCommand.sequenceNumber);
+                respawnCommandRequestReceivedFromClientToServerDic.Remove(respawnPlayerCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
                 Vector3Int cellPointToRespawnPlayerOver = respawnPlayerCommand.respawnCellPostion;
                 RespawnPlayerRequestImplementation(cellPointToRespawnPlayerOver);
@@ -367,24 +487,66 @@ public class ServerMasterController : MonoBehaviour
     #endregion
 
     #region ReliableDataAccumulation
-    public void AccumulatePetrificationRequestFromServer(PetrificationCommand petrificationCommand)
+    public void AccumulateCastingBubbleShieldRequestToBePlayedOnServerFromClient(CastBubbleShieldCommand castBubbleShieldCommand)
     {
-        if (petrificationCommand.sequenceNoForPetrificationCommand > playerSequenceNumberProcessed)
+        if (castBubbleShieldCommand.sequenceNoForCastingBubbleShield > playerSequenceNumberProcessed)
         {
-            PetrificationCommand dataPackage;
-            if (petrificationRequestReceivedFromServerDic.TryGetValue(petrificationCommand.sequenceNoForPetrificationCommand, out dataPackage))
+            CastBubbleShieldCommand dataPackage;
+            if (castBubbleShieldRequestReceivedFromClientToServerDic.TryGetValue(castBubbleShieldCommand.sequenceNoForCastingBubbleShield, out dataPackage))
             {
-                Debug.Log("<color=orange>AccumulatePetrificationRequestFromServer dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNoForPetrificationCommand);
+                Debug.Log("<color=orange>AccumulateCastingBubbleShieldRequestToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNoForCastingBubbleShield);
             }
             else
             {
-                Debug.Log("<color=green>AccumulatePetrificationRequestFromServer Added successfully to processing buffer dic </color>" + petrificationCommand.sequenceNoForPetrificationCommand);
-                petrificationRequestReceivedFromServerDic.Add(petrificationCommand.sequenceNoForPetrificationCommand, petrificationCommand);
+                Debug.Log("<color=green>AccumulateCastingBubbleShieldRequestToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + castBubbleShieldCommand.sequenceNoForCastingBubbleShield);
+                castBubbleShieldRequestReceivedFromClientToServerDic.Add(castBubbleShieldCommand.sequenceNoForCastingBubbleShield, castBubbleShieldCommand);
             }
         }
         else
         {
-            Debug.Log("<color=red>AccumulatePetrificationRequestFromServer Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + petrificationCommand.sequenceNoForPetrificationCommand);
+            Debug.Log("<color=red>AccumulateCastingBubbleShieldRequestToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + castBubbleShieldCommand.sequenceNoForCastingBubbleShield);
+        }
+    }
+
+    public void AccumulateFiringTidalWaveRequestToBePlayedOnServerFromClient(FireTidalWaveCommand fireTidalWaveCommand)
+    {
+        if (fireTidalWaveCommand.sequenceNoForFiringTidalWaveCommand > playerSequenceNumberProcessed)
+        {
+            FireTidalWaveCommand dataPackage;
+            if (tidalWaveFireRequestReceivedFromClientToServerDic.TryGetValue(fireTidalWaveCommand.sequenceNoForFiringTidalWaveCommand, out dataPackage))
+            {
+                Debug.Log("<color=orange>AccumulateFiringTidalWaveRequestToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNoForFiringTidalWaveCommand);
+            }
+            else
+            {
+                Debug.Log("<color=green>AccumulateFiringTidalWaveRequestToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + fireTidalWaveCommand.sequenceNoForFiringTidalWaveCommand);
+                tidalWaveFireRequestReceivedFromClientToServerDic.Add(fireTidalWaveCommand.sequenceNoForFiringTidalWaveCommand, fireTidalWaveCommand);
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>AccumulateFiringTidalWaveRequestToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + fireTidalWaveCommand.sequenceNoForFiringTidalWaveCommand);
+        }
+    }
+
+    public void AccumulatePetrificationRequestToBePlayedOnServerFromClient(PetrificationCommand petrificationCommand)
+    {
+        if (petrificationCommand.sequenceNoForPetrificationCommand > playerSequenceNumberProcessed)
+        {
+            PetrificationCommand dataPackage;
+            if (petrificationRequestReceivedFromClientToServerDic.TryGetValue(petrificationCommand.sequenceNoForPetrificationCommand, out dataPackage))
+            {
+                Debug.Log("<color=orange>AccumulatePetrificationRequestToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNoForPetrificationCommand);
+            }
+            else
+            {
+                Debug.Log("<color=green>AccumulatePetrificationRequestToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + petrificationCommand.sequenceNoForPetrificationCommand);
+                petrificationRequestReceivedFromClientToServerDic.Add(petrificationCommand.sequenceNoForPetrificationCommand, petrificationCommand);
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>AccumulatePetrificationRequestToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + petrificationCommand.sequenceNoForPetrificationCommand);
         }
     }
 
@@ -451,24 +613,24 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    public void AccumulateRespawnningRequestFromServer(RespawnPlayerCommand respawnPlayerCommand)
+    public void AccumulateRespawnningRequestFromClientToServer(RespawnPlayerCommand respawnPlayerCommand)
     {
         if (respawnPlayerCommand.sequenceNumber > playerSequenceNumberProcessed)
         {
             RespawnPlayerCommand dataPackage;
-            if (respawnCommandRequestReceivedFromServerDic.TryGetValue(respawnPlayerCommand.sequenceNumber, out dataPackage))
+            if (respawnCommandRequestReceivedFromClientToServerDic.TryGetValue(respawnPlayerCommand.sequenceNumber, out dataPackage))
             {
-                Debug.Log("<color=orange>AccumulateRespawnningRequestFromServer dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNumber);
+                Debug.Log("<color=orange>AccumulateRespawnningRequestFromClientToServer dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNumber);
             }
             else
             {
-                Debug.Log("<color=green>AccumulateRespawnningRequestFromServer Added successfully to processing buffer dic </color>" + respawnPlayerCommand.sequenceNumber);
-                respawnCommandRequestReceivedFromServerDic.Add(respawnPlayerCommand.sequenceNumber, respawnPlayerCommand);
+                Debug.Log("<color=green>AccumulateRespawnningRequestFromClientToServer Added successfully to processing buffer dic </color>" + respawnPlayerCommand.sequenceNumber);
+                respawnCommandRequestReceivedFromClientToServerDic.Add(respawnPlayerCommand.sequenceNumber, respawnPlayerCommand);
             }
         }
         else
         {
-            Debug.Log("<color=red>AccumulateRespawnningRequestFromServer Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + respawnPlayerCommand.sequenceNumber);
+            Debug.Log("<color=red>AccumulateRespawnningRequestFromClientToServer Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + respawnPlayerCommand.sequenceNumber);
         }
     }
     #endregion
@@ -622,6 +784,17 @@ public class ServerMasterController : MonoBehaviour
 
     }
 
+    void CastBubbleShieldForPlayerImplementation(List<BubbleShieldData>bubbleShieldDatas)
+    {
+        Debug.Log("CastBubbleShieldForPlayerImplementation ");
+    }
+
+    void TidalWaveFirePlayerRequestImplementation()
+    {
+        Debug.Log("TidalWaveFirePlayerRequestImplementation ");
+        serverInstanceHero.Fire(serverInstanceHero);
+    }
+
     void PetrifyPlayerRequestImplementation(int playerIdToPetrify)
     {
         if (!serverInstanceHero.isPushed)
@@ -678,6 +851,8 @@ public class ServerMasterController : MonoBehaviour
             CheckForPushRequestOnServer(playerSequenceNumberProcessed+1);
             CheckForPlaceBoulderRequestOnServer(playerSequenceNumberProcessed+1);
             CheckForRemovingBoulderRequestOnServer(playerSequenceNumberProcessed+1);
+            CheckForTidalWaveFireRequestOnPlayer(playerSequenceNumberProcessed+1);
+            CheckForBubbleShieldRequestForPlayer(playerSequenceNumberProcessed+1);
             CheckForPetrificationRequestOnPlayer(playerSequenceNumberProcessed+1);
             CheckForRespawnningRequestOnServer(playerSequenceNumberProcessed+1);
 

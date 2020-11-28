@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using System.Collections.Generic;
 public class ServerHandle
 {
     public static void WelcomeReceived(int fromClient, Packet packet)
@@ -17,13 +17,39 @@ public class ServerHandle
         Server.clients[fromClient].SendIntoGame(username);
     }
 
+    public static void PlayerCastingBubbleShieldCommandReceived(int fromClient,Packet packet)
+    {
+        int bubbleShieldCount = packet.ReadInt();
+        BubbleShieldData[] bubbleShieldDatas = new BubbleShieldData[bubbleShieldCount];
+        for(int i=0;i<bubbleShieldDatas.Length;i++)
+        {
+            int direction = packet.ReadInt();
+            Vector3Int cellPosition = packet.ReadVector3Int();
+
+            bubbleShieldDatas[i] = new BubbleShieldData(direction, cellPosition);
+        }
+        int sequenceNumber = packet.ReadInt();
+
+        List<BubbleShieldData> bubbleShields = new List<BubbleShieldData>(bubbleShieldDatas);
+        CastBubbleShieldCommand castBubbleShieldCommand = new CastBubbleShieldCommand(sequenceNumber, bubbleShields);
+        Server.clients[fromClient].serverMasterController.AccumulateCastingBubbleShieldRequestToBePlayedOnServerFromClient(castBubbleShieldCommand);
+    }
+    
+    public static void PlayerFiringTidalWaveCommandReceived(int fromClient, Packet packet)
+    {
+        int sequenceNumber = packet.ReadInt();
+
+        FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(sequenceNumber);
+        Server.clients[fromClient].serverMasterController.AccumulateFiringTidalWaveRequestToBePlayedOnServerFromClient(fireTidalWaveCommand);
+    }
+
     public static void PlayerPetrificationCommandReceived(int fromClient, Packet packet)
     {
         int playerIdPetrified = packet.ReadInt();
         int sequenceNumber = packet.ReadInt();
 
         PetrificationCommand petrificationCommand = new PetrificationCommand(sequenceNumber,playerIdPetrified);
-        Server.clients[fromClient].serverMasterController.AccumulatePetrificationRequestFromServer(petrificationCommand);
+        Server.clients[fromClient].serverMasterController.AccumulatePetrificationRequestToBePlayedOnServerFromClient(petrificationCommand);
     }
 
     public static void PlayerRespawnCommandReceived(int fromClient,Packet packet)
@@ -32,7 +58,7 @@ public class ServerHandle
         int sequenceNumber = packet.ReadInt();
 
         RespawnPlayerCommand respawnCommand = new RespawnPlayerCommand(sequenceNumber,cellPostionToRespawnPlayerOn);
-        Server.clients[fromClient].serverMasterController.AccumulateRespawnningRequestFromServer(respawnCommand);
+        Server.clients[fromClient].serverMasterController.AccumulateRespawnningRequestFromClientToServer(respawnCommand);
     }
 
     public static void PlayerPushCommandReceived(int fromClient,Packet packet)
