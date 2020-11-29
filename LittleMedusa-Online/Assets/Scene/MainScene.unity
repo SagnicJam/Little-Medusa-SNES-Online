@@ -8776,7 +8776,7 @@ MonoBehaviour:
     type: 3}
   clientSideGameManager: {fileID: 2329427187541826361, guid: b44fad60d382aa445a231e600ac4979c,
     type: 3}
-  isServer: 0
+  isServer: 1
 --- !u!4 &1777984283
 Transform:
   m_ObjectHideFlags: 0

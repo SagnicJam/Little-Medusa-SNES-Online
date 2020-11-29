@@ -284,10 +284,10 @@ public class ClientMasterController : MonoBehaviour
             UpdateServerPredictedPosition(playerStateUpdates);
             if (Vector3.Distance(serverPlayer.actorTransform.position, localPlayer.actorTransform.position) >= positionThreshold)
             {
-                Debug.Log("Correction regarding position difference "+serverPlayer.actorTransform.position + "local---server" + localPlayer.actorTransform.position + "<color=red>Corrected player position</color>" + playerStateUpdates.playerProcessedSequenceNumber);
+                Debug.Log("Correction regarding position difference " + serverPlayer.actorTransform.position + "local---server" + localPlayer.actorTransform.position + "<color=red>Corrected player position</color>" + playerStateUpdates.playerProcessedSequenceNumber);
                 //Debug.Break();
                 PositionUpdates positionUpdates = new PositionUpdates(serverPlayer.actorTransform.position, serverPlayer.currentMovePointCellPosition, serverPlayer.previousMovePointCellPosition,
-                    (int)serverPlayer.Facing,(int)serverPlayer.PreviousFacingDirection);
+                    (int)serverPlayer.Facing, (int)serverPlayer.PreviousFacingDirection);
                 localPlayer.SetActorPositionalState(positionUpdates);
             }
         }

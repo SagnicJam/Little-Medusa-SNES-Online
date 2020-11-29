@@ -13,6 +13,7 @@ public class ProjectileManager : MonoBehaviour
 
     public void SetPosition(Vector3 position)
     {
+        //Debug.Log("position: "+position);
         transform.position = position;
     }
 }

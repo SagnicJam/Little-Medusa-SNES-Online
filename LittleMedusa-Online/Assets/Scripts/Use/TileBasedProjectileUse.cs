@@ -11,7 +11,7 @@ public class TileBasedProjectileUse : Use
     public Vector3Int currentValidPosCell;
 
     public bool destroyAtPreviousCell;
-
+    public Actor actorMePushing;
     public FaceDirection actorFacingWhenFired;
     public EnumData.Projectiles projectileTypeThrown;
     public bool actorHadAuthority;
@@ -19,6 +19,11 @@ public class TileBasedProjectileUse : Use
     public int gameObjectInstanceId;
 
     public FaceDirection tileMovementDirection;
+
+    public void SetActorMePushing(Actor actorMePushing)
+    {
+        this.actorMePushing = actorMePushing;
+    }
 
     public override void PerformUsage()
     {

@@ -150,6 +150,31 @@ public class GridManager : MonoBehaviour
         return null;
     }
 
+    public Actor GetLastPushedActorInChain(Actor firstActor)
+    {
+        bool foundLastElementInChain = false;
+
+        Actor temp = firstActor;
+        Actor prevActor = null;
+        Actor nextActor = null;
+
+        while(!foundLastElementInChain)
+        {
+            prevActor = temp;
+            nextActor = prevActor.GetNextChainElement();
+            
+            if(prevActor.gameObject.GetInstanceID()==nextActor.gameObject.GetInstanceID())
+            {
+                foundLastElementInChain = true;
+            }
+            else
+            {
+                temp = nextActor;
+            }
+        }
+        return nextActor;
+    }
+
     public Actor GetTheLastActorInChain(Actor firstActor, FaceDirection directionToParseChain)
     {
         bool foundLastElementInChain = false;
@@ -217,13 +242,10 @@ public class GridManager : MonoBehaviour
         float angle = Vector2.Angle(lineFacingDirectionOfMotion, lineWithOtherObject);
         Debug.DrawRay(myPosition, lineFacingDirectionOfMotion, Color.red);
         Debug.DrawRay(myPosition, lineWithOtherObject, Color.blue);
-        Debug.LogError("Angle : "+angle);
         if (angle <= 45)
         {
-            Debug.Log("true for : " + transform.parent.name);
             return true;
         }
-        Debug.Log("Faslse for : " + transform.parent.name);
         return false;
     }
 

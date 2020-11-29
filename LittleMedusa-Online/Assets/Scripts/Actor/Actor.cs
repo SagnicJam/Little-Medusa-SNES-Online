@@ -333,6 +333,28 @@ public abstract class Actor : TileData
         }
     }
 
+    public Actor GetNextChainElement()
+    {
+        Vector3Int cellPos = GridManager.instance.grid.WorldToCell(actorTransform.position+GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+        Vector3 objectPosition = GridManager.instance.cellToworld(cellPos);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, GridManager.instance.grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            Actor actor = hit2DArr[i].collider.GetComponent<Actor>();
+            if (actor != null)
+            {
+                if (actor.isPushed)
+                {
+                    if(actor.chainIDLinkedTo==chainIDLinkedTo)
+                    {
+                        return actor;
+                    }
+                }
+            }
+        }
+        return this;
+    }
+
     public Actor GetNextPetrifiedActorInDirection(FaceDirection direction)
     {
         Vector3Int cellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(direction));
@@ -380,6 +402,7 @@ public abstract class Actor : TileData
     {
         if(IsActorPushableInDirection(this, tileBasedProjectile.actorFacingWhenFired))
         {
+            tileBasedProjectile.SetActorMePushing(this);
             this.SetProjectilePushingMe(tileBasedProjectile);
             this.chainIDLinkedTo = tileBasedProjectile.liveProjectile.chainIDLinkedTo;
             StartPush(this, tileBasedProjectile.actorFacingWhenFired);
@@ -528,6 +551,42 @@ public abstract class Actor : TileData
 
     public abstract void OnCantOccupySpace();
 
+    public void StopPushWithoutDamage(Actor actorToStop)
+    {
+        List<Mapper> mapsToDelete = new List<Mapper>();
+        foreach (Mapper m in actorToStop.mapperList)
+        {
+            if (m is OneDNonCheckingMapper)
+            {
+                mapsToDelete.Add(m);
+            }
+        }
+
+        for (int i = 0; i < mapsToDelete.Count; i++)
+        {
+            actorToStop.mapperList.Remove(mapsToDelete[i]);
+        }
+        
+        actorToStop.OnCantOccupySpace();
+        actorToStop.isPushed = false;
+        if (actorMePushing != null)
+        {
+            if (actorMePushing.isPushed)
+            {
+                if (actorMePushing == this)
+                {
+                    Debug.LogError("Founds!!!");
+                }
+                else
+                {
+                    //Debug.Log("Stopping for : " + actorMePushing.gameObject.GetInstanceID());
+                    actorMePushing.StopPushWithoutDamage(actorMePushing);
+                }
+
+            }
+        }
+    }
+
     public void StopPush(Actor actorToStop)
     {
        
@@ -546,12 +605,28 @@ public abstract class Actor : TileData
         }
 
         actorToStop.OnCantOccupySpace();
+        actorToStop.TakeDamage(damagePerStoppedHit);
+        actorToStop.isPushed = false;
         if (actorPushingMe != null)
         {
-            actorPushingMe.StopPush(actorPushingMe);
+            if (actorPushingMe.isPushed)
+            {
+                if (actorPushingMe == this)
+                {
+                    Debug.LogError("Founds!!!");
+                }
+                else
+                {
+                    //Debug.Log("Stopping for : " + actorMePushing.gameObject.GetInstanceID());
+                    actorPushingMe.StopPush(actorPushingMe);
+                }
+
+            }
         }
-        actorToStop.isPushed = false;
-        actorToStop.TakeDamage(damagePerStoppedHit);
+        if(tilePushingMe!=null)
+        {
+            tilePushingMe.EndOfUse();
+        }
     }
 
     public void StopPushMeOnly(Actor actorToStop)

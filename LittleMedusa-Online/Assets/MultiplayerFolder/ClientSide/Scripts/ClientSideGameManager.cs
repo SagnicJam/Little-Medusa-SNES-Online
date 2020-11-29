@@ -179,7 +179,7 @@ public class ClientSideGameManager : MonoBehaviour
             if (projectileDatasDic.TryGetValue(kvp.Key, out projectileManager))
             {
                 //assign position
-                projectileManager.SetPosition(kvp.Value.projectilePosition);
+                //projectileManager.SetPosition(kvp.Value.projectilePosition);
             }
             else
             {
@@ -192,7 +192,7 @@ public class ClientSideGameManager : MonoBehaviour
                 }
                 ProjectileManager newProjectileManager = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ProjectileManager>();
                 newProjectileManager.OnInititialise(kvp.Key);
-                newProjectileManager.SetPosition(kvp.Value.projectilePosition);
+                //newProjectileManager.SetPosition(kvp.Value.projectilePosition);
                 projectileDatasDic.Add(kvp.Key, newProjectileManager);
             }
         }
@@ -265,7 +265,7 @@ public class ClientSideGameManager : MonoBehaviour
                         }
                         ProjectileManager newProjectileManager = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ProjectileManager>();
                         newProjectileManager.OnInititialise(kvp.Key);
-                        newProjectileManager.SetPosition(kvp.Value.projectilePosition);
+                        //newProjectileManager.SetPosition(kvp.Value.projectilePosition);
 
                         projectileDatasDic.Add(kvp.Key, newProjectileManager);
                     }

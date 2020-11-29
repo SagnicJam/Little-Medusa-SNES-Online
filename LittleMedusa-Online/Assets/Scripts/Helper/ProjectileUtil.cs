@@ -144,7 +144,22 @@ public class ProjectileUtil : MonoBehaviour
                     {
                         if (GridManager.instance.IsHeadCollision(collidedActorWithMyHead.actorTransform.position, transform.position, pU.tileMovementDirection))
                         {
-                            collidedActorWithMyHead.StartGettingPushedDueToTidalWave(pU);
+                            
+                            if (collidedActorWithMyHead.chainIDLinkedTo!=chainIDLinkedTo)
+                            {
+                                if (!collidedActorWithMyHead.isRespawnningPlayer && !collidedActorWithMyHead.isInvincible && !collidedActorWithMyHead.isDead)
+                                {
+                                    if (collidedActorWithMyHead.IsActorPushableInDirection(collidedActorWithMyHead, pU.tileMovementDirection))
+                                    {
+                                        collidedActorWithMyHead.StartGettingPushedDueToTidalWave(pU);
+                                    }
+                                    else
+                                    {
+                                        pU.EndOfUse();
+                                    }
+                                }
+                            }
+                            
                         }
                     }
                 }
@@ -189,10 +204,17 @@ public class ProjectileUtil : MonoBehaviour
         {
             if (isServerNetworked)
             {
+                if(pU.projectileTypeThrown == EnumData.Projectiles.TidalWave)
+                {
+                    if(pU.actorMePushing!=null)
+                    {
+                        pU.actorMePushing.StopPushWithoutDamage(pU.actorMePushing);
+                    }
+
+                }
                 ServerSideGameManager.projectilesDic.Remove(networkUid);
             }
         }
-        Debug.Log("Destroy here");
         Destroy(gameObject);
     }
 }

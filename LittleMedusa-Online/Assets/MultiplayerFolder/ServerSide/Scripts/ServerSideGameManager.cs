@@ -59,8 +59,7 @@ public class ServerSideGameManager : MonoBehaviour
             WorldGridItem worldGridItem = new WorldGridItem((int)toNetworkTileType[i], positionsOfTile);
             worldGridItemList.Add(worldGridItem);
         }
-
-        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), projectilesDic));
+        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), new Dictionary<int, ProjectileData>(projectilesDic)));
 
         //Local client sending data
         if (worldUpdatesToBeSentFromServerToClient.Count >= snapShotsInOnePacket)
