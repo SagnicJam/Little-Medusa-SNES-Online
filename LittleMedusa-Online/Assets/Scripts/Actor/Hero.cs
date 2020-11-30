@@ -25,7 +25,7 @@ public abstract class Hero : Actor
         waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
 
         primaryMoveUseAnimationAction.SetAnimationSpeedAndSpritesOnUsage(primaryMoveAnimationSpeed,normalAnimationSpeed);
-        rangedAttack = new Attack(primaryMoveDamage, ownerId, EnumData.AttackTypes.ProjectileAttack, projectileThrownType);
+        rangedAttack_1 = new Attack(primaryMoveDamage, ownerId, EnumData.AttackTypes.ProjectileAttack, projectileThrownType);
     }
 
     public void InitialiseActor(PlayerStateUpdates playerStateUpdates)
@@ -63,10 +63,12 @@ public abstract class Hero : Actor
         
         isPetrified = playerAuthoratativeStates.isPetrified;
         isPushed = playerAuthoratativeStates.isPushed;
+        isPhysicsControlled = playerAuthoratativeStates.isPhysicsControlled;
         isInvincible = playerAuthoratativeStates.isInvincible;
         
         if(actorCollider2D!=null)
         {
+            
             if (!isRespawnningPlayer && isRespawnningPlayer != playerAuthoratativeStates.isRespawnningPlayer)
             {
                 //enable crosshair locally
@@ -86,6 +88,14 @@ public abstract class Hero : Actor
                     statusSprite.gameObject.SetActive(true);
                 }
                 SetSpawnState();
+            }
+            if (!isPhysicsControlled && isPhysicsControlled != playerAuthoratativeStates.isPhysicsControlled)
+            {
+                actorCollider2D.enabled = false;
+            }
+            if (isPhysicsControlled && isPhysicsControlled != playerAuthoratativeStates.isPhysicsControlled)
+            {
+                actorCollider2D.enabled = true;
             }
         }
         
@@ -168,6 +178,7 @@ public abstract class Hero : Actor
     /// </summary>
     public abstract void ProcessInputMovementsControl();
     public abstract bool IsHeroAbleToFireProjectiles();
+    public abstract bool IsHeroAbleToFireProjectiles(FaceDirection facing);
 
     //do stop push
     //do remaining monster code inside head collision

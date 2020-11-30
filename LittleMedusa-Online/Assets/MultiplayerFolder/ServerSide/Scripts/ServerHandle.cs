@@ -16,31 +16,63 @@ public class ServerHandle
 
         Server.clients[fromClient].SendIntoGame(username);
     }
+    public static void PlayerCastingTornadoCommandReceived(int fromClient, Packet packet)
+    {
+        int direction = packet.ReadInt();
+        int sequenceNumber = packet.ReadInt();
+        PlaceTornadoCommand placeTornadoCommand = new PlaceTornadoCommand(sequenceNumber, direction);
+        Server.clients[fromClient].serverMasterController.AccumulateCastingTornadoRequestToBePlayedOnServerFromClient(placeTornadoCommand);
+    }
+
+    public static void PlayerCastingPitfallCommandReceived(int fromClient, Packet packet)
+    {
+        int direction = packet.ReadInt();
+        int sequenceNumber = packet.ReadInt();
+        CastPitfallCommand castPitfallCommand = new CastPitfallCommand(sequenceNumber, direction);
+        Server.clients[fromClient].serverMasterController.AccumulateCastingPitfallRequestToBePlayedOnServerFromClient(castPitfallCommand);
+    }
+
+    public static void PlayerCastingFlamePillarCommandReceived(int fromClient, Packet packet)
+    {
+        int direction = packet.ReadInt();
+        int sequenceNumber = packet.ReadInt();
+        CastFlamePillar castFlamePillar = new CastFlamePillar(sequenceNumber, direction);
+        Server.clients[fromClient].serverMasterController.AccumulateCastingFlamePillarRequestToBePlayedOnServerFromClient(castFlamePillar);
+    }
 
     public static void PlayerCastingBubbleShieldCommandReceived(int fromClient,Packet packet)
     {
-        int bubbleShieldCount = packet.ReadInt();
-        BubbleShieldData[] bubbleShieldDatas = new BubbleShieldData[bubbleShieldCount];
-        for(int i=0;i<bubbleShieldDatas.Length;i++)
-        {
-            int direction = packet.ReadInt();
-            Vector3Int cellPosition = packet.ReadVector3Int();
-
-            bubbleShieldDatas[i] = new BubbleShieldData(direction, cellPosition);
-        }
         int sequenceNumber = packet.ReadInt();
-
-        List<BubbleShieldData> bubbleShields = new List<BubbleShieldData>(bubbleShieldDatas);
-        CastBubbleShieldCommand castBubbleShieldCommand = new CastBubbleShieldCommand(sequenceNumber, bubbleShields);
+        CastBubbleShieldCommand castBubbleShieldCommand = new CastBubbleShieldCommand(sequenceNumber);
         Server.clients[fromClient].serverMasterController.AccumulateCastingBubbleShieldRequestToBePlayedOnServerFromClient(castBubbleShieldCommand);
     }
-    
-    public static void PlayerFiringTidalWaveCommandReceived(int fromClient, Packet packet)
+
+    public static void PlayerFiringMightyWindCommandReceived(int fromClient, Packet packet)
     {
+        int direction = packet.ReadInt();
         int sequenceNumber = packet.ReadInt();
 
-        FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(sequenceNumber);
+        FireMightyWindCommand fireMightyWindCommand = new FireMightyWindCommand(sequenceNumber, direction);
+        Server.clients[fromClient].serverMasterController.AccumulateFiringMightyWindRequestToBePlayedOnServerFromClient(fireMightyWindCommand);
+    }
+
+    public static void PlayerFiringTidalWaveCommandReceived(int fromClient, Packet packet)
+    {
+        int direction = packet.ReadInt();
+        int sequenceNumber = packet.ReadInt();
+
+        FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(sequenceNumber, direction);
         Server.clients[fromClient].serverMasterController.AccumulateFiringTidalWaveRequestToBePlayedOnServerFromClient(fireTidalWaveCommand);
+    }
+
+    public static void PlayerOnGettingHitByDispersedFireBallCommandReceived(int fromClient, Packet packet)
+    {
+        int playerIdHit = packet.ReadInt();
+        int damage = packet.ReadInt();
+        int sequenceNumber = packet.ReadInt();
+
+        OnHitByDispersedFireBall onHitByDispersedFireBall = new OnHitByDispersedFireBall(sequenceNumber, playerIdHit, damage);
+        Server.clients[fromClient].serverMasterController.AccumulateOnGettingHitByDispersedFireballRequestToBePlayedOnServerFromClient(onHitByDispersedFireBall);
     }
 
     public static void PlayerPetrificationCommandReceived(int fromClient, Packet packet)

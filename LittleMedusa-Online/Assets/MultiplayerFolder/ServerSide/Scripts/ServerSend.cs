@@ -91,6 +91,7 @@ public class ServerSend
             packet.Write(serverMasterController.serverInstanceHero.primaryMoveUseAnimationAction.isBeingUsed);
             packet.Write(serverMasterController.serverInstanceHero.isPetrified);
             packet.Write(serverMasterController.serverInstanceHero.isPushed);
+            packet.Write(serverMasterController.serverInstanceHero.isPhysicsControlled);
             packet.Write(serverMasterController.serverInstanceHero.isInvincible);
             packet.Write(serverMasterController.serverInstanceHero.isRespawnningPlayer);
             packet.Write(serverMasterController.serverInstanceHero.currentHP);
@@ -221,6 +222,7 @@ public class ServerSend
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPetrified);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPushed);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPhysicsControlled);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isInvincible);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.currentHP);
@@ -247,6 +249,7 @@ public class ServerSend
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPetrified);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPushed);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPhysicsControlled);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isInvincible);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.currentHP);

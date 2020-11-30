@@ -32,7 +32,39 @@ public class ClientSend : MonoBehaviour
     {
         using (Packet packet = new Packet((int)ClientPackets.playerFiringTidalWaveCommand))
         {
+            packet.Write(fireTidalWaveCommand.direction);
             packet.Write(fireTidalWaveCommand.sequenceNoForFiringTidalWaveCommand);
+            SendTCPData(packet);
+        }
+    }
+
+    public static void PlaceTornadoCommand(PlaceTornadoCommand placeTornadoCommand)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.playerTornadoCommand))
+        {
+            packet.Write(placeTornadoCommand.direction);
+            packet.Write(placeTornadoCommand.sequenceForPlaceTornadoCommand);
+            SendTCPData(packet);
+        }
+    }
+
+    public static void FireMightyWind(FireMightyWindCommand fireMightyWindCommand)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.playerFiringMightyWindCommand))
+        {
+            packet.Write(fireMightyWindCommand.direction);
+            packet.Write(fireMightyWindCommand.sequenceNoForFiringMightyWindCommand);
+            SendTCPData(packet);
+        }
+    }
+
+    public static void CastFlamePillar(CastFlamePillar castFlamePillar)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.castingFlamePillarCommand))
+        {
+            packet.Write(castFlamePillar.direction);
+            packet.Write(castFlamePillar.sequenceNoCastingFlamePillarCommand);
+
             SendTCPData(packet);
         }
     }
@@ -41,14 +73,30 @@ public class ClientSend : MonoBehaviour
     {
         using (Packet packet = new Packet((int)ClientPackets.castingBubbleShieldCommand))
         {
-            packet.Write(castBubbleShieldCommand.bubbleShieldDatas.Count);
-
-            for(int i=0;i<castBubbleShieldCommand.bubbleShieldDatas.Count;i++)
-            {
-                packet.Write(castBubbleShieldCommand.bubbleShieldDatas[i].directionToPush);
-                packet.Write(castBubbleShieldCommand.bubbleShieldDatas[i].cellPosition);
-            }
             packet.Write(castBubbleShieldCommand.sequenceNoForCastingBubbleShield);
+
+            SendTCPData(packet);
+        }
+    }
+
+    public static void CastPitfall(CastPitfallCommand castPitfallCommand)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.castingPitfallCommand))
+        {
+            packet.Write(castPitfallCommand.direction);
+            packet.Write(castPitfallCommand.sequenceNoForCastingPitfallCommand);
+
+            SendTCPData(packet);
+        }
+    }
+
+    public static void OnPlayerHitByDispersedFireBall(OnHitByDispersedFireBall onHitByDispersedFireBall)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.playerOnGettinghitByDispersedFireBallCommand))
+        {
+            packet.Write(onHitByDispersedFireBall.playerIdHit);
+            packet.Write(onHitByDispersedFireBall.damage);
+            packet.Write(onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand);
 
             SendTCPData(packet);
         }

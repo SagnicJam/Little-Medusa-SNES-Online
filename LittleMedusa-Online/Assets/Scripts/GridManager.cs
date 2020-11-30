@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.Events;
 
 public class GridManager : MonoBehaviour
 {
@@ -15,12 +14,15 @@ public class GridManager : MonoBehaviour
     public Grid grid;
 
     [Header("Tweak Params")]
+    public float switchToNormalFromHoleAfter = 3;
+    public float pullforce = 1;
+    public float timeOfForce = 5;
     public GameStateDependentTiles[] gameStateDependentTileArray;
 
     [Header("Unit Templates")]
     public GameObject rockFormation;
     public GameObject rockRemoval;
-
+    
     private void Awake()
     {
         instance = this;
@@ -87,6 +89,96 @@ public class GridManager : MonoBehaviour
         return false;
     }
 
+    public IEnumerator ForceTravel(Transform moveTrans, Vector3Int cellPos)
+    {
+        IEnumerator ie = ForceTravelCor(moveTrans,cellPos);
+        return ie;
+    }
+
+    public void WaitForForce(Actor actor, OnUsed<Actor> onUsed)
+    {
+        IEnumerator ie = WaitForForceCor(actor, onUsed);
+        StopCoroutine(ie);
+        StartCoroutine(ie);
+    }
+
+    public IEnumerator ForceTravelCor(Transform moveTrans,Vector3Int cellPos)
+    {
+        Vector3 pos = GridManager.instance.cellToworld(cellPos);
+        while(Vector3.Distance(moveTrans.position,pos)>=0.05f)
+        {
+            moveTrans.position = Vector3.MoveTowards(moveTrans.position,pos,Time.fixedDeltaTime* pullforce);
+            yield return new WaitForFixedUpdate();
+        }
+        yield break;
+    }
+
+    public IEnumerator WaitForForceCor(Actor actor,OnUsed<Actor> onUsed)
+    {
+        yield return new WaitForSeconds(timeOfForce);
+        if(onUsed!=null)
+        {
+            onUsed.Invoke(actor);
+        }
+        yield break;
+    }
+
+    public void SwitchTileToAfter(Vector3Int cellPos, EnumData.TileType fromTile, EnumData.TileType toTile)
+    {
+        IEnumerator ie = SwitchTileToAfterCor(cellPos,fromTile,toTile);
+        StopCoroutine(ie);
+        StartCoroutine(ie);
+    }
+
+    public IEnumerator SwitchTileToAfterCor(Vector3Int cellPos,EnumData.TileType fromTile,EnumData.TileType toTile)
+    {
+        yield return new WaitForSeconds(switchToNormalFromHoleAfter);
+        SetTile(cellPos, fromTile,false,false);
+        SetTile(cellPos, toTile, true, true);
+        yield break;
+    }
+
+    public void Disperse(GameObject dispersedCollider,GameObject dispersedGO,float dispersionRadius,float dispersionSpeed,int ownerId, Vector3Int dispersePoint)
+    {
+        List<Vector3Int> vList = new List<Vector3Int>();
+        Vector3 dispersedPoint = cellToworld(dispersePoint);
+        DispersionCollider dispersionCollider = Instantiate(dispersedCollider, dispersedPoint, Quaternion.identity).GetComponent<DispersionCollider>();
+
+        dispersionCollider.Grow(dispersionRadius, dispersionSpeed, ownerId);
+
+        float perAngleJump = 360 / 8;
+        for (float angle = 0; angle <= 360; angle += perAngleJump)
+        {
+            Vector3 finalPoint = dispersedPoint + GetVectorAtAngle(angle, Vector3.right, Vector3.forward) * dispersionRadius;
+            GameObject g = Instantiate(dispersedGO, dispersedPoint, Quaternion.identity);
+            IEnumerator tt = TravelToPos(g, finalPoint, dispersionSpeed, (x) => {
+                Debug.Log(x);
+                Destroy(g);
+            });
+            StopCoroutine(tt);
+            StartCoroutine(tt);
+        }
+    }
+
+    Vector3 GetVectorAtAngle(float angle, Vector3 right, Vector3 forward)
+    {
+        return Quaternion.AngleAxis(angle, forward) * right;
+    }
+
+    IEnumerator TravelToPos(GameObject g, Vector3 finalPoint, float speed, OnUsed<string> onend)
+    {
+        while (g != null && Vector3.Distance(g.transform.position, finalPoint) >= 0.05f)
+        {
+            g.transform.position = Vector3.MoveTowards(g.transform.position, finalPoint, Time.fixedDeltaTime * speed);
+            yield return new WaitForFixedUpdate();
+        }
+        if (onend != null)
+        {
+            onend.Invoke("Destroyed");
+        }
+        yield break;
+    }
+
     public static GameObject InstantiateGameObject(GameObject g)
     {
         return Instantiate(g);
@@ -149,6 +241,8 @@ public class GridManager : MonoBehaviour
         }
         return null;
     }
+
+    
 
     public Actor GetLastPushedActorInChain(Actor firstActor)
     {

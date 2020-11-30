@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public abstract class Actor : TileData
@@ -11,15 +12,16 @@ public abstract class Actor : TileData
     [Header("Tweak params")]
     public BoxCollider2D actorCollider2D;
     public EnumData.Projectiles projectileThrownType;
+    public EnumData.Projectiles projectileThrownType_2;
     public int invincibilityTickTimer;
     public int petrificationTimeTickRate;
     public int maxHP;
     public int maxStockLives;
     public int walkSpeed;
     public int damagePerStoppedHit;
+    public int primaryMoveDamage;
     public float primaryMoveAnimationSpeed;
     public float normalAnimationSpeed;
-    public float primaryMoveDamage;
     public float petrificationSnapSpeed;
     public FaceDirection faceDirectionInit;
 
@@ -65,9 +67,11 @@ public abstract class Actor : TileData
 
     [Header("Live Data")]
     public int ownerId;
+    public Attack currentAttack;
 
     [Header("Attack")]
-    public Attack rangedAttack;
+    public Attack rangedAttack_1;
+    public Attack rangedAttack_2;
 
     [Header("Actor Actions")]
     public WalkAction walkAction = new WalkAction();
@@ -267,7 +271,112 @@ public abstract class Actor : TileData
     public void Fire(Actor firingActor)
     {
         Debug.Log("Firing here!!!!");
-        FireProjectile(firingActor.rangedAttack);
+        FireProjectile(firingActor.rangedAttack_1);
+    }
+
+    public void CastFlamePillar()
+    {
+        DynamicItem dynamicItem = new DynamicItem
+        {
+            ranged = rangedAttack_2,
+            activate = new TileBasedProjectileUse()
+        };
+        currentAttack = rangedAttack_2;
+        dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
+    }
+    public IEnumerator forceTravelCorCache;
+
+    public void StopForceTravelCor()
+    {
+        if(forceTravelCorCache!=null)
+        {
+            StopCoroutine(forceTravelCorCache);
+        }
+    }
+
+    public void StartForceTravelCor()
+    {
+        if (forceTravelCorCache != null)
+        {
+            StopCoroutine(forceTravelCorCache);
+            StartCoroutine(forceTravelCorCache);
+        }
+    }
+
+    public void PlaceTornado(Vector3Int cell)
+    {
+        //place tornado here
+        foreach(KeyValuePair<int,ServerSideClient>kvp in Server.clients)
+        {
+            if (kvp.Value.serverMasterController != null)
+            {
+                if (kvp.Key != ownerId)
+                {
+                    if (kvp.Value.serverMasterController.serverInstanceHero is Hero hero)
+                    {
+                        kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled = true;
+                        kvp.Value.serverMasterController.serverInstanceHero.actorCollider2D.enabled = false;
+                        kvp.Value.serverMasterController.serverInstanceHero.forceTravelCorCache = GridManager.instance.ForceTravel(kvp.Value.serverMasterController.serverInstanceHero.actorTransform, cell);
+                        kvp.Value.serverMasterController.serverInstanceHero.StartForceTravelCor();
+                        GridManager.instance.SetTile(cell,EnumData.TileType.Tornado,true,false);
+                        GridManager.instance.WaitForForce(kvp.Value.serverMasterController.serverInstanceHero,(x)=> {
+                            x.isPhysicsControlled = false;
+                            x.actorCollider2D.enabled = true;
+                            x.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(x.actorTransform.position);
+                            x.StopForceTravelCor();
+                            GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, false, false);
+                        });
+                    }
+                }
+            }
+        }
+    }
+
+    
+    public void CastPitfall(Vector3Int cell)
+    {
+        //do damage
+        //start timer for hole in gridmanager
+        Actor actor = GridManager.instance.GetActorOnPos(cell);
+        if(actor!=null)
+        {
+            actor.TakeDamage(actor.currentHP);
+        }
+        GridManager.instance.SetTile(cell, EnumData.TileType.Normal,false,false);
+        GridManager.instance.SetTile(cell, EnumData.TileType.Hole,true,false);
+        GridManager.instance.SwitchTileToAfter(cell, EnumData.TileType.Hole, EnumData.TileType.Normal);
+    }
+
+    public void CastBubbleShield()
+    {
+        currentAttack = rangedAttack_2;
+        DynamicItem dynamicItem = new DynamicItem
+        {
+            ranged = rangedAttack_2,
+            activate = new DirectionBasedProjectileUse(0, actorTransform.right, null)
+        };
+        dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
+
+        DynamicItem dynamicItem2 = new DynamicItem
+        {
+            ranged = rangedAttack_2,
+            activate = new DirectionBasedProjectileUse(90, actorTransform.right, null)
+        };
+        dynamicItem2.activate.BeginToUse(this, null, dynamicItem2.ranged.OnHit);
+
+        DynamicItem dynamicItem3 = new DynamicItem
+        {
+            ranged = rangedAttack_2,
+            activate = new DirectionBasedProjectileUse(180, actorTransform.right, null)
+        };
+        dynamicItem3.activate.BeginToUse(this, null, dynamicItem3.ranged.OnHit);
+
+        DynamicItem dynamicItem4 = new DynamicItem
+        {
+            ranged = rangedAttack_2,
+            activate = new DirectionBasedProjectileUse(270, actorTransform.right, null)
+        };
+        dynamicItem4.activate.BeginToUse(this, null, dynamicItem4.ranged.OnHit);
     }
 
     void FireProjectile(Attack rangedAttack)
@@ -277,6 +386,7 @@ public abstract class Actor : TileData
             ranged = rangedAttack,
             activate = new TileBasedProjectileUse()
         };
+        currentAttack = rangedAttack;
         dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
     }
 
@@ -388,24 +498,14 @@ public abstract class Actor : TileData
         }
     }
 
-    public void CastBubbleShield(List<BubbleShieldData>bubbleShieldDatas)
-    {
-        //Vector3Int cellPoint = bubbleShieldDatas[0].cellPosition;
-        //Actor actor = GridManager.instance.GetActorOnPos(cellPoint);
-        //if(actor!=null)
-        //{
-
-        //}
-    }
-
     public void StartGettingPushedDueToTidalWave(TileBasedProjectileUse tileBasedProjectile)
     {
-        if(IsActorPushableInDirection(this, tileBasedProjectile.actorFacingWhenFired))
+        if(IsActorPushableInDirection(this, tileBasedProjectile.tileMovementDirection))
         {
             tileBasedProjectile.SetActorMePushing(this);
             this.SetProjectilePushingMe(tileBasedProjectile);
             this.chainIDLinkedTo = tileBasedProjectile.liveProjectile.chainIDLinkedTo;
-            StartPush(this, tileBasedProjectile.actorFacingWhenFired);
+            StartPush(this, tileBasedProjectile.tileMovementDirection);
         }
         else
         {
@@ -524,9 +624,9 @@ public abstract class Actor : TileData
     public void SetProjectilePushingMe(TileBasedProjectileUse tilePushingMe)
     {
         this.tilePushingMe = tilePushingMe;
-        actorTransform.position = this.tilePushingMe.liveProjectile.transform.position + GridManager.instance.GetFacingDirectionOffsetVector3(tilePushingMe.actorFacingWhenFired);
+        actorTransform.position = this.tilePushingMe.liveProjectile.transform.position + GridManager.instance.GetFacingDirectionOffsetVector3(tilePushingMe.tileMovementDirection);
 
-        currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(tilePushingMe.actorFacingWhenFired));
+        currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(tilePushingMe.tileMovementDirection));
         previousMovePointCellPosition = GridManager.instance.grid.WorldToCell(actorTransform.position);
     }
 
@@ -650,7 +750,7 @@ public abstract class Actor : TileData
     }
 
 
-    void TakeDamage(int damageReceived)
+    public void TakeDamage(int damageReceived)
     {
         currentHP -= damageReceived;
         if (currentHP <= 0)
@@ -733,6 +833,7 @@ public abstract class Actor : TileData
 
     void MakeInvincible()
     {
+        Debug.Log("MakeInvincible");
         isInvincible = true;
         waitingForInvinciblityToOver.ReInitialiseTimerToBegin(invincibilityTickTimer);
     }
@@ -748,9 +849,8 @@ public abstract class Actor : TileData
         {
             return;
         }
-
         if (isPetrified && !isPushed)
-            return;
+        return;
 
         ProjectileUtil projectileUtilCollidedWithMyHead = collider.GetComponent<ProjectileUtil>();
         if (projectileUtilCollidedWithMyHead != null)

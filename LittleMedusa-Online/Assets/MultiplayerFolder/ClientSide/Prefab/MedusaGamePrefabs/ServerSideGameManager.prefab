@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3afa70b8205a84248a52841ddb4baca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toNetworkTileType: 03000000
+  toNetworkTileType: 030000001400000015000000
   snapShotsInOnePacket: 4
   packetHistorySize: 3
   serverWorldSequenceNumber: 0
-  serverInstancePlayer: {fileID: 7561869928612098555, guid: af5f2189b6652c74c8f98da0ea04434a,
+  serverInstancePlayer: {fileID: 7561869928612098555, guid: 3bf24ea12fbdbb940b589d68a91879aa,
     type: 3}
 --- !u!114 &490409003049013614
 MonoBehaviour:

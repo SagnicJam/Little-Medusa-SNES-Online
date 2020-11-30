@@ -272,7 +272,7 @@ public class ClientMasterController : MonoBehaviour
             }
             localPlayer.SetAuthoratativeStates(playerStateUpdates.playerAuthoratativeStates);
 
-            if (localPlayer.isPetrified || localPlayer.isPushed)
+            if (localPlayer.isPetrified || localPlayer.isPushed||localPlayer.isPhysicsControlled)
             {
                 localPlayer.SetActorPositionalState(playerStateUpdates.positionUpdates);
             }
@@ -357,14 +357,16 @@ public struct PlayerAuthoratativeStates
     public bool isPetrified;
     public bool isPushed;
     public bool isInvincible;
+    public bool isPhysicsControlled;
     public bool isRespawnningPlayer;
     public int currentHP;
     public int currentStockLives;
 
-    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isInvincible,bool isRespawnningPlayer, int currentHP,int currentStockLives)
+    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isPhysicsControlled, bool isInvincible,bool isRespawnningPlayer, int currentHP,int currentStockLives)
     {
         this.isPetrified = isPetrified;
         this.isPushed = isPushed;
+        this.isPhysicsControlled = isPhysicsControlled;
         this.isInvincible = isInvincible;
         this.isRespawnningPlayer = isRespawnningPlayer;
         this.currentHP = currentHP;
@@ -422,37 +424,87 @@ public struct PetrificationCommand
     }
 }
 
+public struct OnHitByDispersedFireBall
+{
+    public int sequenceNoForGettingHitByDispersedFireBallCommand;
+    public int playerIdHit;
+    public int damage;
+
+    public OnHitByDispersedFireBall(int sequenceNoForGettingHitByDispersedFireBallCommand, int playerIdHit,int damage)
+    {
+        this.sequenceNoForGettingHitByDispersedFireBallCommand = sequenceNoForGettingHitByDispersedFireBallCommand;
+        this.playerIdHit = playerIdHit;
+        this.damage = damage;
+    }
+}
+
 public struct FireTidalWaveCommand
 {
     public int sequenceNoForFiringTidalWaveCommand;
+    public int direction;
 
-    public FireTidalWaveCommand(int sequenceNoForFiringTidalWaveCommand)
+    public FireTidalWaveCommand(int sequenceNoForFiringTidalWaveCommand,int direction)
     {
         this.sequenceNoForFiringTidalWaveCommand = sequenceNoForFiringTidalWaveCommand;
+        this.direction = direction;
+    }
+}
+
+public struct CastPitfallCommand
+{
+    public int sequenceNoForCastingPitfallCommand;
+    public int direction;
+
+    public CastPitfallCommand(int sequenceNoForCastingPitfallCommand, int direction)
+    {
+        this.sequenceNoForCastingPitfallCommand = sequenceNoForCastingPitfallCommand;
+        this.direction = direction;
     }
 }
 
 public struct CastBubbleShieldCommand
 {
     public int sequenceNoForCastingBubbleShield;
-    public List<BubbleShieldData> bubbleShieldDatas;
 
-    public CastBubbleShieldCommand(int sequenceNoForCastingBubbleShield, List<BubbleShieldData> bubbleShieldDatas)
+    public CastBubbleShieldCommand(int sequenceNoForCastingBubbleShield)
     {
         this.sequenceNoForCastingBubbleShield = sequenceNoForCastingBubbleShield;
-        this.bubbleShieldDatas = bubbleShieldDatas;
     }
 }
 
-public struct BubbleShieldData
+public struct FireMightyWindCommand
 {
-    public int directionToPush;
-    public Vector3Int cellPosition;
+    public int sequenceNoForFiringMightyWindCommand;
+    public int direction;
 
-    public BubbleShieldData(int directionToPush, Vector3Int cellPosition)
+    public FireMightyWindCommand(int sequenceNoForFiringMightyWindCommand,int direction)
     {
-        this.directionToPush = directionToPush;
-        this.cellPosition = cellPosition;
+        this.sequenceNoForFiringMightyWindCommand = sequenceNoForFiringMightyWindCommand;
+        this.direction = direction;
+    }
+}
+
+public struct PlaceTornadoCommand
+{
+    public int sequenceForPlaceTornadoCommand;
+    public int direction;
+
+    public PlaceTornadoCommand(int sequenceForPlaceTornadoCommand,int direction)
+    {
+        this.sequenceForPlaceTornadoCommand = sequenceForPlaceTornadoCommand;
+        this.direction = direction;
+    }
+}
+
+public struct CastFlamePillar
+{
+    public int sequenceNoCastingFlamePillarCommand;
+    public int direction;
+
+    public CastFlamePillar(int sequenceNoCastingFlamePillarCommand, int direction)
+    {
+        this.sequenceNoCastingFlamePillarCommand = sequenceNoCastingFlamePillarCommand;
+        this.direction = direction;
     }
 }
 

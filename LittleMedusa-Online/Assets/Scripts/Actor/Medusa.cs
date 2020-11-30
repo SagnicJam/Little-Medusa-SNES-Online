@@ -373,5 +373,13 @@ public class Medusa : Hero
         }
         return false;
     }
-
+    public override bool IsHeroAbleToFireProjectiles(FaceDirection direction)
+    {
+        Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(direction);
+        if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
+        {
+            return true;
+        }
+        return false;
+    }
 }

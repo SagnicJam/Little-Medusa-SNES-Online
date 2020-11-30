@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bb7594b15f1644791f000bdf88fa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 29
+  tileType: 30
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -433,15 +433,16 @@ MonoBehaviour:
   frameLooper: {fileID: 7092370211676962068}
   actorCollider2D: {fileID: 4818192695451518446}
   projectileThrownType: 13
+  projectileThrownType_2: 14
   invincibilityTickTimer: 250
   petrificationTimeTickRate: 1000
   maxHP: 8
   maxStockLives: 5
   walkSpeed: 4
   damagePerStoppedHit: 2
+  primaryMoveDamage: 23
   primaryMoveAnimationSpeed: 0.1
   normalAnimationSpeed: 0.2
-  primaryMoveDamage: 23
   petrificationSnapSpeed: 6
   faceDirectionInit: 1
   idleSprite:

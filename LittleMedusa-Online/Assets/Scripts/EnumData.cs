@@ -27,6 +27,39 @@ public class EnumData
         RespawnPlayer
     }
 
+    public enum ErmolaiInputs
+    {
+        Up = 0,
+        Left,
+        Down,
+        Right,
+        CastPitfall,
+        CastEarthquake,
+        RespawnPlayer
+    }
+
+    public enum HeliemisInputs
+    {
+        Up = 0,
+        Left,
+        Down,
+        Right,
+        ShootMightyWind,
+        PlaceTornado,
+        RespawnPlayer
+    }
+
+    public enum AvernaInputs
+    {
+        Up = 0,
+        Left,
+        Down,
+        Right,
+        ShootFireBall,
+        CastFlamePillar,
+        RespawnPlayer
+    }
+
     public enum PlayerStates
     {
         Local,
@@ -67,6 +100,7 @@ public class EnumData
         Chest,
         SpawnJar,
         Hole,
+        Tornado,
         NoBoulder,
         Wall,
         Mirror,
@@ -76,6 +110,9 @@ public class EnumData
         Monster,
         Medusa,
         Poseidanna,
+        Heliemis,
+        Ermolai,
+        Averna,
         WaterTitan,
         WindTitan,
         EarthTitan,
@@ -118,7 +155,10 @@ public class EnumData
         FioraSpark,
         CardinalProjectile,
         DispersedBoulder,
-        TidalWave
+        TidalWave,
+        BubbleShield,
+        MightyWind,
+        FlamePillar
     }
 
     public enum MonsterBreed

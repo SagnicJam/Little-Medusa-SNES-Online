@@ -549,7 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9bc853f89d1be488f3c42ba72cafaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 28
+  tileType: 29
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -563,15 +563,16 @@ MonoBehaviour:
   frameLooper: {fileID: 6824960385572969362}
   actorCollider2D: {fileID: 1978482911545761097}
   projectileThrownType: 2
+  projectileThrownType_2: 0
   invincibilityTickTimer: 250
   petrificationTimeTickRate: 1000
   maxHP: 8
   maxStockLives: 5
   walkSpeed: 4
   damagePerStoppedHit: 2
+  primaryMoveDamage: 2
   primaryMoveAnimationSpeed: 0.2
   normalAnimationSpeed: 0.1
-  primaryMoveDamage: 23
   petrificationSnapSpeed: 6
   faceDirectionInit: 1
   idleSprite:
@@ -619,10 +620,10 @@ MonoBehaviour:
   triggerFaceChangeEvent: 0
   currentHP: 0
   currentStockLives: 0
-  chainIDLinkedTo: -1
   isHeadCollisionWithOtherActor: 0
   headOnCollisionCell: {x: 0, y: 0, z: 0}
   headOnCollisionFaceDirection: 0
+  chainIDLinkedTo: -1
   clientMasterController: {fileID: 0}
   serverMasterController: {fileID: 0}
   ownerId: 0
@@ -1137,7 +1138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9bc853f89d1be488f3c42ba72cafaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 28
+  tileType: 29
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -1151,15 +1152,16 @@ MonoBehaviour:
   frameLooper: {fileID: 8144042283862135355}
   actorCollider2D: {fileID: 0}
   projectileThrownType: 2
+  projectileThrownType_2: 0
   invincibilityTickTimer: 250
   petrificationTimeTickRate: 1000
   maxHP: 8
   maxStockLives: 5
   walkSpeed: 4
   damagePerStoppedHit: 2
+  primaryMoveDamage: 2
   primaryMoveAnimationSpeed: 0.2
   normalAnimationSpeed: 0.1
-  primaryMoveDamage: 23
   petrificationSnapSpeed: 6
   faceDirectionInit: 1
   idleSprite:
@@ -1207,10 +1209,10 @@ MonoBehaviour:
   triggerFaceChangeEvent: 0
   currentHP: 0
   currentStockLives: 0
-  chainIDLinkedTo: -1
   isHeadCollisionWithOtherActor: 0
   headOnCollisionCell: {x: 0, y: 0, z: 0}
   headOnCollisionFaceDirection: 0
+  chainIDLinkedTo: -1
   clientMasterController: {fileID: 0}
   serverMasterController: {fileID: 0}
   ownerId: 0
@@ -1290,7 +1292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9bc853f89d1be488f3c42ba72cafaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 28
+  tileType: 29
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -1304,15 +1306,16 @@ MonoBehaviour:
   frameLooper: {fileID: 8378923909811213302}
   actorCollider2D: {fileID: 0}
   projectileThrownType: 2
+  projectileThrownType_2: 0
   invincibilityTickTimer: 250
   petrificationTimeTickRate: 1000
   maxHP: 8
   maxStockLives: 5
   walkSpeed: 4
   damagePerStoppedHit: 2
+  primaryMoveDamage: 2
   primaryMoveAnimationSpeed: 0.2
   normalAnimationSpeed: 0.1
-  primaryMoveDamage: 23
   petrificationSnapSpeed: 6
   faceDirectionInit: 1
   idleSprite:
@@ -1360,10 +1363,10 @@ MonoBehaviour:
   triggerFaceChangeEvent: 0
   currentHP: 0
   currentStockLives: 0
-  chainIDLinkedTo: -1
   isHeadCollisionWithOtherActor: 0
   headOnCollisionCell: {x: 0, y: 0, z: 0}
   headOnCollisionFaceDirection: 0
+  chainIDLinkedTo: -1
   clientMasterController: {fileID: 0}
   serverMasterController: {fileID: 0}
   ownerId: 0

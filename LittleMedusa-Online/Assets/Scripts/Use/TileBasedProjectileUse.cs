@@ -12,7 +12,6 @@ public class TileBasedProjectileUse : Use
 
     public bool destroyAtPreviousCell;
     public Actor actorMePushing;
-    public FaceDirection actorFacingWhenFired;
     public EnumData.Projectiles projectileTypeThrown;
     public bool actorHadAuthority;
     public int ownerId;
@@ -34,7 +33,9 @@ public class TileBasedProjectileUse : Use
             
             if (Vector3.Distance(liveProjectile.transform.position, finalPos) >= 0.05f)
             {
-                if (projectileTypeThrown == EnumData.Projectiles.TidalWave)
+                if (projectileTypeThrown == EnumData.Projectiles.TidalWave
+                    || projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
+                    projectileTypeThrown == EnumData.Projectiles.MightyWind)
                 {
                     if (GridManager.instance.HasTileAtCellPoint(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position),EnumData.TileType.Boulder))
                     {
@@ -78,10 +79,7 @@ public class TileBasedProjectileUse : Use
         this.actorUsing = actorUsing;
         onUseOver = onDynamicItemUsed;
 
-        actorFacingWhenFired = actorUsing.Facing;
-        actorUsing.rangedAttack.actorFacingWhenFired= actorFacingWhenFired;
-        tileMovementDirection = actorFacingWhenFired;
-        projectileTypeThrown = actorUsing.projectileThrownType;
+        projectileTypeThrown = actorUsing.currentAttack.projectiles;
         actorHadAuthority = actorUsing.hasAuthority();
         gameObjectInstanceId = actorUsing.gameObject.GetInstanceID();
         ownerId = actorUsing.ownerId;
@@ -95,8 +93,14 @@ public class TileBasedProjectileUse : Use
         liveProjectile = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ProjectileUtil>();
         liveProjectile.transform.position = actorUsing.actorTransform.position;
         finalPos = actorUsing.actorTransform.position + (liveProjectile.projectileTileTravelDistance * GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing));
-
         liveProjectile.Initialise(this);
+        tileMovementDirection = actorUsing.Facing;
+        
+        if (projectileTypeThrown==EnumData.Projectiles.FlamePillar)
+        {
+            liveProjectile.transform.position = actorUsing.actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing);
+            finalPos = actorUsing.actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing) + (liveProjectile.projectileTileTravelDistance * GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing));
+        }
     }
 
     public override void EndOfUse()

@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bb7594b15f1644791f000bdf88fa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 29
+  tileType: 30
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -585,15 +585,16 @@ MonoBehaviour:
   frameLooper: {fileID: 6824960385572969362}
   actorCollider2D: {fileID: 1978482911545761097}
   projectileThrownType: 13
+  projectileThrownType_2: 14
   invincibilityTickTimer: 250
   petrificationTimeTickRate: 1000
   maxHP: 8
   maxStockLives: 5
   walkSpeed: 4
   damagePerStoppedHit: 2
+  primaryMoveDamage: 23
   primaryMoveAnimationSpeed: 0.1
   normalAnimationSpeed: 0.2
-  primaryMoveDamage: 23
   petrificationSnapSpeed: 6
   faceDirectionInit: 1
   idleSprite:
@@ -1158,7 +1159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bb7594b15f1644791f000bdf88fa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 29
+  tileType: 30
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -1172,15 +1173,16 @@ MonoBehaviour:
   frameLooper: {fileID: 8144042283862135355}
   actorCollider2D: {fileID: 0}
   projectileThrownType: 13
+  projectileThrownType_2: 14
   invincibilityTickTimer: 250
   petrificationTimeTickRate: 1000
   maxHP: 8
   maxStockLives: 5
   walkSpeed: 4
   damagePerStoppedHit: 2
+  primaryMoveDamage: 23
   primaryMoveAnimationSpeed: 0.1
   normalAnimationSpeed: 0.2
-  primaryMoveDamage: 23
   petrificationSnapSpeed: 6
   faceDirectionInit: 1
   idleSprite:
@@ -1311,7 +1313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bb7594b15f1644791f000bdf88fa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 29
+  tileType: 30
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -1325,15 +1327,16 @@ MonoBehaviour:
   frameLooper: {fileID: 8378923909811213302}
   actorCollider2D: {fileID: 0}
   projectileThrownType: 13
+  projectileThrownType_2: 14
   invincibilityTickTimer: 250
   petrificationTimeTickRate: 1000
   maxHP: 8
   maxStockLives: 5
   walkSpeed: 4
   damagePerStoppedHit: 2
+  primaryMoveDamage: 23
   primaryMoveAnimationSpeed: 0.1
   normalAnimationSpeed: 0.2
-  primaryMoveDamage: 23
   petrificationSnapSpeed: 6
   faceDirectionInit: 1
   idleSprite:

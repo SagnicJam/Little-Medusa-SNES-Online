@@ -5,14 +5,14 @@ using System;
 public class Attack
 {
     public int attackingActorOwnerId;
-    public float damage;
+    public int damage;
     public EnumData.AttackTypes attackType;
     public EnumData.Projectiles projectiles;
     public FaceDirection actorFacingWhenFired;
 
     public bool isInitialised;
 
-    public Attack(float damage,int attackingActorOwnerId, EnumData.AttackTypes attackType,EnumData.Projectiles projectiles)
+    public Attack(int damage,int attackingActorOwnerId, EnumData.AttackTypes attackType,EnumData.Projectiles projectiles)
     {
         isInitialised = true;
         this.damage = damage;
@@ -42,6 +42,9 @@ public class Attack
             {
                 case EnumData.Projectiles.EyeLaser:
                     actorHit.PetrificationCommandRegister(attackingActorOwnerId);
+                    break;
+                case EnumData.Projectiles.FlamePillar:
+                    actorHit.TakeDamage(damage);
                     break;
             }
         }

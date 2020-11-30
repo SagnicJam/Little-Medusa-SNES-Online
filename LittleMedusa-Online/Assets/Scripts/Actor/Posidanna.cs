@@ -4,6 +4,12 @@ using UnityEngine;
 using System;
 public class Posidanna : Hero
 {
+    public override void Start()
+    {
+        base.Start();
+        rangedAttack_2 = new Attack(primaryMoveDamage, ownerId, EnumData.AttackTypes.ProjectileAttack, projectileThrownType_2);
+    }
+
     public override bool IsHeroAbleToFireProjectiles()
     {
         Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
@@ -13,7 +19,15 @@ public class Posidanna : Hero
         }
         return false;
     }
-
+    public override bool IsHeroAbleToFireProjectiles(FaceDirection direction)
+    {
+        Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(direction);
+        if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
+        {
+            return true;
+        }
+        return false;
+    }
 
     public override void ProcessAnimationsInputs(bool[] inputs, bool[] previousInputs)
     {
@@ -143,22 +157,13 @@ public class Posidanna : Hero
                         {
                             if (IsHeroAbleToFireProjectiles())
                             {
-                                FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(GetLocalSequenceNo());
+                                FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(GetLocalSequenceNo(), (int)Facing);
                                 ClientSend.FireTidalWave(fireTidalWaveCommand);
                             }
                         }
                         else if(inputs[(int)EnumData.PosidannaInputs.CastBubbleShield] && previousInputs[(int)EnumData.PosidannaInputs.CastBubbleShield] != inputs[(int)EnumData.PosidannaInputs.CastBubbleShield])
                         {
-                            List<BubbleShieldData> bubbleShieldDatas = new List<BubbleShieldData>();
-                            
-                            string[] directionList =Enum.GetNames(typeof(FaceDirection));
-                            for (int i=1;i<directionList.Length;i++)
-                            {
-                                bubbleShieldDatas.Add(new BubbleShieldData(i, GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)i))));
-                            }
-
-                            CastBubbleShieldCommand castBubbleShieldCommand = new CastBubbleShieldCommand(
-                                GetLocalSequenceNo(), bubbleShieldDatas);
+                            CastBubbleShieldCommand castBubbleShieldCommand = new CastBubbleShieldCommand(GetLocalSequenceNo());
                             ClientSend.CastBubbleShield(castBubbleShieldCommand);
                         }
                     }

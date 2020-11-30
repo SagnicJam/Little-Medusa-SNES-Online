@@ -8,7 +8,15 @@ public class ProjectileUtil : MonoBehaviour
     public int projectileTileTravelDistance;
     public float projectileSpeed;
     public bool selfDestroyOnTargetTouch;
+    public bool isDispersing;
+    public float dispersionRadius;
+    public float dispersionSpeed;
+
+    [Header("UnitTemplate")]
+    public GameObject dispersedGO;
+    public GameObject dispersedGOCollider;
     
+
     public FrameLooper frameLooper;
 
     public bool isDynamicTravellingSprites;
@@ -51,7 +59,9 @@ public class ProjectileUtil : MonoBehaviour
                 ProjectileData projectileData = new ProjectileData(networkUid, (int)pU.projectileTypeThrown, pU.liveProjectile.transform.position);
                 ServerSideGameManager.projectilesDic.Add(networkUid, projectileData);
 
-                if(pU.projectileTypeThrown == EnumData.Projectiles.TidalWave)
+                if(pU.projectileTypeThrown == EnumData.Projectiles.TidalWave||
+                    pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield||
+                    pU.projectileTypeThrown == EnumData.Projectiles.MightyWind)
                 {
                     chainIDLinkedTo = ++GridManager.chainIDGlobal;
                 }
@@ -138,13 +148,22 @@ public class ProjectileUtil : MonoBehaviour
                         pU.onUseOver.Invoke(collidedActorWithMyHead);
                     }
                 }
-                else if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave)
+                else if(pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
+                {
+                    if (MultiplayerManager.instance.isServer)
+                    {
+                        //Send by client to server
+                        pU.onUseOver.Invoke(collidedActorWithMyHead);
+                    }
+                }
+                else if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave 
+                    || pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
+                    pU.projectileTypeThrown == EnumData.Projectiles.MightyWind)
                 {
                     if (MultiplayerManager.instance.isServer)
                     {
                         if (GridManager.instance.IsHeadCollision(collidedActorWithMyHead.actorTransform.position, transform.position, pU.tileMovementDirection))
                         {
-                            
                             if (collidedActorWithMyHead.chainIDLinkedTo!=chainIDLinkedTo)
                             {
                                 if (!collidedActorWithMyHead.isRespawnningPlayer && !collidedActorWithMyHead.isInvincible && !collidedActorWithMyHead.isDead)
@@ -178,7 +197,7 @@ public class ProjectileUtil : MonoBehaviour
     {
         if(frameLooper!=null)
         {
-            switch (pU.actorFacingWhenFired)
+            switch (pU.tileMovementDirection)
             {
                 case FaceDirection.Up:
                     frameLooper.UpdateSpriteArr(projectileUpDieAnimationSprites);
@@ -204,7 +223,9 @@ public class ProjectileUtil : MonoBehaviour
         {
             if (isServerNetworked)
             {
-                if(pU.projectileTypeThrown == EnumData.Projectiles.TidalWave)
+                if(pU.projectileTypeThrown == EnumData.Projectiles.TidalWave||
+                    pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
+                    pU.projectileTypeThrown == EnumData.Projectiles.MightyWind)
                 {
                     if(pU.actorMePushing!=null)
                     {
@@ -215,6 +236,17 @@ public class ProjectileUtil : MonoBehaviour
                 ServerSideGameManager.projectilesDic.Remove(networkUid);
             }
         }
+        if(pU.projectileTypeThrown==EnumData.Projectiles.FireBall)
+        {
+            GridManager.instance.Disperse(dispersedGOCollider
+                , dispersedGO
+                ,dispersionRadius
+                ,dispersionSpeed
+                ,pU.ownerId
+                ,GridManager.instance.grid.WorldToCell(transform.position));
+        }
         Destroy(gameObject);
     }
+
+    
 }

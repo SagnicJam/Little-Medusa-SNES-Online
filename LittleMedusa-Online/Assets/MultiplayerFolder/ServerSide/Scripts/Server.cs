@@ -137,12 +137,17 @@ public class Server
                 { (int)ClientPackets.welcomeReceived,ServerHandle.WelcomeReceived},
                 { (int)ClientPackets.playerInputs,ServerHandle.PlayerInputs},
                 { (int)ClientPackets.playerPetrifyCommand,ServerHandle.PlayerPetrificationCommandReceived},
+                { (int)ClientPackets.playerOnGettinghitByDispersedFireBallCommand,ServerHandle.PlayerOnGettingHitByDispersedFireBallCommandReceived},
                 { (int)ClientPackets.playerPushCommand,ServerHandle.PlayerPushCommandReceived},
                 { (int)ClientPackets.playerPlaceBoulderCommand,ServerHandle.PlayerPlaceBoulderBoulderCommandReceived},
                 { (int)ClientPackets.playerRemoveBoulderCommand,ServerHandle.PlayerRemoveBoulderBoulderCommandReceived},
                 { (int)ClientPackets.playerRespawnCommand,ServerHandle.PlayerRespawnCommandReceived},
                 { (int)ClientPackets.playerFiringTidalWaveCommand,ServerHandle.PlayerFiringTidalWaveCommandReceived},
-                { (int)ClientPackets.castingBubbleShieldCommand,ServerHandle.PlayerCastingBubbleShieldCommandReceived}
+                { (int)ClientPackets.castingBubbleShieldCommand,ServerHandle.PlayerCastingBubbleShieldCommandReceived},
+                { (int)ClientPackets.playerTornadoCommand,ServerHandle.PlayerCastingTornadoCommandReceived},
+                { (int)ClientPackets.castingPitfallCommand,ServerHandle.PlayerCastingPitfallCommandReceived},
+                { (int)ClientPackets.castingFlamePillarCommand,ServerHandle.PlayerCastingFlamePillarCommandReceived},
+                { (int)ClientPackets.playerFiringMightyWindCommand,ServerHandle.PlayerFiringMightyWindCommandReceived}
             };
 
         Debug.Log("Initialise packets");

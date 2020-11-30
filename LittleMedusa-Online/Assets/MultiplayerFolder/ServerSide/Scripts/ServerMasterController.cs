@@ -21,8 +21,13 @@ public class ServerMasterController : MonoBehaviour
     private Dictionary<int, PlaceBoulderCommand> placeBoulderCommandFromClientToServerDic = new Dictionary<int, PlaceBoulderCommand>();
     private Dictionary<int, RemoveBoulderCommand> removeBoulderCommandFromClientToServerDic = new Dictionary<int, RemoveBoulderCommand>();
     private Dictionary<int, PetrificationCommand> petrificationRequestReceivedFromClientToServerDic = new Dictionary<int, PetrificationCommand>();
+    private Dictionary<int, OnHitByDispersedFireBall> onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic = new Dictionary<int, OnHitByDispersedFireBall>();
     private Dictionary<int, FireTidalWaveCommand> tidalWaveFireRequestReceivedFromClientToServerDic = new Dictionary<int, FireTidalWaveCommand>();
+    private Dictionary<int, FireMightyWindCommand> mightyWindFireRequestReceivedFromClientToServerDic = new Dictionary<int, FireMightyWindCommand>();
     private Dictionary<int, CastBubbleShieldCommand> castBubbleShieldRequestReceivedFromClientToServerDic = new Dictionary<int, CastBubbleShieldCommand>();
+    private Dictionary<int, CastFlamePillar> castFlamePillarRequestReceivedFromClientToServerDic = new Dictionary<int, CastFlamePillar>();
+    private Dictionary<int, CastPitfallCommand> castPitfallRequestReceivedFromClientToServerDic = new Dictionary<int, CastPitfallCommand>();
+    private Dictionary<int, PlaceTornadoCommand> placeTornadoRequestReceivedFromClientToServerDic = new Dictionary<int, PlaceTornadoCommand>();
     private Dictionary<int, RespawnPlayerCommand> respawnCommandRequestReceivedFromClientToServerDic = new Dictionary<int, RespawnPlayerCommand>();
     private List<PlayerStateServerUpdates> playerStateListOnServer = new List<PlayerStateServerUpdates>();
     private List<PreviousPlayerUpdatedStatePacks> previousPlayerUpdatedStatePacks = new List<PreviousPlayerUpdatedStatePacks>();
@@ -54,6 +59,189 @@ public class ServerMasterController : MonoBehaviour
     }
 
     #region ReliableDataCheckForImplementation
+    public void CheckForFlamePillarRequestForPlayer(int sequenceNoToCheck)
+    {
+        List<int> toDiscardSequences = new List<int>();
+        foreach (KeyValuePair<int, CastFlamePillar> kvp in castFlamePillarRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
+            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (KeyValuePair<int, CastFlamePillar> kvp in castFlamePillarRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
+            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (int i in toDiscardSequences)
+        {
+            if (castFlamePillarRequestReceivedFromClientToServerDic.ContainsKey(i))
+            {
+                //Debug.Log("<color=red>discarding seq </color>" + i);
+                castFlamePillarRequestReceivedFromClientToServerDic.Remove(i);
+            }
+            else
+            {
+                Debug.LogError("Could not find the key: " + i);
+            }
+        }
+
+        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
+            CastFlamePillar castFlamePillar;
+            if (castFlamePillarRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out castFlamePillar))
+            {
+                int direction = castFlamePillar.direction;
+                castFlamePillarRequestReceivedFromClientToServerDic.Remove(castFlamePillar.sequenceNoCastingFlamePillarCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                CastFlamePillarForPlayerImplementation(direction);
+            }
+        }
+
+        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
+            CastFlamePillar castFlamePillar;
+            if (castFlamePillarRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out castFlamePillar))
+            {
+                int direction = castFlamePillar.direction;
+                castFlamePillarRequestReceivedFromClientToServerDic.Remove(castFlamePillar.sequenceNoCastingFlamePillarCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                CastFlamePillarForPlayerImplementation(direction);
+            }
+        }
+    }
+
+    public void CheckForPitfallRequestForPlayer(int sequenceNoToCheck)
+    {
+        List<int> toDiscardSequences = new List<int>();
+        foreach (KeyValuePair<int, CastPitfallCommand> kvp in castPitfallRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
+            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (KeyValuePair<int, CastPitfallCommand> kvp in castPitfallRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
+            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (int i in toDiscardSequences)
+        {
+            if (castPitfallRequestReceivedFromClientToServerDic.ContainsKey(i))
+            {
+                //Debug.Log("<color=red>discarding seq </color>" + i);
+                castPitfallRequestReceivedFromClientToServerDic.Remove(i);
+            }
+            else
+            {
+                Debug.LogError("Could not find the key: " + i);
+            }
+        }
+
+        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
+            CastPitfallCommand castPitfallCommand;
+            if (castPitfallRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out castPitfallCommand))
+            {
+                int direction = castPitfallCommand.direction;
+                castPitfallRequestReceivedFromClientToServerDic.Remove(castPitfallCommand.sequenceNoForCastingPitfallCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                CastPitfallImplementation(direction);
+            }
+        }
+
+        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
+            CastPitfallCommand castPitfallCommand;
+            if (castPitfallRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out castPitfallCommand))
+            {
+                int direction = castPitfallCommand.direction;
+                castPitfallRequestReceivedFromClientToServerDic.Remove(castPitfallCommand.sequenceNoForCastingPitfallCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                CastPitfallImplementation(direction);
+            }
+        }
+    }
+
+    public void CheckForTornadoRequestForPlayer(int sequenceNoToCheck)
+    {
+        List<int> toDiscardSequences = new List<int>();
+        foreach (KeyValuePair<int, PlaceTornadoCommand> kvp in placeTornadoRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
+            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (KeyValuePair<int, PlaceTornadoCommand> kvp in placeTornadoRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
+            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (int i in toDiscardSequences)
+        {
+            if (placeTornadoRequestReceivedFromClientToServerDic.ContainsKey(i))
+            {
+                //Debug.Log("<color=red>discarding seq </color>" + i);
+                placeTornadoRequestReceivedFromClientToServerDic.Remove(i);
+            }
+            else
+            {
+                Debug.LogError("Could not find the key: " + i);
+            }
+        }
+
+        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
+            PlaceTornadoCommand placeTornadoCommand;
+            if (placeTornadoRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out placeTornadoCommand))
+            {
+                int direction = placeTornadoCommand.direction;
+                placeTornadoRequestReceivedFromClientToServerDic.Remove(placeTornadoCommand.sequenceForPlaceTornadoCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                CastTornadoForPlayerImplementation(direction);
+            }
+        }
+
+        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
+            PlaceTornadoCommand placeTornadoCommand;
+            if (placeTornadoRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out placeTornadoCommand))
+            {
+                int direction = placeTornadoCommand.direction;
+                placeTornadoRequestReceivedFromClientToServerDic.Remove(placeTornadoCommand.sequenceForPlaceTornadoCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                CastTornadoForPlayerImplementation(direction);
+            }
+        }
+    }
+
     public void CheckForBubbleShieldRequestForPlayer(int sequenceNoToCheck)
     {
         List<int> toDiscardSequences = new List<int>();
@@ -96,7 +284,7 @@ public class ServerMasterController : MonoBehaviour
             {
                 castBubbleShieldRequestReceivedFromClientToServerDic.Remove(castBubbleShieldCommand.sequenceNoForCastingBubbleShield);
                 //do server rollback here to check to check if damage actually occured on server
-                CastBubbleShieldForPlayerImplementation(castBubbleShieldCommand.bubbleShieldDatas);
+                CastBubbleShieldForPlayerImplementation();
             }
         }
 
@@ -108,7 +296,68 @@ public class ServerMasterController : MonoBehaviour
             {
                 castBubbleShieldRequestReceivedFromClientToServerDic.Remove(castBubbleShieldCommand.sequenceNoForCastingBubbleShield);
                 //do server rollback here to check to check if damage actually occured on server
-                CastBubbleShieldForPlayerImplementation(castBubbleShieldCommand.bubbleShieldDatas);
+                CastBubbleShieldForPlayerImplementation();
+            }
+        }
+    }
+
+    public void CheckForMightyWindFireRequestOnPlayer(int sequenceNoToCheck)
+    {
+        List<int> toDiscardSequences = new List<int>();
+        foreach (KeyValuePair<int, FireMightyWindCommand> kvp in mightyWindFireRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
+            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (KeyValuePair<int, FireMightyWindCommand> kvp in mightyWindFireRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
+            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (int i in toDiscardSequences)
+        {
+            if (mightyWindFireRequestReceivedFromClientToServerDic.ContainsKey(i))
+            {
+                //Debug.Log("<color=red>discarding seq </color>" + i);
+                mightyWindFireRequestReceivedFromClientToServerDic.Remove(i);
+            }
+            else
+            {
+                Debug.LogError("Could not find the key: " + i);
+            }
+        }
+
+        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
+            FireMightyWindCommand fireMightyWindCommand;
+            if (mightyWindFireRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out fireMightyWindCommand))
+            {
+                int direction = fireMightyWindCommand.direction;
+                mightyWindFireRequestReceivedFromClientToServerDic.Remove(fireMightyWindCommand.sequenceNoForFiringMightyWindCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                MightyWindFirePlayerRequestImplementation(direction);
+            }
+        }
+
+        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
+            FireMightyWindCommand fireMightyWindCommand;
+            if (mightyWindFireRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out fireMightyWindCommand))
+            {
+                int direction = fireMightyWindCommand.direction;
+                mightyWindFireRequestReceivedFromClientToServerDic.Remove(fireMightyWindCommand.sequenceNoForFiringMightyWindCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                MightyWindFirePlayerRequestImplementation(direction);
             }
         }
     }
@@ -153,9 +402,10 @@ public class ServerMasterController : MonoBehaviour
             FireTidalWaveCommand tidalWaveFireCommand;
             if (tidalWaveFireRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out tidalWaveFireCommand))
             {
+                int direction = tidalWaveFireCommand.direction;
                 tidalWaveFireRequestReceivedFromClientToServerDic.Remove(tidalWaveFireCommand.sequenceNoForFiringTidalWaveCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                TidalWaveFirePlayerRequestImplementation();
+                TidalWaveFirePlayerRequestImplementation(direction);
             }
         }
 
@@ -165,9 +415,73 @@ public class ServerMasterController : MonoBehaviour
             FireTidalWaveCommand tidalWaveFireCommand;
             if (tidalWaveFireRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out tidalWaveFireCommand))
             {
+                int direction = tidalWaveFireCommand.direction;
                 tidalWaveFireRequestReceivedFromClientToServerDic.Remove(tidalWaveFireCommand.sequenceNoForFiringTidalWaveCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                TidalWaveFirePlayerRequestImplementation();
+                TidalWaveFirePlayerRequestImplementation(direction);
+            }
+        }
+    }
+
+    public void CheckForOnGettingHitByDispersedFireBallRequestOnPlayer(int sequenceNoToCheck)
+    {
+        List<int> toDiscardSequences = new List<int>();
+        foreach (KeyValuePair<int, OnHitByDispersedFireBall> kvp in onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
+            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (KeyValuePair<int, OnHitByDispersedFireBall> kvp in onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
+            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (int i in toDiscardSequences)
+        {
+            if (onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.ContainsKey(i))
+            {
+                //Debug.Log("<color=red>discarding seq </color>" + i);
+                onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.Remove(i);
+            }
+            else
+            {
+                Debug.LogError("Could not find the key: " + i);
+            }
+        }
+
+        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
+            OnHitByDispersedFireBall onHitByDispersedFireBall;
+            if (onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out onHitByDispersedFireBall))
+            {
+                onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.Remove(onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                int playerIdHit = onHitByDispersedFireBall.playerIdHit;
+                int damage = onHitByDispersedFireBall.damage;
+                HitPlayerWithDispersedFireBallRequestImplementation(playerIdHit, damage);
+            }
+        }
+
+        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
+            OnHitByDispersedFireBall onHitByDispersedFireBall;
+            if (onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out onHitByDispersedFireBall))
+            {
+                onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.Remove(onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                int playerIdHit = onHitByDispersedFireBall.playerIdHit;
+                int damage = onHitByDispersedFireBall.damage;
+                HitPlayerWithDispersedFireBallRequestImplementation(playerIdHit, damage);
             }
         }
     }
@@ -487,6 +801,68 @@ public class ServerMasterController : MonoBehaviour
     #endregion
 
     #region ReliableDataAccumulation
+    public void AccumulateCastingTornadoRequestToBePlayedOnServerFromClient(PlaceTornadoCommand placeTornadoCommand)
+    {
+        if (placeTornadoCommand.sequenceForPlaceTornadoCommand > playerSequenceNumberProcessed)
+        {
+            PlaceTornadoCommand dataPackage;
+            if (placeTornadoRequestReceivedFromClientToServerDic.TryGetValue(placeTornadoCommand.sequenceForPlaceTornadoCommand, out dataPackage))
+            {
+                Debug.Log("<color=orange>AccumulateCastingTornadoRequestToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + dataPackage.sequenceForPlaceTornadoCommand);
+            }
+            else
+            {
+                Debug.Log("<color=green>AccumulateCastingTornadoRequestToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + placeTornadoCommand.sequenceForPlaceTornadoCommand);
+                placeTornadoRequestReceivedFromClientToServerDic.Add(placeTornadoCommand.sequenceForPlaceTornadoCommand, placeTornadoCommand);
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>AccumulateCastingTornadoRequestToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + placeTornadoCommand.sequenceForPlaceTornadoCommand);
+        }
+    }
+
+    public void AccumulateCastingPitfallRequestToBePlayedOnServerFromClient(CastPitfallCommand castPitfallCommand)
+    {
+        if (castPitfallCommand.sequenceNoForCastingPitfallCommand > playerSequenceNumberProcessed)
+        {
+            CastPitfallCommand dataPackage;
+            if (castPitfallRequestReceivedFromClientToServerDic.TryGetValue(castPitfallCommand.sequenceNoForCastingPitfallCommand, out dataPackage))
+            {
+                Debug.Log("<color=orange>AccumulateCastingPitfallRequestToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNoForCastingPitfallCommand);
+            }
+            else
+            {
+                Debug.Log("<color=green>AccumulateCastingPitfallRequestToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + castPitfallCommand.sequenceNoForCastingPitfallCommand);
+                castPitfallRequestReceivedFromClientToServerDic.Add(castPitfallCommand.sequenceNoForCastingPitfallCommand, castPitfallCommand);
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>AccumulateCastingPitfallRequestToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + castPitfallCommand.sequenceNoForCastingPitfallCommand);
+        }
+    }
+
+    public void AccumulateCastingFlamePillarRequestToBePlayedOnServerFromClient(CastFlamePillar castFlamePillar)
+    {
+        if (castFlamePillar.sequenceNoCastingFlamePillarCommand > playerSequenceNumberProcessed)
+        {
+            CastFlamePillar dataPackage;
+            if (castFlamePillarRequestReceivedFromClientToServerDic.TryGetValue(castFlamePillar.sequenceNoCastingFlamePillarCommand, out dataPackage))
+            {
+                Debug.Log("<color=orange>AccumulateCastingFlamePillarRequestToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNoCastingFlamePillarCommand);
+            }
+            else
+            {
+                Debug.Log("<color=green>AccumulateCastingFlamePillarRequestToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + castFlamePillar.sequenceNoCastingFlamePillarCommand);
+                castFlamePillarRequestReceivedFromClientToServerDic.Add(castFlamePillar.sequenceNoCastingFlamePillarCommand, castFlamePillar);
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>AccumulateCastingFlamePillarRequestToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + castFlamePillar.sequenceNoCastingFlamePillarCommand);
+        }
+    }
     public void AccumulateCastingBubbleShieldRequestToBePlayedOnServerFromClient(CastBubbleShieldCommand castBubbleShieldCommand)
     {
         if (castBubbleShieldCommand.sequenceNoForCastingBubbleShield > playerSequenceNumberProcessed)
@@ -508,6 +884,27 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
+    public void AccumulateFiringMightyWindRequestToBePlayedOnServerFromClient(FireMightyWindCommand fireMightyWindCommand)
+    {
+        if (fireMightyWindCommand.sequenceNoForFiringMightyWindCommand > playerSequenceNumberProcessed)
+        {
+            FireMightyWindCommand dataPackage;
+            if (mightyWindFireRequestReceivedFromClientToServerDic.TryGetValue(fireMightyWindCommand.sequenceNoForFiringMightyWindCommand, out dataPackage))
+            {
+                Debug.Log("<color=orange>AccumulateFiringMightyWindRequestToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNoForFiringMightyWindCommand);
+            }
+            else
+            {
+                Debug.Log("<color=green>AccumulateFiringMightyWindRequestToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + fireMightyWindCommand.sequenceNoForFiringMightyWindCommand);
+                mightyWindFireRequestReceivedFromClientToServerDic.Add(fireMightyWindCommand.sequenceNoForFiringMightyWindCommand, fireMightyWindCommand);
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>AccumulateFiringMightyWindRequestToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + fireMightyWindCommand.sequenceNoForFiringMightyWindCommand);
+        }
+    }
+
     public void AccumulateFiringTidalWaveRequestToBePlayedOnServerFromClient(FireTidalWaveCommand fireTidalWaveCommand)
     {
         if (fireTidalWaveCommand.sequenceNoForFiringTidalWaveCommand > playerSequenceNumberProcessed)
@@ -526,6 +923,27 @@ public class ServerMasterController : MonoBehaviour
         else
         {
             Debug.Log("<color=red>AccumulateFiringTidalWaveRequestToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + fireTidalWaveCommand.sequenceNoForFiringTidalWaveCommand);
+        }
+    }
+
+    public void AccumulateOnGettingHitByDispersedFireballRequestToBePlayedOnServerFromClient(OnHitByDispersedFireBall onHitByDispersedFireBall)
+    {
+        if (onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand > playerSequenceNumberProcessed)
+        {
+            OnHitByDispersedFireBall dataPackage;
+            if (onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.TryGetValue(onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand, out dataPackage))
+            {
+                Debug.Log("<color=orange>AccumulateOnGettingHitByDispersedFireballRequestToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNoForGettingHitByDispersedFireBallCommand);
+            }
+            else
+            {
+                Debug.Log("<color=green>AccumulateOnGettingHitByDispersedFireballRequestToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand);
+                onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.Add(onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand, onHitByDispersedFireBall);
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>AccumulateOnGettingHitByDispersedFireballRequestToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand);
         }
     }
 
@@ -666,6 +1084,11 @@ public class ServerMasterController : MonoBehaviour
             Debug.LogError("PushPlayerRequestImplementation Is respawnning");
             return;
         }
+        if (serverInstanceHero.isPhysicsControlled)
+        {
+            Debug.LogError("PushPlayerRequestImplementation server player is phyhsics controlled hence request failed");
+            return;
+        }
         if (serverInstanceHero.isPetrified)
         {
             Debug.LogError("PushPlayerRequestImplementation server player is petrified hence request failed");
@@ -723,6 +1146,11 @@ public class ServerMasterController : MonoBehaviour
             Debug.LogError("PlaceBoulderRequestImplementation Is respawnning");
             return;
         }
+        if (serverInstanceHero.isPhysicsControlled)
+        {
+            Debug.LogError("PlaceBoulderRequestImplementation server player is phyhsics controlled hence request failed");
+            return;
+        }
         if (serverInstanceHero.isPetrified)
         {
             Debug.LogError("PlaceBoulderRequestImplementation server player is petrified hence request failed");
@@ -757,6 +1185,11 @@ public class ServerMasterController : MonoBehaviour
             Debug.LogError("RemoveBoulderRequestImplementation Is respawnning");
             return;
         }
+        if (serverInstanceHero.isPhysicsControlled)
+        {
+            Debug.LogError("RemoveBoulderRequestImplementation server player is phyhsics controlled hence request failed");
+            return;
+        }
         if (serverInstanceHero.isPetrified)
         {
             Debug.LogError("RemoveBoulderRequestImplementation server player is petrified hence request failed");
@@ -784,19 +1217,92 @@ public class ServerMasterController : MonoBehaviour
 
     }
 
-    void CastBubbleShieldForPlayerImplementation(List<BubbleShieldData>bubbleShieldDatas)
+    void CastFlamePillarForPlayerImplementation(int direction)
     {
-        Debug.Log("CastBubbleShieldForPlayerImplementation ");
+        Debug.Log("CastFlamePillarForPlayerImplementation ");
+        if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
+        {
+            serverInstanceHero.CastFlamePillar();
+        }
+        else
+        {
+            Debug.LogError("Hero is not averna!");
+        }
     }
 
-    void TidalWaveFirePlayerRequestImplementation()
+    void CastBubbleShieldForPlayerImplementation()
+    {
+        Debug.Log("CastBubbleShieldForPlayerImplementation ");
+        serverInstanceHero.CastBubbleShield();
+    }
+
+    void TidalWaveFirePlayerRequestImplementation(int direction)
     {
         Debug.Log("TidalWaveFirePlayerRequestImplementation ");
-        serverInstanceHero.Fire(serverInstanceHero);
+        if(serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
+        {
+            serverInstanceHero.Fire(serverInstanceHero);
+        }
+        else
+        {
+            Debug.LogError("TidalWave-Hero is not able to fire projectiles");
+        }
+    }
+
+    void CastTornadoForPlayerImplementation(int direction)
+    {
+        Debug.Log("CastTornadoForPlayerImplementation ");
+        if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
+        {
+            Vector3Int cellToPlaceTornadoOn = GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position+GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)direction));
+            serverInstanceHero.PlaceTornado(cellToPlaceTornadoOn);
+        }
+        else
+        {
+            Debug.LogError("Tornado-Hero is not able to fire projectiles");
+        }
+    }
+
+    void MightyWindFirePlayerRequestImplementation(int direction)
+    {
+        Debug.Log("MightyWindFirePlayerRequestImplementation ");
+        if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
+        {
+            serverInstanceHero.Fire(serverInstanceHero);
+        }
+        else
+        {
+            Debug.LogError("MightyWind-Hero is not able to fire projectiles");
+        }
+    }
+
+    void CastPitfallImplementation(int direction)
+    {
+        Debug.Log("CastPitfall ");
+        Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position + 2 * GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection) direction));
+        if (GridManager.instance.HasTileAtCellPoint(cellToCheck, EnumData.TileType.Normal))
+        {
+            serverInstanceHero.CastPitfall(cellToCheck);
+        }
+        else
+        {
+            Debug.LogError("No normal tile on placable position");
+        }
+    }
+
+    void HitPlayerWithDispersedFireBallRequestImplementation(int playerIdHit,int damage)
+    {
+        Debug.Log("HitPlayerWithDispersedFireBallRequestImplementation playerIdHit " + playerIdHit);
+        Server.clients[playerIdHit].serverMasterController.serverInstanceHero.TakeDamage(damage);
     }
 
     void PetrifyPlayerRequestImplementation(int playerIdToPetrify)
     {
+        if (serverInstanceHero.isPhysicsControlled)
+        {
+            Debug.LogError("PetrifyPlayerRequestImplementation server player is phyhsics controlled hence request failed");
+            return;
+        }
         if (!serverInstanceHero.isPushed)
         {
             Debug.Log("PetrifyPlayerRequestImplementation playerIdToPetrify " + playerIdToPetrify);
@@ -813,6 +1319,11 @@ public class ServerMasterController : MonoBehaviour
         if (!serverInstanceHero.isRespawnningPlayer)
         {
             Debug.LogError("RespawnPlayerRequestImplementation Is not respawnning");
+            return;
+        }
+        if (serverInstanceHero.isPhysicsControlled)
+        {
+            Debug.LogError("RespawnPlayerRequestImplementation server player is phyhsics controlled hence request failed");
             return;
         }
         if (serverInstanceHero.isPetrified)
@@ -852,8 +1363,13 @@ public class ServerMasterController : MonoBehaviour
             CheckForPlaceBoulderRequestOnServer(playerSequenceNumberProcessed+1);
             CheckForRemovingBoulderRequestOnServer(playerSequenceNumberProcessed+1);
             CheckForTidalWaveFireRequestOnPlayer(playerSequenceNumberProcessed+1);
+            CheckForMightyWindFireRequestOnPlayer(playerSequenceNumberProcessed+1);
             CheckForBubbleShieldRequestForPlayer(playerSequenceNumberProcessed+1);
+            CheckForTornadoRequestForPlayer(playerSequenceNumberProcessed+1);
+            CheckForPitfallRequestForPlayer(playerSequenceNumberProcessed+1);
+            CheckForFlamePillarRequestForPlayer(playerSequenceNumberProcessed+1);
             CheckForPetrificationRequestOnPlayer(playerSequenceNumberProcessed+1);
+            CheckForOnGettingHitByDispersedFireBallRequestOnPlayer(playerSequenceNumberProcessed+1);
             CheckForRespawnningRequestOnServer(playerSequenceNumberProcessed+1);
 
             InputCommands inputPackageCorrespondingToSeq;
@@ -900,7 +1416,8 @@ public class ServerMasterController : MonoBehaviour
         //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
         PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(serverInstanceHero.isPetrified
             , serverInstanceHero.isPushed
-            ,serverInstanceHero.isInvincible
+            , serverInstanceHero.isPhysicsControlled
+            , serverInstanceHero.isInvincible
             ,serverInstanceHero.isRespawnningPlayer
             , serverInstanceHero.currentHP
             ,serverInstanceHero.currentStockLives);

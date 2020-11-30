@@ -34,6 +34,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = true;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    killUnitsInstantlyIfInTheirRegion = true;
                     break;
                 case EnumData.TileType.Normal:
                     blockFlyingUnits = false;
@@ -174,6 +175,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = true;
                     blockPetrifiedObjects = true;
                     blockProjectiles = true;
+                    killUnitsInstantlyIfInTheirRegion = true;
                     break;
                 case EnumData.TileType.Boulder:
                     blockFlyingUnits = false;
@@ -181,11 +183,19 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = true;
                     blockPetrifiedObjects = true;
                     blockProjectiles = true;
+                    killUnitsInstantlyIfInTheirRegion = true;
                     break;
                 case EnumData.TileType.Mirror:
                     blockFlyingUnits = false;
                     blockBoulderPlacement = true;
                     blockUnitMotion = false;
+                    blockPetrifiedObjects = false;
+                    blockProjectiles = false;
+                    break;
+                case EnumData.TileType.Tornado:
+                    blockFlyingUnits = false;
+                    blockBoulderPlacement = true;
+                    blockUnitMotion = true;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
                     break;

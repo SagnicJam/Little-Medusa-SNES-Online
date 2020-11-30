@@ -416,9 +416,9 @@ MonoBehaviour:
   toNetworkTileType: 03000000
   idealSnapshotBufferCount: 8
   maxedOutSnapshotBufferCount: 20
-  localPlayerPrefab: {fileID: 3120245021755954384, guid: d265b6a69858382438316b4fe99791ca,
+  localPlayerPrefab: {fileID: 3120245021755954384, guid: 3a414e81eba2fa140a59dc9437b737dc,
     type: 3}
-  playerPrefab: {fileID: 632477324722974415, guid: d65cffc0d0ca91a459759b178f91da32,
+  playerPrefab: {fileID: 632477324722974415, guid: 43899f79f19693c48a3953c59d195b5b,
     type: 3}
   currentWorldStateUpdateProcessingMode: 0
   serverWorldSequenceNumberProcessed: 0
