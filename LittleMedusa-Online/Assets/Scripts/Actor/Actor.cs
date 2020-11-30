@@ -314,18 +314,22 @@ public abstract class Actor : TileData
                 {
                     if (kvp.Value.serverMasterController.serverInstanceHero is Hero hero)
                     {
-                        kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled = true;
-                        kvp.Value.serverMasterController.serverInstanceHero.actorCollider2D.enabled = false;
-                        kvp.Value.serverMasterController.serverInstanceHero.forceTravelCorCache = GridManager.instance.ForceTravel(kvp.Value.serverMasterController.serverInstanceHero.actorTransform, cell);
-                        kvp.Value.serverMasterController.serverInstanceHero.StartForceTravelCor();
-                        GridManager.instance.SetTile(cell,EnumData.TileType.Tornado,true,false);
-                        GridManager.instance.WaitForForce(kvp.Value.serverMasterController.serverInstanceHero,(x)=> {
-                            x.isPhysicsControlled = false;
-                            x.actorCollider2D.enabled = true;
-                            x.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(x.actorTransform.position);
-                            x.StopForceTravelCor();
-                            GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, false, false);
-                        });
+                        if(!kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled)
+                        {
+                            kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled = true;
+                            kvp.Value.serverMasterController.serverInstanceHero.actorCollider2D.enabled = false;
+                            kvp.Value.serverMasterController.serverInstanceHero.forceTravelCorCache = GridManager.instance.ForceTravel(kvp.Value.serverMasterController.serverInstanceHero.actorTransform, cell);
+                            kvp.Value.serverMasterController.serverInstanceHero.StartForceTravelCor();
+                            GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, true, false);
+                            GridManager.instance.WaitForForce(kvp.Value.serverMasterController.serverInstanceHero, (x) => {
+                                x.isPhysicsControlled = false;
+                                x.actorCollider2D.enabled = true;
+                                x.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(x.actorTransform.position);
+                                x.StopForceTravelCor();
+                                GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, false, false);
+                            });
+                        }
+                        
                     }
                 }
             }

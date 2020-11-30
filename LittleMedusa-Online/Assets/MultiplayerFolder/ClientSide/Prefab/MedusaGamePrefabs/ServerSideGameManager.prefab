@@ -48,7 +48,7 @@ MonoBehaviour:
   snapShotsInOnePacket: 4
   packetHistorySize: 3
   serverWorldSequenceNumber: 0
-  serverInstancePlayer: {fileID: 7561869928612098555, guid: 3bf24ea12fbdbb940b589d68a91879aa,
+  serverInstancePlayer: {fileID: 7561869928612098555, guid: 7286219f6a5e165499aa08d00b9b8b17,
     type: 3}
 --- !u!114 &490409003049013614
 MonoBehaviour:
