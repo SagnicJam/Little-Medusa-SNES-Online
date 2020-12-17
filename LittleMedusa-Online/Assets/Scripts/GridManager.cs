@@ -680,6 +680,33 @@ public class GridManager : MonoBehaviour
         return neighbours;
     }
 
+    public List<Vector3Int> GetAdvancedPlusNeighbours(Vector3Int cell)
+    {
+        List<Vector3Int> neighbours = new List<Vector3Int>();
+        for (int x = -2; x <= 2; x++)
+        {
+            for (int y = -2; y <= 2; y++)
+            {
+                if (x == 0 || y == 0)
+                {
+                    int checkX = cell.x + x;
+                    int checkY = cell.y + y;
+
+                    if (checkX >= xMin && checkX < xMax && checkY >= yMin && checkY < yMax)
+                    {
+                        neighbours.Add(new Vector3Int(checkX, checkY, 0));
+                    }
+                }
+            }
+        }
+
+        if (neighbours.Contains(cell))
+        {
+            neighbours.Remove(cell);
+        }
+        return neighbours;
+    }
+
     public List<Vector3Int> GetCornerNeighbours(Vector3Int cell)
     {
         List<Vector3Int> neighbours = new List<Vector3Int>();
@@ -704,25 +731,35 @@ public class GridManager : MonoBehaviour
 
    
 
-    public void EarthQuake(Vector3Int explodeCell)
+    public void EarthQuake(Hero hero,Vector3Int explodeCell)
     {
-        List<Vector3Int> vList = GetCornerNeighbours(explodeCell);
-        Debug.LogError(vList.Count);
-        IEnumerator ie = Quake(vList);
-        StopCoroutine(ie);
-        StartCoroutine(ie);
+        List<Vector3Int> vList = GetAdvancedPlusNeighbours(explodeCell);
+        List<Vector3Int> vList2 = GetCornerNeighbours(explodeCell);
+        vList.AddRange(vList2);
+        Explode(hero,vList);
     }
 
-    IEnumerator Quake(List<Vector3Int> cornerCell)
+    void Explode(Hero hero,List<Vector3Int> plusCell)
     {
-        for(int i=0;i<cornerCell.Count;i++)
+        hero.isInputFreezed = true;
+        for (int i = 0; i < plusCell.Count; i++)
         {
+            GameObject smallThunderGOPlus = Instantiate(smallExplosion, cellToworld(plusCell[i]), Quaternion.identity);
+            StaticAnimatingTileUtil smallThunderGOPlusStaticTileAnimating = smallThunderGOPlus.GetComponent<StaticAnimatingTileUtil>();
 
+            smallThunderGOPlusStaticTileAnimating.Initialise(plusCell[i]);
+
+            smallThunderGOPlus.GetComponent<FrameLooper>().PlayOneShotAnimation();
+            smallThunderGOPlus.GetComponent<FrameLooper>().onPlayOneShotAnimation.RemoveAllListeners();
+            smallThunderGOPlus.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+            {
+                smallThunderGOPlusStaticTileAnimating.DestroyObject();
+                hero.isInputFreezed = false;
+            });
         }
-        yield break;
+    
     }
 }
-
 [Serializable]
 public struct GameStateDependentTiles
 {

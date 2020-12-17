@@ -115,6 +115,10 @@ public class Ermolai : Hero
 
     public override void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
     {
+        if (isInputFreezed)
+        {
+            return;
+        }
         if (isPushed)
         {
             return;
@@ -211,6 +215,10 @@ public class Ermolai : Hero
         {
             return;
         }
+        if (isInputFreezed)
+        {
+            return;
+        }
         if (isPushed)
         {
             return;
@@ -228,6 +236,10 @@ public class Ermolai : Hero
     public override void ProcessInputMovementsControl()
     {
         if (isPhysicsControlled)
+        {
+            return;
+        }
+        if (isInputFreezed)
         {
             return;
         }
@@ -250,6 +262,10 @@ public class Ermolai : Hero
     public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {
         if (isPhysicsControlled)
+        {
+            return;
+        }
+        if (isInputFreezed)
         {
             return;
         }
@@ -345,7 +361,7 @@ public class Ermolai : Hero
     public bool respawnPlayer;
     public override void DealInput()
     {
-        if (!inGame || isPushed ||isPetrified || isPhysicsControlled)
+        if (!inGame || isPushed ||isPetrified || isPhysicsControlled||isInputFreezed)
         {
             up = false;
             left = false;

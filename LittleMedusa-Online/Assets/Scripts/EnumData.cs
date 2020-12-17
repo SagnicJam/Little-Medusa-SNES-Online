@@ -140,6 +140,11 @@ public class EnumData
         Stagalmite
     }
 
+    public enum StaticAnimatingTiles
+    {
+        SmallExplosion
+    }
+
     public enum Projectiles
     {
         None,

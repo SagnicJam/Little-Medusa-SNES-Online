@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3afa70b8205a84248a52841ddb4baca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toNetworkTileType: 030000001400000015000000
+  toNetworkTileType: 03000000140000001500000002000000
   snapShotsInOnePacket: 4
   packetHistorySize: 3
   serverWorldSequenceNumber: 0

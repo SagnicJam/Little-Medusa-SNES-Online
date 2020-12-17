@@ -240,7 +240,7 @@ public class ServerSideClient
             worldGridItemList.Add(worldGridItem);
         }
 
-        WorldUpdate worldUpdate = new WorldUpdate(ServerSideGameManager.instance.serverWorldSequenceNumber, worldGridItemList.ToArray(), ServerSideGameManager.projectilesDic);
+        WorldUpdate worldUpdate = new WorldUpdate(ServerSideGameManager.instance.serverWorldSequenceNumber, worldGridItemList.ToArray(), ServerSideGameManager.projectilesDic,ServerSideGameManager.animatingStaticTileDic);
 
         ServerSend.SpawnGridWorld(id, worldUpdate);
     }

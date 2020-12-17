@@ -420,6 +420,7 @@ public struct PlayerAuthoratativeStates
     public bool isPushed;
     public bool isInvincible;
     public bool isPhysicsControlled;
+    public bool inputFreezed;
     public bool isRespawnningPlayer;
     public bool inCharacterSelectionScreen;
     public bool inGame;
@@ -427,11 +428,12 @@ public struct PlayerAuthoratativeStates
     public int currentStockLives;
     public int hero;
 
-    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isPhysicsControlled, bool isInvincible,bool isRespawnningPlayer,bool inCharacterSelectionScreen,bool inGame, int currentHP,int currentStockLives,int hero)
+    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isPhysicsControlled,bool inputFreezed, bool isInvincible,bool isRespawnningPlayer,bool inCharacterSelectionScreen,bool inGame, int currentHP,int currentStockLives,int hero)
     {
         this.isPetrified = isPetrified;
         this.isPushed = isPushed;
         this.isPhysicsControlled = isPhysicsControlled;
+        this.inputFreezed = inputFreezed;
         this.isInvincible = isInvincible;
         this.isRespawnningPlayer = isRespawnningPlayer;
         this.inCharacterSelectionScreen = inCharacterSelectionScreen;

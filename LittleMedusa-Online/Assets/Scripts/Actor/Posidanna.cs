@@ -120,6 +120,10 @@ public class Posidanna : Hero
 
     public override void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
     {
+        if (isInputFreezed)
+        {
+            return;
+        }
         if (isPushed)
         {
             return;
@@ -215,6 +219,10 @@ public class Posidanna : Hero
         {
             return;
         }
+        if (isInputFreezed)
+        {
+            return;
+        }
         if (isRespawnningPlayer)
         {
             return;
@@ -239,6 +247,11 @@ public class Posidanna : Hero
         {
             return;
         }
+
+        if (isInputFreezed)
+        {
+            return;
+        }
         if (isPushed)
         {
             return;
@@ -257,6 +270,14 @@ public class Posidanna : Hero
 
     public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {
+        if (isPhysicsControlled)
+        {
+            return;
+        }
+        if (isInputFreezed)
+        {
+            return;
+        }
         if (isPushed)
         {
             return;
@@ -350,7 +371,7 @@ public class Posidanna : Hero
 
     public override void DealInput()
     {
-        if (!inGame || isPushed ||isPetrified || isPhysicsControlled)
+        if (!inGame || isPushed ||isPetrified || isPhysicsControlled||isInputFreezed)
         {
             up = false;
             left = false;

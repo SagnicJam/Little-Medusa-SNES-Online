@@ -1477,7 +1477,7 @@ public class ServerMasterController : MonoBehaviour
             Debug.LogError("havent completed motion");
             return;
         }
-        GridManager.instance.EarthQuake(GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position));
+        GridManager.instance.EarthQuake(serverInstanceHero,GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position));
     }
 
     void CastPitfallImplementation(int direction)
@@ -1621,6 +1621,7 @@ public class ServerMasterController : MonoBehaviour
               serverInstanceHero.isPetrified
             , serverInstanceHero.isPushed
             , serverInstanceHero.isPhysicsControlled
+            , serverInstanceHero.isInputFreezed
             , serverInstanceHero.isInvincible
             , serverInstanceHero.isRespawnningPlayer
             , serverInstanceHero.inCharacterSelectionScreen

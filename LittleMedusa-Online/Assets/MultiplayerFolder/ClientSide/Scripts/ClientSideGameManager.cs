@@ -25,6 +25,7 @@ public class ClientSideGameManager : MonoBehaviour
 
     public static Dictionary<int, PlayerManager> players = new Dictionary<int, PlayerManager>();
     public readonly static Dictionary<int, ProjectileManager> projectileDatasDic = new Dictionary<int, ProjectileManager>();
+    public readonly static Dictionary<int, StaticAnimatingTileManager> staticAnimatingTileDic = new Dictionary<int, StaticAnimatingTileManager>();
 
     public int dicCount;
 
@@ -213,6 +214,33 @@ public class ClientSideGameManager : MonoBehaviour
                 projectileDatasDic.Add(kvp.Key, newProjectileManager);
             }
         }
+
+        foreach(KeyValuePair<int, AnimatingStaticTile>kvp in newWorldUpdate.animatingTileDatas)
+        {
+            StaticAnimatingTileManager staticAnimatingTileManager;
+            if (staticAnimatingTileDic.TryGetValue(kvp.Key, out staticAnimatingTileManager))
+            {
+                //assign position
+                staticAnimatingTileManager.SetPosition(kvp.Value.pos);
+                staticAnimatingTileManager.SetID(kvp.Value.uid);
+                staticAnimatingTileManager.SetSprite(kvp.Value.animationSpriteIndex);
+            }
+            else
+            {
+                //intantiate here
+                GameObject gToSpawn = Resources.Load("ClientOnly/" + ((EnumData.StaticAnimatingTiles)(kvp.Value.tileType)).ToString()) as GameObject;
+                if (gToSpawn == null)
+                {
+                    Debug.LogError("gToSpawn is null");
+                    return;
+                }
+                StaticAnimatingTileManager newstaticAnimatingTileManager = GridManager.InstantiateGameObject(gToSpawn).GetComponent<StaticAnimatingTileManager>();
+                newstaticAnimatingTileManager.SetPosition(kvp.Value.pos);
+                newstaticAnimatingTileManager.SetID(kvp.Value.uid);
+                newstaticAnimatingTileManager.SetSprite(kvp.Value.animationSpriteIndex);
+                staticAnimatingTileDic.Add(kvp.Key, newstaticAnimatingTileManager);
+            }
+        }
         latestWorldUpdate = newWorldUpdate;
     }
 
@@ -292,6 +320,64 @@ public class ClientSideGameManager : MonoBehaviour
                 if(projectileDatasDic.TryGetValue(kvp.Key,out projectileManager))
                 {
                     projectileManager.SetPosition(kvp.Value.projectilePosition);
+                }
+                else
+                {
+                    Debug.LogError("Could not find the projectile manager top alter");
+                }
+            }
+
+
+            foreach (KeyValuePair<int, AnimatingStaticTile> kvp in latestWorldUpdate.animatingTileDatas)
+            {
+                if (!newWorldUpdate.animatingTileDatas.ContainsKey(kvp.Key))
+                {
+                    //delete old
+                    StaticAnimatingTileManager staticAnimatingTileManager;
+                    if (staticAnimatingTileDic.TryGetValue(kvp.Key, out staticAnimatingTileManager))
+                    {
+                        Destroy(staticAnimatingTileManager.gameObject);
+                        staticAnimatingTileDic.Remove(kvp.Key);
+                    }
+                    else
+                    {
+                        Debug.LogError("Could not find object to remove");
+                    }
+                }
+            }
+
+            foreach (KeyValuePair<int, AnimatingStaticTile> kvp in newWorldUpdate.animatingTileDatas)
+            {
+                if (!latestWorldUpdate.animatingTileDatas.ContainsKey(kvp.Key))
+                {
+                    //add new
+                    StaticAnimatingTileManager staticAnimatingTileManager;
+                    if (staticAnimatingTileDic.TryGetValue(kvp.Key, out staticAnimatingTileManager))
+                    {
+                        Debug.LogError("Already contains item to add");
+                    }
+                    else
+                    {
+                        //intantiate here
+                        GameObject gToSpawn = Resources.Load("ClientOnly/" + ((EnumData.StaticAnimatingTiles)(kvp.Value.tileType)).ToString()) as GameObject;
+                        if (gToSpawn == null)
+                        {
+                            Debug.LogError("gToSpawn is null");
+                            return;
+                        }
+                        StaticAnimatingTileManager newStaticAnimatingTile = GridManager.InstantiateGameObject(gToSpawn).GetComponent<StaticAnimatingTileManager>();
+                        newStaticAnimatingTile.SetPosition(kvp.Value.pos);
+                        newStaticAnimatingTile.SetID(kvp.Value.uid);
+                        newStaticAnimatingTile.SetSprite(kvp.Value.animationSpriteIndex);
+
+                        staticAnimatingTileDic.Add(kvp.Key, newStaticAnimatingTile);
+                    }
+                }
+
+                StaticAnimatingTileManager staticAnimatingTileManagerRefresh;
+                if (staticAnimatingTileDic.TryGetValue(kvp.Key, out staticAnimatingTileManagerRefresh))
+                {
+                    staticAnimatingTileManagerRefresh.SetSprite(kvp.Value.animationSpriteIndex);
                 }
                 else
                 {

@@ -93,6 +93,7 @@ public class ServerSend
             packet.Write(serverMasterController.serverInstanceHero.isPetrified);
             packet.Write(serverMasterController.serverInstanceHero.isPushed);
             packet.Write(serverMasterController.serverInstanceHero.isPhysicsControlled);
+            packet.Write(serverMasterController.serverInstanceHero.isInputFreezed);
             packet.Write(serverMasterController.serverInstanceHero.isInvincible);
             packet.Write(serverMasterController.serverInstanceHero.isRespawnningPlayer);
             packet.Write(serverMasterController.serverInstanceHero.inCharacterSelectionScreen);
@@ -131,6 +132,18 @@ public class ServerSend
 
                 packet.Write(keyValuePair.Value.projectilePosition);
             }
+
+            packet.Write(worldUpdate.animatingTileDatas.Count);
+            foreach (KeyValuePair<int, AnimatingStaticTile> keyValuePair in worldUpdate.animatingTileDatas)
+            {
+                packet.Write(keyValuePair.Key);
+
+                packet.Write(keyValuePair.Value.tileType);
+
+                packet.Write(keyValuePair.Value.animationSpriteIndex);
+
+                packet.Write(keyValuePair.Value.pos);
+            }
             packet.Write(worldUpdate.sequenceNumber);
 
             SendTCPData(toClient, packet);
@@ -167,6 +180,18 @@ public class ServerSend
 
                     packet.Write(keyValuePair.Value.projectilePosition);
                 }
+
+                packet.Write(worldUpdates[i].animatingTileDatas.Count);
+                foreach (KeyValuePair<int, AnimatingStaticTile> keyValuePair in worldUpdates[i].animatingTileDatas)
+                {
+                    packet.Write(keyValuePair.Key);
+
+                    packet.Write(keyValuePair.Value.tileType);
+
+                    packet.Write(keyValuePair.Value.animationSpriteIndex);
+
+                    packet.Write(keyValuePair.Value.pos);
+                }
                 packet.Write(worldUpdates[i].sequenceNumber);
                 //Debug.LogWarning("<color=green>Sending inputs packet to server </color>playerMovingCommandSequenceNumber : " + inputCommands[i].sequenceNumber + " w " + inputCommands[i].commands[0] + " a " + inputCommands[i].commands[1] + " s " + inputCommands[i].commands[2] + " d " + inputCommands[i].commands[3] + "<color=green> adding previous : </color>");
             }
@@ -200,6 +225,18 @@ public class ServerSend
 
                         packet.Write(keyValuePair.Value.projectilePosition);
                     }
+
+                    packet.Write(worldUpdates[i].animatingTileDatas.Count);
+                    foreach (KeyValuePair<int, AnimatingStaticTile> keyValuePair in worldUpdates[i].animatingTileDatas)
+                    {
+                        packet.Write(keyValuePair.Key);
+
+                        packet.Write(keyValuePair.Value.tileType);
+
+                        packet.Write(keyValuePair.Value.animationSpriteIndex);
+
+                        packet.Write(keyValuePair.Value.pos);
+                    }
                     packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].sequenceNumber);
                 }
 
@@ -227,6 +264,7 @@ public class ServerSend
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPetrified);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPushed);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPhysicsControlled);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.inputFreezed);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isInvincible);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.inCharacterSelectionScreen);
@@ -257,6 +295,7 @@ public class ServerSend
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPetrified);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPushed);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPhysicsControlled);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.inputFreezed);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isInvincible);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.inCharacterSelectionScreen);

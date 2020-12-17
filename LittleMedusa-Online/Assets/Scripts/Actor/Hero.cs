@@ -20,6 +20,7 @@ public abstract class Hero : Actor
 
     [Header("Live Data")]
     public int hero;
+    public bool isInputFreezed;
 
     public override void Awake()
     {
@@ -82,6 +83,7 @@ public abstract class Hero : Actor
         inCharacterSelectionScreen = playerAuthoratativeStates.inCharacterSelectionScreen;
         inGame = playerAuthoratativeStates.inGame;
         hero = playerAuthoratativeStates.hero;
+        isInputFreezed = playerAuthoratativeStates.inputFreezed;
         isPetrified = playerAuthoratativeStates.isPetrified;
         isPushed = playerAuthoratativeStates.isPushed;
         isPhysicsControlled = playerAuthoratativeStates.isPhysicsControlled;

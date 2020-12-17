@@ -439,7 +439,6 @@ public abstract class Actor : TileData
         //}
         if(!isPushed)
         {
-            Debug.LogError(petrifiedByActorId);
             PetrificationCommand petrificationCommand = new PetrificationCommand(ClientSideGameManager.players[petrifiedByActorId].masterController.localPlayer.GetLocalSequenceNo(), ownerId);
             ClientSend.PetrifyPlayer(petrificationCommand);
         }
@@ -861,6 +860,17 @@ public abstract class Actor : TileData
         }
         if (isPetrified && !isPushed)
         return;
+
+        TileData collidedTile = collider.GetComponent<TileData>();
+
+        if(collidedTile!=null)
+        {
+            if (collidedTile.killUnitsInstantlyIfInTheirRegion && !isInFlyingState)
+            {
+                TakeDamage(currentHP);
+            }
+        }
+        
 
         ProjectileUtil projectileUtilCollidedWithMyHead = collider.GetComponent<ProjectileUtil>();
         if (projectileUtilCollidedWithMyHead != null)

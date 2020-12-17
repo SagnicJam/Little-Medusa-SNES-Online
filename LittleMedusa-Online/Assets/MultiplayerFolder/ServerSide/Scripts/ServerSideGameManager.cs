@@ -17,6 +17,7 @@ public class ServerSideGameManager : MonoBehaviour
     private List<WorldUpdate> worldUpdatesToBeSentFromServerToClient = new List<WorldUpdate>();
     private List<PreviousWorldUpdatePacks> previousHistoryForWorldUpdatesToBeSentToServerCollection = new List<PreviousWorldUpdatePacks>();
     public static Dictionary<int, ProjectileData> projectilesDic = new Dictionary<int, ProjectileData>();
+    public static Dictionary<int, AnimatingStaticTile> animatingStaticTileDic = new Dictionary<int, AnimatingStaticTile>();
     public EnumData.GameState currentGameState;
 
     [Header("Unit Template")]
@@ -83,7 +84,7 @@ public class ServerSideGameManager : MonoBehaviour
             WorldGridItem worldGridItem = new WorldGridItem((int)toNetworkTileType[i], positionsOfTile);
             worldGridItemList.Add(worldGridItem);
         }
-        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), new Dictionary<int, ProjectileData>(projectilesDic)));
+        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), new Dictionary<int, ProjectileData>(projectilesDic), new Dictionary<int, AnimatingStaticTile>(animatingStaticTileDic)));
 
         //Local client sending data
         if (worldUpdatesToBeSentFromServerToClient.Count >= snapShotsInOnePacket)
@@ -115,12 +116,14 @@ public struct WorldUpdate
     public int sequenceNumber;
     public WorldGridItem[] worldGridItems;
     public Dictionary<int,ProjectileData> projectileDatas;
+    public Dictionary<int,AnimatingStaticTile> animatingTileDatas;
 
-    public WorldUpdate(int sequenceNumber, WorldGridItem[] worldItems, Dictionary<int,ProjectileData> projectileDatas)
+    public WorldUpdate(int sequenceNumber, WorldGridItem[] worldGridItems, Dictionary<int, ProjectileData> projectileDatas, Dictionary<int, AnimatingStaticTile> animatingTileDatas)
     {
         this.sequenceNumber = sequenceNumber;
-        this.worldGridItems = worldItems;
+        this.worldGridItems = worldGridItems;
         this.projectileDatas = projectileDatas;
+        this.animatingTileDatas = animatingTileDatas;
     }
 }
 
@@ -131,6 +134,22 @@ public struct PreviousWorldUpdatePacks
     public PreviousWorldUpdatePacks(WorldUpdate[] previousWorldUpdates)
     {
         this.previousWorldUpdates = previousWorldUpdates;
+    }
+}
+
+public struct AnimatingStaticTile
+{
+    public int uid;
+    public int tileType;
+    public int animationSpriteIndex;
+    public Vector3Int pos;
+
+    public AnimatingStaticTile(int uid, int tileType, int animationSpriteIndex, Vector3Int pos)
+    {
+        this.uid = uid;
+        this.tileType = tileType;
+        this.animationSpriteIndex = animationSpriteIndex;
+        this.pos = pos;
     }
 }
 
