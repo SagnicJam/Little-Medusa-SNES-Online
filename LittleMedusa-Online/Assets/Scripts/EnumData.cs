@@ -179,10 +179,25 @@ public class EnumData
         FireShieldActor
     }
 
+    public enum Heroes
+    {
+        Medusa=0,
+        Posidanna,
+        Ermolai,
+        Heliemis,
+        Averna
+    }
+    
     public enum AttackTypes
     {
         None,
         ProjectileAttack,
         TouchAttack
+    }
+
+    public enum GameState
+    {
+        CharacterSelection=0,
+        Gameplay
     }
 }

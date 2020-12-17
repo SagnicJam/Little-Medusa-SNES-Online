@@ -8,6 +8,7 @@ public class ServerSideGameManager : MonoBehaviour
 
     [Header("Tweak Params")]
     public List<EnumData.TileType> toNetworkTileType;
+
     public int snapShotsInOnePacket;
     public int packetHistorySize;
 
@@ -16,6 +17,7 @@ public class ServerSideGameManager : MonoBehaviour
     private List<WorldUpdate> worldUpdatesToBeSentFromServerToClient = new List<WorldUpdate>();
     private List<PreviousWorldUpdatePacks> previousHistoryForWorldUpdatesToBeSentToServerCollection = new List<PreviousWorldUpdatePacks>();
     public static Dictionary<int, ProjectileData> projectilesDic = new Dictionary<int, ProjectileData>();
+    public EnumData.GameState currentGameState;
 
     [Header("Unit Template")]
     public GameObject serverInstancePlayer;
@@ -40,9 +42,31 @@ public class ServerSideGameManager : MonoBehaviour
         Server.Start(10, 23456);
     }
 
-    public ServerMasterController InstantiatePlayer()
+    public ServerMasterController InstantiatePlayer(int hero)
     {
-        return Instantiate(serverInstancePlayer, Vector3.zero, Quaternion.identity).GetComponent<ServerMasterController>();
+        ServerMasterController serverMasterController = Instantiate(serverInstancePlayer, Vector3.zero, Quaternion.identity).GetComponent<ServerMasterController>();
+        Hero serverInstanceHero = Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)hero).ToString() + "/ServerInstance-" + ((EnumData.Heroes)hero).ToString()) as GameObject, serverMasterController.transform, false).GetComponentInChildren<Hero>();
+        serverMasterController.serverInstanceHero = serverInstanceHero;
+        serverMasterController.serverInstanceHero.hero = hero;
+        serverMasterController.serverInstanceHero.inCharacterSelectionScreen = (currentGameState==EnumData.GameState.CharacterSelection);
+        serverMasterController.serverInstanceHero.inGame = (currentGameState==EnumData.GameState.Gameplay);
+        return serverMasterController;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            currentGameState = EnumData.GameState.Gameplay;
+            foreach(KeyValuePair<int,ServerSideClient> kvp in Server.clients)
+            {
+                if(kvp.Value.serverMasterController!=null)
+                {
+                    kvp.Value.serverMasterController.serverInstanceHero.inCharacterSelectionScreen = (currentGameState == EnumData.GameState.CharacterSelection);
+                    kvp.Value.serverMasterController.serverInstanceHero.inGame = (currentGameState == EnumData.GameState.Gameplay);
+                }
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -55,7 +79,7 @@ public class ServerSideGameManager : MonoBehaviour
 
         for(int i=0;i<toNetworkTileType.Count;i++)
         {
-            List<Vector3Int> positionsOfTile = GridManager.instance.GetAllPositionForTileMap(GridManager.instance.gameStateDependentTileArray[(int)toNetworkTileType[i]-1].tileMap);
+            List<Vector3Int> positionsOfTile = GridManager.instance.GetAllPositionForTileMap(toNetworkTileType[i]);
             WorldGridItem worldGridItem = new WorldGridItem((int)toNetworkTileType[i], positionsOfTile);
             worldGridItemList.Add(worldGridItem);
         }
@@ -135,14 +159,3 @@ public struct WorldGridItem
         this.cellGridWorldPositionList = cellPositionList;
     }
 }
-//public struct Item
-//{
-//    public int uid;
-//    public Vector3Int cellPosition;
-
-//    public Item(int uid, Vector3Int cellPosition)
-//    {
-//        this.uid = uid;
-//        this.cellPosition = cellPosition;
-//    }
-//}

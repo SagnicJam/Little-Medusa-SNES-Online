@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Ermolai : Hero
 {
+
     public override bool IsHeroAbleToFireProjectiles()
     {
         Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
@@ -158,7 +159,8 @@ public class Ermolai : Hero
                         }
                         else if (inputs[(int)EnumData.ErmolaiInputs.CastEarthquake] && previousInputs[(int)EnumData.ErmolaiInputs.CastEarthquake] != inputs[(int)EnumData.ErmolaiInputs.CastEarthquake])
                         {
-                            
+                            CastEarthQuakeCommand castEarthQuakeCommand = new CastEarthQuakeCommand(GetLocalSequenceNo());
+                            ClientSend.CastEarthQuake(castEarthQuakeCommand);
                         }
                     }
                 }
@@ -225,6 +227,10 @@ public class Ermolai : Hero
 
     public override void ProcessInputMovementsControl()
     {
+        if (isPhysicsControlled)
+        {
+            return;
+        }
         if (isPushed)
         {
             return;
@@ -243,6 +249,10 @@ public class Ermolai : Hero
 
     public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {
+        if (isPhysicsControlled)
+        {
+            return;
+        }
         if (isPushed)
         {
             return;
@@ -323,5 +333,52 @@ public class Ermolai : Hero
                 }
             }
         }
+    }
+
+    [Header("Inputs")]
+    public bool up;
+    public bool left;
+    public bool down;
+    public bool right;
+    public bool castPitfall;
+    public bool castEarthQuake;
+    public bool respawnPlayer;
+    public override void DealInput()
+    {
+        if (!inGame || isPushed ||isPetrified || isPhysicsControlled)
+        {
+            up = false;
+            left = false;
+            down = false;
+            right = false;
+            castPitfall = false;
+            castEarthQuake = false;
+            respawnPlayer = false;
+        }
+        else
+        {
+            up = Input.GetKey(KeyCode.W);
+            left = Input.GetKey(KeyCode.A);
+            down = Input.GetKey(KeyCode.S);
+            right = Input.GetKey(KeyCode.D);
+            castPitfall = Input.GetKey(KeyCode.J);
+            castEarthQuake = Input.GetKey(KeyCode.K);
+            respawnPlayer = Input.GetKey(KeyCode.Return);
+        }
+    }
+
+    public override bool[] GetHeroInputs()
+    {
+        bool[] inputs = new bool[]
+                {
+                up,
+                left,
+                down,
+                right,
+                castPitfall,
+                castEarthQuake,
+                respawnPlayer
+                };
+        return inputs;
     }
 }

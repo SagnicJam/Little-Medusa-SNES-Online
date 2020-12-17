@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\MultiplayerFolder\ClientSide\Scripts\CameraController.cs" />
+    <Compile Include="Assets\MultiplayerFolder\ClientSide\Scripts\CharacterSelection.cs" />
     <Compile Include="Assets\MultiplayerFolder\ClientSide\Scripts\Client.cs" />
     <Compile Include="Assets\MultiplayerFolder\ClientSide\Scripts\ClientHandle.cs" />
     <Compile Include="Assets\MultiplayerFolder\ClientSide\Scripts\ClientMasterController.cs" />
@@ -99,12 +100,16 @@
     <Compile Include="Assets\Scripts\EnumData.cs" />
     <Compile Include="Assets\Scripts\GameConfig.cs" />
     <Compile Include="Assets\Scripts\GridManager.cs" />
+    <Compile Include="Assets\Scripts\Helper\CharacterSelectButton.cs" />
+    <Compile Include="Assets\Scripts\Helper\CharacterSelectionScreen.cs" />
     <Compile Include="Assets\Scripts\Helper\DispersionCollider.cs" />
     <Compile Include="Assets\Scripts\Helper\FrameLooper.cs" />
+    <Compile Include="Assets\Scripts\Helper\JoinOrderText.cs" />
     <Compile Include="Assets\Scripts\Helper\ProjectileUtil.cs" />
     <Compile Include="Assets\Scripts\InputControllers\AvernaInputController.cs" />
     <Compile Include="Assets\Scripts\InputControllers\ErmolaiInputController.cs" />
     <Compile Include="Assets\Scripts\InputControllers\HeliemisInputController.cs" />
+    <Compile Include="Assets\Scripts\InputControllers\InputController.cs" />
     <Compile Include="Assets\Scripts\InputControllers\MedusaInputController.cs" />
     <Compile Include="Assets\Scripts\InputControllers\PosidannaInputController.cs" />
     <Compile Include="Assets\Scripts\Mapper\Mapper.cs" />
@@ -115,6 +120,7 @@
     <Compile Include="Assets\Scripts\Use\TileBasedProjectileUse.cs" />
     <Compile Include="Assets\Scripts\Use\Use.cs" />
     <Compile Include="Assets\Scripts\items\DynamicItem.cs" />
+    <Compile Include="Assets\test.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Heliemis : Hero
 {
+    
+
     public override bool IsHeroAbleToFireProjectiles()
     {
         Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
@@ -335,5 +337,53 @@ public class Heliemis : Hero
                 }
             }
         }
+    }
+
+    [Header("Input")]
+    public bool up;
+    public bool left;
+    public bool down;
+    public bool right;
+    public bool shootMightyWind;
+    public bool placeTornado;
+    public bool respawnPlayer;
+
+    public override void DealInput()
+    {
+        if (!inGame || isPushed || isPetrified || isPhysicsControlled)
+        {
+            up = false;
+            left = false;
+            down = false;
+            right = false;
+            shootMightyWind = false;
+            placeTornado = false;
+            respawnPlayer = false;
+        }
+        else
+        {
+            up = Input.GetKey(KeyCode.W);
+            left = Input.GetKey(KeyCode.A);
+            down = Input.GetKey(KeyCode.S);
+            right = Input.GetKey(KeyCode.D);
+            shootMightyWind = Input.GetKey(KeyCode.J);
+            placeTornado = Input.GetKey(KeyCode.K);
+            respawnPlayer = Input.GetKey(KeyCode.Return);
+        }
+    }
+
+    public override bool[] GetHeroInputs()
+    {
+        bool[] inputs = new bool[]
+                {
+                up,
+                left,
+                down,
+                right,
+                shootMightyWind,
+                placeTornado,
+                respawnPlayer
+                };
+        return inputs;
     }
 }

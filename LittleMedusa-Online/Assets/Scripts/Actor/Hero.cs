@@ -18,14 +18,17 @@ public abstract class Hero : Actor
     [Header("Hero Actions")]
     public WaitingForNextAction waitingActionForPrimaryMove = new WaitingForNextAction();
 
-    public override void Start()
+    [Header("Live Data")]
+    public int hero;
+
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
         waitingActionForPrimaryMove.Initialise(this);
         waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
 
-        primaryMoveUseAnimationAction.SetAnimationSpeedAndSpritesOnUsage(primaryMoveAnimationSpeed,normalAnimationSpeed);
-        rangedAttack_1 = new Attack(primaryMoveDamage, ownerId, EnumData.AttackTypes.ProjectileAttack, projectileThrownType);
+        primaryMoveUseAnimationAction.SetAnimationSpeedAndSpritesOnUsage(primaryMoveAnimationSpeed, normalAnimationSpeed);
+        rangedAttack_1 = new Attack(primaryMoveDamage, EnumData.AttackTypes.ProjectileAttack, projectileThrownType);
     }
 
     public void InitialiseActor(PlayerStateUpdates playerStateUpdates)
@@ -60,7 +63,25 @@ public abstract class Hero : Actor
                 statusSprite.enabled = false;
             }
         }
-        
+
+        if(playerAuthoratativeStates.inCharacterSelectionScreen && inCharacterSelectionScreen!=playerAuthoratativeStates.inCharacterSelectionScreen)
+        {
+            //turn off model
+            //turn on character selection screen
+            //Debug.LogError("Turn off model");
+            gameObject.transform.parent.gameObject.SetActive(false);
+        }
+        if (playerAuthoratativeStates.inGame && inGame != playerAuthoratativeStates.inGame)
+        {
+            //turn on model
+            //turn off character selection screen
+            //Debug.LogError("Turn on model");
+            gameObject.transform.parent.gameObject.SetActive(true);
+            CharacterSelectionScreen.instance.gameObject.SetActive(false);
+        }
+        inCharacterSelectionScreen = playerAuthoratativeStates.inCharacterSelectionScreen;
+        inGame = playerAuthoratativeStates.inGame;
+        hero = playerAuthoratativeStates.hero;
         isPetrified = playerAuthoratativeStates.isPetrified;
         isPushed = playerAuthoratativeStates.isPushed;
         isPhysicsControlled = playerAuthoratativeStates.isPhysicsControlled;
@@ -350,4 +371,8 @@ public abstract class Hero : Actor
             actorTransform.position = GridManager.instance.cellToworld(previousMovePointCellPosition);
         }
     }
+
+    public abstract void DealInput();
+
+    public abstract bool[] GetHeroInputs();
 }

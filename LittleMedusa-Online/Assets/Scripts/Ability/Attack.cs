@@ -12,12 +12,16 @@ public class Attack
 
     public bool isInitialised;
 
-    public Attack(int damage,int attackingActorOwnerId, EnumData.AttackTypes attackType,EnumData.Projectiles projectiles)
+    public Attack(int damage, EnumData.AttackTypes attackType,EnumData.Projectiles projectiles)
     {
         isInitialised = true;
         this.damage = damage;
         this.attackType = attackType;
         this.projectiles = projectiles;
+    }
+
+    public void SetAttackingActorId(int attackingActorOwnerId)
+    {
         this.attackingActorOwnerId = attackingActorOwnerId;
     }
 

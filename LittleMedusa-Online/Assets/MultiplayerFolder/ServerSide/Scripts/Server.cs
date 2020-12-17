@@ -146,8 +146,10 @@ public class Server
                 { (int)ClientPackets.castingBubbleShieldCommand,ServerHandle.PlayerCastingBubbleShieldCommandReceived},
                 { (int)ClientPackets.playerTornadoCommand,ServerHandle.PlayerCastingTornadoCommandReceived},
                 { (int)ClientPackets.castingPitfallCommand,ServerHandle.PlayerCastingPitfallCommandReceived},
+                { (int)ClientPackets.castingEarthQuakeCommand,ServerHandle.PlayerCastingEarthQuakeCommandReceived},
                 { (int)ClientPackets.castingFlamePillarCommand,ServerHandle.PlayerCastingFlamePillarCommandReceived},
-                { (int)ClientPackets.playerFiringMightyWindCommand,ServerHandle.PlayerFiringMightyWindCommandReceived}
+                { (int)ClientPackets.playerFiringMightyWindCommand,ServerHandle.PlayerFiringMightyWindCommandReceived},
+                { (int)ClientPackets.characterChangeCommand,ServerHandle.ChangeCharacterRequest}
             };
 
         Debug.Log("Initialise packets");

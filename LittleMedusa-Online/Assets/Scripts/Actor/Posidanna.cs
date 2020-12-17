@@ -7,7 +7,7 @@ public class Posidanna : Hero
     public override void Start()
     {
         base.Start();
-        rangedAttack_2 = new Attack(primaryMoveDamage, ownerId, EnumData.AttackTypes.ProjectileAttack, projectileThrownType_2);
+        rangedAttack_2 = new Attack(primaryMoveDamage, EnumData.AttackTypes.ProjectileAttack, projectileThrownType_2);
     }
 
     public override bool IsHeroAbleToFireProjectiles()
@@ -211,6 +211,10 @@ public class Posidanna : Hero
 
     public override void ProcessInputEventControl()
     {
+        if (isPhysicsControlled)
+        {
+            return;
+        }
         if (isRespawnningPlayer)
         {
             return;
@@ -231,6 +235,10 @@ public class Posidanna : Hero
 
     public override void ProcessInputMovementsControl()
     {
+        if (isPhysicsControlled)
+        {
+            return;
+        }
         if (isPushed)
         {
             return;
@@ -329,5 +337,53 @@ public class Posidanna : Hero
                 }
             }
         }
+    }
+
+    [Header("Inputs")]
+    public bool up;
+    public bool left;
+    public bool down;
+    public bool right;
+    public bool shootTidalWave;
+    public bool castBubbleShield;
+    public bool respawnPlayer;
+
+    public override void DealInput()
+    {
+        if (!inGame || isPushed ||isPetrified || isPhysicsControlled)
+        {
+            up = false;
+            left = false;
+            down = false;
+            right = false;
+            shootTidalWave = false;
+            castBubbleShield = false;
+            respawnPlayer = false;
+        }
+        else
+        {
+            up = Input.GetKey(KeyCode.W);
+            left = Input.GetKey(KeyCode.A);
+            down = Input.GetKey(KeyCode.S);
+            right = Input.GetKey(KeyCode.D);
+            shootTidalWave = Input.GetKey(KeyCode.J);
+            castBubbleShield = Input.GetKey(KeyCode.K);
+            respawnPlayer = Input.GetKey(KeyCode.Return);
+        }
+    }
+
+    public override bool[] GetHeroInputs()
+    {
+        bool[] inputs = new bool[]
+                {
+                up,
+                left,
+                down,
+                right,
+                shootTidalWave,
+                castBubbleShield,
+                respawnPlayer
+                };
+        return inputs;
     }
 }

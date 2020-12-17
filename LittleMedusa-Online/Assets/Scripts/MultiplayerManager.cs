@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class MultiplayerManager : MonoBehaviour
 {
+    public Transform Canvas;
+
     public ServerSideGameManager serverSideGameManager;
     public ClientSideGameManager clientSideGameManager;
+
+    public CharacterSelectionScreen characterSelectionScreen;
 
     public static MultiplayerManager instance;
 
@@ -25,6 +29,7 @@ public class MultiplayerManager : MonoBehaviour
         else
         {
             Instantiate(clientSideGameManager);
+            Instantiate(characterSelectionScreen, Canvas, false);
         }
     }
 }

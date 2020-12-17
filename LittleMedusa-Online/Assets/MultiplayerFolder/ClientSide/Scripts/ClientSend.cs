@@ -58,6 +58,16 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    public static void ChangeCharacter(CharacterChangeCommand characterChangeCommand)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.characterChangeCommand))
+        {
+            packet.Write(characterChangeCommand.characterHero);
+            packet.Write(characterChangeCommand.sequenceNoCharacterChangeCommand);
+            SendTCPData(packet);
+        }
+    }
+
     public static void CastFlamePillar(CastFlamePillar castFlamePillar)
     {
         using (Packet packet = new Packet((int)ClientPackets.castingFlamePillarCommand))
@@ -74,6 +84,16 @@ public class ClientSend : MonoBehaviour
         using (Packet packet = new Packet((int)ClientPackets.castingBubbleShieldCommand))
         {
             packet.Write(castBubbleShieldCommand.sequenceNoForCastingBubbleShield);
+
+            SendTCPData(packet);
+        }
+    }
+
+    public static void CastEarthQuake(CastEarthQuakeCommand castEarthQuakeCommand)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.castingEarthQuakeCommand))
+        {
+            packet.Write(castEarthQuakeCommand.sequenceNoForCastingEarthQuakeCommand);
 
             SendTCPData(packet);
         }

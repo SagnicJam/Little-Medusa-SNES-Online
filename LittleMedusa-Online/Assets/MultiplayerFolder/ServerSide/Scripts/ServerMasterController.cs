@@ -27,7 +27,9 @@ public class ServerMasterController : MonoBehaviour
     private Dictionary<int, CastBubbleShieldCommand> castBubbleShieldRequestReceivedFromClientToServerDic = new Dictionary<int, CastBubbleShieldCommand>();
     private Dictionary<int, CastFlamePillar> castFlamePillarRequestReceivedFromClientToServerDic = new Dictionary<int, CastFlamePillar>();
     private Dictionary<int, CastPitfallCommand> castPitfallRequestReceivedFromClientToServerDic = new Dictionary<int, CastPitfallCommand>();
+    private Dictionary<int, CastEarthQuakeCommand> castEarthQuakeRequestReceivedFromClientToServerDic = new Dictionary<int, CastEarthQuakeCommand>();
     private Dictionary<int, PlaceTornadoCommand> placeTornadoRequestReceivedFromClientToServerDic = new Dictionary<int, PlaceTornadoCommand>();
+    private Dictionary<int, CharacterChangeCommand> changeCharacterRequestReceivedFromClientToServerDic = new Dictionary<int, CharacterChangeCommand>();
     private Dictionary<int, RespawnPlayerCommand> respawnCommandRequestReceivedFromClientToServerDic = new Dictionary<int, RespawnPlayerCommand>();
     private List<PlayerStateServerUpdates> playerStateListOnServer = new List<PlayerStateServerUpdates>();
     private List<PreviousPlayerUpdatedStatePacks> previousPlayerUpdatedStatePacks = new List<PreviousPlayerUpdatedStatePacks>();
@@ -54,11 +56,71 @@ public class ServerMasterController : MonoBehaviour
         serverInstanceHero.InitialiseHP();
         serverInstanceHero.InitialiseStockLives();
         serverInstanceHero.InitialiseServerActor(this,id);
-
         serverLocalSequenceNumber = 1;
     }
 
     #region ReliableDataCheckForImplementation
+    public void CheckForChangeCharacterRequestForPlayer(int sequenceNoToCheck)
+    {
+        List<int> toDiscardSequences = new List<int>();
+        foreach (KeyValuePair<int, CharacterChangeCommand> kvp in changeCharacterRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
+            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (KeyValuePair<int, CharacterChangeCommand> kvp in changeCharacterRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
+            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (int i in toDiscardSequences)
+        {
+            if (changeCharacterRequestReceivedFromClientToServerDic.ContainsKey(i))
+            {
+                //Debug.Log("<color=red>discarding seq </color>" + i);
+                changeCharacterRequestReceivedFromClientToServerDic.Remove(i);
+            }
+            else
+            {
+                Debug.LogError("Could not find the key: " + i);
+            }
+        }
+
+        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
+            CharacterChangeCommand characterChangeCommand;
+            if (changeCharacterRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out characterChangeCommand))
+            {
+                int hero = characterChangeCommand.characterHero;
+                changeCharacterRequestReceivedFromClientToServerDic.Remove(characterChangeCommand.sequenceNoCharacterChangeCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                ChangeCharacterCommandForPlayerImplementation(hero);
+            }
+        }
+
+        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
+            CharacterChangeCommand characterChangeCommand;
+            if (changeCharacterRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out characterChangeCommand))
+            {
+                int hero = characterChangeCommand.characterHero;
+                changeCharacterRequestReceivedFromClientToServerDic.Remove(characterChangeCommand.sequenceNoCharacterChangeCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                ChangeCharacterCommandForPlayerImplementation(hero);
+            }
+        }
+    }
+
     public void CheckForFlamePillarRequestForPlayer(int sequenceNoToCheck)
     {
         List<int> toDiscardSequences = new List<int>();
@@ -116,6 +178,65 @@ public class ServerMasterController : MonoBehaviour
                 castFlamePillarRequestReceivedFromClientToServerDic.Remove(castFlamePillar.sequenceNoCastingFlamePillarCommand);
                 //do server rollback here to check to check if damage actually occured on server
                 CastFlamePillarForPlayerImplementation(direction);
+            }
+        }
+    }
+
+    public void CheckForEarthQuakeRequestForPlayer(int sequenceNoToCheck)
+    {
+        List<int> toDiscardSequences = new List<int>();
+        foreach (KeyValuePair<int, CastEarthQuakeCommand> kvp in castEarthQuakeRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
+            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (KeyValuePair<int, CastEarthQuakeCommand> kvp in castEarthQuakeRequestReceivedFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
+            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (int i in toDiscardSequences)
+        {
+            if (castEarthQuakeRequestReceivedFromClientToServerDic.ContainsKey(i))
+            {
+                //Debug.Log("<color=red>discarding seq </color>" + i);
+                castEarthQuakeRequestReceivedFromClientToServerDic.Remove(i);
+            }
+            else
+            {
+                Debug.LogError("Could not find the key: " + i);
+            }
+        }
+
+        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
+            CastEarthQuakeCommand castEarthQuakeCommand;
+            if (castEarthQuakeRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out castEarthQuakeCommand))
+            {
+                castEarthQuakeRequestReceivedFromClientToServerDic.Remove(castEarthQuakeCommand.sequenceNoForCastingEarthQuakeCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                CastEarthQuakeImplementation();
+            }
+        }
+
+        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
+            CastEarthQuakeCommand castEarthQuakeCommand;
+            if (castEarthQuakeRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out castEarthQuakeCommand))
+            {
+                castEarthQuakeRequestReceivedFromClientToServerDic.Remove(castEarthQuakeCommand.sequenceNoForCastingEarthQuakeCommand);
+                //do server rollback here to check to check if damage actually occured on server
+                CastEarthQuakeImplementation();
             }
         }
     }
@@ -801,6 +922,27 @@ public class ServerMasterController : MonoBehaviour
     #endregion
 
     #region ReliableDataAccumulation
+    public void AccumulateChangeCharacterCommandToBePlayedOnServerFromClient(CharacterChangeCommand characterChangeCommand)
+    {
+        if (characterChangeCommand.sequenceNoCharacterChangeCommand > playerSequenceNumberProcessed)
+        {
+            CharacterChangeCommand dataPackage;
+            if (changeCharacterRequestReceivedFromClientToServerDic.TryGetValue(characterChangeCommand.sequenceNoCharacterChangeCommand, out dataPackage))
+            {
+                Debug.Log("<color=orange>AccumulateChangeCharacterCommandToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNoCharacterChangeCommand);
+            }
+            else
+            {
+                Debug.Log("<color=green>AccumulateChangeCharacterCommandToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + characterChangeCommand.sequenceNoCharacterChangeCommand);
+                changeCharacterRequestReceivedFromClientToServerDic.Add(characterChangeCommand.sequenceNoCharacterChangeCommand, characterChangeCommand);
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>AccumulateChangeCharacterCommandToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + characterChangeCommand.sequenceNoCharacterChangeCommand);
+        }
+    }
+
     public void AccumulateCastingTornadoRequestToBePlayedOnServerFromClient(PlaceTornadoCommand placeTornadoCommand)
     {
         if (placeTornadoCommand.sequenceForPlaceTornadoCommand > playerSequenceNumberProcessed)
@@ -819,6 +961,27 @@ public class ServerMasterController : MonoBehaviour
         else
         {
             Debug.Log("<color=red>AccumulateCastingTornadoRequestToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + placeTornadoCommand.sequenceForPlaceTornadoCommand);
+        }
+    }
+
+    public void AccumulateCastingEarthQuakeRequestToBePlayedOnServerFromClient(CastEarthQuakeCommand castEarthQuakeCommand)
+    {
+        if (castEarthQuakeCommand.sequenceNoForCastingEarthQuakeCommand > playerSequenceNumberProcessed)
+        {
+            CastEarthQuakeCommand dataPackage;
+            if (castEarthQuakeRequestReceivedFromClientToServerDic.TryGetValue(castEarthQuakeCommand.sequenceNoForCastingEarthQuakeCommand, out dataPackage))
+            {
+                Debug.Log("<color=orange>AccumulateCastingEarthQuakeRequestToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNoForCastingEarthQuakeCommand);
+            }
+            else
+            {
+                Debug.Log("<color=green>AccumulateCastingEarthQuakeRequestToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + castEarthQuakeCommand.sequenceNoForCastingEarthQuakeCommand);
+                castEarthQuakeRequestReceivedFromClientToServerDic.Add(castEarthQuakeCommand.sequenceNoForCastingEarthQuakeCommand, castEarthQuakeCommand);
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>AccumulateCastingEarthQuakeRequestToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + castEarthQuakeCommand.sequenceNoForCastingEarthQuakeCommand);
         }
     }
 
@@ -1217,6 +1380,26 @@ public class ServerMasterController : MonoBehaviour
 
     }
 
+    void ChangeCharacterCommandForPlayerImplementation(int characterHero)
+    {
+        if (characterHero != (int)serverInstanceHero.hero)
+        {
+            Debug.Log("ChangeCharacterCommandForPlayerImplementation " + ((EnumData.Heroes)characterHero).ToString());
+
+            Hero previousHero = serverInstanceHero;
+
+            PositionUpdates positionUpdate = new PositionUpdates(previousHero.actorTransform.position,previousHero.currentMovePointCellPosition,previousHero.previousMovePointCellPosition, (int)previousHero.Facing,(int)previousHero.PreviousFacingDirection);
+
+            SetCharacter(characterHero, positionUpdate);
+
+            Destroy(previousHero.transform.parent.gameObject);
+        }
+        else
+        {
+            Debug.LogError("Character cant be changed");
+        }
+    }
+
     void CastFlamePillarForPlayerImplementation(int direction)
     {
         Debug.Log("CastFlamePillarForPlayerImplementation ");
@@ -1274,6 +1457,27 @@ public class ServerMasterController : MonoBehaviour
         {
             Debug.LogError("MightyWind-Hero is not able to fire projectiles");
         }
+    }
+
+    void CastEarthQuakeImplementation()
+    {
+        Debug.Log("CastEarthQuake ");
+        if (serverInstanceHero.isRespawnningPlayer)
+        {
+            Debug.LogError("Respawnning");
+            return;
+        }
+        if (serverInstanceHero.isInFlyingState)
+        {
+            Debug.LogError("isInFlyingState");
+            return;
+        }
+        if (!serverInstanceHero.completedMotionToMovePoint)
+        {
+            Debug.LogError("havent completed motion");
+            return;
+        }
+        GridManager.instance.EarthQuake(GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position));
     }
 
     void CastPitfallImplementation(int direction)
@@ -1356,9 +1560,9 @@ public class ServerMasterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         for (int i = 0; i < (int)currentInputProcessingModeOnServer; i++)
         {
+            CheckForChangeCharacterRequestForPlayer(playerSequenceNumberProcessed+1);
             CheckForPushRequestOnServer(playerSequenceNumberProcessed+1);
             CheckForPlaceBoulderRequestOnServer(playerSequenceNumberProcessed+1);
             CheckForRemovingBoulderRequestOnServer(playerSequenceNumberProcessed+1);
@@ -1367,6 +1571,7 @@ public class ServerMasterController : MonoBehaviour
             CheckForBubbleShieldRequestForPlayer(playerSequenceNumberProcessed+1);
             CheckForTornadoRequestForPlayer(playerSequenceNumberProcessed+1);
             CheckForPitfallRequestForPlayer(playerSequenceNumberProcessed+1);
+            CheckForEarthQuakeRequestForPlayer(playerSequenceNumberProcessed+1);
             CheckForFlamePillarRequestForPlayer(playerSequenceNumberProcessed+1);
             CheckForPetrificationRequestOnPlayer(playerSequenceNumberProcessed+1);
             CheckForOnGettingHitByDispersedFireBallRequestOnPlayer(playerSequenceNumberProcessed+1);
@@ -1407,20 +1612,22 @@ public class ServerMasterController : MonoBehaviour
                     serverInstanceHero.ProcessInputAnimationControl();
                 }
             }
-
-            
         }
 
         serverLocalSequenceNumber++;
 
         //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
-        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(serverInstanceHero.isPetrified
+        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(
+              serverInstanceHero.isPetrified
             , serverInstanceHero.isPushed
             , serverInstanceHero.isPhysicsControlled
             , serverInstanceHero.isInvincible
-            ,serverInstanceHero.isRespawnningPlayer
+            , serverInstanceHero.isRespawnningPlayer
+            , serverInstanceHero.inCharacterSelectionScreen
+            , serverInstanceHero.inGame
             , serverInstanceHero.currentHP
-            ,serverInstanceHero.currentStockLives);
+            , serverInstanceHero.currentStockLives
+            , serverInstanceHero.hero);
 
         PositionUpdates positionUpdates = new PositionUpdates(serverInstanceHero.actorTransform.position, serverInstanceHero.currentMovePointCellPosition
             , serverInstanceHero.previousMovePointCellPosition,(int)serverInstanceHero.Facing,(int)serverInstanceHero.PreviousFacingDirection);
@@ -1486,6 +1693,20 @@ public class ServerMasterController : MonoBehaviour
         {
             currentInputProcessingModeOnServer = ProcessMode.Ideal;
         }
+    }
+
+    public void SetCharacter(int characterHero,PositionUpdates positionUpdate)
+    {
+        Hero serverInstanceHero = Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)characterHero).ToString() + "/ServerInstance-" + ((EnumData.Heroes)characterHero).ToString()) as GameObject, transform, false).GetComponentInChildren<Hero>();
+        this.serverInstanceHero = serverInstanceHero;
+        this.serverInstanceHero.hero = characterHero;
+        this.serverInstanceHero.inCharacterSelectionScreen = (ServerSideGameManager.instance.currentGameState == EnumData.GameState.CharacterSelection);
+        this.serverInstanceHero.inGame = (ServerSideGameManager.instance.currentGameState == EnumData.GameState.Gameplay);
+
+        this.serverInstanceHero.SetActorPositionalState(positionUpdate);
+        this.serverInstanceHero.InitialiseHP();
+        this.serverInstanceHero.InitialiseStockLives();
+        this.serverInstanceHero.InitialiseServerActor(this, id);
     }
 }
 

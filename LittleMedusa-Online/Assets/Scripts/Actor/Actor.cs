@@ -49,6 +49,8 @@ public abstract class Actor : TileData
     public bool isFiringPrimaryProjectile;
     public bool isInvincible;
     public bool isRespawnningPlayer;
+    public bool inCharacterSelectionScreen;
+    public bool inGame;
     public bool triggerFaceChangeEvent;
     public int currentHP;
     public int currentStockLives;
@@ -88,6 +90,7 @@ public abstract class Actor : TileData
         primaryMoveUseAnimationAction.Initialise(this);
         dropAction.Initialise(this);
     }
+
     public void InitialiseClientActor(ClientMasterController clientMasterController, int ownerId)
     {
         this.clientMasterController = clientMasterController;
@@ -271,11 +274,12 @@ public abstract class Actor : TileData
     public void Fire(Actor firingActor)
     {
         Debug.Log("Firing here!!!!");
-        FireProjectile(firingActor.rangedAttack_1);
+        FireProjectile();
     }
 
     public void CastFlamePillar()
     {
+        rangedAttack_2.SetAttackingActorId(ownerId);
         DynamicItem dynamicItem = new DynamicItem
         {
             ranged = rangedAttack_2,
@@ -318,7 +322,7 @@ public abstract class Actor : TileData
                         {
                             kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled = true;
                             kvp.Value.serverMasterController.serverInstanceHero.actorCollider2D.enabled = false;
-                            kvp.Value.serverMasterController.serverInstanceHero.forceTravelCorCache = GridManager.instance.ForceTravel(kvp.Value.serverMasterController.serverInstanceHero.actorTransform, cell);
+                            kvp.Value.serverMasterController.serverInstanceHero.forceTravelCorCache = GridManager.instance.ForceTravel(kvp.Value.serverMasterController.serverInstanceHero, cell);
                             kvp.Value.serverMasterController.serverInstanceHero.StartForceTravelCor();
                             GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, true, false);
                             GridManager.instance.WaitForForce(kvp.Value.serverMasterController.serverInstanceHero, (x) => {
@@ -329,7 +333,6 @@ public abstract class Actor : TileData
                                 GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, false, false);
                             });
                         }
-                        
                     }
                 }
             }
@@ -353,6 +356,7 @@ public abstract class Actor : TileData
 
     public void CastBubbleShield()
     {
+        rangedAttack_2.SetAttackingActorId(ownerId);
         currentAttack = rangedAttack_2;
         DynamicItem dynamicItem = new DynamicItem
         {
@@ -383,14 +387,15 @@ public abstract class Actor : TileData
         dynamicItem4.activate.BeginToUse(this, null, dynamicItem4.ranged.OnHit);
     }
 
-    void FireProjectile(Attack rangedAttack)
+    void FireProjectile()
     {
+        rangedAttack_1.SetAttackingActorId(ownerId);
         DynamicItem dynamicItem = new DynamicItem
         {
-            ranged = rangedAttack,
+            ranged = rangedAttack_1,
             activate = new TileBasedProjectileUse()
         };
-        currentAttack = rangedAttack;
+        currentAttack = rangedAttack_1;
         dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
     }
 
@@ -434,6 +439,7 @@ public abstract class Actor : TileData
         //}
         if(!isPushed)
         {
+            Debug.LogError(petrifiedByActorId);
             PetrificationCommand petrificationCommand = new PetrificationCommand(ClientSideGameManager.players[petrifiedByActorId].masterController.localPlayer.GetLocalSequenceNo(), ownerId);
             ClientSend.PetrifyPlayer(petrificationCommand);
         }

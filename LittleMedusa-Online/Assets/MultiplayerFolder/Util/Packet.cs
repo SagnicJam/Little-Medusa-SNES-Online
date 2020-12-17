@@ -26,12 +26,14 @@ public enum ClientPackets
     playerFiringMightyWindCommand,
     castingBubbleShieldCommand,
     castingPitfallCommand,
+    castingEarthQuakeCommand,
     castingFlamePillarCommand,
     playerPushCommand,
     playerPlaceBoulderCommand,
     playerRemoveBoulderCommand,
     playerTornadoCommand,
-    playerRespawnCommand
+    playerRespawnCommand,
+    characterChangeCommand
 }
 
 public class Packet : IDisposable

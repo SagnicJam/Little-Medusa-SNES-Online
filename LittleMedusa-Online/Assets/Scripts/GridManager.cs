@@ -22,11 +22,40 @@ public class GridManager : MonoBehaviour
     [Header("Unit Templates")]
     public GameObject rockFormation;
     public GameObject rockRemoval;
-    
+    public GameObject bigExplosion;
+    public GameObject smallExplosion;
+
+    [Header("Live Data")]
+    public int xMin;
+    public int yMin;
+    public int xMax;
+    public int yMax;
+
     private void Awake()
     {
         instance = this;
-        
+        for (int i = 0; i < gameStateDependentTileArray.Length; i++)
+        {
+            if (gameStateDependentTileArray[i].tileMap != null)
+            {
+                if (xMin > gameStateDependentTileArray[i].tileMap.cellBounds.xMin)
+                {
+                    xMin = gameStateDependentTileArray[i].tileMap.cellBounds.xMin;
+                }
+                if (yMin > gameStateDependentTileArray[i].tileMap.cellBounds.yMin)
+                {
+                    yMin = gameStateDependentTileArray[i].tileMap.cellBounds.yMin;
+                }
+                if (xMax < gameStateDependentTileArray[i].tileMap.cellBounds.xMax)
+                {
+                    xMax = gameStateDependentTileArray[i].tileMap.cellBounds.xMax;
+                }
+                if (yMax < gameStateDependentTileArray[i].tileMap.cellBounds.yMax)
+                {
+                    yMax = gameStateDependentTileArray[i].tileMap.cellBounds.yMax;
+                }
+            }
+        }
     }
 
     public Vector3 GetFacingDirectionOffsetVector3(FaceDirection facing)
@@ -89,9 +118,9 @@ public class GridManager : MonoBehaviour
         return false;
     }
 
-    public IEnumerator ForceTravel(Transform moveTrans, Vector3Int cellPos)
+    public IEnumerator ForceTravel(Actor actor, Vector3Int cellPos)
     {
-        IEnumerator ie = ForceTravelCor(moveTrans,cellPos);
+        IEnumerator ie = ForceTravelCor(actor, cellPos);
         return ie;
     }
 
@@ -102,13 +131,20 @@ public class GridManager : MonoBehaviour
         StartCoroutine(ie);
     }
 
-    public IEnumerator ForceTravelCor(Transform moveTrans,Vector3Int cellPos)
+    public IEnumerator ForceTravelCor(Actor actor, Vector3Int cellPos)
     {
         Vector3 pos = GridManager.instance.cellToworld(cellPos);
-        while(Vector3.Distance(moveTrans.position,pos)>=0.05f)
+        while(Vector3.Distance(actor.actorTransform.position,pos)>=0.05f)
         {
-            moveTrans.position = Vector3.MoveTowards(moveTrans.position,pos,Time.fixedDeltaTime* pullforce);
-            yield return new WaitForFixedUpdate();
+            if(actor!=null)
+            {
+                actor.actorTransform.position = Vector3.MoveTowards(actor.actorTransform.position, pos, Time.fixedDeltaTime * pullforce);
+                yield return new WaitForFixedUpdate();
+            }
+            else
+            {
+                yield break;
+            }
         }
         yield break;
     }
@@ -591,8 +627,9 @@ public class GridManager : MonoBehaviour
         return false;
     }
 
-    public List<Vector3Int> GetAllPositionForTileMap(Tilemap tilemap)
+    public List<Vector3Int> GetAllPositionForTileMap(EnumData.TileType tileType)
     {
+        Tilemap tilemap = gameStateDependentTileArray[(int)tileType - 1].tileMap;
         List<Vector3Int> cellPositions = new List<Vector3Int>();
         if(tilemap!=null)
         {
@@ -615,6 +652,75 @@ public class GridManager : MonoBehaviour
         
         return cellPositions;
     }
+
+    public List<Vector3Int> GetPlusNeighbours(Vector3Int cell)
+    {
+        List<Vector3Int> neighbours = new List<Vector3Int>();
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 || y == 0)
+                {
+                    int checkX = cell.x + x;
+                    int checkY = cell.y + y;
+
+                    if (checkX >= xMin && checkX < xMax && checkY >= yMin && checkY < yMax)
+                    {
+                        neighbours.Add(new Vector3Int(checkX, checkY, 0));
+                    }
+                }
+            }
+        }
+
+        if (neighbours.Contains(cell))
+        {
+            neighbours.Remove(cell);
+        }
+        return neighbours;
+    }
+
+    public List<Vector3Int> GetCornerNeighbours(Vector3Int cell)
+    {
+        List<Vector3Int> neighbours = new List<Vector3Int>();
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x != 0 && y != 0)
+                {
+                    int checkX = cell.x + x;
+                    int checkY = cell.y + y;
+
+                    if (checkX >= xMin && checkX < xMax && checkY >= yMin && checkY < yMax)
+                    {
+                        neighbours.Add(new Vector3Int(checkX, checkY, 0));
+                    }
+                }
+            }
+        }
+        return neighbours;
+    }
+
+   
+
+    public void EarthQuake(Vector3Int explodeCell)
+    {
+        List<Vector3Int> vList = GetCornerNeighbours(explodeCell);
+        Debug.LogError(vList.Count);
+        IEnumerator ie = Quake(vList);
+        StopCoroutine(ie);
+        StartCoroutine(ie);
+    }
+
+    IEnumerator Quake(List<Vector3Int> cornerCell)
+    {
+        for(int i=0;i<cornerCell.Count;i++)
+        {
+
+        }
+        yield break;
+    }
 }
 
 [Serializable]
@@ -625,7 +731,21 @@ public struct GameStateDependentTiles
     public Tile darkTile;
     public Tile tileOff;
     public Tilemap tileMap;
+    //public Tile[] allTileArr;
     public bool cereberustileToggle;
     public bool multipleTileGraphic;
     public bool isDarkOnOdd;
+
+    //public int GetIndexOfTile(Sprite sp)
+    //{
+    //    for(int i=0;i<allTileArr.Length;i++)
+    //    {
+    //        if(allTileArr[i].sprite.name == sp.name)
+    //        {
+    //            return i;
+    //        }
+    //    }
+    //    Debug.LogError("Could not find the sprite "+tileMap.name+"  "+sp.name);
+    //    return -1;
+    //}
 }

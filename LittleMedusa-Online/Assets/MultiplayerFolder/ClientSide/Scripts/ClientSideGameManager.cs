@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 public class ClientSideGameManager : MonoBehaviour
 {
     public static ClientSideGameManager instance;
@@ -17,8 +18,8 @@ public class ClientSideGameManager : MonoBehaviour
     [Header("Live Data")]
     public ProcessMode currentWorldStateUpdateProcessingMode;
     public int serverWorldSequenceNumberProcessed=0;
-    public int snapShotBufferSize = 0;
-    public int lastSequenceNumberReceivedViaUDPOfWorldUpdate = 0;
+    public int snapShotBufferSize=0;
+    public int lastSequenceNumberReceivedViaUDPOfWorldUpdate=0;
     private WorldUpdate latestWorldUpdate;
     private Dictionary<int, WorldUpdate> worldUpdatesFromServerToClientDic = new Dictionary<int, WorldUpdate>();
 
@@ -48,16 +49,32 @@ public class ClientSideGameManager : MonoBehaviour
     public void SpawnPlayer(int id,string username,PlayerStateUpdates playerStateUpdates)
     {
         GameObject player;
-        if(id == Client.instance.myID)
+        int hero = playerStateUpdates.playerAuthoratativeStates.hero;
+        if (id == Client.instance.myID)
         {
             player = Instantiate(localPlayerPrefab,Vector3.zero,Quaternion.identity);
+            Hero localHero = (Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)hero).ToString()  + "/LocalPlayer-" + ((EnumData.Heroes)hero).ToString()), player.transform, false) as GameObject).GetComponentInChildren<Hero>();
+            Hero serverPredictedHero = (Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)hero).ToString() + "/ServerPredicted-" + ((EnumData.Heroes)hero).ToString()), player.transform, false) as GameObject).GetComponentInChildren<Hero>();
+            Hero remoteClientHero = (Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)hero).ToString() + "/RemoteClient-" + ((EnumData.Heroes)hero).ToString()), player.transform, false) as GameObject).GetComponentInChildren<Hero>();
+
+            player.GetComponent<InputController>().localPlayer = localHero;
+            player.GetComponent<ClientMasterController>().localPlayer = localHero;
+            player.GetComponent<ClientMasterController>().serverPlayer = serverPredictedHero;
+            player.GetComponent<ClientMasterController>().clientPlayer = remoteClientHero;
+
             player.GetComponent<PlayerManager>().Initialise(id,username, playerStateUpdates, true);
         }
         else
         {
             player = Instantiate(playerPrefab,Vector3.zero, Quaternion.identity);
+            
+            Hero remoteOtherClient = (Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)hero).ToString() + "/RemoteClientOther-" + ((EnumData.Heroes)hero).ToString()), player.transform, false) as GameObject).GetComponentInChildren<Hero>();
+            
+            player.GetComponent<ClientMasterController>().clientPlayer = remoteOtherClient;
             player.GetComponent<PlayerManager>().Initialise(id, username, playerStateUpdates, false);
         }
+        CharacterSelectionScreen.instance.PlayerConnected(id);
+        CharacterSelectionScreen.instance.AssignCharacterToId(playerStateUpdates.playerAuthoratativeStates.hero, id);
         players.Add(id,player.GetComponent<PlayerManager>());
     }
 
@@ -169,7 +186,7 @@ public class ClientSideGameManager : MonoBehaviour
         {
             for (int j = 0; j < newWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Count; j++)
             {
-                GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true,false);
+                GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true, false);
             }
         }
 
@@ -210,7 +227,7 @@ public class ClientSideGameManager : MonoBehaviour
                     if(!newWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Contains(latestWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j]))
                     {
                         //delete old
-                        GridManager.instance.SetTile(latestWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)latestWorldUpdate.worldGridItems[i].tileType, false,true);
+                        GridManager.instance.SetTile(latestWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)latestWorldUpdate.worldGridItems[i].tileType,false, true);
                     }
                 }
             }
@@ -221,7 +238,7 @@ public class ClientSideGameManager : MonoBehaviour
                     if (!latestWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Contains(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j]))
                     {
                         //add new
-                        GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true,true);
+                        GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true, true);
                     }
                 }
             }

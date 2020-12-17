@@ -205,7 +205,7 @@ public class ServerSideClient
 
     public void SendIntoGame(string playerName)
     {
-        serverMasterController = ServerSideGameManager.instance.InstantiatePlayer();
+        serverMasterController = ServerSideGameManager.instance.InstantiatePlayer((int)EnumData.Heroes.Medusa);
         serverMasterController.Initialise(id,playerName,new Vector3(0.5f,0.5f,0f));
         
 
@@ -235,7 +235,7 @@ public class ServerSideClient
 
         for (int i = 0; i < ServerSideGameManager.instance.toNetworkTileType.Count; i++)
         {
-            List<Vector3Int> positionsOfTile = GridManager.instance.GetAllPositionForTileMap(GridManager.instance.gameStateDependentTileArray[(int)ServerSideGameManager.instance.toNetworkTileType[i] - 1].tileMap);
+            List<Vector3Int> positionsOfTile = GridManager.instance.GetAllPositionForTileMap(ServerSideGameManager.instance.toNetworkTileType[i]);
             WorldGridItem worldGridItem = new WorldGridItem((int)ServerSideGameManager.instance.toNetworkTileType[i], positionsOfTile);
             worldGridItemList.Add(worldGridItem);
         }

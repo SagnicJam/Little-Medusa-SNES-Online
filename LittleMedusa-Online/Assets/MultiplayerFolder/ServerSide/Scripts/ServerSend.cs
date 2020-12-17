@@ -82,6 +82,7 @@ public class ServerSend
         {
             packet.Write(serverMasterController.id);
             packet.Write(serverMasterController.username);
+            packet.Write((int)serverMasterController.serverInstanceHero.hero);
             packet.Write(serverMasterController.serverInstanceHero.actorTransform.position);
             packet.Write(serverMasterController.serverInstanceHero.currentMovePointCellPosition);
             packet.Write(serverMasterController.serverInstanceHero.previousMovePointCellPosition);
@@ -94,6 +95,8 @@ public class ServerSend
             packet.Write(serverMasterController.serverInstanceHero.isPhysicsControlled);
             packet.Write(serverMasterController.serverInstanceHero.isInvincible);
             packet.Write(serverMasterController.serverInstanceHero.isRespawnningPlayer);
+            packet.Write(serverMasterController.serverInstanceHero.inCharacterSelectionScreen);
+            packet.Write(serverMasterController.serverInstanceHero.inGame);
             packet.Write(serverMasterController.serverInstanceHero.currentHP);
             packet.Write(serverMasterController.serverInstanceHero.currentStockLives);
             packet.Write(serverMasterController.playerSequenceNumberProcessed);
@@ -114,9 +117,9 @@ public class ServerSend
 
                 packet.Write(worldGridItem.cellGridWorldPositionList.Count);
 
-                foreach (Vector3Int itemCellPosition in worldGridItem.cellGridWorldPositionList)
+                foreach (Vector3Int v in worldGridItem.cellGridWorldPositionList)
                 {
-                    packet.Write(itemCellPosition);
+                    packet.Write(v);
                 }
             }
             packet.Write(worldUpdate.projectileDatas.Count);
@@ -149,9 +152,9 @@ public class ServerSend
 
                     packet.Write(worldGridItem.cellGridWorldPositionList.Count);
 
-                    foreach(Vector3Int itemCellPosition in worldGridItem.cellGridWorldPositionList)
+                    foreach (Vector3Int v in worldGridItem.cellGridWorldPositionList)
                     {
-                        packet.Write(itemCellPosition);
+                        packet.Write(v);
                     }
                 }
 
@@ -182,9 +185,9 @@ public class ServerSend
 
                         packet.Write(previousWorldGridItem.cellGridWorldPositionList.Count);
 
-                        foreach (Vector3Int itemCellPosition in previousWorldGridItem.cellGridWorldPositionList)
+                        foreach (Vector3Int v in previousWorldGridItem.cellGridWorldPositionList)
                         {
-                            packet.Write(itemCellPosition);
+                            packet.Write(v);
                         }
                     }
 
@@ -213,6 +216,7 @@ public class ServerSend
             for (int i=0;i<playerUpdatedPosition.Count;i++)
             {
                 packet.Write(playerUpdatedPosition[i].playerId);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.hero);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.positionUpdates.updatedActorPosition);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.positionUpdates.updatedBlockActorPosition);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.positionUpdates.updatedPreviousBlockActorPosition);
@@ -225,6 +229,8 @@ public class ServerSend
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPhysicsControlled);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isInvincible);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.inCharacterSelectionScreen);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.inGame);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.currentHP);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.currentStockLives);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerProcessedSequenceNumber);
@@ -240,6 +246,7 @@ public class ServerSend
                 for (int j = 0; j < previousPlayerUpdatedPositionPacks[i].previousUpdatedStates.Length; j++)
                 {
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerId);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.hero);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.positionUpdates.updatedActorPosition);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.positionUpdates.updatedBlockActorPosition);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.positionUpdates.updatedPreviousBlockActorPosition);
@@ -252,6 +259,8 @@ public class ServerSend
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPhysicsControlled);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isInvincible);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.inCharacterSelectionScreen);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.inGame);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.currentHP);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.currentStockLives);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerProcessedSequenceNumber);

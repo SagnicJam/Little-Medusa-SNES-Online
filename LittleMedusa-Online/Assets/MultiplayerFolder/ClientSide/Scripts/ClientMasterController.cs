@@ -52,7 +52,39 @@ public class ClientMasterController : MonoBehaviour
 
     bool[] previousInputs;
 
-    
+    public void SetCharacter(int hero,PositionUpdates positionUpdates)
+    {
+        if (id == Client.instance.myID)
+        {
+            Hero localHero = (Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)hero).ToString() + "/LocalPlayer-" + ((EnumData.Heroes)hero).ToString()), transform, false) as GameObject).GetComponentInChildren<Hero>();
+            Hero serverPredictedHero = (Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)hero).ToString() + "/ServerPredicted-" + ((EnumData.Heroes)hero).ToString()), transform, false) as GameObject).GetComponentInChildren<Hero>();
+            Hero remoteClientHero = (Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)hero).ToString() + "/RemoteClient-" + ((EnumData.Heroes)hero).ToString()), transform, false) as GameObject).GetComponentInChildren<Hero>();
+
+            GetComponent<InputController>().localPlayer = localHero;
+
+            localPlayer = localHero;
+            serverPlayer = serverPredictedHero;
+            clientPlayer = remoteClientHero;
+
+            localPlayer.SetActorPositionalState(positionUpdates);
+            serverPlayer.SetActorPositionalState(positionUpdates);
+            clientPlayer.SetActorPositionalState(positionUpdates);
+
+            localPlayer.InitialiseClientActor(this, id);
+            serverPlayer.InitialiseClientActor(this, id);
+            clientPlayer.InitialiseClientActor(this, id);
+
+            getInputs = localPlayer.GetHeroInputs;
+            CharacterSelectionScreen.instance.clientlocalActor = localPlayer;
+        }
+        else
+        {
+            Hero remoteOtherClient = (Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)hero).ToString() + "/RemoteClientOther-" + ((EnumData.Heroes)hero).ToString()), transform, false) as GameObject).GetComponentInChildren<Hero>();
+            clientPlayer = remoteOtherClient;
+            clientPlayer.SetActorPositionalState(positionUpdates);
+            clientPlayer.InitialiseClientActor(this, id);
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -260,13 +292,43 @@ public class ClientMasterController : MonoBehaviour
 
     public void SetPlayerStateUpdatesReceivedFromServer(PlayerStateUpdates playerStateUpdates)
     {
+        if (hasAuthority)
+        {
+            if (localPlayer.hero != playerStateUpdates.playerAuthoratativeStates.hero)
+            {
+                Hero previousServerHero = serverPlayer;
+                Hero previousClientHero = clientPlayer;
+                Hero previousLocalHero = localPlayer;
+
+                SetCharacter(playerStateUpdates.playerAuthoratativeStates.hero, playerStateUpdates.positionUpdates);
+
+                CharacterSelectionScreen.instance.AssignCharacterToId(playerStateUpdates.playerAuthoratativeStates.hero,id);
+
+                Destroy(previousServerHero.transform.parent.gameObject);
+                Destroy(previousClientHero.transform.parent.gameObject);
+                Destroy(previousLocalHero.transform.parent.gameObject);
+            }
+        }
+        else
+        {
+            if(clientPlayer.hero!= playerStateUpdates.playerAuthoratativeStates.hero)
+            {
+                Hero previousClientHero = clientPlayer;
+
+                SetCharacter(playerStateUpdates.playerAuthoratativeStates.hero, playerStateUpdates.positionUpdates);
+
+                CharacterSelectionScreen.instance.AssignCharacterToId(playerStateUpdates.playerAuthoratativeStates.hero, id);
+
+                Destroy(previousClientHero.transform.parent.gameObject);
+            }
+        }
         clientPlayer.SetActorPositionalState(playerStateUpdates.positionUpdates);
         clientPlayer.SetActorEventActionState(playerStateUpdates.playerEvents);
         clientPlayer.SetActorAnimationState(playerStateUpdates.playerAnimationEvents);
         clientPlayer.SetAuthoratativeStates(playerStateUpdates.playerAuthoratativeStates);
         if (hasAuthority)
         {
-            if(playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer && localPlayer.isRespawnningPlayer != playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer)
+            if (playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer && localPlayer.isRespawnningPlayer != playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer)
             {
                 localPlayer.SetActorPositionalState(playerStateUpdates.positionUpdates);
             }
@@ -359,18 +421,24 @@ public struct PlayerAuthoratativeStates
     public bool isInvincible;
     public bool isPhysicsControlled;
     public bool isRespawnningPlayer;
+    public bool inCharacterSelectionScreen;
+    public bool inGame;
     public int currentHP;
     public int currentStockLives;
+    public int hero;
 
-    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isPhysicsControlled, bool isInvincible,bool isRespawnningPlayer, int currentHP,int currentStockLives)
+    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isPhysicsControlled, bool isInvincible,bool isRespawnningPlayer,bool inCharacterSelectionScreen,bool inGame, int currentHP,int currentStockLives,int hero)
     {
         this.isPetrified = isPetrified;
         this.isPushed = isPushed;
         this.isPhysicsControlled = isPhysicsControlled;
         this.isInvincible = isInvincible;
         this.isRespawnningPlayer = isRespawnningPlayer;
+        this.inCharacterSelectionScreen = inCharacterSelectionScreen;
+        this.inGame = inGame;
         this.currentHP = currentHP;
         this.currentStockLives = currentStockLives;
+        this.hero = hero;
     }
 }
 
@@ -450,6 +518,16 @@ public struct FireTidalWaveCommand
     }
 }
 
+public struct CastEarthQuakeCommand
+{
+    public int sequenceNoForCastingEarthQuakeCommand;
+    
+    public CastEarthQuakeCommand(int sequenceNoForCastingEarthQuakeCommand)
+    {
+        this.sequenceNoForCastingEarthQuakeCommand = sequenceNoForCastingEarthQuakeCommand;
+    }
+}
+
 public struct CastPitfallCommand
 {
     public int sequenceNoForCastingPitfallCommand;
@@ -505,6 +583,18 @@ public struct CastFlamePillar
     {
         this.sequenceNoCastingFlamePillarCommand = sequenceNoCastingFlamePillarCommand;
         this.direction = direction;
+    }
+}
+
+public struct CharacterChangeCommand
+{
+    public int sequenceNoCharacterChangeCommand;
+    public int characterHero;
+
+    public CharacterChangeCommand(int sequenceNoCharacterChangeCommand, int characterHero)
+    {
+        this.sequenceNoCharacterChangeCommand = sequenceNoCharacterChangeCommand;
+        this.characterHero = characterHero;
     }
 }
 

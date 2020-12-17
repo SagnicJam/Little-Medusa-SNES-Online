@@ -16,6 +16,15 @@ public class ServerHandle
 
         Server.clients[fromClient].SendIntoGame(username);
     }
+
+    public static void ChangeCharacterRequest(int fromClient, Packet packet)
+    {
+        int characterHero = packet.ReadInt();
+        int sequenceNumber = packet.ReadInt();
+        CharacterChangeCommand characterChangeCommand = new CharacterChangeCommand(sequenceNumber, characterHero);
+        Server.clients[fromClient].serverMasterController.AccumulateChangeCharacterCommandToBePlayedOnServerFromClient(characterChangeCommand);
+    }
+
     public static void PlayerCastingTornadoCommandReceived(int fromClient, Packet packet)
     {
         int direction = packet.ReadInt();
@@ -30,6 +39,13 @@ public class ServerHandle
         int sequenceNumber = packet.ReadInt();
         CastPitfallCommand castPitfallCommand = new CastPitfallCommand(sequenceNumber, direction);
         Server.clients[fromClient].serverMasterController.AccumulateCastingPitfallRequestToBePlayedOnServerFromClient(castPitfallCommand);
+    }
+
+    public static void PlayerCastingEarthQuakeCommandReceived(int fromClient, Packet packet)
+    {
+        int sequenceNumber = packet.ReadInt();
+        CastEarthQuakeCommand castEarthQuakeCommand = new CastEarthQuakeCommand(sequenceNumber);
+        Server.clients[fromClient].serverMasterController.AccumulateCastingEarthQuakeRequestToBePlayedOnServerFromClient(castEarthQuakeCommand);
     }
 
     public static void PlayerCastingFlamePillarCommandReceived(int fromClient, Packet packet)

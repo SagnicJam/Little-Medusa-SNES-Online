@@ -18,6 +18,9 @@ public class PlayerManager : MonoBehaviour
         {
             masterController.clientPlayer.InitialiseClientActor(masterController,id);
             masterController.localPlayer.InitialiseClientActor(masterController, id);
+            masterController.getInputs = masterController.localPlayer.GetHeroInputs;
+            CharacterSelectionScreen.instance.clientlocalActor = masterController.localPlayer;
+
             masterController.serverPlayer.InitialiseClientActor(masterController, id);
 
             masterController.clientPlayer.InitialiseActor(playerStateUpdates);

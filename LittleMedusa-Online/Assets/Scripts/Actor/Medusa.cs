@@ -263,6 +263,10 @@ public class Medusa : Hero
 
     public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {
+        if (isPhysicsControlled)
+        {
+            return;
+        }
         if (isPushed)
         {
             return;
@@ -348,6 +352,10 @@ public class Medusa : Hero
 
     public override void ProcessInputMovementsControl()
     {
+        if (isPhysicsControlled)
+        {
+            return;
+        }
         if (isPushed)
         {
             return;
@@ -381,5 +389,57 @@ public class Medusa : Hero
             return true;
         }
         return false;
+    }
+
+    [Header("Inputs")]
+    public bool up;
+    public bool left;
+    public bool down;
+    public bool right;
+    public bool shoot;
+    public bool push;
+    public bool placeORRemovalBoulder;
+    public bool respawnPlayer;
+
+    public override void DealInput()
+    {
+        if (!inGame || isPushed || isPetrified || isPhysicsControlled)
+        {
+            up = false;
+            left = false;
+            down = false;
+            right = false;
+            shoot = false;
+            push = false;
+            placeORRemovalBoulder = false;
+            respawnPlayer = false;
+        }
+        else
+        {
+            up = Input.GetKey(KeyCode.W);
+            left = Input.GetKey(KeyCode.A);
+            down = Input.GetKey(KeyCode.S);
+            right = Input.GetKey(KeyCode.D);
+            shoot = Input.GetKey(KeyCode.J);
+            push = Input.GetKey(KeyCode.J);
+            placeORRemovalBoulder = Input.GetKey(KeyCode.K);
+            respawnPlayer = Input.GetKey(KeyCode.Return);
+        }
+    }
+
+    public override bool[] GetHeroInputs()
+    {
+        bool[] inputs = new bool[]
+                {
+                up,
+                left,
+                down,
+                right,
+                shoot,
+                push,
+                placeORRemovalBoulder,
+                respawnPlayer
+                };
+        return inputs;
     }
 }
