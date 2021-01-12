@@ -29,11 +29,10 @@ public class Server
         tcpListener = new TcpListener(IPAddress.Any, Port);
         tcpListener.Start();
         tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null);
-
         udpListener = new UdpClient(Port);
         udpListener.BeginReceive(UDPReceiveCallback, null);
-
         Debug.Log($"Server started on {Port}.");
+        MultiplayerManager.instance.EstablishServerConnection(port);
     }
 
     public static void Stop()
@@ -44,31 +43,32 @@ public class Server
 
     private static void TCPConnectCallback(IAsyncResult result)
     {
-        TcpClient client = tcpListener.EndAcceptTcpClient(result);
-
         //To make sure once the client connects to continue listening for connection
+        TcpClient client = tcpListener.EndAcceptTcpClient(result);
         tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null);
 
 
         Debug.Log($"Incoming connection from {client.Client.RemoteEndPoint}....");
-        for (int i = 1; i <= MaxPlayers; i++)
+        ThreadManager.ExecuteOnMainThread(() =>
         {
-            if (clients[i].tcp.socket == null)
+            for (int i = 1; i <= MaxPlayers; i++)
             {
-                clients[i].tcp.Connect(client);
-                return;
+                if (clients[i].tcp.socket == null)
+                {
+                    clients[i].tcp.Connect(client);
+                    return;
+                }
             }
-        }
+        });
+       
 
-        Debug.LogError($"{client.Client.RemoteEndPoint} failed to connect:Server full");
+        //Debug.LogError($"{client.Client.RemoteEndPoint} failed to connect:Server full");
     }
-
     private static void UDPReceiveCallback(IAsyncResult result)
     {
         try
         {
             IPEndPoint clientEndPoint = new IPEndPoint(IPAddress.Any, 0);
-
             //this will also set the client endpoint
             byte[] data = udpListener.EndReceive(result, ref clientEndPoint);
             //Debug.Log("<color=green>receiveing udp data of length: </color>" + data.Length);
@@ -82,7 +82,7 @@ public class Server
 
             using (Packet packet = new Packet(data))
             {
-                 //Debug.Log("<color=green>datalength: </color>" + data.Length);
+                //Debug.Log("<color=green>datalength: </color>" + data.Length);
                 int clientId = packet.ReadInt();
 
                 if (clientId == 0)
@@ -103,6 +103,7 @@ public class Server
                     clients[clientId].udp.HandleData(packet);
                 }
             }
+
         }
         catch (Exception ex)
         {

@@ -102,9 +102,12 @@ public class ClientHandle : MonoBehaviour
             keyValuePairsAnimation.Add(uid, new AnimatingStaticTile(uid, tileType, animationSpIndex,pos));
         }
 
+        int gameState = packet.ReadInt();
+        int gameMatchStartTime = packet.ReadInt();
+
         int worldUpdateSequenceNumber = packet.ReadInt();
 
-        WorldUpdate worldUpdate = new WorldUpdate(worldUpdateSequenceNumber, worldItems, keyValuePairs, keyValuePairsAnimation);
+        WorldUpdate worldUpdate = new WorldUpdate(worldUpdateSequenceNumber, worldItems,new GameData(gameState,gameMatchStartTime), keyValuePairs, keyValuePairsAnimation);
         ClientSideGameManager.instance.SpawnWorldGridElements(worldUpdate);
     }
 
@@ -153,9 +156,11 @@ public class ClientHandle : MonoBehaviour
 
                 keyValuePairsAnimation.Add(uid, new AnimatingStaticTile(uid, tileType, animationSpIndex, pos));
             }
+            int gameState = packet.ReadInt();
+            int gameMatchStartTime = packet.ReadInt();
             int worldUpdateSequenceNumber = packet.ReadInt();
             //Debug.LogWarning("<color=green>receiving inputs packet to server </color>playerMovingCommandSequenceNumber : " + worldUpdateSequenceNumber + " w " + inputs[0] + " a " + inputs[1] + " s " + inputs[2] + " d " + inputs[3]);
-             ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(worldUpdateSequenceNumber, worldItems, keyValuePairs, keyValuePairsAnimation));
+             ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(worldUpdateSequenceNumber, worldItems,new GameData(gameState,gameMatchStartTime), keyValuePairs, keyValuePairsAnimation));
         }
 
         int previousWorldUpdatePacks = packet.ReadInt();
@@ -203,8 +208,10 @@ public class ClientHandle : MonoBehaviour
 
                     keyValuePairsAnimation.Add(uid, new AnimatingStaticTile(uid, tileType, animationSpIndex, pos));
                 }
+                int gameState = packet.ReadInt();
+                int gameMatchStartTime = packet.ReadInt();
                 int previousSeqNo = packet.ReadInt();
-                ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(previousSeqNo, previousDataWorldItems, previouskeyValuePairs, keyValuePairsAnimation));
+                ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(previousSeqNo, previousDataWorldItems,new GameData(gameState,gameMatchStartTime), previouskeyValuePairs, keyValuePairsAnimation));
             }
         }
     }

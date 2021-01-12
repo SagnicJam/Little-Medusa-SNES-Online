@@ -241,6 +241,7 @@ public class ClientSideGameManager : MonoBehaviour
                 staticAnimatingTileDic.Add(kvp.Key, newstaticAnimatingTileManager);
             }
         }
+        MultiplayerManager.instance.matchStartTimeText.text = Mathf.RoundToInt(newWorldUpdate.gameData.matchStartTime * Time.fixedDeltaTime).ToString();
         latestWorldUpdate = newWorldUpdate;
     }
 
@@ -386,7 +387,7 @@ public class ClientSideGameManager : MonoBehaviour
             }
         }
 
-        
+        MultiplayerManager.instance.matchStartTimeText.text = Mathf.RoundToInt(newWorldUpdate.gameData.matchStartTime * Time.fixedDeltaTime).ToString();
 
         latestWorldUpdate = newWorldUpdate;
     }

@@ -13,8 +13,6 @@ public class Client : MonoBehaviour
     //Server ip
     public string ip = "127.0.0.1";
 
-    public int port = 13;
-
     public int myID = 0;
 
     public TCP tcp;
@@ -44,10 +42,10 @@ public class Client : MonoBehaviour
 
     private void Start()
     {
-       
+        ConnectedToServer();
     }
 
-    public void ConnectedToServer()
+    void ConnectedToServer()
     {
         tcp = new TCP();
         udp = new UDP();
@@ -74,8 +72,8 @@ public class Client : MonoBehaviour
             };
 
             receiveBuffer = new byte[dataBufferSize];
-            Debug.Log("Connecting at ip: "+instance.ip+" port: "+instance.port);
-            socket.BeginConnect(instance.ip,instance.port,ConnectCallback,socket);
+            Debug.Log("Connecting at ip: "+instance.ip+" port: "+MultiplayerManager.instance.serverPort);
+            socket.BeginConnect(instance.ip, MultiplayerManager.instance.serverPort, ConnectCallback,socket);
         }
 
         private void ConnectCallback(IAsyncResult result)
@@ -212,7 +210,7 @@ public class Client : MonoBehaviour
 
         public UDP()
         {
-            endPoint = new IPEndPoint(IPAddress.Parse(instance.ip),instance.port);
+            endPoint = new IPEndPoint(IPAddress.Parse(instance.ip),MultiplayerManager.instance.serverPort);
         }
 
         public void Connect(int localPort)
@@ -321,6 +319,7 @@ public class Client : MonoBehaviour
             udp.socket.Close();
 
             Debug.Log("Disconnected from server");
+            //Leave Match here
         }
     }
 }

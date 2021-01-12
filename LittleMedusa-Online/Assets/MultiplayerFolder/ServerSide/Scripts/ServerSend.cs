@@ -65,6 +65,7 @@ public class ServerSend
     {
         using (Packet packet = new Packet((int)ServerPackets.welcome))
         {
+            Debug.Log("Sending welcome packet to : "+toClient);
             packet.Write(msg);
             packet.Write(toClient);
 
@@ -144,6 +145,10 @@ public class ServerSend
 
                 packet.Write(keyValuePair.Value.pos);
             }
+
+            packet.Write(worldUpdate.gameData.gameState);
+            packet.Write(worldUpdate.gameData.matchStartTime);
+
             packet.Write(worldUpdate.sequenceNumber);
 
             SendTCPData(toClient, packet);
@@ -192,6 +197,10 @@ public class ServerSend
 
                     packet.Write(keyValuePair.Value.pos);
                 }
+
+                packet.Write(worldUpdates[i].gameData.gameState);
+                packet.Write(worldUpdates[i].gameData.matchStartTime);
+
                 packet.Write(worldUpdates[i].sequenceNumber);
                 //Debug.LogWarning("<color=green>Sending inputs packet to server </color>playerMovingCommandSequenceNumber : " + inputCommands[i].sequenceNumber + " w " + inputCommands[i].commands[0] + " a " + inputCommands[i].commands[1] + " s " + inputCommands[i].commands[2] + " d " + inputCommands[i].commands[3] + "<color=green> adding previous : </color>");
             }
@@ -237,6 +246,9 @@ public class ServerSend
 
                         packet.Write(keyValuePair.Value.pos);
                     }
+                    packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].gameData.gameState);
+                    packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].gameData.matchStartTime);
+
                     packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].sequenceNumber);
                 }
 

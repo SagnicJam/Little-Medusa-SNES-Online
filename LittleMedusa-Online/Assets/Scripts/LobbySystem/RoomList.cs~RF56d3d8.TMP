@@ -1,0 +1,77 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RoomList : MonoBehaviour,IRoomList
+{
+    public GameObject roomGO;
+    public Transform roomGOParent;
+    public Dictionary<int, JoinRoom> roomInfoDic = new Dictionary<int, JoinRoom>();
+
+    void OnEnable()
+    {
+        SignalRCoreConnect.instance._connection.On<Room>(nameof(OnNewRoomAdded), OnNewRoomAdded);
+        SignalRCoreConnect.instance._connection.On<Room>(nameof(OnRoomDeleted), OnRoomDeleted);
+    }
+
+    void OnDisable()
+    {
+        SignalRCoreConnect.instance._connection.Remove(nameof(OnNewRoomAdded));
+        SignalRCoreConnect.instance._connection.Remove(nameof(OnRoomDeleted));
+    }
+
+    public void Close()
+    {
+        Destroy(gameObject);
+    }
+
+    public void DisplayRoomList(Lobby lobby)
+    {
+        for(int i=0;i<lobby.LobbyData.Count;i++)
+        {
+            GameObject roomGORef = Instantiate(roomGO, roomGOParent, false);
+            JoinRoom joinRoom = roomGORef.GetComponent<JoinRoom>();
+            joinRoom.Initialise(lobby.LobbyData[i]);
+            roomInfoDic.Add(lobby.LobbyData[i].RoomId, joinRoom);
+        }
+    }
+
+    void AddNewRoom(Room room)
+    {
+        if (playerInfoDic.ContainsKey(playerInfoData.connectionId))
+        {
+            Debug.LogError("Already containing connection id for player: " + playerInfoData.Name);
+        }
+        else
+        {
+            GameObject playerGORef = Instantiate(playerGO, playerParentTrans, false);
+            PlayerInfo playerInfo = playerGORef.GetComponent<PlayerInfo>();
+            playerInfo.Initialise(playerInfoData);
+            playerInfoDic.Add(playerInfoData.connectionId, playerInfo);
+        }
+    }
+
+    void RemoveRoom(Room room)
+    {
+        if (playerInfoDic.ContainsKey(playerInfoData.connectionId))
+        {
+            PlayerInfo playerInfo = playerInfoDic[playerInfoData.connectionId];
+            Destroy(playerInfo.gameObject);
+            playerInfoDic.Remove(playerInfoData.connectionId);
+        }
+        else
+        {
+            Debug.LogError("No player found to remove " + playerInfoData.Name);
+        }
+    }
+
+    public void OnNewRoomAdded(Room room)
+    {
+        Debug.Log("OnNewRoomAdded " + room.RoomName);
+    }
+
+    public void OnRoomDeleted(Room room)
+    {
+        Debug.Log("OnRoomDeleted " + room.RoomName);
+    }
+}

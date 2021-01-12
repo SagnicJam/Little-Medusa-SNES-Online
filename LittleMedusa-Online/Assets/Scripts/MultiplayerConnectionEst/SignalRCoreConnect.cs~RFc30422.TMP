@@ -1,0 +1,162 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using BestHTTP.ServerSentEvents;
+using BestHTTP.SignalRCore;
+using BestHTTP.SignalRCore.Encoders;
+using UnityEngine;
+
+public class SignalRCoreConnect : MonoBehaviour, IMatchMake
+{
+    public HubConnection _connection;
+
+    public static SignalRCoreConnect instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private async void OnDisable()
+    {
+        if (_connection != null) await _connection.CloseAsync();
+    }
+
+    private async void Start()
+    {
+        _connection = new HubConnection(new Uri("https://localhost:5001/matchmakerhub")
+            , new JsonProtocol(new LitJsonEncoder()), new HubOptions());
+
+        _connection.OnError += Hub_OnError;
+        _connection.OnConnected += Hub_OnConnected;
+        _connection.OnReconnected += Hub_OnReconnected;
+        _connection.OnReconnecting += Hub_OnReconnecting;
+        _connection.OnClosed += Hub_OnClosed;
+        _connection.OnRedirected += Hub_OnRedirected;
+        _connection.OnTransportEvent += Hub_OnTransportEvent;
+        _connection.On<int>(nameof(OnClientMatchStarted), OnClientMatchStarted);
+        _connection.On(nameof(OnJoinedQueueSuccess), OnJoinedQueueSuccess);
+        _connection.On(nameof(OnJoinedQueueFailure), OnJoinedQueueFailure);
+        _connection.On(nameof(OnLeftQueueSuccess), OnLeftQueueSuccess);
+        _connection.On(nameof(OnLeftQueueFailure), OnLeftQueueFailure);
+
+        Debug.Log("Connecting!");
+        await _connection.ConnectAsync();
+        
+        Debug.Log("Connection Complete...");
+        if (MultiplayerManager.instance.isServer)
+        {
+            OnMatchMakingCompleted(ServerSideGameManager.instance.serverPort);
+        }
+    }
+
+    private void Hub_OnTransportEvent(HubConnection hubConnection, ITransport transport, TransportEvents transportEvents)
+    {
+        Debug.Log("MessageHub_Hub_OnTransportEvent: " +
+                   $"Transport(<color=green>{transport.TransportType}</color>) " +
+                   $"event: <color=green>{transportEvents}</color>"
+        );
+    }
+    private void Hub_OnRedirected(HubConnection hubConnection, Uri uri1, Uri uri2)
+    {
+        Debug.Log("MessageHub_Hub_OnRedirected: " +
+                   $"Hub_OnRedirected Called. Uri1 = {uri1}, Uri2 = {uri2}");
+    }
+    private bool Hub_OnMessage(HubConnection hubConnection, Message message)
+    {
+        Debug.Log("MessageHub_Hub_OnMessage: " +
+                   $"Hub's OnMessage Called: Message received: {message}");
+
+        // When returning false, no further processing is done by the plugin..
+        return false;
+    }
+    private void Hub_OnClosed(HubConnection hubConnection)
+    {
+        Debug.Log("MessageHub_Hub_OnClosed: " +
+                   "HubConnection is Closed!");
+    }
+    private void Hub_OnReconnecting(HubConnection hub, string message)
+    {
+        Debug.Log("MessageHub_Hub_OnReconnecting: " +
+                   "Hub is Reconnecting!.. Message: " + message);
+    }
+    private void Hub_OnReconnected(HubConnection hubConnection)
+    {
+        Debug.Log("MessageHub_Hub_OnReconnected: " +
+                   "Hub Reconnected!");
+    }
+    private void Hub_OnConnected(HubConnection hubConnection)
+    {
+        Debug.Log("MessageHub_Hub_OnConnected: " +
+                   "Hub Connected! ");
+    }
+    public void Hub_OnError(HubConnection hubConnection, string error)
+    {
+        Debug.Log("MessageHub_Hub_OnError: " +
+                   $"The HubConnection has an Error: {error}");
+    }
+
+    AsyncCallback asyncCallback;
+
+   
+
+    public void OnMatchMakingCompleted(int matchId)
+    {
+        Debug.Log("OnMatchMakingCompleted");
+        _connection.Send("OnMatchMakingCompleted", matchId);
+    }
+
+    public void OnClientMatchStarted(int matchId)
+    {
+        Debug.Log("OnClientMatchStarted "+ matchId);
+        MultiplayerManager.instance.OnMatchBegin(matchId);
+    }
+
+   
+    public void LeaveMatch(int matchId)
+    {
+        Debug.Log("Leave Match with id : "+matchId);
+    }
+
+    public void OnMatchEnded(int matchId)
+    {
+        Debug.Log("OnMatchEnded with id : " + matchId);
+    }
+
+    public void OnMatchAborted(int matchId)
+    {
+        Debug.Log("OnMatchAborted with id : " + matchId);
+    }
+    public async Task JoinQueue()
+    {
+        await _connection.SendAsync("JoinQueue");
+        Debug.Log("Done");
+    }
+
+    public void LeaveQueue()
+    {
+        Debug.Log("LeaveQueue");
+        _connection.SendAsync("LeaveQueue");
+    }
+
+    public void OnJoinedQueueSuccess()
+    {
+        Debug.Log("OnJoinedQueueSuccess");
+    }
+
+    public void OnLeftQueueSuccess()
+    {
+        Debug.Log("OnLeftQueueSuccess");
+    }
+
+    public void OnJoinedQueueFailure()
+    {
+        Debug.Log("OnJoinedQueueFailure");
+    }
+
+    public void OnLeftQueueFailure()
+    {
+        Debug.Log("OnLeftQueueFailure");
+    }
+}
+

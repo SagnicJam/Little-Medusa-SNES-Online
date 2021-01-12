@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class ServerSideGameManager : MonoBehaviour
     public static ServerSideGameManager instance;
 
     [Header("Tweak Params")]
+    public int timeToStartMatch;
     public List<EnumData.TileType> toNetworkTileType;
 
     public int snapShotsInOnePacket;
@@ -40,7 +42,9 @@ public class ServerSideGameManager : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
-        Server.Start(10, 23456);
+        string[] arguments = Environment.GetCommandLineArgs();
+        MultiplayerManager.instance.serverPort = int.Parse(arguments[1]);
+        Server.Start(10, MultiplayerManager.instance.serverPort);
     }
 
     public ServerMasterController InstantiatePlayer(int hero)
@@ -54,18 +58,15 @@ public class ServerSideGameManager : MonoBehaviour
         return serverMasterController;
     }
 
-    private void Update()
+    void StartMatch()
     {
-        if(Input.GetKeyDown(KeyCode.X))
+        currentGameState = EnumData.GameState.Gameplay;
+        foreach (KeyValuePair<int, ServerSideClient> kvp in Server.clients)
         {
-            currentGameState = EnumData.GameState.Gameplay;
-            foreach(KeyValuePair<int,ServerSideClient> kvp in Server.clients)
+            if (kvp.Value.serverMasterController != null)
             {
-                if(kvp.Value.serverMasterController!=null)
-                {
-                    kvp.Value.serverMasterController.serverInstanceHero.inCharacterSelectionScreen = (currentGameState == EnumData.GameState.CharacterSelection);
-                    kvp.Value.serverMasterController.serverInstanceHero.inGame = (currentGameState == EnumData.GameState.Gameplay);
-                }
+                kvp.Value.serverMasterController.serverInstanceHero.inCharacterSelectionScreen = (currentGameState == EnumData.GameState.CharacterSelection);
+                kvp.Value.serverMasterController.serverInstanceHero.inGame = (currentGameState == EnumData.GameState.Gameplay);
             }
         }
     }
@@ -73,7 +74,8 @@ public class ServerSideGameManager : MonoBehaviour
     private void FixedUpdate()
     {
         serverWorldSequenceNumber++;
-
+        
+        DealMatchStartTime();
         //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
 
         List<WorldGridItem> worldGridItemList = new List<WorldGridItem>();
@@ -84,7 +86,8 @@ public class ServerSideGameManager : MonoBehaviour
             WorldGridItem worldGridItem = new WorldGridItem((int)toNetworkTileType[i], positionsOfTile);
             worldGridItemList.Add(worldGridItem);
         }
-        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), new Dictionary<int, ProjectileData>(projectilesDic), new Dictionary<int, AnimatingStaticTile>(animatingStaticTileDic)));
+        GameData gameData = new GameData((int)currentGameState, timeToStartMatch);
+        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), gameData, new Dictionary<int, ProjectileData>(projectilesDic), new Dictionary<int, AnimatingStaticTile>(animatingStaticTileDic)));
 
         //Local client sending data
         if (worldUpdatesToBeSentFromServerToClient.Count >= snapShotsInOnePacket)
@@ -103,6 +106,23 @@ public class ServerSideGameManager : MonoBehaviour
 
         }
     }
+
+    void DealMatchStartTime()
+    {
+        if(timeToStartMatch>0)
+        {
+            timeToStartMatch--;
+            MultiplayerManager.instance.matchStartTimeText.text = Mathf.RoundToInt(timeToStartMatch*Time.fixedDeltaTime).ToString();
+            currentGameState = EnumData.GameState.CharacterSelection;
+        }
+        else
+        {
+            if(currentGameState==EnumData.GameState.CharacterSelection)
+            {
+                StartMatch();
+            }
+        }
+    }
     
 
     private void OnApplicationQuit()
@@ -115,13 +135,15 @@ public struct WorldUpdate
 {
     public int sequenceNumber;
     public WorldGridItem[] worldGridItems;
+    public GameData gameData;
     public Dictionary<int,ProjectileData> projectileDatas;
     public Dictionary<int,AnimatingStaticTile> animatingTileDatas;
 
-    public WorldUpdate(int sequenceNumber, WorldGridItem[] worldGridItems, Dictionary<int, ProjectileData> projectileDatas, Dictionary<int, AnimatingStaticTile> animatingTileDatas)
+    public WorldUpdate(int sequenceNumber, WorldGridItem[] worldGridItems,GameData gameData, Dictionary<int, ProjectileData> projectileDatas, Dictionary<int, AnimatingStaticTile> animatingTileDatas)
     {
         this.sequenceNumber = sequenceNumber;
         this.worldGridItems = worldGridItems;
+        this.gameData = gameData;
         this.projectileDatas = projectileDatas;
         this.animatingTileDatas = animatingTileDatas;
     }
@@ -150,6 +172,18 @@ public struct AnimatingStaticTile
         this.tileType = tileType;
         this.animationSpriteIndex = animationSpriteIndex;
         this.pos = pos;
+    }
+}
+
+public struct GameData
+{
+    public int gameState;
+    public int matchStartTime;
+
+    public GameData(int gameState, int matchStartTime)
+    {
+        this.gameState = gameState;
+        this.matchStartTime = matchStartTime;
     }
 }
 

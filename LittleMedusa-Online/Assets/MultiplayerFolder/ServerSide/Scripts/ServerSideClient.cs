@@ -36,10 +36,15 @@ public class ServerSideClient
         public void Connect(TcpClient socket)
         {
             this.socket = socket;
-            socket.ReceiveBufferSize = dataBufferSize;
-            socket.SendBufferSize = dataBufferSize;
+            Debug.Log("Assigning socket here "+id);
+            if(this.socket==null)
+            {
+                Debug.LogError("Culprit "+id);
+            }
+            this.socket.ReceiveBufferSize = dataBufferSize;
+            this.socket.SendBufferSize = dataBufferSize;
 
-            stream = socket.GetStream();
+            stream = this.socket.GetStream();
 
             receivedData = new Packet();
 
@@ -240,7 +245,7 @@ public class ServerSideClient
             worldGridItemList.Add(worldGridItem);
         }
 
-        WorldUpdate worldUpdate = new WorldUpdate(ServerSideGameManager.instance.serverWorldSequenceNumber, worldGridItemList.ToArray(), ServerSideGameManager.projectilesDic,ServerSideGameManager.animatingStaticTileDic);
+        WorldUpdate worldUpdate = new WorldUpdate(ServerSideGameManager.instance.serverWorldSequenceNumber, worldGridItemList.ToArray(),new GameData((int)ServerSideGameManager.instance.currentGameState,ServerSideGameManager.instance.timeToStartMatch), ServerSideGameManager.projectilesDic,ServerSideGameManager.animatingStaticTileDic);
 
         ServerSend.SpawnGridWorld(id, worldUpdate);
     }
