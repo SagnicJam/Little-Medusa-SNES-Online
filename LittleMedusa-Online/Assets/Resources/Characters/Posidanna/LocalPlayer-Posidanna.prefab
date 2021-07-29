@@ -768,6 +768,7 @@ GameObject:
   - component: {fileID: 7127214357023706370}
   - component: {fileID: 1881854170035987126}
   - component: {fileID: 8461197121142144064}
+  - component: {fileID: 93202386680992498}
   m_Layer: 0
   m_Name: LocalHero
   m_TagString: Untagged
@@ -960,7 +961,10 @@ MonoBehaviour:
   healthFillImage: {fileID: 3694292825115233107}
   currentLifeStockText: {fileID: 5413855789617371966}
   statusSprite: {fileID: 7787604243223704951}
+  inputFrameCounter: {fileID: 93202386680992498}
   hero: 0
+  isInputFreezed: 0
+  frameDelayForRegisteringInput: 8
   up: 0
   left: 0
   down: 0
@@ -968,6 +972,19 @@ MonoBehaviour:
   shootTidalWave: 0
   castBubbleShield: 0
   respawnPlayer: 0
+--- !u!114 &93202386680992498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8063632986591155159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad645ee1ae35c564fa882b402de3729c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputframeCount: 0
 --- !u!1 &8063632986677538152
 GameObject:
   m_ObjectHideFlags: 0

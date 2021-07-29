@@ -468,6 +468,7 @@ GameObject:
   - component: {fileID: 2756874330709423142}
   - component: {fileID: 3884784834467083734}
   - component: {fileID: 6824960385572969362}
+  - component: {fileID: 5473276686598179077}
   m_Layer: 0
   m_Name: LocalHero
   m_TagString: Untagged
@@ -617,6 +618,8 @@ MonoBehaviour:
   isFiringPrimaryProjectile: 0
   isInvincible: 0
   isRespawnningPlayer: 0
+  inCharacterSelectionScreen: 0
+  inGame: 0
   triggerFaceChangeEvent: 0
   currentHP: 0
   currentStockLives: 0
@@ -636,6 +639,18 @@ MonoBehaviour:
   healthFillImage: {fileID: 8641935902117016183}
   currentLifeStockText: {fileID: 1120112090341728794}
   statusSprite: {fileID: 2934572236436786259}
+  inputFrameCounter: {fileID: 5473276686598179077}
+  hero: 0
+  isInputFreezed: 0
+  frameDelayForRegisteringInput: 0
+  up: 0
+  left: 0
+  down: 0
+  right: 0
+  shoot: 0
+  push: 0
+  placeORRemovalBoulder: 0
+  respawnPlayer: 0
 --- !u!114 &6824960385572969362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,6 +673,19 @@ MonoBehaviour:
   spriteIndexToShow: 0
   playonAwakeWithLoop: 0
   playingOneShot: 0
+--- !u!114 &5473276686598179077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120245021199493875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad645ee1ae35c564fa882b402de3729c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputframeCount: 0
 --- !u!1 &3120245021290058828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,6 +1234,8 @@ MonoBehaviour:
   isFiringPrimaryProjectile: 0
   isInvincible: 0
   isRespawnningPlayer: 0
+  inCharacterSelectionScreen: 0
+  inGame: 0
   triggerFaceChangeEvent: 0
   currentHP: 0
   currentStockLives: 0
@@ -1225,6 +1255,18 @@ MonoBehaviour:
   healthFillImage: {fileID: 0}
   currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}
+  inputFrameCounter: {fileID: 0}
+  hero: 0
+  isInputFreezed: 0
+  frameDelayForRegisteringInput: 0
+  up: 0
+  left: 0
+  down: 0
+  right: 0
+  shoot: 0
+  push: 0
+  placeORRemovalBoulder: 0
+  respawnPlayer: 0
 --- !u!114 &8144042283862135355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1258,6 +1300,7 @@ GameObject:
   - component: {fileID: 4309584410505519486}
   - component: {fileID: 367337360462777490}
   - component: {fileID: 8378923909811213302}
+  - component: {fileID: 9065229976637673713}
   m_Layer: 0
   m_Name: ServerPredictedHero
   m_TagString: Untagged
@@ -1360,6 +1403,8 @@ MonoBehaviour:
   isFiringPrimaryProjectile: 0
   isInvincible: 0
   isRespawnningPlayer: 0
+  inCharacterSelectionScreen: 0
+  inGame: 0
   triggerFaceChangeEvent: 0
   currentHP: 0
   currentStockLives: 0
@@ -1379,6 +1424,18 @@ MonoBehaviour:
   healthFillImage: {fileID: 0}
   currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}
+  inputFrameCounter: {fileID: 9065229976637673713}
+  hero: 0
+  isInputFreezed: 0
+  frameDelayForRegisteringInput: 0
+  up: 0
+  left: 0
+  down: 0
+  right: 0
+  shoot: 0
+  push: 0
+  placeORRemovalBoulder: 0
+  respawnPlayer: 0
 --- !u!114 &8378923909811213302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1401,6 +1458,19 @@ MonoBehaviour:
   spriteIndexToShow: 0
   playonAwakeWithLoop: 0
   playingOneShot: 0
+--- !u!114 &9065229976637673713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4309584410505519487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad645ee1ae35c564fa882b402de3729c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputframeCount: 0
 --- !u!1 &4309584410610694027
 GameObject:
   m_ObjectHideFlags: 0

@@ -78,16 +78,17 @@ public abstract class Actor : TileData
     [Header("Actor Actions")]
     public WalkAction walkAction = new WalkAction();
     public PetrificationAction petrificationAction = new PetrificationAction();
-    public MoveUseAnimationAction primaryMoveUseAnimationAction = new MoveUseAnimationAction();
+    public MoveUseAnimationAction primaryMoveUseAction = new MoveUseAnimationAction();
     public InteractWithTileAction dropAction = new InteractWithTileAction();
     public WaitingForNextAction waitingForInvinciblityToOver = new WaitingForNextAction();
+
 
     public virtual void Awake()
     {
         walkAction.Initialise(this);
         petrificationAction.Initialise(this);
         waitingForInvinciblityToOver.Initialise(this);
-        primaryMoveUseAnimationAction.Initialise(this);
+        primaryMoveUseAction.Initialise(this);
         dropAction.Initialise(this);
     }
 
@@ -233,7 +234,7 @@ public abstract class Actor : TileData
         if (frameLooper == null)
             return;
 
-        if (primaryMoveUseAnimationAction.isBeingUsed)
+        if (primaryMoveUseAction.isBeingUsed)
         {
             switch (facing)
             {
@@ -402,25 +403,26 @@ public abstract class Actor : TileData
     //Will run on  server when received from client
     public void Petrify()
     {
-        if (!isPushed)
+        if (isPushed)
         {
-            petrificationAction.ReInitialise();
-
-            float fractionX = Mathf.Abs(actorTransform.position.x - movePoint.position.x) / GridManager.instance.grid.cellSize.x;
-            float fractionY = Mathf.Abs(actorTransform.position.y - movePoint.position.y) / GridManager.instance.grid.cellSize.y;
-
-            if (fractionX >= (GridManager.instance.grid.cellSize.x / 2f))
-            {
-                currentMovePointCellPosition = previousMovePointCellPosition;
-            }
-
-            if (fractionY >= (GridManager.instance.grid.cellSize.y / 2f))
-            {
-                currentMovePointCellPosition = previousMovePointCellPosition;
-            }
-            OnPetrified();
-            isPetrified = true;
+            return;
         }
+        petrificationAction.ReInitialise();
+
+        float fractionX = Mathf.Abs(actorTransform.position.x - movePoint.position.x) / GridManager.instance.grid.cellSize.x;
+        float fractionY = Mathf.Abs(actorTransform.position.y - movePoint.position.y) / GridManager.instance.grid.cellSize.y;
+
+        if (fractionX >= (GridManager.instance.grid.cellSize.x / 2f))
+        {
+            currentMovePointCellPosition = previousMovePointCellPosition;
+        }
+
+        if (fractionY >= (GridManager.instance.grid.cellSize.y / 2f))
+        {
+            currentMovePointCellPosition = previousMovePointCellPosition;
+        }
+        isPetrified = true;
+        OnPetrified();
     }
 
 
@@ -446,9 +448,12 @@ public abstract class Actor : TileData
 
     void OnPetrified()
     {
-        if (primaryMoveUseAnimationAction.isBeingUsed)
+        if (primaryMoveUseAction.isBeingUsed)
         {
-            primaryMoveUseAnimationAction.CancelMoveUsage();
+            if (primaryMoveUseAction != null)
+            {
+                primaryMoveUseAction.CancelMoveUsage();
+            }
         }
     }
 

@@ -1586,7 +1586,7 @@ public class ServerMasterController : MonoBehaviour
                 playerSequenceNumberProcessed = inputPackageCorrespondingToSeq.sequenceNumber;
 
                 serverInstanceHero.ProcessMovementInputs(inputPackageCorrespondingToSeq.commands
-                    , inputPackageCorrespondingToSeq.previousCommands);
+                    , inputPackageCorrespondingToSeq.previousCommands, inputPackageCorrespondingToSeq.movementCommandpressCount);
                 serverInstanceHero.ProcessEventsInputs(inputPackageCorrespondingToSeq.commands, inputPackageCorrespondingToSeq.previousCommands);
                 serverInstanceHero.ProcessAnimationsInputs(inputPackageCorrespondingToSeq.commands, inputPackageCorrespondingToSeq.previousCommands);
 
@@ -1602,7 +1602,7 @@ public class ServerMasterController : MonoBehaviour
                     //Debug.LogError("Could not find any inputToProcess for  seq: " + (sequenceNumberProcessed + 1));
                     playerSequenceNumberProcessed = playerSequenceNumberProcessed + 1;
 
-                    serverInstanceHero.ProcessMovementInputs(latestPlayerInputPackage.commands
+                    serverInstanceHero.ProcessInputFrameCount(latestPlayerInputPackage.commands
                    , latestPlayerInputPackage.previousCommands);
                     serverInstanceHero.ProcessEventsInputs(latestPlayerInputPackage.commands, latestPlayerInputPackage.previousCommands);
                     serverInstanceHero.ProcessAnimationsInputs(latestPlayerInputPackage.commands, latestPlayerInputPackage.previousCommands);
@@ -1633,7 +1633,7 @@ public class ServerMasterController : MonoBehaviour
         PositionUpdates positionUpdates = new PositionUpdates(serverInstanceHero.actorTransform.position, serverInstanceHero.currentMovePointCellPosition
             , serverInstanceHero.previousMovePointCellPosition,(int)serverInstanceHero.Facing,(int)serverInstanceHero.PreviousFacingDirection);
         PlayerEvents playerEvents = new PlayerEvents(serverInstanceHero.isFiringPrimaryProjectile);
-        PlayerAnimationEvents playerAnimationEvents = new PlayerAnimationEvents(serverInstanceHero.primaryMoveUseAnimationAction.isBeingUsed);
+        PlayerAnimationEvents playerAnimationEvents = new PlayerAnimationEvents(serverInstanceHero.primaryMoveUseAction.isBeingUsed);
 
         PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(serverLocalSequenceNumber,playerSequenceNumberProcessed, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimationEvents);
         PlayerStateServerUpdates playerStateServerUpdates = new PlayerStateServerUpdates(id, playerStateUpdates);

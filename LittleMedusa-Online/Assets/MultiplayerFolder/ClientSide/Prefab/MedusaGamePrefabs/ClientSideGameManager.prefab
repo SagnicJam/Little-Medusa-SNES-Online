@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ip: 127.0.0.1
-  port: 23456
   myID: 0
 --- !u!114 &9007779058758804908
 MonoBehaviour:
@@ -76,7 +75,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2159486004260017777
 RectTransform:
   m_ObjectHideFlags: 0

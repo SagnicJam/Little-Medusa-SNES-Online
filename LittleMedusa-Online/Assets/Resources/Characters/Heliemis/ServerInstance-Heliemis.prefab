@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 5865498127932777684}
   - component: {fileID: 5495952472050965225}
   - component: {fileID: 6830001883737469271}
+  - component: {fileID: 7514175480444053666}
   m_Layer: 0
   m_Name: ServerHero
   m_TagString: Untagged
@@ -318,7 +319,10 @@ MonoBehaviour:
   healthFillImage: {fileID: 0}
   currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}
+  inputFrameCounter: {fileID: 7514175480444053666}
   hero: 0
+  isInputFreezed: 0
+  frameDelayForRegisteringInput: 8
   up: 0
   left: 0
   down: 0
@@ -326,6 +330,19 @@ MonoBehaviour:
   shootMightyWind: 0
   placeTornado: 0
   respawnPlayer: 0
+--- !u!114 &7514175480444053666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7520265261763773485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad645ee1ae35c564fa882b402de3729c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputframeCount: 0
 --- !u!1 &7520265261843580133
 GameObject:
   m_ObjectHideFlags: 0

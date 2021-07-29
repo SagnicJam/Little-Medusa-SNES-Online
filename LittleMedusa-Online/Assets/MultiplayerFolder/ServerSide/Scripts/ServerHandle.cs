@@ -153,9 +153,10 @@ public class ServerHandle
             {
                 previousInputs[i] = packet.ReadBool();
             }
+            int movementCommandPressCount = packet.ReadInt();
             int inputSequenceNumber = packet.ReadInt();
             //Debug.LogWarning("<color=green>receiving inputs packet to server </color>playerMovingCommandSequenceNumber : " + inputSequenceNumber + " w " + inputs[0] + " a " + inputs[1] + " s " + inputs[2] + " d " + inputs[3]);
-            Server.clients[fromClient].serverMasterController.AccumulateInputsToBePlayedOnServerFromClient(new InputCommands(inputs, previousInputs, inputSequenceNumber));            
+            Server.clients[fromClient].serverMasterController.AccumulateInputsToBePlayedOnServerFromClient(new InputCommands(inputs, previousInputs, movementCommandPressCount, inputSequenceNumber));            
         }
         int previousInputPacks = packet.ReadInt();
         for (int i = 0; i < previousInputPacks; i++)
@@ -174,8 +175,9 @@ public class ServerHandle
                 {
                     previousDataPreviousInputCommands[k] = packet.ReadBool();
                 }
+                int movementCommandPressCount = packet.ReadInt();
                 int previousSeqNo = packet.ReadInt();
-                Server.clients[fromClient].serverMasterController.AccumulateInputsToBePlayedOnServerFromClient(new InputCommands(previousDataInputCommands, previousDataPreviousInputCommands, previousSeqNo));
+                Server.clients[fromClient].serverMasterController.AccumulateInputsToBePlayedOnServerFromClient(new InputCommands(previousDataInputCommands, previousDataPreviousInputCommands, movementCommandPressCount, previousSeqNo));
             }
         }
     }

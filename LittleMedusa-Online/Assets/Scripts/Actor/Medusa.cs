@@ -79,17 +79,17 @@ public class Medusa : Hero
         {
             if (inputs[(int)EnumData.Inputs.Shoot])
             {
-                if (!primaryMoveUseAnimationAction.isBeingUsed)
+                if (!primaryMoveUseAction.isBeingUsed)
                 {
-                    primaryMoveUseAnimationAction.isBeingUsed = true;
+                    primaryMoveUseAction.isBeingUsed = true;
                 }
             }
             else if (!inputs[(int)EnumData.Inputs.Shoot] && previousInputs[(int)EnumData.Inputs.Shoot] != inputs[(int)EnumData.Inputs.Shoot])
             {
-                if (primaryMoveUseAnimationAction.isBeingUsed)
+                if (primaryMoveUseAction.isBeingUsed)
                 {
-                    primaryMoveUseAnimationAction.isBeingUsed = false;
-                    primaryMoveUseAnimationAction.CancelMoveUsage();
+                    primaryMoveUseAction.isBeingUsed = false;
+                    primaryMoveUseAction.CancelMoveUsage();
                 }
             }
 
@@ -118,15 +118,15 @@ public class Medusa : Hero
         {
             return;
         }
-        if (primaryMoveUseAnimationAction.isBeingUsed)
+        if (primaryMoveUseAction.isBeingUsed)
         {
-            primaryMoveUseAnimationAction.Perform();
+            primaryMoveUseAction.Perform();
         }
         else
         {
-            if (!primaryMoveUseAnimationAction.isBeingUsed && primaryMoveUseAnimationAction.initialiseSprite)
+            if (!primaryMoveUseAction.isBeingUsed && primaryMoveUseAction.initialiseSprite)
             {
-                primaryMoveUseAnimationAction.CancelMoveUsage();
+                primaryMoveUseAction.CancelMoveUsage();
             }
             else if (!completedMotionToMovePoint)
             {
@@ -269,7 +269,7 @@ public class Medusa : Hero
     }
 
 
-    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
+    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs,int movementCommandPressCount)
     {
         if (isPhysicsControlled)
         {
@@ -289,40 +289,33 @@ public class Medusa : Hero
         }
         if (completedMotionToMovePoint)
         {
-            if (inputs[(int)EnumData.Inputs.Up])
+            if (inputs[(int)EnumData.Inputs.Up] && (inputs[(int)EnumData.Inputs.Up] != previousInputs[(int)EnumData.Inputs.Up]))
             {
                 Facing = FaceDirection.Up;
-                Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+            }
+            else if (inputs[(int)EnumData.Inputs.Left] && (inputs[(int)EnumData.Inputs.Left] != previousInputs[(int)EnumData.Inputs.Left]))
+            {
+                Facing = FaceDirection.Left;
+            }
+            else if (inputs[(int)EnumData.Inputs.Down] && (inputs[(int)EnumData.Inputs.Down] != previousInputs[(int)EnumData.Inputs.Down]))
+            {
+                Facing = FaceDirection.Down;
+            }
+            else if (inputs[(int)EnumData.Inputs.Right] && (inputs[(int)EnumData.Inputs.Right] != previousInputs[(int)EnumData.Inputs.Right]))
+            {
+                Facing = FaceDirection.Right;
+            }
+
+            if ((inputs[(int)EnumData.Inputs.Up]|| inputs[(int)EnumData.Inputs.Left]|| inputs[(int)EnumData.Inputs.Down]|| inputs[(int)EnumData.Inputs.Right])
+                && movementCommandPressCount > frameDelayForRegisteringInput)
+            {
+                //Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
                 //{
                 currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 //}
             }
-            else if (inputs[(int)EnumData.Inputs.Left])
-            {
-                Facing = FaceDirection.Left;
-                //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
-                //{
-                currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                //}
-            }
-            else if (inputs[(int)EnumData.Inputs.Down])
-            {
-                Facing = FaceDirection.Down;
-                //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
-                //{
-                currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                //}
-            }
-            else if (inputs[(int)EnumData.Inputs.Right])
-            {
-                Facing = FaceDirection.Right;
-                //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
-                //{
-                currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                //}
-            }
-
+           
         }
         else
         {
@@ -457,5 +450,10 @@ public class Medusa : Hero
                 respawnPlayer
                 };
         return inputs;
+    }
+
+    public override void ProcessInputFrameCount(bool[] inputs, bool[] previousInputs)
+    {
+        inputFrameCounter.ProcessInputFrameCount(inputs,previousInputs);
     }
 }

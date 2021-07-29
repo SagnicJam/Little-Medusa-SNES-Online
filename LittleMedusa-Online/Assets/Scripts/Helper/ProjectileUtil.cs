@@ -238,12 +238,12 @@ public class ProjectileUtil : MonoBehaviour
         }
         if(pU.projectileTypeThrown==EnumData.Projectiles.FireBall)
         {
-            GridManager.instance.Disperse(dispersedGOCollider
+            GridManager.instance.Disperse(pU.actorHadAuthority, dispersedGOCollider
                 , dispersedGO
-                ,dispersionRadius
-                ,dispersionSpeed
-                ,pU.ownerId
-                ,GridManager.instance.grid.WorldToCell(transform.position));
+                , dispersionRadius
+                , dispersionSpeed
+                , pU.ownerId
+                , GridManager.instance.grid.WorldToCell(transform.position));
         }
         Destroy(gameObject);
     }

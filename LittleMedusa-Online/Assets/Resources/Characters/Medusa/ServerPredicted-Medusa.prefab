@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 8438492171484474930}
   - component: {fileID: 5461802819602088926}
   - component: {fileID: 4220674656292707514}
+  - component: {fileID: 6354422439391426448}
   m_Layer: 0
   m_Name: ServerPredictedHero
   m_TagString: Untagged
@@ -248,7 +249,10 @@ MonoBehaviour:
   healthFillImage: {fileID: 0}
   currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}
+  inputFrameCounter: {fileID: 6354422439391426448}
   hero: 0
+  isInputFreezed: 0
+  frameDelayForRegisteringInput: 8
   up: 0
   left: 0
   down: 0
@@ -279,6 +283,19 @@ MonoBehaviour:
   spriteIndexToShow: 0
   playonAwakeWithLoop: 0
   playingOneShot: 0
+--- !u!114 &6354422439391426448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8438492171484474931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad645ee1ae35c564fa882b402de3729c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputframeCount: 0
 --- !u!1 &8438492171874859207
 GameObject:
   m_ObjectHideFlags: 0

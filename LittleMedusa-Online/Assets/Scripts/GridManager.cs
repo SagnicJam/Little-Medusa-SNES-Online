@@ -174,13 +174,16 @@ public class GridManager : MonoBehaviour
         yield break;
     }
 
-    public void Disperse(GameObject dispersedCollider,GameObject dispersedGO,float dispersionRadius,float dispersionSpeed,int ownerId, Vector3Int dispersePoint)
+    public void Disperse(bool spawnTriggerCollider,GameObject dispersedCollider,GameObject dispersedGO,float dispersionRadius,float dispersionSpeed,int ownerId, Vector3Int dispersePoint)
     {
         List<Vector3Int> vList = new List<Vector3Int>();
         Vector3 dispersedPoint = cellToworld(dispersePoint);
-        DispersionCollider dispersionCollider = Instantiate(dispersedCollider, dispersedPoint, Quaternion.identity).GetComponent<DispersionCollider>();
-
-        dispersionCollider.Grow(dispersionRadius, dispersionSpeed, ownerId);
+        if(spawnTriggerCollider)
+        {
+            DispersionCollider dispersionCollider = Instantiate(dispersedCollider, dispersedPoint, Quaternion.identity).GetComponent<DispersionCollider>();
+            dispersionCollider.Grow(dispersionRadius, dispersionSpeed, ownerId);
+        }
+        
 
         float perAngleJump = 360 / 8;
         for (float angle = 0; angle <= 360; angle += perAngleJump)
@@ -758,6 +761,11 @@ public class GridManager : MonoBehaviour
             });
         }
     
+    }
+
+    public void OnHitMedusa(Vector3 position)
+    {
+        Instantiate(GamePrefabCreator.instance.onHitMedusaVFX, position, Quaternion.identity);
     }
 }
 [Serializable]

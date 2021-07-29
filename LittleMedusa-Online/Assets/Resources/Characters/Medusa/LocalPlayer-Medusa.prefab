@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 1765732196427759132}
   - component: {fileID: 804668454826426348}
   - component: {fileID: 6950294217673970088}
+  - component: {fileID: 3200239471511497581}
   m_Layer: 0
   m_Name: LocalHero
   m_TagString: Untagged
@@ -237,6 +238,8 @@ MonoBehaviour:
   isFiringPrimaryProjectile: 0
   isInvincible: 0
   isRespawnningPlayer: 0
+  inCharacterSelectionScreen: 0
+  inGame: 0
   triggerFaceChangeEvent: 0
   currentHP: 0
   currentStockLives: 0
@@ -256,7 +259,10 @@ MonoBehaviour:
   healthFillImage: {fileID: 5272893148613916749}
   currentLifeStockText: {fileID: 3551148271469094944}
   statusSprite: {fileID: 1619879066139215465}
+  inputFrameCounter: {fileID: 3200239471511497581}
   hero: 0
+  isInputFreezed: 0
+  frameDelayForRegisteringInput: 8
   up: 0
   left: 0
   down: 0
@@ -287,6 +293,19 @@ MonoBehaviour:
   spriteIndexToShow: 0
   playonAwakeWithLoop: 0
   playingOneShot: 0
+--- !u!114 &3200239471511497581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553197456691224777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad645ee1ae35c564fa882b402de3729c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputframeCount: 0
 --- !u!1 &1553197456940129910
 GameObject:
   m_ObjectHideFlags: 0

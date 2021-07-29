@@ -140,12 +140,13 @@ public class ClientMasterController : MonoBehaviour
                 bool[] inputs = getInputs();
                 localSequenceNumber++;
 
-                ProcessInputsLocally(inputs, previousInputs);
-                RecordLocalClientActions(localSequenceNumber, inputs, previousInputs);
+                localPlayer.ProcessInputFrameCount(inputs,previousInputs);
+                ProcessInputsLocally(inputs, previousInputs, localPlayer.inputFrameCounter.inputframeCount);
+                RecordLocalClientActions(localSequenceNumber, inputs, previousInputs, localPlayer.inputFrameCounter.inputframeCount);
 
                 //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
 
-                inputCommandsToBeSentToServerCollection.Add(new InputCommands(inputs, previousInputs, localSequenceNumber));
+                inputCommandsToBeSentToServerCollection.Add(new InputCommands(inputs, previousInputs, localPlayer.inputFrameCounter.inputframeCount, localSequenceNumber));
                 previousInputs = inputs;
 
                 //Local client sending data
@@ -212,18 +213,18 @@ public class ClientMasterController : MonoBehaviour
         return largestInt;
     }
 
-    public void RecordLocalClientActions(int sequenceNumber,bool[] inputs,bool[] previousInputs)
+    public void RecordLocalClientActions(int sequenceNumber,bool[] inputs,bool[] previousInputs,int movementCommandPressCount)
     {
         //Debug.Log("After wards player position locally "+localPlayer.actorTransform.position+"<color=red>Recording here </color>"+"-->"+ sequenceNumber+" "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]+"<color=blue>Previous Inputs</color>"+previousInputs[0]+" "+previousInputs[1]+" "+previousInputs[2]+" "+previousInputs[3]);
-        localClientInputCommands.Add(sequenceNumber,new InputCommands(inputs,previousInputs,sequenceNumber));
+        localClientInputCommands.Add(sequenceNumber,new InputCommands(inputs,previousInputs, movementCommandPressCount,sequenceNumber));
         sequenceNoList.Add(sequenceNumber);
         latestPacketProcessedLocally = sequenceNumber;
         //Debug.Log("<color=pink>sequence no recorded </color>" + sequenceNo + "<color=pink> last run is  </color>"+localClientInputCommands.Count);
     }
 
-    private void ProcessInputsLocally(bool[]inputs,bool[] previousInputs)
+    private void ProcessInputsLocally(bool[]inputs,bool[] previousInputs,int movementCommandPressCount)
     {
-        localPlayer.ProcessMovementInputs(inputs, previousInputs);
+        localPlayer.ProcessMovementInputs(inputs, previousInputs, movementCommandPressCount);
         localPlayer.ProcessEventsInputs(inputs, previousInputs);
         localPlayer.ProcessAnimationsInputs(inputs, previousInputs);
 
@@ -277,7 +278,7 @@ public class ClientMasterController : MonoBehaviour
             {
                 //Debug.Log("<color=yellow>prediction done using sequnce no: </color>" + localClientInputCommands[i].sequenceNumber + "<color=green> inputs: </color>" + localClientInputCommands[i].commands[0] + localClientInputCommands[i].commands[1] + localClientInputCommands[i].commands[2] + localClientInputCommands[i].commands[3] + " Previous commands " + localClientInputCommands[i].previousCommands[0] + localClientInputCommands[i].previousCommands[1] + localClientInputCommands[i].previousCommands[2] + localClientInputCommands[i].previousCommands[3]);
                 //Debug.Log(serverPlayer.movePoint.position + "--" + serverPlayer.currentMovePointCellPosition + "Before" + serverPlayer.actorTransform.position + "<color=yellow>Before prediction done using sequnce no: </color>" + localClientInputCommands[i].sequenceNumber);
-                serverPlayer.ProcessMovementInputs(ic2.commands,ic2.previousCommands);
+                serverPlayer.ProcessMovementInputs(ic2.commands, ic2.previousCommands,ic2.movementCommandpressCount);
                 serverPlayer.ProcessInputMovementsControl();
                 //Debug.Log(serverPlayer.movePoint.position + "--" + serverPlayer.currentMovePointCellPosition + "After wards" + serverPlayer.actorTransform.position + "<color=yellow>After prediction done using sequnce no: </color>" + localClientInputCommands[i].sequenceNumber + "<color=green> inputs: </color>" + localClientInputCommands[i].commands[0] + localClientInputCommands[i].commands[1] + localClientInputCommands[i].commands[2] + localClientInputCommands[i].commands[3] + " Previous commands " + localClientInputCommands[i].previousCommands[0] + localClientInputCommands[i].previousCommands[1] + localClientInputCommands[i].previousCommands[2] + localClientInputCommands[i].previousCommands[3]);
             }
@@ -655,11 +656,13 @@ public struct InputCommands
     public int sequenceNumber;
     public bool[] commands;
     public bool[] previousCommands;
+    public int movementCommandpressCount;
 
-    public InputCommands(bool[] commands,bool[] previousCommands, int sequenceNumber)
+    public InputCommands(bool[] commands,bool[] previousCommands,int movementCommandpressCount, int sequenceNumber)
     {
         this.commands = commands;
         this.previousCommands = previousCommands;
+        this.movementCommandpressCount = movementCommandpressCount;
         this.sequenceNumber = sequenceNumber;
     }
 }

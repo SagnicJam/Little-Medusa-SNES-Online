@@ -90,7 +90,7 @@ public class ServerSend
             packet.Write((int)serverMasterController.serverInstanceHero.Facing);
             packet.Write((int)serverMasterController.serverInstanceHero.PreviousFacingDirection);
             packet.Write(serverMasterController.serverInstanceHero.isFiringPrimaryProjectile);
-            packet.Write(serverMasterController.serverInstanceHero.primaryMoveUseAnimationAction.isBeingUsed);
+            packet.Write(serverMasterController.serverInstanceHero.primaryMoveUseAction.isBeingUsed);
             packet.Write(serverMasterController.serverInstanceHero.isPetrified);
             packet.Write(serverMasterController.serverInstanceHero.isPushed);
             packet.Write(serverMasterController.serverInstanceHero.isPhysicsControlled);

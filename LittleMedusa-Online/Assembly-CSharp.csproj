@@ -88,6 +88,7 @@
     <Compile Include="Assets\MultiplayerFolder\ServerSide\Scripts\ServerSideGameManager.cs" />
     <Compile Include="Assets\MultiplayerFolder\Util\Packet.cs" />
     <Compile Include="Assets\MultiplayerFolder\Util\ThreadManager.cs" />
+    <Compile Include="Assets\PrefabScripts\GamePrefabCreator.cs" />
     <Compile Include="Assets\Scripts\Ability\Attack.cs" />
     <Compile Include="Assets\Scripts\Action\Actions.cs" />
     <Compile Include="Assets\Scripts\Action\InteractWithTileAction.cs" />
@@ -107,6 +108,8 @@
     <Compile Include="Assets\Scripts\Data\PlayerInfoData.cs" />
     <Compile Include="Assets\Scripts\Data\Room.cs" />
     <Compile Include="Assets\Scripts\Dtos\RoomDto.cs" />
+    <Compile Include="Assets\Scripts\EnemyAI\Cyclops.cs" />
+    <Compile Include="Assets\Scripts\EnemyAI\Enemy.cs" />
     <Compile Include="Assets\Scripts\EnumData.cs" />
     <Compile Include="Assets\Scripts\FindMatchScreen.cs" />
     <Compile Include="Assets\Scripts\GameConfig.cs" />
@@ -119,6 +122,7 @@
     <Compile Include="Assets\Scripts\Helper\ProjectileUtil.cs" />
     <Compile Include="Assets\Scripts\Helper\StaticAnimatingTileManager.cs" />
     <Compile Include="Assets\Scripts\Helper\StaticAnimatingTileUtil.cs" />
+    <Compile Include="Assets\Scripts\InputControl\InputFrameCount.cs" />
     <Compile Include="Assets\Scripts\InputControllers\AvernaInputController.cs" />
     <Compile Include="Assets\Scripts\InputControllers\ErmolaiInputController.cs" />
     <Compile Include="Assets\Scripts\InputControllers\HeliemisInputController.cs" />
@@ -134,8 +138,12 @@
     <Compile Include="Assets\Scripts\LobbySystem\interfaces\ILobby.cs" />
     <Compile Include="Assets\Scripts\LobbySystem\interfaces\IPlayerList.cs" />
     <Compile Include="Assets\Scripts\LobbySystem\interfaces\IRoomList.cs" />
+    <Compile Include="Assets\Scripts\Mapper\AStar.cs" />
+    <Compile Include="Assets\Scripts\Mapper\AStarPathFindMapper.cs" />
+    <Compile Include="Assets\Scripts\Mapper\AimlessWandererMapper.cs" />
     <Compile Include="Assets\Scripts\Mapper\Mapper.cs" />
     <Compile Include="Assets\Scripts\Mapper\OneDNonCheckingMapper.cs" />
+    <Compile Include="Assets\Scripts\Misc\FPSDisplay.cs" />
     <Compile Include="Assets\Scripts\MultiplayerConnectionEst\Interfaces\IMatchMake.cs" />
     <Compile Include="Assets\Scripts\MultiplayerConnectionEst\MatchMaker.cs" />
     <Compile Include="Assets\Scripts\MultiplayerConnectionEst\SignalRCoreConnect.cs" />

@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 6859817303419487237}
   - component: {fileID: 1583362718385476947}
   - component: {fileID: 3478797571131538498}
+  - component: {fileID: 3824045091951895389}
   m_Layer: 0
   m_Name: RemoteHero
   m_TagString: Untagged
@@ -188,7 +189,10 @@ MonoBehaviour:
   healthFillImage: {fileID: 0}
   currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}
+  inputFrameCounter: {fileID: 3824045091951895389}
   hero: 0
+  isInputFreezed: 0
+  frameDelayForRegisteringInput: 8
   up: 0
   left: 0
   down: 0
@@ -196,6 +200,19 @@ MonoBehaviour:
   shootMightyWind: 0
   placeTornado: 0
   respawnPlayer: 0
+--- !u!114 &3824045091951895389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6859817303419487238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad645ee1ae35c564fa882b402de3729c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputframeCount: 0
 --- !u!1 &6859817303550687723
 GameObject:
   m_ObjectHideFlags: 0

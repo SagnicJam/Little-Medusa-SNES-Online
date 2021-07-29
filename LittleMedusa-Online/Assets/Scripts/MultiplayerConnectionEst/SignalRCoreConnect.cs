@@ -22,9 +22,11 @@ public class SignalRCoreConnect : MonoBehaviour
         if (_connection != null) await _connection.CloseAsync();
     }
 
+
     void InitialiseHubConnection(string username)
     {
-        _connection = new HubConnection(new Uri("https://localhost:5001/customlobbysystem?user=" + username)
+        //public ip here//private ip in server
+        _connection = new HubConnection(new Uri("https://localhost:5001/gamehub?user=" + username)
             , new JsonProtocol(new LitJsonEncoder()), new HubOptions());
 
         _connection.OnError += Hub_OnError;
@@ -40,6 +42,7 @@ public class SignalRCoreConnect : MonoBehaviour
         }
     }
 
+
     public async Task ServerConnectSignalR(string username,int port, OnWorkDone<int> onCompleted)
     {
         InitialiseHubConnection(username);
@@ -51,7 +54,6 @@ public class SignalRCoreConnect : MonoBehaviour
 
     public async Task ClientConnectSignalR(string username,OnWorkDone onCompleted)
     {
-
         InitialiseHubConnection(username);
         Debug.Log("Connecting for client!");
         Loader loader=null;

@@ -50,17 +50,17 @@ public class Averna : Hero
         {
             if (inputs[(int)EnumData.AvernaInputs.ShootFireBall])
             {
-                if (!primaryMoveUseAnimationAction.isBeingUsed)
+                if (!primaryMoveUseAction.isBeingUsed)
                 {
-                    primaryMoveUseAnimationAction.isBeingUsed = true;
+                    primaryMoveUseAction.isBeingUsed = true;
                 }
             }
             else if (!inputs[(int)EnumData.AvernaInputs.ShootFireBall] && previousInputs[(int)EnumData.AvernaInputs.ShootFireBall] != inputs[(int)EnumData.AvernaInputs.ShootFireBall])
             {
-                if (primaryMoveUseAnimationAction.isBeingUsed)
+                if (primaryMoveUseAction.isBeingUsed)
                 {
-                    primaryMoveUseAnimationAction.isBeingUsed = false;
-                    primaryMoveUseAnimationAction.CancelMoveUsage();
+                    primaryMoveUseAction.isBeingUsed = false;
+                    primaryMoveUseAction.CancelMoveUsage();
                 }
             }
         }
@@ -221,15 +221,15 @@ public class Averna : Hero
         {
             return;
         }
-        if (primaryMoveUseAnimationAction.isBeingUsed)
+        if (primaryMoveUseAction.isBeingUsed)
         {
-            primaryMoveUseAnimationAction.Perform();
+            primaryMoveUseAction.Perform();
         }
         else
         {
-            if (!primaryMoveUseAnimationAction.isBeingUsed && primaryMoveUseAnimationAction.initialiseSprite)
+            if (!primaryMoveUseAction.isBeingUsed && primaryMoveUseAction.initialiseSprite)
             {
-                primaryMoveUseAnimationAction.CancelMoveUsage();
+                primaryMoveUseAction.CancelMoveUsage();
             }
             else if (!completedMotionToMovePoint)
             {
@@ -300,7 +300,7 @@ public class Averna : Hero
         walkAction.Perform();
     }
 
-    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
+    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs,int movementCommandPressCount)
     {
         if (isPhysicsControlled)
         {
@@ -320,35 +320,28 @@ public class Averna : Hero
         }
         if (completedMotionToMovePoint)
         {
-            if (inputs[(int)EnumData.Inputs.Up])
+            if (inputs[(int)EnumData.Inputs.Up] && (inputs[(int)EnumData.Inputs.Up] != previousInputs[(int)EnumData.Inputs.Up]))
             {
                 Facing = FaceDirection.Up;
-                Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
-                //{
-                currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                //}
             }
-            else if (inputs[(int)EnumData.Inputs.Left])
+            else if (inputs[(int)EnumData.Inputs.Left] && (inputs[(int)EnumData.Inputs.Left] != previousInputs[(int)EnumData.Inputs.Left]))
             {
                 Facing = FaceDirection.Left;
-                //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
-                //{
-                currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                //}
             }
-            else if (inputs[(int)EnumData.Inputs.Down])
+            else if (inputs[(int)EnumData.Inputs.Down] && (inputs[(int)EnumData.Inputs.Down] != previousInputs[(int)EnumData.Inputs.Down]))
             {
                 Facing = FaceDirection.Down;
-                //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
-                //{
-                currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                //}
             }
-            else if (inputs[(int)EnumData.Inputs.Right])
+            else if (inputs[(int)EnumData.Inputs.Right] && (inputs[(int)EnumData.Inputs.Right] != previousInputs[(int)EnumData.Inputs.Right]))
             {
                 Facing = FaceDirection.Right;
-                //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing))
+            }
+
+            if ((inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Right])
+                && movementCommandPressCount > frameDelayForRegisteringInput)
+            {
+                //Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
                 //{
                 currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 //}
@@ -442,5 +435,9 @@ public class Averna : Hero
                 selectMedusa
                 };
         return inputs;
+    }
+    public override void ProcessInputFrameCount(bool[] inputs, bool[] previousInputs)
+    {
+        inputFrameCounter.ProcessInputFrameCount(inputs, previousInputs);
     }
 }

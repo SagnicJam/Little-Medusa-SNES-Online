@@ -14,6 +14,7 @@ public abstract class Hero : Actor
     public Image healthFillImage;
     public TextMeshProUGUI currentLifeStockText;
     public SpriteRenderer statusSprite;
+    public InputFrameCount inputFrameCounter;
 
     [Header("Hero Actions")]
     public WaitingForNextAction waitingActionForPrimaryMove = new WaitingForNextAction();
@@ -21,14 +22,16 @@ public abstract class Hero : Actor
     [Header("Live Data")]
     public int hero;
     public bool isInputFreezed;
+    public int frameDelayForRegisteringInput;
 
     public override void Awake()
     {
         base.Awake();
+
         waitingActionForPrimaryMove.Initialise(this);
         waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
 
-        primaryMoveUseAnimationAction.SetAnimationSpeedAndSpritesOnUsage(primaryMoveAnimationSpeed, normalAnimationSpeed);
+        primaryMoveUseAction.SetAnimationSpeedAndSpritesOnUsage(primaryMoveAnimationSpeed, normalAnimationSpeed);
         rangedAttack_1 = new Attack(primaryMoveDamage, EnumData.AttackTypes.ProjectileAttack, projectileThrownType);
     }
 
@@ -151,7 +154,7 @@ public abstract class Hero : Actor
 
     public void SetActorAnimationState(PlayerAnimationEvents playerAnimationEvents)
     {
-        primaryMoveUseAnimationAction.isBeingUsed = playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed;
+        primaryMoveUseAction.isBeingUsed = playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed;
     }
 
     //authoratatively is performed(but is locally is also done)
@@ -194,7 +197,9 @@ public abstract class Hero : Actor
     /// </summary>
     /// <param name="inputs"></param>
     /// <param name="previousInputs"></param>
-    public abstract void ProcessMovementInputs(bool[] inputs, bool[] previousInputs);
+    public abstract void ProcessMovementInputs(bool[] inputs, bool[] previousInputs,int movementCommandPressCount);
+
+    public abstract void ProcessInputFrameCount(bool[]inputs,bool[]previousInputs);
 
     /// <summary>
     /// Called locally on client and on server

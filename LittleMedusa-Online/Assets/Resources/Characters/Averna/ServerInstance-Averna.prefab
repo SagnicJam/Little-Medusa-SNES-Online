@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 1681645371743594888}
   - component: {fileID: 753652899687765941}
   - component: {fileID: 7908723408593909882}
+  - component: {fileID: 5111044400009170026}
   m_Layer: 0
   m_Name: ServerHero
   m_TagString: Untagged
@@ -295,6 +296,8 @@ MonoBehaviour:
   isFiringPrimaryProjectile: 0
   isInvincible: 0
   isRespawnningPlayer: 0
+  inCharacterSelectionScreen: 0
+  inGame: 0
   triggerFaceChangeEvent: 0
   currentHP: 0
   currentStockLives: 0
@@ -314,6 +317,31 @@ MonoBehaviour:
   healthFillImage: {fileID: 0}
   currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}
+  inputFrameCounter: {fileID: 5111044400009170026}
+  hero: 0
+  isInputFreezed: 0
+  frameDelayForRegisteringInput: 8
+  up: 0
+  left: 0
+  down: 0
+  right: 0
+  shootFireBall: 0
+  castFlamePillar: 0
+  respawnPlayer: 0
+  selectMedusa: 0
+--- !u!114 &5111044400009170026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3345419843409135985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad645ee1ae35c564fa882b402de3729c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputframeCount: 0
 --- !u!1 &3345419843549339525
 GameObject:
   m_ObjectHideFlags: 0

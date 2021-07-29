@@ -769,6 +769,7 @@ GameObject:
   - component: {fileID: 8113084855782908538}
   - component: {fileID: 1244065629654800263}
   - component: {fileID: 666767143457830073}
+  - component: {fileID: 5240171545127504576}
   m_Layer: 0
   m_Name: RemoteHero
   m_TagString: Untagged
@@ -940,6 +941,8 @@ MonoBehaviour:
   isFiringPrimaryProjectile: 0
   isInvincible: 0
   isRespawnningPlayer: 0
+  inCharacterSelectionScreen: 0
+  inGame: 0
   triggerFaceChangeEvent: 0
   currentHP: 0
   currentStockLives: 0
@@ -959,6 +962,31 @@ MonoBehaviour:
   healthFillImage: {fileID: 8649658973955065500}
   currentLifeStockText: {fileID: 8910110750577682807}
   statusSprite: {fileID: 1908355285719078919}
+  inputFrameCounter: {fileID: 5240171545127504576}
+  hero: 0
+  isInputFreezed: 0
+  frameDelayForRegisteringInput: 8
+  up: 0
+  left: 0
+  down: 0
+  right: 0
+  shootFireBall: 0
+  castFlamePillar: 0
+  respawnPlayer: 0
+  selectMedusa: 0
+--- !u!114 &5240171545127504576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8928919519344515182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad645ee1ae35c564fa882b402de3729c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputframeCount: 0
 --- !u!1 &8928919519750399363
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,7 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3afa70b8205a84248a52841ddb4baca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToStartMatch: 2000
+  spawnPositions:
+  - {x: 3.5, y: 6.5, z: 0}
+  - {x: -3.5, y: 6.5, z: 0}
+  - {x: -3.5, y: -0.5, z: 0}
+  - {x: 3.5, y: -0.5, z: 0}
+  timeToStartMatch: 225
   toNetworkTileType: 03000000140000001500000002000000
   snapShotsInOnePacket: 4
   packetHistorySize: 3

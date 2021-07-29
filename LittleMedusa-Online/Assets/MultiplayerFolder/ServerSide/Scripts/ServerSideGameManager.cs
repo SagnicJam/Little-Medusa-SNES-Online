@@ -8,6 +8,7 @@ public class ServerSideGameManager : MonoBehaviour
     public static ServerSideGameManager instance;
 
     [Header("Tweak Params")]
+    public List<Vector3> spawnPositions;
     public int timeToStartMatch;
     public List<EnumData.TileType> toNetworkTileType;
 
@@ -96,6 +97,7 @@ public class ServerSideGameManager : MonoBehaviour
             {
                 previousHistoryForWorldUpdatesToBeSentToServerCollection.RemoveAt(0);
             }
+
             ServerSend.WorldUpdate(worldUpdatesToBeSentFromServerToClient, previousHistoryForWorldUpdatesToBeSentToServerCollection);
 
             previousHistoryForWorldUpdatesToBeSentToServerCollection.Add(new PreviousWorldUpdatePacks(worldUpdatesToBeSentFromServerToClient.ToArray()));
