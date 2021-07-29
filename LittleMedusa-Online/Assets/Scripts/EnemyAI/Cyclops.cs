@@ -6,16 +6,16 @@ public class Cyclops : Enemy
 {
     public float lineRangeForDetection;
     
-    public override void Awake()
-    {
-        base.Awake();
+    //public override void Awake()
+    //{
+    //    base.Awake();
         
-        lineRangeForDetection = GameConfig.cyclopsLineRangeInTileUnitsForFollowing;
-        walkSpeed = GameConfig.cyclopsMovementSpeed;
+    //    lineRangeForDetection = GameConfig.cyclopsLineRangeInTileUnitsForFollowing;
+    //    walkSpeed = GameConfig.cyclopsMovementSpeed;
 
-        mapperList.Add(new AimlessWandererMapper());
-        mapperList.Add(new AStarPathFindMapper());
+    //    mapperList.Add(new AimlessWandererMapper());
+    //    mapperList.Add(new AStarPathFindMapper());
 
-        //primaryMoveUseAction.SetAnimationSpeedAndSpritesOnUsage(GameConfig.cyclopsWalkAnimationDuration,GameConfig.cyclopsWalkAnimationDuration,);
-    }
+    //    //primaryMoveUseAction.SetAnimationSpeedAndSpritesOnUsage(GameConfig.cyclopsWalkAnimationDuration,GameConfig.cyclopsWalkAnimationDuration,);
+    //}
 }
