@@ -4,16 +4,27 @@ using UnityEngine;
 using UnityEngine.Events;
 public class FrameLooper : MonoBehaviour
 {
+    public OnUsed<Actor> onMoveUseActionOver;
+
     public UnityEvent onPlayOneShotAnimation;
     public Sprite[] spriteArr;
     public SpriteRenderer spriteRenderer;
-    
-    public float timeBetweenFrames;
 
+    public float animationDuration;
     public float temp;
-    public int spriteIndexToShow;
 
+    public bool IsLoopComplete;
     public bool playonAwakeWithLoop;
+    public bool playonAwakeOneShot;
+    public int spriteIndexToShowCache;
+
+    private void Start()
+    {
+        if(playonAwakeOneShot)
+        {
+            PlayOneShotAnimation();
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -32,10 +43,11 @@ public class FrameLooper : MonoBehaviour
     {
         if(spArr.Length>0)
         {
-            spriteIndexToShow = 0;
+            spriteIndexToShowCache = 0;
             spriteArr = spArr;
-            spriteRenderer.sprite = spriteArr[spriteIndexToShow];
-            temp = timeBetweenFrames;
+            spriteRenderer.sprite = spriteArr[spriteIndexToShowCache];
+            temp = 0;
+            IsLoopComplete = false;
         }
     }
 
@@ -43,8 +55,12 @@ public class FrameLooper : MonoBehaviour
     IEnumerator ie;
     public void PlayOneShotAnimation()
     {
+        if (ie != null)
+        {
+            StopCoroutine(ie);
+        }
+
         ie = PlayOneShot();
-        StopCoroutine(ie);
         StartCoroutine(ie);
     }
 
@@ -53,27 +69,19 @@ public class FrameLooper : MonoBehaviour
         StopCoroutine(ie);
     }
 
-    public bool isRepeatingLoop
-    {
-        get
-        {
-            return spriteIndexToShow + 1 == spriteArr.Length;
-        }
-    }
-
     IEnumerator PlayOneShot()
     {
         playingOneShot = true;
-        spriteIndexToShow = 0;
-        temp = timeBetweenFrames;
+        spriteIndexToShowCache = 0;
         if (spriteArr.Length > 0)
         {
-            while (!isRepeatingLoop)
+            while (!IsLoopComplete)
             {
                 UpdateAnimationFrame();
                 yield return new WaitForFixedUpdate();
             }
         }
+
         if (onPlayOneShotAnimation != null)
         {
             onPlayOneShotAnimation.Invoke();
@@ -84,22 +92,27 @@ public class FrameLooper : MonoBehaviour
 
     public void UpdateAnimationFrame()
     {
-        if (temp >= 0f)
+        temp += Time.fixedDeltaTime;
+        if (temp < animationDuration)
         {
-            temp -= Time.fixedDeltaTime;
+            IsLoopComplete = false;
+            spriteIndexToShowCache = Mathf.RoundToInt(Mathf.Lerp(0, spriteArr.Length - 1, temp / animationDuration));
+            if (spriteIndexToShowCache < 0 || spriteIndexToShowCache >= spriteArr.Length)
+            {
+                Debug.LogError("instance id causing problem: " + gameObject.GetInstanceID() + "----> " + spriteIndexToShowCache);
+                return;
+            }
+            spriteRenderer.sprite = spriteArr[spriteIndexToShowCache];
         }
         else
         {
-            if (spriteArr.Length == 0)
-            {
-                return;
-            }
-            else
-            {
-                spriteIndexToShow = (spriteIndexToShow + 1) % spriteArr.Length;
-                spriteRenderer.sprite = spriteArr[spriteIndexToShow];
-                temp = timeBetweenFrames;
-            }
+            temp = 0;
+            IsLoopComplete = true;
         }
+    }
+
+    public void DestroyObject()
+    {
+        Destroy(this.gameObject);
     }
 }

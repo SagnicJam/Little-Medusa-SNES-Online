@@ -1,0 +1,659 @@
+fileFormatVersion: 2
+guid: ce9ffb987b520294e8177a5effbcc97c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2285019674660935136
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_0
+  - first:
+      213: -3637103932157107474
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_1
+  - first:
+      213: 2769105252642229802
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_2
+  - first:
+      213: -1197042593753365218
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_3
+  - first:
+      213: 9036978998019798619
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_4
+  - first:
+      213: 3141963019114264475
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_5
+  - first:
+      213: 17931158167636245
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_6
+  - first:
+      213: 4813454238397481510
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_7
+  - first:
+      213: 453187259979109572
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_8
+  - first:
+      213: -5340233530382822693
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_9
+  - first:
+      213: -2859981543035609040
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_10
+  - first:
+      213: -6016933576878862022
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_11
+  - first:
+      213: 1678115630442309028
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_12
+  - first:
+      213: -1975605844614772360
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_13
+  - first:
+      213: -7173633692812138771
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_14
+  - first:
+      213: -1535128395740898326
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_15
+  - first:
+      213: 8057595783090323406
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_16
+  - first:
+      213: 2046172701153493801
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_17
+  - first:
+      213: 1323865543235166376
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_18
+  - first:
+      213: 8352885677809985780
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_19
+  - first:
+      213: 6683572047256436197
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_20
+  - first:
+      213: -3309626833177935566
+    second: Poseidonna_Character_Idle_S(32,32)_35F.dain_21
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 68
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02a6e0366baf940e0800000000000000
+      internalID: -2285019674660935136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 68
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee269907e39668dc0800000000000000
+      internalID: -3637103932157107474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 68
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2e88615e86dd6620800000000000000
+      internalID: 2769105252642229802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_3
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 68
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e15815a6a10436fe0800000000000000
+      internalID: -1197042593753365218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_4
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 68
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b56b2abc48cc96d70800000000000000
+      internalID: 9036978998019798619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_5
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 68
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9738b318be7a9b20800000000000000
+      internalID: 3141963019114264475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_6
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 68
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5194ef81b44bf3000800000000000000
+      internalID: 17931158167636245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_7
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 68
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 622c7468023dcc240800000000000000
+      internalID: 4813454238397481510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_8
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 36
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c499cf696b0a4600800000000000000
+      internalID: 453187259979109572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_9
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 36
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd2d6ebd5eda3e5b0800000000000000
+      internalID: -5340233530382822693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_10
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 36
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 030603f70fd4f48d0800000000000000
+      internalID: -2859981543035609040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_11
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 36
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a31d3097ace8f7ca0800000000000000
+      internalID: -6016933576878862022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_12
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 36
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a56b8c564dd94710800000000000000
+      internalID: 1678115630442309028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_13
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 36
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8790d8793fc3594e0800000000000000
+      internalID: -1975605844614772360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_14
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 36
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de6a827f922227c90800000000000000
+      internalID: -7173633692812138771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_15
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 36
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeb9f378bd022bae0800000000000000
+      internalID: -1535128395740898326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_16
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 4
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecfb8ca7ca452df60800000000000000
+      internalID: 8057595783090323406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_17
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 4
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9230b590b37756c10800000000000000
+      internalID: 2046172701153493801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_18
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 4
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a069ea82b05f5210800000000000000
+      internalID: 1323865543235166376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_19
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 4
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f8ef4bb4496be370800000000000000
+      internalID: 8352885677809985780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poseidonna_Character_Idle_S(32,32)_35F.dain_20
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 4
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ed337bad51d0cc50800000000000000
+      internalID: 6683572047256436197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

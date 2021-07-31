@@ -1,0 +1,473 @@
+fileFormatVersion: 2
+guid: 993d8a99bc47c81418ae26bba5c0f4e9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1311709302836147673
+    second: Averna_Character_Walk_E(16,28)_32F.dain_0
+  - first:
+      213: 1085245645259325593
+    second: Averna_Character_Walk_E(16,28)_32F.dain_1
+  - first:
+      213: 6922795262023143336
+    second: Averna_Character_Walk_E(16,28)_32F.dain_2
+  - first:
+      213: 9134714629338653960
+    second: Averna_Character_Walk_E(16,28)_32F.dain_3
+  - first:
+      213: -4730481702891317654
+    second: Averna_Character_Walk_E(16,28)_32F.dain_4
+  - first:
+      213: 2901824382587749049
+    second: Averna_Character_Walk_E(16,28)_32F.dain_5
+  - first:
+      213: -7256296607217454568
+    second: Averna_Character_Walk_E(16,28)_32F.dain_6
+  - first:
+      213: -6777534948470197895
+    second: Averna_Character_Walk_E(16,28)_32F.dain_7
+  - first:
+      213: 5755386847199248725
+    second: Averna_Character_Walk_E(16,28)_32F.dain_8
+  - first:
+      213: 3215463707957345994
+    second: Averna_Character_Walk_E(16,28)_32F.dain_9
+  - first:
+      213: -9167643096479646121
+    second: Averna_Character_Walk_E(16,28)_32F.dain_10
+  - first:
+      213: 1099736036366370631
+    second: Averna_Character_Walk_E(16,28)_32F.dain_11
+  - first:
+      213: -4201987952815460077
+    second: Averna_Character_Walk_E(16,28)_32F.dain_12
+  - first:
+      213: 4470879402265936540
+    second: Averna_Character_Walk_E(16,28)_32F.dain_13
+  - first:
+      213: -2281180999546874113
+    second: Averna_Character_Walk_E(16,28)_32F.dain_14
+  - first:
+      213: 1521321388585194502
+    second: Averna_Character_Walk_E(16,28)_32F.dain_15
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Averna_Character_Walk_E(16,28)_32F.dain_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 28
+        width: 15
+        height: 21
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.3809524}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72a40ebb65fdbcde0800000000000000
+      internalID: -1311709302836147673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Walk_E(16,28)_32F.dain_1
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 28
+        width: 15
+        height: 21
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.3809524}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 990c8bb1a219f0f00800000000000000
+      internalID: 1085245645259325593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Walk_E(16,28)_32F.dain_2
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 28
+        width: 15
+        height: 22
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.36363637}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8af85adbc95b21060800000000000000
+      internalID: 6922795262023143336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Walk_E(16,28)_32F.dain_3
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 28
+        width: 15
+        height: 22
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.36363637}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8056b4ebe8605ce70800000000000000
+      internalID: 9134714629338653960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Walk_E(16,28)_32F.dain_4
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 28
+        width: 15
+        height: 23
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a669da254f3f95eb0800000000000000
+      internalID: -4730481702891317654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Walk_E(16,28)_32F.dain_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 28
+        width: 15
+        height: 23
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b2c5b4c6e9554820800000000000000
+      internalID: 2901824382587749049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Walk_E(16,28)_32F.dain_6
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 28
+        width: 15
+        height: 23
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8127ee56ea47c4b90800000000000000
+      internalID: -7256296607217454568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Walk_E(16,28)_32F.dain_7
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 28
+        width: 15
+        height: 23
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97173af8fdb51f1a0800000000000000
+      internalID: -6777534948470197895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Walk_E(16,28)_32F.dain_8
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 14
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5714286, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 551444c18dd3fdf40800000000000000
+      internalID: 5755386847199248725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Walk_E(16,28)_32F.dain_9
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 0
+        width: 15
+        height: 23
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ace35f4c43f9f9c20800000000000000
+      internalID: 3215463707957345994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Walk_E(16,28)_32F.dain_10
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 0
+        width: 15
+        height: 23
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75eb4ce0d2df5c080800000000000000
+      internalID: -9167643096479646121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Walk_E(16,28)_32F.dain_11
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 0
+        width: 15
+        height: 23
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7474052391c034f00800000000000000
+      internalID: 1099736036366370631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Walk_E(16,28)_32F.dain_12
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 0
+        width: 15
+        height: 23
+      alignment: 9
+      pivot: {x: 0.53333336, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 311b6f1583a8fa5c0800000000000000
+      internalID: -4201987952815460077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

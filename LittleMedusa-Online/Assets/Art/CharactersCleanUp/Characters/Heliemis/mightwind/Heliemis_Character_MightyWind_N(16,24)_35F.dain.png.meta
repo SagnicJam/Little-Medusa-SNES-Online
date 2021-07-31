@@ -1,0 +1,773 @@
+fileFormatVersion: 2
+guid: 4c6b57783df191e46b2099f761b6af8e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6069318662778541798
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_0
+  - first:
+      213: 782256892417833961
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_1
+  - first:
+      213: -6604056921786359133
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_2
+  - first:
+      213: 6303439026552609745
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_3
+  - first:
+      213: -2700404426255365926
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_4
+  - first:
+      213: 3038901130273181109
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_5
+  - first:
+      213: 116564227073278446
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_6
+  - first:
+      213: -6673638330318507675
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_7
+  - first:
+      213: 4489811207012741337
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_8
+  - first:
+      213: 7215843182490447101
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_9
+  - first:
+      213: -2703883332438693754
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_10
+  - first:
+      213: 1933117613103754806
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_11
+  - first:
+      213: 6246557804637080137
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_12
+  - first:
+      213: 2903824150299039545
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_13
+  - first:
+      213: 1193385504374164630
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_14
+  - first:
+      213: -5557601464738014026
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_15
+  - first:
+      213: -1287327121551483137
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_16
+  - first:
+      213: -2719147782656922144
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_17
+  - first:
+      213: 7612465639668729189
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_18
+  - first:
+      213: -2603131522110621389
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_19
+  - first:
+      213: -6164978448160479129
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_20
+  - first:
+      213: -5267026495729510635
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_21
+  - first:
+      213: 2331686095994655743
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_22
+  - first:
+      213: -508847577100912499
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_23
+  - first:
+      213: -403512838087456957
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_24
+  - first:
+      213: -8561045535595770857
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_25
+  - first:
+      213: -4749974058569556814
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_26
+  - first:
+      213: 5772774913660093955
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_27
+  - first:
+      213: 8992604184923890682
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_28
+  - first:
+      213: 7704177461305795155
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_29
+  - first:
+      213: -2594734690828671925
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_30
+  - first:
+      213: 6996886801541328605
+    second: Heliemis_Character_MightyWind_N(16,24)_35F.dain_31
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e6509bca2d8a3450800000000000000
+      internalID: 6069318662778541798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eb7aa3cf722bda00800000000000000
+      internalID: 782256892417833961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a2e67c283da954a0800000000000000
+      internalID: -6604056921786359133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1db9009c5605a7750800000000000000
+      internalID: 6303439026552609745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad8082f4b7c368ad0800000000000000
+      internalID: -2700404426255365926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bd47792a785c2a20800000000000000
+      internalID: 3038901130273181109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee188340c8e1e9100800000000000000
+      internalID: 116564227073278446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 72
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5613fe90c497263a0800000000000000
+      internalID: -6673638330318507675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d0ff8631830f4e30800000000000000
+      internalID: 4489811207012741337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_9
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfc644fa423d32460800000000000000
+      internalID: 7215843182490447101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68864e75f60e97ad0800000000000000
+      internalID: -2703883332438693754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63ea91e1a30d3da10800000000000000
+      internalID: 1933117613103754806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 48
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94a46564a3b30b650800000000000000
+      internalID: 6246557804637080137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_13
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 48
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93756c8fda47c4820800000000000000
+      internalID: 2903824150299039545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_14
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 48
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69c825c1bc1cf8010800000000000000
+      internalID: 1193385504374164630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_15
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 48
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bc991bc9ee6fd2b0800000000000000
+      internalID: -5557601464738014026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 24
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffe9232bdce722ee0800000000000000
+      internalID: -1287327121551483137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_17
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 24
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ed61f29f75a34ad0800000000000000
+      internalID: -2719147782656922144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_18
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 24
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 565425daa29e4a960800000000000000
+      internalID: 7612465639668729189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_19
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 24
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33979f03ca1dfdbd0800000000000000
+      internalID: -2603131522110621389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_20
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 24
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 768a47dc3c8917aa0800000000000000
+      internalID: -6164978448160479129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_21
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 24
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 517d87bde43c7e6b0800000000000000
+      internalID: -5267026495729510635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_22
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 24
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff39a778620db5020800000000000000
+      internalID: 2331686095994655743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_23
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 24
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d88f41a13d530f8f0800000000000000
+      internalID: -508847577100912499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_MightyWind_N(16,24)_35F.dain_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 347cc7f263f666af0800000000000000
+      internalID: -403512838087456957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -22,7 +22,7 @@ public class StaticAnimatingTileUtil : MonoBehaviour
                 networkUid = nextStaticAnimationTileID;
                 nextStaticAnimationTileID++;
 
-                AnimatingStaticTile animatingStaticTile = new AnimatingStaticTile(networkUid, (int)animationTileType, fl.spriteIndexToShow, pos);
+                AnimatingStaticTile animatingStaticTile = new AnimatingStaticTile(networkUid, (int)animationTileType, fl.spriteIndexToShowCache, pos);
                 ServerSideGameManager.animatingStaticTileDic.Add(networkUid, animatingStaticTile);
             }
         }
@@ -43,7 +43,7 @@ public class StaticAnimatingTileUtil : MonoBehaviour
                 AnimatingStaticTile animatingStaticTile;
                 if (ServerSideGameManager.animatingStaticTileDic.TryGetValue(networkUid, out animatingStaticTile))
                 {
-                    animatingStaticTile.animationSpriteIndex = fl.spriteIndexToShow;
+                    animatingStaticTile.animationSpriteIndex = fl.spriteIndexToShowCache;
                     ServerSideGameManager.animatingStaticTileDic.Remove(networkUid);
                     ServerSideGameManager.animatingStaticTileDic.Add(networkUid, animatingStaticTile);
                 }

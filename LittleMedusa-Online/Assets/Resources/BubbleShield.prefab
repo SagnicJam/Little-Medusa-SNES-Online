@@ -139,10 +139,12 @@ MonoBehaviour:
         m_CallState: 2
   spriteArr: []
   spriteRenderer: {fileID: 4609712844027708361}
-  timeBetweenFrames: 0.1
+  animationDuration: 0
   temp: 0
-  spriteIndexToShow: 0
+  IsLoopComplete: 0
   playonAwakeWithLoop: 0
+  playonAwakeOneShot: 0
+  spriteIndexToShowCache: 0
   playingOneShot: 0
 --- !u!114 &6343060601045919070
 MonoBehaviour:
@@ -160,15 +162,21 @@ MonoBehaviour:
   projectileTileTravelDistance: 1
   projectileSpeed: 4
   selfDestroyOnTargetTouch: 0
+  isDispersing: 0
+  dispersionRadius: 0
+  dispersionSpeed: 0
+  isRotationControlledByTransform: 1
+  dispersedGO: {fileID: 0}
+  dispersedGOCollider: {fileID: 0}
   frameLooper: {fileID: 630966238488796755}
   isDynamicTravellingSprites: 0
-  projectileTravelRightSprite: {fileID: -295879850061160071, guid: 8e34980fdb1e55847988ce0586fb2f16,
+  projectileTravelRightSprite: {fileID: 1863715632967679990, guid: c60f88a1414fd744a9ff4db166996c25,
     type: 3}
-  projectileTravelLeftSprite: {fileID: -9062529124756593654, guid: 8e34980fdb1e55847988ce0586fb2f16,
+  projectileTravelLeftSprite: {fileID: 1863715632967679990, guid: c60f88a1414fd744a9ff4db166996c25,
     type: 3}
-  projectileTravelUpSprite: {fileID: 7718515357799426450, guid: 8e34980fdb1e55847988ce0586fb2f16,
+  projectileTravelUpSprite: {fileID: 1863715632967679990, guid: c60f88a1414fd744a9ff4db166996c25,
     type: 3}
-  projectileTravelDownSprite: {fileID: 8411867806688940998, guid: 8e34980fdb1e55847988ce0586fb2f16,
+  projectileTravelDownSprite: {fileID: 1863715632967679990, guid: c60f88a1414fd744a9ff4db166996c25,
     type: 3}
   dynamicProjectileTravelRightSprite: []
   dynamicProjectileTravelLeftSprite: []

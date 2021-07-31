@@ -55,6 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1545891712680462035}
   - component: {fileID: 1545891712680462032}
+  - component: {fileID: 3911285767611182713}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -115,7 +116,7 @@ SpriteRenderer:
   m_SortingLayerID: 866084665
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1863715632967679990, guid: c60f88a1414fd744a9ff4db166996c25,
+  m_Sprite: {fileID: 5542943860394628541, guid: 703e9439b7847a244985dc783cf1510b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -127,3 +128,45 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3911285767611182713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545891712680462034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5bc638fe063464680b6b59e9171927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPlayOneShotAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  spriteArr:
+  - {fileID: 5542943860394628541, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: -5125994265881329875, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: 137216567537761024, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: 3914624472377988181, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: -2397452766510782762, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: -7886921052137534571, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: 8902536085798203150, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: -8138793979593303630, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: 6790067363068942789, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: -5469848889052296390, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: 1850501317659137024, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: 2922068363977210117, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: 6250859077780697252, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: 1850666116054788066, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: 7616272679124748145, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: -1336465004216959953, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: -179146802334315626, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  - {fileID: -4527159215505912176, guid: 703e9439b7847a244985dc783cf1510b, type: 3}
+  spriteRenderer: {fileID: 1545891712680462032}
+  animationDuration: 0.38
+  temp: 0
+  IsLoopComplete: 0
+  playonAwakeWithLoop: 0
+  playonAwakeOneShot: 1
+  spriteIndexToShowCache: 0
+  playingOneShot: 0

@@ -50,17 +50,35 @@ public class Averna : Hero
         {
             if (inputs[(int)EnumData.AvernaInputs.ShootFireBall])
             {
-                if (!primaryMoveUseAction.isBeingUsed)
+                if (!isUsingPrimaryMove)
                 {
-                    primaryMoveUseAction.isBeingUsed = true;
+                    isUsingPrimaryMove = true;
+                    UpdateFrameSprites();
                 }
             }
-            else if (!inputs[(int)EnumData.AvernaInputs.ShootFireBall] && previousInputs[(int)EnumData.AvernaInputs.ShootFireBall] != inputs[(int)EnumData.AvernaInputs.ShootFireBall])
+            else if (!inputs[(int)EnumData.AvernaInputs.ShootFireBall])
             {
-                if (primaryMoveUseAction.isBeingUsed)
+                if (isUsingPrimaryMove)
                 {
-                    primaryMoveUseAction.isBeingUsed = false;
-                    primaryMoveUseAction.CancelMoveUsage();
+                    isUsingPrimaryMove = false;
+                    UpdateFrameSprites();
+                }
+            }
+
+            if (inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Right])
+            {
+                if (!isWalking)
+                {
+                    isWalking = true;
+                    UpdateFrameSprites();
+                }
+            }
+            else if (!(inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Right]))
+            {
+                if (isWalking)
+                {
+                    isWalking = false;
+                    UpdateFrameSprites();
                 }
             }
         }
@@ -210,7 +228,7 @@ public class Averna : Hero
         }
         if (triggerFaceChangeEvent)
         {
-            UpdateBasicWalkingSprite();
+            UpdateFrameSprites();
             triggerFaceChangeEvent = false;
         }
         if (isPushed)
@@ -221,22 +239,8 @@ public class Averna : Hero
         {
             return;
         }
-        if (primaryMoveUseAction.isBeingUsed)
-        {
-            primaryMoveUseAction.Perform();
-        }
-        else
-        {
-            if (!primaryMoveUseAction.isBeingUsed && primaryMoveUseAction.initialiseSprite)
-            {
-                primaryMoveUseAction.CancelMoveUsage();
-            }
-            else if (!completedMotionToMovePoint)
-            {
-                //for walking
-                frameLooper.UpdateAnimationFrame();
-            }
-        }
+        frameLooper.UpdateAnimationFrame();
+
     }
 
     public override void ProcessInputEventControl()
@@ -320,19 +324,19 @@ public class Averna : Hero
         }
         if (completedMotionToMovePoint)
         {
-            if (inputs[(int)EnumData.Inputs.Up] && (inputs[(int)EnumData.Inputs.Up] != previousInputs[(int)EnumData.Inputs.Up]))
+            if (inputs[(int)EnumData.Inputs.Up])
             {
                 Facing = FaceDirection.Up;
             }
-            else if (inputs[(int)EnumData.Inputs.Left] && (inputs[(int)EnumData.Inputs.Left] != previousInputs[(int)EnumData.Inputs.Left]))
+            else if (inputs[(int)EnumData.Inputs.Left])
             {
                 Facing = FaceDirection.Left;
             }
-            else if (inputs[(int)EnumData.Inputs.Down] && (inputs[(int)EnumData.Inputs.Down] != previousInputs[(int)EnumData.Inputs.Down]))
+            else if (inputs[(int)EnumData.Inputs.Down])
             {
                 Facing = FaceDirection.Down;
             }
-            else if (inputs[(int)EnumData.Inputs.Right] && (inputs[(int)EnumData.Inputs.Right] != previousInputs[(int)EnumData.Inputs.Right]))
+            else if (inputs[(int)EnumData.Inputs.Right])
             {
                 Facing = FaceDirection.Right;
             }

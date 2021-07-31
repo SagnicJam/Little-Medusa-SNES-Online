@@ -1,0 +1,464 @@
+fileFormatVersion: 2
+guid: c68ac558ad0991744b4afe021f9a606d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7263004102803353048
+    second: Syfri_Character_walk_N(32,32)_32F.dain_0
+  - first:
+      213: 8093268863935017075
+    second: Syfri_Character_walk_N(32,32)_32F.dain_1
+  - first:
+      213: 3008214701484529849
+    second: Syfri_Character_walk_N(32,32)_32F.dain_2
+  - first:
+      213: 7834081617345065793
+    second: Syfri_Character_walk_N(32,32)_32F.dain_3
+  - first:
+      213: -6130538821590856474
+    second: Syfri_Character_walk_N(32,32)_32F.dain_4
+  - first:
+      213: 3246645081388227457
+    second: Syfri_Character_walk_N(32,32)_32F.dain_5
+  - first:
+      213: -1224990976402536671
+    second: Syfri_Character_walk_N(32,32)_32F.dain_6
+  - first:
+      213: -2869434932822279954
+    second: Syfri_Character_walk_N(32,32)_32F.dain_7
+  - first:
+      213: -2860142813301770589
+    second: Syfri_Character_walk_N(32,32)_32F.dain_8
+  - first:
+      213: 3435673352820715919
+    second: Syfri_Character_walk_N(32,32)_32F.dain_9
+  - first:
+      213: 791725525744924693
+    second: Syfri_Character_walk_N(32,32)_32F.dain_10
+  - first:
+      213: -2405886393745533704
+    second: Syfri_Character_walk_N(32,32)_32F.dain_11
+  - first:
+      213: -2209284957119111848
+    second: Syfri_Character_walk_N(32,32)_32F.dain_12
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Syfri_Character_walk_N(32,32)_32F.dain_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 100
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dd6ccd10cf5bc460800000000000000
+      internalID: 7263004102803353048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Syfri_Character_walk_N(32,32)_32F.dain_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 99
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 370739ad621115070800000000000000
+      internalID: 8093268863935017075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Syfri_Character_walk_N(32,32)_32F.dain_2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 99
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b8d71235535fb920800000000000000
+      internalID: 3008214701484529849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Syfri_Character_walk_N(32,32)_32F.dain_3
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 99
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 143354769bf38bc60800000000000000
+      internalID: 7834081617345065793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Syfri_Character_walk_N(32,32)_32F.dain_4
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 67
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ecc5593c63fbeaa0800000000000000
+      internalID: -6130538821590856474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Syfri_Character_walk_N(32,32)_32F.dain_5
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 67
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18b1ae300866e0d20800000000000000
+      internalID: 3246645081388227457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Syfri_Character_walk_N(32,32)_32F.dain_6
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 67
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 127c77e7235fffee0800000000000000
+      internalID: -1224990976402536671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Syfri_Character_walk_N(32,32)_32F.dain_7
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 67
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee8f70ba128bd28d0800000000000000
+      internalID: -2869434932822279954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Syfri_Character_walk_N(32,32)_32F.dain_8
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 36
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a6f246d34bbe48d0800000000000000
+      internalID: -2860142813301770589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Syfri_Character_walk_N(32,32)_32F.dain_9
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 35
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f81772f16b6fdaf20800000000000000
+      internalID: 3435673352820715919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Syfri_Character_walk_N(32,32)_32F.dain_10
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 35
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 518b2a1cb26ccfa00800000000000000
+      internalID: 791725525744924693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Syfri_Character_walk_N(32,32)_32F.dain_11
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 35
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f41ad262139c9ed0800000000000000
+      internalID: -2405886393745533704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Syfri_Character_walk_N(32,32)_32F.dain_12
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 3
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85d1d4b690b0751e0800000000000000
+      internalID: -2209284957119111848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

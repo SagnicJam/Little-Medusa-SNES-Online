@@ -16,4 +16,9 @@ public class ProjectileManager : MonoBehaviour
         //Debug.Log("position: "+position);
         transform.position = position;
     }
+
+    public void SetRotation(Vector3 rotation)
+    {
+        transform.rotation = Quaternion.Euler(rotation);
+    }
 }

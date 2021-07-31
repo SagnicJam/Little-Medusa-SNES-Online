@@ -153,8 +153,9 @@ MonoBehaviour:
   - {fileID: 6570254142886018071, guid: c60f88a1414fd744a9ff4db166996c25, type: 3}
   - {fileID: 6761842583480609648, guid: c60f88a1414fd744a9ff4db166996c25, type: 3}
   spriteRenderer: {fileID: 8102428376803915500}
-  timeBetweenFrames: 0.1
+  animationDuration: 0.25
   temp: 0
-  spriteIndexToShow: 0
+  IsLoopComplete: 0
   playonAwakeWithLoop: 0
+  spriteIndexToShowCache: 0
   playingOneShot: 0

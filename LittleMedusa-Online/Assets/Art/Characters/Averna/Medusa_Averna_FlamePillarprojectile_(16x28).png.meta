@@ -1,0 +1,488 @@
+fileFormatVersion: 2
+guid: 9579f71fe883f5b468e37e825bdcb479
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2131146825980861892
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_0
+  - first:
+      213: -157439221154504045
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_1
+  - first:
+      213: 8902558204656718155
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_2
+  - first:
+      213: 7039744199716004141
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_3
+  - first:
+      213: -2083588336395558106
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_4
+  - first:
+      213: -4290938537173917888
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_5
+  - first:
+      213: -6069110920544500032
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_6
+  - first:
+      213: 7342327605409821774
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_7
+  - first:
+      213: 1133742208043706973
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_8
+  - first:
+      213: -7887875344711841208
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_9
+  - first:
+      213: 1889932682970189787
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_10
+  - first:
+      213: 6834226009728648215
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_11
+  - first:
+      213: -5506875320269617334
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_12
+  - first:
+      213: 3866143081950688515
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_13
+  - first:
+      213: 4695522375453099911
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_0
+  - first:
+      213: -7322843241892924334
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_1
+  - first:
+      213: 8250981364876895829
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_2
+  - first:
+      213: -512221031805341860
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_3
+  - first:
+      213: 8111625160005020552
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_4
+  - first:
+      213: -6884126868977945722
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_5
+  - first:
+      213: 5860634807526850725
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_6
+  - first:
+      213: 9080435896830084289
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_7
+  - first:
+      213: -580680351086542986
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_8
+  - first:
+      213: -7804058224377894771
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_9
+  - first:
+      213: 2673703551004654912
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_10
+  - first:
+      213: -1147128793515897202
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_11
+  - first:
+      213: -8479026707845339620
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_12
+  - first:
+      213: -3100631726579561040
+    second: Medusa_Averna_FlamePillarprojectile_(16x28)_13
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Medusa_Averna_FlamePillarprojectile_(16x28)_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 0
+        width: 10
+        height: 26
+      alignment: 9
+      pivot: {x: 0.5, y: 0.30769232}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 787c7c7f8b8d92140800000000000000
+      internalID: 4695522375453099911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medusa_Averna_FlamePillarprojectile_(16x28)_1
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 0
+        width: 9
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2543a1d9ed8006a90800000000000000
+      internalID: -7322843241892924334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medusa_Averna_FlamePillarprojectile_(16x28)_2
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 0
+        width: 10
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 556ead5f5df518270800000000000000
+      internalID: 8250981364876895829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medusa_Averna_FlamePillarprojectile_(16x28)_3
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 11
+        height: 28
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5f22c87fa934e8f0800000000000000
+      internalID: -512221031805341860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medusa_Averna_FlamePillarprojectile_(16x28)_4
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 0
+        width: 10
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88b68351b18429070800000000000000
+      internalID: 8111625160005020552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medusa_Averna_FlamePillarprojectile_(16x28)_6
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 0
+        width: 9
+        height: 28
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a08de47e48255150800000000000000
+      internalID: 5860634807526850725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medusa_Averna_FlamePillarprojectile_(16x28)_7
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 0
+        width: 10
+        height: 26
+      alignment: 9
+      pivot: {x: 0.5, y: 0.30769232}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c443448650340e70800000000000000
+      internalID: 9080435896830084289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medusa_Averna_FlamePillarprojectile_(16x28)_8
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 0
+        width: 11
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67fff691c4201f7f0800000000000000
+      internalID: -580680351086542986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medusa_Averna_FlamePillarprojectile_(16x28)_9
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 0
+        width: 11
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d886d71846a62b390800000000000000
+      internalID: -7804058224377894771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medusa_Averna_FlamePillarprojectile_(16x28)_10
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 0
+        width: 10
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04d3558b637ea1520800000000000000
+      internalID: 2673703551004654912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medusa_Averna_FlamePillarprojectile_(16x28)_12
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 0
+        width: 10
+        height: 26
+      alignment: 9
+      pivot: {x: 0.5, y: 0.30769232}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1624dd0222745a80800000000000000
+      internalID: -8479026707845339620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Medusa_Averna_FlamePillarprojectile_(16x28)_13
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 0
+        width: 10
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bd4bed5fd758f4d0800000000000000
+      internalID: -3100631726579561040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

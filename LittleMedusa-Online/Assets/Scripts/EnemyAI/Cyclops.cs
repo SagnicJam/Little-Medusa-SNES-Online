@@ -5,17 +5,17 @@ using UnityEngine;
 public class Cyclops : Enemy
 {
     public float lineRangeForDetection;
-    
-    //public override void Awake()
-    //{
-    //    base.Awake();
-        
-    //    lineRangeForDetection = GameConfig.cyclopsLineRangeInTileUnitsForFollowing;
-    //    walkSpeed = GameConfig.cyclopsMovementSpeed;
 
-    //    mapperList.Add(new AimlessWandererMapper());
-    //    mapperList.Add(new AStarPathFindMapper());
+    public override void Awake()
+    {
+        //base.Awake();
 
-    //    //primaryMoveUseAction.SetAnimationSpeedAndSpritesOnUsage(GameConfig.cyclopsWalkAnimationDuration,GameConfig.cyclopsWalkAnimationDuration,);
-    //}
+        //lineRangeForDetection = GameConfig.cyclopsLineRangeInTileUnitsForFollowing;
+        //walkSpeed = GameConfig.cyclopsMovementSpeed;
+
+        //mapperList.Add(new AimlessWandererMapper());
+        //mapperList.Add(new AStarPathFindMapper());
+
+        //primaryMoveUseAction.SetAnimationSpeedAndSpritesOnUsage(GameConfig.cyclopsWalkAnimationDuration,GameConfig.cyclopsWalkAnimationDuration,);
+    }
 }

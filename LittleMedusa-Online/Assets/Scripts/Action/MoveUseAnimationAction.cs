@@ -6,19 +6,25 @@ public class MoveUseAnimationAction : Actions
 {
     public OnUsed<Actor> onMoveUseActionOver;
     public OnUsed<Actor> onMoveUseActionBegin;
-    public float animationSpeed;
-    public float normalSpeed;
+
+    public float animationDuration;
+    public float walkAnimationDuration;
+    public bool canPerformMoveUseAnimations;
+    public bool isCancellingMovePlayerInputDriven;
+
     Actor actorUsingMove;
+    MoveAnimationSprites moveAnimationSprites;
 
     public override void Initialise(Actor actorActingThisAction)
     {
         actorUsingMove = actorActingThisAction;
     }
 
-    public void SetAnimationSpeedAndSpritesOnUsage(float animationSpeed,float normalSpeed)
+    public void SetAnimationSpeedAndSpritesOnUsage(float animationDuration, float walkAnimationDuration, MoveAnimationSprites moveAnimationSprites)
     {
-        this.animationSpeed = animationSpeed;
-        this.normalSpeed = normalSpeed;
+        this.animationDuration = animationDuration;
+        this.walkAnimationDuration = walkAnimationDuration;
+        this.moveAnimationSprites = moveAnimationSprites;
     }
 
 
@@ -27,35 +33,52 @@ public class MoveUseAnimationAction : Actions
 
     public override bool Perform()
     {
-        if(!initialiseSprite)
+        if (actorUsingMove.isPetrified)
         {
-            if(onMoveUseActionBegin!=null)
+            return false;
+        }
+        if (!canPerformMoveUseAnimations)
+        {
+            return false;
+        }
+        if (!initialiseSprite)
+        {
+            if (onMoveUseActionBegin != null)
             {
                 onMoveUseActionBegin.Invoke(actorUsingMove);
             }
             //Debug.Log("initialiseSprite");
-            actorUsingMove.UpdateBasicWalkingSprite();
-            actorUsingMove.frameLooper.timeBetweenFrames = animationSpeed;
+            actorUsingMove.frameLooper.animationDuration = animationDuration;
+            switch (actorUsingMove.Facing)
+            {
+                case FaceDirection.Down:
+                    actorUsingMove.frameLooper.UpdateSpriteArr(moveAnimationSprites.downMove);
+                    break;
+                case FaceDirection.Up:
+                    actorUsingMove.frameLooper.UpdateSpriteArr(moveAnimationSprites.upMove);
+                    break;
+                case FaceDirection.Left:
+                    actorUsingMove.frameLooper.UpdateSpriteArr(moveAnimationSprites.leftMove);
+                    break;
+                case FaceDirection.Right:
+                    actorUsingMove.frameLooper.UpdateSpriteArr(moveAnimationSprites.rightMove);
+                    break;
+            }
             initialiseSprite = true;
+            isBeingUsed = true;
         }
         else
         {
-
-            if (!actorUsingMove.frameLooper.isRepeatingLoop)
+            actorUsingMove.frameLooper.UpdateAnimationFrame();
+            if (!actorUsingMove.frameLooper.IsLoopComplete)
             {
-                actorUsingMove.frameLooper.UpdateAnimationFrame();
                 return true;
             }
             else
             {
-                if(!isBeingUsed)
-                {
-                    CancelMoveUsage();
-                }
-                
+                CancelMoveUsage();
                 if (onMoveUseActionOver != null)
                 {
-                    //Debug.LogError("sasa");
                     onMoveUseActionOver.Invoke(actorUsingMove);
                 }
                 return false;
@@ -67,14 +90,32 @@ public class MoveUseAnimationAction : Actions
     public void CancelMoveUsage()
     {
         //Debug.Log("CancelMoveUsage");
-        if(initialiseSprite)
+        initialiseSprite = false;
+        isBeingUsed = false;
+        canPerformMoveUseAnimations = false;
+        //Debug.Log("normalSpeed "+ normalSpeed);
+        actorUsingMove.frameLooper.animationDuration = walkAnimationDuration;
+        if (!isCancellingMovePlayerInputDriven)
         {
-            initialiseSprite = false;
-            //Debug.Log("normalSpeed "+ normalSpeed);
-            actorUsingMove.frameLooper.timeBetweenFrames = normalSpeed;
             actorUsingMove.UpdateBasicWalkingSprite();
         }
-        
+    }
+
+    [Serializable]
+    public class MoveAnimationSprites
+    {
+        public Sprite[] upMove;
+        public Sprite[] downMove;
+        public Sprite[] leftMove;
+        public Sprite[] rightMove;
+
+        public MoveAnimationSprites(Sprite[] upMove, Sprite[] downMove, Sprite[] leftMove, Sprite[] rightMove)
+        {
+            this.upMove = upMove;
+            this.downMove = downMove;
+            this.leftMove = leftMove;
+            this.rightMove = rightMove;
+        }
     }
 }
 

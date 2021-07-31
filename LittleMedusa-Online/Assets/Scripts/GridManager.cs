@@ -736,9 +736,10 @@ public class GridManager : MonoBehaviour
 
     public void EarthQuake(Hero hero,Vector3Int explodeCell)
     {
-        List<Vector3Int> vList = GetAdvancedPlusNeighbours(explodeCell);
-        List<Vector3Int> vList2 = GetCornerNeighbours(explodeCell);
-        vList.AddRange(vList2);
+        //List<Vector3Int> vList = GetAdvancedPlusNeighbours(explodeCell);
+        //List<Vector3Int> vList2 = GetCornerNeighbours(explodeCell);
+        //vList.AddRange(vList2);
+        List<Vector3Int> vList = GetPlusNeighbours(explodeCell);
         Explode(hero,vList);
     }
 

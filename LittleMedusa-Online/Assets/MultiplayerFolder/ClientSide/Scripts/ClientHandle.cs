@@ -85,7 +85,9 @@ public class ClientHandle : MonoBehaviour
 
             Vector3 projectilePosition = packet.ReadVector3();
 
-            keyValuePairs.Add(uid, new ProjectileData(uid,projectileTileType, projectilePosition));
+            Vector3 projectileRotation = packet.ReadVector3();
+
+            keyValuePairs.Add(uid, new ProjectileData(uid,projectileTileType, projectilePosition, projectileRotation));
         }
 
         AnimatingStaticTile[] animatingTiles = new AnimatingStaticTile[packet.ReadInt()];
@@ -139,7 +141,8 @@ public class ClientHandle : MonoBehaviour
                 int projectileId = packet.ReadInt();
                 int projectileTileType = packet.ReadInt();
                 Vector3 projectilePosition = packet.ReadVector3();
-                keyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileTileType, projectilePosition));
+                Vector3 projectileRotation = packet.ReadVector3();
+                keyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileTileType, projectilePosition, projectileRotation));
             }
 
             Dictionary<int, AnimatingStaticTile> keyValuePairsAnimation = new Dictionary<int, AnimatingStaticTile>();
@@ -191,7 +194,8 @@ public class ClientHandle : MonoBehaviour
                     int projectileId = packet.ReadInt();
                     int projectileTileType = packet.ReadInt();
                     Vector3 projectilePosition = packet.ReadVector3();
-                    previouskeyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileTileType, projectilePosition));
+                    Vector3 projectileRotation = packet.ReadVector3();
+                    previouskeyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileTileType, projectilePosition, projectileRotation));
                 }
 
                 Dictionary<int, AnimatingStaticTile> keyValuePairsAnimation = new Dictionary<int, AnimatingStaticTile>();

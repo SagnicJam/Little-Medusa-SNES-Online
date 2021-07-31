@@ -55,6 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1867544370430139036}
   - component: {fileID: 1867544370430139039}
+  - component: {fileID: 2476519255670814364}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -127,3 +128,72 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2476519255670814364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867544370430139037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5bc638fe063464680b6b59e9171927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPlayOneShotAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  spriteArr:
+  - {fileID: 1677897273062238191, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -1900885873300648980, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -2906940970422818913, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -5640743914266848506, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -5515784515863828982, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -972111984600311182, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -7037653582461869896, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: 8535002958882408576, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -4073770044109083046, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -2057344807062786819, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: 4935294467336687843, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -5374440811310403851, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -7874531147305783671, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -5672087653840438548, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -2657495951027907232, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -3635287891820005747, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -5197770837416166400, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -8896291270461835098, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -9219906007215511163, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -7758027280981654101, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -5910754715035380570, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -1055051204583292956, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: 8876542600013360566, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: 6616764050813582052, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -816949313806963760, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -4611423312826627970, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -2957334248277793863, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: 1033306098077795821, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -7205381006449348604, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -8216734033494030505, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -6446292995421410633, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: 5030501356699623868, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -2756251272607676822, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -3509666969455934554, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -6087040086945451824, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: 754053639044110846, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -7146583098804951269, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: 4925397341107521026, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -4855396354936796075, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: 781892980546630398, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -7754494428292554658, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: 8396644030197922281, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: 4978379856583947089, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -5897308159723969677, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -7680296846736718365, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  - {fileID: -1617040801076032378, guid: 87342fce1aaf95a47a66706149a35cf2, type: 3}
+  spriteRenderer: {fileID: 1867544370430139039}
+  animationDuration: 0.5
+  temp: 0
+  IsLoopComplete: 0
+  playonAwakeWithLoop: 1
+  spriteIndexToShowCache: 0
+  playingOneShot: 0

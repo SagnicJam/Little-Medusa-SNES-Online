@@ -1,0 +1,581 @@
+fileFormatVersion: 2
+guid: 9a5378aff8ff4ea47a4922dc5f9bddad
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 563234098042240728
+    second: Averna_Character_Idle_N(16,28)_34F.dain_0
+  - first:
+      213: -1524997264282675897
+    second: Averna_Character_Idle_N(16,28)_34F.dain_1
+  - first:
+      213: 6457400761437813205
+    second: Averna_Character_Idle_N(16,28)_34F.dain_2
+  - first:
+      213: 9114711605366918080
+    second: Averna_Character_Idle_N(16,28)_34F.dain_3
+  - first:
+      213: -8091672568666721442
+    second: Averna_Character_Idle_N(16,28)_34F.dain_4
+  - first:
+      213: 4599148110759899905
+    second: Averna_Character_Idle_N(16,28)_34F.dain_5
+  - first:
+      213: -9125535750561440238
+    second: Averna_Character_Idle_N(16,28)_34F.dain_6
+  - first:
+      213: 1531977203056582763
+    second: Averna_Character_Idle_N(16,28)_34F.dain_7
+  - first:
+      213: -3003259674434434429
+    second: Averna_Character_Idle_N(16,28)_34F.dain_8
+  - first:
+      213: -2796533553461042757
+    second: Averna_Character_Idle_N(16,28)_34F.dain_9
+  - first:
+      213: -9050609161858910830
+    second: Averna_Character_Idle_N(16,28)_34F.dain_10
+  - first:
+      213: -8835949349139245334
+    second: Averna_Character_Idle_N(16,28)_34F.dain_11
+  - first:
+      213: 6427926036338888453
+    second: Averna_Character_Idle_N(16,28)_34F.dain_12
+  - first:
+      213: 3810044935160127175
+    second: Averna_Character_Idle_N(16,28)_34F.dain_13
+  - first:
+      213: 4148962911791459073
+    second: Averna_Character_Idle_N(16,28)_34F.dain_14
+  - first:
+      213: -2425288520537122371
+    second: Averna_Character_Idle_N(16,28)_34F.dain_15
+  - first:
+      213: -5183283329753244400
+    second: Averna_Character_Idle_N(16,28)_34F.dain_16
+  - first:
+      213: 6940464818539043738
+    second: Averna_Character_Idle_N(16,28)_34F.dain_17
+  - first:
+      213: 204868342117764844
+    second: Averna_Character_Idle_N(16,28)_34F.dain_18
+  - first:
+      213: -4666477319599639900
+    second: Averna_Character_Idle_N(16,28)_34F.dain_19
+  - first:
+      213: -7328122066448114940
+    second: Averna_Character_Idle_N(16,28)_34F.dain_20
+  - first:
+      213: 9157540547081083784
+    second: Averna_Character_Idle_N(16,28)_34F.dain_21
+  - first:
+      213: 3812488234230873599
+    second: Averna_Character_Idle_N(16,28)_34F.dain_22
+  - first:
+      213: 2528541630610557211
+    second: Averna_Character_Idle_N(16,28)_34F.dain_23
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 56
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8def1339d6201d700800000000000000
+      internalID: 563234098042240728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 56
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7451df2611f16dae0800000000000000
+      internalID: -1524997264282675897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 56
+        width: 17
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d976dd97cb4d9950800000000000000
+      internalID: 6457400761437813205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 56
+        width: 17
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cb860cc9e5fd7e70800000000000000
+      internalID: 9114711605366918080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 56
+        width: 17
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e53f8d99baa94bf80800000000000000
+      internalID: -8091672568666721442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 56
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 103b043e6d473df30800000000000000
+      internalID: 4599148110759899905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_6
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 56
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21e58a285959b5180800000000000000
+      internalID: -9125535750561440238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_7
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 56
+        width: 15
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b602f20462da24510800000000000000
+      internalID: 1531977203056582763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 28
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38a8411fc374256d0800000000000000
+      internalID: -3003259674434434429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_9
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 28
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb16e7fbc87b039d0800000000000000
+      internalID: -2796533553461042757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 28
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 295f0826be6c56280800000000000000
+      internalID: -9050609161858910830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_11
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 28
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae6163fb1e6606580800000000000000
+      internalID: -8835949349139245334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 28
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50fc6766ca4943950800000000000000
+      internalID: 6427926036338888453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_13
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 28
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cede7a9eafffd430800000000000000
+      internalID: 3810044935160127175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_14
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 28
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10ba99f39c3149930800000000000000
+      internalID: 4148962911791459073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_15
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 28
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db95d87b0f4a75ed0800000000000000
+      internalID: -2425288520537122371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Character_Idle_N(16,28)_34F.dain_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01d9ad716474118b0800000000000000
+      internalID: -5183283329753244400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

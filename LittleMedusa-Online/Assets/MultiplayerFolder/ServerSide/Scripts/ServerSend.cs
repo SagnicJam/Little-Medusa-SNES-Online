@@ -132,6 +132,8 @@ public class ServerSend
                 packet.Write(keyValuePair.Value.projectileType);
 
                 packet.Write(keyValuePair.Value.projectilePosition);
+
+                packet.Write(keyValuePair.Value.projectileRotation);
             }
 
             packet.Write(worldUpdate.animatingTileDatas.Count);
@@ -184,6 +186,8 @@ public class ServerSend
                     packet.Write(keyValuePair.Value.projectileType);
 
                     packet.Write(keyValuePair.Value.projectilePosition);
+
+                    packet.Write(keyValuePair.Value.projectileRotation);
                 }
 
                 packet.Write(worldUpdates[i].animatingTileDatas.Count);
@@ -233,6 +237,8 @@ public class ServerSend
                         packet.Write(keyValuePair.Value.projectileType);
 
                         packet.Write(keyValuePair.Value.projectilePosition);
+
+                        packet.Write(keyValuePair.Value.projectileRotation);
                     }
 
                     packet.Write(worldUpdates[i].animatingTileDatas.Count);

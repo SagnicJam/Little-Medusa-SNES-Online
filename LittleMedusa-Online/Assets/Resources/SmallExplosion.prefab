@@ -198,10 +198,12 @@ MonoBehaviour:
   - {fileID: 5918102335919774044, guid: c77a56daf81a89044810296a81a01707, type: 3}
   - {fileID: -8390114349433926962, guid: c77a56daf81a89044810296a81a01707, type: 3}
   spriteRenderer: {fileID: 9073788204147551048}
-  timeBetweenFrames: 0.05
+  animationDuration: 0.5
   temp: 0
-  spriteIndexToShow: 0
+  IsLoopComplete: 0
   playonAwakeWithLoop: 0
+  playonAwakeOneShot: 0
+  spriteIndexToShowCache: 0
   playingOneShot: 0
 --- !u!114 &903563351609929642
 MonoBehaviour:

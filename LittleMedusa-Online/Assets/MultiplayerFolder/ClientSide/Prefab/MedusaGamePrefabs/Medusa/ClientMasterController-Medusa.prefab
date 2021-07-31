@@ -572,8 +572,8 @@ MonoBehaviour:
   walkSpeed: 4
   damagePerStoppedHit: 2
   primaryMoveDamage: 2
-  primaryMoveAnimationSpeed: 0.2
-  normalAnimationSpeed: 0.1
+  primaryMoveAnimationDuration: 0.5
+  normalWalkAnimationDuration: 0.5
   petrificationSnapSpeed: 6
   faceDirectionInit: 1
   idleSprite:
@@ -598,18 +598,31 @@ MonoBehaviour:
   - {fileID: -9186328622268647156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   - {fileID: 2528335122740360581, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   - {fileID: -2687521320619258062, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  leftPrimaryMoveSprite:
-  - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  rightPrimaryMoveSprite:
-  - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  downPrimaryMoveSprite:
-  - {fileID: -8696682573477391892, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: -8696682573477391892, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  upPrimaryMoveSprite:
-  - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+  leftFlySprite: []
+  rightFlySprite: []
+  downFlySprite: []
+  upFlySprite: []
+  primaryMoveAnimationSprites:
+    upMove:
+    - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    downMove:
+    - {fileID: -3905478272961665791, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -3905478272961665791, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -3905478272961665791, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -3905478272961665791, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    leftMove:
+    - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    rightMove:
+    - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   crosshairSprite: {fileID: 21300000, guid: 5a0810130c2b57743b60b3e50b2a2a89, type: 3}
   isDead: 0
   isPushed: 0
@@ -668,10 +681,11 @@ MonoBehaviour:
       m_Calls: []
   spriteArr: []
   spriteRenderer: {fileID: 125878683353188213}
-  timeBetweenFrames: 0.1
+  animationDuration: 0.5
   temp: 0
-  spriteIndexToShow: 0
+  IsLoopComplete: 0
   playonAwakeWithLoop: 0
+  spriteIndexToShowCache: 0
   playingOneShot: 0
 --- !u!114 &5473276686598179077
 MonoBehaviour:
@@ -1188,8 +1202,8 @@ MonoBehaviour:
   walkSpeed: 4
   damagePerStoppedHit: 2
   primaryMoveDamage: 2
-  primaryMoveAnimationSpeed: 0.2
-  normalAnimationSpeed: 0.1
+  primaryMoveAnimationDuration: 0.5
+  normalWalkAnimationDuration: 0.5
   petrificationSnapSpeed: 6
   faceDirectionInit: 1
   idleSprite:
@@ -1214,18 +1228,31 @@ MonoBehaviour:
   - {fileID: -9186328622268647156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   - {fileID: 2528335122740360581, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   - {fileID: -2687521320619258062, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  leftPrimaryMoveSprite:
-  - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  rightPrimaryMoveSprite:
-  - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  downPrimaryMoveSprite:
-  - {fileID: -8696682573477391892, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: -8696682573477391892, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  upPrimaryMoveSprite:
-  - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+  leftFlySprite: []
+  rightFlySprite: []
+  downFlySprite: []
+  upFlySprite: []
+  primaryMoveAnimationSprites:
+    upMove:
+    - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    downMove:
+    - {fileID: -3905478272961665791, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -3905478272961665791, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -3905478272961665791, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -3905478272961665791, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    leftMove:
+    - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    rightMove:
+    - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   crosshairSprite: {fileID: 21300000, guid: 5a0810130c2b57743b60b3e50b2a2a89, type: 3}
   isDead: 0
   isPushed: 0
@@ -1284,10 +1311,11 @@ MonoBehaviour:
       m_Calls: []
   spriteArr: []
   spriteRenderer: {fileID: 7147260740278185349}
-  timeBetweenFrames: 0.1
+  animationDuration: 0.5
   temp: 0
-  spriteIndexToShow: 0
+  IsLoopComplete: 0
   playonAwakeWithLoop: 0
+  spriteIndexToShowCache: 0
   playingOneShot: 0
 --- !u!1 &4309584410505519487
 GameObject:
@@ -1357,8 +1385,8 @@ MonoBehaviour:
   walkSpeed: 4
   damagePerStoppedHit: 2
   primaryMoveDamage: 2
-  primaryMoveAnimationSpeed: 0.2
-  normalAnimationSpeed: 0.1
+  primaryMoveAnimationDuration: 0.5
+  normalWalkAnimationDuration: 0.5
   petrificationSnapSpeed: 6
   faceDirectionInit: 1
   idleSprite:
@@ -1383,18 +1411,31 @@ MonoBehaviour:
   - {fileID: -9186328622268647156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   - {fileID: 2528335122740360581, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   - {fileID: -2687521320619258062, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  leftPrimaryMoveSprite:
-  - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  rightPrimaryMoveSprite:
-  - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  downPrimaryMoveSprite:
-  - {fileID: -8696682573477391892, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: -8696682573477391892, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  upPrimaryMoveSprite:
-  - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+  leftFlySprite: []
+  rightFlySprite: []
+  downFlySprite: []
+  upFlySprite: []
+  primaryMoveAnimationSprites:
+    upMove:
+    - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    downMove:
+    - {fileID: -3905478272961665791, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -3905478272961665791, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -3905478272961665791, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: -3905478272961665791, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    leftMove:
+    - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    rightMove:
+    - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+    - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   crosshairSprite: {fileID: 21300000, guid: 5a0810130c2b57743b60b3e50b2a2a89, type: 3}
   isDead: 0
   isPushed: 0
@@ -1453,10 +1494,11 @@ MonoBehaviour:
       m_Calls: []
   spriteArr: []
   spriteRenderer: {fileID: 9119175614103649339}
-  timeBetweenFrames: 0.1
+  animationDuration: 0.5
   temp: 0
-  spriteIndexToShow: 0
+  IsLoopComplete: 0
   playonAwakeWithLoop: 0
+  spriteIndexToShowCache: 0
   playingOneShot: 0
 --- !u!114 &9065229976637673713
 MonoBehaviour:

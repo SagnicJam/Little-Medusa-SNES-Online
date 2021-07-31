@@ -55,6 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1545891712680462035}
   - component: {fileID: 1545891712680462032}
+  - component: {fileID: 5952363314119579879}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -115,7 +116,7 @@ SpriteRenderer:
   m_SortingLayerID: 866084665
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7144953509852361976, guid: 380c01910ec30d34a830942966408ba7,
+  m_Sprite: {fileID: -5327794991017518665, guid: 7b9c2cadbe8a282489176aad5ca4d845,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -127,3 +128,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5952363314119579879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545891712680462034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca5bc638fe063464680b6b59e9171927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPlayOneShotAnimation:
+    m_PersistentCalls:
+      m_Calls: []
+  spriteArr:
+  - {fileID: -5327794991017518665, guid: 7b9c2cadbe8a282489176aad5ca4d845, type: 3}
+  - {fileID: -3428057131658658798, guid: 7b9c2cadbe8a282489176aad5ca4d845, type: 3}
+  - {fileID: -1483680305522520696, guid: 7b9c2cadbe8a282489176aad5ca4d845, type: 3}
+  spriteRenderer: {fileID: 1545891712680462032}
+  animationDuration: 0.2
+  temp: 0
+  IsLoopComplete: 0
+  playonAwakeWithLoop: 1
+  playonAwakeOneShot: 0
+  spriteIndexToShowCache: 0
+  playingOneShot: 0

@@ -1,0 +1,767 @@
+fileFormatVersion: 2
+guid: ad4c2c1a780acdf458565ee0c11c4cea
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8859418991817675911
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_0
+  - first:
+      213: -1682110801982658417
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_1
+  - first:
+      213: -8971906149774516374
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_2
+  - first:
+      213: 5402448753861699737
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_3
+  - first:
+      213: 8097927565327944184
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_4
+  - first:
+      213: -7588269240052644861
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_5
+  - first:
+      213: 8928948349051135857
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_6
+  - first:
+      213: -4286694793030384053
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_7
+  - first:
+      213: -6428411063599403303
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_8
+  - first:
+      213: -3743482061426306414
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_9
+  - first:
+      213: 3784241126823843588
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_10
+  - first:
+      213: -31577538365570538
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_11
+  - first:
+      213: 8602726910096969648
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_12
+  - first:
+      213: -4613189423890224795
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_13
+  - first:
+      213: 6186221518836224042
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_14
+  - first:
+      213: 3831520281066339884
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_15
+  - first:
+      213: -1949939221185094214
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_16
+  - first:
+      213: 6950983204416228368
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_17
+  - first:
+      213: -5997572906156278803
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_18
+  - first:
+      213: -3443302328525795418
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_19
+  - first:
+      213: -1537221901970314201
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_20
+  - first:
+      213: -5518315808963385689
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_21
+  - first:
+      213: 3810849927660542866
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_22
+  - first:
+      213: -5653523360926464079
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_23
+  - first:
+      213: 3674803041486836458
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_24
+  - first:
+      213: 2838769056818997805
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_25
+  - first:
+      213: -1230569238630193431
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_26
+  - first:
+      213: -8854143285011932018
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_27
+  - first:
+      213: 7546661550518921967
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_28
+  - first:
+      213: 333338907520186521
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_29
+  - first:
+      213: 1232576066344668912
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_30
+  - first:
+      213: -4480042878712939063
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_31
+  - first:
+      213: -1122965385696462861
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_32
+  - first:
+      213: -6041061168302797981
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_33
+  - first:
+      213: 4520106254908607496
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_34
+  - first:
+      213: -8031088685985933310
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_35
+  - first:
+      213: -4660992111849167562
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_36
+  - first:
+      213: 1926859127345540047
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_37
+  - first:
+      213: 8888585151704377278
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_38
+  - first:
+      213: 5763417960737609199
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_39
+  - first:
+      213: 3634898939190478279
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_40
+  - first:
+      213: -5538423600746291081
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_41
+  - first:
+      213: -7445084653739205805
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_42
+  - first:
+      213: -6961604861350114728
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_43
+  - first:
+      213: 8780766798331908771
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_44
+  - first:
+      213: -3423866595423650923
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_45
+  - first:
+      213: 5632340679706872806
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_46
+  - first:
+      213: -1931323707938161910
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_47
+  - first:
+      213: 1764134658220325633
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_48
+  - first:
+      213: 7010851790639398002
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_49
+  - first:
+      213: 947274410954230354
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_50
+  - first:
+      213: -3888195657645996128
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_51
+  - first:
+      213: 253640212824852116
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_52
+  - first:
+      213: 8510145630806048100
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_53
+  - first:
+      213: 2665160031469401638
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_54
+  - first:
+      213: 6903763231858606150
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_55
+  - first:
+      213: -4180986377658993285
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_56
+  - first:
+      213: 2640481550490620926
+    second: Heliemis_Character_Idle_S(32,32)_35F.dain_57
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 64
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97bab5cbd550d0580800000000000000
+      internalID: -8859418991817675911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 64
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f88e9f64321f7a8e0800000000000000
+      internalID: -1682110801982658417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 64
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6f1c8854e26d7380800000000000000
+      internalID: -8971906149774516374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_3
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 64
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 998ad2ba48a59fa40800000000000000
+      internalID: 5402448753861699737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_4
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 64
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f9473c473e916070800000000000000
+      internalID: 8097927565327944184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_5
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 64
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30483ae945d01b690800000000000000
+      internalID: -7588269240052644861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_6
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 64
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 177e003473ff9eb70800000000000000
+      internalID: 8928948349051135857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_7
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 64
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4648e03cc99284c0800000000000000
+      internalID: -4286694793030384053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_8
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 32
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9de67f36232b9c6a0800000000000000
+      internalID: -6428411063599403303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_9
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 32
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29253a126ea7c0cc0800000000000000
+      internalID: -3743482061426306414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_10
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 32
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40752cc4143548430800000000000000
+      internalID: 3784241126823843588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_11
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 32
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 612c6da6560df8ff0800000000000000
+      internalID: -31577538365570538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_12
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 32
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bf0608ab86036770800000000000000
+      internalID: 8602726910096969648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_13
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 32
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5692f6329a8aaffb0800000000000000
+      internalID: -4613189423890224795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_14
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 32
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a205c1402bfd9d550800000000000000
+      internalID: 6186221518836224042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_15
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 32
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2ef9a6356b4c2530800000000000000
+      internalID: 3831520281066339884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_16
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 0
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abd19ab0c9c60f4e0800000000000000
+      internalID: -1949939221185094214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_17
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 0
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01c8fe2856ad67060800000000000000
+      internalID: 6950983204416228368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_18
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: deb3c06e73754cca0800000000000000
+      internalID: -5997572906156278803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_19
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 0
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6afc1fd86cee630d0800000000000000
+      internalID: -3443302328525795418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heliemis_Character_Idle_S(32,32)_35F.dain_20
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 0
+        width: 16
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72ceb1023d0baaae0800000000000000
+      internalID: -1537221901970314201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

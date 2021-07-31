@@ -20,23 +20,29 @@ public abstract class Actor : TileData
     public int walkSpeed;
     public int damagePerStoppedHit;
     public int primaryMoveDamage;
-    public float primaryMoveAnimationSpeed;
-    public float normalAnimationSpeed;
+    public float primaryMoveAnimationDuration;
+    public float normalWalkAnimationDuration;
     public float petrificationSnapSpeed;
     public FaceDirection faceDirectionInit;
 
     [Header("Animation Sprites")]
-    public Sprite[] idleSprite;
+    public Sprite[] leftIdleSprite;
+    public Sprite[] rightIdleSprite;
+    public Sprite[] upIdleSprite;
+    public Sprite[] downIdleSprite;
+
     public Sprite[] leftMoveSprite;
     public Sprite[] rightMoveSprite;
     public Sprite[] downMoveSprite;
     public Sprite[] upMoveSprite;
 
+    public Sprite[] leftFlySprite;
+    public Sprite[] rightFlySprite;
+    public Sprite[] downFlySprite;
+    public Sprite[] upFlySprite;
+
     [Header("Primary MoveUseAnimation Sprites")]
-    public Sprite[] leftPrimaryMoveSprite;
-    public Sprite[] rightPrimaryMoveSprite;
-    public Sprite[] downPrimaryMoveSprite;
-    public Sprite[] upPrimaryMoveSprite;
+    public MoveUseAnimationAction.MoveAnimationSprites primaryMoveAnimationSprites;
 
     [Header("Unit Template")]
     public Sprite crosshairSprite;
@@ -52,6 +58,11 @@ public abstract class Actor : TileData
     public bool inCharacterSelectionScreen;
     public bool inGame;
     public bool triggerFaceChangeEvent;
+    
+    [Header("Hero Specific Data")]
+    public bool isWalking;
+    public bool isUsingPrimaryMove;
+
     public int currentHP;
     public int currentStockLives;
     public bool isHeadCollisionWithOtherActor;
@@ -229,47 +240,134 @@ public abstract class Actor : TileData
         Debug.Log("Die here");
     }
 
-    public void UpdateBasicWalkingSprite()
+
+
+    public void UpdateFrameSprites()
     {
         if (frameLooper == null)
             return;
-
-        if (primaryMoveUseAction.isBeingUsed)
+        if (isUsingPrimaryMove)
         {
             switch (facing)
             {
                 case FaceDirection.Left:
-                    frameLooper.UpdateSpriteArr(leftPrimaryMoveSprite);
+                    frameLooper.UpdateSpriteArr(primaryMoveAnimationSprites.leftMove);
                     break;
                 case FaceDirection.Right:
-                    frameLooper.UpdateSpriteArr(rightPrimaryMoveSprite);
+                    frameLooper.UpdateSpriteArr(primaryMoveAnimationSprites.rightMove);
                     break;
                 case FaceDirection.Down:
-                    frameLooper.UpdateSpriteArr(downPrimaryMoveSprite);
+                    frameLooper.UpdateSpriteArr(primaryMoveAnimationSprites.downMove);
                     break;
                 case FaceDirection.Up:
-                    frameLooper.UpdateSpriteArr(upPrimaryMoveSprite);
+                    frameLooper.UpdateSpriteArr(primaryMoveAnimationSprites.upMove);
                     break;
             }
         }
         else
         {
+            if (isWalking)
+            {
+                switch (facing)
+                {
+                    case FaceDirection.Left:
+                        frameLooper.UpdateSpriteArr(leftMoveSprite);
+                        break;
+                    case FaceDirection.Right:
+                        frameLooper.UpdateSpriteArr(rightMoveSprite);
+                        break;
+                    case FaceDirection.Down:
+                        frameLooper.UpdateSpriteArr(downMoveSprite);
+                        break;
+                    case FaceDirection.Up:
+                        frameLooper.UpdateSpriteArr(upMoveSprite);
+                        break;
+                }
+            }
+            else
+            {
+                switch (facing)
+                {
+                    case FaceDirection.Left:
+                        frameLooper.UpdateSpriteArr(leftIdleSprite);
+                        break;
+                    case FaceDirection.Right:
+                        frameLooper.UpdateSpriteArr(rightIdleSprite);
+                        break;
+                    case FaceDirection.Down:
+                        frameLooper.UpdateSpriteArr(downIdleSprite);
+                        break;
+                    case FaceDirection.Up:
+                        frameLooper.UpdateSpriteArr(upIdleSprite);
+                        break;
+                }
+            }
+        }
+    }
+
+    public void UpdateBasicWalkingSprite()
+    {
+        if (frameLooper == null)
+            return;
+        if (primaryMoveUseAction.canPerformMoveUseAnimations)
+        {
             switch (facing)
             {
                 case FaceDirection.Left:
-                    frameLooper.UpdateSpriteArr(leftMoveSprite);
+                    frameLooper.UpdateSpriteArr(primaryMoveAnimationSprites.leftMove);
                     break;
                 case FaceDirection.Right:
-                    frameLooper.UpdateSpriteArr(rightMoveSprite);
+                    frameLooper.UpdateSpriteArr(primaryMoveAnimationSprites.rightMove);
                     break;
                 case FaceDirection.Down:
-                    frameLooper.UpdateSpriteArr(downMoveSprite);
+                    frameLooper.UpdateSpriteArr(primaryMoveAnimationSprites.downMove);
                     break;
                 case FaceDirection.Up:
-                    frameLooper.UpdateSpriteArr(upMoveSprite);
+                    frameLooper.UpdateSpriteArr(primaryMoveAnimationSprites.upMove);
                     break;
             }
         }
+        else
+        {
+            if (isInFlyingState)
+            {
+                switch (facing)
+                {
+                    case FaceDirection.Left:
+                        frameLooper.UpdateSpriteArr(leftFlySprite);
+                        break;
+                    case FaceDirection.Right:
+                        frameLooper.UpdateSpriteArr(rightFlySprite);
+                        break;
+                    case FaceDirection.Down:
+                        frameLooper.UpdateSpriteArr(downFlySprite);
+                        break;
+                    case FaceDirection.Up:
+                        frameLooper.UpdateSpriteArr(upFlySprite);
+                        break;
+                }
+            }
+            else
+            {
+                switch (facing)
+                {
+                    case FaceDirection.Left:
+                        frameLooper.UpdateSpriteArr(leftMoveSprite);
+                        break;
+                    case FaceDirection.Right:
+                        frameLooper.UpdateSpriteArr(rightMoveSprite);
+                        break;
+                    case FaceDirection.Down:
+                        frameLooper.UpdateSpriteArr(downMoveSprite);
+                        break;
+                    case FaceDirection.Up:
+                        frameLooper.UpdateSpriteArr(upMoveSprite);
+                        break;
+                }
+            }
+        }
+
+
     }
 
     public void Fire(Actor firingActor)
@@ -448,7 +546,7 @@ public abstract class Actor : TileData
 
     void OnPetrified()
     {
-        if (primaryMoveUseAction.isBeingUsed)
+        if (primaryMoveUseAction.canPerformMoveUseAnimations)
         {
             if (primaryMoveUseAction != null)
             {

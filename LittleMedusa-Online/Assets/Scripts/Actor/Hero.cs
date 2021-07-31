@@ -6,6 +6,7 @@ using TMPro;
 public abstract class Hero : Actor
 {
     [Header("Tweak Params")]
+    public int frameDelayForRegisteringInput;
     public int primaryMoveAttackRateTickRate;
     public Color petrificationColor;
     public Color invincibleColor;
@@ -22,7 +23,6 @@ public abstract class Hero : Actor
     [Header("Live Data")]
     public int hero;
     public bool isInputFreezed;
-    public int frameDelayForRegisteringInput;
 
     public override void Awake()
     {
@@ -31,8 +31,9 @@ public abstract class Hero : Actor
         waitingActionForPrimaryMove.Initialise(this);
         waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
 
-        primaryMoveUseAction.SetAnimationSpeedAndSpritesOnUsage(primaryMoveAnimationSpeed, normalAnimationSpeed);
         rangedAttack_1 = new Attack(primaryMoveDamage, EnumData.AttackTypes.ProjectileAttack, projectileThrownType);
+        primaryMoveUseAction.SetAnimationSpeedAndSpritesOnUsage(primaryMoveAnimationDuration, normalWalkAnimationDuration,primaryMoveAnimationSprites);
+        primaryMoveUseAction.isCancellingMovePlayerInputDriven = true;
     }
 
     public void InitialiseActor(PlayerStateUpdates playerStateUpdates)
@@ -154,7 +155,7 @@ public abstract class Hero : Actor
 
     public void SetActorAnimationState(PlayerAnimationEvents playerAnimationEvents)
     {
-        primaryMoveUseAction.isBeingUsed = playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed;
+        primaryMoveUseAction.canPerformMoveUseAnimations = playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed;
     }
 
     //authoratatively is performed(but is locally is also done)
@@ -379,6 +380,7 @@ public abstract class Hero : Actor
         }
     }
 
+    
     public abstract void DealInput();
 
     public abstract bool[] GetHeroInputs();

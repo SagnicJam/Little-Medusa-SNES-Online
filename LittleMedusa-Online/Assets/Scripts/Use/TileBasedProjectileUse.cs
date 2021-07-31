@@ -83,7 +83,7 @@ public class TileBasedProjectileUse : Use
         actorHadAuthority = actorUsing.hasAuthority();
         gameObjectInstanceId = actorUsing.gameObject.GetInstanceID();
         ownerId = actorUsing.ownerId;
-
+        //Debug.LogError("PProjectile to throw type "+projectileTypeThrown.ToString());
         GameObject gToSpawn = Resources.Load(projectileTypeThrown.ToString()) as GameObject;
         if (gToSpawn==null)
         {
@@ -93,8 +93,8 @@ public class TileBasedProjectileUse : Use
         liveProjectile = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ProjectileUtil>();
         liveProjectile.transform.position = actorUsing.actorTransform.position;
         finalPos = actorUsing.actorTransform.position + (liveProjectile.projectileTileTravelDistance * GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing));
-        liveProjectile.Initialise(this);
         tileMovementDirection = actorUsing.Facing;
+        liveProjectile.Initialise(this);
         
         if (projectileTypeThrown==EnumData.Projectiles.FlamePillar)
         {

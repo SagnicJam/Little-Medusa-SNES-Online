@@ -165,10 +165,12 @@ MonoBehaviour:
       m_Calls: []
   spriteArr: []
   spriteRenderer: {fileID: 1810377700213605333}
-  timeBetweenFrames: 0.1
+  animationDuration: 0
   temp: 0
-  spriteIndexToShow: 0
+  IsLoopComplete: 0
   playonAwakeWithLoop: 0
+  playonAwakeOneShot: 0
+  spriteIndexToShowCache: 0
   playingOneShot: 0
 --- !u!114 &2045512066361018656
 MonoBehaviour:
@@ -204,12 +206,14 @@ MonoBehaviour:
   walkSpeed: 4
   damagePerStoppedHit: 2
   primaryMoveDamage: 23
-  primaryMoveAnimationSpeed: 0.1
-  normalAnimationSpeed: 0.2
+  primaryMoveAnimationDuration: 0.5
+  normalWalkAnimationDuration: 0.5
   petrificationSnapSpeed: 6
   faceDirectionInit: 1
-  idleSprite:
-  - {fileID: 8599813833102577452, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+  leftIdleSprite: []
+  rightIdleSprite: []
+  upIdleSprite: []
+  downIdleSprite: []
   leftMoveSprite:
   - {fileID: 8266594858856756167, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   - {fileID: 3042096729039127943, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
@@ -230,18 +234,15 @@ MonoBehaviour:
   - {fileID: -9186328622268647156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   - {fileID: 2528335122740360581, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
   - {fileID: -2687521320619258062, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  leftPrimaryMoveSprite:
-  - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: 8030553017410919156, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  rightPrimaryMoveSprite:
-  - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  downPrimaryMoveSprite:
-  - {fileID: -8696682573477391892, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: -8696682573477391892, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  upPrimaryMoveSprite:
-  - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
-  - {fileID: -6815898031259212021, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+  leftFlySprite: []
+  rightFlySprite: []
+  downFlySprite: []
+  upFlySprite: []
+  primaryMoveAnimationSprites:
+    upMove: []
+    downMove: []
+    leftMove: []
+    rightMove: []
   crosshairSprite: {fileID: 21300000, guid: 5a0810130c2b57743b60b3e50b2a2a89, type: 3}
   isDead: 0
   isPushed: 0
@@ -253,6 +254,8 @@ MonoBehaviour:
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
+  isWalking: 0
+  isUsingPrimaryMove: 0
   currentHP: 0
   currentStockLives: 0
   isHeadCollisionWithOtherActor: 0
@@ -265,6 +268,7 @@ MonoBehaviour:
   previousMovePointCellPosition: {x: 0, y: 0, z: 0}
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
+  frameDelayForRegisteringInput: 4
   primaryMoveAttackRateTickRate: 20
   petrificationColor: {r: 0.4039216, g: 0.4039216, b: 0.4039216, a: 0.6509804}
   invincibleColor: {r: 1, g: 0.9333334, b: 0, a: 0.6509804}
@@ -274,7 +278,6 @@ MonoBehaviour:
   inputFrameCounter: {fileID: 6753007217621064311}
   hero: 0
   isInputFreezed: 0
-  frameDelayForRegisteringInput: 8
   up: 0
   left: 0
   down: 0

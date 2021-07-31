@@ -1,0 +1,1262 @@
+fileFormatVersion: 2
+guid: 87342fce1aaf95a47a66706149a35cf2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1677897273062238191
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_0
+  - first:
+      213: -1900885873300648980
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_1
+  - first:
+      213: -2906940970422818913
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_2
+  - first:
+      213: -5640743914266848506
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_3
+  - first:
+      213: -5515784515863828982
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_4
+  - first:
+      213: -972111984600311182
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_5
+  - first:
+      213: -7037653582461869896
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_6
+  - first:
+      213: 8535002958882408576
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_7
+  - first:
+      213: -4073770044109083046
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_8
+  - first:
+      213: -2057344807062786819
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_9
+  - first:
+      213: 4935294467336687843
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_10
+  - first:
+      213: -5374440811310403851
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_11
+  - first:
+      213: -7874531147305783671
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_12
+  - first:
+      213: -5672087653840438548
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_13
+  - first:
+      213: -2657495951027907232
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_14
+  - first:
+      213: -3635287891820005747
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_15
+  - first:
+      213: -5197770837416166400
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_16
+  - first:
+      213: -8896291270461835098
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_17
+  - first:
+      213: -9219906007215511163
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_18
+  - first:
+      213: -7758027280981654101
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_19
+  - first:
+      213: -5910754715035380570
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_20
+  - first:
+      213: -1055051204583292956
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_21
+  - first:
+      213: 8876542600013360566
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_22
+  - first:
+      213: 6616764050813582052
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_23
+  - first:
+      213: -816949313806963760
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_24
+  - first:
+      213: -4611423312826627970
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_25
+  - first:
+      213: -2957334248277793863
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_26
+  - first:
+      213: 1033306098077795821
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_27
+  - first:
+      213: -7205381006449348604
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_28
+  - first:
+      213: -8216734033494030505
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_29
+  - first:
+      213: -6446292995421410633
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_30
+  - first:
+      213: 5030501356699623868
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_31
+  - first:
+      213: -2756251272607676822
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_32
+  - first:
+      213: -3509666969455934554
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_33
+  - first:
+      213: -6087040086945451824
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_34
+  - first:
+      213: 754053639044110846
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_35
+  - first:
+      213: -7146583098804951269
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_36
+  - first:
+      213: 4925397341107521026
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_37
+  - first:
+      213: -4855396354936796075
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_38
+  - first:
+      213: 2642402264938724192
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_39
+  - first:
+      213: 8043195789224417129
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_40
+  - first:
+      213: 781892980546630398
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_41
+  - first:
+      213: -7754494428292554658
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_42
+  - first:
+      213: 8396644030197922281
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_43
+  - first:
+      213: 4978379856583947089
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_44
+  - first:
+      213: -5897308159723969677
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_45
+  - first:
+      213: -7680296846736718365
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_46
+  - first:
+      213: -1617040801076032378
+    second: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_47
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 44
+        width: 10
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe7a8721ea6194710800000000000000
+      internalID: 1677897273062238191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_1
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 44
+        width: 9
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceb4b5b9e52be95e0800000000000000
+      internalID: -1900885873300648980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_2
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 68
+        width: 9
+        height: 30
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0.26666668}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f972beac69878a7d0800000000000000
+      internalID: -2906940970422818913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_3
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 68
+        width: 9
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0.2580645}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6039d21cb4d08b1b0800000000000000
+      internalID: -5640743914266848506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_4
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 69
+        width: 9
+        height: 30
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0.26666668}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a06265ae43ff373b0800000000000000
+      internalID: -5515784515863828982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_5
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 69
+        width: 9
+        height: 29
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0.27586207}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27a9ffbec4d5282f0800000000000000
+      internalID: -972111984600311182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_6
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 69
+        width: 9
+        height: 29
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0.27586207}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b0ea159a5b355e90800000000000000
+      internalID: -7037653582461869896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_7
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 71
+        width: 10
+        height: 28
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 088081188fb627670800000000000000
+      internalID: 8535002958882408576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_8
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 72
+        width: 10
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5e20488abf0777c0800000000000000
+      internalID: -4073770044109083046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_9
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 72
+        width: 10
+        height: 28
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfc278a5cc7d273e0800000000000000
+      internalID: -2057344807062786819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_10
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 72
+        width: 10
+        height: 28
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e0dd837b20bd7440800000000000000
+      internalID: 4935294467336687843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_11
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 72
+        width: 10
+        height: 28
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fe2b7f9e862a65b0800000000000000
+      internalID: -5374440811310403851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_12
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 72
+        width: 11
+        height: 28
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.2857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98ee61084ab08b290800000000000000
+      internalID: -7874531147305783671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_13
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 72
+        width: 11
+        height: 28
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.2857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cea36f1b452b841b0800000000000000
+      internalID: -5672087653840438548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_14
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 72
+        width: 11
+        height: 28
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.2857143}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06551f6338dae1bd0800000000000000
+      internalID: -2657495951027907232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_15
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 93
+        width: 8
+        height: 6
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d863ac74cecdc8dc0800000000000000
+      internalID: -3635287891820005747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_16
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 44
+        width: 9
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00cbceb56fecdd7b0800000000000000
+      internalID: -5197770837416166400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_17
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 44
+        width: 9
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0.3478261}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a8b6bd59360a8480800000000000000
+      internalID: -8896291270461835098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_18
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 44
+        width: 9
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 589ed69e5505c0080800000000000000
+      internalID: -9219906007215511163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_19
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 44
+        width: 10
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33333334}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba58c4faa43f55490800000000000000
+      internalID: -7758027280981654101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_20
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 44
+        width: 10
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a4d9d737e7c8fda0800000000000000
+      internalID: -5910754715035380570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_21
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 44
+        width: 10
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4eff6f2f484bb51f0800000000000000
+      internalID: -1055051204583292956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_22
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 44
+        width: 10
+        height: 26
+      alignment: 9
+      pivot: {x: 0.5, y: 0.30769232}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bd2b6bf670df2b70800000000000000
+      internalID: 8876542600013360566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_23
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 44
+        width: 10
+        height: 26
+      alignment: 9
+      pivot: {x: 0.5, y: 0.30769232}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ea715bd8d773db50800000000000000
+      internalID: 6616764050813582052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_24
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 44
+        width: 11
+        height: 27
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0db690f6dec99a4f0800000000000000
+      internalID: -816949313806963760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_25
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 44
+        width: 11
+        height: 27
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e78830aedeee000c0800000000000000
+      internalID: -4611423312826627970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_26
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 44
+        width: 11
+        height: 27
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b32e497b2075f6d0800000000000000
+      internalID: -2957334248277793863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_27
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 44
+        width: 11
+        height: 27
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de50c28eb6a075e00800000000000000
+      internalID: 1033306098077795821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_28
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 44
+        width: 11
+        height: 26
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.30769232}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4007d3f7628510c90800000000000000
+      internalID: -7205381006449348604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_29
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 44
+        width: 11
+        height: 27
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 757c9bf3eeb48fd80800000000000000
+      internalID: -8216734033494030505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_30
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 16
+        width: 11
+        height: 27
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ba61d1bcaa2a86a0800000000000000
+      internalID: -6446292995421410633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_31
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 16
+        width: 11
+        height: 27
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb1a338c45eefc540800000000000000
+      internalID: 5030501356699623868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_32
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 16
+        width: 11
+        height: 27
+      alignment: 9
+      pivot: {x: 0.45454547, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6640802214dfb9d0800000000000000
+      internalID: -2756251272607676822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_33
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 16
+        width: 10
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a348ad7c782b4fc0800000000000000
+      internalID: -3509666969455934554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_34
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 16
+        width: 10
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d0bd0c9a4d768ba0800000000000000
+      internalID: -6087040086945451824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_35
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 16
+        width: 10
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef990d02acfe67a00800000000000000
+      internalID: 754053639044110846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_41
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 16
+        width: 10
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef27adde587d9da00800000000000000
+      internalID: 781892980546630398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_42
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 16
+        width: 10
+        height: 26
+      alignment: 9
+      pivot: {x: 0.5, y: 0.30769232}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5060ec0760826490800000000000000
+      internalID: -7754494428292554658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_43
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 16
+        width: 10
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e9f955124fd68470800000000000000
+      internalID: 8396644030197922281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_44
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 16
+        width: 10
+        height: 26
+      alignment: 9
+      pivot: {x: 0.5, y: 0.30769232}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15375ac5a12c61540800000000000000
+      internalID: 4978379856583947089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_45
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 16
+        width: 10
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 373e3a8597d882ea0800000000000000
+      internalID: -5897308159723969677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_46
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 16
+        width: 9
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e584b8b5ba1a6590800000000000000
+      internalID: -7680296846736718365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_47
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 16
+        width: 9
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68ccc8875fd1f89e0800000000000000
+      internalID: -1617040801076032378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_36
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 72
+        width: 10
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2962963}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b17abed298c32dc90800000000000000
+      internalID: -7146583098804951269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_37
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 67
+        width: 9
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5555556, y: 0.2580645}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2060e5e29c68a5440800000000000000
+      internalID: 4925397341107521026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Averna_Projectile_FlamePillar_S(16,28)_37F.dain_38
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 67
+        width: 10
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2580645}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55c044c7dba2e9cb0800000000000000
+      internalID: -4855396354936796075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

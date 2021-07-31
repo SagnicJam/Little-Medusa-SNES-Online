@@ -11,6 +11,7 @@ public class ProjectileUtil : MonoBehaviour
     public bool isDispersing;
     public float dispersionRadius;
     public float dispersionSpeed;
+    public bool isRotationControlledByTransform;
 
     [Header("UnitTemplate")]
     public GameObject dispersedGO;
@@ -46,7 +47,7 @@ public class ProjectileUtil : MonoBehaviour
     public static int nextProjectileID=1;
     public int networkUid;
 
-
+    
     public void Initialise(TileBasedProjectileUse pU)
     {
         this.pU = pU;
@@ -56,7 +57,27 @@ public class ProjectileUtil : MonoBehaviour
             {
                 networkUid = nextProjectileID;
                 nextProjectileID++;
-                ProjectileData projectileData = new ProjectileData(networkUid, (int)pU.projectileTypeThrown, pU.liveProjectile.transform.position);
+
+                if (isRotationControlledByTransform)
+                {
+                    switch (pU.tileMovementDirection)
+                    {
+                        case FaceDirection.Down:
+                            transform.rotation = Quaternion.Euler(0, 0, 0);
+                            break;
+                        case FaceDirection.Up:
+                            transform.rotation = Quaternion.Euler(0, 0, 180);
+                            break;
+                        case FaceDirection.Left:
+                            transform.rotation = Quaternion.Euler(0, 0, -90);
+                            break;
+                        case FaceDirection.Right:
+                            transform.rotation = Quaternion.Euler(0, 0, 90);
+                            break;
+                    }
+                }
+
+                ProjectileData projectileData = new ProjectileData(networkUid, (int)pU.projectileTypeThrown, pU.liveProjectile.transform.position,pU.liveProjectile.transform.rotation.eulerAngles);
                 ServerSideGameManager.projectilesDic.Add(networkUid, projectileData);
 
                 if(pU.projectileTypeThrown == EnumData.Projectiles.TidalWave||

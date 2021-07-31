@@ -917,6 +917,84 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  walkSpeed: 0
+  canBePetrified: 0
+  dieOnUnPetrification: 0
+  lineRangeForDetection: 0
+--- !u!1001 &322683748
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1545891711480867698, guid: 1e539c48330c7d54bb6731b3035a2e1b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545891711480867698, guid: 1e539c48330c7d54bb6731b3035a2e1b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545891711480867698, guid: 1e539c48330c7d54bb6731b3035a2e1b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545891711480867698, guid: 1e539c48330c7d54bb6731b3035a2e1b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545891711480867698, guid: 1e539c48330c7d54bb6731b3035a2e1b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545891711480867698, guid: 1e539c48330c7d54bb6731b3035a2e1b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545891711480867698, guid: 1e539c48330c7d54bb6731b3035a2e1b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545891711480867698, guid: 1e539c48330c7d54bb6731b3035a2e1b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545891711480867698, guid: 1e539c48330c7d54bb6731b3035a2e1b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545891711480867698, guid: 1e539c48330c7d54bb6731b3035a2e1b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545891711480867698, guid: 1e539c48330c7d54bb6731b3035a2e1b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545891711480867701, guid: 1e539c48330c7d54bb6731b3035a2e1b,
+        type: 3}
+      propertyPath: m_Name
+      value: BubbleShield
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545891711480867701, guid: 1e539c48330c7d54bb6731b3035a2e1b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e539c48330c7d54bb6731b3035a2e1b, type: 3}
 --- !u!1 &336427594
 GameObject:
   m_ObjectHideFlags: 0

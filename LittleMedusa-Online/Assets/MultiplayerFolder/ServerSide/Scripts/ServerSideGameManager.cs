@@ -194,12 +194,14 @@ public struct ProjectileData
     public int uid;
     public int projectileType;
     public Vector3 projectilePosition;
+    public Vector3 projectileRotation;
 
-    public ProjectileData(int uid, int projectileType, Vector3 projectilePosition)
+    public ProjectileData(int uid, int projectileType, Vector3 projectilePosition,Vector3 projectileRotation)
     {
         this.uid = uid;
         this.projectileType = projectileType;
         this.projectilePosition = projectilePosition;
+        this.projectileRotation = projectileRotation;
     }
 }
 
