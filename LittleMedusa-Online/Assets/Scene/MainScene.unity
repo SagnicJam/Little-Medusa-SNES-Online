@@ -8565,7 +8565,7 @@ Tilemap:
     m_Data: {r: -0.0000000018189432, g: -0.0000000018189432, b: -0.0000000018189432,
       a: -0.0000000018189432}
   m_TileObjectToInstantiateArray: []
-  m_AnimationFrameRate: 1
+  m_AnimationFrameRate: 10
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -16, y: -18, z: 0}
   m_Size: {x: 41, y: 31, z: 1}
@@ -11023,7 +11023,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 960480977}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11031,7 +11033,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 26fda1622871db64e9b7bdaa3c8f8f31, type: 2}
     darkTile: {fileID: 11400000, guid: 5a1320c5997be2d4a9c3a1a96cfaf3e3, type: 2}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 1045922244}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 1
     isDarkOnOdd: 0
@@ -11039,7 +11043,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 270348158}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11047,7 +11053,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 270348158}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11055,7 +11063,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 270348158}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11063,7 +11073,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 270348158}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11071,7 +11083,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 270348158}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11079,7 +11093,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 270348158}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11087,7 +11103,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 270348158}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11095,7 +11113,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 270348158}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11103,7 +11123,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 639945145}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11111,7 +11133,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 639945145}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11119,7 +11143,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 639945145}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11127,7 +11153,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 639945145}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11135,7 +11163,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 639945145}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11143,7 +11173,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 639945145}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11151,7 +11183,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 639945145}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11159,7 +11193,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 639945145}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11167,7 +11203,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 639945145}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11175,7 +11213,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 74d45107f24b67e40845e641e37d03c9, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 1395769771}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11183,7 +11223,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: 2f2a75a1b3170ca4f847301c1c4e8037, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 11400000, guid: bd24b9ec0855aa74ca05bbcc07d5fca9, type: 2}
     tileMap: {fileID: 1541293339}
+    isAnimatedTile: 1
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11191,7 +11233,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: e23b1d5788549f24a8628359a7a83cdc, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 1904420466}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
@@ -11199,7 +11243,9 @@ MonoBehaviour:
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
+    animatedTile: {fileID: 0}
     tileMap: {fileID: 1743894817}
+    isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0

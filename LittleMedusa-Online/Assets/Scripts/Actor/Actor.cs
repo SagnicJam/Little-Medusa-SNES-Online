@@ -20,9 +20,8 @@ public abstract class Actor : TileData
     public int walkSpeed;
     public int damagePerStoppedHit;
     public int primaryMoveDamage;
-    public float primaryMoveAnimationDuration;
-    public float normalWalkAnimationDuration;
     public float petrificationSnapSpeed;
+    public int primaryMoveAttackRateTickRate;
     public FaceDirection faceDirectionInit;
 
     [Header("Animation Sprites")]
@@ -66,7 +65,7 @@ public abstract class Actor : TileData
     public int currentHP;
     public int currentStockLives;
     public bool isHeadCollisionWithOtherActor;
-    public List<Mapper> mapperList = new List<Mapper>();
+    public Mapper currentMapper;
     public Vector3Int headOnCollisionCell;
     public FaceDirection headOnCollisionFaceDirection;
     public int chainIDLinkedTo = -1;
@@ -94,6 +93,9 @@ public abstract class Actor : TileData
     public WaitingForNextAction waitingForInvinciblityToOver = new WaitingForNextAction();
 
 
+    [Header("Action Primary Actions")]
+    public WaitingForNextAction waitingActionForPrimaryMove = new WaitingForNextAction();
+
     public virtual void Awake()
     {
         walkAction.Initialise(this);
@@ -101,7 +103,17 @@ public abstract class Actor : TileData
         waitingForInvinciblityToOver.Initialise(this);
         primaryMoveUseAction.Initialise(this);
         dropAction.Initialise(this);
+
+        waitingActionForPrimaryMove.Initialise(this);
+        waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
     }
+
+   
+
+    public virtual void Start()
+    {
+    }
+
 
     public void InitialiseClientActor(ClientMasterController clientMasterController, int ownerId)
     {
@@ -115,11 +127,6 @@ public abstract class Actor : TileData
         this.serverMasterController = serverMasterController;
         this.ownerId = ownerId;
     }
-
-    public virtual void Start()
-    {
-    }
-
     public int GetNetworkSequenceNo()
     {
         if (serverMasterController != null)
@@ -156,7 +163,7 @@ public abstract class Actor : TileData
 
     public bool isServer()
     {
-        return (clientMasterController == null) && (serverMasterController != null);
+        return this is Enemy||(clientMasterController == null) && (serverMasterController != null);
     }
 
     public void InitialiseHP()
@@ -168,6 +175,70 @@ public abstract class Actor : TileData
     {
         currentStockLives = maxStockLives;
     }
+
+    void RespawnPlayer()
+    {
+        isRespawnningPlayer = true;
+        SetRespawnState();
+    }
+
+    public void SpawnPlayer()
+    {
+        isRespawnningPlayer = false;
+        InitialiseHP();
+        SetSpawnState();
+    }
+
+    public void SetRespawnState()
+    {
+        actorCollider2D.enabled = false;
+        if (isClient())
+        {
+            if (hasAuthority())
+            {
+                //crosshair replaces sprite
+                frameLooper.spriteRenderer.sprite = crosshairSprite;
+            }
+            else
+            {
+                //sprite enabled false
+                frameLooper.spriteRenderer.enabled = false;
+            }
+
+        }
+        //Debug.LogError("Collider off");
+    }
+
+    public void SetSpawnState()
+    {
+        actorCollider2D.enabled = true;
+        if (isClient())
+        {
+            if (hasAuthority())
+            {
+                //sprite replaces crosshair
+            }
+            else
+            {
+                //sprite enabled true
+                frameLooper.spriteRenderer.enabled = true;
+            }
+        }
+        //Debug.LogError("Collider on");
+    }
+
+    public void MakeUnInvincible()
+    {
+        isInvincible = false;
+    }
+
+    void MakeInvincible()
+    {
+        Debug.Log("MakeInvincible");
+        isInvincible = true;
+        waitingForInvinciblityToOver.ReInitialiseTimerToBegin(invincibilityTickTimer);
+    }
+
 
     public bool completedMotionToMovePoint
     {
@@ -197,6 +268,7 @@ public abstract class Actor : TileData
         }
         set
         {
+            Debug.Log("find");
             movePoint.position = GridManager.instance.cellToworld(value);
 
         }
@@ -376,22 +448,11 @@ public abstract class Actor : TileData
         FireProjectile();
     }
 
-    public void CastFlamePillar()
-    {
-        rangedAttack_2.SetAttackingActorId(ownerId);
-        DynamicItem dynamicItem = new DynamicItem
-        {
-            ranged = rangedAttack_2,
-            activate = new TileBasedProjectileUse()
-        };
-        currentAttack = rangedAttack_2;
-        dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
-    }
     public IEnumerator forceTravelCorCache;
 
     public void StopForceTravelCor()
     {
-        if(forceTravelCorCache!=null)
+        if (forceTravelCorCache != null)
         {
             StopCoroutine(forceTravelCorCache);
         }
@@ -404,86 +465,6 @@ public abstract class Actor : TileData
             StopCoroutine(forceTravelCorCache);
             StartCoroutine(forceTravelCorCache);
         }
-    }
-
-    public void PlaceTornado(Vector3Int cell)
-    {
-        //place tornado here
-        foreach(KeyValuePair<int,ServerSideClient>kvp in Server.clients)
-        {
-            if (kvp.Value.serverMasterController != null)
-            {
-                if (kvp.Key != ownerId)
-                {
-                    if (kvp.Value.serverMasterController.serverInstanceHero is Hero hero)
-                    {
-                        if(!kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled)
-                        {
-                            kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled = true;
-                            kvp.Value.serverMasterController.serverInstanceHero.actorCollider2D.enabled = false;
-                            kvp.Value.serverMasterController.serverInstanceHero.forceTravelCorCache = GridManager.instance.ForceTravel(kvp.Value.serverMasterController.serverInstanceHero, cell);
-                            kvp.Value.serverMasterController.serverInstanceHero.StartForceTravelCor();
-                            GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, true, false);
-                            GridManager.instance.WaitForForce(kvp.Value.serverMasterController.serverInstanceHero, (x) => {
-                                x.isPhysicsControlled = false;
-                                x.actorCollider2D.enabled = true;
-                                x.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(x.actorTransform.position);
-                                x.StopForceTravelCor();
-                                GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, false, false);
-                            });
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    
-    public void CastPitfall(Vector3Int cell)
-    {
-        //do damage
-        //start timer for hole in gridmanager
-        Actor actor = GridManager.instance.GetActorOnPos(cell);
-        if(actor!=null)
-        {
-            actor.TakeDamage(actor.currentHP);
-        }
-        GridManager.instance.SetTile(cell, EnumData.TileType.Normal,false,false);
-        GridManager.instance.SetTile(cell, EnumData.TileType.Hole,true,false);
-        GridManager.instance.SwitchTileToAfter(cell, EnumData.TileType.Hole, EnumData.TileType.Normal);
-    }
-
-    public void CastBubbleShield()
-    {
-        rangedAttack_2.SetAttackingActorId(ownerId);
-        currentAttack = rangedAttack_2;
-        DynamicItem dynamicItem = new DynamicItem
-        {
-            ranged = rangedAttack_2,
-            activate = new DirectionBasedProjectileUse(0, actorTransform.right, null)
-        };
-        dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
-
-        DynamicItem dynamicItem2 = new DynamicItem
-        {
-            ranged = rangedAttack_2,
-            activate = new DirectionBasedProjectileUse(90, actorTransform.right, null)
-        };
-        dynamicItem2.activate.BeginToUse(this, null, dynamicItem2.ranged.OnHit);
-
-        DynamicItem dynamicItem3 = new DynamicItem
-        {
-            ranged = rangedAttack_2,
-            activate = new DirectionBasedProjectileUse(180, actorTransform.right, null)
-        };
-        dynamicItem3.activate.BeginToUse(this, null, dynamicItem3.ranged.OnHit);
-
-        DynamicItem dynamicItem4 = new DynamicItem
-        {
-            ranged = rangedAttack_2,
-            activate = new DirectionBasedProjectileUse(270, actorTransform.right, null)
-        };
-        dynamicItem4.activate.BeginToUse(this, null, dynamicItem4.ranged.OnHit);
     }
 
     void FireProjectile()
@@ -499,7 +480,7 @@ public abstract class Actor : TileData
     }
 
     //Will run on  server when received from client
-    public void Petrify()
+    public virtual void Petrify()
     {
         if (isPushed)
         {
@@ -627,14 +608,17 @@ public abstract class Actor : TileData
 
     public void StartPush(Actor actorToPush, FaceDirection directionOfPush)
     {
-        actorToPush.mapperList.Add(new OneDNonCheckingMapper(directionOfPush));
+        actorToPush.OnPushStart();
+        Debug.LogError("Start push");
+        actorToPush.currentMapper = null;
+        actorToPush.currentMapper = new OneDNonCheckingMapper(directionOfPush);
         actorToPush.Facing = directionOfPush;
         actorToPush.isPushed = true;
         actorToPush.isHeadCollisionWithOtherActor = false;
     }
 
     //Will called on the server only
-    public void InitialisePush(int actorToPushId, int pushDirection)
+    public void InitialiseHeroPush(int actorToPushId, int pushDirection)
     {
         if (isServer())
         {
@@ -706,26 +690,15 @@ public abstract class Actor : TileData
         return false;
     }
 
-    public void CheckSwitchCellIndex()
+    public virtual void CheckSwitchCellIndex()
     {
-        currentMovePointCellPosition = GetMapper().GetNewPathPoint(this);
-        Facing = GridManager.instance.GetFaceDirectionFromCurrentPrevPoint(currentMovePointCellPosition, previousMovePointCellPosition, this);
-    }
-
-    public Mapper GetMapper()
-    {
-        if (isPushed)
+        if(currentMapper==null)
         {
-            foreach (Mapper map in mapperList)
-            {
-                if (map is OneDNonCheckingMapper)
-                {
-                    //Debug.Log("OneDirectionalMapperBoss");
-                    return map;
-                }
-            }
+            Debug.LogError("Mapper not set");
+            return;
         }
-        return null;
+        currentMovePointCellPosition = currentMapper.GetNewPathPoint(this);
+        Facing = GridManager.instance.GetFaceDirectionFromCurrentPrevPoint(currentMovePointCellPosition, previousMovePointCellPosition, this);
     }
 
     public Actor actorPushingMe;
@@ -765,20 +738,7 @@ public abstract class Actor : TileData
 
     public void StopPushWithoutDamage(Actor actorToStop)
     {
-        List<Mapper> mapsToDelete = new List<Mapper>();
-        foreach (Mapper m in actorToStop.mapperList)
-        {
-            if (m is OneDNonCheckingMapper)
-            {
-                mapsToDelete.Add(m);
-            }
-        }
-
-        for (int i = 0; i < mapsToDelete.Count; i++)
-        {
-            actorToStop.mapperList.Remove(mapsToDelete[i]);
-        }
-        
+        actorToStop.currentMapper = null;
         actorToStop.OnCantOccupySpace();
         actorToStop.isPushed = false;
         if (actorMePushing != null)
@@ -801,21 +761,8 @@ public abstract class Actor : TileData
 
     public void StopPush(Actor actorToStop)
     {
-       
-        List<Mapper> mapsToDelete = new List<Mapper>();
-        foreach (Mapper m in actorToStop.mapperList)
-        {
-            if (m is OneDNonCheckingMapper)
-            {
-                mapsToDelete.Add(m);
-            }
-        }
-
-        for (int i = 0; i < mapsToDelete.Count; i++)
-        {
-            actorToStop.mapperList.Remove(mapsToDelete[i]);
-        }
-
+        actorToStop.currentMapper = null;
+        actorToStop.OnPushStop();
         actorToStop.OnCantOccupySpace();
         actorToStop.TakeDamage(damagePerStoppedHit);
         actorToStop.isPushed = false;
@@ -843,19 +790,8 @@ public abstract class Actor : TileData
 
     public void StopPushMeOnly(Actor actorToStop)
     {
-        List<Mapper> mapsToDelete = new List<Mapper>();
-        foreach (Mapper m in actorToStop.mapperList)
-        {
-            if (m is OneDNonCheckingMapper)
-            {
-                mapsToDelete.Add(m);
-            }
-        }
-
-        for (int i = 0; i < mapsToDelete.Count; i++)
-        {
-            actorToStop.mapperList.Remove(mapsToDelete[i]);
-        }
+        actorToStop.currentMapper = null;
+        actorToStop.OnPushStop();
         actorToStop.TakeDamage(maxHP);
         actorToStop.OnCantOccupySpace();
         actorToStop.isPushed = false;
@@ -877,78 +813,31 @@ public abstract class Actor : TileData
             }
             else
             {
+                if(this is Enemy enemy)
+                {
+                    if (isPetrified&&GridManager.instance.HasTileAtCellPoint(GridManager.instance.grid.WorldToCell(currentMovePointCellPosition), EnumData.TileType.Empty))
+                    {
+                        Debug.Log("chala");
+                        GridManager.instance.SetTile(GridManager.instance.grid.WorldToCell(currentMovePointCellPosition), EnumData.TileType.Empty, false, false);
+                        GridManager.instance.SetTile(GridManager.instance.grid.WorldToCell(currentMovePointCellPosition), EnumData.TileType.Normal, true, false);
+                    }
+                    enemy.KillMe();
+                }
                 Debug.LogError("Game Over");
             }
         }
         else
         {
-            UnPetrify();
-            MakeInvincible();
+            if(this is Hero)
+            {
+                UnPetrify();
+                MakeInvincible();
+            }
+            
         }
     }
 
-    void RespawnPlayer()
-    {
-        isRespawnningPlayer = true;
-        SetRespawnState();
-    }
-
-    public void SpawnPlayer()
-    {
-        isRespawnningPlayer = false;
-        InitialiseHP();
-        SetSpawnState();
-    }
-
-    public void SetRespawnState()
-    {
-        actorCollider2D.enabled = false;
-        if(isClient())
-        {
-            if (hasAuthority())
-            {
-                //crosshair replaces sprite
-                frameLooper.spriteRenderer.sprite = crosshairSprite;
-            }
-            else
-            {
-                //sprite enabled false
-                frameLooper.spriteRenderer.enabled = false;
-            }
-
-        }
-        //Debug.LogError("Collider off");
-    }
-
-    public void SetSpawnState()
-    {
-        actorCollider2D.enabled = true;
-        if (isClient())
-        {
-            if (hasAuthority())
-            {
-                //sprite replaces crosshair
-            }
-            else
-            {
-                //sprite enabled true
-                frameLooper.spriteRenderer.enabled = true;
-            }
-        }
-        //Debug.LogError("Collider on");
-    }
-
-    public void MakeUnInvincible()
-    {
-        isInvincible = false;
-    }
-
-    void MakeInvincible()
-    {
-        Debug.Log("MakeInvincible");
-        isInvincible = true;
-        waitingForInvinciblityToOver.ReInitialiseTimerToBegin(invincibilityTickTimer);
-    }
+    
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -998,13 +887,13 @@ public abstract class Actor : TileData
 
         Actor collidedActorWithMyHead = collider.GetComponent<Actor>();
 
-        if (isPushed)
-        {
-            if (collidedActorWithMyHead != null && collidedActorWithMyHead.gameObject.GetInstanceID() != actorTransform.gameObject.GetInstanceID() && IsCollidingWithChainElement(collidedActorWithMyHead))
-            {
-                return;
-            }
-        }
+        //if (isPushed)
+        //{
+        //    if (collidedActorWithMyHead != null && collidedActorWithMyHead.gameObject.GetInstanceID() != actorTransform.gameObject.GetInstanceID() && IsCollidingWithChainElement(collidedActorWithMyHead))
+        //    {
+        //        return;
+        //    }
+        //}
 
         if (collidedActorWithMyHead != null &&!collidedActorWithMyHead.isInvincible&& collidedActorWithMyHead.gameObject.GetInstanceID() != actorTransform.gameObject.GetInstanceID() && GridManager.instance.IsHeadCollision(collidedActorWithMyHead.actorTransform.position, actorTransform.position, Facing))
         {
@@ -1018,8 +907,7 @@ public abstract class Actor : TileData
     }
     public virtual void OnHeadCollision(Actor collidedActorWithMyHead)
     {
-        
-        //Debug.Break();
+
         if (collidedActorWithMyHead.isPushed)
         {
             if (collidedActorWithMyHead.isPetrified)
@@ -1163,6 +1051,9 @@ public abstract class Actor : TileData
     public abstract void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndAmPetrified(Actor collidedActorWithMyHead);
     public abstract void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead);
 
+    public abstract void OnPushStart();
+    public abstract void OnPushStop();
+
     public bool IsCollidingWithChainElement(Actor collidingNeigbor)
     {
         if (collidingNeigbor.chainIDLinkedTo == chainIDLinkedTo)
@@ -1175,6 +1066,8 @@ public abstract class Actor : TileData
             return false;
         }
     }
+
+    
 
     public void SnapBackAfterCollision()
     {

@@ -9,6 +9,7 @@ public class TileData : MonoBehaviour
     public bool blockUnitMotion;
     public bool blockPetrifiedObjects;
     public bool blockProjectiles;
+    public bool isPlayer;
     public bool killUnitsInstantlyIfInTheirRegion;
     public bool isPhysicsControlled;
 

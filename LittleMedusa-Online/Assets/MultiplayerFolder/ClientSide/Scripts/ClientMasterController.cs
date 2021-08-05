@@ -465,10 +465,12 @@ public struct PositionUpdates
 
 public struct PlayerAnimationEvents
 {
+    public bool isWalking;
     public bool isPrimaryMoveAnimationBeingPlayed;
 
-    public PlayerAnimationEvents(bool isPrimaryMoveAnimationBeingPlayed)
+    public PlayerAnimationEvents(bool isWalking,bool isPrimaryMoveAnimationBeingPlayed)
     {
+        this.isWalking = isWalking;
         this.isPrimaryMoveAnimationBeingPlayed = isPrimaryMoveAnimationBeingPlayed;
     }
 }

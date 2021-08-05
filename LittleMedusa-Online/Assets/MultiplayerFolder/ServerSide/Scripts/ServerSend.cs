@@ -90,7 +90,8 @@ public class ServerSend
             packet.Write((int)serverMasterController.serverInstanceHero.Facing);
             packet.Write((int)serverMasterController.serverInstanceHero.PreviousFacingDirection);
             packet.Write(serverMasterController.serverInstanceHero.isFiringPrimaryProjectile);
-            packet.Write(serverMasterController.serverInstanceHero.primaryMoveUseAction.isBeingUsed);
+            packet.Write(serverMasterController.serverInstanceHero.isWalking);
+            packet.Write(serverMasterController.serverInstanceHero.isUsingPrimaryMove);
             packet.Write(serverMasterController.serverInstanceHero.isPetrified);
             packet.Write(serverMasterController.serverInstanceHero.isPushed);
             packet.Write(serverMasterController.serverInstanceHero.isPhysicsControlled);
@@ -278,6 +279,7 @@ public class ServerSend
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.positionUpdates.Facing);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.positionUpdates.previousFacing);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerEvents.firedPrimaryMoveProjectile);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAnimationEvents.isWalking);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPetrified);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPushed);
@@ -309,6 +311,7 @@ public class ServerSend
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.positionUpdates.Facing);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.positionUpdates.previousFacing);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerEvents.firedPrimaryMoveProjectile);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAnimationEvents.isWalking);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPetrified);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPushed);

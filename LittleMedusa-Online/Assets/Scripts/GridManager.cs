@@ -10,7 +10,7 @@ public class GridManager : MonoBehaviour
     public static int chainIDGlobal = 0;
 
     [Header("Scene references")]
-    //public AStar aStar;
+    public AStar aStar;
     public Grid grid;
 
     [Header("Tweak Params")]
@@ -56,6 +56,7 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
+        aStar.Initialise();
     }
 
     public Vector3 GetFacingDirectionOffsetVector3(FaceDirection facing)
@@ -603,7 +604,14 @@ public class GridManager : MonoBehaviour
                 //}
                 //else
                 //{
+                if(gameStateDependentTileArray[(int)tType - 1].isAnimatedTile)
+                {
+                    gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].animatedTile);
+                }
+                else
+                {
                     gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tile);
+                }
                 //}
             }
             if (gameStateDependentTileArray[(int)tType - 1].tileMap.GetComponent<TilemapCollider2D>() != null)
@@ -612,6 +620,21 @@ public class GridManager : MonoBehaviour
                 gameStateDependentTileArray[(int)tType - 1].tileMap.GetComponent<TilemapCollider2D>().enabled = true;
             }
         }
+    }
+
+    public bool HasPetrifiedObject(Vector3Int cellPosToCheckFor)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            Actor actor = hit2DArr[i].collider.gameObject.GetComponent<Actor>();
+            if (actor != null && actor.isPetrified)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool IsCellBlockedForFlyingUnitsAtPos(Vector3Int cellPosToCheckFor)
@@ -764,6 +787,36 @@ public class GridManager : MonoBehaviour
     
     }
 
+    public bool IsCellBlockedForMonsterWithAnotherMonster(Vector3Int cellPosToCheck, Enemy monster)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheck);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            Enemy monsterCollidedWith = hit2DArr[i].collider.gameObject.GetComponent<Enemy>();
+            if (monsterCollidedWith != null && monsterCollidedWith.gameObject.GetInstanceID() != monster.gameObject.GetInstanceID())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool IsCellPointTheNextPointToMoveInForPathFindingAnyMonster(Vector3Int cellPos)
+    {
+        foreach(KeyValuePair<int,Enemy>kvp in Enemy.enemies)
+        {
+            if (kvp.Value.followingTarget)
+            {
+                if (cellPos == kvp.Value.currentMovePointCellPosition)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void OnHitMedusa(Vector3 position)
     {
         Instantiate(GamePrefabCreator.instance.onHitMedusaVFX, position, Quaternion.identity);
@@ -776,7 +829,9 @@ public struct GameStateDependentTiles
     public Tile tile;
     public Tile darkTile;
     public Tile tileOff;
+    public AnimatedTile animatedTile;
     public Tilemap tileMap;
+    public bool isAnimatedTile;
     //public Tile[] allTileArr;
     public bool cereberustileToggle;
     public bool multipleTileGraphic;

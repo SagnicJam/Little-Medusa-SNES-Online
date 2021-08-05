@@ -1279,7 +1279,7 @@ public class ServerMasterController : MonoBehaviour
                     if (serverInstanceHero.IsActorPushableInDirection(actorToPush, (FaceDirection)directionOfPush))
                     {
                         Debug.Log("Pushing id: "+playerIdToPush+" direction: "+(FaceDirection)directionOfPush);
-                        serverInstanceHero.InitialisePush(playerIdToPush, directionOfPush);
+                        serverInstanceHero.InitialiseHeroPush(playerIdToPush, directionOfPush);
                     }
                     else
                     {
@@ -1633,7 +1633,7 @@ public class ServerMasterController : MonoBehaviour
         PositionUpdates positionUpdates = new PositionUpdates(serverInstanceHero.actorTransform.position, serverInstanceHero.currentMovePointCellPosition
             , serverInstanceHero.previousMovePointCellPosition,(int)serverInstanceHero.Facing,(int)serverInstanceHero.PreviousFacingDirection);
         PlayerEvents playerEvents = new PlayerEvents(serverInstanceHero.isFiringPrimaryProjectile);
-        PlayerAnimationEvents playerAnimationEvents = new PlayerAnimationEvents(serverInstanceHero.primaryMoveUseAction.isBeingUsed);
+        PlayerAnimationEvents playerAnimationEvents = new PlayerAnimationEvents(serverInstanceHero.isWalking, serverInstanceHero.isUsingPrimaryMove);
 
         PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(serverLocalSequenceNumber,playerSequenceNumberProcessed, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimationEvents);
         PlayerStateServerUpdates playerStateServerUpdates = new PlayerStateServerUpdates(id, playerStateUpdates);

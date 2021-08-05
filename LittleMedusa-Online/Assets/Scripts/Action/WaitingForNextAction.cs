@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WaitingForNextAction : Actions
 {
+    public bool isWaitingForNextActionCheck;
     float NextCheckTime;
 
     public Actor actor;
@@ -13,22 +14,18 @@ public class WaitingForNextAction : Actions
         actor = actorActingThisAction;
     }
 
-    public void SetWaitingState(float waitingTimer,float waitDuration)
-    {
-        this.waitingTimer = waitingTimer;
-        NextCheckTime = waitDuration;
-    }
-
     public void ReInitialiseTimerToBegin(float waitDuration)
     {
         NextCheckTime =  waitDuration;
         waitingTimer = 0;
+        isWaitingForNextActionCheck = true;
     }
 
     public void ReInitialiseTimerToEnd(float waitDuration)
     {
         NextCheckTime = waitDuration;
         waitingTimer = NextCheckTime;
+        isWaitingForNextActionCheck = true;
     }
 
     public float waitingTimer=0;
@@ -38,6 +35,7 @@ public class WaitingForNextAction : Actions
         if (waitingTimer >= NextCheckTime)
         {
             waitingTimer = 0f;
+            isWaitingForNextActionCheck = false;
             return false;
         }
         else

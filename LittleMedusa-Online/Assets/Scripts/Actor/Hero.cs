@@ -7,7 +7,6 @@ public abstract class Hero : Actor
 {
     [Header("Tweak Params")]
     public int frameDelayForRegisteringInput;
-    public int primaryMoveAttackRateTickRate;
     public Color petrificationColor;
     public Color invincibleColor;
 
@@ -17,8 +16,7 @@ public abstract class Hero : Actor
     public SpriteRenderer statusSprite;
     public InputFrameCount inputFrameCounter;
 
-    [Header("Hero Actions")]
-    public WaitingForNextAction waitingActionForPrimaryMove = new WaitingForNextAction();
+    
 
     [Header("Live Data")]
     public int hero;
@@ -28,12 +26,7 @@ public abstract class Hero : Actor
     {
         base.Awake();
 
-        waitingActionForPrimaryMove.Initialise(this);
-        waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
-
         rangedAttack_1 = new Attack(primaryMoveDamage, EnumData.AttackTypes.ProjectileAttack, projectileThrownType);
-        primaryMoveUseAction.SetAnimationSpeedAndSpritesOnUsage(primaryMoveAnimationDuration, normalWalkAnimationDuration,primaryMoveAnimationSprites);
-        primaryMoveUseAction.isCancellingMovePlayerInputDriven = true;
     }
 
     public void InitialiseActor(PlayerStateUpdates playerStateUpdates)
@@ -155,7 +148,17 @@ public abstract class Hero : Actor
 
     public void SetActorAnimationState(PlayerAnimationEvents playerAnimationEvents)
     {
-        primaryMoveUseAction.canPerformMoveUseAnimations = playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed;
+        if (isUsingPrimaryMove!= playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed)
+        {
+            isUsingPrimaryMove = playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed;
+            UpdateFrameSprites();
+        }
+
+        if (isWalking != playerAnimationEvents.isWalking)
+        {
+            isWalking = playerAnimationEvents.isWalking;
+            UpdateFrameSprites();
+        }
     }
 
     //authoratatively is performed(but is locally is also done)
@@ -208,6 +211,101 @@ public abstract class Hero : Actor
     public abstract void ProcessInputMovementsControl();
     public abstract bool IsHeroAbleToFireProjectiles();
     public abstract bool IsHeroAbleToFireProjectiles(FaceDirection facing);
+
+    //Abilities
+    public void CastFlamePillar()
+    {
+        rangedAttack_2.SetAttackingActorId(ownerId);
+        DynamicItem dynamicItem = new DynamicItem
+        {
+            ranged = rangedAttack_2,
+            activate = new TileBasedProjectileUse()
+        };
+        currentAttack = rangedAttack_2;
+        dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
+    }
+    
+
+    public void PlaceTornado(Vector3Int cell)
+    {
+        //place tornado here
+        foreach (KeyValuePair<int, ServerSideClient> kvp in Server.clients)
+        {
+            if (kvp.Value.serverMasterController != null)
+            {
+                if (kvp.Key != ownerId)
+                {
+                    if (kvp.Value.serverMasterController.serverInstanceHero is Hero hero)
+                    {
+                        if (!kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled)
+                        {
+                            kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled = true;
+                            kvp.Value.serverMasterController.serverInstanceHero.actorCollider2D.enabled = false;
+                            kvp.Value.serverMasterController.serverInstanceHero.forceTravelCorCache = GridManager.instance.ForceTravel(kvp.Value.serverMasterController.serverInstanceHero, cell);
+                            kvp.Value.serverMasterController.serverInstanceHero.StartForceTravelCor();
+                            GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, true, false);
+                            GridManager.instance.WaitForForce(kvp.Value.serverMasterController.serverInstanceHero, (x) => {
+                                x.isPhysicsControlled = false;
+                                x.actorCollider2D.enabled = true;
+                                x.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(x.actorTransform.position);
+                                x.StopForceTravelCor();
+                                GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, false, false);
+                            });
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    public void CastPitfall(Vector3Int cell)
+    {
+        //do damage
+        //start timer for hole in gridmanager
+        Actor actor = GridManager.instance.GetActorOnPos(cell);
+        if (actor != null)
+        {
+            actor.TakeDamage(actor.currentHP);
+        }
+        GridManager.instance.SetTile(cell, EnumData.TileType.Normal, false, false);
+        GridManager.instance.SetTile(cell, EnumData.TileType.Hole, true, false);
+        GridManager.instance.SwitchTileToAfter(cell, EnumData.TileType.Hole, EnumData.TileType.Normal);
+    }
+
+    public void CastBubbleShield()
+    {
+        rangedAttack_2.SetAttackingActorId(ownerId);
+        currentAttack = rangedAttack_2;
+        DynamicItem dynamicItem = new DynamicItem
+        {
+            ranged = rangedAttack_2,
+            activate = new DirectionBasedProjectileUse(0, actorTransform.right, null)
+        };
+        dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
+
+        DynamicItem dynamicItem2 = new DynamicItem
+        {
+            ranged = rangedAttack_2,
+            activate = new DirectionBasedProjectileUse(90, actorTransform.right, null)
+        };
+        dynamicItem2.activate.BeginToUse(this, null, dynamicItem2.ranged.OnHit);
+
+        DynamicItem dynamicItem3 = new DynamicItem
+        {
+            ranged = rangedAttack_2,
+            activate = new DirectionBasedProjectileUse(180, actorTransform.right, null)
+        };
+        dynamicItem3.activate.BeginToUse(this, null, dynamicItem3.ranged.OnHit);
+
+        DynamicItem dynamicItem4 = new DynamicItem
+        {
+            ranged = rangedAttack_2,
+            activate = new DirectionBasedProjectileUse(270, actorTransform.right, null)
+        };
+        dynamicItem4.activate.BeginToUse(this, null, dynamicItem4.ranged.OnHit);
+    }
+    //end abilities
 
     //do stop push
     //do remaining monster code inside head collision
@@ -364,6 +462,16 @@ public abstract class Hero : Actor
         {
             return true;
         }
+    }
+
+    public override void OnPushStart()
+    {
+        Debug.Log("OnPushStart ");
+    }
+
+    public override void OnPushStop()
+    {
+        Debug.Log("OnPushStop ");
     }
 
     public override void OnCantOccupySpace()

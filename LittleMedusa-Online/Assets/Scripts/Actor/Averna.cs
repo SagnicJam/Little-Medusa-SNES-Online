@@ -10,6 +10,7 @@ public class Averna : Hero
         base.Start();
         rangedAttack_2 = new Attack(primaryMoveDamage, EnumData.AttackTypes.ProjectileAttack, projectileThrownType_2);
     }
+
     public override bool IsHeroAbleToFireProjectiles()
     {
         Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
@@ -101,8 +102,8 @@ public class Averna : Hero
                     return;
                 }
 
-                Mapper m = GetMapper();
-                if (m is OneDNonCheckingMapper oneDNonCheckingMapper)
+                Mapper m = currentMapper;
+                if (m!=null && m is OneDNonCheckingMapper oneDNonCheckingMapper)
                 {
                     oneDNonCheckingMapper.face = Facing;
                 }

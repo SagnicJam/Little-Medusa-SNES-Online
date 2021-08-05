@@ -94,6 +94,8 @@
     <Compile Include="Assets\Scripts\Action\InteractWithTileAction.cs" />
     <Compile Include="Assets\Scripts\Action\MoveUseAnimationAction.cs" />
     <Compile Include="Assets\Scripts\Action\PetrificationAction.cs" />
+    <Compile Include="Assets\Scripts\Action\SenseInCircleAction.cs" />
+    <Compile Include="Assets\Scripts\Action\SenseInLineAction.cs" />
     <Compile Include="Assets\Scripts\Action\WaitingForNextAction.cs" />
     <Compile Include="Assets\Scripts\Action\WalkAction.cs" />
     <Compile Include="Assets\Scripts\Actor\Actor.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="Assets\Scripts\Dtos\RoomDto.cs" />
     <Compile Include="Assets\Scripts\EnemyAI\Cyclops.cs" />
     <Compile Include="Assets\Scripts\EnemyAI\Enemy.cs" />
+    <Compile Include="Assets\Scripts\EnemyAI\Snake.cs" />
     <Compile Include="Assets\Scripts\EnumData.cs" />
     <Compile Include="Assets\Scripts\FindMatchScreen.cs" />
     <Compile Include="Assets\Scripts\GameConfig.cs" />
@@ -141,6 +144,7 @@
     <Compile Include="Assets\Scripts\Mapper\AStar.cs" />
     <Compile Include="Assets\Scripts\Mapper\AStarPathFindMapper.cs" />
     <Compile Include="Assets\Scripts\Mapper\AimlessWandererMapper.cs" />
+    <Compile Include="Assets\Scripts\Mapper\DashMapper.cs" />
     <Compile Include="Assets\Scripts\Mapper\Mapper.cs" />
     <Compile Include="Assets\Scripts\Mapper\OneDNonCheckingMapper.cs" />
     <Compile Include="Assets\Scripts\Misc\FPSDisplay.cs" />
@@ -805,6 +809,10 @@
       <Project>{680249CE-F1DC-1EDD-971D-B1C0D3BB9613}</Project>
       <Name>BestHTTP</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.2D.Tilemap.Extras.Editor.csproj">
+      <Project>{22559DB3-A06E-0061-861D-4EC1A0811154}</Project>
+      <Name>Unity.2D.Tilemap.Extras.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="IngameDebugConsole.Runtime.csproj">
       <Project>{83C540AD-EDA1-B141-1901-D0970896B819}</Project>
       <Name>IngameDebugConsole.Runtime</Name>
@@ -812,6 +820,10 @@
     <ProjectReference Include="IngameDebugConsole.Editor.csproj">
       <Project>{6AD951CB-DA67-64B0-4DD0-6AD96E3C8D3B}</Project>
       <Name>IngameDebugConsole.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.2D.Tilemap.Extras.csproj">
+      <Project>{E12BE5B2-BD51-A028-54DC-682BAB7F18F7}</Project>
+      <Name>Unity.2D.Tilemap.Extras</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
