@@ -75,7 +75,13 @@ public abstract class Hero : Actor
             //turn off character selection screen
             //Debug.LogError("Turn on model");
             gameObject.transform.parent.gameObject.SetActive(true);
-            CharacterSelectionScreen.instance.gameObject.SetActive(false);
+            if(CharacterSelectionScreen.instance.gameObject.activeSelf)
+            {
+                CharacterSelectionScreen.instance.gameObject.SetActive(false);
+                
+            }
+            //MatchConditionData matchConditionData = new MatchConditionData(GetLocalSequenceNo(), MatchConditionManager.instance.enemyType, MatchConditionManager.instance.enemyCount);
+            //ClientSend.SendMatchConditionData(matchConditionData);
         }
         inCharacterSelectionScreen = playerAuthoratativeStates.inCharacterSelectionScreen;
         inGame = playerAuthoratativeStates.inGame;

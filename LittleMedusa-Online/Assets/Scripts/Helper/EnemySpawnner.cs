@@ -9,27 +9,57 @@ public class EnemySpawnner : MonoBehaviour
 
     public List<Vector3Int> spawnIndexList = new List<Vector3Int>();
 
+    public int totalEnemyToSpawn;
+
+    public int currentEnemyCount;
+
+    public bool liveEnemy;
+
+    public bool matchStarted;
+
     private void Start()
     {
         spawnIndexList = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.SpawnJar);
     }
 
-    public void SpawnEnemy(EnumData.MonsterBreed monsterBreedToSpawn,Vector3Int cell)
+    public void InitialiseSpawnner(int enemyType,int enemyCount)
     {
-        IEnumerator ie = waitAndStartCor(monsterBreedToSpawn, cell);
-        StopCoroutine(ie);
-        StartCoroutine(ie);
+        matchStarted = true;
+        monsterToSpawn = (EnumData.MonsterBreed)enemyType;
+        totalEnemyToSpawn = enemyCount;
     }
 
-    IEnumerator waitAndStartCor(EnumData.MonsterBreed monsterBreedToSpawn, Vector3Int cell)
+    void SpawnNewEnemy()
     {
-        yield return new WaitForSeconds(1.5f);
-
-        GameObject enemy = Instantiate(enemyPrefab[(int)monsterBreedToSpawn]);
+        currentEnemyCount++;
+        GameObject enemy = Instantiate(enemyPrefab[(int)monsterToSpawn]);
         Actor actor = enemy.GetComponentInChildren<Actor>();
-        actor.transform.position = GridManager.instance.cellToworld(cell);
+        actor.transform.position = GridManager.instance.cellToworld(spawnIndexList[Random.Range(0,spawnIndexList.Count)]);
         actor.transform.rotation = Quaternion.identity;
         actor.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actor.transform.position);
     }
 
+    public int spawnTickRate;
+    public int currentSpawnTick;
+
+    private void FixedUpdate()
+    {
+        if(MultiplayerManager.instance.isServer&& matchStarted)
+        {
+            liveEnemy = currentEnemyCount <= totalEnemyToSpawn;
+            if (liveEnemy)
+            {
+                if (spawnTickRate <= currentSpawnTick)
+                {
+                    SpawnNewEnemy();
+                    currentSpawnTick = 0;
+                }
+                else
+                {
+                    currentSpawnTick ++;
+                }
+            }
+        }
+        
+    }
 }

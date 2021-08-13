@@ -186,9 +186,9 @@ public class ClientSideGameManager : MonoBehaviour
     {
         for (int i = 0; i < newWorldUpdate.worldGridItems.Length; i++)
         {
-            for (int j = 0; j < newWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Count; j++)
+            for (int j = 0; j < newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList.Count; j++)
             {
-                GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true, false);
+                GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true, false);
             }
         }
 
@@ -277,23 +277,23 @@ public class ClientSideGameManager : MonoBehaviour
         {
             for (int i = 0; i < latestWorldUpdate.worldGridItems.Length; i++)
             {
-                for (int j = 0; j < latestWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Count; j++)
+                for (int j = 0; j < latestWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList.Count; j++)
                 {
-                    if(!newWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Contains(latestWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j]))
+                    if(!newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList.Contains(latestWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList[j]))
                     {
                         //delete old
-                        GridManager.instance.SetTile(latestWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)latestWorldUpdate.worldGridItems[i].tileType,false, true);
+                        GridManager.instance.SetTile(latestWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList[j], (EnumData.TileType)latestWorldUpdate.worldGridItems[i].tileType,false, true);
                     }
                 }
             }
             for (int i = 0; i < newWorldUpdate.worldGridItems.Length; i++)
             {
-                for (int j = 0; j < newWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Count; j++)
+                for (int j = 0; j < newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList.Count; j++)
                 {
-                    if (!latestWorldUpdate.worldGridItems[i].cellGridWorldPositionList.Contains(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j]))
+                    if (!latestWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList.Contains(newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList[j]))
                     {
                         //add new
-                        GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].cellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true, true);
+                        GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true, true);
                     }
                 }
             }

@@ -131,6 +131,7 @@
     <Compile Include="Assets\Scripts\Helper\FrameLooper.cs" />
     <Compile Include="Assets\Scripts\Helper\GamePhysics.cs" />
     <Compile Include="Assets\Scripts\Helper\JoinOrderText.cs" />
+    <Compile Include="Assets\Scripts\Helper\MatchConditionManager.cs" />
     <Compile Include="Assets\Scripts\Helper\ProjectileUtil.cs" />
     <Compile Include="Assets\Scripts\Helper\StaticAnimatingTileManager.cs" />
     <Compile Include="Assets\Scripts\Helper\StaticAnimatingTileUtil.cs" />

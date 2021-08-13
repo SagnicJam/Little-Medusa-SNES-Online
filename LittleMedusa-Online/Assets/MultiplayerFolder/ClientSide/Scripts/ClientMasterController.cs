@@ -652,6 +652,19 @@ public struct RespawnPlayerCommand
         this.respawnCellPostion = respawnCellPostion;
     }
 }
+public struct MatchConditionData
+{
+    public int sequenceNumber;
+    public int enemyType;
+    public int enemyCount;
+
+    public MatchConditionData(int sequenceNumber, int enemyType, int enemyCount)
+    {
+        this.sequenceNumber = sequenceNumber;
+        this.enemyType = enemyType;
+        this.enemyCount = enemyCount;
+    }
+}
 
 public struct InputCommands
 {

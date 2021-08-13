@@ -17,6 +17,7 @@ public class MultiplayerManager : MonoBehaviour
 
 
     public CharacterSelectionScreen characterSelectionScreen;
+    public MatchConditionManager matchConditionManager;
 
     public static MultiplayerManager instance;
     public bool isDebug;
@@ -24,6 +25,7 @@ public class MultiplayerManager : MonoBehaviour
 
     public int serverPort;
 
+    public bool isRoomOwner;
 
     private void Awake()
     {
@@ -82,6 +84,10 @@ public class MultiplayerManager : MonoBehaviour
         serverPort = match.MatchID;
         Instantiate(clientSideGameManager);
         Instantiate(characterSelectionScreen, Canvas, false);
+        if(isRoomOwner)
+        {
+            Instantiate(matchConditionManager, Canvas, false);
+        }
     }
 
     public void DestroyEnterName()

@@ -78,6 +78,7 @@ public abstract class Enemy : Actor
         {
             enemies.Remove(ownerId);
             Destroy(HeadTransform.gameObject);
+            GridManager.instance.enemySpawnner.currentEnemyCount--;
         }
     }
 

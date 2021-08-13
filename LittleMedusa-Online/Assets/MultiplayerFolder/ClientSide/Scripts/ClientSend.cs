@@ -23,7 +23,22 @@ public class ClientSend : MonoBehaviour
         using (Packet packet = new Packet((int)ClientPackets.welcomeReceived))
         {
             packet.Write(Client.instance.myID);
-            packet.Write("dummy");
+            packet.Write("dummy123");
+            SendTCPData(packet);
+        }
+    }
+
+    public static void SendMatchConditionData(MatchConditionData matchConditionData)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.matchConditionDataCommand))
+        {
+            Debug.LogError(matchConditionData.enemyType);
+            Debug.LogError(matchConditionData.enemyCount);
+            Debug.LogError(matchConditionData.sequenceNumber);
+
+            packet.Write(matchConditionData.enemyType);
+            packet.Write(matchConditionData.enemyCount);
+            packet.Write(matchConditionData.sequenceNumber);
             SendTCPData(packet);
         }
     }

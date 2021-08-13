@@ -154,7 +154,8 @@ public class Server
                 { (int)ClientPackets.castingEarthQuakeCommand,ServerHandle.PlayerCastingEarthQuakeCommandReceived},
                 { (int)ClientPackets.castingFlamePillarCommand,ServerHandle.PlayerCastingFlamePillarCommandReceived},
                 { (int)ClientPackets.playerFiringMightyWindCommand,ServerHandle.PlayerFiringMightyWindCommandReceived},
-                { (int)ClientPackets.characterChangeCommand,ServerHandle.ChangeCharacterRequest}
+                { (int)ClientPackets.characterChangeCommand,ServerHandle.ChangeCharacterRequest},
+                { (int)ClientPackets.matchConditionDataCommand,ServerHandle.SetMatchConditionData}
             };
 
         Debug.Log("Initialise packets");

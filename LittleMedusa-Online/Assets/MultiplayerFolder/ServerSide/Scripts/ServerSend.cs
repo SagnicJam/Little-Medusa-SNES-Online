@@ -118,9 +118,9 @@ public class ServerSend
             {
                 packet.Write(worldGridItem.tileType);
 
-                packet.Write(worldGridItem.cellGridWorldPositionList.Count);
+                packet.Write(worldGridItem.updatedCellGridWorldPositionList.Count);
 
-                foreach (Vector2Int v in worldGridItem.cellGridWorldPositionList)
+                foreach (Vector2Int v in worldGridItem.updatedCellGridWorldPositionList)
                 {
                     packet.Write(v);
                 }
@@ -187,9 +187,9 @@ public class ServerSend
                 {
                     packet.Write(worldGridItem.tileType);
 
-                    packet.Write(worldGridItem.cellGridWorldPositionList.Count);
+                    packet.Write(worldGridItem.updatedCellGridWorldPositionList.Count);
 
-                    foreach (Vector2Int v in worldGridItem.cellGridWorldPositionList)
+                    foreach (Vector2Int v in worldGridItem.updatedCellGridWorldPositionList)
                     {
                         packet.Write(v);
                     }
@@ -254,9 +254,9 @@ public class ServerSend
                     {
                         packet.Write(previousWorldGridItem.tileType);
 
-                        packet.Write(previousWorldGridItem.cellGridWorldPositionList.Count);
+                        packet.Write(previousWorldGridItem.updatedCellGridWorldPositionList.Count);
 
-                        foreach (Vector3Int v in previousWorldGridItem.cellGridWorldPositionList)
+                        foreach (Vector3Int v in previousWorldGridItem.updatedCellGridWorldPositionList)
                         {
                             packet.Write(v);
                         }

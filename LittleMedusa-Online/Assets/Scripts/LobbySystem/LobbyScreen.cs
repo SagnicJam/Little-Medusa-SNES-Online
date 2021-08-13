@@ -46,12 +46,14 @@ public class LobbyScreen : MonoBehaviour,ILobby
     {
         Debug.Log("OnRoom created : "+room.RoomName);
         MultiplayerManager.instance.InitialisePlayerList(room);
+        MultiplayerManager.instance.isRoomOwner = true;
     }
 
     void OnRoomLeft(Room room)
     {
         Debug.Log("OnRoom left : "+room.RoomName);
         MultiplayerManager.instance.DestroyPlayerList();
+        MultiplayerManager.instance.isRoomOwner = false;
     }
 
     void OnGetLobby(Lobby lobby)

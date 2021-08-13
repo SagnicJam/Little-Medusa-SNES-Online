@@ -6,5 +6,6 @@ public struct Room
 {
     public int RoomId { get; set; }
     public string RoomName { get; set; }
+    public string RoomOwnerConnectionID { get; set; }
     public Dictionary<string,PlayerInfoData> playerList { get; set; }
 }

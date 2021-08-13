@@ -14,7 +14,19 @@ public class ServerHandle
             Debug.Log($"Player {username} ID {fromClient} has assumed the wrong client id: {clientIDToCheck}");
         }
 
-        Server.clients[fromClient].SendIntoGame(username);
+        Server.clients[fromClient].SendIntoGame( username);
+    }
+
+    public static void SetMatchConditionData(int fromClient, Packet packet)
+    {
+        int enemyType = packet.ReadInt();
+        int enemyCount = packet.ReadInt();
+        int sequenceNumber = packet.ReadInt();
+        Debug.LogError(enemyType);
+        Debug.LogError(enemyCount);
+        Debug.LogError(sequenceNumber);
+        MatchConditionData matchConditionData = new MatchConditionData(sequenceNumber,enemyType, enemyCount);
+        Server.clients[fromClient].serverMasterController.AccumulateMatchConditionDataCommandToBePlayedOnServerFromClient(matchConditionData);
     }
 
     public static void ChangeCharacterRequest(int fromClient, Packet packet)

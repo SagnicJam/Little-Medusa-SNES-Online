@@ -71,11 +71,6 @@ public class ServerSideGameManager : MonoBehaviour
                 kvp.Value.serverMasterController.serverInstanceHero.inGame = (currentGameState == EnumData.GameState.Gameplay);
             }
         }
-        for (int i = 0; i < GridManager.instance.enemySpawnner.spawnIndexList.Count; i++)
-        {
-            GridManager.instance.enemySpawnner.SpawnEnemy(GridManager.instance.enemySpawnner.monsterToSpawn, GridManager.instance.enemySpawnner.spawnIndexList[i]);
-
-        }
     }
 
     private void FixedUpdate()
@@ -217,11 +212,12 @@ public struct ProjectileData
 public struct WorldGridItem
 {
     public int tileType;
-    public List<Vector3Int> cellGridWorldPositionList;
+    public List<Vector3Int> updatedCellGridWorldPositionList;
 
-    public WorldGridItem(int tileType, List<Vector3Int> cellPositionList)
+    public WorldGridItem(int tileType, List<Vector3Int> updatedCellPositionList)
     {
         this.tileType = tileType;
-        this.cellGridWorldPositionList = cellPositionList;
+        this.updatedCellGridWorldPositionList = updatedCellPositionList;
     }
 }
+

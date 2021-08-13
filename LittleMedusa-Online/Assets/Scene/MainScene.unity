@@ -695,46 +695,36 @@ Tilemap:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270348157}
   m_Enabled: 1
-  m_Tiles:
-  - first: {x: 5, y: -3, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
+  m_Tiles: {}
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 6761842583480609648, guid: c60f88a1414fd744a9ff4db166996c25,
-      type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 1
+  - m_RefCount: 0
     m_Data:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
+      e00: NaN
+      e01: -1.25064955e-29
+      e02: -1.25065196e-29
+      e03: NaN
+      e10: NaN
+      e11: 3.5e-43
+      e12: 3.5e-43
+      e13: NaN
+      e20: -1.25064474e-29
+      e21: 0.0000000026403015
+      e22: -1.3454565e+9
+      e23: 7.6322174
+      e30: 3.5e-43
+      e31: 4.5904e-41
+      e32: 9.3e-43
+      e33: 9.29e-43
   m_TileColorArray:
-  - m_RefCount: 1
-    m_Data: {r: 1, g: 1, b: 1, a: 1}
+  - m_RefCount: 0
+    m_Data: {r: 6.4478455, g: 6.4478455, b: 6.4478455, a: 6.4478455}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -9571,15 +9561,6 @@ Tilemap:
   m_GameObject: {fileID: 1743894812}
   m_Enabled: 1
   m_Tiles:
-  - first: {x: -6, y: -4, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 3
-      m_TileSpriteIndex: 3
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
   - first: {x: -4, y: -4, z: 0}
     second:
       serializedVersion: 2
@@ -9630,24 +9611,6 @@ Tilemap:
       serializedVersion: 2
       m_TileIndex: 4
       m_TileSpriteIndex: 4
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: -7, y: -3, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 3
-      m_TileSpriteIndex: 3
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: -7, y: -2, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 3
-      m_TileSpriteIndex: 3
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -9894,8 +9857,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 3
-    m_Data: {fileID: 11400000, guid: 3a8e7c3296cfeab4c9817833f906d44d, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 32
     m_Data: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
   m_TileSpriteArray:
@@ -9905,14 +9868,13 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 3
-    m_Data: {fileID: -3199751583258398446, guid: c60f88a1414fd744a9ff4db166996c25,
-      type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 32
     m_Data: {fileID: 6168722448946411991, guid: 0ae389090da16414f9ed6b09ec1f975a,
       type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 35
+  - m_RefCount: 32
     m_Data:
       e00: 1
       e01: 0
@@ -9931,7 +9893,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 35
+  - m_RefCount: 32
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -9977,7 +9939,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1749640614
 Transform:
   m_ObjectHideFlags: 0
@@ -10087,16 +10049,7 @@ Tilemap:
   m_GameObject: {fileID: 1749640613}
   m_Enabled: 1
   m_Tiles:
-  - first: {x: 0, y: 7, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 1
-      m_TileObjectToInstantiateIndex: 65535
-      m_AllTileFlags: 1073741825
-  - first: {x: 3, y: 7, z: 0}
+  - first: {x: 0, y: -3, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 0
@@ -10107,16 +10060,16 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 1dffb455cf942d04ca92fad2dd80c95e, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: -3322664745523931652, guid: c60f88a1414fd744a9ff4db166996c25,
       type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data:
       e00: 1
       e01: 0
@@ -10137,7 +10090,7 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: 9.993748e-10, g: 9.993748e-10, b: 9.993748e-10, a: 9.993748e-10}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -10181,8 +10134,15 @@ MonoBehaviour:
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
+  - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
   monsterToSpawn: 1
   spawnIndexList: []
+  totalEnemyToSpawn: 0
+  currentEnemyCount: 0
+  liveEnemy: 0
+  matchStarted: 0
+  spawnTickRate: 300
+  currentSpawnTick: 0
 --- !u!1 &1777984281
 GameObject:
   m_ObjectHideFlags: 0
@@ -10230,8 +10190,10 @@ MonoBehaviour:
   loader: {fileID: 2116128978587783406, guid: cfbb9be39566779458fdb33ff3583947, type: 3}
   characterSelectionScreen: {fileID: 256209095372272350, guid: 125f7419cbf8e89478566ac42fdd5a36,
     type: 3}
-  isDebug: 1
-  isServer: 1
+  matchConditionManager: {fileID: 6422030692788672854, guid: 8563d9e9ec73e3e49bb17b0a134cdcb1,
+    type: 3}
+  isDebug: 0
+  isServer: 0
   serverPort: 13
 --- !u!4 &1777984283
 Transform:

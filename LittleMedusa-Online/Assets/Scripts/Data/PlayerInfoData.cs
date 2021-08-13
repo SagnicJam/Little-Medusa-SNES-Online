@@ -9,7 +9,6 @@ public struct PlayerInfoData
         this.connectionId = connectionId;
         Name = name;
     }
-
     public string connectionId { get; set; }
     public string Name { get; set; }
 }
