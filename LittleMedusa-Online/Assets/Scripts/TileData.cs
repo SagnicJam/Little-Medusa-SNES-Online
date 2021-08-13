@@ -9,6 +9,7 @@ public class TileData : MonoBehaviour
     public bool blockUnitMotion;
     public bool blockPetrifiedObjects;
     public bool blockProjectiles;
+    public bool solidifyTile;
     public bool isPlayer;
     public bool killUnitsInstantlyIfInTheirRegion;
     public bool isPhysicsControlled;
@@ -36,6 +37,7 @@ public class TileData : MonoBehaviour
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
                     killUnitsInstantlyIfInTheirRegion = true;
+                    solidifyTile = false;
                     break;
                 case EnumData.TileType.Normal:
                     blockFlyingUnits = false;
@@ -43,6 +45,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = false;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    solidifyTile = false;
                     break;
                 case EnumData.TileType.WaterChannels:
                     blockFlyingUnits = false;
@@ -50,6 +53,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = true;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    solidifyTile = false;
                     break;
                 case EnumData.TileType.Up:
                     blockFlyingUnits = false;
@@ -57,6 +61,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = false;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    solidifyTile = false;
                     break;
                 case EnumData.TileType.Hourglass:
                     blockFlyingUnits = false;
@@ -64,6 +69,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = false;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    solidifyTile = false;
                     break;
                 case EnumData.TileType.UpArrow:
                     blockFlyingUnits = false;
@@ -71,6 +77,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = false;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    solidifyTile = false;
                     break;
                 case EnumData.TileType.DownArrow:
                     blockFlyingUnits = false;
@@ -78,6 +85,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = false;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    solidifyTile = false;
                     break;
                 case EnumData.TileType.LeftArrow:
                     blockFlyingUnits = false;
@@ -85,6 +93,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = false;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    solidifyTile = false;
                     break;
                 case EnumData.TileType.RightArrow:
                     blockFlyingUnits = false;
@@ -92,6 +101,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = false;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    solidifyTile = false;
                     break;
                 case EnumData.TileType.IcarusWings:
                     blockFlyingUnits = false;
@@ -99,6 +109,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = false;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    solidifyTile = false;
                     break;
                 case EnumData.TileType.UpCereberusHead:
                     blockFlyingUnits = false;
@@ -106,6 +117,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = true;
                     blockPetrifiedObjects = true;
                     blockProjectiles = true;
+                    solidifyTile = true;
                     break;
                 case EnumData.TileType.DownCereberusHead:
                     blockFlyingUnits = false;
@@ -113,6 +125,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = true;
                     blockPetrifiedObjects = true;
                     blockProjectiles = true;
+                    solidifyTile = true;
                     break;
                 case EnumData.TileType.LeftCereberusHead:
                     blockFlyingUnits = false;
@@ -120,6 +133,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = true;
                     blockPetrifiedObjects = true;
                     blockProjectiles = true;
+                    solidifyTile = true;
                     break;
                 case EnumData.TileType.RightCereberusHead:
                     blockFlyingUnits = false;
@@ -127,6 +141,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = true;
                     blockPetrifiedObjects = true;
                     blockProjectiles = true;
+                    solidifyTile = true;
                     break;
                 case EnumData.TileType.Star:
                     blockFlyingUnits = false;
@@ -134,6 +149,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = false;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    solidifyTile = false;
                     break;
                 case EnumData.TileType.Key:
                     blockFlyingUnits = false;
@@ -141,6 +157,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = false;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    solidifyTile = false;
                     break;
                 case EnumData.TileType.Chest:
                     blockFlyingUnits = false;
@@ -148,6 +165,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = true;
                     blockPetrifiedObjects = true;
                     blockProjectiles = true;
+                    solidifyTile = true;
                     break;
                 case EnumData.TileType.SpawnJar:
                     blockFlyingUnits = false;
@@ -155,6 +173,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = true;
                     blockPetrifiedObjects = true;
                     blockProjectiles = true;
+                    solidifyTile = true;
                     break;
                 case EnumData.TileType.Hole:
                     blockFlyingUnits = false;
@@ -162,6 +181,8 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = true;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    solidifyTile = false;
+                    killUnitsInstantlyIfInTheirRegion = true;
                     break;
                 case EnumData.TileType.NoBoulder:
                     blockFlyingUnits = false;
@@ -169,6 +190,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = false;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
+                    solidifyTile = false;
                     break;
                 case EnumData.TileType.Wall:
                     blockFlyingUnits = false;
@@ -176,7 +198,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = true;
                     blockPetrifiedObjects = true;
                     blockProjectiles = true;
-                    killUnitsInstantlyIfInTheirRegion = true;
+                    solidifyTile = true;
                     break;
                 case EnumData.TileType.Boulder:
                     blockFlyingUnits = false;
@@ -184,7 +206,7 @@ public class TileData : MonoBehaviour
                     blockUnitMotion = true;
                     blockPetrifiedObjects = true;
                     blockProjectiles = true;
-                    killUnitsInstantlyIfInTheirRegion = true;
+                    solidifyTile = true;
                     break;
                 case EnumData.TileType.Mirror:
                     blockFlyingUnits = false;
@@ -197,8 +219,9 @@ public class TileData : MonoBehaviour
                     blockFlyingUnits = false;
                     blockBoulderPlacement = true;
                     blockUnitMotion = true;
-                    blockPetrifiedObjects = false;
-                    blockProjectiles = false;
+                    blockPetrifiedObjects = true;
+                    blockProjectiles = true;
+                    solidifyTile = true;
                     break;
             }
         }

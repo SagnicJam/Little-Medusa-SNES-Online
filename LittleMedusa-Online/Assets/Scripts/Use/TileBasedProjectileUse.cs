@@ -11,13 +11,17 @@ public class TileBasedProjectileUse : Use
     public Vector3Int currentValidPosCell;
 
     public bool destroyAtPreviousCell;
+    
     public Actor actorMePushing;
     public EnumData.Projectiles projectileTypeThrown;
+    
     public bool actorHadAuthority;
     public int ownerId;
     public int gameObjectInstanceId;
 
     public FaceDirection tileMovementDirection;
+
+    public Attack attack;
 
     public void SetActorMePushing(Actor actorMePushing)
     {
@@ -79,6 +83,7 @@ public class TileBasedProjectileUse : Use
         this.actorUsing = actorUsing;
         onUseOver = onDynamicItemUsed;
 
+        attack = actorUsing.currentAttack;
         projectileTypeThrown = actorUsing.currentAttack.projectiles;
         actorHadAuthority = actorUsing.hasAuthority();
         gameObjectInstanceId = actorUsing.gameObject.GetInstanceID();

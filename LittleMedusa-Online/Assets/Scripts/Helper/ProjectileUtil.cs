@@ -11,12 +11,11 @@ public class ProjectileUtil : MonoBehaviour
     public bool isDispersing;
     public float dispersionRadius;
     public float dispersionSpeed;
-    public bool isRotationControlledByTransform;
 
     [Header("UnitTemplate")]
     public GameObject dispersedGO;
     public GameObject dispersedGOCollider;
-    
+
 
     public FrameLooper frameLooper;
 
@@ -44,54 +43,31 @@ public class ProjectileUtil : MonoBehaviour
 
 
     public int chainIDLinkedTo = -1;
-    public static int nextProjectileID=1;
+    public static int nextProjectileID = 1;
     public int networkUid;
 
-    
+
     public void Initialise(TileBasedProjectileUse pU)
     {
         this.pU = pU;
-        if (MultiplayerManager.instance.isServer)
+        if (MultiplayerManager.instance.isServer&&isServerNetworked)
         {
-            if (isServerNetworked)
+            networkUid = nextProjectileID;
+            nextProjectileID++;
+            ProjectileData projectileData = new ProjectileData(networkUid, (int)pU.projectileTypeThrown, pU.liveProjectile.transform.position, (int)pU.tileMovementDirection);
+            ServerSideGameManager.projectilesDic.Add(networkUid, projectileData);
+
+            if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave ||
+                pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
+                pU.projectileTypeThrown == EnumData.Projectiles.MightyWind)
             {
-                networkUid = nextProjectileID;
-                nextProjectileID++;
-
-                if (isRotationControlledByTransform)
-                {
-                    switch (pU.tileMovementDirection)
-                    {
-                        case FaceDirection.Down:
-                            transform.rotation = Quaternion.Euler(0, 0, 0);
-                            break;
-                        case FaceDirection.Up:
-                            transform.rotation = Quaternion.Euler(0, 0, 180);
-                            break;
-                        case FaceDirection.Left:
-                            transform.rotation = Quaternion.Euler(0, 0, -90);
-                            break;
-                        case FaceDirection.Right:
-                            transform.rotation = Quaternion.Euler(0, 0, 90);
-                            break;
-                    }
-                }
-
-                ProjectileData projectileData = new ProjectileData(networkUid, (int)pU.projectileTypeThrown, pU.liveProjectile.transform.position,pU.liveProjectile.transform.rotation.eulerAngles);
-                ServerSideGameManager.projectilesDic.Add(networkUid, projectileData);
-
-                if(pU.projectileTypeThrown == EnumData.Projectiles.TidalWave||
-                    pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield||
-                    pU.projectileTypeThrown == EnumData.Projectiles.MightyWind)
-                {
-                    chainIDLinkedTo = ++GridManager.chainIDGlobal;
-                }
+                chainIDLinkedTo = ++GridManager.chainIDGlobal;
             }
         }
 
-        if (frameLooper!=null)
+        if (frameLooper != null)
         {
-            if(isDynamicTravellingSprites)
+            if (isDynamicTravellingSprites)
             {
                 switch (pU.actorUsing.Facing)
                 {
@@ -129,94 +105,295 @@ public class ProjectileUtil : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     private void FixedUpdate()
     {
-        if (MultiplayerManager.instance.isServer)
+        if (MultiplayerManager.instance.isServer&&isServerNetworked)
         {
-            if (isServerNetworked)
+            ProjectileData projectileData;
+            if (ServerSideGameManager.projectilesDic.TryGetValue(networkUid, out projectileData))
             {
-                ProjectileData projectileData;
-                if(ServerSideGameManager.projectilesDic.TryGetValue(networkUid,out projectileData))
-                {
-                    projectileData.projectilePosition = pU.liveProjectile.transform.position;
-                    ServerSideGameManager.projectilesDic.Remove(networkUid);
-                    ServerSideGameManager.projectilesDic.Add(networkUid, projectileData);
-                }
-                else
-                {
-                    Debug.LogError("Doesnot contain the key to set projectile position for");
-                }
+                projectileData.projectilePosition = pU.liveProjectile.transform.position;
+                projectileData.faceDirection = (int)pU.tileMovementDirection;
+                ServerSideGameManager.projectilesDic.Remove(networkUid);
+                ServerSideGameManager.projectilesDic.Add(networkUid, projectileData);
+            }
+            else
+            {
+                Debug.LogError("Doesnot contain the key to set projectile position for");
             }
         }
-        pU.PerformUsage();
+        if(pU!=null)
+        {
+            pU.PerformUsage();
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         Actor collidedActorWithMyHead = collision.GetComponent<Actor>();
-        if (collidedActorWithMyHead != null && pU.onUseOver != null)
+        if (collidedActorWithMyHead != null && !collidedActorWithMyHead.isPushed && !collidedActorWithMyHead.isPhysicsControlled)
         {
-            if (pU.gameObjectInstanceId != collidedActorWithMyHead.gameObject.GetInstanceID() && pU.ownerId!= collidedActorWithMyHead.ownerId)
+            if (pU.gameObjectInstanceId != collidedActorWithMyHead.gameObject.GetInstanceID() && pU.ownerId != collidedActorWithMyHead.ownerId)
             {
-                if (pU.projectileTypeThrown == EnumData.Projectiles.EyeLaser)
+                if (collidedActorWithMyHead is MirrorKnight)
                 {
-                    if (!MultiplayerManager.instance.isServer && pU.actorHadAuthority)
-                    {
-                        //Send by client to server
-                        pU.onUseOver.Invoke(collidedActorWithMyHead);
-                    }
+                    DealProjectileOnMirrorKnight(collidedActorWithMyHead);
                 }
-                else if(pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
+                else
                 {
-                    if (MultiplayerManager.instance.isServer)
-                    {
-                        //Send by client to server
-                        pU.onUseOver.Invoke(collidedActorWithMyHead);
-                    }
-                }
-                else if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave 
-                    || pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
-                    pU.projectileTypeThrown == EnumData.Projectiles.MightyWind)
-                {
-                    if (MultiplayerManager.instance.isServer)
-                    {
-                        if (GridManager.instance.IsHeadCollision(collidedActorWithMyHead.actorTransform.position, transform.position, pU.tileMovementDirection))
-                        {
-                            if (collidedActorWithMyHead.chainIDLinkedTo!=chainIDLinkedTo)
-                            {
-                                if (!collidedActorWithMyHead.isRespawnningPlayer && !collidedActorWithMyHead.isInvincible && !collidedActorWithMyHead.isDead)
-                                {
-                                    if (collidedActorWithMyHead.IsActorPushableInDirection(collidedActorWithMyHead, pU.tileMovementDirection))
-                                    {
-                                        collidedActorWithMyHead.StartGettingPushedDueToTidalWave(pU);
-                                    }
-                                    else
-                                    {
-                                        pU.EndOfUse();
-                                    }
-                                }
-                            }
-                            
-                        }
-                    }
-                }
-                if (selfDestroyOnTargetTouch)
-                {
-                    pU.EndOfUse();
+                    DealProjectileOnActor(collidedActorWithMyHead);
                 }
             }
         }
-        
+
+        ClientEnemyManager clientEnemyManager = collision.GetComponent<ClientEnemyManager>();
+        if (clientEnemyManager != null)
+        {
+            if (selfDestroyOnTargetTouch)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    void DealProjectileOnMirrorKnight(Actor collidedActorWithMyHead)
+    {
+        if (pU.projectileTypeThrown == EnumData.Projectiles.EyeLaser)
+        {
+            if (MultiplayerManager.instance.isServer && GridManager.instance.IsPureHeadOn(transform.position, collidedActorWithMyHead))
+            {
+                collidedActorWithMyHead.FireProjectile(new Attack(pU.attack.damage, pU.attack.attackType, EnumData.Projectiles.EyeLaserMirrorKnight));
+                pU.EndOfUse();
+            }
+            else if (GridManager.instance.IsPureBackOrSideStab(transform.position, collidedActorWithMyHead))
+            {
+                pU.onUseOver.Invoke(collidedActorWithMyHead);
+            }
+            if (selfDestroyOnTargetTouch)
+            {
+                pU.EndOfUse();
+            }
+        }
+        else if(pU.projectileTypeThrown == EnumData.Projectiles.FireBall)
+        {
+            if (MultiplayerManager.instance.isServer && GridManager.instance.IsPureHeadOn(transform.position, collidedActorWithMyHead))
+            {
+                collidedActorWithMyHead.FireProjectile(new Attack(pU.attack.damage, pU.attack.attackType, EnumData.Projectiles.FireBallMirrorKnight));
+                Destroy(gameObject);
+            }
+            else if (GridManager.instance.IsPureBackOrSideStab(transform.position, collidedActorWithMyHead))
+            {
+                GridManager.instance.Disperse(pU.actorHadAuthority, dispersedGOCollider
+                , dispersedGO
+                , dispersionRadius
+                , dispersionSpeed
+                , pU.ownerId
+                , GridManager.instance.grid.WorldToCell(transform.position));
+                Destroy(gameObject);
+            }
+        }
+        else if (pU.projectileTypeThrown == EnumData.Projectiles.MightyWind)
+        {
+            if (MultiplayerManager.instance.isServer && GridManager.instance.IsPureHeadOn(transform.position, collidedActorWithMyHead))
+            {
+                collidedActorWithMyHead.FireProjectile(new Attack(pU.attack.damage, pU.attack.attackType, EnumData.Projectiles.MightyWindMirrorKnight));
+                pU.EndOfUse();
+            }
+            else if (GridManager.instance.IsPureBackOrSideStab(transform.position, collidedActorWithMyHead))
+            {
+                if (MultiplayerManager.instance.isServer)
+                {
+                    if (GridManager.instance.IsHeadCollision(collidedActorWithMyHead.actorTransform.position, transform.position, pU.tileMovementDirection))
+                    {
+                        if (collidedActorWithMyHead.chainIDLinkedTo != chainIDLinkedTo)
+                        {
+                            if (!collidedActorWithMyHead.isRespawnningPlayer && !collidedActorWithMyHead.isInvincible && !collidedActorWithMyHead.isDead)
+                            {
+                                if (collidedActorWithMyHead.IsActorPushableInDirection(collidedActorWithMyHead, pU.tileMovementDirection))
+                                {
+                                    collidedActorWithMyHead.StartGettingPushedByProjectile(pU);
+                                }
+                                else
+                                {
+                                    pU.EndOfUse();
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+        else if (pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
+        {
+            if (MultiplayerManager.instance.isServer)
+            {
+                if(collidedActorWithMyHead is Enemy)
+                {
+                    collidedActorWithMyHead.TakeDamage(collidedActorWithMyHead.currentHP);
+                }
+            }
+        }
+        else if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave
+            || pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield)
+        {
+            if (MultiplayerManager.instance.isServer)
+            {
+                if (GridManager.instance.IsHeadCollision(collidedActorWithMyHead.actorTransform.position, transform.position, pU.tileMovementDirection))
+                {
+                    if (!collidedActorWithMyHead.isRespawnningPlayer && !collidedActorWithMyHead.isInvincible && !collidedActorWithMyHead.isDead)
+                    {
+                        if (collidedActorWithMyHead.IsActorPushableInDirection(collidedActorWithMyHead, pU.tileMovementDirection))
+                        {
+                            collidedActorWithMyHead.StartGettingPushedByProjectile(pU);
+                        }
+                        else
+                        {
+                            pU.EndOfUse();
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    void DealProjectileOnActor(Actor collidedActorWithMyHead)
+    {
+        if (pU.projectileTypeThrown == EnumData.Projectiles.EyeLaser)
+        {
+            if (collidedActorWithMyHead is Enemy enemy)
+            {
+                if (!(enemy is Minnataur))
+                {
+                    pU.onUseOver.Invoke(collidedActorWithMyHead);
+                }
+            }
+            else if ((!MultiplayerManager.instance.isServer && pU.actorHadAuthority))
+            {
+                //Send by client to server
+                pU.onUseOver.Invoke(collidedActorWithMyHead);
+            }
+
+        }
+        else if(pU.projectileTypeThrown == EnumData.Projectiles.Arrow)
+        {
+            if(MultiplayerManager.instance.isServer)
+            {
+                if (collidedActorWithMyHead is Hero)
+                {
+                    pU.onUseOver.Invoke(collidedActorWithMyHead);
+                }
+            }
+        }
+        else if (pU.projectileTypeThrown == EnumData.Projectiles.EyeLaserMirrorKnight)
+        {
+            if (MultiplayerManager.instance.isServer)
+            {
+                if (collidedActorWithMyHead is Enemy enemy)
+                {
+                    if (!(enemy is Minnataur))
+                    {
+                        pU.onUseOver.Invoke(collidedActorWithMyHead);
+                    }
+                }
+            }
+
+        }
+        else if(pU.projectileTypeThrown == EnumData.Projectiles.FireBall)
+        {
+            GridManager.instance.Disperse(pU.actorHadAuthority, dispersedGOCollider
+                , dispersedGO
+                , dispersionRadius
+                , dispersionSpeed
+                , pU.ownerId
+                , GridManager.instance.grid.WorldToCell(transform.position));
+            Destroy(gameObject);
+        }
+        else if (pU.projectileTypeThrown == EnumData.Projectiles.FireBallMirrorKnight)
+        {
+            GridManager.instance.Disperse(MultiplayerManager.instance.isServer, dispersedGOCollider
+                , dispersedGO
+                , dispersionRadius
+                , dispersionSpeed
+                , pU.ownerId
+                , GridManager.instance.grid.WorldToCell(transform.position));
+            Destroy(gameObject);
+        }
+        else if (pU.projectileTypeThrown == EnumData.Projectiles.MightyWindMirrorKnight)
+        {
+            if (MultiplayerManager.instance.isServer)
+            {
+                if (GridManager.instance.IsHeadCollision(collidedActorWithMyHead.actorTransform.position, transform.position, pU.tileMovementDirection))
+                {
+                    if (!collidedActorWithMyHead.isRespawnningPlayer && !collidedActorWithMyHead.isInvincible && !collidedActorWithMyHead.isDead)
+                    {
+                        if (collidedActorWithMyHead.IsActorPushableInDirection(collidedActorWithMyHead, pU.tileMovementDirection))
+                        {
+                            collidedActorWithMyHead.StartGettingPushedByProjectile(pU);
+                        }
+                        else
+                        {
+                            pU.EndOfUse();
+                        }
+                    }
+
+                }
+            }
+
+        }
+        else if (pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
+        {
+            if (MultiplayerManager.instance.isServer)
+            {
+                if (collidedActorWithMyHead is Hero)
+                {
+                    //Send by client to server
+                    pU.onUseOver.Invoke(collidedActorWithMyHead);
+                }
+                else if (collidedActorWithMyHead is Enemy)
+                {
+                    collidedActorWithMyHead.TakeDamage(collidedActorWithMyHead.currentHP);
+                }
+            }
+        }
+        else if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave
+            || pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
+            pU.projectileTypeThrown == EnumData.Projectiles.MightyWind)
+        {
+            if (MultiplayerManager.instance.isServer)
+            {
+                if (GridManager.instance.IsHeadCollision(collidedActorWithMyHead.actorTransform.position, transform.position, pU.tileMovementDirection))
+                {
+                    if (collidedActorWithMyHead.chainIDLinkedTo != chainIDLinkedTo)
+                    {
+                        if (collidedActorWithMyHead.IsActorPushableInDirection(collidedActorWithMyHead, pU.tileMovementDirection))
+                        {
+                            collidedActorWithMyHead.StartGettingPushedByProjectile(pU);
+                        }
+                        else
+                        {
+                            pU.EndOfUse();
+                        }
+                    }
+
+                }
+            }
+        }
+        if (selfDestroyOnTargetTouch)
+        {
+            pU.EndOfUse();
+        }
     }
 
 
 
     public void OnProjectileDieBegin()
     {
-        if(frameLooper!=null)
+        if (frameLooper != null)
         {
             switch (pU.tileMovementDirection)
             {
@@ -235,29 +412,27 @@ public class ProjectileUtil : MonoBehaviour
             }
             frameLooper.PlayOneShotAnimation();
         }
-        
+
     }
 
     public void DestroyProjectile()
     {
-        if (MultiplayerManager.instance.isServer)
+        if (MultiplayerManager.instance.isServer&&isServerNetworked)
         {
-            if (isServerNetworked)
+            if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave ||
+                pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
+                pU.projectileTypeThrown == EnumData.Projectiles.MightyWind||
+                pU.projectileTypeThrown == EnumData.Projectiles.MightyWindMirrorKnight)
             {
-                if(pU.projectileTypeThrown == EnumData.Projectiles.TidalWave||
-                    pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
-                    pU.projectileTypeThrown == EnumData.Projectiles.MightyWind)
+                if (pU.actorMePushing != null)
                 {
-                    if(pU.actorMePushing!=null)
-                    {
-                        pU.actorMePushing.StopPushWithoutDamage(pU.actorMePushing);
-                    }
-
+                    pU.actorMePushing.StopPushWithoutDamage(pU.actorMePushing);
                 }
-                ServerSideGameManager.projectilesDic.Remove(networkUid);
+
             }
+            ServerSideGameManager.projectilesDic.Remove(networkUid);
         }
-        if(pU.projectileTypeThrown==EnumData.Projectiles.FireBall)
+        if (pU.projectileTypeThrown == EnumData.Projectiles.FireBall|| pU.projectileTypeThrown == EnumData.Projectiles.FireBallMirrorKnight)
         {
             GridManager.instance.Disperse(pU.actorHadAuthority, dispersedGOCollider
                 , dispersedGO
@@ -269,5 +444,5 @@ public class ProjectileUtil : MonoBehaviour
         Destroy(gameObject);
     }
 
-    
+
 }

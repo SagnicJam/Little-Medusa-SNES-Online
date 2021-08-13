@@ -1267,7 +1267,6 @@ public class ServerMasterController : MonoBehaviour
             Debug.LogError("PushPlayerRequestImplementation server player is isInFlyingState hence request failed");
             return;
         }
-
         if(Server.clients.ContainsKey(playerIdToPush))
         {
             Actor actorToPush = Server.clients[playerIdToPush].serverMasterController.serverInstanceHero;
@@ -1294,6 +1293,33 @@ public class ServerMasterController : MonoBehaviour
             else
             {
                 Debug.LogError("Actor to push : " + playerIdToPush + " Does not exists!");
+            }
+        }
+        else if(Enemy.enemies.ContainsKey(playerIdToPush))
+        {
+            Enemy enemyToPush = Enemy.enemies[playerIdToPush];
+            if(enemyToPush!=null)
+            {
+                if (serverInstanceHero.IsActorAbleToPush((FaceDirection)directionOfPush))
+                {
+                    if (serverInstanceHero.IsActorPushableInDirection(enemyToPush, (FaceDirection)directionOfPush))
+                    {
+                        Debug.Log("Pushing id: " + playerIdToPush + " direction: " + (FaceDirection)directionOfPush);
+                        serverInstanceHero.InitialiseEnemyPush(enemyToPush, directionOfPush);
+                    }
+                    else
+                    {
+                        Debug.LogError(playerIdToPush + " IsActorPushableInDirection " + directionOfPush + " Not possible");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("IsActorAbleToPush " + directionOfPush + " Not possible");
+                }
+            }
+            else
+            {
+                Debug.LogError("Enemy to push : " + playerIdToPush + " Does not exists!");
             }
         }
         else
@@ -1424,7 +1450,7 @@ public class ServerMasterController : MonoBehaviour
         Debug.Log("TidalWaveFirePlayerRequestImplementation ");
         if(serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
         {
-            serverInstanceHero.Fire(serverInstanceHero);
+            serverInstanceHero.Fire();
         }
         else
         {
@@ -1451,7 +1477,7 @@ public class ServerMasterController : MonoBehaviour
         Debug.Log("MightyWindFirePlayerRequestImplementation ");
         if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
         {
-            serverInstanceHero.Fire(serverInstanceHero);
+            serverInstanceHero.Fire();
         }
         else
         {

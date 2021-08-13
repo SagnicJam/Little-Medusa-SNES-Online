@@ -147,7 +147,7 @@ public class Ermolai : Hero
         }
         if (!isInFlyingState)
         {
-            if (isClient() && hasAuthority())
+            if (!MultiplayerManager.instance.isServer && hasAuthority())
             {
                 if (completedMotionToMovePoint)
                 {

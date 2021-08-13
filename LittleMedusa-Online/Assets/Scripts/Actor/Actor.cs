@@ -8,6 +8,7 @@ public abstract class Actor : TileData
     public Transform movePoint;
     public Transform actorTransform;
     public FrameLooper frameLooper;
+    public GamePhysics gamePhysics;
 
     [Header("Tweak params")]
     public BoxCollider2D actorCollider2D;
@@ -22,6 +23,8 @@ public abstract class Actor : TileData
     public int primaryMoveDamage;
     public float petrificationSnapSpeed;
     public int primaryMoveAttackRateTickRate;
+    public int secondaryMoveAttackRateTickRate;
+    public int pushSpeed;
     public FaceDirection faceDirectionInit;
 
     [Header("Animation Sprites")]
@@ -40,8 +43,11 @@ public abstract class Actor : TileData
     public Sprite[] downFlySprite;
     public Sprite[] upFlySprite;
 
+    public Sprite[] petrificationSpriteArr;
+
     [Header("Primary MoveUseAnimation Sprites")]
     public MoveUseAnimationAction.MoveAnimationSprites primaryMoveAnimationSprites;
+    public MoveUseAnimationAction.MoveAnimationSprites secondaryMoveAnimationSprites;
 
     [Header("Unit Template")]
     public Sprite crosshairSprite;
@@ -57,10 +63,11 @@ public abstract class Actor : TileData
     public bool inCharacterSelectionScreen;
     public bool inGame;
     public bool triggerFaceChangeEvent;
-    
+
     [Header("Hero Specific Data")]
     public bool isWalking;
     public bool isUsingPrimaryMove;
+    public bool isUsingSecondaryMove;
 
     public int currentHP;
     public int currentStockLives;
@@ -95,6 +102,7 @@ public abstract class Actor : TileData
 
     [Header("Action Primary Actions")]
     public WaitingForNextAction waitingActionForPrimaryMove = new WaitingForNextAction();
+    public WaitingForNextAction waitingActionForSecondaryMove = new WaitingForNextAction();
 
     public virtual void Awake()
     {
@@ -106,6 +114,9 @@ public abstract class Actor : TileData
 
         waitingActionForPrimaryMove.Initialise(this);
         waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
+
+        waitingActionForSecondaryMove.Initialise(this);
+        waitingActionForSecondaryMove.ReInitialiseTimerToEnd(secondaryMoveAttackRateTickRate);
     }
 
    
@@ -151,19 +162,9 @@ public abstract class Actor : TileData
         }
     }
 
-    public bool isClient()
-    {
-        return (serverMasterController == null) && (clientMasterController != null);
-    }
-
     public bool hasAuthority()
     {
         return clientMasterController != null && clientMasterController.hasAuthority;
-    }
-
-    public bool isServer()
-    {
-        return this is Enemy||(clientMasterController == null) && (serverMasterController != null);
     }
 
     public void InitialiseHP()
@@ -192,7 +193,7 @@ public abstract class Actor : TileData
     public void SetRespawnState()
     {
         actorCollider2D.enabled = false;
-        if (isClient())
+        if (!MultiplayerManager.instance.isServer)
         {
             if (hasAuthority())
             {
@@ -212,7 +213,7 @@ public abstract class Actor : TileData
     public void SetSpawnState()
     {
         actorCollider2D.enabled = true;
-        if (isClient())
+        if (!MultiplayerManager.instance.isServer)
         {
             if (hasAuthority())
             {
@@ -268,7 +269,6 @@ public abstract class Actor : TileData
         }
         set
         {
-            Debug.Log("find");
             movePoint.position = GridManager.instance.cellToworld(value);
 
         }
@@ -333,6 +333,24 @@ public abstract class Actor : TileData
                     break;
                 case FaceDirection.Up:
                     frameLooper.UpdateSpriteArr(primaryMoveAnimationSprites.upMove);
+                    break;
+            }
+        }
+        else if (isUsingSecondaryMove)
+        {
+            switch (facing)
+            {
+                case FaceDirection.Left:
+                    frameLooper.UpdateSpriteArr(secondaryMoveAnimationSprites.leftMove);
+                    break;
+                case FaceDirection.Right:
+                    frameLooper.UpdateSpriteArr(secondaryMoveAnimationSprites.rightMove);
+                    break;
+                case FaceDirection.Down:
+                    frameLooper.UpdateSpriteArr(secondaryMoveAnimationSprites.downMove);
+                    break;
+                case FaceDirection.Up:
+                    frameLooper.UpdateSpriteArr(secondaryMoveAnimationSprites.upMove);
                     break;
             }
         }
@@ -442,7 +460,7 @@ public abstract class Actor : TileData
 
     }
 
-    public void Fire(Actor firingActor)
+    public void Fire()
     {
         Debug.Log("Firing here!!!!");
         FireProjectile();
@@ -479,10 +497,22 @@ public abstract class Actor : TileData
         dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
     }
 
+    public void FireProjectile(Attack rangedAttack)
+    {
+        rangedAttack.SetAttackingActorId(ownerId);
+        DynamicItem dynamicItem = new DynamicItem
+        {
+            ranged = rangedAttack,
+            activate = new TileBasedProjectileUse()
+        };
+        currentAttack = rangedAttack;
+        dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
+    }
+
     //Will run on  server when received from client
     public virtual void Petrify()
     {
-        if (isPushed)
+        if (isPhysicsControlled||isPushed)
         {
             return;
         }
@@ -504,8 +534,14 @@ public abstract class Actor : TileData
         OnPetrified();
     }
 
-
-    public void UnPetrify()
+    public bool IsInSpawnJarTerritory
+    {
+        get
+        {
+            return !isInFlyingState && GridManager.instance.IsCellBlockedBySpawnJar(GridManager.instance.grid.WorldToCell(actorTransform.position));
+        }
+    }
+    public virtual void UnPetrify()
     {
         isPetrified = false;
     }
@@ -513,15 +549,22 @@ public abstract class Actor : TileData
     //Is called from client
     public void PetrificationCommandRegister(int petrifiedByActorId)
     {
-        //if (IsInSpawnJarTerritory)
-        //{
-        //    health = maxHealth;
-        //    return;
-        //}
-        if(!isPushed)
+        if (IsInSpawnJarTerritory)
         {
-            PetrificationCommand petrificationCommand = new PetrificationCommand(ClientSideGameManager.players[petrifiedByActorId].masterController.localPlayer.GetLocalSequenceNo(), ownerId);
-            ClientSend.PetrifyPlayer(petrificationCommand);
+            currentHP = maxHP;
+            return;
+        }
+        if (!isPushed)
+        {
+            if(this is Hero)
+            {
+                PetrificationCommand petrificationCommand = new PetrificationCommand(ClientSideGameManager.players[petrifiedByActorId].masterController.localPlayer.GetLocalSequenceNo(), ownerId);
+                ClientSend.PetrifyPlayer(petrificationCommand);
+            }
+            else
+            {
+                Petrify();
+            }
         }
     }
 
@@ -591,7 +634,7 @@ public abstract class Actor : TileData
         }
     }
 
-    public void StartGettingPushedDueToTidalWave(TileBasedProjectileUse tileBasedProjectile)
+    public void StartGettingPushedByProjectile(TileBasedProjectileUse tileBasedProjectile)
     {
         if(IsActorPushableInDirection(this, tileBasedProjectile.tileMovementDirection))
         {
@@ -609,18 +652,23 @@ public abstract class Actor : TileData
     public void StartPush(Actor actorToPush, FaceDirection directionOfPush)
     {
         actorToPush.OnPushStart();
-        Debug.LogError("Start push");
+        Debug.LogError("Start push "+actorToPush.actorTransform.gameObject.name);
         actorToPush.currentMapper = null;
         actorToPush.currentMapper = new OneDNonCheckingMapper(directionOfPush);
         actorToPush.Facing = directionOfPush;
         actorToPush.isPushed = true;
         actorToPush.isHeadCollisionWithOtherActor = false;
     }
+    //Will called on the server only
+    public void InitialiseEnemyPush(Enemy enemyToPush, int pushDirection)
+    {
+        StartPush(enemyToPush, (FaceDirection)pushDirection);
+    }
 
     //Will called on the server only
     public void InitialiseHeroPush(int actorToPushId, int pushDirection)
     {
-        if (isServer())
+        if (MultiplayerManager.instance.isServer)
         {
             Actor actorToPush = Server.clients[actorToPushId].serverMasterController.serverInstanceHero;
             if (actorToPush != null)
@@ -676,6 +724,18 @@ public abstract class Actor : TileData
         {
             return true;
         }
+    }
+
+    public bool IsClientEnemyPushable(FaceDirection pushDirection)
+    {
+        Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(pushDirection);
+        //check if enemy has completed motion
+        //check if enemy is petrified and is not pushed
+        if (GridManager.instance.IsClientEnemyOnPositionPushable(objectPosition))
+        {
+            return true;
+        }
+        return false;
     }
 
     public bool IsActorAbleToPush(FaceDirection pushDirection)
@@ -739,6 +799,7 @@ public abstract class Actor : TileData
     public void StopPushWithoutDamage(Actor actorToStop)
     {
         actorToStop.currentMapper = null;
+        OnPushStop();
         actorToStop.OnCantOccupySpace();
         actorToStop.isPushed = false;
         if (actorMePushing != null)
@@ -800,6 +861,12 @@ public abstract class Actor : TileData
 
     public void TakeDamage(int damageReceived)
     {
+        if(isInvincible)
+        {
+            Debug.Log("Damage not taken actor is invincible");
+            return;
+        }
+        Debug.Log("Taking damage "+damageReceived);
         currentHP -= damageReceived;
         if (currentHP <= 0)
         {
@@ -841,7 +908,8 @@ public abstract class Actor : TileData
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (!isServer())
+        //Debug.LogError("chal raha hai na "+gamePhysics.gameCollider2D.enabled);
+        if (!MultiplayerManager.instance.isServer)
         {
             return;
         }
@@ -853,17 +921,22 @@ public abstract class Actor : TileData
         if (isPetrified && !isPushed)
         return;
 
+        
+
         TileData collidedTile = collider.GetComponent<TileData>();
 
         if(collidedTile!=null)
         {
-            if (collidedTile.killUnitsInstantlyIfInTheirRegion && !isInFlyingState)
+            if (collidedTile.killUnitsInstantlyIfInTheirRegion&& !IsInSpawnJarTerritory && !isInFlyingState)
             {
-                TakeDamage(currentHP);
+                OnBodyCollidingWithKillingTiles(collidedTile);
             }
         }
-        
 
+        if (isPhysicsControlled)
+        {
+            return;
+        }
         ProjectileUtil projectileUtilCollidedWithMyHead = collider.GetComponent<ProjectileUtil>();
         if (projectileUtilCollidedWithMyHead != null)
         {
@@ -1050,6 +1123,8 @@ public abstract class Actor : TileData
     public abstract void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmNotPushedAndNotPetrified(Actor collidedActorWithMyHead);
     public abstract void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndAmPetrified(Actor collidedActorWithMyHead);
     public abstract void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead);
+
+    public abstract void OnBodyCollidingWithKillingTiles(TileData tileData);
 
     public abstract void OnPushStart();
     public abstract void OnPushStop();

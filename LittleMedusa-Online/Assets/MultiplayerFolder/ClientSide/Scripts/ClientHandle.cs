@@ -67,14 +67,15 @@ public class ClientHandle : MonoBehaviour
             List<Vector3Int> cellPositionList = new List<Vector3Int>();
             for (int k = 0; k < cellPositionCount; k++)
             {
-                Vector3Int cell = packet.ReadVector3Int();
-                cellPositionList.Add(cell);
+                Vector2Int cell = packet.ReadVector2Int();
+                cellPositionList.Add(new Vector3Int(cell.x,cell.y,0));
             }
 
             worldItems[i] = new WorldGridItem(tileType, cellPositionList);
         }
 
         Dictionary<int, ProjectileData> keyValuePairs = new Dictionary<int, ProjectileData>();
+        Dictionary<int, EnemyData> keyValueEnemyPairs = new Dictionary<int, EnemyData>();
         Dictionary<int, AnimatingStaticTile> keyValuePairsAnimation = new Dictionary<int, AnimatingStaticTile>();
 
         ProjectileData[] projectileDatas = new ProjectileData[packet.ReadInt()];
@@ -86,9 +87,27 @@ public class ClientHandle : MonoBehaviour
 
             Vector3 projectilePosition = packet.ReadVector3();
 
-            Vector3 projectileRotation = packet.ReadVector3();
+            int faceDirection = packet.ReadInt();
 
-            keyValuePairs.Add(uid, new ProjectileData(uid,projectileTileType, projectilePosition, projectileRotation));
+            keyValuePairs.Add(uid, new ProjectileData(uid,projectileTileType, projectilePosition, faceDirection));
+        }
+
+        EnemyData[] enemyDatas = new EnemyData[packet.ReadInt()];
+        for (int i = 0; i < enemyDatas.Length; i++)
+        {
+            int uid = packet.ReadInt();
+
+            int enemyType = packet.ReadInt();
+
+            int animationIndexNumber = packet.ReadInt();
+
+            int faceDirection = packet.ReadInt();
+
+            int enemyState = packet.ReadInt();
+
+            Vector3 enemyPosition = packet.ReadVector3();
+
+            keyValueEnemyPairs.Add(uid, new EnemyData(uid, enemyType, animationIndexNumber,faceDirection, enemyState, enemyPosition));
         }
 
         AnimatingStaticTile[] animatingTiles = new AnimatingStaticTile[packet.ReadInt()];
@@ -110,7 +129,7 @@ public class ClientHandle : MonoBehaviour
 
         int worldUpdateSequenceNumber = packet.ReadInt();
 
-        WorldUpdate worldUpdate = new WorldUpdate(worldUpdateSequenceNumber, worldItems,new GameData(gameState,gameMatchStartTime), keyValuePairs, keyValuePairsAnimation);
+        WorldUpdate worldUpdate = new WorldUpdate(worldUpdateSequenceNumber, worldItems,new GameData(gameState,gameMatchStartTime), keyValuePairs, keyValueEnemyPairs, keyValuePairsAnimation);
         ClientSideGameManager.instance.SpawnWorldGridElements(worldUpdate);
     }
 
@@ -129,8 +148,8 @@ public class ClientHandle : MonoBehaviour
                 List<Vector3Int> cellPositionList = new List<Vector3Int>();
                 for (int k = 0; k < cellPositionCount; k++)
                 {
-                    Vector3Int cell = packet.ReadVector3Int();
-                    cellPositionList.Add(cell);
+                    Vector2Int cell = packet.ReadVector2Int();
+                    cellPositionList.Add(new Vector3Int(cell.x,cell.y,0));
                 }
 
                 worldItems[i] = new WorldGridItem(tileType, cellPositionList);
@@ -142,8 +161,23 @@ public class ClientHandle : MonoBehaviour
                 int projectileId = packet.ReadInt();
                 int projectileTileType = packet.ReadInt();
                 Vector3 projectilePosition = packet.ReadVector3();
-                Vector3 projectileRotation = packet.ReadVector3();
-                keyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileTileType, projectilePosition, projectileRotation));
+                int faceDirection = packet.ReadInt();
+
+                keyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileTileType, projectilePosition, faceDirection));
+            }
+
+            Dictionary<int, EnemyData> enemyValuePairs = new Dictionary<int, EnemyData>();
+            EnemyData[] enemyDatas = new EnemyData[packet.ReadInt()];
+            for (int i = 0; i < enemyDatas.Length; i++)
+            {
+                int enemyId = packet.ReadInt();
+                int enemyType = packet.ReadInt();
+                int animationIndexNumber = packet.ReadInt();
+                int faceDirection = packet.ReadInt();
+                int enemyState = packet.ReadInt();
+                Vector3 enemyPosition = packet.ReadVector3();
+
+                enemyValuePairs.Add(enemyId, new EnemyData(enemyId, enemyType, animationIndexNumber, faceDirection , enemyState, enemyPosition));
             }
 
             Dictionary<int, AnimatingStaticTile> keyValuePairsAnimation = new Dictionary<int, AnimatingStaticTile>();
@@ -164,7 +198,7 @@ public class ClientHandle : MonoBehaviour
             int gameMatchStartTime = packet.ReadInt();
             int worldUpdateSequenceNumber = packet.ReadInt();
             //Debug.LogWarning("<color=green>receiving inputs packet to server </color>playerMovingCommandSequenceNumber : " + worldUpdateSequenceNumber + " w " + inputs[0] + " a " + inputs[1] + " s " + inputs[2] + " d " + inputs[3]);
-             ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(worldUpdateSequenceNumber, worldItems,new GameData(gameState,gameMatchStartTime), keyValuePairs, keyValuePairsAnimation));
+             ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(worldUpdateSequenceNumber, worldItems,new GameData(gameState,gameMatchStartTime), keyValuePairs, enemyValuePairs, keyValuePairsAnimation));
         }
 
         int previousWorldUpdatePacks = packet.ReadInt();
@@ -195,8 +229,23 @@ public class ClientHandle : MonoBehaviour
                     int projectileId = packet.ReadInt();
                     int projectileTileType = packet.ReadInt();
                     Vector3 projectilePosition = packet.ReadVector3();
-                    Vector3 projectileRotation = packet.ReadVector3();
-                    previouskeyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileTileType, projectilePosition, projectileRotation));
+                    int faceDirection = packet.ReadInt();
+
+                    previouskeyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileTileType, projectilePosition, faceDirection));
+                }
+
+                Dictionary<int, EnemyData> previousEnemyValuePairs = new Dictionary<int, EnemyData>();
+                EnemyData[] previousEnemyDatas = new EnemyData[packet.ReadInt()];
+                for (int k = 0; k < previousEnemyDatas.Length; k++)
+                {
+                    int enemyId = packet.ReadInt();
+                    int enemyType = packet.ReadInt();
+                    int animationIndexNumber = packet.ReadInt();
+                    int faceDirection = packet.ReadInt();
+                    int enemyState = packet.ReadInt();
+                    Vector3 enemyPosition = packet.ReadVector3();
+
+                    previousEnemyValuePairs.Add(enemyId, new EnemyData(enemyId, enemyType, animationIndexNumber, faceDirection ,enemyState, enemyPosition));
                 }
 
                 Dictionary<int, AnimatingStaticTile> keyValuePairsAnimation = new Dictionary<int, AnimatingStaticTile>();
@@ -216,7 +265,7 @@ public class ClientHandle : MonoBehaviour
                 int gameState = packet.ReadInt();
                 int gameMatchStartTime = packet.ReadInt();
                 int previousSeqNo = packet.ReadInt();
-                ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(previousSeqNo, previousDataWorldItems,new GameData(gameState,gameMatchStartTime), previouskeyValuePairs, keyValuePairsAnimation));
+                ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(previousSeqNo, previousDataWorldItems,new GameData(gameState,gameMatchStartTime), previouskeyValuePairs,previousEnemyValuePairs, keyValuePairsAnimation));
             }
         }
     }

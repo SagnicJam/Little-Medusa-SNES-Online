@@ -29,7 +29,7 @@ public class PetrificationAction : Actions
             return false;
         }
 
-        if(actorGettingPetrified.isServer())
+        if(MultiplayerManager.instance.isServer)
         {
             if (petrificationTime > 0)
             {

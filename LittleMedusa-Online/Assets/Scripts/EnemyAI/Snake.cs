@@ -8,6 +8,7 @@ public class Snake : Enemy
     public bool isPreparingToDash;
     public int tileToDash;
     public int dashSpeed;
+    public float dashAnimation;
     public float lineRangeForDetection;
     public float dashPreparationTime;
 
@@ -16,11 +17,13 @@ public class Snake : Enemy
     SenseInLineAction senseInLineAction = new SenseInLineAction();
 
     int normalSpeed;
+    float normalAnimation;
 
     public override void Awake()
     {
         base.Awake();
         normalSpeed = walkSpeed;
+        normalAnimation = frameLooper.animationDuration;
         currentMapper = wandererMapper;
         senseInLineAction.Initialise(this);
         senseInLineAction.InitialiseLineSize(lineRangeForDetection);
@@ -29,7 +32,7 @@ public class Snake : Enemy
     IEnumerator ie;
 
     //update the block pos here
-    public override void UpdateMovementState(bool isPrimaryMoveActive)
+    public override void UpdateMovementState(bool isPrimaryMoveActive, bool isSecondaryMoveActive)
     {
         if (isPhysicsControlled)
         {
@@ -43,8 +46,7 @@ public class Snake : Enemy
         {
             return;
         }
-       
-        if (!isPrimaryMoveActive)
+        if (!isPrimaryMoveActive && !isSecondaryMoveActive)
         {
             inLineRange = senseInLineAction.Perform();
             heroToChase = senseInLineAction.heroInLineOfAction;
@@ -62,7 +64,6 @@ public class Snake : Enemy
                 }
                 //normal aimless wanderer
             }
-
             if (waitingForNextActionToCheckForPath.isWaitingForNextActionCheck)
             {
                 waitingForNextActionToCheckForPath.Perform();
@@ -97,6 +98,7 @@ public class Snake : Enemy
     {
         FinishDash();
         base.OnCantOccupySpace();
+        CheckSwitchCellIndex();
     }
 
     public void FinishDash()
@@ -104,22 +106,41 @@ public class Snake : Enemy
         if(followingTarget)
         {
             followingTarget = false;
-            walkSpeed = normalSpeed;
+        }
+        if(senseInLineAction.heroInLineOfAction != null)
+        {
             senseInLineAction.heroInLineOfAction = null;
-            currentMapper = wandererMapper;
+        }
+        if (waitingForNextActionToCheckForPath.isWaitingForNextActionCheck)
+        {
+            waitingForNextActionToCheckForPath.CompleteTimer();
+        }
+        walkSpeed = normalSpeed;
+        frameLooper.animationDuration = normalAnimation;
+        currentMapper = null;
+        currentMapper = wandererMapper;
+        if(isPreparingToDash)
+        {
+            isPreparingToDash = false;
+        }
+        if (ie != null)
+        {
+            StopCoroutine(ie);
         }
     }
 
     IEnumerator PrepareToDashCor()
     {
+        Debug.Log("preparing to dash");
         isPreparingToDash = true;
         followingTarget = true;
-        frameLooper.animationDuration /= 2;
+        frameLooper.animationDuration = dashAnimation;
 
         yield return new WaitForSeconds(dashPreparationTime);
+        Debug.Log("dashing now");
 
         currentMapper = null;
-        frameLooper.animationDuration *= 2;
+        frameLooper.animationDuration = normalAnimation;
         walkSpeed = dashSpeed;
 
         dashMapper.InitialiseDirection(Facing);
@@ -152,7 +173,7 @@ public class Snake : Enemy
         walkAction.Perform();
     }
 
-    public override void UpdateAnimationState(bool isPrimaryMoveActive)
+    public override void UpdateAnimationState(bool isPrimaryMoveActive, bool isSecondaryMoveActive)
     {
         if (isPhysicsControlled)
         {
@@ -215,7 +236,7 @@ public class Snake : Enemy
         frameLooper.UpdateAnimationFrame();
     }
 
-    public override void UpdateEventState(bool isPrimaryMoveActive, bool switchedThisFrame)
+    public override void UpdateEventState(bool isPrimaryMoveActive, bool switchedPrimaryMoveThisFrame, bool isSecondaryMoveActive, bool switchedSecondaryMoveThisFrame)
     {
         if (isPhysicsControlled)
         {
@@ -273,7 +294,7 @@ public class Snake : Enemy
         //wait for next attack
         if (isPrimaryMoveActive)
         {
-            if(switchedThisFrame)
+            if(switchedPrimaryMoveThisFrame)
             {
                 FinishDash();
             }
@@ -287,7 +308,7 @@ public class Snake : Enemy
                 isMelleAttacking = false;
             }
         }
-        else if (!isPrimaryMoveActive && switchedThisFrame)
+        else if (!isPrimaryMoveActive && switchedPrimaryMoveThisFrame)
         {
             isMelleAttacking = false;
             waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
@@ -313,29 +334,27 @@ public class Snake : Enemy
         {
             //Check for player
             //Attack player
-            Debug.Log("Attack player");
+            heroGettingHit = GetHeroNextTo();
+            if (heroGettingHit != null)
+            {
+                Debug.Log("Attack player");
+                heroGettingHit.TakeDamage(primaryMoveDamage);
+            }
         }
-    }
-
-    public override void OnHeadCollidingWithANonPetrifiedNonPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead)
-    {
-        FinishDash();
-        base.OnHeadCollidingWithANonPetrifiedNonPushedObjectWhereIAmPushedAndNotPetrified(collidedActorWithMyHead);
     }
 
     bool newIsPrimaryMoveActive;
     bool previousIsPrimaryMoveActive;
     private void FixedUpdate()
     {
-        newIsPrimaryMoveActive = IsPlayerInRangeForAttack();
-
-        UpdateMovementState(newIsPrimaryMoveActive);
+        newIsPrimaryMoveActive = IsPlayerInRangeForMelleAttack();
+        UpdateMovementState(newIsPrimaryMoveActive, false);
         PerformMovement();
 
-        UpdateAnimationState(newIsPrimaryMoveActive);
+        UpdateAnimationState(newIsPrimaryMoveActive, false);
         PerformAnimations();
 
-        UpdateEventState(newIsPrimaryMoveActive, newIsPrimaryMoveActive != previousIsPrimaryMoveActive);
+        UpdateEventState(newIsPrimaryMoveActive, newIsPrimaryMoveActive != previousIsPrimaryMoveActive, false, false);
         PerformEvents();
 
         previousIsPrimaryMoveActive = newIsPrimaryMoveActive;
@@ -344,16 +363,14 @@ public class Snake : Enemy
     public override void OnPushStart()
     {
         FinishDash();
+        walkSpeed = pushSpeed;
     }
 
     public override void OnPushStop()
     {
-        currentMapper = wandererMapper;
-    }
-
-    public override void OnHeadCollidingWithANonPetrifiedNonPushedObjectWhereIAmNotPushedAndNotPetrified(Actor collidedActorWithMyHead)
-    {
+        Debug.Log("OnPushStop : snake");
         FinishDash();
-        base.OnHeadCollidingWithANonPetrifiedNonPushedObjectWhereIAmNotPushedAndNotPetrified(collidedActorWithMyHead);
+        walkSpeed = normalSpeed;
+        currentMapper = wandererMapper;
     }
 }

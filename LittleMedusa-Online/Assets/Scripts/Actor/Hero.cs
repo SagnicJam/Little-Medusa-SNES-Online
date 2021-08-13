@@ -223,39 +223,55 @@ public abstract class Hero : Actor
         };
         currentAttack = rangedAttack_2;
         dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
+
     }
-    
+
+
+    //public void PlaceTornado(Vector3Int cell)
+    //{
+    //    //place tornado here
+    //    foreach (KeyValuePair<int, ServerSideClient> kvp in Server.clients)
+    //    {
+    //        if (kvp.Value.serverMasterController != null)
+    //        {
+    //            if (kvp.Key != ownerId)
+    //            {
+    //                if (kvp.Value.serverMasterController.serverInstanceHero is Hero hero)
+    //                {
+    //                    if (!kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled)
+    //                    {
+    //                        kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled = true;
+    //                        kvp.Value.serverMasterController.serverInstanceHero.actorCollider2D.enabled = false;
+    //                        kvp.Value.serverMasterController.serverInstanceHero.forceTravelCorCache = GridManager.instance.ForceTravel(kvp.Value.serverMasterController.serverInstanceHero, cell);
+    //                        kvp.Value.serverMasterController.serverInstanceHero.StartForceTravelCor();
+    //                        GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, true, false);
+    //                        GridManager.instance.WaitForForce(kvp.Value.serverMasterController.serverInstanceHero, (x) => {
+    //                            x.isPhysicsControlled = false;
+    //                            x.actorCollider2D.enabled = true;
+    //                            x.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(x.actorTransform.position);
+    //                            x.StopForceTravelCor();
+    //                            GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, false, false);
+    //                        });
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
+
 
     public void PlaceTornado(Vector3Int cell)
     {
-        //place tornado here
-        foreach (KeyValuePair<int, ServerSideClient> kvp in Server.clients)
-        {
-            if (kvp.Value.serverMasterController != null)
-            {
-                if (kvp.Key != ownerId)
-                {
-                    if (kvp.Value.serverMasterController.serverInstanceHero is Hero hero)
-                    {
-                        if (!kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled)
-                        {
-                            kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled = true;
-                            kvp.Value.serverMasterController.serverInstanceHero.actorCollider2D.enabled = false;
-                            kvp.Value.serverMasterController.serverInstanceHero.forceTravelCorCache = GridManager.instance.ForceTravel(kvp.Value.serverMasterController.serverInstanceHero, cell);
-                            kvp.Value.serverMasterController.serverInstanceHero.StartForceTravelCor();
-                            GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, true, false);
-                            GridManager.instance.WaitForForce(kvp.Value.serverMasterController.serverInstanceHero, (x) => {
-                                x.isPhysicsControlled = false;
-                                x.actorCollider2D.enabled = true;
-                                x.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(x.actorTransform.position);
-                                x.StopForceTravelCor();
-                                GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, false, false);
-                            });
-                        }
-                    }
-                }
-            }
-        }
+        StartCoroutine(RunTornado(5, cell));
+    }
+
+    IEnumerator RunTornado(float time,Vector3Int cell)
+    {
+        GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, true, false);
+        GridManager.instance.tornado.UpdateTornadoActivation(ownerId);
+        yield return new WaitForSeconds(time);
+        GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, false, false);
+        GridManager.instance.tornado.UpdateTornadoActivation(ownerId);
     }
 
 
@@ -304,6 +320,7 @@ public abstract class Hero : Actor
             activate = new DirectionBasedProjectileUse(270, actorTransform.right, null)
         };
         dynamicItem4.activate.BeginToUse(this, null, dynamicItem4.ranged.OnHit);
+
     }
     //end abilities
 
@@ -399,7 +416,7 @@ public abstract class Hero : Actor
     {
         if(!(collidedActorWithMyHead is Hero))
         {
-            collidedActorWithMyHead.Die();
+            collidedActorWithMyHead.TakeDamage(currentHP);
         }
         StopPush(this);
         isHeadCollisionWithOtherActor = false;
@@ -409,7 +426,7 @@ public abstract class Hero : Actor
     {
         if (!(collidedActorWithMyHead is Hero))
         {
-            collidedActorWithMyHead.Die();
+            collidedActorWithMyHead.TakeDamage(currentHP);
         }
         StopPush(this);
         isHeadCollisionWithOtherActor = false;
@@ -442,7 +459,7 @@ public abstract class Hero : Actor
         //    //}
         //}
         /*else */
-        else if (GridManager.instance.IsCellBlockedForUnitMotionAtPos(pos))
+        else if (GridManager.instance.IsCellBlockedForUnitMotionAtPos(pos)||GridManager.instance.IsCellContainingMonster(pos,this))
         {
             return false;
         }
@@ -473,6 +490,12 @@ public abstract class Hero : Actor
     {
         Debug.Log("OnPushStop ");
     }
+
+    public override void OnBodyCollidingWithKillingTiles(TileData tileData)
+    {
+        TakeDamage(currentHP);
+    }
+
 
     public override void OnCantOccupySpace()
     {

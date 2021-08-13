@@ -20,6 +20,7 @@ public class ServerSideGameManager : MonoBehaviour
     private List<WorldUpdate> worldUpdatesToBeSentFromServerToClient = new List<WorldUpdate>();
     private List<PreviousWorldUpdatePacks> previousHistoryForWorldUpdatesToBeSentToServerCollection = new List<PreviousWorldUpdatePacks>();
     public static Dictionary<int, ProjectileData> projectilesDic = new Dictionary<int, ProjectileData>();
+    public static Dictionary<int, EnemyData> enemiesDic = new Dictionary<int, EnemyData>();
     public static Dictionary<int, AnimatingStaticTile> animatingStaticTileDic = new Dictionary<int, AnimatingStaticTile>();
     public EnumData.GameState currentGameState;
 
@@ -44,7 +45,7 @@ public class ServerSideGameManager : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         string[] arguments = Environment.GetCommandLineArgs();
-        MultiplayerManager.instance.serverPort = int.Parse(arguments[1]);
+        MultiplayerManager.instance.serverPort = MultiplayerManager.instance.isDebug?13:int.Parse(arguments[1]);
         Server.Start(10, MultiplayerManager.instance.serverPort);
     }
 
@@ -70,6 +71,11 @@ public class ServerSideGameManager : MonoBehaviour
                 kvp.Value.serverMasterController.serverInstanceHero.inGame = (currentGameState == EnumData.GameState.Gameplay);
             }
         }
+        for (int i = 0; i < GridManager.instance.enemySpawnner.spawnIndexList.Count; i++)
+        {
+            GridManager.instance.enemySpawnner.SpawnEnemy(GridManager.instance.enemySpawnner.monsterToSpawn, GridManager.instance.enemySpawnner.spawnIndexList[i]);
+
+        }
     }
 
     private void FixedUpdate()
@@ -84,11 +90,12 @@ public class ServerSideGameManager : MonoBehaviour
         for(int i=0;i<toNetworkTileType.Count;i++)
         {
             List<Vector3Int> positionsOfTile = GridManager.instance.GetAllPositionForTileMap(toNetworkTileType[i]);
+            //Debug.LogError("TileType: " + toNetworkTileType[i] + " positionsOfTile " + positionsOfTile.Count);
             WorldGridItem worldGridItem = new WorldGridItem((int)toNetworkTileType[i], positionsOfTile);
             worldGridItemList.Add(worldGridItem);
         }
         GameData gameData = new GameData((int)currentGameState, timeToStartMatch);
-        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), gameData, new Dictionary<int, ProjectileData>(projectilesDic), new Dictionary<int, AnimatingStaticTile>(animatingStaticTileDic)));
+        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), gameData, new Dictionary<int, ProjectileData>(projectilesDic), new Dictionary<int, EnemyData>(enemiesDic), new Dictionary<int, AnimatingStaticTile>(animatingStaticTileDic)));
 
         //Local client sending data
         if (worldUpdatesToBeSentFromServerToClient.Count >= snapShotsInOnePacket)
@@ -139,14 +146,16 @@ public struct WorldUpdate
     public WorldGridItem[] worldGridItems;
     public GameData gameData;
     public Dictionary<int,ProjectileData> projectileDatas;
+    public Dictionary<int,EnemyData> enemyDatas;
     public Dictionary<int,AnimatingStaticTile> animatingTileDatas;
 
-    public WorldUpdate(int sequenceNumber, WorldGridItem[] worldGridItems,GameData gameData, Dictionary<int, ProjectileData> projectileDatas, Dictionary<int, AnimatingStaticTile> animatingTileDatas)
+    public WorldUpdate(int sequenceNumber, WorldGridItem[] worldGridItems,GameData gameData, Dictionary<int, ProjectileData> projectileDatas,Dictionary<int,EnemyData> enemyDatas, Dictionary<int, AnimatingStaticTile> animatingTileDatas)
     {
         this.sequenceNumber = sequenceNumber;
         this.worldGridItems = worldGridItems;
         this.gameData = gameData;
         this.projectileDatas = projectileDatas;
+        this.enemyDatas = enemyDatas;
         this.animatingTileDatas = animatingTileDatas;
     }
 }
@@ -194,14 +203,14 @@ public struct ProjectileData
     public int uid;
     public int projectileType;
     public Vector3 projectilePosition;
-    public Vector3 projectileRotation;
+    public int faceDirection;
 
-    public ProjectileData(int uid, int projectileType, Vector3 projectilePosition,Vector3 projectileRotation)
+    public ProjectileData(int uid, int projectileType, Vector3 projectilePosition, int faceDirection)
     {
         this.uid = uid;
         this.projectileType = projectileType;
         this.projectilePosition = projectilePosition;
-        this.projectileRotation = projectileRotation;
+        this.faceDirection = faceDirection;
     }
 }
 

@@ -173,6 +173,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -353,6 +355,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -533,6 +537,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -689,41 +695,51 @@ Tilemap:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270348157}
   m_Enabled: 1
-  m_Tiles: {}
+  m_Tiles:
+  - first: {x: 5, y: -3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 6761842583480609648, guid: c60f88a1414fd744a9ff4db166996c25,
+      type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 0
+  - m_RefCount: 1
     m_Data:
-      e00: NaN
-      e01: -5.9579146e-15
-      e02: -5.957928e-15
-      e03: NaN
-      e10: NaN
-      e11: 3.57e-43
-      e12: 3.57e-43
-      e13: NaN
-      e20: -5.9578874e-15
-      e21: -2.2643625e+35
-      e22: 2.6698978e+35
-      e23: -0.00000000146537
-      e30: 3.57e-43
-      e31: 4.5904e-41
-      e32: 9.32e-43
-      e33: 9.29e-43
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_TileColorArray:
-  - m_RefCount: 0
-    m_Data: {r: -0.00000000108205, g: -0.00000000108205, b: -0.00000000108205, a: -0.00000000108205}
+  - m_RefCount: 1
+    m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -3, y: -1, z: 0}
-  m_Size: {x: 6, y: 6, z: 1}
+  m_Origin: {x: -7, y: -3, z: 0}
+  m_Size: {x: 13, y: 8, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -761,6 +777,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -893,6 +911,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -1151,6 +1171,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -1331,6 +1353,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -1511,6 +1535,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -1691,6 +1717,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -1930,6 +1958,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -4937,6 +4967,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -6488,6 +6520,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -6620,6 +6654,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -6905,6 +6941,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -7085,6 +7123,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -7346,6 +7386,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -8392,6 +8434,7 @@ GameObject:
   - component: {fileID: 1541293338}
   - component: {fileID: 1541293337}
   - component: {fileID: 1541293336}
+  - component: {fileID: 1541293340}
   m_Layer: 0
   m_Name: tornado
   m_TagString: Untagged
@@ -8431,6 +8474,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -8588,6 +8633,21 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1541293340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541293334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4019b5ad1895e646b6639c3308e0461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownerCasting: 0
+  solidify: 0
+  tornadoActive: 0
 --- !u!1 &1642284971
 GameObject:
   m_ObjectHideFlags: 0
@@ -8640,6 +8700,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -8886,6 +8948,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -9066,6 +9130,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -9246,6 +9312,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -9426,6 +9494,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -9501,6 +9571,15 @@ Tilemap:
   m_GameObject: {fileID: 1743894812}
   m_Enabled: 1
   m_Tiles:
+  - first: {x: -6, y: -4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   - first: {x: -4, y: -4, z: 0}
     second:
       serializedVersion: 2
@@ -9551,6 +9630,24 @@ Tilemap:
       serializedVersion: 2
       m_TileIndex: 4
       m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: -7, y: -3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: -7, y: -2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -9797,8 +9894,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 3
+    m_Data: {fileID: 11400000, guid: 3a8e7c3296cfeab4c9817833f906d44d, type: 2}
   - m_RefCount: 32
     m_Data: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
   m_TileSpriteArray:
@@ -9808,13 +9905,14 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 3
+    m_Data: {fileID: -3199751583258398446, guid: c60f88a1414fd744a9ff4db166996c25,
+      type: 3}
   - m_RefCount: 32
     m_Data: {fileID: 6168722448946411991, guid: 0ae389090da16414f9ed6b09ec1f975a,
       type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 32
+  - m_RefCount: 35
     m_Data:
       e00: 1
       e01: 0
@@ -9833,7 +9931,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 32
+  - m_RefCount: 35
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -9872,13 +9970,14 @@ GameObject:
   - component: {fileID: 1749640617}
   - component: {fileID: 1749640616}
   - component: {fileID: 1749640615}
+  - component: {fileID: 1749640619}
   m_Layer: 0
   m_Name: SpawnJar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1749640614
 Transform:
   m_ObjectHideFlags: 0
@@ -9911,6 +10010,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -9985,40 +10086,59 @@ Tilemap:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749640613}
   m_Enabled: 1
-  m_Tiles: {}
+  m_Tiles:
+  - first: {x: 0, y: 7, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 1
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: 3, y: 7, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 1
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 2
+    m_Data: {fileID: 11400000, guid: 1dffb455cf942d04ca92fad2dd80c95e, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 2
+    m_Data: {fileID: -3322664745523931652, guid: c60f88a1414fd744a9ff4db166996c25,
+      type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 0
+  - m_RefCount: 2
     m_Data:
-      e00: NaN
-      e01: -7.975547e-15
+      e00: 1
+      e01: 0
       e02: 0
-      e03: NaN
-      e10: NaN
-      e11: 3.17e-43
+      e03: 0
+      e10: 0
+      e11: 1
       e12: 0
-      e13: NaN
-      e20: -7.9755335e-15
+      e13: 0
+      e20: 0
       e21: 0
-      e22: 0
+      e22: 1
       e23: 0
-      e30: 3.17e-43
+      e30: 0
       e31: 0
       e32: 0
-      e33: 0
+      e33: 1
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: 9.993748e-10, g: 9.993748e-10, b: 9.993748e-10, a: 9.993748e-10}
-  - m_RefCount: 0
-    m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
+  - m_RefCount: 2
+    m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -10043,6 +10163,26 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1749640619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749640613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1974a23f055f21440b6b8cf60b989a5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab:
+  - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
+  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
+  - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
+  monsterToSpawn: 1
+  spawnIndexList: []
 --- !u!1 &1777984281
 GameObject:
   m_ObjectHideFlags: 0
@@ -10090,7 +10230,8 @@ MonoBehaviour:
   loader: {fileID: 2116128978587783406, guid: cfbb9be39566779458fdb33ff3583947, type: 3}
   characterSelectionScreen: {fileID: 256209095372272350, guid: 125f7419cbf8e89478566ac42fdd5a36,
     type: 3}
-  isServer: 0
+  isDebug: 1
+  isServer: 1
   serverPort: 13
 --- !u!4 &1777984283
 Transform:
@@ -10158,6 +10299,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -10824,6 +10967,8 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -10995,6 +11140,7 @@ GameObject:
   - component: {fileID: 2117918250}
   - component: {fileID: 2117918249}
   - component: {fileID: 2117918248}
+  - component: {fileID: 2117918251}
   m_Layer: 0
   m_Name: Water_1
   m_TagString: Untagged
@@ -11014,7 +11160,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c6e7ba47e30e14eb6f5476d393bc5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aStar: {fileID: 2117918251}
   grid: {fileID: 2117918249}
+  tornado: {fileID: 1541293340}
+  enemySpawnner: {fileID: 1749640619}
   switchToNormalFromHoleAfter: 3
   pullforce: 1
   timeOfForce: 3
@@ -11025,6 +11174,8 @@ MonoBehaviour:
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
     tileMap: {fileID: 960480977}
+    tileData: {fileID: 960480978}
+    tilemapCollider2D: {fileID: 960480979}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11035,6 +11186,8 @@ MonoBehaviour:
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
     tileMap: {fileID: 1045922244}
+    tileData: {fileID: 1045922245}
+    tilemapCollider2D: {fileID: 1045922246}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 1
@@ -11045,6 +11198,8 @@ MonoBehaviour:
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
     tileMap: {fileID: 270348158}
+    tileData: {fileID: 270348159}
+    tilemapCollider2D: {fileID: 270348160}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11054,7 +11209,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 270348158}
+    tileMap: {fileID: 20578054}
+    tileData: {fileID: 20578051}
+    tilemapCollider2D: {fileID: 20578052}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11064,7 +11221,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 270348158}
+    tileMap: {fileID: 914863419}
+    tileData: {fileID: 914863416}
+    tilemapCollider2D: {fileID: 914863417}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11074,7 +11233,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 270348158}
+    tileMap: {fileID: 849134603}
+    tileData: {fileID: 849134600}
+    tilemapCollider2D: {fileID: 849134601}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11084,7 +11245,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 270348158}
+    tileMap: {fileID: 1655445362}
+    tileData: {fileID: 1655445359}
+    tilemapCollider2D: {fileID: 1655445360}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11094,7 +11257,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 270348158}
+    tileMap: {fileID: 2024654117}
+    tileData: {fileID: 2024654114}
+    tilemapCollider2D: {fileID: 2024654115}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11104,7 +11269,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 270348158}
+    tileMap: {fileID: 820987653}
+    tileData: {fileID: 820987650}
+    tilemapCollider2D: {fileID: 820987651}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11114,7 +11281,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 270348158}
+    tileMap: {fileID: 1694595484}
+    tileData: {fileID: 1694595481}
+    tilemapCollider2D: {fileID: 1694595482}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11125,6 +11294,8 @@ MonoBehaviour:
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
     tileMap: {fileID: 639945145}
+    tileData: {fileID: 639945142}
+    tilemapCollider2D: {fileID: 639945143}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11134,7 +11305,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 639945145}
+    tileMap: {fileID: 1706446835}
+    tileData: {fileID: 1706446832}
+    tilemapCollider2D: {fileID: 1706446833}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11144,7 +11317,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 639945145}
+    tileMap: {fileID: 1350232640}
+    tileData: {fileID: 1350232637}
+    tilemapCollider2D: {fileID: 1350232638}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11154,7 +11329,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 639945145}
+    tileMap: {fileID: 217434527}
+    tileData: {fileID: 217434524}
+    tilemapCollider2D: {fileID: 217434525}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11164,7 +11341,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 639945145}
+    tileMap: {fileID: 136563235}
+    tileData: {fileID: 136563232}
+    tilemapCollider2D: {fileID: 136563233}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11174,7 +11353,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 639945145}
+    tileMap: {fileID: 1092264376}
+    tileData: {fileID: 1092264373}
+    tilemapCollider2D: {fileID: 1092264374}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11184,7 +11365,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 639945145}
+    tileMap: {fileID: 1642284976}
+    tileData: {fileID: 1642284973}
+    tilemapCollider2D: {fileID: 1642284974}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11194,7 +11377,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 639945145}
+    tileMap: {fileID: 336427599}
+    tileData: {fileID: 336427596}
+    tilemapCollider2D: {fileID: 336427597}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11204,7 +11389,9 @@ MonoBehaviour:
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
-    tileMap: {fileID: 639945145}
+    tileMap: {fileID: 1749640618}
+    tileData: {fileID: 1749640615}
+    tilemapCollider2D: {fileID: 1749640616}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11215,16 +11402,20 @@ MonoBehaviour:
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
     tileMap: {fileID: 1395769771}
+    tileData: {fileID: 1395769768}
+    tilemapCollider2D: {fileID: 1395769769}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
   - tileAssetType: 21
-    tile: {fileID: 11400000, guid: 2f2a75a1b3170ca4f847301c1c4e8037, type: 2}
+    tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 11400000, guid: bd24b9ec0855aa74ca05bbcc07d5fca9, type: 2}
     tileMap: {fileID: 1541293339}
+    tileData: {fileID: 1541293336}
+    tilemapCollider2D: {fileID: 1541293337}
     isAnimatedTile: 1
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11235,6 +11426,8 @@ MonoBehaviour:
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
     tileMap: {fileID: 1904420466}
+    tileData: {fileID: 1904420463}
+    tilemapCollider2D: {fileID: 1904420464}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11245,6 +11438,8 @@ MonoBehaviour:
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
     tileMap: {fileID: 1743894817}
+    tileData: {fileID: 1743894814}
+    tilemapCollider2D: {fileID: 1743894815}
     isAnimatedTile: 0
     cereberustileToggle: 0
     multipleTileGraphic: 0
@@ -11256,6 +11451,8 @@ MonoBehaviour:
   bigExplosion: {fileID: 3571190174229290062, guid: 9dd4a8764bfd21d4e975e8d0e2a31aad,
     type: 3}
   smallExplosion: {fileID: 9073788204147551044, guid: ab994e15488e1304086a3b5985b95c41,
+    type: 3}
+  lightning: {fileID: 2401713681578667559, guid: a6149d1855c2d1e4a9b1feda1978b7a9,
     type: 3}
   xMin: 0
   yMin: 0
@@ -11314,6 +11511,55 @@ Transform:
   m_Father: {fileID: 2055252789}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2117918251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117918247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b4a945b47b01734685841e3495fdee9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openSet: []
+  closedSet: []
+  startSpot:
+    f: 0
+    g: 0
+    h: 0
+    i: 0
+    j: 0
+    isBlocked: 0
+    posX: 0
+    posY: 0
+    neighbour: []
+  targetSpot:
+    f: 0
+    g: 0
+    h: 0
+    i: 0
+    j: 0
+    isBlocked: 0
+    posX: 0
+    posY: 0
+    neighbour: []
+  current:
+    f: 0
+    g: 0
+    h: 0
+    i: 0
+    j: 0
+    isBlocked: 0
+    posX: 0
+    posY: 0
+    neighbour: []
+  cols: 0
+  rows: 0
+  aiPathToTarget: []
+  startCellPos: {x: 0, y: 0, z: 0}
+  targetCellPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &2121973509
 PrefabInstance:
   m_ObjectHideFlags: 0

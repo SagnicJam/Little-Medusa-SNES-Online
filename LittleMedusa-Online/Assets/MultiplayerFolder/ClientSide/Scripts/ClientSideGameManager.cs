@@ -25,6 +25,7 @@ public class ClientSideGameManager : MonoBehaviour
 
     public static Dictionary<int, PlayerManager> players = new Dictionary<int, PlayerManager>();
     public readonly static Dictionary<int, ProjectileManager> projectileDatasDic = new Dictionary<int, ProjectileManager>();
+    public readonly static Dictionary<int, ClientEnemyManager> enemyDatasDic = new Dictionary<int, ClientEnemyManager>();
     public readonly static Dictionary<int, StaticAnimatingTileManager> staticAnimatingTileDic = new Dictionary<int, StaticAnimatingTileManager>();
 
     public int dicCount;
@@ -198,7 +199,7 @@ public class ClientSideGameManager : MonoBehaviour
             {
                 //assign position
                 projectileManager.SetPosition(kvp.Value.projectilePosition);
-                projectileManager.SetRotation(kvp.Value.projectileRotation);
+                projectileManager.SetFaceDirection(kvp.Value.faceDirection);
             }
             else
             {
@@ -212,12 +213,35 @@ public class ClientSideGameManager : MonoBehaviour
                 ProjectileManager newProjectileManager = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ProjectileManager>();
                 newProjectileManager.OnInititialise(kvp.Key);
                 newProjectileManager.SetPosition(kvp.Value.projectilePosition);
-                projectileManager.SetRotation(kvp.Value.projectileRotation);
+                projectileManager.SetFaceDirection(kvp.Value.faceDirection);
                 projectileDatasDic.Add(kvp.Key, newProjectileManager);
             }
         }
 
-        foreach(KeyValuePair<int, AnimatingStaticTile>kvp in newWorldUpdate.animatingTileDatas)
+        foreach (KeyValuePair<int, EnemyData> kvp in newWorldUpdate.enemyDatas)
+        {
+            ClientEnemyManager clientEnemyManager;
+            if (enemyDatasDic.TryGetValue(kvp.Key, out clientEnemyManager))
+            {
+                //assign position
+                clientEnemyManager.SetEnemyData(kvp.Value);
+            }
+            else
+            {
+                //intantiate here
+                GameObject gToSpawn = Resources.Load("ClientEnemy") as GameObject;
+                if (gToSpawn == null)
+                {
+                    Debug.LogError("gToSpawn is null");
+                    return;
+                }
+                ClientEnemyManager newClientEnemyManager = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ClientEnemyManager>();
+                newClientEnemyManager.SetEnemyData(kvp.Value);
+                enemyDatasDic.Add(kvp.Key,newClientEnemyManager);
+            }
+        }
+
+        foreach (KeyValuePair<int, AnimatingStaticTile>kvp in newWorldUpdate.animatingTileDatas)
         {
             StaticAnimatingTileManager staticAnimatingTileManager;
             if (staticAnimatingTileDic.TryGetValue(kvp.Key, out staticAnimatingTileManager))
@@ -308,13 +332,13 @@ public class ClientSideGameManager : MonoBehaviour
                         GameObject gToSpawn = Resources.Load("ClientOnly/"+((EnumData.Projectiles)(kvp.Value.projectileType)).ToString()) as GameObject;
                         if (gToSpawn == null)
                         {
-                            Debug.LogError("gToSpawn is null");
+                            Debug.LogError("gToSpawn is null " + ((EnumData.Projectiles)(kvp.Value.projectileType)).ToString());
                             return;
                         }
                         ProjectileManager newProjectileManager = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ProjectileManager>();
                         newProjectileManager.OnInititialise(kvp.Key);
                         newProjectileManager.SetPosition(kvp.Value.projectilePosition);
-                        newProjectileManager.SetRotation(kvp.Value.projectileRotation);
+                        newProjectileManager.SetFaceDirection(kvp.Value.faceDirection);
 
                         projectileDatasDic.Add(kvp.Key, newProjectileManager);
                     }
@@ -324,11 +348,67 @@ public class ClientSideGameManager : MonoBehaviour
                 if(projectileDatasDic.TryGetValue(kvp.Key,out projectileManager))
                 {
                     projectileManager.SetPosition(kvp.Value.projectilePosition);
-                    projectileManager.SetRotation(kvp.Value.projectileRotation);
+                    projectileManager.SetFaceDirection(kvp.Value.faceDirection);
                 }
                 else
                 {
                     Debug.LogError("Could not find the projectile manager top alter");
+                }
+            }
+
+            foreach (KeyValuePair<int, EnemyData> kvp in latestWorldUpdate.enemyDatas)
+            {
+                if (!newWorldUpdate.enemyDatas.ContainsKey(kvp.Key))
+                {
+                    //delete old
+                    ClientEnemyManager enemyManagerToRemove;
+                    if (enemyDatasDic.TryGetValue(kvp.Key, out enemyManagerToRemove))
+                    {
+                        Debug.LogError("Deleting here");
+                        Destroy(enemyManagerToRemove.gameObject);
+                        enemyDatasDic.Remove(kvp.Key);
+                    }
+                    else
+                    {
+                        Debug.LogError("Could not find object to remove");
+                    }
+                }
+            }
+
+            foreach (KeyValuePair<int, EnemyData> kvp in newWorldUpdate.enemyDatas)
+            {
+                if (!latestWorldUpdate.enemyDatas.ContainsKey(kvp.Key))
+                {
+                    //add new
+                    ClientEnemyManager clientEnemyManagerToAdd;
+                    if (enemyDatasDic.TryGetValue(kvp.Key, out clientEnemyManagerToAdd))
+                    {
+                        Debug.LogError("Already contains item to add");
+                    }
+                    else
+                    {
+                        //intantiate here
+                        GameObject gToSpawn = Resources.Load("ClientEnemy") as GameObject;
+                        if (gToSpawn == null)
+                        {
+                            Debug.LogError("gToSpawn is null " + ((EnumData.Projectiles)(kvp.Value.enemyType)).ToString());
+                            return;
+                        }
+                        ClientEnemyManager newClientManager = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ClientEnemyManager>();
+                        newClientManager.SetEnemyData(kvp.Value);
+
+                        enemyDatasDic.Add(kvp.Key, newClientManager);
+                    }
+                }
+
+                ClientEnemyManager clientEnemyManager;
+                if (enemyDatasDic.TryGetValue(kvp.Key, out clientEnemyManager))
+                {
+                    clientEnemyManager.SetEnemyData(kvp.Value);
+                }
+                else
+                {
+                    Debug.LogError("Could not find the enemy manager top alter");
                 }
             }
 

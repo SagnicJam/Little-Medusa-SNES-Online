@@ -49,7 +49,7 @@ MonoBehaviour:
   - {x: -3.5, y: 6.5, z: 0}
   - {x: -3.5, y: -0.5, z: 0}
   - {x: 3.5, y: -0.5, z: 0}
-  timeToStartMatch: 225
+  timeToStartMatch: 532
   toNetworkTileType: 03000000140000001500000002000000
   snapShotsInOnePacket: 4
   packetHistorySize: 3

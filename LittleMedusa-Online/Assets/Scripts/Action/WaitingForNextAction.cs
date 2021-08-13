@@ -28,10 +28,18 @@ public class WaitingForNextAction : Actions
         isWaitingForNextActionCheck = true;
     }
 
+    public void CompleteTimer()
+    {
+        waitingTimer = NextCheckTime;
+        isWaitingForNextActionCheck = false;
+    }
+
     public float waitingTimer=0;
 
     public override bool Perform()
     {
+        if (!isWaitingForNextActionCheck)
+            return false;
         if (waitingTimer >= NextCheckTime)
         {
             waitingTimer = 0f;

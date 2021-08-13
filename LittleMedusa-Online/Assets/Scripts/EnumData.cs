@@ -142,7 +142,9 @@ public class EnumData
 
     public enum StaticAnimatingTiles
     {
-        SmallExplosion
+        SmallExplosion,
+        BigExplosion,
+        Lightning
     }
 
     public enum Projectiles
@@ -163,7 +165,11 @@ public class EnumData
         TidalWave,
         BubbleShield,
         MightyWind,
-        FlamePillar
+        FlamePillar,
+        EyeLaserMirrorKnight,
+        MightyWindMirrorKnight,
+        FireBallMirrorKnight,
+        DispersedFireBallMirrorKnight
     }
 
     public enum MonsterBreed
@@ -204,5 +210,16 @@ public class EnumData
     {
         CharacterSelection=0,
         Gameplay
+    }
+
+    public enum EnemyState
+    {
+        Idle=0,
+        Walking,
+        PhysicsControlled,
+        Pushed,
+        Petrified,
+        PrimaryMoveUse,
+        SecondaryMoveUse
     }
 }

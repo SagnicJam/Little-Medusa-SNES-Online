@@ -24,6 +24,14 @@ public class DispersionCollider : MonoBehaviour
                     OnHitByDispersedFireBall onHitByDispersedFireBall = new OnHitByDispersedFireBall(ClientSideGameManager.players[ownerId].masterController.localPlayer.GetLocalSequenceNo(),collidedActorWithMyHead.ownerId,damage);
                     ClientSend.OnPlayerHitByDispersedFireBall(onHitByDispersedFireBall);
                 }
+                else if(collidedActorWithMyHead is Enemy enemy)
+                {
+                    enemy.TakeDamage(enemy.currentHP);
+                }
+                else if (collidedActorWithMyHead is Hero hero)
+                {
+                    hero.TakeDamage(damage);
+                }
             }
         }
     }

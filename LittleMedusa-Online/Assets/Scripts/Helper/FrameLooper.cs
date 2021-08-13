@@ -18,6 +18,11 @@ public class FrameLooper : MonoBehaviour
     public bool playonAwakeOneShot;
     public int spriteIndexToShowCache;
 
+    private void Awake()
+    {
+        originalDuration = animationDuration;
+    }
+
     private void Start()
     {
         if(playonAwakeOneShot)
@@ -53,6 +58,19 @@ public class FrameLooper : MonoBehaviour
 
     public bool playingOneShot;
     IEnumerator ie;
+
+    public void PlayOneShotAnimation(float duration)
+    {
+        if (ie != null)
+        {
+            StopCoroutine(ie);
+        }
+
+        ie = PlayOneShot(duration);
+        StartCoroutine(ie);
+    }
+
+
     public void PlayOneShotAnimation()
     {
         if (ie != null)
@@ -69,6 +87,7 @@ public class FrameLooper : MonoBehaviour
         StopCoroutine(ie);
     }
 
+    float originalDuration=0;
     IEnumerator PlayOneShot()
     {
         playingOneShot = true;
@@ -81,7 +100,28 @@ public class FrameLooper : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
         }
+        if (onPlayOneShotAnimation != null)
+        {
+            onPlayOneShotAnimation.Invoke();
+        }
+        playingOneShot = false;
+        yield break;
+    }
 
+    IEnumerator PlayOneShot(float duration)
+    {
+        playingOneShot = true;
+        spriteIndexToShowCache = 0;
+        animationDuration = duration;
+        if (spriteArr.Length > 0)
+        {
+            while (!IsLoopComplete)
+            {
+                UpdateAnimationFrame();
+                yield return new WaitForFixedUpdate();
+            }
+        }
+        animationDuration = originalDuration;
         if (onPlayOneShotAnimation != null)
         {
             onPlayOneShotAnimation.Invoke();

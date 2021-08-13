@@ -12,6 +12,8 @@ public class GridManager : MonoBehaviour
     [Header("Scene references")]
     public AStar aStar;
     public Grid grid;
+    public Tornado tornado;
+    public EnemySpawnner enemySpawnner;
 
     [Header("Tweak Params")]
     public float switchToNormalFromHoleAfter = 3;
@@ -24,6 +26,7 @@ public class GridManager : MonoBehaviour
     public GameObject rockRemoval;
     public GameObject bigExplosion;
     public GameObject smallExplosion;
+    public GameObject lightning;
 
     [Header("Live Data")]
     public int xMin;
@@ -56,7 +59,10 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-        aStar.Initialise();
+        if(aStar!=null)
+        {
+            aStar.Initialise();
+        }
     }
 
     public Vector3 GetFacingDirectionOffsetVector3(FaceDirection facing)
@@ -175,11 +181,11 @@ public class GridManager : MonoBehaviour
         yield break;
     }
 
-    public void Disperse(bool spawnTriggerCollider,GameObject dispersedCollider,GameObject dispersedGO,float dispersionRadius,float dispersionSpeed,int ownerId, Vector3Int dispersePoint)
+    public void Disperse(bool hasAuthority,GameObject dispersedCollider,GameObject dispersedGO,float dispersionRadius,float dispersionSpeed,int ownerId, Vector3Int dispersePoint)
     {
         List<Vector3Int> vList = new List<Vector3Int>();
         Vector3 dispersedPoint = cellToworld(dispersePoint);
-        if(spawnTriggerCollider)
+        if(MultiplayerManager.instance.isServer||hasAuthority)
         {
             DispersionCollider dispersionCollider = Instantiate(dispersedCollider, dispersedPoint, Quaternion.identity).GetComponent<DispersionCollider>();
             dispersionCollider.Grow(dispersionRadius, dispersionSpeed, ownerId);
@@ -224,6 +230,46 @@ public class GridManager : MonoBehaviour
         return Instantiate(g);
     }
 
+    public bool IsPureHeadOn(Vector2 collidedObjectPosition, Actor headActor)
+    {
+        Vector2 myPosition = headActor.transform.position;
+        Vector2 otherObjectPosition = collidedObjectPosition;
+
+        Vector2 lineFacingDirectionOfMotion = GridManager.instance.GetFacingDirectionOffsetVector3(headActor.Facing);
+        Vector2 lineWithOtherObject = (otherObjectPosition - myPosition).normalized;
+
+        float angle = Vector2.Angle(lineFacingDirectionOfMotion, lineWithOtherObject);
+        Debug.DrawRay(myPosition, lineFacingDirectionOfMotion, Color.red);
+        Debug.DrawRay(myPosition, lineWithOtherObject, Color.blue);
+        if (angle == 0)
+        {
+            //Debug.Log("true for : " + transform.parent.name);
+            return true;
+        }
+        //Debug.Log("Faslse for : "+transform.parent.name);
+        return false;
+    }
+
+    public bool IsPureBackOrSideStab(Vector2 collidedObjectPosition, Actor headActor)
+    {
+        Vector2 myPosition = headActor.transform.position;
+        Vector2 otherObjectPosition = collidedObjectPosition;
+
+        Vector2 lineFacingDirectionOfMotion = GridManager.instance.GetFacingDirectionOffsetVector3(headActor.Facing);
+        Vector2 lineWithOtherObject = (otherObjectPosition - myPosition).normalized;
+
+        float angle = Vector2.Angle(lineFacingDirectionOfMotion, lineWithOtherObject);
+        Debug.DrawRay(myPosition, lineFacingDirectionOfMotion, Color.red);
+        Debug.DrawRay(myPosition, lineWithOtherObject, Color.blue);
+
+        if (angle > 0f)
+        {
+            //Debug.Log("true for : " + transform.parent.name);
+            return true;
+        }
+        return false;
+    }
+
     public bool IsPositionBlockedForProjectiles(Vector3 cellObjectPosition)
     {
         RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(cellObjectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, cellObjectPosition, 0);
@@ -249,6 +295,20 @@ public class GridManager : MonoBehaviour
                 return true;
             }
 
+        }
+        return false;
+    }
+
+    public bool IsClientEnemyOnPositionPushable(Vector3 objectPosition)
+    {
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            ClientEnemyManager cE = hit2DArr[i].collider.gameObject.GetComponent<ClientEnemyManager>();
+            if (cE != null && cE.currentEnemyState == EnumData.EnemyState.Petrified)
+            {
+                return true;
+            }
         }
         return false;
     }
@@ -282,7 +342,21 @@ public class GridManager : MonoBehaviour
         return null;
     }
 
-    
+    public ClientEnemyManager GetClientEnemyOnPos(Vector3Int cellPosToCheckFor)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            ClientEnemyManager clientEnemy = hit2DArr[i].collider.gameObject.GetComponent<ClientEnemyManager>();
+            if (clientEnemy != null)
+            {
+                return clientEnemy;
+            }
+        }
+        return null;
+    }
+
 
     public Actor GetLastPushedActorInChain(Actor firstActor)
     {
@@ -604,7 +678,7 @@ public class GridManager : MonoBehaviour
                 //}
                 //else
                 //{
-                if(gameStateDependentTileArray[(int)tType - 1].isAnimatedTile)
+                if(gameStateDependentTileArray[(int)tType - 1].isAnimatedTile&&!MultiplayerManager.instance.isServer)
                 {
                     gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].animatedTile);
                 }
@@ -651,6 +725,39 @@ public class GridManager : MonoBehaviour
             }
         }
         return false;
+    }
+    public bool IsCellBlockedBySpawnJar(Vector3Int cellPosToCheckFor)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+            if (td != null && td.tileType == EnumData.TileType.SpawnJar)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void SolidifyTiles()
+    {
+        for (int i = 0; i < gameStateDependentTileArray.Length; i++)
+        {
+            if(gameStateDependentTileArray[i].tileData.solidifyTile)
+            {
+                gameStateDependentTileArray[i].tilemapCollider2D.isTrigger = false;
+            }
+        }
+    }
+
+    public void NormaliseTiles()
+    {
+        for (int i = 0; i < gameStateDependentTileArray.Length; i++)
+        {
+            gameStateDependentTileArray[i].tilemapCollider2D.isTrigger = true;
+        }
     }
 
     public List<Vector3Int> GetAllPositionForTileMap(EnumData.TileType tileType)
@@ -766,6 +873,197 @@ public class GridManager : MonoBehaviour
         Explode(hero,vList);
     }
 
+    public void ExplodeCells(Vector3Int cellLightningBoltDropped)
+    {
+        Explode(cellLightningBoltDropped, GetCornerNeighbours(cellLightningBoltDropped), GetPlusNeighbours(cellLightningBoltDropped));
+    }
+
+    void Explode(Vector3Int explodeCell, List<Vector3Int> cornerCell, List<Vector3Int> plusCell)
+    {
+        GameObject lightningGO = Instantiate(lightning, cellToworld(explodeCell), Quaternion.identity);
+        StaticAnimatingTileUtil lightningGOPlusStaticTileAnimating = lightningGO.GetComponent<StaticAnimatingTileUtil>();
+        lightningGOPlusStaticTileAnimating.Initialise(explodeCell);
+
+        lightningGO.GetComponent<FrameLooper>().PlayOneShotAnimation();
+        lightningGO.GetComponent<FrameLooper>().onPlayOneShotAnimation.RemoveAllListeners();
+        lightningGO.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+        {
+            lightningGOPlusStaticTileAnimating.DestroyObject();
+
+            GameObject bigThunderGO = Instantiate(bigExplosion, cellToworld(explodeCell), Quaternion.identity);
+            StaticAnimatingTileUtil bigThunderGOPlusStaticTileAnimating = bigThunderGO.GetComponent<StaticAnimatingTileUtil>();
+            bigThunderGOPlusStaticTileAnimating.Initialise(explodeCell);
+
+            bigThunderGO.GetComponent<FrameLooper>().PlayOneShotAnimation();
+            bigThunderGO.GetComponent<FrameLooper>().onPlayOneShotAnimation.RemoveAllListeners();
+            bigThunderGO.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+            {
+                bigThunderGOPlusStaticTileAnimating.DestroyObject();
+                for (int i = 0; i < plusCell.Count; i++)
+                {
+                    GameObject smallThunderGOPlus = Instantiate(smallExplosion, cellToworld(plusCell[i]), Quaternion.identity);
+                    StaticAnimatingTileUtil smallThunderGOPlusStaticTileAnimating = smallThunderGOPlus.GetComponent<StaticAnimatingTileUtil>();
+                    smallThunderGOPlusStaticTileAnimating.Initialise(plusCell[i]);
+
+                    smallThunderGOPlus.GetComponent<FrameLooper>().PlayOneShotAnimation();
+                    smallThunderGOPlus.GetComponent<FrameLooper>().onPlayOneShotAnimation.RemoveAllListeners();
+                    if (i == plusCell.Count - 1)
+                    {
+                        smallThunderGOPlus.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+                        {
+                            smallThunderGOPlusStaticTileAnimating.DestroyObject();
+                            for (int j = 0; j < cornerCell.Count; j++)
+                            {
+                                GameObject smallThunderGOCorner = Instantiate(smallExplosion, cellToworld(cornerCell[j]), Quaternion.identity);
+                                StaticAnimatingTileUtil smallThunderGOCornerStaticTileAnimating = smallThunderGOCorner.GetComponent<StaticAnimatingTileUtil>();
+                                smallThunderGOCornerStaticTileAnimating.Initialise(cornerCell[j]);
+
+                                smallThunderGOCorner.GetComponent<FrameLooper>().PlayOneShotAnimation();
+                                smallThunderGOCorner.GetComponent<FrameLooper>().onPlayOneShotAnimation.RemoveAllListeners();
+                                if (j == cornerCell.Count - 1)
+                                {
+                                    smallThunderGOCorner.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+                                    {
+                                        //Debug.Log("Plus generation");
+                                        for (int k = 0; k < plusCell.Count; k++)
+                                        {
+                                            GameObject smallThunderGOPlusFast = Instantiate(smallExplosion, cellToworld(plusCell[k]), Quaternion.identity);
+                                            StaticAnimatingTileUtil smallThunderGOPlusFastStaticTileAnimating = smallThunderGOPlusFast.GetComponent<StaticAnimatingTileUtil>();
+                                            smallThunderGOPlusFastStaticTileAnimating.Initialise(plusCell[k]);
+
+                                            smallThunderGOPlusFast.GetComponent<FrameLooper>().animationDuration /= 2f;
+                                            smallThunderGOPlusFast.GetComponent<FrameLooper>().PlayOneShotAnimation();
+                                            smallThunderGOPlusFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.RemoveAllListeners();
+
+                                            if (k == plusCell.Count - 1)
+                                            {
+                                                smallThunderGOPlusFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+                                                {
+                                                    for (int l = 0; l < cornerCell.Count; l++)
+                                                    {
+                                                        GameObject smallThunderGOCornerFast = Instantiate(smallExplosion, cellToworld(cornerCell[l]), Quaternion.identity);
+                                                        StaticAnimatingTileUtil smallThunderGOCornerFastStaticTileAnimating = smallThunderGOCornerFast.GetComponent<StaticAnimatingTileUtil>();
+                                                        smallThunderGOCornerFastStaticTileAnimating.Initialise(cornerCell[l]);
+
+                                                        smallThunderGOCornerFast.GetComponent<FrameLooper>().animationDuration /= 2f;
+                                                        smallThunderGOCornerFast.GetComponent<FrameLooper>().PlayOneShotAnimation();
+                                                        smallThunderGOCornerFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.RemoveAllListeners();
+                                                        if (l == cornerCell.Count - 1)
+                                                        {
+                                                            smallThunderGOCornerFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+                                                            {
+                                                                for (int m = 0; m < plusCell.Count; m++)
+                                                                {
+                                                                    GameObject smallThunderGOPlusDoubleFast = Instantiate(smallExplosion, cellToworld(plusCell[m]), Quaternion.identity);
+                                                                    StaticAnimatingTileUtil smallThunderGOPlusDoubleFastStaticTileAnimating = smallThunderGOPlusDoubleFast.GetComponent<StaticAnimatingTileUtil>();
+                                                                    smallThunderGOPlusDoubleFastStaticTileAnimating.Initialise(plusCell[m]);
+
+                                                                    smallThunderGOPlusDoubleFast.GetComponent<FrameLooper>().animationDuration /= 4f;
+                                                                    smallThunderGOPlusDoubleFast.GetComponent<FrameLooper>().PlayOneShotAnimation();
+                                                                    smallThunderGOPlusDoubleFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.RemoveAllListeners();
+                                                                    if (m == plusCell.Count - 1)
+                                                                    {
+                                                                        smallThunderGOPlusDoubleFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+                                                                        {
+                                                                            for (int n = 0; n < cornerCell.Count; n++)
+                                                                            {
+                                                                                GameObject smallThunderGOCornerDoubleFast = Instantiate(smallExplosion, cellToworld(cornerCell[n]), Quaternion.identity);
+                                                                                StaticAnimatingTileUtil smallThunderGOCornerDoubleFastStaticTileAnimating = smallThunderGOCornerDoubleFast.GetComponent<StaticAnimatingTileUtil>();
+                                                                                smallThunderGOCornerDoubleFastStaticTileAnimating.Initialise(cornerCell[n]);
+
+                                                                                smallThunderGOCornerDoubleFast.GetComponent<FrameLooper>().animationDuration /= 4f;
+                                                                                smallThunderGOCornerDoubleFast.GetComponent<FrameLooper>().PlayOneShotAnimation();
+                                                                                smallThunderGOCornerDoubleFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.RemoveAllListeners();
+                                                                                if (n == cornerCell.Count - 1)
+                                                                                {
+                                                                                    smallThunderGOCornerDoubleFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+                                                                                    {
+                                                                                        for (int o = 0; o < plusCell.Count; o++)
+                                                                                        {
+                                                                                            GameObject smallThunderGOPlusFourXFast = Instantiate(smallExplosion, cellToworld(plusCell[o]), Quaternion.identity);
+                                                                                            StaticAnimatingTileUtil smallThunderGOPlusFourXFastStaticTileAnimating = smallThunderGOPlusFourXFast.GetComponent<StaticAnimatingTileUtil>();
+                                                                                            smallThunderGOPlusFourXFastStaticTileAnimating.Initialise(plusCell[o]);
+
+                                                                                            smallThunderGOPlusFourXFast.GetComponent<FrameLooper>().animationDuration /= 8f;
+                                                                                            smallThunderGOPlusFourXFast.GetComponent<FrameLooper>().PlayOneShotAnimation();
+                                                                                            smallThunderGOPlusFourXFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.RemoveAllListeners();
+                                                                                            smallThunderGOPlusFourXFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+                                                                                            {
+                                                                                                smallThunderGOPlusFourXFastStaticTileAnimating.DestroyObject();
+                                                                                            });
+                                                                                        }
+                                                                                        smallThunderGOCornerDoubleFastStaticTileAnimating.DestroyObject();
+                                                                                    });
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    smallThunderGOCornerDoubleFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+                                                                                    {
+                                                                                        smallThunderGOCornerDoubleFastStaticTileAnimating.DestroyObject();
+                                                                                    });
+                                                                                }
+                                                                            }
+                                                                            smallThunderGOPlusDoubleFastStaticTileAnimating.DestroyObject();
+                                                                        });
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        smallThunderGOPlusDoubleFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+                                                                        {
+                                                                            smallThunderGOPlusDoubleFastStaticTileAnimating.DestroyObject();
+                                                                        });
+                                                                    }
+                                                                }
+                                                                smallThunderGOCornerFastStaticTileAnimating.DestroyObject();
+                                                            });
+                                                        }
+                                                        else
+                                                        {
+                                                            smallThunderGOCornerFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+                                                            {
+                                                                smallThunderGOCornerFastStaticTileAnimating.DestroyObject();
+                                                            });
+                                                        }
+                                                    }
+                                                    smallThunderGOPlusFastStaticTileAnimating.DestroyObject();
+                                                });
+                                            }
+                                            else
+                                            {
+                                                smallThunderGOPlusFast.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+                                                {
+                                                    smallThunderGOPlusFastStaticTileAnimating.DestroyObject();
+                                                });
+                                            }
+
+                                        }
+                                        smallThunderGOCornerStaticTileAnimating.DestroyObject();
+                                    });
+                                }
+                                else
+                                {
+                                    smallThunderGOCorner.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+                                    {
+                                        smallThunderGOCornerStaticTileAnimating.DestroyObject();
+                                    });
+                                }
+                            }
+                        });
+
+                    }
+                    else
+                    {
+                        smallThunderGOPlus.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+                        {
+                            smallThunderGOPlusStaticTileAnimating.DestroyObject();
+                        });
+                    }
+                }
+            });
+        });
+    }
+
+
     void Explode(Hero hero,List<Vector3Int> plusCell)
     {
         hero.isInputFreezed = true;
@@ -785,6 +1083,22 @@ public class GridManager : MonoBehaviour
             });
         }
     
+    }
+
+    public bool IsCellContainingMonster(Vector3Int cellPosToCheckFor, Actor actorCalling)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            Enemy monster = hit2DArr[i].collider.gameObject.GetComponent<Enemy>();
+
+            if (monster != null && actorCalling.gameObject.GetInstanceID() != monster.gameObject.GetInstanceID())
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool IsCellBlockedForMonsterWithAnotherMonster(Vector3Int cellPosToCheck, Enemy monster)
@@ -831,12 +1145,14 @@ public struct GameStateDependentTiles
     public Tile tileOff;
     public AnimatedTile animatedTile;
     public Tilemap tileMap;
+    public TileData tileData;
+    public TilemapCollider2D tilemapCollider2D;
     public bool isAnimatedTile;
     //public Tile[] allTileArr;
     public bool cereberustileToggle;
     public bool multipleTileGraphic;
     public bool isDarkOnOdd;
-
+    
     //public int GetIndexOfTile(Sprite sp)
     //{
     //    for(int i=0;i<allTileArr.Length;i++)

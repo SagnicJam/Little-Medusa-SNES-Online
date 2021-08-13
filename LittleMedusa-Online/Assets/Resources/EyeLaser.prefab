@@ -139,10 +139,12 @@ MonoBehaviour:
         m_CallState: 2
   spriteArr: []
   spriteRenderer: {fileID: 5678393013608641410}
-  timeBetweenFrames: 0.1
+  animationDuration: 0
   temp: 0
-  spriteIndexToShow: 0
+  IsLoopComplete: 0
   playonAwakeWithLoop: 0
+  playonAwakeOneShot: 0
+  spriteIndexToShowCache: 0
   playingOneShot: 0
 --- !u!114 &2968537593953522965
 MonoBehaviour:
@@ -160,6 +162,11 @@ MonoBehaviour:
   projectileTileTravelDistance: 4
   projectileSpeed: 6
   selfDestroyOnTargetTouch: 1
+  isDispersing: 0
+  dispersionRadius: 0
+  dispersionSpeed: 0
+  dispersedGO: {fileID: 0}
+  dispersedGOCollider: {fileID: 0}
   frameLooper: {fileID: 8787909664814902808}
   isDynamicTravellingSprites: 0
   projectileTravelRightSprite: {fileID: -295879850061160071, guid: 8e34980fdb1e55847988ce0586fb2f16,

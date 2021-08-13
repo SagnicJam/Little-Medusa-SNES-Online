@@ -243,7 +243,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -444576245
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: -8859418991817675911, guid: ad4c2c1a780acdf458565ee0c11c4cea,
     type: 3}
@@ -663,12 +663,15 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
   movePoint: {fileID: 6912961816643967155}
   actorTransform: {fileID: 6912961816926996303}
   frameLooper: {fileID: 3032524789910844975}
+  gamePhysics: {fileID: 0}
   actorCollider2D: {fileID: 8058747107275616500}
   projectileThrownType: 15
   projectileThrownType_2: 0
@@ -679,9 +682,10 @@ MonoBehaviour:
   walkSpeed: 4
   damagePerStoppedHit: 2
   primaryMoveDamage: 23
-  primaryMoveAnimationDuration: 0.5
-  normalWalkAnimationDuration: 0.5
   petrificationSnapSpeed: 6
+  primaryMoveAttackRateTickRate: 20
+  secondaryMoveAttackRateTickRate: 0
+  pushSpeed: 4
   faceDirectionInit: 1
   leftIdleSprite:
   - {fileID: -2599869090914219938, guid: c8492be59b31aa74a83fffcac29b73e9, type: 3}
@@ -831,6 +835,7 @@ MonoBehaviour:
   rightFlySprite: []
   downFlySprite: []
   upFlySprite: []
+  petrificationSpriteArr: []
   primaryMoveAnimationSprites:
     upMove:
     - {fileID: 6069318662778541798, guid: 4c6b57783df191e46b2099f761b6af8e, type: 3}
@@ -936,6 +941,11 @@ MonoBehaviour:
     - {fileID: -6761069545234737037, guid: 56a3b44a6cd15ee4da1e6695ee672e0c, type: 3}
     - {fileID: -2278243000804015301, guid: 56a3b44a6cd15ee4da1e6695ee672e0c, type: 3}
     - {fileID: -8007408853452197804, guid: 56a3b44a6cd15ee4da1e6695ee672e0c, type: 3}
+  secondaryMoveAnimationSprites:
+    upMove: []
+    downMove: []
+    leftMove: []
+    rightMove: []
   crosshairSprite: {fileID: 21300000, guid: 5a0810130c2b57743b60b3e50b2a2a89, type: 3}
   isDead: 0
   isPushed: 0
@@ -949,6 +959,7 @@ MonoBehaviour:
   triggerFaceChangeEvent: 0
   isWalking: 0
   isUsingPrimaryMove: 0
+  isUsingSecondaryMove: 0
   currentHP: 0
   currentStockLives: 0
   isHeadCollisionWithOtherActor: 0
@@ -962,7 +973,6 @@ MonoBehaviour:
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
   frameDelayForRegisteringInput: 4
-  primaryMoveAttackRateTickRate: 20
   petrificationColor: {r: 0.4039216, g: 0.4039216, b: 0.4039216, a: 0.6509804}
   invincibleColor: {r: 1, g: 0.9333334, b: 0, a: 0.6509804}
   healthFillImage: {fileID: 237778869680218058}
@@ -1092,7 +1102,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -444576245
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f09ebd5456861034cb99ed08a30c452b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

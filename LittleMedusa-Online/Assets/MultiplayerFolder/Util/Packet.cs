@@ -194,6 +194,12 @@ public class Packet : IDisposable
         Write(_value.z);
     }
 
+    public void Write(Vector2Int _value)
+    {
+        Write(_value.x);
+        Write(_value.y);
+    }
+
     /// <summary>Adds a Quaternion to the packet.</summary>
     /// <param name="_value">The Quaternion to add.</param>
     public void Write(Quaternion _value)
@@ -385,6 +391,11 @@ public class Packet : IDisposable
     public Vector3Int ReadVector3Int(bool _moveReadPos = true)
     {
         return new Vector3Int(ReadInt(_moveReadPos), ReadInt(_moveReadPos), ReadInt(_moveReadPos));
+    }
+
+    public Vector2Int ReadVector2Int(bool _moveReadPos = true)
+    {
+        return new Vector2Int(ReadInt(_moveReadPos), ReadInt(_moveReadPos));
     }
 
     /// <summary>Reads a Quaternion from the packet.</summary>

@@ -47,7 +47,19 @@ public class AStarPathFindMapper : Mapper
             {
                 if (tobeMappedActor is Enemy monsterToBeMapped)
                 {
-                    monsterToBeMapped.followingTarget = false;
+                    if(monsterToBeMapped is MirrorKnight mirrorKnight)
+                    {
+                        mirrorKnight.FinishFollowing();
+                    }
+                    else if (monsterToBeMapped is Cyclops cyclops)
+                    {
+                        cyclops.FinishFollowing();
+                    }
+                    else if (monsterToBeMapped is Centaur centaur)
+                    {
+                        centaur.FinishFollowing();
+                    }
+                    monsterToBeMapped.waitForPathFindingToWearOff.ReInitialiseTimerToBegin(monsterToBeMapped.pathFindingWearOffTickCount);
                 }
                 //Debug.LogError("Returning start cell: "+startCell);
                 return startCell;
@@ -62,7 +74,19 @@ public class AStarPathFindMapper : Mapper
         {
             if (tobeMappedActor is Enemy monsterToBeMapped)
             {
-                monsterToBeMapped.followingTarget = false;
+                if (monsterToBeMapped is MirrorKnight mirrorKnight)
+                {
+                    mirrorKnight.FinishFollowing();
+                }
+                else if (monsterToBeMapped is Cyclops cyclops)
+                {
+                    cyclops.FinishFollowing();
+                }
+                else if (monsterToBeMapped is Centaur centaur)
+                {
+                    centaur.FinishFollowing();
+                }
+                monsterToBeMapped.waitForPathFindingToWearOff.ReInitialiseTimerToBegin(monsterToBeMapped.pathFindingWearOffTickCount);
             }
             return startCell;
         }

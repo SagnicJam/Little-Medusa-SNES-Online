@@ -68,7 +68,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -444576245
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -3483078198669406429, guid: cc47fa1754686bb419d442e080bfc323,
     type: 3}
@@ -96,6 +96,8 @@ GameObject:
   - component: {fileID: 7939149361246446019}
   - component: {fileID: 7673462834611208786}
   - component: {fileID: 4839937088663873016}
+  - component: {fileID: 4050315332374504804}
+  - component: {fileID: 5135798890586738745}
   m_Layer: 0
   m_Name: ServerHero
   m_TagString: Untagged
@@ -220,12 +222,15 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
   movePoint: {fileID: 5347273080383547890}
   actorTransform: {fileID: 5347273079975968518}
   frameLooper: {fileID: 7939149361246446019}
+  gamePhysics: {fileID: 4050315332374504804}
   actorCollider2D: {fileID: 1521806858529265013}
   projectileThrownType: 0
   projectileThrownType_2: 0
@@ -236,9 +241,10 @@ MonoBehaviour:
   walkSpeed: 4
   damagePerStoppedHit: 2
   primaryMoveDamage: 23
-  primaryMoveAnimationDuration: 0.5
-  normalWalkAnimationDuration: 0.5
   petrificationSnapSpeed: 6
+  primaryMoveAttackRateTickRate: 20
+  secondaryMoveAttackRateTickRate: 0
+  pushSpeed: 4
   faceDirectionInit: 1
   leftIdleSprite:
   - {fileID: 2535347849031311247, guid: fb7c2256b0db0ca47809b337f905b5cb, type: 3}
@@ -356,6 +362,7 @@ MonoBehaviour:
   rightFlySprite: []
   downFlySprite: []
   upFlySprite: []
+  petrificationSpriteArr: []
   primaryMoveAnimationSprites:
     upMove:
     - {fileID: 2535347849031311247, guid: fb7c2256b0db0ca47809b337f905b5cb, type: 3}
@@ -413,6 +420,11 @@ MonoBehaviour:
     - {fileID: 2535347849031311247, guid: fb7c2256b0db0ca47809b337f905b5cb, type: 3}
     - {fileID: 2535347849031311247, guid: fb7c2256b0db0ca47809b337f905b5cb, type: 3}
     - {fileID: 2535347849031311247, guid: fb7c2256b0db0ca47809b337f905b5cb, type: 3}
+  secondaryMoveAnimationSprites:
+    upMove: []
+    downMove: []
+    leftMove: []
+    rightMove: []
   crosshairSprite: {fileID: 21300000, guid: 5a0810130c2b57743b60b3e50b2a2a89, type: 3}
   isDead: 0
   isPushed: 0
@@ -426,6 +438,7 @@ MonoBehaviour:
   triggerFaceChangeEvent: 0
   isWalking: 0
   isUsingPrimaryMove: 0
+  isUsingSecondaryMove: 0
   currentHP: 0
   currentStockLives: 0
   isHeadCollisionWithOtherActor: 0
@@ -439,7 +452,6 @@ MonoBehaviour:
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
   frameDelayForRegisteringInput: 4
-  primaryMoveAttackRateTickRate: 20
   petrificationColor: {r: 0.4039216, g: 0.4039216, b: 0.4039216, a: 0.6509804}
   invincibleColor: {r: 1, g: 0.9333334, b: 0, a: 0.6509804}
   healthFillImage: {fileID: 0}
@@ -468,6 +480,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputframeCount: 0
+--- !u!114 &4050315332374504804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5347273079975968519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 872d455a75094464184b05c83023c0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 1
+  hardboxCollider2D: {fileID: 5135798890586738745}
+  gameCollider2D: {fileID: 1521806858529265013}
+  direction: {x: 0, y: 0, z: 0}
+  isPhysicsEnabled: 0
+--- !u!61 &5135798890586738745
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5347273079975968519}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.85, y: 0.85}
+  m_EdgeRadius: 0
 --- !u!1 &5347273080030871503
 GameObject:
   m_ObjectHideFlags: 0

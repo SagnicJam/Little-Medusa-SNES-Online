@@ -248,7 +248,7 @@ public class ServerSideClient
             worldGridItemList.Add(worldGridItem);
         }
 
-        WorldUpdate worldUpdate = new WorldUpdate(ServerSideGameManager.instance.serverWorldSequenceNumber, worldGridItemList.ToArray(),new GameData((int)ServerSideGameManager.instance.currentGameState,ServerSideGameManager.instance.timeToStartMatch), ServerSideGameManager.projectilesDic,ServerSideGameManager.animatingStaticTileDic);
+        WorldUpdate worldUpdate = new WorldUpdate(ServerSideGameManager.instance.serverWorldSequenceNumber, worldGridItemList.ToArray(),new GameData((int)ServerSideGameManager.instance.currentGameState,ServerSideGameManager.instance.timeToStartMatch), ServerSideGameManager.projectilesDic, ServerSideGameManager.enemiesDic, ServerSideGameManager.animatingStaticTileDic);
 
         ServerSend.SpawnGridWorld(id, worldUpdate);
     }

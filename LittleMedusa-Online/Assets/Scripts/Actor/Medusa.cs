@@ -187,7 +187,7 @@ public class Medusa : Hero
 
 
 
-            if (isClient() && hasAuthority())
+            if (!MultiplayerManager.instance.isServer && hasAuthority())
             {
                 if (completedMotionToMovePoint)
                 {
@@ -221,6 +221,17 @@ public class Medusa : Hero
                                 {
                                     //Send reliable request of push to server here
                                     PushCommand pushCommand = new PushCommand(GetLocalSequenceNo(), (int)Facing, actorToPush.ownerId);
+                                    ClientSend.PushPlayerCommand(pushCommand);
+                                }
+                            }
+
+                            ClientEnemyManager clientEnemy = GridManager.instance.GetClientEnemyOnPos(cellPos);
+
+                            if(clientEnemy!=null)
+                            {
+                                if(IsClientEnemyPushable(Facing))
+                                {
+                                    PushCommand pushCommand = new PushCommand(GetLocalSequenceNo(), (int)Facing, clientEnemy.id);
                                     ClientSend.PushPlayerCommand(pushCommand);
                                 }
                             }
@@ -267,7 +278,7 @@ public class Medusa : Hero
         }
         if (isFiringPrimaryProjectile)
         {
-            Fire(this);
+            Fire();
         }
     }
 

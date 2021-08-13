@@ -13,9 +13,12 @@ public class Cyclops : Enemy
     SenseInLineAction senseInLineAction = new SenseInLineAction();
     SenseInCircleAction senseInCircleAction = new SenseInCircleAction();
 
+    int normalSpeed;
+
     public override void Awake()
     {
         base.Awake();
+        normalSpeed = walkSpeed;
         currentMapper = wandererMapper;
         senseInLineAction.Initialise(this);
         senseInLineAction.InitialiseLineSize(lineRangeForDetection);
@@ -29,7 +32,7 @@ public class Cyclops : Enemy
 
     //}
     //update the block pos here
-    public override void UpdateMovementState(bool isPrimaryMoveActive)
+    public override void UpdateMovementState(bool isPrimaryMoveActive, bool isSecondaryMoveActive)
     {
         if (isPhysicsControlled)
         {
@@ -43,42 +46,51 @@ public class Cyclops : Enemy
         {
             return;
         }
-        
-        if(!isPrimaryMoveActive)
+
+        if (!isPrimaryMoveActive && !isSecondaryMoveActive)
         {
-            inLineRange = senseInLineAction.Perform();
-            heroToChase = senseInLineAction.heroInLineOfAction;
-            if (!followingTarget)
+            if (!waitForPathFindingToWearOff.Perform())
             {
-                if (followingTarget != inLineRange)
+                inLineRange = senseInLineAction.Perform();
+                heroToChase = senseInLineAction.heroInLineOfAction;
+                if (!followingTarget)
                 {
-                    //Triggered ai motion
-                    currentMapper = null;
-                    currentMapper = pathfindingMapper;
-                    followingTarget = true;
+                    if (followingTarget != inLineRange)
+                    {
+                        //Triggered ai motion
+                        currentMapper = null;
+                        currentMapper = pathfindingMapper;
+                        followingTarget = true;
+                    }
+                    //normal aimless wanderer
                 }
-                //normal aimless wanderer
+                else
+                {
+                    if (!senseInCircleAction.Perform())
+                    {
+                        FinishFollowing();
+                    }
+                }
+
+                if (waitingForNextActionToCheckForPath.isWaitingForNextActionCheck)
+                {
+                    waitingForNextActionToCheckForPath.Perform();
+                    return;
+                }
             }
             else
             {
-                if (!senseInCircleAction.Perform())
+                if (waitingForNextActionToCheckForPath.isWaitingForNextActionCheck)
                 {
-                    followingTarget = false;
-                    currentMapper = null;
-                    currentMapper = wandererMapper;
+                    waitingForNextActionToCheckForPath.CompleteTimer();
                 }
-            }
-            if (waitingForNextActionToCheckForPath.isWaitingForNextActionCheck)
-            {
-                waitingForNextActionToCheckForPath.Perform();
-                return;
             }
             if (completedMotionToMovePoint)
             {
                 CheckSwitchCellIndex();
             }
         }
-        
+
     }
 
 
@@ -107,7 +119,7 @@ public class Cyclops : Enemy
         walkAction.Perform();
     }
 
-    public override void UpdateAnimationState(bool isPrimaryMoveActive)
+    public override void UpdateAnimationState(bool isPrimaryMoveActive, bool isSecondaryMoveActive)
     {
         if (isPhysicsControlled)
         {
@@ -170,7 +182,7 @@ public class Cyclops : Enemy
         frameLooper.UpdateAnimationFrame();
     }
 
-    public override void UpdateEventState(bool isPrimaryMoveActive,bool switchedThisFrame)
+    public override void UpdateEventState(bool isPrimaryMoveActive, bool switchedPrimaryMoveThisFrame, bool isSecondaryMoveActive, bool switchedSecondaryMoveThisFrame)
     {
         if (isPhysicsControlled)
         {
@@ -237,7 +249,7 @@ public class Cyclops : Enemy
                 isMelleAttacking = false;
             }
         }
-        else if (!isPrimaryMoveActive && switchedThisFrame)
+        else if (!isPrimaryMoveActive && switchedPrimaryMoveThisFrame)
         {
             isMelleAttacking = false;
             waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
@@ -263,35 +275,63 @@ public class Cyclops : Enemy
         {
             //Check for player
             //Attack player
-            Debug.Log("Attack player");
+            heroGettingHit = GetHeroNextTo();
+            if(heroGettingHit!=null)
+            {
+                Debug.Log("Attack player");
+                heroGettingHit.TakeDamage(primaryMoveDamage);
+            }
         }
     }
     bool newIsPrimaryMoveActive;
     bool previousIsPrimaryMoveActive;
+
+
     private void FixedUpdate()
     {
-        newIsPrimaryMoveActive = IsPlayerInRangeForAttack();
-
-        UpdateMovementState(newIsPrimaryMoveActive);
+        newIsPrimaryMoveActive = IsPlayerInRangeForMelleAttack();
+        UpdateMovementState(newIsPrimaryMoveActive, false);
         PerformMovement();
 
-        UpdateAnimationState(newIsPrimaryMoveActive);
+        UpdateAnimationState(newIsPrimaryMoveActive, false);
         PerformAnimations();
 
-        UpdateEventState(newIsPrimaryMoveActive, newIsPrimaryMoveActive != previousIsPrimaryMoveActive);
+        UpdateEventState(newIsPrimaryMoveActive, newIsPrimaryMoveActive != previousIsPrimaryMoveActive, false, false);
         PerformEvents();
 
         previousIsPrimaryMoveActive = newIsPrimaryMoveActive;
     }
 
+    public void FinishFollowing()
+    {
+        if(followingTarget)
+        {
+            followingTarget = false;
+        }
+        if(senseInLineAction.heroInLineOfAction != null)
+        {
+            senseInLineAction.heroInLineOfAction = null;
+        }
+        if(waitingForNextActionToCheckForPath.isWaitingForNextActionCheck)
+        {
+            waitingForNextActionToCheckForPath.CompleteTimer();
+        }
+        currentMapper = null;
+        currentMapper = wandererMapper;
+    }
+
     public override void OnPushStart()
     {
         //Empty
-        Debug.Log("OnPushStart - cyclops");
+        FinishFollowing();
+        walkSpeed = pushSpeed;
+        Debug.Log("OnPushStart - "+ gameObject.name);
     }
 
     public override void OnPushStop()
     {
-        currentMapper = wandererMapper;
+        Debug.Log("OnPushStop - " + gameObject.name);
+        FinishFollowing();
+        walkSpeed = normalSpeed;
     }
 }

@@ -32,7 +32,6 @@ public class SenseInCircleAction : Actions
                 return true;
             }
         }
-        monsterSensing.heroToChase = null;
         return false;
     }
 

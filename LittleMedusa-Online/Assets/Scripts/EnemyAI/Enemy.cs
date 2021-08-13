@@ -6,42 +6,77 @@ public abstract class Enemy : Actor
 {
     [Header("Enemy Actions")]
     public WaitingForNextAction waitingForNextActionToCheckForPath = new WaitingForNextAction();
+    public WaitingForNextAction waitForPathFindingToWearOff = new WaitingForNextAction();
 
     [Header("Scene references")]
     public Transform HeadTransform;
+    public EnemyDataSender enemyDataSender;
 
     [Header("Tweak  Params")]
     public float waitingTimeWhenStuck;
-    public Sprite[] petrificationSpriteArr;
+    public float petrifyAnimationDuration;
+    public int pathFindingWearOffTickCount;
 
     [Header("Live Data")]
     public bool isMelleAttacking;
+    public bool isRangedAttacking;
     public bool followingTarget;
     public Hero heroToChase;
 
     [Header("Enemy stats")]
-    public int id;
     public bool canBePetrified;
     public bool dieOnUnPetrification;
 
     public static Dictionary<int, Enemy> enemies = new Dictionary<int, Enemy>();
-    static int nextEnemyId = 1;
+
+    public Hero heroGettingHit;
 
     public override void Awake()
     {
         base.Awake();
         Facing = faceDirectionInit;
-        id = nextEnemyId;
-        nextEnemyId++;
-        enemies.Add(id, this);
+        Server.serverID++;
+        ownerId = Server.serverID;
+        enemies.Add(ownerId, this);
         InitialiseHP();
+        waitForPathFindingToWearOff.Initialise(this);
+        enemyDataSender.Initialise(this);
+    }
+
+    public int GetEnemyState()
+    {
+        if(isPhysicsControlled)
+        {
+            return (int)EnumData.EnemyState.PhysicsControlled;
+        }
+        else if (isPushed)
+        {
+            return (int)EnumData.EnemyState.Pushed;
+        }
+        else if(isPetrified)
+        {
+            return (int)EnumData.EnemyState.Petrified;
+        }
+        else if (isUsingPrimaryMove)
+        {
+            return (int)EnumData.EnemyState.PrimaryMoveUse;
+        }
+        else if (isUsingSecondaryMove)
+        {
+            return (int)EnumData.EnemyState.SecondaryMoveUse;
+        }
+        else if(isWalking)
+        {
+            return (int)EnumData.EnemyState.Walking;
+        }
+        return (int)EnumData.EnemyState.Idle;
     }
 
     public void KillMe()
     {
-        if(enemies.ContainsKey(id))
+        if (enemies.ContainsKey(ownerId))
         {
-            enemies.Remove(id);
+            enemies.Remove(ownerId);
             Destroy(HeadTransform.gameObject);
         }
     }
@@ -55,7 +90,7 @@ public abstract class Enemy : Actor
         return true;
     }
 
-    public bool IsPlayerInRangeForAttack()
+    public bool IsPlayerInRangeForMelleAttack()
     {
         Vector3 toCheckPos = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
         Actor actor = GridManager.instance.GetActorOnPos(GridManager.instance.grid.WorldToCell(toCheckPos));
@@ -66,12 +101,45 @@ public abstract class Enemy : Actor
         return false;
     }
 
+    public Hero GetHeroNextTo()
+    {
+        Vector3 toCheckPos = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
+        Actor actor = GridManager.instance.GetActorOnPos(GridManager.instance.grid.WorldToCell(toCheckPos));
+        if (actor != null && actor is Hero hero && completedMotionToMovePoint && actor.completedMotionToMovePoint)
+        {
+            return hero;
+        }
+        return null;
+    }
+
+    public bool IsPlayerInRangeForRangedAttack(float range)
+    {
+        Vector3 toCheckPos = actorTransform.position + range * GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
+        Actor actor = GridManager.instance.GetActorOnPos(GridManager.instance.grid.WorldToCell(toCheckPos));
+        if (actor != null && actor is Hero hero && completedMotionToMovePoint)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public override void Petrify()
     {
+        if(!isPetrified)
+        {
+            if (petrificationSpriteArr.Length > 0)
+            {
+                frameLooper.UpdateSpriteArr(petrificationSpriteArr);
+                frameLooper.PlayOneShotAnimation(petrifyAnimationDuration);
+            }
+        }
         base.Petrify();
-        Debug.LogError("Petrified here");
-        //frameLooper.UpdateSpriteArr(petrificationSpriteArr);
-        //frameLooper.PlayOneShotAnimation();
+    }
+
+    public override void UnPetrify()
+    {
+        base.UnPetrify();
+        UpdateFrameSprites();
     }
 
     public override void OnCantOccupySpace()
@@ -101,19 +169,40 @@ public abstract class Enemy : Actor
 
     public override void OnHeadCollidingWithANonPetrifiedNonPushedObjectWhereIAmPushedAndPetrified(Actor collidedActorWithMyHead)
     {
-        PushActor(collidedActorWithMyHead, Facing);
+        if (!collidedActorWithMyHead.IsInSpawnJarTerritory)
+        {
+            PushActor(collidedActorWithMyHead, Facing);
+        }
+        else
+        {
+            StopPush(this);
+        }
         isHeadCollisionWithOtherActor = false;
     }
 
     public override void OnHeadCollidingWithANonPetrifiedNonPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead)
     {
-        PushActor(collidedActorWithMyHead, Facing);
+        if(!collidedActorWithMyHead.IsInSpawnJarTerritory)
+        {
+            PushActor(collidedActorWithMyHead, Facing);
+        }
+        else
+        {
+            StopPush(this);
+        }
         isHeadCollisionWithOtherActor = false;
     }
 
     public override void OnHeadCollidingWithANonPetrifiedNonPushedObjectWhereIAmNotPushedAndNotPetrified(Actor collidedActorWithMyHead)
     {
-        SnapBackAfterCollision();
+        if (!collidedActorWithMyHead.IsInSpawnJarTerritory)
+        {
+            SnapBackAfterCollision();
+        }
+        else
+        {
+            collidedActorWithMyHead.TakeDamage(currentHP);
+        }
     }
 
     public override void OnHeadCollidingWithANonPetrifiedNonPushedObjectWhereIAmNotPushedAndAmPetrified(Actor collidedActorWithMyHead)
@@ -196,12 +285,16 @@ public abstract class Enemy : Actor
         isHeadCollisionWithOtherActor = false;
     }
 
+    public override void OnBodyCollidingWithKillingTiles(TileData tileData)
+    {
+        TakeDamage(currentHP);
+    }
 
-    public abstract void UpdateAnimationState(bool isPrimaryMoveActive);
+    public abstract void UpdateAnimationState(bool isPrimaryMoveActive,bool isSecondaryMoveActive);
 
-    public abstract void UpdateMovementState(bool isPrimaryMoveActive);
+    public abstract void UpdateMovementState(bool isPrimaryMoveActive, bool isSecondaryMoveActive);
 
-    public abstract void UpdateEventState(bool isPrimaryMoveActive,bool switchedThisFrame);
+    public abstract void UpdateEventState(bool isPrimaryMoveActive, bool switchedPrimaryMoveThisFrame, bool isSecondaryMoveActive, bool switchedSecondaryMoveThisFrame);
 
 
     public abstract void PerformAnimations();

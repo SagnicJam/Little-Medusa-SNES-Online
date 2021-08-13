@@ -128,6 +128,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  isSpriteDependedonRotation: 0
+  isRotationControlledByTransform: 1
+  leftSpriteArr: {fileID: 0}
+  rightSpriteArr: {fileID: 0}
+  upSpriteArr: {fileID: 0}
+  downSpriteArr: {fileID: 0}
 --- !u!1 &4143706499439794782
 GameObject:
   m_ObjectHideFlags: 0

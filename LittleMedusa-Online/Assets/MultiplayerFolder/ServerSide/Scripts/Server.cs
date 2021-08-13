@@ -126,11 +126,15 @@ public class Server
         }
     }
 
+    public static int serverID;
+
     private static void InitialiseServerData()
     {
+        serverID = 1;
         for (int i = 1; i <= MaxPlayers; i++)
         {
-            clients.Add(i, new ServerSideClient(i));
+            clients.Add(serverID, new ServerSideClient(serverID));
+            serverID++;
         }
 
         packetHandlers = new Dictionary<int, PacketHandler>()

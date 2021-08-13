@@ -102,7 +102,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.8125, y: 1}
     newSize: {x: 1, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -139,10 +139,12 @@ MonoBehaviour:
         m_CallState: 2
   spriteArr: []
   spriteRenderer: {fileID: 4609712844027708361}
-  timeBetweenFrames: 0.1
+  animationDuration: 0
   temp: 0
-  spriteIndexToShow: 0
+  IsLoopComplete: 0
   playonAwakeWithLoop: 0
+  playonAwakeOneShot: 0
+  spriteIndexToShowCache: 0
   playingOneShot: 0
 --- !u!114 &6343060601045919070
 MonoBehaviour:
@@ -160,15 +162,20 @@ MonoBehaviour:
   projectileTileTravelDistance: 3
   projectileSpeed: 4
   selfDestroyOnTargetTouch: 0
+  isDispersing: 0
+  dispersionRadius: 0
+  dispersionSpeed: 0
+  dispersedGO: {fileID: 0}
+  dispersedGOCollider: {fileID: 0}
   frameLooper: {fileID: 630966238488796755}
   isDynamicTravellingSprites: 0
-  projectileTravelRightSprite: {fileID: -295879850061160071, guid: 8e34980fdb1e55847988ce0586fb2f16,
+  projectileTravelRightSprite: {fileID: 7144953509852361976, guid: 380c01910ec30d34a830942966408ba7,
     type: 3}
-  projectileTravelLeftSprite: {fileID: -9062529124756593654, guid: 8e34980fdb1e55847988ce0586fb2f16,
+  projectileTravelLeftSprite: {fileID: 7144953509852361976, guid: 380c01910ec30d34a830942966408ba7,
     type: 3}
-  projectileTravelUpSprite: {fileID: 7718515357799426450, guid: 8e34980fdb1e55847988ce0586fb2f16,
+  projectileTravelUpSprite: {fileID: 7144953509852361976, guid: 380c01910ec30d34a830942966408ba7,
     type: 3}
-  projectileTravelDownSprite: {fileID: 8411867806688940998, guid: 8e34980fdb1e55847988ce0586fb2f16,
+  projectileTravelDownSprite: {fileID: 7144953509852361976, guid: 380c01910ec30d34a830942966408ba7,
     type: 3}
   dynamicProjectileTravelRightSprite: []
   dynamicProjectileTravelLeftSprite: []

@@ -19,7 +19,7 @@ public class MultiplayerManager : MonoBehaviour
     public CharacterSelectionScreen characterSelectionScreen;
 
     public static MultiplayerManager instance;
-
+    public bool isDebug;
     public bool isServer;
 
     public int serverPort;
@@ -39,9 +39,26 @@ public class MultiplayerManager : MonoBehaviour
         }
         else
         {
-            InitialiseEnterNameScreen();
-            //Instantiate(clientSideGameManager);
-            //Instantiate(characterSelectionScreen, Canvas, false);
+            if (isDebug)
+            {
+                Match debugMatch = new Match();
+                debugMatch.MatchID = 13;
+                debugMatch.ProcessID = 9156;
+
+                PlayerInfoData playerInfoData = new PlayerInfoData("cZE3aJKSS50lCuXkelhz7Q", "sagnic");
+
+                Dictionary<string, PlayerInfoData> dic = new Dictionary<string, PlayerInfoData>();
+                dic.Add("cZE3aJKSS50lCuXkelhz7Q", playerInfoData);
+
+                debugMatch.playerList = dic;
+                OnMatchBegun(debugMatch);
+            }
+            else
+            {
+                InitialiseEnterNameScreen();
+                //Instantiate(clientSideGameManager);
+                //Instantiate(characterSelectionScreen, Canvas, false);
+            }
         }
     }
 
@@ -53,7 +70,13 @@ public class MultiplayerManager : MonoBehaviour
 
     public void OnMatchBegun(Match match)
     {
-        Debug.Log("On Match begun on client");
+        Debug.Log(match.MatchID);
+        Debug.Log(match.ProcessID);
+        foreach(KeyValuePair<string,PlayerInfoData>kvp in match.playerList)
+        {
+            Debug.Log(kvp.Key+"  "+kvp.Value.connectionId +" "+kvp.Value.Name);
+        }
+        Debug.Log("On Match begun on client "+JsonUtility.ToJson(match));
         DestroyPlayerList();
         DestroyLobbyScreen();
         serverPort = match.MatchID;

@@ -120,7 +120,7 @@ public class ServerSend
 
                 packet.Write(worldGridItem.cellGridWorldPositionList.Count);
 
-                foreach (Vector3Int v in worldGridItem.cellGridWorldPositionList)
+                foreach (Vector2Int v in worldGridItem.cellGridWorldPositionList)
                 {
                     packet.Write(v);
                 }
@@ -134,7 +134,23 @@ public class ServerSend
 
                 packet.Write(keyValuePair.Value.projectilePosition);
 
-                packet.Write(keyValuePair.Value.projectileRotation);
+                packet.Write(keyValuePair.Value.faceDirection);
+            }
+
+            packet.Write(worldUpdate.enemyDatas.Count);
+            foreach (KeyValuePair<int, EnemyData> keyValuePair in worldUpdate.enemyDatas)
+            {
+                packet.Write(keyValuePair.Key);
+
+                packet.Write(keyValuePair.Value.enemyType);
+
+                packet.Write(keyValuePair.Value.animationIndexNumber);
+
+                packet.Write(keyValuePair.Value.faceDirection);
+
+                packet.Write(keyValuePair.Value.enemyState);
+
+                packet.Write(keyValuePair.Value.enemyPosition);
             }
 
             packet.Write(worldUpdate.animatingTileDatas.Count);
@@ -173,7 +189,7 @@ public class ServerSend
 
                     packet.Write(worldGridItem.cellGridWorldPositionList.Count);
 
-                    foreach (Vector3Int v in worldGridItem.cellGridWorldPositionList)
+                    foreach (Vector2Int v in worldGridItem.cellGridWorldPositionList)
                     {
                         packet.Write(v);
                     }
@@ -188,7 +204,23 @@ public class ServerSend
 
                     packet.Write(keyValuePair.Value.projectilePosition);
 
-                    packet.Write(keyValuePair.Value.projectileRotation);
+                    packet.Write(keyValuePair.Value.faceDirection);
+                }
+
+                packet.Write(worldUpdates[i].enemyDatas.Count);
+                foreach (KeyValuePair<int, EnemyData> keyValuePair in worldUpdates[i].enemyDatas)
+                {
+                    packet.Write(keyValuePair.Key);
+
+                    packet.Write(keyValuePair.Value.enemyType);
+
+                    packet.Write(keyValuePair.Value.animationIndexNumber);
+
+                    packet.Write(keyValuePair.Value.faceDirection);
+
+                    packet.Write(keyValuePair.Value.enemyState);
+
+                    packet.Write(keyValuePair.Value.enemyPosition);
                 }
 
                 packet.Write(worldUpdates[i].animatingTileDatas.Count);
@@ -239,7 +271,23 @@ public class ServerSend
 
                         packet.Write(keyValuePair.Value.projectilePosition);
 
-                        packet.Write(keyValuePair.Value.projectileRotation);
+                        packet.Write(keyValuePair.Value.faceDirection);
+                    }
+
+                    packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].enemyDatas.Count);
+                    foreach (KeyValuePair<int, EnemyData> keyValuePair in previousWorldUpdatePacks[i].previousWorldUpdates[j].enemyDatas)
+                    {
+                        packet.Write(keyValuePair.Key);
+
+                        packet.Write(keyValuePair.Value.enemyType);
+
+                        packet.Write(keyValuePair.Value.animationIndexNumber);
+
+                        packet.Write(keyValuePair.Value.faceDirection);
+
+                        packet.Write(keyValuePair.Value.enemyState);
+
+                        packet.Write(keyValuePair.Value.enemyPosition);
                     }
 
                     packet.Write(worldUpdates[i].animatingTileDatas.Count);

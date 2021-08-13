@@ -183,7 +183,7 @@ public class Averna : Hero
 
             }
 
-            if (isClient() && hasAuthority())
+            if (!MultiplayerManager.instance.isServer && hasAuthority())
             {
                 if (completedMotionToMovePoint)
                 {

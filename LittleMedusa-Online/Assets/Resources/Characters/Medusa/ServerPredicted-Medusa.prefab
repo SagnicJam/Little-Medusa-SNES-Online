@@ -68,7 +68,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -444576245
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 8599813833102577452, guid: 8e34980fdb1e55847988ce0586fb2f16,
     type: 3}
@@ -166,6 +166,7 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
   overrideInspectorValues: 0
@@ -182,9 +183,10 @@ MonoBehaviour:
   walkSpeed: 4
   damagePerStoppedHit: 2
   primaryMoveDamage: 2
-  primaryMoveAnimationDuration: 0.5
-  normalWalkAnimationDuration: 0.5
   petrificationSnapSpeed: 6
+  primaryMoveAttackRateTickRate: 20
+  secondaryMoveAttackRateTickRate: 0
+  pushSpeed: 4
   faceDirectionInit: 1
   leftIdleSprite: []
   rightIdleSprite: []
@@ -235,6 +237,11 @@ MonoBehaviour:
     - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
     - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
     - {fileID: 4795728080198389794, guid: 8e34980fdb1e55847988ce0586fb2f16, type: 3}
+  secondaryMoveAnimationSprites:
+    upMove: []
+    downMove: []
+    leftMove: []
+    rightMove: []
   crosshairSprite: {fileID: 21300000, guid: 5a0810130c2b57743b60b3e50b2a2a89, type: 3}
   isDead: 0
   isPushed: 0
@@ -248,6 +255,7 @@ MonoBehaviour:
   triggerFaceChangeEvent: 0
   isWalking: 0
   isUsingPrimaryMove: 0
+  isUsingSecondaryMove: 0
   currentHP: 0
   currentStockLives: 0
   isHeadCollisionWithOtherActor: 0
@@ -261,7 +269,6 @@ MonoBehaviour:
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
   frameDelayForRegisteringInput: 4
-  primaryMoveAttackRateTickRate: 20
   petrificationColor: {r: 0, g: 0, b: 0, a: 0}
   invincibleColor: {r: 0, g: 0, b: 0, a: 0}
   healthFillImage: {fileID: 0}
@@ -299,6 +306,7 @@ MonoBehaviour:
   temp: 0
   IsLoopComplete: 0
   playonAwakeWithLoop: 0
+  playonAwakeOneShot: 0
   spriteIndexToShowCache: 0
   playingOneShot: 0
 --- !u!114 &6354422439391426448
