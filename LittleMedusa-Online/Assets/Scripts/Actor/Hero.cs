@@ -78,10 +78,17 @@ public abstract class Hero : Actor
             if(CharacterSelectionScreen.instance.gameObject.activeSelf)
             {
                 CharacterSelectionScreen.instance.gameObject.SetActive(false);
-                
             }
-            //MatchConditionData matchConditionData = new MatchConditionData(GetLocalSequenceNo(), MatchConditionManager.instance.enemyType, MatchConditionManager.instance.enemyCount);
-            //ClientSend.SendMatchConditionData(matchConditionData);
+            if (clientMasterController.connectionId == MultiplayerManager.instance.matchOwnerConnectionId)
+            {
+                if(MatchConditionManager.instance !=null&& MatchConditionManager.instance.gameObject.activeSelf)
+                {
+                    MatchConditionData matchConditionData = new MatchConditionData(GetLocalSequenceNo(), MatchConditionManager.instance.enemyType, MatchConditionManager.instance.enemyCount);
+                    ClientSend.SendMatchConditionData(matchConditionData);
+                    MatchConditionManager.instance.gameObject.SetActive(false);
+                }
+            }
+            
         }
         inCharacterSelectionScreen = playerAuthoratativeStates.inCharacterSelectionScreen;
         inGame = playerAuthoratativeStates.inGame;

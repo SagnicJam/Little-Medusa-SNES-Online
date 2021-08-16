@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ClientSend : MonoBehaviour
 {
-
+    public static string username;
+    public static string connectionID;
     private static void SendTCPData(Packet packet)
     {
         packet.WriteLength();
@@ -23,7 +24,16 @@ public class ClientSend : MonoBehaviour
         using (Packet packet = new Packet((int)ClientPackets.welcomeReceived))
         {
             packet.Write(Client.instance.myID);
-            packet.Write("dummy123");
+            if(string.IsNullOrEmpty(connectionID))
+            {
+                Debug.LogError("No connection id received");
+            }
+            else
+            {
+                Debug.Log("connectionID: " + connectionID);
+            }
+            packet.Write(connectionID);
+            packet.Write(username);
             SendTCPData(packet);
         }
     }
@@ -32,10 +42,6 @@ public class ClientSend : MonoBehaviour
     {
         using (Packet packet = new Packet((int)ClientPackets.matchConditionDataCommand))
         {
-            Debug.LogError(matchConditionData.enemyType);
-            Debug.LogError(matchConditionData.enemyCount);
-            Debug.LogError(matchConditionData.sequenceNumber);
-
             packet.Write(matchConditionData.enemyType);
             packet.Write(matchConditionData.enemyCount);
             packet.Write(matchConditionData.sequenceNumber);

@@ -46,14 +46,14 @@ public class LobbyScreen : MonoBehaviour,ILobby
     {
         Debug.Log("OnRoom created : "+room.RoomName);
         MultiplayerManager.instance.InitialisePlayerList(room);
-        MultiplayerManager.instance.isRoomOwner = true;
+        MultiplayerManager.instance.matchOwnerConnectionId = room.RoomOwnerConnectionID;
     }
 
     void OnRoomLeft(Room room)
     {
         Debug.Log("OnRoom left : "+room.RoomName);
         MultiplayerManager.instance.DestroyPlayerList();
-        MultiplayerManager.instance.isRoomOwner = false;
+        MultiplayerManager.instance.matchOwnerConnectionId = null;
     }
 
     void OnGetLobby(Lobby lobby)
@@ -67,6 +67,7 @@ public class LobbyScreen : MonoBehaviour,ILobby
         Debug.Log("OnJoinedRoom");
         MultiplayerManager.instance.InitialisePlayerList(room);
         MultiplayerManager.instance.DestroyRoomList();
+        MultiplayerManager.instance.matchOwnerConnectionId = room.RoomOwnerConnectionID;
     }
 
     public async Task JoinRandomRoom()

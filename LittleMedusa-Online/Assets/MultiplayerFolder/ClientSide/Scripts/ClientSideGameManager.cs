@@ -48,7 +48,7 @@ public class ClientSideGameManager : MonoBehaviour
         }
     }
 
-    public void SpawnPlayer(int id,string username,PlayerStateUpdates playerStateUpdates)
+    public void SpawnPlayer(int id,string connectionId,string username,PlayerStateUpdates playerStateUpdates)
     {
         GameObject player;
         int hero = playerStateUpdates.playerAuthoratativeStates.hero;
@@ -64,7 +64,7 @@ public class ClientSideGameManager : MonoBehaviour
             player.GetComponent<ClientMasterController>().serverPlayer = serverPredictedHero;
             player.GetComponent<ClientMasterController>().clientPlayer = remoteClientHero;
 
-            player.GetComponent<PlayerManager>().Initialise(id,username, playerStateUpdates, true);
+            player.GetComponent<PlayerManager>().Initialise(id, connectionId, username, playerStateUpdates, true);
         }
         else
         {
@@ -73,7 +73,7 @@ public class ClientSideGameManager : MonoBehaviour
             Hero remoteOtherClient = (Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)hero).ToString() + "/RemoteClientOther-" + ((EnumData.Heroes)hero).ToString()), player.transform, false) as GameObject).GetComponentInChildren<Hero>();
             
             player.GetComponent<ClientMasterController>().clientPlayer = remoteOtherClient;
-            player.GetComponent<PlayerManager>().Initialise(id, username, playerStateUpdates, false);
+            player.GetComponent<PlayerManager>().Initialise(id, connectionId, username, playerStateUpdates, false);
         }
         CharacterSelectionScreen.instance.PlayerConnected(id);
         CharacterSelectionScreen.instance.AssignCharacterToId(playerStateUpdates.playerAuthoratativeStates.hero, id);

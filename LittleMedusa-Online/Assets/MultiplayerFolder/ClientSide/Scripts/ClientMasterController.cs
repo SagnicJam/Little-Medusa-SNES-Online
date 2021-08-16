@@ -28,6 +28,7 @@ public class ClientMasterController : MonoBehaviour
 
     [Header("Live Units")]
     public int id;
+    public string connectionId;
     public ProcessMode currentStateProcessingModeOnClient;
     public int localSequenceNumber = 0;
     public int serverSequenceNumberToBeProcessed = 0;
@@ -70,9 +71,9 @@ public class ClientMasterController : MonoBehaviour
             serverPlayer.SetActorPositionalState(positionUpdates);
             clientPlayer.SetActorPositionalState(positionUpdates);
 
-            localPlayer.InitialiseClientActor(this, id);
-            serverPlayer.InitialiseClientActor(this, id);
-            clientPlayer.InitialiseClientActor(this, id);
+            localPlayer.InitialiseClientActor(this,connectionId, id);
+            serverPlayer.InitialiseClientActor(this, connectionId, id);
+            clientPlayer.InitialiseClientActor(this, connectionId, id);
 
             getInputs = localPlayer.GetHeroInputs;
             CharacterSelectionScreen.instance.clientlocalActor = localPlayer;
@@ -82,7 +83,7 @@ public class ClientMasterController : MonoBehaviour
             Hero remoteOtherClient = (Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)hero).ToString() + "/RemoteClientOther-" + ((EnumData.Heroes)hero).ToString()), transform, false) as GameObject).GetComponentInChildren<Hero>();
             clientPlayer = remoteOtherClient;
             clientPlayer.SetActorPositionalState(positionUpdates);
-            clientPlayer.InitialiseClientActor(this, id);
+            clientPlayer.InitialiseClientActor(this, connectionId, id);
         }
     }
 
@@ -295,12 +296,12 @@ public class ClientMasterController : MonoBehaviour
     {
         if (hasAuthority)
         {
+            
             if (localPlayer.hero != playerStateUpdates.playerAuthoratativeStates.hero)
             {
                 Hero previousServerHero = serverPlayer;
                 Hero previousClientHero = clientPlayer;
                 Hero previousLocalHero = localPlayer;
-
                 SetCharacter(playerStateUpdates.playerAuthoratativeStates.hero, playerStateUpdates.positionUpdates);
 
                 CharacterSelectionScreen.instance.AssignCharacterToId(playerStateUpdates.playerAuthoratativeStates.hero,id);

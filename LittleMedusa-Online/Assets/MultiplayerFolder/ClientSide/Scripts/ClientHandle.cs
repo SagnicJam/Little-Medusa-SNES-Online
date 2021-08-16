@@ -22,6 +22,7 @@ public class ClientHandle : MonoBehaviour
     public static void SpawnedPlayer(Packet packet)
     {
         int id = packet.ReadInt();
+        string connectionId = packet.ReadString();
         string username = packet.ReadString();
         int hero = packet.ReadInt();
         Vector3 position = packet.ReadVector3();
@@ -52,7 +53,7 @@ public class ClientHandle : MonoBehaviour
         PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, hero);
 
         PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(playerServerSequenceNumber, playerProcessingSequenceNumber, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
-        ClientSideGameManager.instance.SpawnPlayer(id,username, playerStateUpdates);
+        ClientSideGameManager.instance.SpawnPlayer(id, connectionId, username, playerStateUpdates);
     }
 
     public static void SpawnGridWorld(Packet packet)

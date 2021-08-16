@@ -25,7 +25,8 @@ public class MultiplayerManager : MonoBehaviour
 
     public int serverPort;
 
-    public bool isRoomOwner;
+    public string matchOwnerConnectionId;
+    public string localPlayerConnectionId;
 
     private void Awake()
     {
@@ -84,9 +85,10 @@ public class MultiplayerManager : MonoBehaviour
         serverPort = match.MatchID;
         Instantiate(clientSideGameManager);
         Instantiate(characterSelectionScreen, Canvas, false);
-        if(isRoomOwner)
+        if (matchOwnerConnectionId == localPlayerConnectionId)
         {
             Instantiate(matchConditionManager, Canvas, false);
+            //Debug.LogError("hua 1");
         }
     }
 

@@ -38,6 +38,7 @@ public class ServerMasterController : MonoBehaviour
     [Header("Live Units")]
     public int id;
     public string username;
+    public string connectionID;
     public ProcessMode currentInputProcessingModeOnServer;
     public int snapShotBufferSize;
     public int serverLocalSequenceNumber = 0;
@@ -47,9 +48,10 @@ public class ServerMasterController : MonoBehaviour
 
     
 
-    public void Initialise(int id, string username,Vector3 position)
+    public void Initialise(int id,string connectionID, string username, Vector3 position)
     {
         this.id = id;
+        this.connectionID = connectionID;
         this.username = username;
         serverInstanceHero.actorTransform.position = position;
         serverInstanceHero.movePoint.position = position;
@@ -1756,7 +1758,7 @@ public class ServerMasterController : MonoBehaviour
         PlayerAnimationEvents playerAnimationEvents = new PlayerAnimationEvents(serverInstanceHero.isWalking, serverInstanceHero.isUsingPrimaryMove);
 
         PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(serverLocalSequenceNumber,playerSequenceNumberProcessed, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimationEvents);
-        PlayerStateServerUpdates playerStateServerUpdates = new PlayerStateServerUpdates(id, playerStateUpdates);
+        PlayerStateServerUpdates playerStateServerUpdates = new PlayerStateServerUpdates(id,connectionID, playerStateUpdates);
         //Debug.LogError("Server sequence number : "+ serverLocalSequenceNumber+" player sequence number processeed: "+ playerSequenceNumberProcessed+" player position : "+serverInstanceHero.actorTransform.position);
 
         playerStateListOnServer.Add(playerStateServerUpdates);
@@ -1835,11 +1837,13 @@ public class ServerMasterController : MonoBehaviour
 public struct PlayerStateServerUpdates
 {
     public int playerId;
+    public string connectionId;
     public PlayerStateUpdates playerStateUpdates;
 
-    public PlayerStateServerUpdates(int playerId, PlayerStateUpdates playerStateUpdates)
+    public PlayerStateServerUpdates(int playerId,string connectionId, PlayerStateUpdates playerStateUpdates)
     {
         this.playerId = playerId;
+        this.connectionId = connectionId;
         this.playerStateUpdates = playerStateUpdates;
     }
 }

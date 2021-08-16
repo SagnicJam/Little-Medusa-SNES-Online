@@ -42,12 +42,12 @@ public class ClientEnemyManager : MonoBehaviour
     {
         if (currentAnimationSpriteGroup == null || currentAnimationSpriteGroup.Length == 0)
         {
-            Debug.LogError("sprite arr not initialised");
+            Debug.Log("sprite arr not initialised");
             return;
         }
         if (currentAnimationSpriteGroup.Length <= index || index < 0)
         {
-            Debug.LogError("index error " + index);
+            Debug.Log("index error " + index);
             return;
         }
         spriteRenderer.sprite = currentAnimationSpriteGroup[index];

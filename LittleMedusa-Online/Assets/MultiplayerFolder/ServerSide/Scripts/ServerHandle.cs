@@ -5,6 +5,7 @@ public class ServerHandle
     public static void WelcomeReceived(int fromClient, Packet packet)
     {
         int clientIDToCheck = packet.ReadInt();
+        string connectionID = packet.ReadString();
         string username = packet.ReadString();
 
         Debug.Log($"{Server.clients[fromClient].tcp.socket.Client.RemoteEndPoint} connected successfully and is now player: {fromClient}.");
@@ -14,7 +15,7 @@ public class ServerHandle
             Debug.Log($"Player {username} ID {fromClient} has assumed the wrong client id: {clientIDToCheck}");
         }
 
-        Server.clients[fromClient].SendIntoGame( username);
+        Server.clients[fromClient].SendIntoGame(connectionID,username);
     }
 
     public static void SetMatchConditionData(int fromClient, Packet packet)
@@ -22,9 +23,6 @@ public class ServerHandle
         int enemyType = packet.ReadInt();
         int enemyCount = packet.ReadInt();
         int sequenceNumber = packet.ReadInt();
-        Debug.LogError(enemyType);
-        Debug.LogError(enemyCount);
-        Debug.LogError(sequenceNumber);
         MatchConditionData matchConditionData = new MatchConditionData(sequenceNumber,enemyType, enemyCount);
         Server.clients[fromClient].serverMasterController.AccumulateMatchConditionDataCommandToBePlayedOnServerFromClient(matchConditionData);
     }

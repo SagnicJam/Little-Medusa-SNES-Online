@@ -10195,6 +10195,8 @@ MonoBehaviour:
   isDebug: 0
   isServer: 0
   serverPort: 13
+  matchOwnerConnectionId: 
+  localPlayerConnectionId: 
 --- !u!4 &1777984283
 Transform:
   m_ObjectHideFlags: 0

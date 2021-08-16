@@ -26,7 +26,8 @@ public class SignalRCoreConnect : MonoBehaviour
     void InitialiseHubConnection(string username)
     {
         //public ip here//private ip in server
-        _connection = new HubConnection(new Uri("https://localhost:5001/gamehub?user=" + username)
+        //52.77.230.101
+        _connection = new HubConnection(new Uri("https://52.77.230.101:5001/gamehub?user=" + username)
             , new JsonProtocol(new LitJsonEncoder()), new HubOptions());
 
         _connection.OnError += Hub_OnError;
@@ -39,6 +40,7 @@ public class SignalRCoreConnect : MonoBehaviour
         if(!MultiplayerManager.instance.isServer)
         {
             _connection.On<Match>(nameof(OnMatchStartedOnClients), OnMatchStartedOnClients);
+            _connection.On<PlayerInfoData>(nameof(ReceivedPlayerConnection), ReceivedPlayerConnection);
         }
     }
 
@@ -90,6 +92,13 @@ public class SignalRCoreConnect : MonoBehaviour
     public void OnMatchStartedOnClients(Match match)
     {
         MultiplayerManager.instance.OnMatchBegun(match);
+    }
+
+    public void ReceivedPlayerConnection(PlayerInfoData playerInfoData)
+    {
+        ClientSend.username = playerInfoData.Name;
+        ClientSend.connectionID = playerInfoData.connectionId;
+        MultiplayerManager.instance.localPlayerConnectionId = playerInfoData.connectionId;
     }
 
     private void Hub_OnTransportEvent(HubConnection hubConnection, ITransport transport, TransportEvents transportEvents)

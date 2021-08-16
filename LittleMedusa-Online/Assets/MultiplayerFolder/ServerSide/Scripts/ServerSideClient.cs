@@ -208,13 +208,13 @@ public class ServerSideClient
         }
     }
 
-    public void SendIntoGame(string playerName)
+    public void SendIntoGame(string connectionID,string playerName)
     {
         Vector3 spawnPos = ServerSideGameManager.instance.spawnPositions[0];
         ServerSideGameManager.instance.spawnPositions.RemoveAt(0);
 
         serverMasterController = ServerSideGameManager.instance.InstantiatePlayer((int)EnumData.Heroes.Medusa);
-        serverMasterController.Initialise(id,playerName, spawnPos);
+        serverMasterController.Initialise(id, connectionID, playerName, spawnPos);
         
 
         //This will send all other players information to our new player

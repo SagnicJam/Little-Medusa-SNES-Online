@@ -126,10 +126,11 @@ public abstract class Actor : TileData
     }
 
 
-    public void InitialiseClientActor(ClientMasterController clientMasterController, int ownerId)
+    public void InitialiseClientActor(ClientMasterController clientMasterController,string connectionId, int ownerId)
     {
         this.clientMasterController = clientMasterController;
         this.clientMasterController.id = ownerId;
+        this.clientMasterController.connectionId = connectionId;
         this.ownerId = ownerId;
     }
 

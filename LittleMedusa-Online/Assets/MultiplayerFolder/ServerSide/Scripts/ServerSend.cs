@@ -82,6 +82,7 @@ public class ServerSend
         using (Packet packet = new Packet((int)ServerPackets.spawnPlayer))
         {
             packet.Write(serverMasterController.id);
+            packet.Write(serverMasterController.connectionID);
             packet.Write(serverMasterController.username);
             packet.Write((int)serverMasterController.serverInstanceHero.hero);
             packet.Write(serverMasterController.serverInstanceHero.actorTransform.position);
