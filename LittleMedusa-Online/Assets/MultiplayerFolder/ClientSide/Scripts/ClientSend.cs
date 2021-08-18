@@ -6,6 +6,7 @@ public class ClientSend : MonoBehaviour
 {
     public static string username;
     public static string connectionID;
+
     private static void SendTCPData(Packet packet)
     {
         packet.WriteLength();
@@ -24,16 +25,25 @@ public class ClientSend : MonoBehaviour
         using (Packet packet = new Packet((int)ClientPackets.welcomeReceived))
         {
             packet.Write(Client.instance.myID);
-            if(string.IsNullOrEmpty(connectionID))
+            if(MultiplayerManager.instance.isDebug)
             {
-                Debug.LogError("No connection id received");
+                packet.Write("cZE3aJKSS50lCuXkelhz7Q");
+                packet.Write("DummyPeople");
             }
             else
             {
-                Debug.Log("connectionID: " + connectionID);
+                if (string.IsNullOrEmpty(connectionID))
+                {
+                    Debug.LogError("No connection id received");
+                }
+                else
+                {
+                    Debug.Log("connectionID: " + connectionID);
+                }
+                packet.Write(connectionID);
+                packet.Write(username);
             }
-            packet.Write(connectionID);
-            packet.Write(username);
+            
             SendTCPData(packet);
         }
     }

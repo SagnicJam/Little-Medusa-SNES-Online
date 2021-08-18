@@ -201,11 +201,7 @@ public class Heliemis : Hero
         {
             return;
         }
-        if (triggerFaceChangeEvent)
-        {
-            UpdateFrameSprites();
-            triggerFaceChangeEvent = false;
-        }
+        
         if (isPushed)
         {
             return;
@@ -213,6 +209,11 @@ public class Heliemis : Hero
         if (isPetrified)
         {
             return;
+        }
+        if (triggerFaceChangeEvent)
+        {
+            UpdateFrameSprites();
+            triggerFaceChangeEvent = false;
         }
         frameLooper.UpdateAnimationFrame();
     }

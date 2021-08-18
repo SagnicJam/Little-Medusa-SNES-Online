@@ -164,11 +164,6 @@ public class MirrorKnight : Enemy
 
     public override void PerformAnimations()
     {
-        if (triggerFaceChangeEvent)
-        {
-            UpdateFrameSprites();
-            triggerFaceChangeEvent = false;
-        }
         if (isPhysicsControlled)
         {
             return;
@@ -180,6 +175,11 @@ public class MirrorKnight : Enemy
         if (isPetrified)
         {
             return;
+        }
+        if (triggerFaceChangeEvent)
+        {
+            UpdateFrameSprites();
+            triggerFaceChangeEvent = false;
         }
         frameLooper.UpdateAnimationFrame();
     }

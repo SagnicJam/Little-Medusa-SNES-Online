@@ -79,6 +79,16 @@ public class Packet : IDisposable
         readableBuffer = buffer.ToArray();
     }
 
+    public void CompressPacket()
+    {
+        buffer = new List<byte>(ByteSizeManupulator.Compress(buffer.ToArray()));
+    }
+
+    public void DecompressPacket()
+    {
+        buffer = new List<byte>(ByteSizeManupulator.Decompress(buffer.ToArray()));
+    }
+
     /// <summary>Inserts the length of the packet's content at the start of the buffer.</summary>
     public void WriteLength()
     {
@@ -424,6 +434,7 @@ public class Packet : IDisposable
             disposed = true;
         }
     }
+
 
     public void Dispose()
     {

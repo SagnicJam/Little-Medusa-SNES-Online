@@ -7,7 +7,6 @@ public class ClientSideGameManager : MonoBehaviour
     public static ClientSideGameManager instance;
 
     [Header("Tweak paramters")]
-    public List<EnumData.TileType> toNetworkTileType;
     public int idealSnapshotBufferCount;
     public int maxedOutSnapshotBufferCount;
 

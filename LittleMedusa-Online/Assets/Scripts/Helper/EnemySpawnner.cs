@@ -20,6 +20,10 @@ public class EnemySpawnner : MonoBehaviour
     private void Start()
     {
         spawnIndexList = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.SpawnJar);
+        if(MultiplayerManager.instance.isDebug)
+        {
+            InitialiseSpawnner((int)monsterToSpawn, totalEnemyToSpawn);
+        }
     }
 
     public void InitialiseSpawnner(int enemyType,int enemyCount)
@@ -46,7 +50,7 @@ public class EnemySpawnner : MonoBehaviour
     {
         if(MultiplayerManager.instance.isServer&& matchStarted)
         {
-            liveEnemy = currentEnemyCount <= totalEnemyToSpawn;
+            liveEnemy = currentEnemyCount < totalEnemyToSpawn;
             if (liveEnemy)
             {
                 if (spawnTickRate <= currentSpawnTick)

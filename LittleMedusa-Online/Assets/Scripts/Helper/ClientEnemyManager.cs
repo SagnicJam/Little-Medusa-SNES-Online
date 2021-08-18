@@ -102,12 +102,12 @@ public class ClientEnemyManager : MonoBehaviour
             case EnumData.EnemyState.Walking:
                 UpdateDirectionSprite(enemyDisplayData.walkSprite, faceDirection);
                 break;
+            case EnumData.EnemyState.Petrified:
+                currentAnimationSpriteGroup = enemyDisplayData.petrificationSprite;
+                break;
             case EnumData.EnemyState.Pushed:
                 break;
             case EnumData.EnemyState.PhysicsControlled:
-                break;
-            case EnumData.EnemyState.Petrified:
-                currentAnimationSpriteGroup = enemyDisplayData.petrificationSprite;
                 break;
             case EnumData.EnemyState.PrimaryMoveUse:
                 UpdateDirectionSprite(enemyDisplayData.primaryMove, faceDirection);

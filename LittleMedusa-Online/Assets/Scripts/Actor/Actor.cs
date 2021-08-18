@@ -883,12 +883,11 @@ public abstract class Actor : TileData
             {
                 if(this is Enemy enemy)
                 {
-                    //if (isPetrified&&GridManager.instance.HasTileAtCellPoint(GridManager.instance.grid.WorldToCell(currentMovePointCellPosition), EnumData.TileType.Empty))
-                    //{
-                    //    Debug.Log("chala");
-                    //    GridManager.instance.SetTile(GridManager.instance.grid.WorldToCell(currentMovePointCellPosition), EnumData.TileType.Empty, false, false);
-                    //    GridManager.instance.SetTile(GridManager.instance.grid.WorldToCell(currentMovePointCellPosition), EnumData.TileType.Normal, true, false);
-                    //}
+                    if (isPetrified && GridManager.instance.HasTileAtCellPoint(GridManager.instance.grid.WorldToCell(currentMovePointCellPosition), EnumData.TileType.Empty))
+                    {
+                        GridManager.instance.SetTile(GridManager.instance.grid.WorldToCell(currentMovePointCellPosition), EnumData.TileType.Empty, false, false);
+                        GridManager.instance.SetTile(GridManager.instance.grid.WorldToCell(currentMovePointCellPosition), EnumData.TileType.Normal, true, false);
+                    }
                     enemy.KillMe();
                 }
                 Debug.LogError("Game Over");

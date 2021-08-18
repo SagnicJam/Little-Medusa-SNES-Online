@@ -186,11 +186,6 @@ public class Centaur : Enemy
 
     public override void PerformAnimations()
     {
-        if (triggerFaceChangeEvent)
-        {
-            UpdateFrameSprites();
-            triggerFaceChangeEvent = false;
-        }
         if (isPhysicsControlled)
         {
             return;
@@ -202,6 +197,11 @@ public class Centaur : Enemy
         if (isPetrified)
         {
             return;
+        }
+        if (triggerFaceChangeEvent)
+        {
+            UpdateFrameSprites();
+            triggerFaceChangeEvent = false;
         }
         frameLooper.UpdateAnimationFrame();
     }

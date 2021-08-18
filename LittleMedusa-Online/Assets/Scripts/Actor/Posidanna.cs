@@ -200,11 +200,7 @@ public class Posidanna : Hero
         {
             return;
         }
-        if (triggerFaceChangeEvent)
-        {
-            UpdateFrameSprites();
-            triggerFaceChangeEvent = false;
-        }
+        
         if (isPushed)
         {
             return;
@@ -212,6 +208,11 @@ public class Posidanna : Hero
         if (isPetrified)
         {
             return;
+        }
+        if (triggerFaceChangeEvent)
+        {
+            UpdateFrameSprites();
+            triggerFaceChangeEvent = false;
         }
         frameLooper.UpdateAnimationFrame();
     }

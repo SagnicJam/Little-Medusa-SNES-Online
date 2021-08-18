@@ -150,7 +150,7 @@ public class ClientHandle : MonoBehaviour
                 for (int k = 0; k < cellPositionCount; k++)
                 {
                     Vector2Int cell = packet.ReadVector2Int();
-                    cellPositionList.Add(new Vector3Int(cell.x,cell.y,0));
+                    cellPositionList.Add(new Vector3Int(cell.x, cell.y, 0));
                 }
 
                 worldItems[i] = new WorldGridItem(tileType, cellPositionList);
@@ -178,7 +178,7 @@ public class ClientHandle : MonoBehaviour
                 int enemyState = packet.ReadInt();
                 Vector3 enemyPosition = packet.ReadVector3();
 
-                enemyValuePairs.Add(enemyId, new EnemyData(enemyId, enemyType, animationIndexNumber, faceDirection , enemyState, enemyPosition));
+                enemyValuePairs.Add(enemyId, new EnemyData(enemyId, enemyType, animationIndexNumber, faceDirection, enemyState, enemyPosition));
             }
 
             Dictionary<int, AnimatingStaticTile> keyValuePairsAnimation = new Dictionary<int, AnimatingStaticTile>();
@@ -199,7 +199,7 @@ public class ClientHandle : MonoBehaviour
             int gameMatchStartTime = packet.ReadInt();
             int worldUpdateSequenceNumber = packet.ReadInt();
             //Debug.LogWarning("<color=green>receiving inputs packet to server </color>playerMovingCommandSequenceNumber : " + worldUpdateSequenceNumber + " w " + inputs[0] + " a " + inputs[1] + " s " + inputs[2] + " d " + inputs[3]);
-             ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(worldUpdateSequenceNumber, worldItems,new GameData(gameState,gameMatchStartTime), keyValuePairs, enemyValuePairs, keyValuePairsAnimation));
+            ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(worldUpdateSequenceNumber, worldItems, new GameData(gameState, gameMatchStartTime), keyValuePairs, enemyValuePairs, keyValuePairsAnimation));
         }
 
         int previousWorldUpdatePacks = packet.ReadInt();
@@ -246,7 +246,7 @@ public class ClientHandle : MonoBehaviour
                     int enemyState = packet.ReadInt();
                     Vector3 enemyPosition = packet.ReadVector3();
 
-                    previousEnemyValuePairs.Add(enemyId, new EnemyData(enemyId, enemyType, animationIndexNumber, faceDirection ,enemyState, enemyPosition));
+                    previousEnemyValuePairs.Add(enemyId, new EnemyData(enemyId, enemyType, animationIndexNumber, faceDirection, enemyState, enemyPosition));
                 }
 
                 Dictionary<int, AnimatingStaticTile> keyValuePairsAnimation = new Dictionary<int, AnimatingStaticTile>();
@@ -266,7 +266,7 @@ public class ClientHandle : MonoBehaviour
                 int gameState = packet.ReadInt();
                 int gameMatchStartTime = packet.ReadInt();
                 int previousSeqNo = packet.ReadInt();
-                ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(previousSeqNo, previousDataWorldItems,new GameData(gameState,gameMatchStartTime), previouskeyValuePairs,previousEnemyValuePairs, keyValuePairsAnimation));
+                ClientSideGameManager.instance.AccumulateWorldUpdatesToBePlayedOnClientFromServer(new WorldUpdate(previousSeqNo, previousDataWorldItems, new GameData(gameState, gameMatchStartTime), previouskeyValuePairs, previousEnemyValuePairs, keyValuePairsAnimation));
             }
         }
     }

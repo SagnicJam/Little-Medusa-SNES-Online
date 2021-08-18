@@ -85,11 +85,15 @@ public class MultiplayerManager : MonoBehaviour
         serverPort = match.MatchID;
         Instantiate(clientSideGameManager);
         Instantiate(characterSelectionScreen, Canvas, false);
-        if (matchOwnerConnectionId == localPlayerConnectionId)
+        if(!isDebug)
         {
-            Instantiate(matchConditionManager, Canvas, false);
-            //Debug.LogError("hua 1");
+            if (matchOwnerConnectionId == localPlayerConnectionId)
+            {
+                Instantiate(matchConditionManager, Canvas, false);
+                //Debug.LogError("hua 1");
+            }
         }
+        
     }
 
     public void DestroyEnterName()

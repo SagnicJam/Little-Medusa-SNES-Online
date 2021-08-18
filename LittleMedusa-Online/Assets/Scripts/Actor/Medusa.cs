@@ -121,11 +121,7 @@ public class Medusa : Hero
         {
             return;
         }
-        if (triggerFaceChangeEvent)
-        {
-            UpdateFrameSprites();
-            triggerFaceChangeEvent = false;
-        }
+        
         if (isPushed)
         {
             return;
@@ -134,7 +130,11 @@ public class Medusa : Hero
         {
             return;
         }
-        
+        if (triggerFaceChangeEvent)
+        {
+            UpdateFrameSprites();
+            triggerFaceChangeEvent = false;
+        }
         frameLooper.UpdateAnimationFrame();
     }
 

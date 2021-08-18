@@ -121,6 +121,7 @@
     <Compile Include="Assets\Scripts\FindMatchScreen.cs" />
     <Compile Include="Assets\Scripts\GameConfig.cs" />
     <Compile Include="Assets\Scripts\GridManager.cs" />
+    <Compile Include="Assets\Scripts\Helper\ByteSizeManupulator.cs" />
     <Compile Include="Assets\Scripts\Helper\CharacterSelectButton.cs" />
     <Compile Include="Assets\Scripts\Helper\CharacterSelectionScreen.cs" />
     <Compile Include="Assets\Scripts\Helper\ClientEnemyManager.cs" />

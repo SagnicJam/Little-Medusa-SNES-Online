@@ -162,11 +162,7 @@ public class Cyclops : Enemy
 
     public override void PerformAnimations()
     {
-        if (triggerFaceChangeEvent)
-        {
-            UpdateFrameSprites();
-            triggerFaceChangeEvent = false;
-        }
+        
         if (isPhysicsControlled)
         {
             return;
@@ -178,6 +174,11 @@ public class Cyclops : Enemy
         if (isPetrified)
         {
             return;
+        }
+        if (triggerFaceChangeEvent)
+        {
+            UpdateFrameSprites();
+            triggerFaceChangeEvent = false;
         }
         frameLooper.UpdateAnimationFrame();
     }

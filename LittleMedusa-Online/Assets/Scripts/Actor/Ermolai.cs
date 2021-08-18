@@ -196,11 +196,7 @@ public class Ermolai : Hero
         {
             return;
         }
-        if (triggerFaceChangeEvent)
-        {
-            UpdateFrameSprites();
-            triggerFaceChangeEvent = false;
-        }
+        
         if (isPushed)
         {
             return;
@@ -208,6 +204,11 @@ public class Ermolai : Hero
         if (isPetrified)
         {
             return;
+        }
+        if (triggerFaceChangeEvent)
+        {
+            UpdateFrameSprites();
+            triggerFaceChangeEvent = false;
         }
         frameLooper.UpdateAnimationFrame();
 

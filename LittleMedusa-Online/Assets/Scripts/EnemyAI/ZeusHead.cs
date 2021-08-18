@@ -139,11 +139,6 @@ public class ZeusHead : Enemy
 
     public override void PerformAnimations()
     {
-        if (triggerFaceChangeEvent)
-        {
-            UpdateFrameSprites();
-            triggerFaceChangeEvent = false;
-        }
         if (isPhysicsControlled)
         {
             return;
@@ -155,6 +150,11 @@ public class ZeusHead : Enemy
         if (isPetrified)
         {
             return;
+        }
+        if (triggerFaceChangeEvent)
+        {
+            UpdateFrameSprites();
+            triggerFaceChangeEvent = false;
         }
         frameLooper.UpdateAnimationFrame();
     }
