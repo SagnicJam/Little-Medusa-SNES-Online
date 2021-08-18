@@ -20,7 +20,7 @@ public class MatchConditionManager : MonoBehaviour
         int amount = 0;
         if (int.TryParse(inputString,out amount))
         {
-            if(amount<=4)
+            if(amount<=10)
             {
                 enemyCount = amount;
             }

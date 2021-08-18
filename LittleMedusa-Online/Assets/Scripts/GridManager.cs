@@ -230,12 +230,32 @@ public class GridManager : MonoBehaviour
         return Instantiate(g);
     }
 
+    public bool IsPureHeadOn(Vector2 collidedObjectPosition, ClientEnemyManager cE)
+    {
+        Vector2 myPosition = cE.transform.position;
+        Vector2 otherObjectPosition = collidedObjectPosition;
+
+        Vector2 lineFacingDirectionOfMotion = GetFacingDirectionOffsetVector3(cE.currentFaceDirection);
+        Vector2 lineWithOtherObject = (otherObjectPosition - myPosition).normalized;
+
+        float angle = Vector2.Angle(lineFacingDirectionOfMotion, lineWithOtherObject);
+        Debug.DrawRay(myPosition, lineFacingDirectionOfMotion, Color.red);
+        Debug.DrawRay(myPosition, lineWithOtherObject, Color.blue);
+        if (angle == 0)
+        {
+            //Debug.Log("true for : " + transform.parent.name);
+            return true;
+        }
+        //Debug.Log("Faslse for : "+transform.parent.name);
+        return false;
+    }
+
     public bool IsPureHeadOn(Vector2 collidedObjectPosition, Actor headActor)
     {
         Vector2 myPosition = headActor.transform.position;
         Vector2 otherObjectPosition = collidedObjectPosition;
 
-        Vector2 lineFacingDirectionOfMotion = GridManager.instance.GetFacingDirectionOffsetVector3(headActor.Facing);
+        Vector2 lineFacingDirectionOfMotion = GetFacingDirectionOffsetVector3(headActor.Facing);
         Vector2 lineWithOtherObject = (otherObjectPosition - myPosition).normalized;
 
         float angle = Vector2.Angle(lineFacingDirectionOfMotion, lineWithOtherObject);
@@ -255,7 +275,27 @@ public class GridManager : MonoBehaviour
         Vector2 myPosition = headActor.transform.position;
         Vector2 otherObjectPosition = collidedObjectPosition;
 
-        Vector2 lineFacingDirectionOfMotion = GridManager.instance.GetFacingDirectionOffsetVector3(headActor.Facing);
+        Vector2 lineFacingDirectionOfMotion = GetFacingDirectionOffsetVector3(headActor.Facing);
+        Vector2 lineWithOtherObject = (otherObjectPosition - myPosition).normalized;
+
+        float angle = Vector2.Angle(lineFacingDirectionOfMotion, lineWithOtherObject);
+        Debug.DrawRay(myPosition, lineFacingDirectionOfMotion, Color.red);
+        Debug.DrawRay(myPosition, lineWithOtherObject, Color.blue);
+
+        if (angle > 0f)
+        {
+            //Debug.Log("true for : " + transform.parent.name);
+            return true;
+        }
+        return false;
+    }
+
+    public bool IsPureBackOrSideStab(Vector2 collidedObjectPosition, ClientEnemyManager cE)
+    {
+        Vector2 myPosition = cE.transform.position;
+        Vector2 otherObjectPosition = collidedObjectPosition;
+
+        Vector2 lineFacingDirectionOfMotion = GetFacingDirectionOffsetVector3(cE.currentFaceDirection);
         Vector2 lineWithOtherObject = (otherObjectPosition - myPosition).normalized;
 
         float angle = Vector2.Angle(lineFacingDirectionOfMotion, lineWithOtherObject);

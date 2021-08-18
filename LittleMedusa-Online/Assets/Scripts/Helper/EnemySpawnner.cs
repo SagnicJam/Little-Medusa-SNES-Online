@@ -22,6 +22,7 @@ public class EnemySpawnner : MonoBehaviour
         spawnIndexList = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.SpawnJar);
         if(MultiplayerManager.instance.isDebug)
         {
+            monsterToSpawn = EnumData.MonsterBreed.MirrorKnight;
             InitialiseSpawnner((int)monsterToSpawn, totalEnemyToSpawn);
         }
     }

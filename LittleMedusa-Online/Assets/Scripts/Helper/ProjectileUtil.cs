@@ -154,7 +154,39 @@ public class ProjectileUtil : MonoBehaviour
         {
             if (selfDestroyOnTargetTouch)
             {
-                Destroy(gameObject);
+                if(pU.projectileTypeThrown == EnumData.Projectiles.FireBall)
+                {
+                    if(clientEnemyManager.enemyType == EnumData.MonsterBreed.MirrorKnight)
+                    {
+                        if (GridManager.instance.IsPureHeadOn(transform.position, clientEnemyManager))
+                        {
+                            Destroy(gameObject);
+                        }
+                        else if (GridManager.instance.IsPureBackOrSideStab(transform.position, clientEnemyManager))
+                        {
+                            GridManager.instance.Disperse(false, dispersedGOCollider
+                            , dispersedGO
+                            , dispersionRadius
+                            , dispersionSpeed
+                            , pU.ownerId
+                            , GridManager.instance.grid.WorldToCell(transform.position));
+                            Destroy(gameObject);
+                        }
+                    }
+                    else
+                    {
+                        GridManager.instance.Disperse(false, dispersedGOCollider
+                       , dispersedGO
+                       , dispersionRadius
+                       , dispersionSpeed
+                       , pU.ownerId
+                       , GridManager.instance.grid.WorldToCell(transform.position));
+                    }
+                }
+                else if (pU.projectileTypeThrown == EnumData.Projectiles.EyeLaser)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
@@ -299,6 +331,10 @@ public class ProjectileUtil : MonoBehaviour
                     {
                         pU.onUseOver.Invoke(collidedActorWithMyHead);
                     }
+                }
+                else
+                {
+                    pU.onUseOver.Invoke(collidedActorWithMyHead);
                 }
             }
 

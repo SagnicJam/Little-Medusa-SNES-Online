@@ -10192,8 +10192,8 @@ MonoBehaviour:
     type: 3}
   matchConditionManager: {fileID: 6422030692788672854, guid: 8563d9e9ec73e3e49bb17b0a134cdcb1,
     type: 3}
-  isDebug: 1
-  isServer: 1
+  isDebug: 0
+  isServer: 0
   serverPort: 13
   matchOwnerConnectionId: 
   localPlayerConnectionId: 
