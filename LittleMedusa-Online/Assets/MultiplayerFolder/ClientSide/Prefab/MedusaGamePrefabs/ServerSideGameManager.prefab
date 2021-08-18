@@ -50,7 +50,7 @@ MonoBehaviour:
   - {x: -3.5, y: -0.5, z: 0}
   - {x: 3.5, y: -0.5, z: 0}
   timeToStartMatch: 532
-  toNetworkTileType: 03000000140000001500000002000000
+  toNetworkTileType: 0300000014000000150000000200000001000000
   snapShotsInOnePacket: 4
   packetHistorySize: 3
   serverWorldSequenceNumber: 0

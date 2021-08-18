@@ -10137,7 +10137,7 @@ MonoBehaviour:
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
   monsterToSpawn: 0
   spawnIndexList: []
-  totalEnemyToSpawn: 10
+  totalEnemyToSpawn: 1
   currentEnemyCount: 0
   liveEnemy: 0
   matchStarted: 0
@@ -10193,7 +10193,7 @@ MonoBehaviour:
   matchConditionManager: {fileID: 6422030692788672854, guid: 8563d9e9ec73e3e49bb17b0a134cdcb1,
     type: 3}
   isDebug: 1
-  isServer: 0
+  isServer: 1
   serverPort: 13
   matchOwnerConnectionId: 
   localPlayerConnectionId: 

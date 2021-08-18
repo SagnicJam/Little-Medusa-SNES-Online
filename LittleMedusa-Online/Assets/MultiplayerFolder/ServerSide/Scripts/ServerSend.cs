@@ -179,140 +179,145 @@ public class ServerSend
     {
         using (Packet packet = new Packet((int)ServerPackets.worldUpdates))
         {
-            packet.Write(worldUpdates.Count);
+            Packet compressedPacked = new Packet();
+            compressedPacked.Write(worldUpdates.Count);
 
             for (int i = 0; i < worldUpdates.Count; i++)
             {
-                packet.Write(worldUpdates[i].worldGridItems.Length);
+                compressedPacked.Write(worldUpdates[i].worldGridItems.Length);
                 foreach (WorldGridItem worldGridItem in worldUpdates[i].worldGridItems)
                 {
-                    packet.Write(worldGridItem.tileType);
+                    compressedPacked.Write(worldGridItem.tileType);
 
-                    packet.Write(worldGridItem.updatedCellGridWorldPositionList.Count);
+                    compressedPacked.Write(worldGridItem.updatedCellGridWorldPositionList.Count);
 
                     foreach (Vector2Int v in worldGridItem.updatedCellGridWorldPositionList)
                     {
-                        packet.Write(v);
+                        compressedPacked.Write(v);
                     }
                 }
 
-                packet.Write(worldUpdates[i].projectileDatas.Count);
+                compressedPacked.Write(worldUpdates[i].projectileDatas.Count);
                 foreach (KeyValuePair<int, ProjectileData> keyValuePair in worldUpdates[i].projectileDatas)
                 {
-                    packet.Write(keyValuePair.Key);
+                    compressedPacked.Write(keyValuePair.Key);
 
-                    packet.Write(keyValuePair.Value.projectileType);
+                    compressedPacked.Write(keyValuePair.Value.projectileType);
 
-                    packet.Write(keyValuePair.Value.projectilePosition);
+                    compressedPacked.Write(keyValuePair.Value.projectilePosition);
 
-                    packet.Write(keyValuePair.Value.faceDirection);
+                    compressedPacked.Write(keyValuePair.Value.faceDirection);
                 }
 
-                packet.Write(worldUpdates[i].enemyDatas.Count);
+                compressedPacked.Write(worldUpdates[i].enemyDatas.Count);
                 foreach (KeyValuePair<int, EnemyData> keyValuePair in worldUpdates[i].enemyDatas)
                 {
-                    packet.Write(keyValuePair.Key);
+                    compressedPacked.Write(keyValuePair.Key);
 
-                    packet.Write(keyValuePair.Value.enemyType);
+                    compressedPacked.Write(keyValuePair.Value.enemyType);
 
-                    packet.Write(keyValuePair.Value.animationIndexNumber);
+                    compressedPacked.Write(keyValuePair.Value.animationIndexNumber);
 
-                    packet.Write(keyValuePair.Value.faceDirection);
+                    compressedPacked.Write(keyValuePair.Value.faceDirection);
 
-                    packet.Write(keyValuePair.Value.enemyState);
+                    compressedPacked.Write(keyValuePair.Value.enemyState);
 
-                    packet.Write(keyValuePair.Value.enemyPosition);
+                    compressedPacked.Write(keyValuePair.Value.enemyPosition);
                 }
 
-                packet.Write(worldUpdates[i].animatingTileDatas.Count);
+                compressedPacked.Write(worldUpdates[i].animatingTileDatas.Count);
                 foreach (KeyValuePair<int, AnimatingStaticTile> keyValuePair in worldUpdates[i].animatingTileDatas)
                 {
-                    packet.Write(keyValuePair.Key);
+                    compressedPacked.Write(keyValuePair.Key);
 
-                    packet.Write(keyValuePair.Value.tileType);
+                    compressedPacked.Write(keyValuePair.Value.tileType);
 
-                    packet.Write(keyValuePair.Value.animationSpriteIndex);
+                    compressedPacked.Write(keyValuePair.Value.animationSpriteIndex);
 
-                    packet.Write(keyValuePair.Value.pos);
+                    compressedPacked.Write(keyValuePair.Value.pos);
                 }
 
-                packet.Write(worldUpdates[i].gameData.gameState);
-                packet.Write(worldUpdates[i].gameData.matchStartTime);
+                compressedPacked.Write(worldUpdates[i].gameData.gameState);
+                compressedPacked.Write(worldUpdates[i].gameData.matchStartTime);
 
-                packet.Write(worldUpdates[i].sequenceNumber);
+                compressedPacked.Write(worldUpdates[i].sequenceNumber);
                 //Debug.LogWarning("<color=green>Sending inputs packet to server </color>playerMovingCommandSequenceNumber : " + inputCommands[i].sequenceNumber + " w " + inputCommands[i].commands[0] + " a " + inputCommands[i].commands[1] + " s " + inputCommands[i].commands[2] + " d " + inputCommands[i].commands[3] + "<color=green> adding previous : </color>");
             }
 
-            packet.Write(previousWorldUpdatePacks.Count);
+            compressedPacked.Write(previousWorldUpdatePacks.Count);
             for (int i = 0; i < previousWorldUpdatePacks.Count; i++)
             {
-                packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates.Length);
+                compressedPacked.Write(previousWorldUpdatePacks[i].previousWorldUpdates.Length);
                 for (int j = 0; j < previousWorldUpdatePacks[i].previousWorldUpdates.Length; j++)
                 {
-                    packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].worldGridItems.Length);
+                    compressedPacked.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].worldGridItems.Length);
 
                     foreach (WorldGridItem previousWorldGridItem in previousWorldUpdatePacks[i].previousWorldUpdates[j].worldGridItems)
                     {
-                        packet.Write(previousWorldGridItem.tileType);
+                        compressedPacked.Write(previousWorldGridItem.tileType);
 
-                        packet.Write(previousWorldGridItem.updatedCellGridWorldPositionList.Count);
+                        compressedPacked.Write(previousWorldGridItem.updatedCellGridWorldPositionList.Count);
 
                         foreach (Vector3Int v in previousWorldGridItem.updatedCellGridWorldPositionList)
                         {
-                            packet.Write(v);
+                            compressedPacked.Write(v);
                         }
                     }
 
-                    packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].projectileDatas.Count);
+                    compressedPacked.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].projectileDatas.Count);
                     foreach (KeyValuePair<int, ProjectileData> keyValuePair in previousWorldUpdatePacks[i].previousWorldUpdates[j].projectileDatas)
                     {
-                        packet.Write(keyValuePair.Key);
+                        compressedPacked.Write(keyValuePair.Key);
 
-                        packet.Write(keyValuePair.Value.projectileType);
+                        compressedPacked.Write(keyValuePair.Value.projectileType);
 
-                        packet.Write(keyValuePair.Value.projectilePosition);
+                        compressedPacked.Write(keyValuePair.Value.projectilePosition);
 
-                        packet.Write(keyValuePair.Value.faceDirection);
+                        compressedPacked.Write(keyValuePair.Value.faceDirection);
                     }
 
-                    packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].enemyDatas.Count);
+                    compressedPacked.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].enemyDatas.Count);
                     foreach (KeyValuePair<int, EnemyData> keyValuePair in previousWorldUpdatePacks[i].previousWorldUpdates[j].enemyDatas)
                     {
-                        packet.Write(keyValuePair.Key);
+                        compressedPacked.Write(keyValuePair.Key);
 
-                        packet.Write(keyValuePair.Value.enemyType);
+                        compressedPacked.Write(keyValuePair.Value.enemyType);
 
-                        packet.Write(keyValuePair.Value.animationIndexNumber);
+                        compressedPacked.Write(keyValuePair.Value.animationIndexNumber);
 
-                        packet.Write(keyValuePair.Value.faceDirection);
+                        compressedPacked.Write(keyValuePair.Value.faceDirection);
 
-                        packet.Write(keyValuePair.Value.enemyState);
+                        compressedPacked.Write(keyValuePair.Value.enemyState);
 
-                        packet.Write(keyValuePair.Value.enemyPosition);
+                        compressedPacked.Write(keyValuePair.Value.enemyPosition);
                     }
 
-                    packet.Write(worldUpdates[i].animatingTileDatas.Count);
-                    foreach (KeyValuePair<int, AnimatingStaticTile> keyValuePair in worldUpdates[i].animatingTileDatas)
+                    compressedPacked.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].animatingTileDatas.Count);
+                    foreach (KeyValuePair<int, AnimatingStaticTile> keyValuePair in previousWorldUpdatePacks[i].previousWorldUpdates[j].animatingTileDatas)
                     {
-                        packet.Write(keyValuePair.Key);
+                        compressedPacked.Write(keyValuePair.Key);
 
-                        packet.Write(keyValuePair.Value.tileType);
+                        compressedPacked.Write(keyValuePair.Value.tileType);
 
-                        packet.Write(keyValuePair.Value.animationSpriteIndex);
+                        compressedPacked.Write(keyValuePair.Value.animationSpriteIndex);
 
-                        packet.Write(keyValuePair.Value.pos);
+                        compressedPacked.Write(keyValuePair.Value.pos);
                     }
-                    packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].gameData.gameState);
-                    packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].gameData.matchStartTime);
+                    compressedPacked.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].gameData.gameState);
+                    compressedPacked.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].gameData.matchStartTime);
 
-                    packet.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].sequenceNumber);
+                    compressedPacked.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].sequenceNumber);
                 }
-
             }
-            
+            //Debug.LogError("Before " + compressedPacked.Length());
+            byte[] compressedBytes = ByteSizeManupulator.Compress(compressedPacked.ToArray());
+            //Debug.LogError("After " + compressedBytes.Length);
+            packet.SetBytes(compressedBytes);
             SendUDPDataToAll(packet);
+            
         }
     }
+
 
     public static void PlayerStateSend(List<PlayerStateServerUpdates> playerUpdatedPosition,List<PreviousPlayerUpdatedStatePacks>previousPlayerUpdatedPositionPacks)
     {

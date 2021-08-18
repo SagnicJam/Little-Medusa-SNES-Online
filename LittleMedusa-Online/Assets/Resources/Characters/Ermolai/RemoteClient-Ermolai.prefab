@@ -190,6 +190,7 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
   isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
@@ -197,6 +198,7 @@ MonoBehaviour:
   movePoint: {fileID: 8523259952126685581}
   actorTransform: {fileID: 8523259951718599778}
   frameLooper: {fileID: 4360461605944892724}
+  gamePhysics: {fileID: 0}
   actorCollider2D: {fileID: 0}
   projectileThrownType: 0
   projectileThrownType_2: 0
@@ -240,6 +242,7 @@ MonoBehaviour:
   rightFlySprite: []
   downFlySprite: []
   upFlySprite: []
+  petrificationSpriteArr: []
   primaryMoveAnimationSprites:
     upMove: []
     downMove: []
