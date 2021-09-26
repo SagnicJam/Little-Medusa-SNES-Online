@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="16" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="7">
+ <tileset firstgid="1" source="ether_world.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="16" height="13">
+  <data encoding="csv">
+1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,
+7,20,20,20,20,20,10,25,25,10,20,20,20,20,20,7,
+7,20,20,21,20,20,15,25,25,15,20,20,21,20,20,7,
+7,20,17,29,45,20,20,25,25,20,20,45,27,19,20,7,
+7,20,26,20,45,20,20,25,25,20,20,45,20,26,20,7,
+7,20,20,20,20,20,14,25,25,14,20,20,20,20,20,7,
+7,14,45,20,20,45,45,25,25,45,45,20,20,45,14,7,
+7,20,20,20,20,20,14,25,25,14,20,20,20,20,20,7,
+7,20,21,20,45,20,20,25,25,20,20,45,20,21,20,7,
+7,20,27,19,45,20,20,25,25,20,20,45,17,29,20,7,
+7,20,20,26,20,20,10,25,25,10,20,20,26,20,20,7,
+7,20,20,20,20,20,15,25,25,15,20,20,20,20,20,7,
+11,2,2,2,2,2,2,2,2,2,2,2,2,2,2,13
+</data>
+ </layer>
+ <objectgroup id="2" name="Spawn">
+  <object id="1" name="P1 Spawn" x="32" y="32" width="16" height="16"/>
+  <object id="2" name="P2 Spawn" x="208" y="32" width="16" height="16"/>
+  <object id="3" name="P3 Spawn" x="32" y="160" width="16" height="16"/>
+  <object id="4" name="P4 Spawn" x="208" y="160" width="16" height="16"/>
+  <object id="5" name="Enemy Jar" x="112" y="96" width="16" height="16"/>
+  <object id="6" name="Enemy Jar" x="128" y="96" width="16" height="16"/>
+ </objectgroup>
+</map>

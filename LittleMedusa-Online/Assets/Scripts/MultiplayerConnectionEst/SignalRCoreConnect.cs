@@ -27,7 +27,7 @@ public class SignalRCoreConnect : MonoBehaviour
     {
         //public ip here//private ip in server
         //52.77.230.101
-        _connection = new HubConnection(new Uri("https://52.77.230.101:5001/gamehub?user=" + username)
+        _connection = new HubConnection(new Uri("https://localhost:5001/gamehub?user=" + username)
             , new JsonProtocol(new LitJsonEncoder()), new HubOptions());
 
         _connection.OnError += Hub_OnError;

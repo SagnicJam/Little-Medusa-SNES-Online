@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="16" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="9">
+ <tileset firstgid="1" source="mirror_world.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="16" height="13">
+  <data encoding="csv">
+28,4,19,19,19,19,19,19,20,19,19,19,19,19,4,28,
+28,12,19,33,35,19,20,19,19,19,19,19,5,19,12,28,
+28,12,19,19,32,19,19,19,5,19,19,32,14,19,12,28,
+28,12,19,19,19,6,35,19,24,34,7,19,19,19,12,28,
+28,12,19,19,19,8,32,19,19,32,14,19,20,19,12,28,
+28,12,20,19,33,25,19,19,19,19,19,19,19,19,12,28,
+28,12,19,19,19,19,19,19,19,19,6,35,19,20,12,28,
+28,12,19,20,19,5,32,19,19,32,8,19,19,19,12,28,
+28,12,19,19,19,24,34,7,19,33,25,19,19,19,12,28,
+28,12,19,5,32,19,19,14,19,19,19,32,19,19,12,28,
+28,12,19,14,19,19,19,19,19,20,19,33,35,19,12,28,
+28,12,19,19,19,19,19,20,19,19,19,19,19,19,12,28,
+28,10,3,3,3,3,3,3,3,3,3,3,3,3,11,28
+</data>
+ </layer>
+ <objectgroup id="2" name="Spawn" visible="0">
+  <object id="1" name="P1 Spawn" x="48" y="48" width="16" height="16"/>
+  <object id="2" name="P3 Spawn" x="80" y="160" width="16" height="16"/>
+  <object id="3" name="P4 Spawn" x="192" y="128" width="16" height="16"/>
+  <object id="4" name="P2 Spawn" x="160" y="16" width="16" height="16"/>
+  <object id="5" name="Enemy Jar" x="48" y="128" width="16" height="16"/>
+  <object id="6" name="Enemy Jar" x="160" y="160" width="16" height="16"/>
+  <object id="7" name="Enemy Jar" x="192" y="48" width="16" height="16"/>
+  <object id="8" name="Enemy Jar" x="80" y="16" width="16" height="16"/>
+ </objectgroup>
+</map>
