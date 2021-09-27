@@ -83,7 +83,7 @@ public abstract class Hero : Actor
             {
                 if(MatchConditionManager.instance !=null&& MatchConditionManager.instance.gameObject.activeSelf)
                 {
-                    MatchConditionData matchConditionData = new MatchConditionData(GetLocalSequenceNo(), MatchConditionManager.instance.enemyType, MatchConditionManager.instance.enemyCount);
+                    MatchConditionData matchConditionData = new MatchConditionData(GetLocalSequenceNo(), MatchConditionManager.instance.enemyType, MatchConditionManager.instance.enemyCount, MatchConditionManager.instance.mapSelected);
                     ClientSend.SendMatchConditionData(matchConditionData);
                     MatchConditionManager.instance.gameObject.SetActive(false);
                 }

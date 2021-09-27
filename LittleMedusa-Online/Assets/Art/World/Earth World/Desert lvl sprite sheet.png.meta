@@ -1,7 +1,214 @@
 fileFormatVersion: 2
 guid: 1c7221d75d9d6094c91706174192a3fb
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 5901269807064388521
+    second: Desert lvl sprite sheet_0
+  - first:
+      213: -4915091626664317760
+    second: Desert lvl sprite sheet_1
+  - first:
+      213: -6289136467236504057
+    second: Desert lvl sprite sheet_2
+  - first:
+      213: -3614967002734181590
+    second: Desert lvl sprite sheet_3
+  - first:
+      213: 5598413765457339430
+    second: Desert lvl sprite sheet_4
+  - first:
+      213: 3800648699049252170
+    second: Desert lvl sprite sheet_5
+  - first:
+      213: 8390681866359303703
+    second: Desert lvl sprite sheet_6
+  - first:
+      213: 5507529317124321858
+    second: Desert lvl sprite sheet_7
+  - first:
+      213: -2244453223364941697
+    second: Desert lvl sprite sheet_8
+  - first:
+      213: 7316418577068861641
+    second: Desert lvl sprite sheet_9
+  - first:
+      213: 2099192962481146911
+    second: Desert lvl sprite sheet_10
+  - first:
+      213: -6736526083619934066
+    second: Desert lvl sprite sheet_11
+  - first:
+      213: 4941756492658540108
+    second: Desert lvl sprite sheet_12
+  - first:
+      213: -7640544630256506225
+    second: Desert lvl sprite sheet_13
+  - first:
+      213: 3634648453455923829
+    second: Desert lvl sprite sheet_14
+  - first:
+      213: -3542695462516528670
+    second: Desert lvl sprite sheet_15
+  - first:
+      213: -4037626977872951343
+    second: Desert lvl sprite sheet_16
+  - first:
+      213: -667207045356665695
+    second: Desert lvl sprite sheet_17
+  - first:
+      213: 1643379165214160234
+    second: Desert lvl sprite sheet_18
+  - first:
+      213: -2071996237626362260
+    second: Desert lvl sprite sheet_19
+  - first:
+      213: 3594800297625019919
+    second: Desert lvl sprite sheet_20
+  - first:
+      213: 4099050844391987258
+    second: Desert lvl sprite sheet_21
+  - first:
+      213: -7543198865510856205
+    second: Desert lvl sprite sheet_22
+  - first:
+      213: 1285603594314189231
+    second: Desert lvl sprite sheet_23
+  - first:
+      213: -6052396971244409867
+    second: Desert lvl sprite sheet_24
+  - first:
+      213: 4523172934412038628
+    second: Desert lvl sprite sheet_25
+  - first:
+      213: -2271584574525282059
+    second: Desert lvl sprite sheet_26
+  - first:
+      213: -6959318947736823296
+    second: Desert lvl sprite sheet_27
+  - first:
+      213: -1063836970550914307
+    second: Desert lvl sprite sheet_28
+  - first:
+      213: 548940083217864424
+    second: Desert lvl sprite sheet_29
+  - first:
+      213: 3522047090265571076
+    second: Desert lvl sprite sheet_30
+  - first:
+      213: -7690107018547152238
+    second: Desert lvl sprite sheet_31
+  - first:
+      213: -2139284847744788224
+    second: Desert lvl sprite sheet_32
+  - first:
+      213: 1137510440783859674
+    second: Desert lvl sprite sheet_33
+  - first:
+      213: -8939854525079815297
+    second: Desert lvl sprite sheet_0
+  - first:
+      213: 1718142284355076927
+    second: Desert lvl sprite sheet_1
+  - first:
+      213: -5325142820078820034
+    second: Desert lvl sprite sheet_2
+  - first:
+      213: -4796221227504601984
+    second: Desert lvl sprite sheet_3
+  - first:
+      213: 8445625415187284262
+    second: Desert lvl sprite sheet_4
+  - first:
+      213: -9166073035389656146
+    second: Desert lvl sprite sheet_5
+  - first:
+      213: 28054018375360250
+    second: Desert lvl sprite sheet_6
+  - first:
+      213: 106956020007111580
+    second: Desert lvl sprite sheet_7
+  - first:
+      213: -7102422169759792474
+    second: Desert lvl sprite sheet_8
+  - first:
+      213: -2128251788181194235
+    second: Desert lvl sprite sheet_9
+  - first:
+      213: -2858905624445662471
+    second: Desert lvl sprite sheet_10
+  - first:
+      213: 5438276152339182266
+    second: Desert lvl sprite sheet_11
+  - first:
+      213: -5723836697582270865
+    second: Desert lvl sprite sheet_12
+  - first:
+      213: 5934063405624508523
+    second: Desert lvl sprite sheet_13
+  - first:
+      213: -463176979170229577
+    second: Desert lvl sprite sheet_14
+  - first:
+      213: 8140516975565400729
+    second: Desert lvl sprite sheet_15
+  - first:
+      213: -3251863843527892038
+    second: Desert lvl sprite sheet_16
+  - first:
+      213: -5615199399063578102
+    second: Desert lvl sprite sheet_17
+  - first:
+      213: -1417711610901306211
+    second: Desert lvl sprite sheet_18
+  - first:
+      213: 775232995894074000
+    second: Desert lvl sprite sheet_19
+  - first:
+      213: 3229751223719305724
+    second: Desert lvl sprite sheet_20
+  - first:
+      213: -9149960045902761235
+    second: Desert lvl sprite sheet_21
+  - first:
+      213: -7058970490673024637
+    second: Desert lvl sprite sheet_22
+  - first:
+      213: -3307669586521074214
+    second: Desert lvl sprite sheet_23
+  - first:
+      213: -3924562651116054752
+    second: Desert lvl sprite sheet_24
+  - first:
+      213: -6596836133417959221
+    second: Desert lvl sprite sheet_25
+  - first:
+      213: 9001131791459921712
+    second: Desert lvl sprite sheet_26
+  - first:
+      213: 5632550351355314377
+    second: Desert lvl sprite sheet_27
+  - first:
+      213: 4322935896800381943
+    second: Desert lvl sprite sheet_28
+  - first:
+      213: 4578612791673003511
+    second: Desert lvl sprite sheet_29
+  - first:
+      213: -1059784615301269562
+    second: Desert lvl sprite sheet_30
+  - first:
+      213: 7963144446105540388
+    second: Desert lvl sprite sheet_31
+  - first:
+      213: -6017749964694425357
+    second: Desert lvl sprite sheet_32
+  - first:
+      213: 4386984061940655182
+    second: Desert lvl sprite sheet_33
+  - first:
+      213: -4939323060441620540
+    second: Desert lvl sprite sheet_34
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -31,7 +238,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -40,12 +247,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -71,9 +278,804 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7bf2f0cca14fe380800000000000000
+      internalID: -8939854525079815297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f330094fd4118d710800000000000000
+      internalID: 1718142284355076927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e35eaf6a1da4916b0800000000000000
+      internalID: -5325142820078820034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_3
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 084766e7436607db0800000000000000
+      internalID: -4796221227504601984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 621cf3a7193e43570800000000000000
+      internalID: 8445625415187284262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_5
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea3205463219bc080800000000000000
+      internalID: -9166073035389656146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afe19c72bfaa36000800000000000000
+      internalID: 28054018375360250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9b0d1bfeebfb7100800000000000000
+      internalID: 106956020007111580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_8
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a2cb96baa02f6d90800000000000000
+      internalID: -7102422169759792474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_9
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50abedc464ee672e0800000000000000
+      internalID: -2128251788181194235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_10
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9facc805b702358d0800000000000000
+      internalID: -2858905624445662471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab2b7aae853a87b40800000000000000
+      internalID: 5438276152339182266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_12
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f66834889d8d090b0800000000000000
+      internalID: -5723836697582270865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b60c4e63a370a5250800000000000000
+      internalID: 5934063405624508523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_14
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b28b60ddf67299f0800000000000000
+      internalID: -463176979170229577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_15
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99aec981f0de8f070800000000000000
+      internalID: 8140516975565400729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_16
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab3659c301f0fd2d0800000000000000
+      internalID: -3251863843527892038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_17
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0a14dba5edc212b0800000000000000
+      internalID: -5615199399063578102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_18
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d94e74e1dc6435ce0800000000000000
+      internalID: -1417711610901306211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09a9d6a6d4e22ca00800000000000000
+      internalID: 775232995894074000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_20
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf12ca240a162dc20800000000000000
+      internalID: 3229751223719305724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_21
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de2f2fa11dfc40180800000000000000
+      internalID: -9149960045902761235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_22
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 381387f1dbf790e90800000000000000
+      internalID: -7058970490673024637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_23
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad55c0d290cc812d0800000000000000
+      internalID: -3307669586521074214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_24
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0275671ef072989c0800000000000000
+      internalID: -3924562651116054752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc0492afc745374a0800000000000000
+      internalID: -6596836133417959221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_26
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03fa17e9ca17aec70800000000000000
+      internalID: 9001131791459921712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_27
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c00908b3b6da2e40800000000000000
+      internalID: 5632550351355314377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_28
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fb42935b472efb30800000000000000
+      internalID: 4322935896800381943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_29
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fd9ab353108a8f30800000000000000
+      internalID: 4578612791673003511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_30
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c73b82e183ea41f0800000000000000
+      internalID: -1059784615301269562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_31
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 427de35eea5c28e60800000000000000
+      internalID: 7963144446105540388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f0f44f5a48ac7ca0800000000000000
+      internalID: -6017749964694425357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_33
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e44e547d2c2b1ec30800000000000000
+      internalID: 4386984061940655182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Desert lvl sprite sheet_34
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cf5b7f98dff37bb0800000000000000
+      internalID: -4939323060441620540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

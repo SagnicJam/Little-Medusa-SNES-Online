@@ -77,7 +77,7 @@ public class ServerSend
 
     
 
-    public static void SpawnPlayer(int toClient, ServerMasterController serverMasterController)
+    public static void SpawnPlayer(int toClient,int map, ServerMasterController serverMasterController)
     {
         using (Packet packet = new Packet((int)ServerPackets.spawnPlayer))
         {
@@ -103,6 +103,7 @@ public class ServerSend
             packet.Write(serverMasterController.serverInstanceHero.inGame);
             packet.Write(serverMasterController.serverInstanceHero.currentHP);
             packet.Write(serverMasterController.serverInstanceHero.currentStockLives);
+            packet.Write(map);
             packet.Write(serverMasterController.playerSequenceNumberProcessed);
             packet.Write(serverMasterController.serverLocalSequenceNumber);
 

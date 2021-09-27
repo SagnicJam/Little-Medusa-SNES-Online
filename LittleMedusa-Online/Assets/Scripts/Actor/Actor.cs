@@ -106,6 +106,7 @@ public abstract class Actor : TileData
 
     public virtual void Awake()
     {
+        //
         walkAction.Initialise(this);
         petrificationAction.Initialise(this);
         waitingForInvinciblityToOver.Initialise(this);

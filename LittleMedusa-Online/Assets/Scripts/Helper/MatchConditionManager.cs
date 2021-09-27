@@ -13,6 +13,7 @@ public class MatchConditionManager : MonoBehaviour
 
     public int enemyCount;
     public int enemyType;
+    public int mapSelected;
 
     public void SetCount(TMP_InputField tMP_InputField)
     {
@@ -40,5 +41,10 @@ public class MatchConditionManager : MonoBehaviour
     public void SetEnemyType(TMP_Dropdown tMP_Dropdown)
     {
         enemyType = tMP_Dropdown.value;
+    }
+
+    public void SetMap(int mapSelected)
+    {
+        this.mapSelected = mapSelected;
     }
 }

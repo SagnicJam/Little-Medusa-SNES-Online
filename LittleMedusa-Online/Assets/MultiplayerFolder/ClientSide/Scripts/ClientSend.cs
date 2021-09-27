@@ -54,6 +54,7 @@ public class ClientSend : MonoBehaviour
         {
             packet.Write(matchConditionData.enemyType);
             packet.Write(matchConditionData.enemyCount);
+            packet.Write(matchConditionData.map);
             packet.Write(matchConditionData.sequenceNumber);
             SendTCPData(packet);
         }

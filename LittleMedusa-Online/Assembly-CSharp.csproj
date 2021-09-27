@@ -120,6 +120,7 @@
     <Compile Include="Assets\Scripts\EnumData.cs" />
     <Compile Include="Assets\Scripts\FindMatchScreen.cs" />
     <Compile Include="Assets\Scripts\GameConfig.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GridManager.cs" />
     <Compile Include="Assets\Scripts\Helper\ByteSizeManupulator.cs" />
     <Compile Include="Assets\Scripts\Helper\CharacterSelectButton.cs" />
@@ -161,6 +162,9 @@
     <Compile Include="Assets\Scripts\Mapper\OneDNonCheckingMapper.cs" />
     <Compile Include="Assets\Scripts\Mapper\PermiterMapper.cs" />
     <Compile Include="Assets\Scripts\Misc\FPSDisplay.cs" />
+    <Compile Include="Assets\Scripts\Misc\StageSelection\Snapper.cs" />
+    <Compile Include="Assets\Scripts\Misc\StageSelection\StageSelect.cs" />
+    <Compile Include="Assets\Scripts\Misc\StageSelection\StageSelection.cs" />
     <Compile Include="Assets\Scripts\MultiplayerConnectionEst\Interfaces\IMatchMake.cs" />
     <Compile Include="Assets\Scripts\MultiplayerConnectionEst\MatchMaker.cs" />
     <Compile Include="Assets\Scripts\MultiplayerConnectionEst\SignalRCoreConnect.cs" />

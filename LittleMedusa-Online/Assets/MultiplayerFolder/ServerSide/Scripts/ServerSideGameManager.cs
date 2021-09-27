@@ -84,10 +84,13 @@ public class ServerSideGameManager : MonoBehaviour
 
         for(int i=0;i<toNetworkTileType.Count;i++)
         {
-            List<Vector3Int> positionsOfTile = GridManager.instance.GetAllPositionForTileMap(toNetworkTileType[i]);
-            //Debug.LogError("TileType: " + toNetworkTileType[i] + " positionsOfTile " + positionsOfTile.Count);
-            WorldGridItem worldGridItem = new WorldGridItem((int)toNetworkTileType[i], positionsOfTile);
-            worldGridItemList.Add(worldGridItem);
+            if(GridManager.instance!=null)
+            {
+                List<Vector3Int> positionsOfTile = GridManager.instance.GetAllPositionForTileMap(toNetworkTileType[i]);
+                //Debug.LogError("TileType: " + toNetworkTileType[i] + " positionsOfTile " + positionsOfTile.Count);
+                WorldGridItem worldGridItem = new WorldGridItem((int)toNetworkTileType[i], positionsOfTile);
+                worldGridItemList.Add(worldGridItem);
+            }
         }
         GameData gameData = new GameData((int)currentGameState, timeToStartMatch);
         worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), gameData, new Dictionary<int, ProjectileData>(projectilesDic), new Dictionary<int, EnemyData>(enemiesDic), new Dictionary<int, AnimatingStaticTile>(animatingStaticTileDic)));

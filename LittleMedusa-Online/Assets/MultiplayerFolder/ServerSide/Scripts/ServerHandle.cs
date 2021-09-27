@@ -22,8 +22,9 @@ public class ServerHandle
     {
         int enemyType = packet.ReadInt();
         int enemyCount = packet.ReadInt();
+        int map = packet.ReadInt();
         int sequenceNumber = packet.ReadInt();
-        MatchConditionData matchConditionData = new MatchConditionData(sequenceNumber,enemyType, enemyCount);
+        MatchConditionData matchConditionData = new MatchConditionData(sequenceNumber,enemyType, enemyCount, map);
         Server.clients[fromClient].serverMasterController.AccumulateMatchConditionDataCommandToBePlayedOnServerFromClient(matchConditionData);
     }
 

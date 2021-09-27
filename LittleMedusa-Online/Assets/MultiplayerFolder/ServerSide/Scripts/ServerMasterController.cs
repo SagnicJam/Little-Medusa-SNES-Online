@@ -105,10 +105,11 @@ public class ServerMasterController : MonoBehaviour
             {
                 int enemyType = matchConditionData.enemyType;
                 int enemyCount = matchConditionData.enemyCount;
+                int map = matchConditionData.map;
 
                 matchConditionDataChangeRequestReceivedFromClientToServerDic.Remove(matchConditionData.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
-                SetMatchCondition(enemyType,enemyCount);
+                SetMatchCondition(enemyType,enemyCount,map);
             }
         }
 
@@ -120,10 +121,11 @@ public class ServerMasterController : MonoBehaviour
             {
                 int enemyType = matchConditionData.enemyType;
                 int enemyCount = matchConditionData.enemyCount;
+                int map = matchConditionData.map;
 
                 matchConditionDataChangeRequestReceivedFromClientToServerDic.Remove(matchConditionData.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
-                SetMatchCondition(enemyType, enemyCount);
+                SetMatchCondition(enemyType, enemyCount, map);
             }
         }
     }
@@ -1492,12 +1494,11 @@ public class ServerMasterController : MonoBehaviour
         {
             Debug.LogError("Doesnot have any tile at cell point: " + cellPositionToRemoveBoulder);
         }
-
     }
 
-    void SetMatchCondition(int enemyType,int enemyCount)
+    void SetMatchCondition(int enemyType,int enemyCount,int map)
     {
-        GridManager.instance.enemySpawnner.InitialiseSpawnner(enemyType,enemyCount);
+        GameManager.instance.SetServerParams(enemyType, enemyCount,map);
     }
 
 

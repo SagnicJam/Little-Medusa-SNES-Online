@@ -65,6 +65,17 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        if(!MultiplayerManager.instance.isDebug)
+        {
+            if(MultiplayerManager.instance.isServer)
+            {
+                enemySpawnner.InitialiseSpawnner(GameManager.instance.enemy, GameManager.instance.enemyCount);
+            }
+        }
+    }
+
     public Vector3 GetFacingDirectionOffsetVector3(FaceDirection facing)
     {
         switch (facing)

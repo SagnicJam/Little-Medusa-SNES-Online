@@ -222,4 +222,20 @@ public class EnumData
         PrimaryMoveUse,
         SecondaryMoveUse
     }
+
+    public enum BattleRoyaleMaps
+    {
+        Earth_1,
+        Earth_2,
+        Ether_3,
+        Ether_4,
+        Fire_5,
+        Fire_6,
+        Mirror_7,
+        Mirror_8,
+        Water_9,
+        Water_10,
+        Wind_11,
+        Wind_12,
+    }
 }
