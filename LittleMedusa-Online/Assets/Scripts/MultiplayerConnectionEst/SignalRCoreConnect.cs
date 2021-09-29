@@ -27,7 +27,7 @@ public class SignalRCoreConnect : MonoBehaviour
     {
         //public ip here//private ip in server
         //52.77.230.101
-        _connection = new HubConnection(new Uri("https://localhost:5001/gamehub?user=" + username)
+        _connection = new HubConnection(new Uri("https://54.151.251.64:5001/gamehub?user=" + username)
             , new JsonProtocol(new LitJsonEncoder()), new HubOptions());
 
         _connection.OnError += Hub_OnError;
@@ -44,13 +44,13 @@ public class SignalRCoreConnect : MonoBehaviour
     }
 
 
-    public async Task ServerConnectSignalR(string username,int port, OnWorkDone<int> onCompleted)
+    public async Task ServerConnectSignalR(string username,MatchBeginDto matchBeginDto, OnWorkDone<MatchBeginDto> onCompleted)
     {
         InitialiseHubConnection(username);
         Debug.Log("Connecting for server!");
         await _connection.ConnectAsync();
         Debug.Log("Connection Complete...");
-        onCompleted?.Invoke(port);
+        onCompleted?.Invoke(matchBeginDto);
     }
 
     public async Task ClientConnectSignalR(string username,OnWorkDone onCompleted)
@@ -81,11 +81,11 @@ public class SignalRCoreConnect : MonoBehaviour
         }
     }
 
-    public async Task StartMatch(int port)
+    public async Task StartMatch(MatchBeginDto matchBeginDto)
     {
         OnWorkDone<Match> OnMatchStartedOnServerResponse = OnMatchStartedOnServer;
-        Debug.Log("On Match started on server at port "+ port);
-        await SendAsyncData("OnMatchStarted", port, OnMatchStartedOnServerResponse);
+        Debug.Log("On Match started on server at port "+ matchBeginDto.matchId);
+        await SendAsyncData("OnMatchStartedOnServer", matchBeginDto, OnMatchStartedOnServerResponse);
     }
 
     void OnMatchStartedOnServer(Match match)

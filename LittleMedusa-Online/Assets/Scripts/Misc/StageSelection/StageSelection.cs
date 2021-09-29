@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class StageSelection : MonoBehaviour
 {
+    public MatchConditionManager matchConditionManager;
     public Snapper snapper;
     public Image[] imageOptionArray;
     public Image[] imagePreviewArray;
@@ -27,7 +28,7 @@ public class StageSelection : MonoBehaviour
             item.enabled = false;
         }
         imagePreviewArray[snapper.selectedIndex].enabled = true;
-        MatchConditionManager.instance.SetMap((int)imageOptionArray[snapper.selectedIndex].GetComponent<StageSelect>().battleRoyaleMaps);
+        matchConditionManager.SetMap((int)imageOptionArray[snapper.selectedIndex].GetComponent<StageSelect>().battleRoyaleMaps);
     }
 
 }

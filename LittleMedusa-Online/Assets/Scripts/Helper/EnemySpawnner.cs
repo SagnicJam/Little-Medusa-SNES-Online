@@ -20,16 +20,17 @@ public class EnemySpawnner : MonoBehaviour
     private void Start()
     {
         spawnIndexList = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.SpawnJar);
-        //if(MultiplayerManager.instance.isDebug)
-        //{
-        //    monsterToSpawn = EnumData.MonsterBreed.MirrorKnight;
-        //    InitialiseSpawnner((int)monsterToSpawn, totalEnemyToSpawn);
-        //}
+        if (MultiplayerManager.instance.isDebug)
+        {
+            monsterToSpawn = EnumData.MonsterBreed.MirrorKnight;
+            InitialiseSpawnner((int)monsterToSpawn, totalEnemyToSpawn);
+        }
     }
 
     public void InitialiseSpawnner(int enemyType,int enemyCount)
     {
         matchStarted = true;
+        Debug.LogError("enemy: "+enemyType);
         monsterToSpawn = (EnumData.MonsterBreed)enemyType;
         totalEnemyToSpawn = enemyCount;
     }

@@ -25,6 +25,8 @@ public class Snapper : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerD
     public UnityEvent onFingerUp;
     public UnityEvent onFingerDown;
 
+    bool touch;
+
     public void InitialiseSnapper()
     {
         centrePositionX = viewPort.rect.width / 2f;
@@ -33,18 +35,36 @@ public class Snapper : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerD
         minX = centrePositionX - (contentRect.transform.childCount - 1) * (spacing + childWidth);
     }
 
+    void OnTouchBegin()
+    {
+        onFingerDown?.Invoke();
+    }
+
+    void OnTouchOver()
+    {
+        onFingerUp?.Invoke();
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         if (SnapCor != null)
         {
-            onFingerDown?.Invoke();
+            if(!touch)
+            {
+                OnTouchBegin();
+                touch = true;
+            }
             StopCoroutine(SnapCor);
         }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!touch)
+        {
+            OnTouchBegin();
+            touch = true;
+        }
         Vector2 movePosition = contentRect.anchoredPosition;
         movePosition += new Vector2(eventData.delta.x, 0f);
         float movePositionClampedX = Mathf.Clamp(movePosition.x, minX, maxX);
@@ -57,7 +77,11 @@ public class Snapper : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerD
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        onFingerUp?.Invoke();
+        if (touch)
+        {
+            OnTouchOver();
+            touch = false;
+        }
         SnapCor = SnapToCentre();
         StartCoroutine(SnapCor);
     }

@@ -33,8 +33,7 @@ public enum ClientPackets
     playerRemoveBoulderCommand,
     playerTornadoCommand,
     playerRespawnCommand,
-    characterChangeCommand,
-    matchConditionDataCommand
+    characterChangeCommand
 }
 
 public class Packet : IDisposable

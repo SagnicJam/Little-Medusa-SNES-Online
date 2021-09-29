@@ -43,4 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2a10978da81094ea7db53e1ed4e58e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  username: 
+  messageText: {fileID: 0}

@@ -48,18 +48,6 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    public static void SendMatchConditionData(MatchConditionData matchConditionData)
-    {
-        using (Packet packet = new Packet((int)ClientPackets.matchConditionDataCommand))
-        {
-            packet.Write(matchConditionData.enemyType);
-            packet.Write(matchConditionData.enemyCount);
-            packet.Write(matchConditionData.map);
-            packet.Write(matchConditionData.sequenceNumber);
-            SendTCPData(packet);
-        }
-    }
-
     public static void FireTidalWave(FireTidalWaveCommand fireTidalWaveCommand)
     {
         using (Packet packet = new Packet((int)ClientPackets.playerFiringTidalWaveCommand))

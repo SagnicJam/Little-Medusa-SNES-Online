@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LitJson;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,9 +45,38 @@ public class ServerSideGameManager : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
-        string[] arguments = Environment.GetCommandLineArgs();
-        MultiplayerManager.instance.serverPort = MultiplayerManager.instance.isDebug?13:int.Parse(arguments[1]);
-        Server.Start(10, MultiplayerManager.instance.serverPort);
+        
+
+        if(MultiplayerManager.instance.isDebug)
+        {
+            MultiplayerManager.instance.serverPort = 13;
+            MultiplayerManager.instance.matchBeginDto = new MatchBeginDto
+            {
+                matchId = 13,
+                matchConditionDto = new MatchConditionDto
+                {
+                    enemy = 1,
+                    enemyCount = 1
+                }
+            };
+            Server.Start(10, MultiplayerManager.instance.matchBeginDto);
+        }
+        else
+        {
+            string[] arguments = Environment.GetCommandLineArgs();
+
+            MultiplayerManager.instance.matchBeginDto = JsonMapper.ToObject<MatchBeginDto>(arguments[1]);
+            
+            MultiplayerManager.instance.serverPort = MultiplayerManager.instance.matchBeginDto.matchId;
+
+            spawnPositions = MultiplayerManager.instance.battleMaps[MultiplayerManager.instance.matchBeginDto.matchConditionDto.map].spawnPoints;
+            MultiplayerManager.instance.battleMaps[MultiplayerManager.instance.matchBeginDto.matchConditionDto.map].battleMapsGO.SetActive(true);
+
+            Server.Start(10, MultiplayerManager.instance.matchBeginDto);
+        }
+       
+
+
     }
 
     public ServerMasterController InstantiatePlayer(int hero)
@@ -71,6 +101,7 @@ public class ServerSideGameManager : MonoBehaviour
                 kvp.Value.serverMasterController.serverInstanceHero.inGame = (currentGameState == EnumData.GameState.Gameplay);
             }
         }
+        GridManager.instance.enemySpawnner.InitialiseSpawnner(MultiplayerManager.instance.matchBeginDto.matchConditionDto.enemy, MultiplayerManager.instance.matchBeginDto.matchConditionDto.enemyCount);
     }
 
     private void FixedUpdate()
@@ -84,13 +115,10 @@ public class ServerSideGameManager : MonoBehaviour
 
         for(int i=0;i<toNetworkTileType.Count;i++)
         {
-            if(GridManager.instance!=null)
-            {
-                List<Vector3Int> positionsOfTile = GridManager.instance.GetAllPositionForTileMap(toNetworkTileType[i]);
-                //Debug.LogError("TileType: " + toNetworkTileType[i] + " positionsOfTile " + positionsOfTile.Count);
-                WorldGridItem worldGridItem = new WorldGridItem((int)toNetworkTileType[i], positionsOfTile);
-                worldGridItemList.Add(worldGridItem);
-            }
+            List<Vector3Int> positionsOfTile = GridManager.instance.GetAllPositionForTileMap(toNetworkTileType[i]);
+            //Debug.LogError("TileType: " + toNetworkTileType[i] + " positionsOfTile " + positionsOfTile.Count);
+            WorldGridItem worldGridItem = new WorldGridItem((int)toNetworkTileType[i], positionsOfTile);
+            worldGridItemList.Add(worldGridItem);
         }
         GameData gameData = new GameData((int)currentGameState, timeToStartMatch);
         worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), gameData, new Dictionary<int, ProjectileData>(projectilesDic), new Dictionary<int, EnemyData>(enemiesDic), new Dictionary<int, AnimatingStaticTile>(animatingStaticTileDic)));

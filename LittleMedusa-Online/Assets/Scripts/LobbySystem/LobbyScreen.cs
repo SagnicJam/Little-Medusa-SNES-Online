@@ -46,6 +46,7 @@ public class LobbyScreen : MonoBehaviour,ILobby
     {
         Debug.Log("OnRoom created : "+room.RoomName);
         MultiplayerManager.instance.InitialisePlayerList(room);
+        MultiplayerManager.instance.InstantiateMatchOptions(room.RoomId);
         MultiplayerManager.instance.matchOwnerConnectionId = room.RoomOwnerConnectionID;
     }
 
@@ -53,6 +54,7 @@ public class LobbyScreen : MonoBehaviour,ILobby
     {
         Debug.Log("OnRoom left : "+room.RoomName);
         MultiplayerManager.instance.DestroyPlayerList();
+        MultiplayerManager.instance.DestroyMatchOptions();
         MultiplayerManager.instance.matchOwnerConnectionId = null;
     }
 

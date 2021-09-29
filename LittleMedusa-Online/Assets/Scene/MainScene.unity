@@ -932,7 +932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &31919583
 Transform:
   m_ObjectHideFlags: 0
@@ -983,11 +983,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 866084665
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f4ba45846eb8db240a78066156fdf158, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.72156864}
+  m_Sprite: {fileID: 21300000, guid: 04e7612e33ebe434b99060fa93f3bd44, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -23355,7 +23355,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
-  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 2806662213051011494, guid: e3a41501f42f87c4a878a01132f82b38, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
@@ -32485,7 +32485,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
-  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 2806662213051011494, guid: e3a41501f42f87c4a878a01132f82b38, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
@@ -48924,7 +48924,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
-  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 2806662213051011494, guid: e3a41501f42f87c4a878a01132f82b38, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
@@ -49632,7 +49632,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
-  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 2806662213051011494, guid: e3a41501f42f87c4a878a01132f82b38, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
@@ -52794,7 +52794,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
-  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 2806662213051011494, guid: e3a41501f42f87c4a878a01132f82b38, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
@@ -53200,7 +53200,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
-  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 2806662213051011494, guid: e3a41501f42f87c4a878a01132f82b38, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
@@ -86179,7 +86179,7 @@ MonoBehaviour:
     multipleTileGraphic: 0
     isDarkOnOdd: 0
   - tileAssetType: 2
-    tile: {fileID: 11400000, guid: 97e23ff639af0a747afe304832a99d46, type: 2}
+    tile: {fileID: 11400000, guid: 2ec55027b2210b24598054ed13fc9c26, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
@@ -86395,7 +86395,7 @@ MonoBehaviour:
     multipleTileGraphic: 0
     isDarkOnOdd: 0
   - tileAssetType: 20
-    tile: {fileID: 11400000, guid: 2ec55027b2210b24598054ed13fc9c26, type: 2}
+    tile: {fileID: 11400000, guid: 37a7400647b602e47a31ca5cb43b37ef, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
@@ -88055,7 +88055,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
-  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 2806662213051011494, guid: e3a41501f42f87c4a878a01132f82b38, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
@@ -91030,7 +91030,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
-  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 2806662213051011494, guid: e3a41501f42f87c4a878a01132f82b38, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
@@ -102372,7 +102372,7 @@ MonoBehaviour:
     multipleTileGraphic: 0
     isDarkOnOdd: 0
   - tileAssetType: 2
-    tile: {fileID: 11400000, guid: 97e23ff639af0a747afe304832a99d46, type: 2}
+    tile: {fileID: 11400000, guid: 2ec55027b2210b24598054ed13fc9c26, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
@@ -102588,7 +102588,7 @@ MonoBehaviour:
     multipleTileGraphic: 0
     isDarkOnOdd: 0
   - tileAssetType: 20
-    tile: {fileID: 11400000, guid: 2ec55027b2210b24598054ed13fc9c26, type: 2}
+    tile: {fileID: 11400000, guid: 37a7400647b602e47a31ca5cb43b37ef, type: 2}
     darkTile: {fileID: 0}
     tileOff: {fileID: 0}
     animatedTile: {fileID: 0}
@@ -114483,7 +114483,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
-  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 2806662213051011494, guid: e3a41501f42f87c4a878a01132f82b38, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
@@ -116715,7 +116715,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
-  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 2806662213051011494, guid: e3a41501f42f87c4a878a01132f82b38, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
@@ -118239,7 +118239,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
-  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 2806662213051011494, guid: e3a41501f42f87c4a878a01132f82b38, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
@@ -118448,6 +118448,91 @@ MonoBehaviour:
     type: 3}
   clientSideGameManager: {fileID: 2329427187541826361, guid: b44fad60d382aa445a231e600ac4979c,
     type: 3}
+  battleMaps:
+  - battleRoyaleMapType: 0
+    battleMapsGO: {fileID: 1513383827}
+    spawnPoints:
+    - {x: 3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: -0.5, z: 0}
+    - {x: 3.5, y: -0.5, z: 0}
+  - battleRoyaleMapType: 1
+    battleMapsGO: {fileID: 1311609250}
+    spawnPoints:
+    - {x: 3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: -1.5, z: 0}
+    - {x: 3.5, y: -1.5, z: 0}
+  - battleRoyaleMapType: 2
+    battleMapsGO: {fileID: 551249867}
+    spawnPoints:
+    - {x: 3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: -1.5, z: 0}
+    - {x: 3.5, y: -1.5, z: 0}
+  - battleRoyaleMapType: 3
+    battleMapsGO: {fileID: 2105514690}
+    spawnPoints:
+    - {x: 3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: -0.5, z: 0}
+    - {x: 3.5, y: -0.5, z: 0}
+  - battleRoyaleMapType: 4
+    battleMapsGO: {fileID: 1098885752}
+    spawnPoints:
+    - {x: 3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: -0.5, z: 0}
+    - {x: 3.5, y: -0.5, z: 0}
+  - battleRoyaleMapType: 5
+    battleMapsGO: {fileID: 1603581727}
+    spawnPoints:
+    - {x: 3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: -0.5, z: 0}
+    - {x: 3.5, y: -0.5, z: 0}
+  - battleRoyaleMapType: 6
+    battleMapsGO: {fileID: 28759667}
+    spawnPoints:
+    - {x: 3.5, y: 5.5, z: 0}
+    - {x: -3.5, y: 5.5, z: 0}
+    - {x: -3.5, y: -2.5, z: 0}
+    - {x: 3.5, y: -2.5, z: 0}
+  - battleRoyaleMapType: 7
+    battleMapsGO: {fileID: 750472909}
+    spawnPoints:
+    - {x: 3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: -0.5, z: 0}
+    - {x: 3.5, y: -0.5, z: 0}
+  - battleRoyaleMapType: 8
+    battleMapsGO: {fileID: 2127986211}
+    spawnPoints:
+    - {x: 3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: -0.5, z: 0}
+    - {x: 3.5, y: -0.5, z: 0}
+  - battleRoyaleMapType: 9
+    battleMapsGO: {fileID: 102656214}
+    spawnPoints:
+    - {x: 5.5, y: 6.5, z: 0}
+    - {x: -5.5, y: 6.5, z: 0}
+    - {x: -5.5, y: -0.5, z: 0}
+    - {x: 5.5, y: -0.5, z: 0}
+  - battleRoyaleMapType: 10
+    battleMapsGO: {fileID: 840832797}
+    spawnPoints:
+    - {x: 3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: -0.5, z: 0}
+    - {x: 3.5, y: -0.5, z: 0}
+  - battleRoyaleMapType: 11
+    battleMapsGO: {fileID: 1872431935}
+    spawnPoints:
+    - {x: 3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: 6.5, z: 0}
+    - {x: -3.5, y: -0.5, z: 0}
+    - {x: 3.5, y: -0.5, z: 0}
   signalRGO: {fileID: 3826252881981098136, guid: 0ac2be5dc7f5d614fa281fa33020ebef,
     type: 3}
   lobbyGO: {fileID: 3084070278716069786, guid: 37a7e5b67aac8674d90f961486b4f7b6, type: 3}
@@ -118457,12 +118542,18 @@ MonoBehaviour:
     type: 3}
   enterNameGO: {fileID: 5390733055000270393, guid: 32ef590939e417b4f9037a9c89192652,
     type: 3}
+  matchConditionManagerGO: {fileID: 1674206843843074885, guid: 8563d9e9ec73e3e49bb17b0a134cdcb1,
+    type: 3}
+  enterNameGORef: {fileID: 0}
+  lobbyGORef: {fileID: 0}
+  roomListRef: {fileID: 0}
+  playerListRef: {fileID: 0}
+  signalRGORef: {fileID: 0}
+  matchConditionManagerGORef: {fileID: 0}
   loader: {fileID: 2116128978587783406, guid: cfbb9be39566779458fdb33ff3583947, type: 3}
   characterSelectionScreen: {fileID: 256209095372272350, guid: 125f7419cbf8e89478566ac42fdd5a36,
     type: 3}
-  matchConditionManager: {fileID: 6422030692788672854, guid: 8563d9e9ec73e3e49bb17b0a134cdcb1,
-    type: 3}
-  isDebug: 1
+  isDebug: 0
   isServer: 0
   serverPort: 13
   matchOwnerConnectionId: 
@@ -119442,7 +119533,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
-  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 2806662213051011494, guid: e3a41501f42f87c4a878a01132f82b38, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
@@ -131072,7 +131163,7 @@ MonoBehaviour:
   enemyPrefab:
   - {fileID: 5471294648117903951, guid: 97d624c8a446fd447bb17690bcb8e551, type: 3}
   - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
-  - {fileID: 8452105313810545255, guid: c8b123abdbdd64d4bba1c1a3a6f68f6c, type: 3}
+  - {fileID: 2806662213051011494, guid: e3a41501f42f87c4a878a01132f82b38, type: 3}
   - {fileID: 4073036487728227963, guid: c6a4f230d97952a4c974caeafe707622, type: 3}
   - {fileID: 4134259614088450871, guid: 7a055c55ff0fbca4287088abe8135e35, type: 3}
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
@@ -136115,7 +136206,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2055252789}
-  - component: {fileID: 2055252790}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -136139,106 +136229,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2055252790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2055252788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ea3b5b40a3e4e445abbe3e362534c69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  battleRoyalMaps:
-  - mapType: 0
-    gridGO: {fileID: 1513383827}
-    spawnPositions:
-    - {x: 3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: -0.5, z: 0}
-    - {x: 3.5, y: -0.5, z: 0}
-  - mapType: 1
-    gridGO: {fileID: 1311609250}
-    spawnPositions:
-    - {x: 3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: -0.5, z: 0}
-    - {x: 3.5, y: -0.5, z: 0}
-  - mapType: 2
-    gridGO: {fileID: 551249867}
-    spawnPositions:
-    - {x: 3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: -0.5, z: 0}
-    - {x: 3.5, y: -0.5, z: 0}
-  - mapType: 3
-    gridGO: {fileID: 2105514690}
-    spawnPositions:
-    - {x: 3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: -0.5, z: 0}
-    - {x: 3.5, y: -0.5, z: 0}
-  - mapType: 4
-    gridGO: {fileID: 1098885752}
-    spawnPositions:
-    - {x: 3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: -0.5, z: 0}
-    - {x: 3.5, y: -0.5, z: 0}
-  - mapType: 5
-    gridGO: {fileID: 1603581727}
-    spawnPositions:
-    - {x: 3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: -0.5, z: 0}
-    - {x: 3.5, y: -0.5, z: 0}
-  - mapType: 6
-    gridGO: {fileID: 28759667}
-    spawnPositions:
-    - {x: 3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: -0.5, z: 0}
-    - {x: 3.5, y: -0.5, z: 0}
-  - mapType: 7
-    gridGO: {fileID: 750472909}
-    spawnPositions:
-    - {x: 3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: -0.5, z: 0}
-    - {x: 3.5, y: -0.5, z: 0}
-  - mapType: 8
-    gridGO: {fileID: 2127986211}
-    spawnPositions:
-    - {x: 3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: -0.5, z: 0}
-    - {x: 3.5, y: -0.5, z: 0}
-  - mapType: 9
-    gridGO: {fileID: 102656214}
-    spawnPositions:
-    - {x: 3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: -0.5, z: 0}
-    - {x: 3.5, y: -0.5, z: 0}
-  - mapType: 10
-    gridGO: {fileID: 840832797}
-    spawnPositions:
-    - {x: 3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: -0.5, z: 0}
-    - {x: 3.5, y: -0.5, z: 0}
-  - mapType: 11
-    gridGO: {fileID: 1872431935}
-    spawnPositions:
-    - {x: 3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: 6.5, z: 0}
-    - {x: -3.5, y: -0.5, z: 0}
-    - {x: 3.5, y: -0.5, z: 0}
-  enemy: 0
-  enemyCount: 0
-  map: 0
 --- !u!1 &2082906099
 GameObject:
   m_ObjectHideFlags: 0
@@ -137851,7 +137841,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2117918248
 MonoBehaviour:
   m_ObjectHideFlags: 0

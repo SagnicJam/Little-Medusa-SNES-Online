@@ -18,16 +18,6 @@ public class ServerHandle
         Server.clients[fromClient].SendIntoGame(connectionID,username);
     }
 
-    public static void SetMatchConditionData(int fromClient, Packet packet)
-    {
-        int enemyType = packet.ReadInt();
-        int enemyCount = packet.ReadInt();
-        int map = packet.ReadInt();
-        int sequenceNumber = packet.ReadInt();
-        MatchConditionData matchConditionData = new MatchConditionData(sequenceNumber,enemyType, enemyCount, map);
-        Server.clients[fromClient].serverMasterController.AccumulateMatchConditionDataCommandToBePlayedOnServerFromClient(matchConditionData);
-    }
-
     public static void ChangeCharacterRequest(int fromClient, Packet packet)
     {
         int characterHero = packet.ReadInt();

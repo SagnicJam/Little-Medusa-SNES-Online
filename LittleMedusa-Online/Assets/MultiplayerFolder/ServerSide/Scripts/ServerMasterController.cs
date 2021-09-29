@@ -30,7 +30,6 @@ public class ServerMasterController : MonoBehaviour
     private Dictionary<int, CastEarthQuakeCommand> castEarthQuakeRequestReceivedFromClientToServerDic = new Dictionary<int, CastEarthQuakeCommand>();
     private Dictionary<int, PlaceTornadoCommand> placeTornadoRequestReceivedFromClientToServerDic = new Dictionary<int, PlaceTornadoCommand>();
     private Dictionary<int, CharacterChangeCommand> changeCharacterRequestReceivedFromClientToServerDic = new Dictionary<int, CharacterChangeCommand>();
-    private Dictionary<int, MatchConditionData> matchConditionDataChangeRequestReceivedFromClientToServerDic = new Dictionary<int, MatchConditionData>();
     private Dictionary<int, RespawnPlayerCommand> respawnCommandRequestReceivedFromClientToServerDic = new Dictionary<int, RespawnPlayerCommand>();
     private List<PlayerStateServerUpdates> playerStateListOnServer = new List<PlayerStateServerUpdates>();
     private List<PreviousPlayerUpdatedStatePacks> previousPlayerUpdatedStatePacks = new List<PreviousPlayerUpdatedStatePacks>();
@@ -63,73 +62,6 @@ public class ServerMasterController : MonoBehaviour
     }
 
     #region ReliableDataCheckForImplementation
-    public void CheckForMatchConditionDataRequestForPlayer(int sequenceNoToCheck)
-    {
-        List<int> toDiscardSequences = new List<int>();
-        foreach (KeyValuePair<int, MatchConditionData> kvp in matchConditionDataChangeRequestReceivedFromClientToServerDic)
-        {
-            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
-            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
-            {
-                toDiscardSequences.Add(kvp.Key);
-            }
-        }
-
-        foreach (KeyValuePair<int, MatchConditionData> kvp in matchConditionDataChangeRequestReceivedFromClientToServerDic)
-        {
-            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
-            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
-            {
-                toDiscardSequences.Add(kvp.Key);
-            }
-        }
-
-        foreach (int i in toDiscardSequences)
-        {
-            if (matchConditionDataChangeRequestReceivedFromClientToServerDic.ContainsKey(i))
-            {
-                //Debug.Log("<color=red>discarding seq </color>" + i);
-                matchConditionDataChangeRequestReceivedFromClientToServerDic.Remove(i);
-            }
-            else
-            {
-                Debug.LogError("Could not find the key: " + i);
-            }
-        }
-
-        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
-        {
-            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
-            MatchConditionData matchConditionData;
-            if (matchConditionDataChangeRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out matchConditionData))
-            {
-                int enemyType = matchConditionData.enemyType;
-                int enemyCount = matchConditionData.enemyCount;
-                int map = matchConditionData.map;
-
-                matchConditionDataChangeRequestReceivedFromClientToServerDic.Remove(matchConditionData.sequenceNumber);
-                //do server rollback here to check to check if damage actually occured on server
-                SetMatchCondition(enemyType,enemyCount,map);
-            }
-        }
-
-        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
-        {
-            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
-            MatchConditionData matchConditionData;
-            if (matchConditionDataChangeRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out matchConditionData))
-            {
-                int enemyType = matchConditionData.enemyType;
-                int enemyCount = matchConditionData.enemyCount;
-                int map = matchConditionData.map;
-
-                matchConditionDataChangeRequestReceivedFromClientToServerDic.Remove(matchConditionData.sequenceNumber);
-                //do server rollback here to check to check if damage actually occured on server
-                SetMatchCondition(enemyType, enemyCount, map);
-            }
-        }
-    }
-
     public void CheckForChangeCharacterRequestForPlayer(int sequenceNoToCheck)
     {
         List<int> toDiscardSequences = new List<int>();
@@ -992,26 +924,6 @@ public class ServerMasterController : MonoBehaviour
     #endregion
 
     #region ReliableDataAccumulation
-    public void AccumulateMatchConditionDataCommandToBePlayedOnServerFromClient(MatchConditionData matchConditionData)
-    {
-        if (matchConditionData.sequenceNumber > playerSequenceNumberProcessed)
-        {
-            MatchConditionData dataPackage;
-            if (matchConditionDataChangeRequestReceivedFromClientToServerDic.TryGetValue(matchConditionData.sequenceNumber, out dataPackage))
-            {
-                Debug.Log("<color=orange>AccumulateMatchConditionCommandToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNumber);
-            }
-            else
-            {
-                Debug.Log("<color=green>AccumulateMatchConditionCommandToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + matchConditionData.sequenceNumber);
-                matchConditionDataChangeRequestReceivedFromClientToServerDic.Add(matchConditionData.sequenceNumber, matchConditionData);
-            }
-        }
-        else
-        {
-            Debug.Log("<color=red>AccumulateMatchConditionCommandToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + matchConditionData.sequenceNumber);
-        }
-    }
 
     public void AccumulateChangeCharacterCommandToBePlayedOnServerFromClient(CharacterChangeCommand characterChangeCommand)
     {
@@ -1496,11 +1408,6 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void SetMatchCondition(int enemyType,int enemyCount,int map)
-    {
-        GameManager.instance.SetServerParams(enemyType, enemyCount,map);
-    }
-
 
     void ChangeCharacterCommandForPlayerImplementation(int characterHero)
     {
@@ -1684,7 +1591,6 @@ public class ServerMasterController : MonoBehaviour
     {
         for (int i = 0; i < (int)currentInputProcessingModeOnServer; i++)
         {
-            CheckForMatchConditionDataRequestForPlayer(playerSequenceNumberProcessed + 1);
             CheckForChangeCharacterRequestForPlayer(playerSequenceNumberProcessed+1);
             CheckForPushRequestOnServer(playerSequenceNumberProcessed+1);
             CheckForPlaceBoulderRequestOnServer(playerSequenceNumberProcessed+1);

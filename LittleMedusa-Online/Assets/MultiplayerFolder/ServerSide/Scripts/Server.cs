@@ -18,10 +18,10 @@ public class Server
 
     private static UdpClient udpListener;
 
-    public static void Start(int maxPlayers, int port)
+    public static void Start(int maxPlayers, MatchBeginDto matchBeginDto)
     {
         MaxPlayers = maxPlayers;
-        Port = port;
+        Port = matchBeginDto.matchId;
 
         Debug.Log("Starting server...");
 
@@ -32,7 +32,7 @@ public class Server
         udpListener = new UdpClient(Port);
         udpListener.BeginReceive(UDPReceiveCallback, null);
         Debug.Log($"Server started on {Port}.");
-        MultiplayerManager.instance.EstablishServerConnection(port);
+        MultiplayerManager.instance.EstablishServerConnection(matchBeginDto);
     }
 
     public static void Stop()
@@ -154,8 +154,7 @@ public class Server
                 { (int)ClientPackets.castingEarthQuakeCommand,ServerHandle.PlayerCastingEarthQuakeCommandReceived},
                 { (int)ClientPackets.castingFlamePillarCommand,ServerHandle.PlayerCastingFlamePillarCommandReceived},
                 { (int)ClientPackets.playerFiringMightyWindCommand,ServerHandle.PlayerFiringMightyWindCommandReceived},
-                { (int)ClientPackets.characterChangeCommand,ServerHandle.ChangeCharacterRequest},
-                { (int)ClientPackets.matchConditionDataCommand,ServerHandle.SetMatchConditionData}
+                { (int)ClientPackets.characterChangeCommand,ServerHandle.ChangeCharacterRequest}
             };
 
         Debug.Log("Initialise packets");

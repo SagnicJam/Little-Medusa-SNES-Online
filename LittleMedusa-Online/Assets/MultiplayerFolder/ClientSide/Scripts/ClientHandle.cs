@@ -45,7 +45,6 @@ public class ClientHandle : MonoBehaviour
         bool inGame = packet.ReadBool();
         int currentHP = packet.ReadInt();
         int currentStockLives = packet.ReadInt();
-        int map = packet.ReadInt();
         int playerProcessingSequenceNumber = packet.ReadInt();
         int playerServerSequenceNumber = packet.ReadInt();
         Debug.Log(id+"<color=red>Player id Sequence no spawned on: </color>"+ playerServerSequenceNumber);
@@ -56,7 +55,6 @@ public class ClientHandle : MonoBehaviour
         PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, hero);
 
         PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(playerServerSequenceNumber, playerProcessingSequenceNumber, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
-        GameManager.instance.SetSetClientMap(map);
         ClientSideGameManager.instance.SpawnPlayer(id, connectionId, username, playerStateUpdates);
     }
 

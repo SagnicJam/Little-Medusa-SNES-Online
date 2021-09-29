@@ -2,18 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+
 public class MatchConditionManager : MonoBehaviour
 {
-    public static MatchConditionManager instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
+    public Button startGameButtonGO;
+    public int roomId;
 
     public int enemyCount;
     public int enemyType;
     public int mapSelected;
+
+    public void Initialise(int roomId)
+    {
+        this.roomId = roomId;
+    }
+
+    public void EnableStartGame()
+    {
+        startGameButtonGO.gameObject.SetActive(true);
+    }
+
+    public void DisableStartGame()
+    {
+        startGameButtonGO.gameObject.SetActive(false);
+    }
 
     public void SetCount(TMP_InputField tMP_InputField)
     {
@@ -46,5 +59,42 @@ public class MatchConditionManager : MonoBehaviour
     public void SetMap(int mapSelected)
     {
         this.mapSelected = mapSelected;
+    }
+
+    public void StartMatch()
+    {
+        SignalRCoreConnect.instance.SendAsyncData<MatchBeginDto, Match>("StartMatch", new MatchBeginDto {
+            matchId = roomId,
+            matchConditionDto =  new MatchConditionDto
+            {
+                enemy = enemyType,
+                enemyCount = enemyCount,
+                map = mapSelected
+            }
+        }, onMatchStartedByRoomOwner);
+    }
+
+    void onMatchStartedByRoomOwner(Match match)
+    {
+        Debug.Log("Match started by room owner on match process id: "+match.ProcessID);
+        MultiplayerManager.instance.DestroyMatchOptions();
+    }
+}
+public struct MatchBeginDto
+{
+    public int matchId { get; set; }
+    public MatchConditionDto matchConditionDto { get; set; }
+}
+public struct MatchConditionDto
+{
+    public int enemy { get; set; }
+    public int enemyCount { get; set; }
+    public int map { get; set; }
+
+    public MatchConditionDto(int enemy, int enemyCount, int map)
+    {
+        this.enemy = enemy;
+        this.enemyCount = enemyCount;
+        this.map = map;
     }
 }

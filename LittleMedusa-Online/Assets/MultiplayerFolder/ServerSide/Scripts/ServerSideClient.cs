@@ -223,7 +223,7 @@ public class ServerSideClient
             {
                 if (client.id != id)
                 {
-                    ServerSend.SpawnPlayer(id, GameManager.instance.map,client.serverMasterController);
+                    ServerSend.SpawnPlayer(id,client.serverMasterController);
                 }
             }
         }
@@ -234,7 +234,7 @@ public class ServerSideClient
         {
             if (client.serverMasterController != null)
             {
-                ServerSend.SpawnPlayer(client.id, GameManager.instance.map, serverMasterController);
+                ServerSend.SpawnPlayer(client.id, serverMasterController);
             }
         }
 

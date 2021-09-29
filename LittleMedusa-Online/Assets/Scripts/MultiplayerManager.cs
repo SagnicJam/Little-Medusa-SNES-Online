@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class MultiplayerManager : MonoBehaviour
@@ -8,21 +9,34 @@ public class MultiplayerManager : MonoBehaviour
 
     public ServerSideGameManager serverSideGameManager;
     public ClientSideGameManager clientSideGameManager;
+
+    public BattleMaps[] battleMaps;
+
     public GameObject signalRGO;
     public GameObject lobbyGO;
     public GameObject roomListGO;
     public GameObject playerListGO;
     public GameObject enterNameGO;
+    public GameObject matchConditionManagerGO;
+
+    [Header("Live Units")]
+    public GameObject enterNameGORef;
+    public GameObject lobbyGORef;
+    public GameObject roomListRef;
+    public GameObject playerListRef;
+    public GameObject signalRGORef;
+    public GameObject matchConditionManagerGORef;
+
     public Loader loader;
 
 
     public CharacterSelectionScreen characterSelectionScreen;
-    public MatchConditionManager matchConditionManager;
 
     public static MultiplayerManager instance;
     public bool isDebug;
     public bool isServer;
 
+    public MatchBeginDto matchBeginDto;
     public int serverPort;
 
     public string matchOwnerConnectionId;
@@ -65,11 +79,12 @@ public class MultiplayerManager : MonoBehaviour
         }
     }
 
-    GameObject enterNameGORef;
-    GameObject lobbyGORef;
-    GameObject roomListRef;
-    GameObject playerListRef;
-    GameObject signalRGORef;
+    public bool IsMatchOwner()
+    {
+        return !string.IsNullOrEmpty(matchOwnerConnectionId) && localPlayerConnectionId == matchOwnerConnectionId;
+    }
+
+    
 
     public void OnMatchBegun(Match match)
     {
@@ -79,21 +94,16 @@ public class MultiplayerManager : MonoBehaviour
         {
             Debug.Log(kvp.Key+"  "+kvp.Value.connectionId +" "+kvp.Value.Name);
         }
+
+        battleMaps[match.MatchConditionDto.map].battleMapsGO.SetActive(true);
+
         Debug.Log("On Match begun on client "+JsonUtility.ToJson(match));
         DestroyPlayerList();
         DestroyLobbyScreen();
         serverPort = match.MatchID;
+
         Instantiate(clientSideGameManager);
         Instantiate(characterSelectionScreen, Canvas, false);
-        if(!isDebug)
-        {
-            if (matchOwnerConnectionId == localPlayerConnectionId)
-            {
-                Instantiate(matchConditionManager, Canvas, false);
-                //Debug.LogError("hua 1");
-            }
-        }
-        
     }
 
     public void DestroyEnterName()
@@ -122,16 +132,16 @@ public class MultiplayerManager : MonoBehaviour
         signalRGORef.GetComponent<SignalRCoreConnect>().ClientConnectSignalR(username, OnClientConnectedToSignalR);
     }
 
-    public void EstablishServerConnection(int port)
+    public void EstablishServerConnection(MatchBeginDto matchBeginDto)
     {
-        Debug.Log("Establishing server side signalR "+port);
+        Debug.Log("Establishing server side signalR "+ matchBeginDto.matchId);
         signalRGORef = Instantiate(signalRGO, Canvas, false);
-        signalRGORef.GetComponent<SignalRCoreConnect>().ServerConnectSignalR("server-instance", port, OnServerSignalRConnectionEstablished);
+        signalRGORef.GetComponent<SignalRCoreConnect>().ServerConnectSignalR("server-instance", matchBeginDto, OnServerSignalRConnectionEstablished);
     }
 
-    void OnServerSignalRConnectionEstablished(int port)
+    void OnServerSignalRConnectionEstablished(MatchBeginDto matchBeginDto)
     {
-        SignalRCoreConnect.instance.StartMatch(port);
+        SignalRCoreConnect.instance.StartMatch(matchBeginDto);
     }
 
     void OnClientConnectedToSignalR()
@@ -157,8 +167,26 @@ public class MultiplayerManager : MonoBehaviour
         roomListRef.GetComponent<RoomList>().DisplayRoomList(lobby);
     }
 
+    public void InstantiateMatchOptions(int roomId)
+    {
+        matchConditionManagerGORef=Instantiate(matchConditionManagerGO, Canvas, false);
+        matchConditionManagerGORef.GetComponent<MatchConditionManager>().Initialise(roomId);
+    }
+
+    public void DestroyMatchOptions()
+    {
+        Destroy(matchConditionManagerGORef);
+    }
+
     public void DestroyLobbyScreen()
     {
         Destroy(lobbyGORef);
     }
+}
+[Serializable]
+public struct BattleMaps
+{
+    public EnumData.BattleRoyaleMaps battleRoyaleMapType;
+    public GameObject battleMapsGO;
+    public List<Vector3> spawnPoints;
 }

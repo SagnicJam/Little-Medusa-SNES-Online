@@ -10,12 +10,13 @@ public class PlayerList : MonoBehaviour,IPlayerList
     public Dictionary<string, PlayerInfo> playerInfoDic = new Dictionary<string, PlayerInfo>();
 
     public Room room;
-
     void OnEnable()
     {
         SignalRCoreConnect.instance._connection.On<PlayerInfoData>(nameof(OnPlayerJoinedRoom), OnPlayerJoinedRoom);
         SignalRCoreConnect.instance._connection.On<PlayerInfoData>(nameof(OnPlayerLeftRoom), OnPlayerLeftRoom);
         SignalRCoreConnect.instance._connection.On<Match>(nameof(OnMatchFound), OnMatchFound);
+        SignalRCoreConnect.instance._connection.On<Room>(nameof(OnAllPlayersJoined), OnAllPlayersJoined);
+        SignalRCoreConnect.instance._connection.On<Room>(nameof(OnRoomOwnerLeft), OnRoomOwnerLeft);
     }
 
     void OnDisable()
@@ -23,6 +24,8 @@ public class PlayerList : MonoBehaviour,IPlayerList
         SignalRCoreConnect.instance._connection.Remove(nameof(OnPlayerJoinedRoom));
         SignalRCoreConnect.instance._connection.Remove(nameof(OnPlayerLeftRoom));
         SignalRCoreConnect.instance._connection.Remove(nameof(OnMatchFound));
+        SignalRCoreConnect.instance._connection.Remove(nameof(OnAllPlayersJoined));
+        SignalRCoreConnect.instance._connection.Remove(nameof(OnRoomOwnerLeft));
     }
 
     public void DisplayAllPlayerList(Room room)
@@ -82,6 +85,12 @@ public class PlayerList : MonoBehaviour,IPlayerList
     public void OnPlayerLeftRoom(PlayerInfoData player)
     {
         Debug.Log("Player Left room : " + player.Name);
+        if(MultiplayerManager.instance.matchConditionManagerGORef!=null)
+        {
+            MatchConditionManager matchConditionManager = MultiplayerManager.instance.matchConditionManagerGORef.GetComponent<MatchConditionManager>();
+            matchConditionManager.DisableStartGame();
+        }
+        
         RemovePlayer(player);
     }
 
@@ -92,5 +101,23 @@ public class PlayerList : MonoBehaviour,IPlayerList
         loader = Instantiate(MultiplayerManager.instance.loader, MultiplayerManager.instance.Canvas, false);
         loader.SetMessage("Match found Successfully!");
         loader.transform.SetAsLastSibling();
+    }
+
+    public void OnAllPlayersJoined(Room room)
+    {
+        Debug.Log("Room full found: " + room.RoomId);
+        if(MultiplayerManager.instance.matchConditionManagerGORef!=null)
+        {
+            MatchConditionManager matchConditionManager = MultiplayerManager.instance.matchConditionManagerGORef.GetComponent<MatchConditionManager>();
+            matchConditionManager.EnableStartGame();
+        }
+    }
+
+    public void OnRoomOwnerLeft(Room room)
+    {
+        Debug.Log("OnRoomOwnerLeft " + room.RoomName);
+        MultiplayerManager.instance.DestroyPlayerList();
+        MultiplayerManager.instance.DestroyMatchOptions();
+        MultiplayerManager.instance.matchOwnerConnectionId = null;
     }
 }

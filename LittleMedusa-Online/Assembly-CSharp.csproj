@@ -120,7 +120,6 @@
     <Compile Include="Assets\Scripts\EnumData.cs" />
     <Compile Include="Assets\Scripts\FindMatchScreen.cs" />
     <Compile Include="Assets\Scripts\GameConfig.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GridManager.cs" />
     <Compile Include="Assets\Scripts\Helper\ByteSizeManupulator.cs" />
     <Compile Include="Assets\Scripts\Helper\CharacterSelectButton.cs" />
