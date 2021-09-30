@@ -25,6 +25,10 @@ public class GamePhysics : MonoBehaviour
         rb.angularDrag = 0;
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        if(hardboxCollider2D==null|| gameCollider2D==null)
+        {
+            Debug.LogError("NotAssigned for: "+actor.actorTransform.gameObject.name);
+        }
         hardboxCollider2D.enabled = true;
         gameCollider2D.enabled = false;
         actor.isPhysicsControlled = true;

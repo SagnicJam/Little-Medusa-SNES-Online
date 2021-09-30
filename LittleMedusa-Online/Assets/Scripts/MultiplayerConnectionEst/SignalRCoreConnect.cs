@@ -29,7 +29,8 @@ public class SignalRCoreConnect : MonoBehaviour
         //52.77.230.101
         _connection = new HubConnection(new Uri("https://54.151.251.64:5001/gamehub?user=" + username)
             , new JsonProtocol(new LitJsonEncoder()), new HubOptions());
-
+        //_connection = new HubConnection(new Uri("https://localhost:5001/gamehub?user=" + username)
+        //    , new JsonProtocol(new LitJsonEncoder()), new HubOptions());
         _connection.OnError += Hub_OnError;
         _connection.OnConnected += Hub_OnConnected;
         _connection.OnReconnected += Hub_OnReconnected;

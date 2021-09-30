@@ -15,22 +15,17 @@ public class EnemySpawnner : MonoBehaviour
 
     public bool liveEnemy;
 
-    public bool matchStarted;
+    public bool startSpawnner;
 
     private void Start()
     {
         spawnIndexList = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.SpawnJar);
-        if (MultiplayerManager.instance.isDebug)
-        {
-            monsterToSpawn = EnumData.MonsterBreed.MirrorKnight;
-            InitialiseSpawnner((int)monsterToSpawn, totalEnemyToSpawn);
-        }
     }
 
     public void InitialiseSpawnner(int enemyType,int enemyCount)
     {
-        matchStarted = true;
-        Debug.LogError("enemy: "+enemyType);
+        startSpawnner = true;
+        //Debug.LogError("enemy: "+enemyType);
         monsterToSpawn = (EnumData.MonsterBreed)enemyType;
         totalEnemyToSpawn = enemyCount;
     }
@@ -50,7 +45,7 @@ public class EnemySpawnner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(MultiplayerManager.instance.isServer&& matchStarted)
+        if(MultiplayerManager.instance.isServer&& startSpawnner)
         {
             liveEnemy = currentEnemyCount < totalEnemyToSpawn;
             if (liveEnemy)

@@ -612,7 +612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 1
-  hardboxCollider2D: {fileID: 0}
+  hardboxCollider2D: {fileID: 797281986942532113}
   gameCollider2D: {fileID: 3996529767862627935}
   direction: {x: 0, y: 0, z: 0}
   isPhysicsEnabled: 0

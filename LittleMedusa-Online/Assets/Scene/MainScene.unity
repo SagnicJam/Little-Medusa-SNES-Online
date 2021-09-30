@@ -23364,7 +23364,7 @@ MonoBehaviour:
   totalEnemyToSpawn: 1
   currentEnemyCount: 0
   liveEnemy: 0
-  matchStarted: 0
+  startSpawnner: 0
   spawnTickRate: 300
   currentSpawnTick: 0
 --- !u!114 &445479548
@@ -32494,7 +32494,7 @@ MonoBehaviour:
   totalEnemyToSpawn: 1
   currentEnemyCount: 0
   liveEnemy: 0
-  matchStarted: 0
+  startSpawnner: 0
   spawnTickRate: 300
   currentSpawnTick: 0
 --- !u!114 &513456572
@@ -48933,7 +48933,7 @@ MonoBehaviour:
   totalEnemyToSpawn: 1
   currentEnemyCount: 0
   liveEnemy: 0
-  matchStarted: 0
+  startSpawnner: 0
   spawnTickRate: 300
   currentSpawnTick: 0
 --- !u!114 &769338184
@@ -49641,7 +49641,7 @@ MonoBehaviour:
   totalEnemyToSpawn: 1
   currentEnemyCount: 0
   liveEnemy: 0
-  matchStarted: 0
+  startSpawnner: 0
   spawnTickRate: 300
   currentSpawnTick: 0
 --- !u!114 &776313423
@@ -52803,7 +52803,7 @@ MonoBehaviour:
   totalEnemyToSpawn: 1
   currentEnemyCount: 0
   liveEnemy: 0
-  matchStarted: 0
+  startSpawnner: 0
   spawnTickRate: 300
   currentSpawnTick: 0
 --- !u!114 &873273789
@@ -53209,7 +53209,7 @@ MonoBehaviour:
   totalEnemyToSpawn: 1
   currentEnemyCount: 0
   liveEnemy: 0
-  matchStarted: 0
+  startSpawnner: 0
   spawnTickRate: 300
   currentSpawnTick: 0
 --- !u!114 &882537869
@@ -88064,7 +88064,7 @@ MonoBehaviour:
   totalEnemyToSpawn: 1
   currentEnemyCount: 0
   liveEnemy: 0
-  matchStarted: 0
+  startSpawnner: 0
   spawnTickRate: 300
   currentSpawnTick: 0
 --- !u!114 &1354603593
@@ -91039,7 +91039,7 @@ MonoBehaviour:
   totalEnemyToSpawn: 1
   currentEnemyCount: 0
   liveEnemy: 0
-  matchStarted: 0
+  startSpawnner: 0
   spawnTickRate: 300
   currentSpawnTick: 0
 --- !u!114 &1390821973
@@ -114492,7 +114492,7 @@ MonoBehaviour:
   totalEnemyToSpawn: 1
   currentEnemyCount: 0
   liveEnemy: 0
-  matchStarted: 0
+  startSpawnner: 0
   spawnTickRate: 300
   currentSpawnTick: 0
 --- !u!114 &1729994824
@@ -116721,10 +116721,10 @@ MonoBehaviour:
   - {fileID: 1024727798998094771, guid: 0912d955887d4a54aa2ba364dd3da223, type: 3}
   monsterToSpawn: 0
   spawnIndexList: []
-  totalEnemyToSpawn: 1
+  totalEnemyToSpawn: 0
   currentEnemyCount: 0
   liveEnemy: 0
-  matchStarted: 0
+  startSpawnner: 0
   spawnTickRate: 300
   currentSpawnTick: 0
 --- !u!1 &1751704190
@@ -118248,7 +118248,7 @@ MonoBehaviour:
   totalEnemyToSpawn: 1
   currentEnemyCount: 0
   liveEnemy: 0
-  matchStarted: 0
+  startSpawnner: 0
   spawnTickRate: 300
   currentSpawnTick: 0
 --- !u!114 &1776847561
@@ -118555,6 +118555,12 @@ MonoBehaviour:
     type: 3}
   isDebug: 0
   isServer: 0
+  matchBeginDto:
+    <matchId>k__BackingField: 0
+    <matchConditionDto>k__BackingField:
+      <enemy>k__BackingField: 0
+      <enemyCount>k__BackingField: 0
+      <map>k__BackingField: 0
   serverPort: 13
   matchOwnerConnectionId: 
   localPlayerConnectionId: 
@@ -119542,7 +119548,7 @@ MonoBehaviour:
   totalEnemyToSpawn: 1
   currentEnemyCount: 0
   liveEnemy: 0
-  matchStarted: 0
+  startSpawnner: 0
   spawnTickRate: 300
   currentSpawnTick: 0
 --- !u!114 &1817167513
@@ -131172,7 +131178,7 @@ MonoBehaviour:
   totalEnemyToSpawn: 1
   currentEnemyCount: 0
   liveEnemy: 0
-  matchStarted: 0
+  startSpawnner: 0
   spawnTickRate: 300
   currentSpawnTick: 0
 --- !u!114 &2020348511
@@ -133389,6 +133395,15 @@ Tilemap:
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
+  - first: {x: 0, y: 0, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   - first: {x: 7, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -133695,6 +133710,15 @@ Tilemap:
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
+  - first: {x: -3, y: 2, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
   - first: {x: 7, y: 2, z: 0}
     second:
       serializedVersion: 2
@@ -133840,6 +133864,15 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
   - first: {x: -8, y: 3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: 2, y: 3, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 3
@@ -134146,6 +134179,15 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       m_AllTileFlags: 1073741825
   - first: {x: -8, y: 5, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 1
+      m_TileObjectToInstantiateIndex: 65535
+      m_AllTileFlags: 1073741825
+  - first: {x: -1, y: 5, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 3
@@ -135251,7 +135293,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 359
+  - m_RefCount: 363
     m_Data: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
@@ -135260,11 +135302,11 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 359
+  - m_RefCount: 363
     m_Data: {fileID: 8009976025066671661, guid: c60f88a1414fd744a9ff4db166996c25,
       type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 359
+  - m_RefCount: 363
     m_Data:
       e00: 1
       e01: 0
@@ -135285,7 +135327,7 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
-  - m_RefCount: 359
+  - m_RefCount: 363
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1

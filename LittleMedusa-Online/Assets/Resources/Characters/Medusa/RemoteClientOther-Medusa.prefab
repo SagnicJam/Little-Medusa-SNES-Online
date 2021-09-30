@@ -422,6 +422,7 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
   isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
@@ -429,6 +430,7 @@ MonoBehaviour:
   movePoint: {fileID: 4156775102893372363}
   actorTransform: {fileID: 4156775101959196196}
   frameLooper: {fileID: 5982468094641783246}
+  gamePhysics: {fileID: 0}
   actorCollider2D: {fileID: 8337709454710503732}
   projectileThrownType: 2
   projectileThrownType_2: 0
@@ -445,13 +447,33 @@ MonoBehaviour:
   pushSpeed: 4
   faceDirectionInit: 1
   leftIdleSprite:
-  - {fileID: -1027207101077669310, guid: a08cf55e531b61646a0a4fc3f128d7e4, type: 3}
+  - {fileID: 1689681175171403056, guid: 0837a9d0a78a15446b8da34a7d1e6238, type: 3}
+  - {fileID: -8683362795616161716, guid: 0837a9d0a78a15446b8da34a7d1e6238, type: 3}
+  - {fileID: -4369856001316590009, guid: 0837a9d0a78a15446b8da34a7d1e6238, type: 3}
+  - {fileID: -6334841422034688233, guid: 0837a9d0a78a15446b8da34a7d1e6238, type: 3}
+  - {fileID: -616483732796688542, guid: 0837a9d0a78a15446b8da34a7d1e6238, type: 3}
+  - {fileID: 2203330765309522842, guid: 0837a9d0a78a15446b8da34a7d1e6238, type: 3}
   rightIdleSprite:
-  - {fileID: 2725860987502940371, guid: f04798a17f62adc41b410c1d2e1a5868, type: 3}
+  - {fileID: 5753905528249277498, guid: e173d0e8eccfc414d8a97601d536ec79, type: 3}
+  - {fileID: 1347239231164978410, guid: e173d0e8eccfc414d8a97601d536ec79, type: 3}
+  - {fileID: 4656798417595064667, guid: e173d0e8eccfc414d8a97601d536ec79, type: 3}
+  - {fileID: 2176229126476962875, guid: e173d0e8eccfc414d8a97601d536ec79, type: 3}
+  - {fileID: 7371394592405988948, guid: e173d0e8eccfc414d8a97601d536ec79, type: 3}
+  - {fileID: -5988587532531651149, guid: e173d0e8eccfc414d8a97601d536ec79, type: 3}
   upIdleSprite:
-  - {fileID: 926370226917490492, guid: b1a85343ac3de8240a15e51b30873260, type: 3}
+  - {fileID: 4966239404100218546, guid: 6b817147be112af43832975bb34b061f, type: 3}
+  - {fileID: 2339701980464575986, guid: 6b817147be112af43832975bb34b061f, type: 3}
+  - {fileID: -814599923941444851, guid: 6b817147be112af43832975bb34b061f, type: 3}
+  - {fileID: -4502791770886001058, guid: 6b817147be112af43832975bb34b061f, type: 3}
+  - {fileID: 6103434451410978852, guid: 6b817147be112af43832975bb34b061f, type: 3}
+  - {fileID: 4826687552275169205, guid: 6b817147be112af43832975bb34b061f, type: 3}
   downIdleSprite:
-  - {fileID: -6173052371982023701, guid: 763cad0beafbe024c9dbb8c673b8abd5, type: 3}
+  - {fileID: 6947107526961769267, guid: 1e8a2c8dc90f6044f9ffcd90574685c7, type: 3}
+  - {fileID: -1728243328691962094, guid: 1e8a2c8dc90f6044f9ffcd90574685c7, type: 3}
+  - {fileID: 5124657202352212762, guid: 1e8a2c8dc90f6044f9ffcd90574685c7, type: 3}
+  - {fileID: 6726541881570511824, guid: 1e8a2c8dc90f6044f9ffcd90574685c7, type: 3}
+  - {fileID: 7985177661027434612, guid: 1e8a2c8dc90f6044f9ffcd90574685c7, type: 3}
+  - {fileID: -4215384868413278224, guid: 1e8a2c8dc90f6044f9ffcd90574685c7, type: 3}
   leftMoveSprite:
   - {fileID: -1027207101077669310, guid: a08cf55e531b61646a0a4fc3f128d7e4, type: 3}
   - {fileID: 2000995090911122232, guid: a08cf55e531b61646a0a4fc3f128d7e4, type: 3}
@@ -576,6 +598,7 @@ MonoBehaviour:
   rightFlySprite: []
   downFlySprite: []
   upFlySprite: []
+  petrificationSpriteArr: []
   primaryMoveAnimationSprites:
     upMove:
     - {fileID: 4849609312182175081, guid: 77da609852e46c345a230bc9589ebfc9, type: 3}

@@ -94,8 +94,10 @@ public class MultiplayerManager : MonoBehaviour
         {
             Debug.Log(kvp.Key+"  "+kvp.Value.connectionId +" "+kvp.Value.Name);
         }
-
-        battleMaps[match.MatchConditionDto.map].battleMapsGO.SetActive(true);
+        if(!isDebug)
+        {
+            battleMaps[match.MatchConditionDto.map].battleMapsGO.SetActive(true);
+        }
 
         Debug.Log("On Match begun on client "+JsonUtility.ToJson(match));
         DestroyPlayerList();
