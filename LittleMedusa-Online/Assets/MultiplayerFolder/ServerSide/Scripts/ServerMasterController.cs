@@ -1242,32 +1242,48 @@ public class ServerMasterController : MonoBehaviour
     }
     #endregion
 
-    #region ServerRequestsImplementation
-    void PushPlayerRequestImplementation(int playerIdToPush, int directionOfPush)
+    #region SantiyCheck
+    bool CanDoAction(string function)
     {
         if (serverInstanceHero.isRespawnningPlayer)
         {
-            Debug.LogError("PushPlayerRequestImplementation Is respawnning");
-            return;
+            Debug.LogError(function + " Is respawnning");
+            return false;
         }
         if (serverInstanceHero.isPhysicsControlled)
         {
-            Debug.LogError("PushPlayerRequestImplementation server player is phyhsics controlled hence request failed");
-            return;
+            Debug.LogError(function + " server player is phyhsics controlled hence request failed");
+            return false;
         }
         if (serverInstanceHero.isPetrified)
         {
-            Debug.LogError("PushPlayerRequestImplementation server player is petrified hence request failed");
-            return;
+            Debug.LogError(function + " server player is petrified hence request failed");
+            return false;
         }
         if (serverInstanceHero.isPushed)
         {
-            Debug.LogError("PushPlayerRequestImplementation server player is pushed hence request failed");
-            return;
+            Debug.LogError(function + " server player is pushed hence request failed");
+            return false;
         }
         if (serverInstanceHero.isInFlyingState)
         {
-            Debug.LogError("PushPlayerRequestImplementation server player is isInFlyingState hence request failed");
+            Debug.LogError(function + " server player is isInFlyingState hence request failed");
+            return false;
+        }
+        if (serverInstanceHero.isInvincible)
+        {
+            Debug.LogError(function + " server player is isInvincible hence request failed");
+            return false;
+        }
+        return true;
+    }
+    #endregion
+
+    #region ServerRequestsImplementation
+    void PushPlayerRequestImplementation(int playerIdToPush, int directionOfPush)
+    {
+        if(!CanDoAction("PushPlayerRequestImplementation"))
+        {
             return;
         }
         if(Server.clients.ContainsKey(playerIdToPush))
@@ -1333,29 +1349,8 @@ public class ServerMasterController : MonoBehaviour
 
     void PlaceBoulderRequestImplementation(Vector3Int cellPositionToPlaceBoulder)
     {
-        if (serverInstanceHero.isRespawnningPlayer)
+        if (!CanDoAction("PlaceBoulderRequestImplementation"))
         {
-            Debug.LogError("PlaceBoulderRequestImplementation Is respawnning");
-            return;
-        }
-        if (serverInstanceHero.isPhysicsControlled)
-        {
-            Debug.LogError("PlaceBoulderRequestImplementation server player is phyhsics controlled hence request failed");
-            return;
-        }
-        if (serverInstanceHero.isPetrified)
-        {
-            Debug.LogError("PlaceBoulderRequestImplementation server player is petrified hence request failed");
-            return;
-        }
-        if (serverInstanceHero.isPushed)
-        {
-            Debug.LogError("PlaceBoulderRequestImplementation server player is pushed hence request failed");
-            return;
-        }
-        if (serverInstanceHero.isInFlyingState)
-        {
-            Debug.LogError("PlaceBoulderRequestImplementation server player is isInFlyingState hence request failed");
             return;
         }
 
@@ -1372,29 +1367,8 @@ public class ServerMasterController : MonoBehaviour
 
     void RemoveBoulderRequestImplementation(Vector3Int cellPositionToRemoveBoulder)
     {
-        if (serverInstanceHero.isRespawnningPlayer)
+        if (!CanDoAction("RemoveBoulderRequestImplementation"))
         {
-            Debug.LogError("RemoveBoulderRequestImplementation Is respawnning");
-            return;
-        }
-        if (serverInstanceHero.isPhysicsControlled)
-        {
-            Debug.LogError("RemoveBoulderRequestImplementation server player is phyhsics controlled hence request failed");
-            return;
-        }
-        if (serverInstanceHero.isPetrified)
-        {
-            Debug.LogError("RemoveBoulderRequestImplementation server player is petrified hence request failed");
-            return;
-        }
-        if (serverInstanceHero.isPushed)
-        {
-            Debug.LogError("RemoveBoulderRequestImplementation server player is pushed hence request failed");
-            return;
-        }
-        if (serverInstanceHero.isInFlyingState)
-        {
-            Debug.LogError("RemoveBoulderRequestImplementation server player is isInFlyingState hence request failed");
             return;
         }
         if (GridManager.instance.HasTileAtCellPoint(cellPositionToRemoveBoulder, EnumData.TileType.Boulder))
@@ -1431,7 +1405,10 @@ public class ServerMasterController : MonoBehaviour
 
     void CastFlamePillarForPlayerImplementation(int direction)
     {
-        Debug.Log("CastFlamePillarForPlayerImplementation ");
+        if (!CanDoAction("CastFlamePillarForPlayerImplementation"))
+        {
+            return;
+        }
         if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
         {
             serverInstanceHero.CastFlamePillar();
@@ -1444,14 +1421,21 @@ public class ServerMasterController : MonoBehaviour
 
     void CastBubbleShieldForPlayerImplementation()
     {
-        Debug.Log("CastBubbleShieldForPlayerImplementation ");
+        if (!CanDoAction("CastBubbleShieldForPlayerImplementation"))
+        {
+            return;
+        }
         serverInstanceHero.CastBubbleShield();
     }
 
     void TidalWaveFirePlayerRequestImplementation(int direction)
     {
+        if (!CanDoAction("TidalWaveFirePlayerRequestImplementation"))
+        {
+            return;
+        }
         Debug.Log("TidalWaveFirePlayerRequestImplementation ");
-        if(serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
+        if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
         {
             serverInstanceHero.Fire();
         }
@@ -1463,6 +1447,10 @@ public class ServerMasterController : MonoBehaviour
 
     void CastTornadoForPlayerImplementation(int direction)
     {
+        if (!CanDoAction("CastTornadoForPlayerImplementation"))
+        {
+            return;
+        }
         Debug.Log("CastTornadoForPlayerImplementation ");
         if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
         {
@@ -1477,6 +1465,10 @@ public class ServerMasterController : MonoBehaviour
 
     void MightyWindFirePlayerRequestImplementation(int direction)
     {
+        if (!CanDoAction("MightyWindFirePlayerRequestImplementation"))
+        {
+            return;
+        }
         Debug.Log("MightyWindFirePlayerRequestImplementation ");
         if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
         {
@@ -1490,6 +1482,10 @@ public class ServerMasterController : MonoBehaviour
 
     void CastEarthQuakeImplementation()
     {
+        if (!CanDoAction("CastEarthQuakeImplementation"))
+        {
+            return;
+        }
         Debug.Log("CastEarthQuake ");
         if (serverInstanceHero.isRespawnningPlayer)
         {
@@ -1511,6 +1507,10 @@ public class ServerMasterController : MonoBehaviour
 
     void CastPitfallImplementation(int direction)
     {
+        if (!CanDoAction("CastPitfallImplementation"))
+        {
+            return;
+        }
         Debug.Log("CastPitfall ");
         Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position + 2 * GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection) direction));
         if (GridManager.instance.HasTileAtCellPoint(cellToCheck, EnumData.TileType.Normal))

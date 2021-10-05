@@ -25,8 +25,14 @@ public abstract class Hero : Actor
     public override void Awake()
     {
         base.Awake();
-
         rangedAttack_1 = new Attack(primaryMoveDamage, EnumData.AttackTypes.ProjectileAttack, projectileThrownType);
+    }
+
+    public override void MakeInvincible()
+    {
+        base.MakeInvincible();
+        isFiringPrimaryProjectile = false;
+        waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
     }
 
     public void InitialiseActor(PlayerStateUpdates playerStateUpdates)
@@ -227,41 +233,7 @@ public abstract class Hero : Actor
         };
         currentAttack = rangedAttack_2;
         dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
-
     }
-
-
-    //public void PlaceTornado(Vector3Int cell)
-    //{
-    //    //place tornado here
-    //    foreach (KeyValuePair<int, ServerSideClient> kvp in Server.clients)
-    //    {
-    //        if (kvp.Value.serverMasterController != null)
-    //        {
-    //            if (kvp.Key != ownerId)
-    //            {
-    //                if (kvp.Value.serverMasterController.serverInstanceHero is Hero hero)
-    //                {
-    //                    if (!kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled)
-    //                    {
-    //                        kvp.Value.serverMasterController.serverInstanceHero.isPhysicsControlled = true;
-    //                        kvp.Value.serverMasterController.serverInstanceHero.actorCollider2D.enabled = false;
-    //                        kvp.Value.serverMasterController.serverInstanceHero.forceTravelCorCache = GridManager.instance.ForceTravel(kvp.Value.serverMasterController.serverInstanceHero, cell);
-    //                        kvp.Value.serverMasterController.serverInstanceHero.StartForceTravelCor();
-    //                        GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, true, false);
-    //                        GridManager.instance.WaitForForce(kvp.Value.serverMasterController.serverInstanceHero, (x) => {
-    //                            x.isPhysicsControlled = false;
-    //                            x.actorCollider2D.enabled = true;
-    //                            x.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(x.actorTransform.position);
-    //                            x.StopForceTravelCor();
-    //                            GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, false, false);
-    //                        });
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
 
 
     public void PlaceTornado(Vector3Int cell)

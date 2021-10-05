@@ -180,7 +180,6 @@ public class Averna : Hero
                         waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
                     }
                 }
-
             }
 
             if (!MultiplayerManager.instance.isServer && hasAuthority())

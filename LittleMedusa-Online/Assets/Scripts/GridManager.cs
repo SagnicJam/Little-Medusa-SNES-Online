@@ -57,6 +57,14 @@ public class GridManager : MonoBehaviour
                 {
                     yMax = gameStateDependentTileArray[i].tileMap.cellBounds.yMax;
                 }
+                if(gameStateDependentTileArray[i].hasMultipleSpriteOfSameTile)
+                {
+                    gameStateDependentTileArray[i].instanceIdToSpriteMapper = new Dictionary<int, Sprite>();
+                    foreach (Sprite item in gameStateDependentTileArray[i].spriteArr)
+                    {
+                        gameStateDependentTileArray[i].instanceIdToSpriteMapper.Add(item.GetInstanceID(), item);
+                    }
+                }
             }
         }
         if(aStar!=null)
@@ -550,7 +558,8 @@ public class GridManager : MonoBehaviour
         FrameLooper fL = g.GetComponent<FrameLooper>();
         fL.PlayOneShotAnimation();
         fL.onPlayOneShotAnimation.RemoveAllListeners();
-        fL.onPlayOneShotAnimation.AddListener(() => {
+        fL.onPlayOneShotAnimation.AddListener(() => 
+        {
             Destroy(g);
         });
     }
@@ -1192,7 +1201,11 @@ public struct GameStateDependentTiles
     public bool cereberustileToggle;
     public bool multipleTileGraphic;
     public bool isDarkOnOdd;
-    
+
+    public bool hasMultipleSpriteOfSameTile;
+    public Sprite[] spriteArr;
+    public Dictionary<int, Sprite> instanceIdToSpriteMapper;
+
     //public int GetIndexOfTile(Sprite sp)
     //{
     //    for(int i=0;i<allTileArr.Length;i++)

@@ -626,6 +626,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: f6b5d1f84a1a22d4c9da4e279cdf3283, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
@@ -638,6 +640,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -650,6 +654,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -662,6 +668,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -674,6 +682,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -686,6 +696,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -698,6 +710,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -710,6 +724,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -722,6 +738,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -734,6 +752,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -746,6 +766,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -758,6 +780,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -770,6 +794,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -782,6 +808,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -794,6 +822,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -806,6 +836,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -818,6 +850,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -830,6 +864,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -842,6 +878,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 9a9dfd88a9cdde548926df267900f310, type: 2}
     darkTile: {fileID: 0}
@@ -854,6 +892,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -866,6 +906,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: be7b2aed65c5cf044bc4862d368ba839, type: 2}
     darkTile: {fileID: 0}
@@ -878,6 +920,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: 6f18e70fd5d38bb48942fd62fc26b914, type: 2}
     darkTile: {fileID: 0}
@@ -890,6 +934,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   rockFormation: {fileID: 6493663347274158638, guid: 4e0b46779c10201448a2cb5b555fbc97,
     type: 3}
   rockRemoval: {fileID: 776211525547550794, guid: 799914f6363ecfa43ab4e659ef343ed9,
@@ -3329,6 +3375,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 6b458523ce3b50646a90212f7a1b1b63, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
@@ -3341,6 +3389,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -3353,6 +3403,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -3365,6 +3417,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -3377,6 +3431,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -3389,6 +3445,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -3401,6 +3459,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -3413,6 +3473,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -3425,6 +3487,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -3437,6 +3501,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -3449,6 +3515,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -3461,6 +3529,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -3473,6 +3543,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -3485,6 +3557,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -3497,6 +3571,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -3509,6 +3585,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -3521,6 +3599,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -3533,6 +3613,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -3545,6 +3627,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 74d45107f24b67e40845e641e37d03c9, type: 2}
     darkTile: {fileID: 0}
@@ -3557,6 +3641,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -3569,6 +3655,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: c585039eceeac1f4d895b11b4439c14e, type: 2}
     darkTile: {fileID: 0}
@@ -3581,6 +3669,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -3593,6 +3683,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   rockFormation: {fileID: 6493663347274158638, guid: 4e0b46779c10201448a2cb5b555fbc97,
     type: 3}
   rockRemoval: {fileID: 776211525547550794, guid: 799914f6363ecfa43ab4e659ef343ed9,
@@ -39388,6 +39480,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 8f80e2ac6af701445a72419727e934ab, type: 2}
     darkTile: {fileID: 11400000, guid: 33b697a44ba8fcb40bec30ccac821798, type: 2}
@@ -39400,6 +39494,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 1
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -39412,6 +39508,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -39424,6 +39522,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -39436,6 +39536,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -39448,6 +39550,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -39460,6 +39564,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -39472,6 +39578,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -39484,6 +39592,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -39496,6 +39606,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -39508,6 +39620,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -39520,6 +39634,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -39532,6 +39648,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -39544,6 +39662,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -39556,6 +39676,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -39568,6 +39690,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -39580,6 +39704,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -39592,6 +39718,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -39604,6 +39732,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 0c5f2304c1100254580a5aa0168cebe6, type: 2}
     darkTile: {fileID: 0}
@@ -39616,6 +39746,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -39628,6 +39760,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: 79a8606300089794097a4766610d438c, type: 2}
     darkTile: {fileID: 0}
@@ -39640,6 +39774,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: ae4717d5bbaff764f9ec342a858b6bed, type: 2}
     darkTile: {fileID: 0}
@@ -39652,6 +39788,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   rockFormation: {fileID: 6493663347274158638, guid: 4e0b46779c10201448a2cb5b555fbc97,
     type: 3}
   rockRemoval: {fileID: 776211525547550794, guid: 799914f6363ecfa43ab4e659ef343ed9,
@@ -48038,6 +48176,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: f6b5d1f84a1a22d4c9da4e279cdf3283, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
@@ -48050,6 +48190,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -48062,6 +48204,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -48074,6 +48218,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -48086,6 +48232,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -48098,6 +48246,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -48110,6 +48260,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -48122,6 +48274,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -48134,6 +48288,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -48146,6 +48302,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -48158,6 +48316,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -48170,6 +48330,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -48182,6 +48344,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -48194,6 +48358,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -48206,6 +48372,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -48218,6 +48386,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -48230,6 +48400,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -48242,6 +48414,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -48254,6 +48428,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 9a9dfd88a9cdde548926df267900f310, type: 2}
     darkTile: {fileID: 0}
@@ -48266,6 +48442,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -48278,6 +48456,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: be7b2aed65c5cf044bc4862d368ba839, type: 2}
     darkTile: {fileID: 0}
@@ -48290,6 +48470,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: 6f18e70fd5d38bb48942fd62fc26b914, type: 2}
     darkTile: {fileID: 0}
@@ -48302,6 +48484,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   rockFormation: {fileID: 6493663347274158638, guid: 4e0b46779c10201448a2cb5b555fbc97,
     type: 3}
   rockRemoval: {fileID: 776211525547550794, guid: 799914f6363ecfa43ab4e659ef343ed9,
@@ -51869,6 +52053,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 070bbccd46630f640a5c3f8ac3482a75, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
@@ -51881,6 +52067,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -51893,6 +52081,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -51905,6 +52095,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -51917,6 +52109,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -51929,6 +52123,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -51941,6 +52137,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -51953,6 +52151,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -51965,6 +52165,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -51977,6 +52179,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -51989,6 +52193,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -52001,6 +52207,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -52013,6 +52221,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -52025,6 +52235,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -52037,6 +52249,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -52049,6 +52263,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -52061,6 +52277,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -52073,6 +52291,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -52085,6 +52305,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: f3bdc5ced32d43746a721720762e4d9c, type: 2}
     darkTile: {fileID: 0}
@@ -52097,6 +52319,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -52109,6 +52333,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: c585039eceeac1f4d895b11b4439c14e, type: 2}
     darkTile: {fileID: 0}
@@ -52121,6 +52347,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: d76268c8470531146bcc12b8bd63c35d, type: 2}
     darkTile: {fileID: 0}
@@ -52133,6 +52361,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   rockFormation: {fileID: 6493663347274158638, guid: 4e0b46779c10201448a2cb5b555fbc97,
     type: 3}
   rockRemoval: {fileID: 776211525547550794, guid: 799914f6363ecfa43ab4e659ef343ed9,
@@ -72064,6 +72294,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: e72bdfaa9b85010429ef7bb19e9ee17b, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
@@ -72076,6 +72308,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 1
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -72088,6 +72322,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -72100,6 +72336,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -72112,6 +72350,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -72124,6 +72364,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -72136,6 +72378,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -72148,6 +72392,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -72160,6 +72406,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -72172,6 +72420,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -72184,6 +72434,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -72196,6 +72448,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -72208,6 +72462,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -72220,6 +72476,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -72232,6 +72490,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -72244,6 +72504,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -72256,6 +72518,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -72268,6 +72532,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -72280,6 +72546,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 3f3aa5cbdc23a054aa74c210e3b7594b, type: 2}
     darkTile: {fileID: 0}
@@ -72292,6 +72560,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -72304,6 +72574,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: 0427a35b3ae289043a1a26972ba1c927, type: 2}
     darkTile: {fileID: 0}
@@ -72316,6 +72588,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: 6516da74a37ca374593b306d07f42a9a, type: 2}
     darkTile: {fileID: 0}
@@ -72328,6 +72602,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   rockFormation: {fileID: 6493663347274158638, guid: 4e0b46779c10201448a2cb5b555fbc97,
     type: 3}
   rockRemoval: {fileID: 776211525547550794, guid: 799914f6363ecfa43ab4e659ef343ed9,
@@ -86178,6 +86454,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 2ec55027b2210b24598054ed13fc9c26, type: 2}
     darkTile: {fileID: 0}
@@ -86190,6 +86468,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -86202,6 +86482,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -86214,6 +86496,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -86226,6 +86510,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -86238,6 +86524,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -86250,6 +86538,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -86262,6 +86552,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -86274,6 +86566,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -86286,6 +86580,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -86298,6 +86594,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -86310,6 +86608,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -86322,6 +86622,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -86334,6 +86636,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -86346,6 +86650,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -86358,6 +86664,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -86370,6 +86678,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -86382,6 +86692,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -86394,6 +86706,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 37a7400647b602e47a31ca5cb43b37ef, type: 2}
     darkTile: {fileID: 0}
@@ -86406,6 +86720,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -86418,6 +86734,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: e9d3127d5b19f394389f9ce620a991d7, type: 2}
     darkTile: {fileID: 0}
@@ -86430,6 +86748,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: d2febe3aaf7bcab449f0c41144be1cd9, type: 2}
     darkTile: {fileID: 0}
@@ -86442,6 +86762,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   rockFormation: {fileID: 6493663347274158638, guid: 4e0b46779c10201448a2cb5b555fbc97,
     type: 3}
   rockRemoval: {fileID: 776211525547550794, guid: 799914f6363ecfa43ab4e659ef343ed9,
@@ -102371,6 +102693,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 2ec55027b2210b24598054ed13fc9c26, type: 2}
     darkTile: {fileID: 0}
@@ -102383,6 +102707,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -102395,6 +102721,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -102407,6 +102735,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -102419,6 +102749,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -102431,6 +102763,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -102443,6 +102777,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -102455,6 +102791,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -102467,6 +102805,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -102479,6 +102819,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -102491,6 +102833,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -102503,6 +102847,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -102515,6 +102861,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -102527,6 +102875,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -102539,6 +102889,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -102551,6 +102903,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -102563,6 +102917,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -102575,6 +102931,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -102587,6 +102945,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 37a7400647b602e47a31ca5cb43b37ef, type: 2}
     darkTile: {fileID: 0}
@@ -102599,6 +102959,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -102611,6 +102973,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: e9d3127d5b19f394389f9ce620a991d7, type: 2}
     darkTile: {fileID: 0}
@@ -102623,6 +102987,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: d2febe3aaf7bcab449f0c41144be1cd9, type: 2}
     darkTile: {fileID: 0}
@@ -102635,6 +103001,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   rockFormation: {fileID: 6493663347274158638, guid: 4e0b46779c10201448a2cb5b555fbc97,
     type: 3}
   rockRemoval: {fileID: 776211525547550794, guid: 799914f6363ecfa43ab4e659ef343ed9,
@@ -108834,6 +109202,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: e72bdfaa9b85010429ef7bb19e9ee17b, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
@@ -108846,6 +109216,17 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 1
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 1
+    spriteArr:
+    - {fileID: -4636070203277036132, guid: 6fe92f08b5d92914180a4b0564df25a7, type: 3}
+    - {fileID: -1210978891913449264, guid: 6fe92f08b5d92914180a4b0564df25a7, type: 3}
+    - {fileID: 9027309074629171392, guid: 6fe92f08b5d92914180a4b0564df25a7, type: 3}
+    - {fileID: 3958061435822741681, guid: 6fe92f08b5d92914180a4b0564df25a7, type: 3}
+    - {fileID: 7775673671015800436, guid: 6fe92f08b5d92914180a4b0564df25a7, type: 3}
+    - {fileID: 604543481792468967, guid: 6fe92f08b5d92914180a4b0564df25a7, type: 3}
+    - {fileID: 6393348399162572679, guid: 6fe92f08b5d92914180a4b0564df25a7, type: 3}
+    - {fileID: -3981291457494277357, guid: 6fe92f08b5d92914180a4b0564df25a7, type: 3}
+    - {fileID: -5162948726401930879, guid: 6fe92f08b5d92914180a4b0564df25a7, type: 3}
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -108858,6 +109239,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -108870,6 +109253,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -108882,6 +109267,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -108894,6 +109281,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -108906,6 +109295,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -108918,6 +109309,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -108930,6 +109323,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -108942,6 +109337,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -108954,6 +109351,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -108966,6 +109365,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -108978,6 +109379,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -108990,6 +109393,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -109002,6 +109407,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -109014,6 +109421,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -109026,6 +109435,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -109038,6 +109449,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -109050,6 +109463,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 3f3aa5cbdc23a054aa74c210e3b7594b, type: 2}
     darkTile: {fileID: 0}
@@ -109062,6 +109477,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -109074,6 +109491,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: 0427a35b3ae289043a1a26972ba1c927, type: 2}
     darkTile: {fileID: 0}
@@ -109086,6 +109505,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: 6516da74a37ca374593b306d07f42a9a, type: 2}
     darkTile: {fileID: 0}
@@ -109098,6 +109519,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   rockFormation: {fileID: 6493663347274158638, guid: 4e0b46779c10201448a2cb5b555fbc97,
     type: 3}
   rockRemoval: {fileID: 776211525547550794, guid: 799914f6363ecfa43ab4e659ef343ed9,
@@ -127166,6 +127589,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 070bbccd46630f640a5c3f8ac3482a75, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
@@ -127178,6 +127603,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -127190,6 +127617,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -127202,6 +127631,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -127214,6 +127645,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -127226,6 +127659,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -127238,6 +127673,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -127250,6 +127687,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -127262,6 +127701,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -127274,6 +127715,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -127286,6 +127729,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -127298,6 +127743,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -127310,6 +127757,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -127322,6 +127771,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -127334,6 +127785,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -127346,6 +127799,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -127358,6 +127813,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -127370,6 +127827,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -127382,6 +127841,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: f3bdc5ced32d43746a721720762e4d9c, type: 2}
     darkTile: {fileID: 0}
@@ -127394,6 +127855,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -127406,6 +127869,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: c585039eceeac1f4d895b11b4439c14e, type: 2}
     darkTile: {fileID: 0}
@@ -127418,6 +127883,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: d76268c8470531146bcc12b8bd63c35d, type: 2}
     darkTile: {fileID: 0}
@@ -127430,6 +127897,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   rockFormation: {fileID: 6493663347274158638, guid: 4e0b46779c10201448a2cb5b555fbc97,
     type: 3}
   rockRemoval: {fileID: 776211525547550794, guid: 799914f6363ecfa43ab4e659ef343ed9,
@@ -137028,6 +137497,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 8f80e2ac6af701445a72419727e934ab, type: 2}
     darkTile: {fileID: 11400000, guid: 33b697a44ba8fcb40bec30ccac821798, type: 2}
@@ -137040,6 +137511,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 1
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -137052,6 +137525,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -137064,6 +137539,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -137076,6 +137553,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -137088,6 +137567,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -137100,6 +137581,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -137112,6 +137595,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -137124,6 +137609,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -137136,6 +137623,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -137148,6 +137637,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -137160,6 +137651,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -137172,6 +137665,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -137184,6 +137679,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -137196,6 +137693,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -137208,6 +137707,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -137220,6 +137721,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -137232,6 +137735,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -137244,6 +137749,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 0c5f2304c1100254580a5aa0168cebe6, type: 2}
     darkTile: {fileID: 0}
@@ -137256,6 +137763,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -137268,6 +137777,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: 79a8606300089794097a4766610d438c, type: 2}
     darkTile: {fileID: 0}
@@ -137280,6 +137791,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: ae4717d5bbaff764f9ec342a858b6bed, type: 2}
     darkTile: {fileID: 0}
@@ -137292,6 +137805,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   rockFormation: {fileID: 6493663347274158638, guid: 4e0b46779c10201448a2cb5b555fbc97,
     type: 3}
   rockRemoval: {fileID: 776211525547550794, guid: 799914f6363ecfa43ab4e659ef343ed9,
@@ -137916,6 +138431,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 26fda1622871db64e9b7bdaa3c8f8f31, type: 2}
     darkTile: {fileID: 11400000, guid: 5a1320c5997be2d4a9c3a1a96cfaf3e3, type: 2}
@@ -137928,6 +138445,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 1
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -137940,6 +138459,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -137952,6 +138473,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -137964,6 +138487,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -137976,6 +138501,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -137988,6 +138515,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -138000,6 +138529,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -138012,6 +138543,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -138024,6 +138557,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -138036,6 +138571,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -138048,6 +138585,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -138060,6 +138599,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -138072,6 +138613,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -138084,6 +138627,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -138096,6 +138641,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -138108,6 +138655,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -138120,6 +138669,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -138132,6 +138683,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 74d45107f24b67e40845e641e37d03c9, type: 2}
     darkTile: {fileID: 0}
@@ -138144,6 +138697,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -138156,6 +138711,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: e23b1d5788549f24a8628359a7a83cdc, type: 2}
     darkTile: {fileID: 0}
@@ -138168,6 +138725,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -138180,6 +138739,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   rockFormation: {fileID: 6493663347274158638, guid: 4e0b46779c10201448a2cb5b555fbc97,
     type: 3}
   rockRemoval: {fileID: 776211525547550794, guid: 799914f6363ecfa43ab4e659ef343ed9,
@@ -142495,6 +143056,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 6b458523ce3b50646a90212f7a1b1b63, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
@@ -142507,6 +143070,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -142519,6 +143084,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -142531,6 +143098,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -142543,6 +143112,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -142555,6 +143126,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -142567,6 +143140,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -142579,6 +143154,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -142591,6 +143168,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
@@ -142603,6 +143182,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -142615,6 +143196,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -142627,6 +143210,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -142639,6 +143224,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -142651,6 +143238,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -142663,6 +143252,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -142675,6 +143266,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -142687,6 +143280,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -142699,6 +143294,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
@@ -142711,6 +143308,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 74d45107f24b67e40845e641e37d03c9, type: 2}
     darkTile: {fileID: 0}
@@ -142723,6 +143322,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -142735,6 +143336,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: c585039eceeac1f4d895b11b4439c14e, type: 2}
     darkTile: {fileID: 0}
@@ -142747,6 +143350,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
@@ -142759,6 +143364,8 @@ MonoBehaviour:
     cereberustileToggle: 0
     multipleTileGraphic: 0
     isDarkOnOdd: 0
+    hasMultipleSpriteOfSameTile: 0
+    spriteArr: []
   rockFormation: {fileID: 6493663347274158638, guid: 4e0b46779c10201448a2cb5b555fbc97,
     type: 3}
   rockRemoval: {fileID: 776211525547550794, guid: 799914f6363ecfa43ab4e659ef343ed9,

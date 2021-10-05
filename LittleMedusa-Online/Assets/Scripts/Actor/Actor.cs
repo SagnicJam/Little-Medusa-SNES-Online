@@ -140,15 +140,19 @@ public abstract class Actor : TileData
         this.serverMasterController = serverMasterController;
         this.ownerId = ownerId;
     }
-    public int GetNetworkSequenceNo()
+    public int GetProcessedSequenceNo()
     {
         if (serverMasterController != null)
         {
             return serverMasterController.playerSequenceNumberProcessed;
         }
-        else
+        else if(clientMasterController!=null)
         {
             return clientMasterController.serverSequenceNumberToBeProcessed;
+        }
+        else
+        {
+            return -1;
         }
     }
 
@@ -158,9 +162,13 @@ public abstract class Actor : TileData
         {
             return clientMasterController.localSequenceNumber;
         }
-        else
+        else if(serverMasterController!=null)
         {
             return serverMasterController.serverLocalSequenceNumber;
+        }
+        else
+        {
+            return -1;
         }
     }
 
@@ -235,7 +243,7 @@ public abstract class Actor : TileData
         isInvincible = false;
     }
 
-    void MakeInvincible()
+    public virtual void MakeInvincible()
     {
         Debug.Log("MakeInvincible");
         isInvincible = true;
@@ -715,17 +723,25 @@ public abstract class Actor : TileData
 
     public bool IsActorPushableInDirection(Actor collidedActorWithMyHead, FaceDirection facing)
     {
-        Actor lastActor = GridManager.instance.GetTheLastActorInChain(collidedActorWithMyHead, facing);
-        Vector3Int cellPosToCheck = lastActor.currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(facing));
-        //Debug.LogError("Last actor id is : "+lastActor.gameObject.GetInstanceID());
-        if (GridManager.instance.IsCellBlockedForPetrifiedUnitMotionAtPos(cellPosToCheck))
+        if(collidedActorWithMyHead.isInvincible)
         {
             return false;
         }
         else
         {
-            return true;
+            Actor lastActor = GridManager.instance.GetTheLastActorInChain(collidedActorWithMyHead, facing);
+            Vector3Int cellPosToCheck = lastActor.currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(facing));
+            //Debug.LogError("Last actor id is : "+lastActor.gameObject.GetInstanceID());
+            if (GridManager.instance.IsCellBlockedForPetrifiedUnitMotionAtPos(cellPosToCheck))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
+        
     }
 
     public bool IsClientEnemyPushable(FaceDirection pushDirection)

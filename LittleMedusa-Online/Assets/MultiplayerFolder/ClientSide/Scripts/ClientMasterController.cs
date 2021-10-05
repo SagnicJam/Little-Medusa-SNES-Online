@@ -296,7 +296,6 @@ public class ClientMasterController : MonoBehaviour
     {
         if (hasAuthority)
         {
-            
             if (localPlayer.hero != playerStateUpdates.playerAuthoratativeStates.hero)
             {
                 Hero previousServerHero = serverPlayer;
