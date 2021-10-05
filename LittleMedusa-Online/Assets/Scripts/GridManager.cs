@@ -16,7 +16,7 @@ public class GridManager : MonoBehaviour
     public EnemySpawnner enemySpawnner;
 
     [Header("Tweak Params")]
-    public float switchToNormalFromHoleAfter = 3;
+    public float removeHoleAfter = 3;
     public float pullforce = 1;
     public float timeOfForce = 5;
     public GameStateDependentTiles[] gameStateDependentTileArray;
@@ -174,18 +174,17 @@ public class GridManager : MonoBehaviour
         yield break;
     }
 
-    public void SwitchTileToAfter(Vector3Int cellPos, EnumData.TileType fromTile, EnumData.TileType toTile)
+    public void RemoveTileAfter(Vector3Int cellPos, EnumData.TileType fromTile)
     {
-        IEnumerator ie = SwitchTileToAfterCor(cellPos,fromTile,toTile);
+        IEnumerator ie = RemoveTileAfterCor(cellPos,fromTile);
         StopCoroutine(ie);
         StartCoroutine(ie);
     }
 
-    public IEnumerator SwitchTileToAfterCor(Vector3Int cellPos,EnumData.TileType fromTile,EnumData.TileType toTile)
+    public IEnumerator RemoveTileAfterCor(Vector3Int cellPos,EnumData.TileType fromTile)
     {
-        yield return new WaitForSeconds(switchToNormalFromHoleAfter);
+        yield return new WaitForSeconds(removeHoleAfter);
         SetTile(cellPos, fromTile,false,false);
-        SetTile(cellPos, toTile, true, true);
         yield break;
     }
 
@@ -603,7 +602,6 @@ public class GridManager : MonoBehaviour
         }
         if (!HasTile)
         {
-
             gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, null);
             if (gameStateDependentTileArray[(int)tType - 1].cereberustileToggle)
             {

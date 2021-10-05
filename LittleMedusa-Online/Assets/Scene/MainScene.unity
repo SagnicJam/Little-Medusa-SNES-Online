@@ -109079,7 +109079,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1603581728
 Transform:
   m_ObjectHideFlags: 0
@@ -118976,7 +118976,7 @@ MonoBehaviour:
   loader: {fileID: 2116128978587783406, guid: cfbb9be39566779458fdb33ff3583947, type: 3}
   characterSelectionScreen: {fileID: 256209095372272350, guid: 125f7419cbf8e89478566ac42fdd5a36,
     type: 3}
-  isDebug: 0
+  isDebug: 1
   isServer: 0
   matchBeginDto:
     <matchId>k__BackingField: 0

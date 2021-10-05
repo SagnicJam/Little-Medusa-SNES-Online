@@ -260,9 +260,8 @@ public abstract class Hero : Actor
         {
             actor.TakeDamage(actor.currentHP);
         }
-        GridManager.instance.SetTile(cell, EnumData.TileType.Normal, false, false);
         GridManager.instance.SetTile(cell, EnumData.TileType.Hole, true, false);
-        GridManager.instance.SwitchTileToAfter(cell, EnumData.TileType.Hole, EnumData.TileType.Normal);
+        GridManager.instance.RemoveTileAfter(cell, EnumData.TileType.Hole);
     }
 
     public void CastBubbleShield()
