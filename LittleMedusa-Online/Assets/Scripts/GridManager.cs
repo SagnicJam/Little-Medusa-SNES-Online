@@ -16,7 +16,7 @@ public class GridManager : MonoBehaviour
     public EnemySpawnner enemySpawnner;
 
     [Header("Tweak Params")]
-    public float removeHoleAfter = 3;
+    public float switchHoleToNormalTileAfterDuration = 3;
     public float pullforce = 1;
     public float timeOfForce = 5;
     public GameStateDependentTiles[] gameStateDependentTileArray;
@@ -174,17 +174,18 @@ public class GridManager : MonoBehaviour
         yield break;
     }
 
-    public void RemoveTileAfter(Vector3Int cellPos, EnumData.TileType fromTile)
+    public void SwitchTileAfter(Vector3Int cellPos, EnumData.TileType fromTile,EnumData.TileType toTile)
     {
-        IEnumerator ie = RemoveTileAfterCor(cellPos,fromTile);
+        IEnumerator ie = SwitchTileCor(cellPos,fromTile, toTile);
         StopCoroutine(ie);
         StartCoroutine(ie);
     }
 
-    public IEnumerator RemoveTileAfterCor(Vector3Int cellPos,EnumData.TileType fromTile)
+    public IEnumerator SwitchTileCor(Vector3Int cellPos,EnumData.TileType fromTile,EnumData.TileType toTile)
     {
-        yield return new WaitForSeconds(removeHoleAfter);
+        yield return new WaitForSeconds(switchHoleToNormalTileAfterDuration);
         SetTile(cellPos, fromTile,false,false);
+        SetTile(cellPos, toTile, true,false);
         yield break;
     }
 

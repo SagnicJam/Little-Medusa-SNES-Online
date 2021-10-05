@@ -258,7 +258,7 @@ public class ServerSend
 
                         compressedPacked.Write(previousWorldGridItem.updatedCellGridWorldPositionList.Count);
 
-                        foreach (Vector3Int v in previousWorldGridItem.updatedCellGridWorldPositionList)
+                        foreach (Vector2Int v in previousWorldGridItem.updatedCellGridWorldPositionList)
                         {
                             compressedPacked.Write(v);
                         }

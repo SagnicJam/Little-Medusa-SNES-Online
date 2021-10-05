@@ -74,9 +74,6 @@ public class ServerSideGameManager : MonoBehaviour
 
             Server.Start(10, MultiplayerManager.instance.matchBeginDto);
         }
-       
-
-
     }
 
     public ServerMasterController InstantiatePlayer(int hero)
@@ -251,4 +248,10 @@ public struct WorldGridItem
         this.updatedCellGridWorldPositionList = updatedCellPositionList;
     }
 }
+
+//public struct CellData
+//{
+//    public int instanceId;
+//    public Vector3Int position;
+//}
 

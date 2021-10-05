@@ -73,7 +73,6 @@ public class ClientHandle : MonoBehaviour
                 Vector2Int cell = packet.ReadVector2Int();
                 cellPositionList.Add(new Vector3Int(cell.x,cell.y,0));
             }
-
             worldItems[i] = new WorldGridItem(tileType, cellPositionList);
         }
 
@@ -236,8 +235,8 @@ public class ClientHandle : MonoBehaviour
                     List<Vector3Int> cellPositionList = new List<Vector3Int>();
                     for (int l = 0; l < cellPositionCount; l++)
                     {
-                        Vector3Int cell = decompressedPacket.ReadVector3Int();
-                        cellPositionList.Add(cell);
+                        Vector2Int cell = decompressedPacket.ReadVector2Int();
+                        cellPositionList.Add(new Vector3Int(cell.x, cell.y, 0));
                     }
                     previousDataWorldItems[k] = new WorldGridItem(tileType, cellPositionList);
                 }
