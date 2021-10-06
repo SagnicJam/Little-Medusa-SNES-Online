@@ -27,6 +27,10 @@ public class GridManager : MonoBehaviour
     public GameObject bigExplosion;
     public GameObject smallExplosion;
     public GameObject lightning;
+    public GameObject tornadoAnimation;
+
+    [Header("Live Units")]
+    public Dictionary<Vector3Int,GameObject> liveTornadoAnimationsDic = new Dictionary<Vector3Int, GameObject>();
 
     [Header("Live Data")]
     public int xMin;
@@ -535,6 +539,19 @@ public class GridManager : MonoBehaviour
         return false;
     }
 
+    public void PlaceTornadoAnimation(Vector3Int cellTornadoDropped)
+    {
+        liveTornadoAnimationsDic.Add(cellTornadoDropped, Instantiate(tornadoAnimation, cellToworld(cellTornadoDropped), Quaternion.identity));
+    }
+
+    public void RemoveTornadoAnimation(Vector3Int cellTornadoDropped)
+    {
+        if(liveTornadoAnimationsDic.ContainsKey(cellTornadoDropped))
+        {
+            Destroy(liveTornadoAnimationsDic[cellTornadoDropped]);
+            liveTornadoAnimationsDic.Remove(cellTornadoDropped);
+        }
+    }
     public void PlaceBoulderAnimation(Vector3Int cellBoulderDropped)
     {
         //if (AudioManager.instance != null)
@@ -580,6 +597,17 @@ public class GridManager : MonoBehaviour
                 else
                 {
                     RemoveBoulderAnimation(cellPos);
+                }
+            }
+            else if(tType == EnumData.TileType.Tornado)
+            {
+                if (HasTile)
+                {
+                    PlaceTornadoAnimation(cellPos);
+                }
+                else
+                {
+                    RemoveTornadoAnimation(cellPos);
                 }
             }
         }
@@ -728,14 +756,7 @@ public class GridManager : MonoBehaviour
                 //}
                 //else
                 //{
-                if(gameStateDependentTileArray[(int)tType - 1].isAnimatedTile&&!MultiplayerManager.instance.isServer)
-                {
-                    gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].animatedTile);
-                }
-                else
-                {
-                    gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tile);
-                }
+                gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tile);
                 //}
             }
             if (gameStateDependentTileArray[(int)tType - 1].tileMap.GetComponent<TilemapCollider2D>() != null)
@@ -1192,13 +1213,9 @@ public struct GameStateDependentTiles
     public EnumData.TileType tileAssetType;
     public Tile tile;
     public Tile darkTile;
-    public Tile tileOff;
-    public AnimatedTile animatedTile;
     public Tilemap tileMap;
     public TileData tileData;
     public TilemapCollider2D tilemapCollider2D;
-    public bool isAnimatedTile;
-    //public Tile[] allTileArr;
     public bool cereberustileToggle;
     public bool multipleTileGraphic;
     public bool isDarkOnOdd;

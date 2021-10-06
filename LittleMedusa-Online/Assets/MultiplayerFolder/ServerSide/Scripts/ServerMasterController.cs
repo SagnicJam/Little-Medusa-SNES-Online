@@ -1286,7 +1286,12 @@ public class ServerMasterController : MonoBehaviour
         {
             return;
         }
-        if(Server.clients.ContainsKey(playerIdToPush))
+        if (!serverInstanceHero.completedMotionToMovePoint)
+        {
+            Debug.LogError("havent completed motion");
+            return;
+        }
+        if (Server.clients.ContainsKey(playerIdToPush))
         {
             Actor actorToPush = Server.clients[playerIdToPush].serverMasterController.serverInstanceHero;
 
@@ -1353,7 +1358,11 @@ public class ServerMasterController : MonoBehaviour
         {
             return;
         }
-
+        if (!serverInstanceHero.completedMotionToMovePoint)
+        {
+            Debug.LogError("havent completed motion");
+            return;
+        }
         if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellPositionToPlaceBoulder))
         {
             Debug.Log("Setting tile boulder on "+cellPositionToPlaceBoulder);
@@ -1369,6 +1378,11 @@ public class ServerMasterController : MonoBehaviour
     {
         if (!CanDoAction("RemoveBoulderRequestImplementation"))
         {
+            return;
+        }
+        if (!serverInstanceHero.completedMotionToMovePoint)
+        {
+            Debug.LogError("havent completed motion");
             return;
         }
         if (GridManager.instance.HasTileAtCellPoint(cellPositionToRemoveBoulder, EnumData.TileType.Boulder))
@@ -1409,6 +1423,11 @@ public class ServerMasterController : MonoBehaviour
         {
             return;
         }
+        if (!serverInstanceHero.completedMotionToMovePoint)
+        {
+            Debug.LogError("havent completed motion");
+            return;
+        }
         if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
         {
             serverInstanceHero.CastFlamePillar();
@@ -1423,6 +1442,11 @@ public class ServerMasterController : MonoBehaviour
     {
         if (!CanDoAction("CastBubbleShieldForPlayerImplementation"))
         {
+            return;
+        }
+        if (!serverInstanceHero.completedMotionToMovePoint)
+        {
+            Debug.LogError("havent completed motion");
             return;
         }
         serverInstanceHero.CastBubbleShield();
@@ -1449,6 +1473,11 @@ public class ServerMasterController : MonoBehaviour
     {
         if (!CanDoAction("CastTornadoForPlayerImplementation"))
         {
+            return;
+        }
+        if (!serverInstanceHero.completedMotionToMovePoint)
+        {
+            Debug.LogError("havent completed motion");
             return;
         }
         Debug.Log("CastTornadoForPlayerImplementation ");
@@ -1486,22 +1515,12 @@ public class ServerMasterController : MonoBehaviour
         {
             return;
         }
-        Debug.Log("CastEarthQuake ");
-        if (serverInstanceHero.isRespawnningPlayer)
-        {
-            Debug.LogError("Respawnning");
-            return;
-        }
-        if (serverInstanceHero.isInFlyingState)
-        {
-            Debug.LogError("isInFlyingState");
-            return;
-        }
         if (!serverInstanceHero.completedMotionToMovePoint)
         {
             Debug.LogError("havent completed motion");
             return;
         }
+        Debug.Log("CastEarthQuake ");
         GridManager.instance.EarthQuake(serverInstanceHero,GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position));
     }
 
@@ -1509,6 +1528,11 @@ public class ServerMasterController : MonoBehaviour
     {
         if (!CanDoAction("CastPitfallImplementation"))
         {
+            return;
+        }
+        if (!serverInstanceHero.completedMotionToMovePoint)
+        {
+            Debug.LogError("havent completed motion");
             return;
         }
         Debug.Log("CastPitfall ");

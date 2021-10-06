@@ -196,6 +196,7 @@ public abstract class Actor : TileData
     public void SpawnPlayer()
     {
         isRespawnningPlayer = false;
+        isDead = false;
         InitialiseHP();
         SetSpawnState();
     }
@@ -895,6 +896,7 @@ public abstract class Actor : TileData
                 Debug.LogError("Respawn Player");
                 UnPetrify();
                 RespawnPlayer();
+                Die();
             }
             else
             {

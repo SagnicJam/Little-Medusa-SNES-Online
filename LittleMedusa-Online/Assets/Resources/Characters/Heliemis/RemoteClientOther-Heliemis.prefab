@@ -709,6 +709,7 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  solidifyTile: 0
   isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
@@ -716,13 +717,14 @@ MonoBehaviour:
   movePoint: {fileID: 7256509176430748646}
   actorTransform: {fileID: 7256509175496613385}
   frameLooper: {fileID: 1017364097330221539}
+  gamePhysics: {fileID: 0}
   actorCollider2D: {fileID: 3363879797578967321}
   projectileThrownType: 15
   projectileThrownType_2: 0
   invincibilityTickTimer: 250
   petrificationTimeTickRate: 1000
   maxHP: 8
-  maxStockLives: 5
+  maxStockLives: 99
   walkSpeed: 4
   damagePerStoppedHit: 2
   primaryMoveDamage: 23
@@ -879,6 +881,7 @@ MonoBehaviour:
   rightFlySprite: []
   downFlySprite: []
   upFlySprite: []
+  petrificationSpriteArr: []
   primaryMoveAnimationSprites:
     upMove:
     - {fileID: 6069318662778541798, guid: 4c6b57783df191e46b2099f761b6af8e, type: 3}
