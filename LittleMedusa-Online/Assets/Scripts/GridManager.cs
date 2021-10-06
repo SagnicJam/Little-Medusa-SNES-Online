@@ -57,13 +57,12 @@ public class GridManager : MonoBehaviour
                 {
                     yMax = gameStateDependentTileArray[i].tileMap.cellBounds.yMax;
                 }
-                if(gameStateDependentTileArray[i].hasMultipleSpriteOfSameTile)
+
+                List<Vector3Int>allPositionList = GetAllPositionForTileMap(gameStateDependentTileArray[i].tileAssetType);
+                gameStateDependentTileArray[i].initialVectorToTileMapper = new Dictionary<Vector3Int, Tile>();
+                foreach (Vector3Int item in allPositionList)
                 {
-                    gameStateDependentTileArray[i].instanceIdToSpriteMapper = new Dictionary<int, Sprite>();
-                    foreach (Sprite item in gameStateDependentTileArray[i].spriteArr)
-                    {
-                        gameStateDependentTileArray[i].instanceIdToSpriteMapper.Add(item.GetInstanceID(), item);
-                    }
+                    gameStateDependentTileArray[i].initialVectorToTileMapper.Add(item,gameStateDependentTileArray[i].tileMap.GetTile(item)as Tile);
                 }
             }
         }
@@ -585,7 +584,6 @@ public class GridManager : MonoBehaviour
             }
         }
         
-
         if (((int)tType - 1) > gameStateDependentTileArray.Length - 1)
         {
             Debug.LogError("index more thean range: " + tType);
@@ -686,7 +684,11 @@ public class GridManager : MonoBehaviour
                     //    break;
                 }
             }
-            if (gameStateDependentTileArray[(int)tType - 1].multipleTileGraphic)
+            else if(gameStateDependentTileArray[(int)tType - 1].initialVectorToTileMapper.ContainsKey(cellPos))
+            {
+                gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].initialVectorToTileMapper[cellPos]);
+            }
+            else if (gameStateDependentTileArray[(int)tType - 1].multipleTileGraphic)
             {
                 if (gameStateDependentTileArray[(int)tType - 1].isDarkOnOdd)
                 {
@@ -1201,20 +1203,5 @@ public struct GameStateDependentTiles
     public bool multipleTileGraphic;
     public bool isDarkOnOdd;
 
-    public bool hasMultipleSpriteOfSameTile;
-    public Sprite[] spriteArr;
-    public Dictionary<int, Sprite> instanceIdToSpriteMapper;
-
-    //public int GetIndexOfTile(Sprite sp)
-    //{
-    //    for(int i=0;i<allTileArr.Length;i++)
-    //    {
-    //        if(allTileArr[i].sprite.name == sp.name)
-    //        {
-    //            return i;
-    //        }
-    //    }
-    //    Debug.LogError("Could not find the sprite "+tileMap.name+"  "+sp.name);
-    //    return -1;
-    //}
+    public Dictionary<Vector3Int, Tile> initialVectorToTileMapper;
 }

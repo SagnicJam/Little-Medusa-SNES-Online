@@ -363,7 +363,7 @@ public class ClientSideGameManager : MonoBehaviour
                     ClientEnemyManager enemyManagerToRemove;
                     if (enemyDatasDic.TryGetValue(kvp.Key, out enemyManagerToRemove))
                     {
-                        Debug.LogError("Deleting here");
+                        //Debug.LogError("Deleting here");
                         Destroy(enemyManagerToRemove.gameObject);
                         enemyDatasDic.Remove(kvp.Key);
                     }

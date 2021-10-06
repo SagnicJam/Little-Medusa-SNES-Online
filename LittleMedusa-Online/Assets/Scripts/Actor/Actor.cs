@@ -662,7 +662,7 @@ public abstract class Actor : TileData
     public void StartPush(Actor actorToPush, FaceDirection directionOfPush)
     {
         actorToPush.OnPushStart();
-        Debug.LogError("Start push "+actorToPush.actorTransform.gameObject.name);
+        //Debug.LogError("Start push "+actorToPush.actorTransform.gameObject.name);
         actorToPush.currentMapper = null;
         actorToPush.currentMapper = new OneDNonCheckingMapper(directionOfPush);
         actorToPush.Facing = directionOfPush;
@@ -907,7 +907,7 @@ public abstract class Actor : TileData
                     }
                     enemy.KillMe();
                 }
-                Debug.LogError("Game Over");
+                //Debug.LogError("Game Over");
             }
         }
         else

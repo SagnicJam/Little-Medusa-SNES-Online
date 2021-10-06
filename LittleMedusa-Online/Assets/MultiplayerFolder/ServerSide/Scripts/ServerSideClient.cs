@@ -208,10 +208,10 @@ public class ServerSideClient
         }
     }
 
+    static int count;
     public void SendIntoGame(string connectionID,string playerName)
     {
-        Vector3 spawnPos = ServerSideGameManager.instance.spawnPositions[0];
-        ServerSideGameManager.instance.spawnPositions.RemoveAt(0);
+        Vector3 spawnPos = ServerSideGameManager.instance.spawnPositions[(count++) % ServerSideGameManager.instance.spawnPositions.Count];
         serverMasterController = ServerSideGameManager.instance.InstantiatePlayer((int)EnumData.Heroes.Medusa);
         serverMasterController.Initialise(id, connectionID, playerName, spawnPos);
         
