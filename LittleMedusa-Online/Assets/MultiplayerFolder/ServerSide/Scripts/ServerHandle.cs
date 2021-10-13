@@ -82,16 +82,6 @@ public class ServerHandle
         Server.clients[fromClient].serverMasterController.AccumulateFiringTidalWaveRequestToBePlayedOnServerFromClient(fireTidalWaveCommand);
     }
 
-    public static void PlayerOnGettingHitByDispersedFireBallCommandReceived(int fromClient, Packet packet)
-    {
-        int playerIdHit = packet.ReadInt();
-        int damage = packet.ReadInt();
-        int sequenceNumber = packet.ReadInt();
-
-        OnHitByDispersedFireBall onHitByDispersedFireBall = new OnHitByDispersedFireBall(sequenceNumber, playerIdHit, damage);
-        Server.clients[fromClient].serverMasterController.AccumulateOnGettingHitByDispersedFireballRequestToBePlayedOnServerFromClient(onHitByDispersedFireBall);
-    }
-
     public static void PlayerPetrificationCommandReceived(int fromClient, Packet packet)
     {
         int playerIdPetrified = packet.ReadInt();

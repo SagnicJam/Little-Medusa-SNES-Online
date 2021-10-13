@@ -54,18 +54,27 @@ public class TileBasedProjectileUse : Use
                 }
                 else
                 {
-                    if (!GridManager.instance.IsCellBlockedForProjectiles(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position)))
+                    if(projectileTypeThrown==EnumData.Projectiles.FireBall||projectileTypeThrown==EnumData.Projectiles.FireBallMirrorKnight)
                     {
-                        liveProjectile.transform.position = Vector3.MoveTowards(liveProjectile.transform.position, finalPos, Time.fixedDeltaTime * liveProjectile.projectileSpeed);
-                        if (currentValidPosCell != GridManager.instance.grid.WorldToCell(liveProjectile.transform.position))
+                        if(GridManager.instance.IsCellBlockedForProjectiles(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position + GridManager.instance.GetFacingDirectionOffsetVector3(tileMovementDirection))))
                         {
-                            previousValidPosCell = currentValidPosCell;
-                            currentValidPosCell = GridManager.instance.grid.WorldToCell(liveProjectile.transform.position);
+                            EndOfUse();
+                            return;
                         }
                     }
                     else
                     {
-                        EndOfUse();
+                        if (GridManager.instance.IsCellBlockedForProjectiles(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position)))
+                        {
+                            EndOfUse();
+                            return;
+                        }
+                    }
+                    liveProjectile.transform.position = Vector3.MoveTowards(liveProjectile.transform.position, finalPos, Time.fixedDeltaTime * liveProjectile.projectileSpeed);
+                    if (currentValidPosCell != GridManager.instance.grid.WorldToCell(liveProjectile.transform.position))
+                    {
+                        previousValidPosCell = currentValidPosCell;
+                        currentValidPosCell = GridManager.instance.grid.WorldToCell(liveProjectile.transform.position);
                     }
                 }
                 

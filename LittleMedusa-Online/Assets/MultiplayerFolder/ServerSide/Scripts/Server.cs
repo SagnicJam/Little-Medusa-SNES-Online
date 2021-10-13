@@ -142,7 +142,6 @@ public class Server
                 { (int)ClientPackets.welcomeReceived,ServerHandle.WelcomeReceived},
                 { (int)ClientPackets.playerInputs,ServerHandle.PlayerInputs},
                 { (int)ClientPackets.playerPetrifyCommand,ServerHandle.PlayerPetrificationCommandReceived},
-                { (int)ClientPackets.playerOnGettinghitByDispersedFireBallCommand,ServerHandle.PlayerOnGettingHitByDispersedFireBallCommandReceived},
                 { (int)ClientPackets.playerPushCommand,ServerHandle.PlayerPushCommandReceived},
                 { (int)ClientPackets.playerPlaceBoulderCommand,ServerHandle.PlayerPlaceBoulderBoulderCommandReceived},
                 { (int)ClientPackets.playerRemoveBoulderCommand,ServerHandle.PlayerRemoveBoulderBoulderCommandReceived},

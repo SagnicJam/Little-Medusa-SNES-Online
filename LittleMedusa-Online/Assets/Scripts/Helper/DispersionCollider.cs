@@ -8,56 +8,42 @@ public class DispersionCollider : MonoBehaviour
     public int damage;
 
     [Header("LiveData")]
-    public float dispersionRadius;
-    public float dispersionSpeed;
     public int ownerId;
 
+    public void Initialise(int ownerId)
+    {
+        this.ownerId = ownerId;
+    }
+
+    private void FixedUpdate()
+    {
+        if (GridManager.instance.IsCellBlockedForProjectiles(GridManager.instance.grid.WorldToCell(transform.position)))
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Actor collidedActorWithMyHead = collision.GetComponent<Actor>();
-        if (collidedActorWithMyHead != null)
+        if (MultiplayerManager.instance.isServer)
         {
-            if (ownerId != collidedActorWithMyHead.ownerId)
+            Actor collidedActor = collision.GetComponent<Actor>();
+            if (collidedActor != null)
             {
-                if (!MultiplayerManager.instance.isServer)
+                if (ownerId != collidedActor.ownerId && !collidedActor.isInvincible&&!collidedActor.isDead)
                 {
-                    OnHitByDispersedFireBall onHitByDispersedFireBall = new OnHitByDispersedFireBall(ClientSideGameManager.players[ownerId].masterController.localPlayer.GetLocalSequenceNo(),collidedActorWithMyHead.ownerId,damage);
-                    ClientSend.OnPlayerHitByDispersedFireBall(onHitByDispersedFireBall);
-                }
-                else if(collidedActorWithMyHead is Enemy enemy)
-                {
-                    enemy.TakeDamage(enemy.currentHP);
-                }
-                else if (collidedActorWithMyHead is Hero hero)
-                {
-                    hero.TakeDamage(damage);
+                    if (collidedActor is Enemy enemy)
+                    {
+                        Debug.LogError("Enemy taking damage");
+                        enemy.TakeDamage(enemy.currentHP);
+                    }
+                    else if (collidedActor is Hero hero)
+                    {
+                        Debug.LogError("Herop taking damage");
+                        hero.TakeDamage(damage);
+                    }
                 }
             }
         }
-    }
-
-    public void Grow(float dispersionRadius, float dispersionSpeed, int ownerId)
-    {
-
-        this.dispersionRadius = dispersionRadius;
-        this.dispersionSpeed = dispersionSpeed/2;
-        this.ownerId = ownerId;
-        IEnumerator ie = GrowCor();
-        StopCoroutine(ie);
-        StartCoroutine(ie);
-    }
-
-    float t;
-
-    IEnumerator GrowCor()
-    {
-        while(t<1)
-        {
-            t += Time.fixedDeltaTime * dispersionSpeed;
-            transform.localScale = Vector3.Lerp(Vector3.zero,dispersionRadius*Vector3.one,t);
-            yield return new WaitForFixedUpdate();
-        }
-        Destroy(gameObject);
-        yield break;
     }
 }

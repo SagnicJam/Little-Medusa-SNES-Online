@@ -21,7 +21,6 @@ public class ServerMasterController : MonoBehaviour
     private Dictionary<int, PlaceBoulderCommand> placeBoulderCommandFromClientToServerDic = new Dictionary<int, PlaceBoulderCommand>();
     private Dictionary<int, RemoveBoulderCommand> removeBoulderCommandFromClientToServerDic = new Dictionary<int, RemoveBoulderCommand>();
     private Dictionary<int, PetrificationCommand> petrificationRequestReceivedFromClientToServerDic = new Dictionary<int, PetrificationCommand>();
-    private Dictionary<int, OnHitByDispersedFireBall> onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic = new Dictionary<int, OnHitByDispersedFireBall>();
     private Dictionary<int, FireTidalWaveCommand> tidalWaveFireRequestReceivedFromClientToServerDic = new Dictionary<int, FireTidalWaveCommand>();
     private Dictionary<int, FireMightyWindCommand> mightyWindFireRequestReceivedFromClientToServerDic = new Dictionary<int, FireMightyWindCommand>();
     private Dictionary<int, CastBubbleShieldCommand> castBubbleShieldRequestReceivedFromClientToServerDic = new Dictionary<int, CastBubbleShieldCommand>();
@@ -546,69 +545,6 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    public void CheckForOnGettingHitByDispersedFireBallRequestOnPlayer(int sequenceNoToCheck)
-    {
-        List<int> toDiscardSequences = new List<int>();
-        foreach (KeyValuePair<int, OnHitByDispersedFireBall> kvp in onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic)
-        {
-            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
-            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
-            {
-                toDiscardSequences.Add(kvp.Key);
-            }
-        }
-
-        foreach (KeyValuePair<int, OnHitByDispersedFireBall> kvp in onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic)
-        {
-            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
-            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
-            {
-                toDiscardSequences.Add(kvp.Key);
-            }
-        }
-
-        foreach (int i in toDiscardSequences)
-        {
-            if (onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.ContainsKey(i))
-            {
-                //Debug.Log("<color=red>discarding seq </color>" + i);
-                onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.Remove(i);
-            }
-            else
-            {
-                Debug.LogError("Could not find the key: " + i);
-            }
-        }
-
-        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
-        {
-            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
-            OnHitByDispersedFireBall onHitByDispersedFireBall;
-            if (onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out onHitByDispersedFireBall))
-            {
-                onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.Remove(onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand);
-                //do server rollback here to check to check if damage actually occured on server
-                int playerIdHit = onHitByDispersedFireBall.playerIdHit;
-                int damage = onHitByDispersedFireBall.damage;
-                HitPlayerWithDispersedFireBallRequestImplementation(playerIdHit, damage);
-            }
-        }
-
-        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
-        {
-            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
-            OnHitByDispersedFireBall onHitByDispersedFireBall;
-            if (onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out onHitByDispersedFireBall))
-            {
-                onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.Remove(onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand);
-                //do server rollback here to check to check if damage actually occured on server
-                int playerIdHit = onHitByDispersedFireBall.playerIdHit;
-                int damage = onHitByDispersedFireBall.damage;
-                HitPlayerWithDispersedFireBallRequestImplementation(playerIdHit, damage);
-            }
-        }
-    }
-
     public void CheckForPetrificationRequestOnPlayer(int sequenceNoToCheck)
     {
         List<int> toDiscardSequences = new List<int>();
@@ -1092,27 +1028,6 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    public void AccumulateOnGettingHitByDispersedFireballRequestToBePlayedOnServerFromClient(OnHitByDispersedFireBall onHitByDispersedFireBall)
-    {
-        if (onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand > playerSequenceNumberProcessed)
-        {
-            OnHitByDispersedFireBall dataPackage;
-            if (onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.TryGetValue(onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand, out dataPackage))
-            {
-                Debug.Log("<color=orange>AccumulateOnGettingHitByDispersedFireballRequestToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNoForGettingHitByDispersedFireBallCommand);
-            }
-            else
-            {
-                Debug.Log("<color=green>AccumulateOnGettingHitByDispersedFireballRequestToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand);
-                onGettingHitbyDispersedFireBallRequestReceivedFromClientToServerDic.Add(onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand, onHitByDispersedFireBall);
-            }
-        }
-        else
-        {
-            Debug.Log("<color=red>AccumulateOnGettingHitByDispersedFireballRequestToBePlayedOnServerFromClient Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand);
-        }
-    }
-
     public void AccumulatePetrificationRequestToBePlayedOnServerFromClient(PetrificationCommand petrificationCommand)
     {
         if (petrificationCommand.sequenceNoForPetrificationCommand > playerSequenceNumberProcessed)
@@ -1546,14 +1461,6 @@ public class ServerMasterController : MonoBehaviour
             Debug.LogError("No normal tile on placable position");
         }
     }
-
-    void HitPlayerWithDispersedFireBallRequestImplementation(int playerIdHit,int damage)
-    {
-        Debug.Log("HitPlayerWithDispersedFireBallRequestImplementation playerIdHit " + playerIdHit);
-        //start ball dispersion here
-        //Server.clients[playerIdHit].serverMasterController.serverInstanceHero.TakeDamage(damage);
-    }
-
     void PetrifyPlayerRequestImplementation(int playerIdToPetrify)
     {
         if (serverInstanceHero.isPhysicsControlled)
@@ -1628,7 +1535,6 @@ public class ServerMasterController : MonoBehaviour
             CheckForEarthQuakeRequestForPlayer(playerSequenceNumberProcessed+1);
             CheckForFlamePillarRequestForPlayer(playerSequenceNumberProcessed+1);
             CheckForPetrificationRequestOnPlayer(playerSequenceNumberProcessed+1);
-            CheckForOnGettingHitByDispersedFireBallRequestOnPlayer(playerSequenceNumberProcessed+1);
             CheckForRespawnningRequestOnServer(playerSequenceNumberProcessed+1);
 
             InputCommands inputPackageCorrespondingToSeq;

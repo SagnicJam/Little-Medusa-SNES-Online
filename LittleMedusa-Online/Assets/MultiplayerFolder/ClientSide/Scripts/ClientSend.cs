@@ -130,18 +130,6 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    public static void OnPlayerHitByDispersedFireBall(OnHitByDispersedFireBall onHitByDispersedFireBall)
-    {
-        using (Packet packet = new Packet((int)ClientPackets.playerOnGettinghitByDispersedFireBallCommand))
-        {
-            packet.Write(onHitByDispersedFireBall.playerIdHit);
-            packet.Write(onHitByDispersedFireBall.damage);
-            packet.Write(onHitByDispersedFireBall.sequenceNoForGettingHitByDispersedFireBallCommand);
-
-            SendTCPData(packet);
-        }
-    }
-
     public static void PetrifyPlayer(PetrificationCommand petrificationCommand)
     {
         using (Packet packet = new Packet((int)ClientPackets.playerPetrifyCommand))

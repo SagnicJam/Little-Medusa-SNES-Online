@@ -175,6 +175,7 @@ public class Posidanna : Hero
                     }
                     else
                     {
+                        bool secondaryAttackReady = !waitingActionForSecondaryMove.Perform();
                         if (inputs[(int)EnumData.PosidannaInputs.ShootTidalWave] && previousInputs[(int)EnumData.PosidannaInputs.ShootTidalWave] != inputs[(int)EnumData.PosidannaInputs.ShootTidalWave])
                         {
                             if (IsHeroAbleToFireProjectiles())
@@ -183,8 +184,15 @@ public class Posidanna : Hero
                                 ClientSend.FireTidalWave(fireTidalWaveCommand);
                             }
                         }
-                        else if(inputs[(int)EnumData.PosidannaInputs.CastBubbleShield] && previousInputs[(int)EnumData.PosidannaInputs.CastBubbleShield] != inputs[(int)EnumData.PosidannaInputs.CastBubbleShield])
+                        //else if(inputs[(int)EnumData.PosidannaInputs.CastBubbleShield] && previousInputs[(int)EnumData.PosidannaInputs.CastBubbleShield] != inputs[(int)EnumData.PosidannaInputs.CastBubbleShield])
+                        //{
+                            
+                        //    CastBubbleShieldCommand castBubbleShieldCommand = new CastBubbleShieldCommand(GetLocalSequenceNo());
+                        //    ClientSend.CastBubbleShield(castBubbleShieldCommand);
+                        //}
+                        else if(inputs[(int)EnumData.PosidannaInputs.CastBubbleShield]&& secondaryAttackReady)
                         {
+                            waitingActionForSecondaryMove.ReInitialiseTimerToBegin(secondaryMoveAttackRateTickRate);
                             CastBubbleShieldCommand castBubbleShieldCommand = new CastBubbleShieldCommand(GetLocalSequenceNo());
                             ClientSend.CastBubbleShield(castBubbleShieldCommand);
                         }

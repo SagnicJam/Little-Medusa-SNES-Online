@@ -496,21 +496,6 @@ public struct PetrificationCommand
         this.playerIdPetrified = playerIdPetrified;
     }
 }
-
-public struct OnHitByDispersedFireBall
-{
-    public int sequenceNoForGettingHitByDispersedFireBallCommand;
-    public int playerIdHit;
-    public int damage;
-
-    public OnHitByDispersedFireBall(int sequenceNoForGettingHitByDispersedFireBallCommand, int playerIdHit,int damage)
-    {
-        this.sequenceNoForGettingHitByDispersedFireBallCommand = sequenceNoForGettingHitByDispersedFireBallCommand;
-        this.playerIdHit = playerIdHit;
-        this.damage = damage;
-    }
-}
-
 public struct FireTidalWaveCommand
 {
     public int sequenceNoForFiringTidalWaveCommand;

@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7500002265617590015}
   - component: {fileID: 6522359983763759698}
+  - component: {fileID: 8653591416387346993}
+  - component: {fileID: 2253970776321937740}
   m_Layer: 0
   m_Name: DispersedFireBall
   m_TagString: Untagged
@@ -82,3 +84,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &8653591416387346993
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94336416680244386}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2
+--- !u!114 &2253970776321937740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94336416680244386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5165d14bbdf10ed4a86dcc1a69674ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 4
+  ownerId: 0

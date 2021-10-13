@@ -14,8 +14,6 @@ public class ProjectileUtil : MonoBehaviour
 
     [Header("UnitTemplate")]
     public GameObject dispersedGO;
-    public GameObject dispersedGOCollider;
-
 
     public FrameLooper frameLooper;
 
@@ -144,7 +142,6 @@ public class ProjectileUtil : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("chala");
                     DealProjectileOnActor(collidedActorWithMyHead);
                 }
             }
@@ -165,8 +162,8 @@ public class ProjectileUtil : MonoBehaviour
                         }
                         else if (GridManager.instance.IsPureBackOrSideStab(transform.position, clientEnemyManager))
                         {
-                            GridManager.instance.Disperse(false, dispersedGOCollider
-                            , dispersedGO
+                            GridManager.instance.Disperse(
+                             dispersedGO
                             , dispersionRadius
                             , dispersionSpeed
                             , pU.ownerId
@@ -176,8 +173,8 @@ public class ProjectileUtil : MonoBehaviour
                     }
                     else
                     {
-                        GridManager.instance.Disperse(false, dispersedGOCollider
-                       , dispersedGO
+                        GridManager.instance.Disperse(
+                        dispersedGO
                        , dispersionRadius
                        , dispersionSpeed
                        , pU.ownerId
@@ -220,8 +217,8 @@ public class ProjectileUtil : MonoBehaviour
             }
             else if (GridManager.instance.IsPureBackOrSideStab(transform.position, collidedActorWithMyHead))
             {
-                GridManager.instance.Disperse(pU.actorHadAuthority, dispersedGOCollider
-                , dispersedGO
+                GridManager.instance.Disperse(
+                    dispersedGO
                 , dispersionRadius
                 , dispersionSpeed
                 , pU.ownerId
@@ -343,9 +340,7 @@ public class ProjectileUtil : MonoBehaviour
         }
         else if(pU.projectileTypeThrown == EnumData.Projectiles.FireBall)
         {
-            Debug.LogError("Fireball..........");
-            GridManager.instance.Disperse(pU.actorHadAuthority, dispersedGOCollider
-                , dispersedGO
+            GridManager.instance.Disperse( dispersedGO
                 , dispersionRadius
                 , dispersionSpeed
                 , pU.ownerId
@@ -354,8 +349,7 @@ public class ProjectileUtil : MonoBehaviour
         }
         else if (pU.projectileTypeThrown == EnumData.Projectiles.FireBallMirrorKnight)
         {
-            GridManager.instance.Disperse(MultiplayerManager.instance.isServer, dispersedGOCollider
-                , dispersedGO
+            GridManager.instance.Disperse( dispersedGO
                 , dispersionRadius
                 , dispersionSpeed
                 , pU.ownerId
@@ -473,8 +467,7 @@ public class ProjectileUtil : MonoBehaviour
         if (pU.projectileTypeThrown == EnumData.Projectiles.FireBall|| pU.projectileTypeThrown == EnumData.Projectiles.FireBallMirrorKnight)
         {
             Debug.LogError("DestroyProjectile");
-            GridManager.instance.Disperse(pU.actorHadAuthority, dispersedGOCollider
-                , dispersedGO
+            GridManager.instance.Disperse( dispersedGO
                 , dispersionRadius
                 , dispersionSpeed
                 , pU.ownerId

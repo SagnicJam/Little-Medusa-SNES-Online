@@ -192,23 +192,21 @@ public class GridManager : MonoBehaviour
         yield break;
     }
 
-    public void Disperse(bool hasAuthority,GameObject dispersedCollider,GameObject dispersedGO,float dispersionRadius,float dispersionSpeed,int ownerId, Vector3Int dispersePoint)
+    public void Disperse(GameObject dispersedGO,float dispersionRadius,float dispersionSpeed,int ownerId, Vector3Int dispersePoint)
     {
-        List<Vector3Int> vList = new List<Vector3Int>();
+        //List<Vector3Int> vList = new List<Vector3Int>();
         Vector3 dispersedPoint = cellToworld(dispersePoint);
-        if(MultiplayerManager.instance.isServer||hasAuthority)
-        {
-            DispersionCollider dispersionCollider = Instantiate(dispersedCollider, dispersedPoint, Quaternion.identity).GetComponent<DispersionCollider>();
-            dispersionCollider.Grow(dispersionRadius, dispersionSpeed, ownerId);
-        }
-        
 
         float perAngleJump = 360 / 8;
         for (float angle = 0; angle <= 360; angle += perAngleJump)
         {
             Vector3 finalPoint = dispersedPoint + GetVectorAtAngle(angle, Vector3.right, Vector3.forward) * dispersionRadius;
             GameObject g = Instantiate(dispersedGO, dispersedPoint, Quaternion.identity);
-            IEnumerator tt = TravelToPos(g, finalPoint, dispersionSpeed, (x) => {
+
+            g.GetComponent<DispersionCollider>().Initialise(ownerId);
+
+            IEnumerator tt = TravelToPos(g, finalPoint, dispersionSpeed, (x) =>
+            {
                 Debug.Log(x);
                 Destroy(g);
             });

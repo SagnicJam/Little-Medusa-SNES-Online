@@ -21,7 +21,6 @@ public enum ClientPackets
     welcomeReceived = 1,
     playerInputs,
     playerPetrifyCommand,
-    playerOnGettinghitByDispersedFireBallCommand,
     playerFiringTidalWaveCommand,
     playerFiringMightyWindCommand,
     castingBubbleShieldCommand,
