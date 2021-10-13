@@ -21,7 +21,7 @@ public abstract class Hero : Actor
     [Header("Live Data")]
     public int hero;
     public bool isInputFreezed;
-
+    
     public override void Awake()
     {
         base.Awake();
@@ -238,18 +238,9 @@ public abstract class Hero : Actor
 
     public void PlaceTornado(Vector3Int cell)
     {
-        StartCoroutine(RunTornado(5, cell));
+        //StartCoroutine(RunTornado(5, cell));
+        GridManager.instance.tornado.PlaceTornadoObject(ownerId,cell);
     }
-
-    IEnumerator RunTornado(float time,Vector3Int cell)
-    {
-        GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, true, false);
-        GridManager.instance.tornado.UpdateTornadoActivation(ownerId);
-        yield return new WaitForSeconds(time);
-        GridManager.instance.SetTile(cell, EnumData.TileType.Tornado, false, false);
-        GridManager.instance.tornado.UpdateTornadoActivation(ownerId);
-    }
-
 
     public void CastPitfall(Vector3Int cell)
     {
@@ -472,6 +463,10 @@ public abstract class Hero : Actor
         TakeDamage(currentHP);
     }
 
+    public override void OnBodyCollidingWithTornadoEffectTiles(TileData tileData)
+    {
+        GridManager.instance.tornado.OnEnterTornadoRegion(tileData,this);
+    }
 
     public override void OnCantOccupySpace()
     {

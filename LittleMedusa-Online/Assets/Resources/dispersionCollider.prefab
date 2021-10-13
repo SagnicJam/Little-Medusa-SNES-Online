@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 4
-  dispersionRadius: 2
-  dispersionSpeed: 1
+  dispersionRadius: 0
+  dispersionSpeed: 0
   ownerId: 0
 --- !u!58 &3062148314610269352
 CircleCollider2D:

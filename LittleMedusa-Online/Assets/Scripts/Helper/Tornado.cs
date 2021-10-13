@@ -1,112 +1,152 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.Tilemaps;
 
 public class Tornado : MonoBehaviour
 {
-    public int ownerCasting;
-    List<Vector3Int> positionsOfTile=new List<Vector3Int>();
-    public bool solidify;
+    [Header("TweakParams")]
+    public int size = 10;
 
-    Vector3 directionVectorCache;
-    Vector3 actorResultantDirectionOfPullCache;
+    [Header("Unit Template")]
+    public GameObject tornadoColliderUnit;
 
-    public bool tornadoActive;
+    [Header("Live Data")]
+    Dictionary<int, Dictionary<int, TornadoChild>> actorIdToPlacedTornadoDic = new Dictionary<int, Dictionary<int, TornadoChild>>();
+    int calSize;
 
-    private void FixedUpdate()
+    private void Awake()
     {
-        if(tornadoActive)
-        {
-            positionsOfTile = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.Tornado);
+        calSize = size / 2;
+    }
 
-            foreach(KeyValuePair<int,ServerSideClient>kvp in Server.clients)
+    public void PlaceTornadoObject(int ownerCastingId,Vector3Int cellToPlaceOn)
+    {
+        //SpawnThe collider here
+        GameObject colliderRef = Instantiate(tornadoColliderUnit
+            , GridManager.instance.cellToworld(cellToPlaceOn)
+            , Quaternion.identity);
+
+        TornadoCollider tornadoCollider = colliderRef.GetComponent<TornadoCollider>();
+        tornadoCollider.InitialiseOwner(ownerCastingId);
+
+        //place tile tornado
+        GridManager.instance.SetTile(cellToPlaceOn, EnumData.TileType.Tornado, true, false);
+
+        List<Vector3Int> getCellToSolidify = GridManager.instance.GetSizeCells(calSize, cellToPlaceOn);
+
+        if (actorIdToPlacedTornadoDic.ContainsKey(ownerCastingId))
+        {
+            actorIdToPlacedTornadoDic[ownerCastingId].Add(colliderRef.GetInstanceID(),new TornadoChild(colliderRef,new List<Actor>()));
+        }
+        else
+        {
+            Dictionary<int, TornadoChild> tornadoChildrenDictionary = new Dictionary<int, TornadoChild>();
+            tornadoChildrenDictionary.Add(colliderRef.GetInstanceID(), new TornadoChild(colliderRef, new List<Actor>()));
+
+            actorIdToPlacedTornadoDic.Add(ownerCastingId, tornadoChildrenDictionary);
+        }
+        GridManager.instance.SolidifyTiles(getCellToSolidify);
+
+        //Start the coroutine here
+        IEnumerator ie = WaitForTornado(ownerCastingId, cellToPlaceOn, colliderRef.GetInstanceID());
+        StopCoroutine(ie);
+        StartCoroutine(ie);
+    }
+
+    IEnumerator WaitForTornado(int ownerCasting, Vector3Int cellToRemoveFrom, int instanceIDCollider)
+    {
+        yield return new WaitForSeconds(5);
+
+        if (actorIdToPlacedTornadoDic.ContainsKey(ownerCasting))
+        {
+            if(actorIdToPlacedTornadoDic[ownerCasting].ContainsKey(instanceIDCollider))
             {
-                if(kvp.Value.serverMasterController != null)
+                //disable physics
+                List<Actor> effectedActors = new List<Actor>(actorIdToPlacedTornadoDic[ownerCasting][instanceIDCollider].actorsEffectedList);
+                actorIdToPlacedTornadoDic[ownerCasting][instanceIDCollider].actorsEffectedList.Clear();
+                foreach (Actor item in effectedActors)
                 {
-                    if (kvp.Key != ownerCasting)
+                    if(item!=null)
                     {
-                        actorResultantDirectionOfPullCache = Vector3.zero;
-                        directionVectorCache = Vector3.zero;
-                        foreach (Vector3Int v in positionsOfTile)
-                        {
-                            directionVectorCache = (GridManager.instance.cellToworld(v) - kvp.Value.serverMasterController.serverInstanceHero.actorTransform.position).normalized;
-                            actorResultantDirectionOfPullCache += directionVectorCache;
-                        }
-                        actorResultantDirectionOfPullCache.Normalize();
-                        if(!kvp.Value.serverMasterController.serverInstanceHero.gamePhysics.isPhysicsEnabled)
-                        {
-                            kvp.Value.serverMasterController.serverInstanceHero.gamePhysics.EnablePhysics();
-                        }
-                        kvp.Value.serverMasterController.serverInstanceHero.gamePhysics.UpdateDirection(actorResultantDirectionOfPullCache);
-                        Debug.DrawLine(kvp.Value.serverMasterController.serverInstanceHero.actorTransform.position
-                            , kvp.Value.serverMasterController.serverInstanceHero.actorTransform.position + (10f * actorResultantDirectionOfPullCache), Color.red);
+                        item.gamePhysics.RemoveForcePoint(GridManager.instance.cellToworld(cellToRemoveFrom));
+                    }
+                }
+
+                //destroy colliders
+                Destroy(actorIdToPlacedTornadoDic[ownerCasting][instanceIDCollider].tornadoCollider);
+                actorIdToPlacedTornadoDic[ownerCasting].Remove(instanceIDCollider);
+            }
+
+            
+
+            if (actorIdToPlacedTornadoDic[ownerCasting].Count == 0)
+            {
+                actorIdToPlacedTornadoDic.Remove(ownerCasting);
+            }
+        }
+
+        //remove tile tornado
+        GridManager.instance.SetTile(cellToRemoveFrom, EnumData.TileType.Tornado, false, false);
+        GridManager.instance.SetTile(cellToRemoveFrom, EnumData.TileType.Solid, false, false);
+
+        //set tiles to normal
+        List<Vector3Int> getCellToNormalise = GridManager.instance.GetSizeCells(calSize, cellToRemoveFrom);
+        foreach (KeyValuePair<int, Dictionary<int, TornadoChild>> kvp in actorIdToPlacedTornadoDic)
+        {
+            foreach (KeyValuePair<int, TornadoChild> item in kvp.Value)
+            {
+                List<Vector3Int> regionPositions = GridManager.instance.GetSizeCells(calSize, GridManager.instance.grid.WorldToCell(item.Value.tornadoCollider.transform.position));
+                foreach (Vector3Int pos in regionPositions)
+                {
+                    if (getCellToNormalise.Contains(pos))
+                    {
+                        getCellToNormalise.Remove(pos);
                     }
                 }
             }
-            foreach(KeyValuePair<int,Enemy>kvp in Enemy.enemies)
-            {
-                actorResultantDirectionOfPullCache = Vector3.zero;
-                directionVectorCache = Vector3.zero;
-                foreach (Vector3Int v in positionsOfTile)
-                {
-                    directionVectorCache = (GridManager.instance.cellToworld(v) - kvp.Value.actorTransform.position).normalized;
-                    actorResultantDirectionOfPullCache += directionVectorCache;
-                }
-                actorResultantDirectionOfPullCache.Normalize();
-                if(!kvp.Value.gamePhysics.isPhysicsEnabled)
-                {
-                    kvp.Value.gamePhysics.EnablePhysics();
-                }
-                kvp.Value.gamePhysics.UpdateDirection(actorResultantDirectionOfPullCache);
-
-                Debug.DrawLine(kvp.Value.actorTransform.position
-                    , kvp.Value.actorTransform.position + (10f * actorResultantDirectionOfPullCache), Color.blue);
-            }
         }
+        //normalise all tiles in region here
+
+        GridManager.instance.NormaliseTiles(getCellToNormalise);
     }
 
-    public void UpdateTornadoActivation(int ownerCasting)
+    public void OnEnterTornadoRegion(TileData tileData,Actor actor)
     {
-        this.ownerCasting = ownerCasting;
-        positionsOfTile = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.Tornado);
-        tornadoActive = (positionsOfTile.Count > 0);
-        if(tornadoActive)
+        int ownerCasting = tileData.GetComponent<TornadoCollider>().ownerCasting;
+        if(actorIdToPlacedTornadoDic.ContainsKey(ownerCasting))
         {
-            if(!solidify)
+            actor.gamePhysics.AddForcePoint(tileData.gameObject.transform.position);
+            if(actorIdToPlacedTornadoDic[ownerCasting].ContainsKey(tileData.gameObject.GetInstanceID()))
             {
-                GridManager.instance.SolidifyTiles();
-                solidify = true;
+                actorIdToPlacedTornadoDic[ownerCasting][tileData.gameObject.GetInstanceID()].actorsEffectedList.Add(actor);
             }
         }
         else
         {
-            if (solidify)
-            {
-                GridManager.instance.NormaliseTiles();
-                solidify = false;
-            }
+            Debug.LogError("Coukd not find any key to add actor to Key: "+ownerCasting);
+        }
+    }
 
-            foreach (KeyValuePair<int, ServerSideClient> kvp in Server.clients)
+    public struct TornadoChild
+    {
+        public GameObject tornadoCollider;
+        public List<Actor> actorsEffectedList;
+
+        public TornadoChild(GameObject tornadoCollider, List<Actor> actorsEffectedList)
+        {
+            this.tornadoCollider = tornadoCollider;
+            this.actorsEffectedList = actorsEffectedList;
+        }
+
+        public bool ContainsGameObject(GameObject go)
+        {
+            if(tornadoCollider==go)
             {
-                if (kvp.Value.serverMasterController != null)
-                {
-                    if (kvp.Key != ownerCasting)
-                    {
-                        if (kvp.Value.serverMasterController.serverInstanceHero.gamePhysics.isPhysicsEnabled)
-                        {
-                            kvp.Value.serverMasterController.serverInstanceHero.gamePhysics.DisablePhysics();
-                        }
-                    }
-                }
+                return true;
             }
-            foreach (KeyValuePair<int, Enemy> kvp in Enemy.enemies)
-            {
-                if (kvp.Value.gamePhysics.isPhysicsEnabled)
-                {
-                    kvp.Value.gamePhysics.DisablePhysics();
-                }
-            }
+            return false;
         }
     }
 }

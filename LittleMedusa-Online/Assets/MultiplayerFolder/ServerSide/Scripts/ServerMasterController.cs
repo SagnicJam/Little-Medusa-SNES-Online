@@ -1550,7 +1550,8 @@ public class ServerMasterController : MonoBehaviour
     void HitPlayerWithDispersedFireBallRequestImplementation(int playerIdHit,int damage)
     {
         Debug.Log("HitPlayerWithDispersedFireBallRequestImplementation playerIdHit " + playerIdHit);
-        Server.clients[playerIdHit].serverMasterController.serverInstanceHero.TakeDamage(damage);
+        //start ball dispersion here
+        //Server.clients[playerIdHit].serverMasterController.serverInstanceHero.TakeDamage(damage);
     }
 
     void PetrifyPlayerRequestImplementation(int playerIdToPetrify)

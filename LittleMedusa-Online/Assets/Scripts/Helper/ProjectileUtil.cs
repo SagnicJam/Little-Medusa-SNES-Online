@@ -144,6 +144,7 @@ public class ProjectileUtil : MonoBehaviour
                 }
                 else
                 {
+                    Debug.LogError("chala");
                     DealProjectileOnActor(collidedActorWithMyHead);
                 }
             }
@@ -181,6 +182,7 @@ public class ProjectileUtil : MonoBehaviour
                        , dispersionSpeed
                        , pU.ownerId
                        , GridManager.instance.grid.WorldToCell(transform.position));
+                        Destroy(gameObject);
                     }
                 }
                 else if (pU.projectileTypeThrown == EnumData.Projectiles.EyeLaser)
@@ -341,6 +343,7 @@ public class ProjectileUtil : MonoBehaviour
         }
         else if(pU.projectileTypeThrown == EnumData.Projectiles.FireBall)
         {
+            Debug.LogError("Fireball..........");
             GridManager.instance.Disperse(pU.actorHadAuthority, dispersedGOCollider
                 , dispersedGO
                 , dispersionRadius
@@ -448,7 +451,6 @@ public class ProjectileUtil : MonoBehaviour
             }
             frameLooper.PlayOneShotAnimation();
         }
-
     }
 
     public void DestroyProjectile()
@@ -470,6 +472,7 @@ public class ProjectileUtil : MonoBehaviour
         }
         if (pU.projectileTypeThrown == EnumData.Projectiles.FireBall|| pU.projectileTypeThrown == EnumData.Projectiles.FireBallMirrorKnight)
         {
+            Debug.LogError("DestroyProjectile");
             GridManager.instance.Disperse(pU.actorHadAuthority, dispersedGOCollider
                 , dispersedGO
                 , dispersionRadius

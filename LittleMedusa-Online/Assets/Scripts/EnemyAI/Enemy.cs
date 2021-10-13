@@ -286,6 +286,11 @@ public abstract class Enemy : Actor
         isHeadCollisionWithOtherActor = false;
     }
 
+    public override void OnBodyCollidingWithTornadoEffectTiles(TileData tileData)
+    {
+        GridManager.instance.tornado.OnEnterTornadoRegion(tileData, this);
+    }
+
     public override void OnBodyCollidingWithKillingTiles(TileData tileData)
     {
         TakeDamage(currentHP);

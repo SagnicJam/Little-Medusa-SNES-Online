@@ -555,6 +555,7 @@ MonoBehaviour:
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
+  ownerId: 0
   isWalking: 0
   isUsingPrimaryMove: 0
   isUsingSecondaryMove: 0
@@ -566,7 +567,6 @@ MonoBehaviour:
   chainIDLinkedTo: -1
   clientMasterController: {fileID: 0}
   serverMasterController: {fileID: 0}
-  ownerId: 0
   previousMovePointCellPosition: {x: 0, y: 0, z: 0}
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
@@ -614,6 +614,7 @@ MonoBehaviour:
   force: 1
   hardboxCollider2D: {fileID: 797281986942532113}
   gameCollider2D: {fileID: 3996529767862627935}
+  tilePullPositions: []
   direction: {x: 0, y: 0, z: 0}
   isPhysicsEnabled: 0
 --- !u!61 &797281986942532113

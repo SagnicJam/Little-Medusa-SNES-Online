@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawnner : MonoBehaviour
 {
     public List<GameObject> enemyPrefab;
+
     public EnumData.MonsterBreed monsterToSpawn;
 
     public List<Vector3Int> spawnIndexList = new List<Vector3Int>();

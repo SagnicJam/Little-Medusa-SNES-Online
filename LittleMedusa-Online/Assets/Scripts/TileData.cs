@@ -222,6 +222,14 @@ public class TileData : MonoBehaviour
                     blockProjectiles = true;
                     solidifyTile = true;
                     break;
+                case EnumData.TileType.Solid:
+                    blockFlyingUnits = false;
+                    blockBoulderPlacement = true;
+                    blockUnitMotion = true;
+                    blockPetrifiedObjects = true;
+                    blockProjectiles = true;
+                    solidifyTile = true;
+                    break;
             }
         }
     }

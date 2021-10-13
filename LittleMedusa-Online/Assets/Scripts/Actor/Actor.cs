@@ -64,6 +64,9 @@ public abstract class Actor : TileData
     public bool inGame;
     public bool triggerFaceChangeEvent;
 
+    public int ownerId;
+    public Attack currentAttack;
+
     [Header("Hero Specific Data")]
     public bool isWalking;
     public bool isUsingPrimaryMove;
@@ -83,10 +86,6 @@ public abstract class Actor : TileData
     [Header("Live Units")]
     public ClientMasterController clientMasterController;
     public ServerMasterController serverMasterController;
-
-    [Header("Live Data")]
-    public int ownerId;
-    public Attack currentAttack;
 
     [Header("Attack")]
     public Attack rangedAttack_1;
@@ -932,7 +931,6 @@ public abstract class Actor : TileData
         {
             return;
         }
-
         if (isDead)
         {
             return;
@@ -940,22 +938,19 @@ public abstract class Actor : TileData
         if (isPetrified && !isPushed)
         return;
 
-        
-
         TileData collidedTile = collider.GetComponent<TileData>();
-
-        if(collidedTile!=null)
+        if (collidedTile!=null)
         {
             if (collidedTile.killUnitsInstantlyIfInTheirRegion&& !IsInSpawnJarTerritory && !isInFlyingState)
             {
                 OnBodyCollidingWithKillingTiles(collidedTile);
             }
         }
-
         if (isPhysicsControlled)
         {
             return;
         }
+
         ProjectileUtil projectileUtilCollidedWithMyHead = collider.GetComponent<ProjectileUtil>();
         if (projectileUtilCollidedWithMyHead != null)
         {
@@ -1144,6 +1139,7 @@ public abstract class Actor : TileData
     public abstract void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead);
 
     public abstract void OnBodyCollidingWithKillingTiles(TileData tileData);
+    public abstract void OnBodyCollidingWithTornadoEffectTiles(TileData tileData);
 
     public abstract void OnPushStart();
     public abstract void OnPushStop();

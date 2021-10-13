@@ -103,6 +103,7 @@ public class EnumData
         Tornado,
         NoBoulder,
         Wall,
+        Solid,
         Mirror,
         Switch,
         ThunderStruck,
@@ -137,7 +138,8 @@ public class EnumData
         RightRailIceWorldTile,
         LeftRailIceWorldTile,
         WaveBlocks,
-        Stagalmite
+        Stagalmite,
+        TornadoEffect
     }
 
     public enum StaticAnimatingTiles

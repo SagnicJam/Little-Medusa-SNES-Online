@@ -812,22 +812,51 @@ public class GridManager : MonoBehaviour
         return false;
     }
 
-    public void SolidifyTiles()
+    List<TileData>GetAllTileDataInCellPos(Vector3Int cellPos)
     {
-        for (int i = 0; i < gameStateDependentTileArray.Length; i++)
+        List<TileData> tileDatas = new List<TileData>();
+        Vector3 objectPosition = cellToworld(cellPos);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
         {
-            if(gameStateDependentTileArray[i].tileData.solidifyTile)
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+            if(td!=null)
             {
-                gameStateDependentTileArray[i].tilemapCollider2D.isTrigger = false;
+                tileDatas.Add(td);
+            }
+        }
+        return tileDatas;
+    }
+
+    public void SolidifyTiles(List<Vector3Int>cellList)
+    {
+        foreach (Vector3Int cell in cellList)
+        {
+            List<TileData> tileDatas = GetAllTileDataInCellPos(cell);
+            foreach (TileData item in tileDatas)
+            {
+                if(item.solidifyTile)
+                {
+                    SetTile(cell, EnumData.TileType.Solid,true,false);
+                    break;
+                }
             }
         }
     }
 
-    public void NormaliseTiles()
+    public void NormaliseTiles(List<Vector3Int> cellList)
     {
-        for (int i = 0; i < gameStateDependentTileArray.Length; i++)
+        foreach (Vector3Int cell in cellList)
         {
-            gameStateDependentTileArray[i].tilemapCollider2D.isTrigger = true;
+            List<TileData> tileDatas = GetAllTileDataInCellPos(cell);
+            foreach (TileData item in tileDatas)
+            {
+                if (item.solidifyTile)
+                {
+                    SetTile(cell, EnumData.TileType.Solid, false, false);
+                    break;
+                }
+            }
         }
     }
 
@@ -880,6 +909,29 @@ public class GridManager : MonoBehaviour
         if (neighbours.Contains(cell))
         {
             neighbours.Remove(cell);
+        }
+        return neighbours;
+    }
+
+    public List<Vector3Int> GetSizeCells(int size,Vector3Int cell)
+    {
+        if(size<=0)
+        {
+            return null;
+        }
+        List<Vector3Int> neighbours = new List<Vector3Int>();
+        for (int x = -size; x <= size; x++)
+        {
+            for (int y = -size; y <= size; y++)
+            {
+                int checkX = cell.x + x;
+                int checkY = cell.y + y;
+
+                if (checkX >= xMin && checkX < xMax && checkY >= yMin && checkY < yMax)
+                {
+                    neighbours.Add(new Vector3Int(checkX, checkY, 0));
+                }
+            }
         }
         return neighbours;
     }

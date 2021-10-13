@@ -102,7 +102,7 @@ MonoBehaviour:
   projectileSpeed: 4
   selfDestroyOnTargetTouch: 1
   isDispersing: 1
-  dispersionRadius: 2
+  dispersionRadius: 1
   dispersionSpeed: 6
   dispersedGO: {fileID: 5676064298496214623, guid: d292c90d23b77104fb22c13fc1e8fcee,
     type: 3}
