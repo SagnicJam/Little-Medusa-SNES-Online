@@ -273,9 +273,9 @@ TextureImporter:
       name: Averna_Character_Idle_N(16,28)_34F.dain_3
       rect:
         serializedVersion: 2
-        x: 48
+        x: 49
         y: 56
-        width: 17
+        width: 16
         height: 24
       alignment: 9
       pivot: {x: 0.5, y: 0.33333334}
@@ -294,9 +294,9 @@ TextureImporter:
       name: Averna_Character_Idle_N(16,28)_34F.dain_4
       rect:
         serializedVersion: 2
-        x: 64
+        x: 65
         y: 56
-        width: 17
+        width: 16
         height: 24
       alignment: 9
       pivot: {x: 0.5, y: 0.33333334}

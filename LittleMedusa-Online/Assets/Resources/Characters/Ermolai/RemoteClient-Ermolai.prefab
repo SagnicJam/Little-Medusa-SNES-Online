@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcb37f34103b104188383f3f318fde3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 32
+  tileType: 33
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
   projectileThrownType: 0
   projectileThrownType_2: 0
   invincibilityTickTimer: 250
-  petrificationTimeTickRate: 1000
+  petrificationTimeTickRate: 300
   maxHP: 8
   maxStockLives: 99
   walkSpeed: 4
@@ -264,6 +264,7 @@ MonoBehaviour:
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
+  ownerId: 0
   isWalking: 0
   isUsingPrimaryMove: 0
   isUsingSecondaryMove: 0
@@ -275,7 +276,6 @@ MonoBehaviour:
   chainIDLinkedTo: -1
   clientMasterController: {fileID: 0}
   serverMasterController: {fileID: 0}
-  ownerId: 0
   previousMovePointCellPosition: {x: 0, y: 0, z: 0}
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}

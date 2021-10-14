@@ -207,7 +207,6 @@ public class Averna : Hero
                     {
                         if (inputs[(int)EnumData.AvernaInputs.CastFlamePillar] && previousInputs[(int)EnumData.AvernaInputs.CastFlamePillar] != inputs[(int)EnumData.AvernaInputs.CastFlamePillar])
                         {
-
                             if (IsHeroAbleToFireProjectiles())
                             {
                                 CastFlamePillar castFlamePillar = new CastFlamePillar(GetLocalSequenceNo(), (int)Facing);

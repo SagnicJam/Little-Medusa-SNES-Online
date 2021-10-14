@@ -57,7 +57,8 @@ public class ProjectileUtil : MonoBehaviour
 
             if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave ||
                 pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
-                pU.projectileTypeThrown == EnumData.Projectiles.MightyWind)
+                pU.projectileTypeThrown == EnumData.Projectiles.MightyWind||
+                pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
             {
                 chainIDLinkedTo = ++GridManager.chainIDGlobal;
             }
@@ -258,18 +259,19 @@ public class ProjectileUtil : MonoBehaviour
                 }
             }
         }
-        else if (pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
-        {
-            if (MultiplayerManager.instance.isServer)
-            {
-                if(collidedActorWithMyHead is Enemy)
-                {
-                    collidedActorWithMyHead.TakeDamage(collidedActorWithMyHead.currentHP);
-                }
-            }
-        }
+        //else if (pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
+        //{
+        //    if (MultiplayerManager.instance.isServer)
+        //    {
+        //        if(collidedActorWithMyHead is Enemy)
+        //        {
+        //            collidedActorWithMyHead.TakeDamage(collidedActorWithMyHead.currentHP);
+        //        }
+        //    }
+        //}
         else if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave
-            || pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield)
+            || pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield
+            || pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
         {
             if (MultiplayerManager.instance.isServer)
             {
@@ -378,24 +380,25 @@ public class ProjectileUtil : MonoBehaviour
             }
 
         }
-        else if (pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
-        {
-            if (MultiplayerManager.instance.isServer)
-            {
-                if (collidedActorWithMyHead is Hero)
-                {
-                    //Send by client to server
-                    pU.onUseOver.Invoke(collidedActorWithMyHead);
-                }
-                else if (collidedActorWithMyHead is Enemy)
-                {
-                    collidedActorWithMyHead.TakeDamage(collidedActorWithMyHead.currentHP);
-                }
-            }
-        }
+        //else if (pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
+        //{
+        //    if (MultiplayerManager.instance.isServer)
+        //    {
+        //        if (collidedActorWithMyHead is Hero)
+        //        {
+        //            //Send by client to server
+        //            pU.onUseOver.Invoke(collidedActorWithMyHead);
+        //        }
+        //        else if (collidedActorWithMyHead is Enemy)
+        //        {
+        //            collidedActorWithMyHead.TakeDamage(collidedActorWithMyHead.currentHP);
+        //        }
+        //    }
+        //}
         else if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave
             || pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
-            pU.projectileTypeThrown == EnumData.Projectiles.MightyWind)
+            pU.projectileTypeThrown == EnumData.Projectiles.MightyWind||
+            pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
         {
             if (MultiplayerManager.instance.isServer)
             {
@@ -454,6 +457,7 @@ public class ProjectileUtil : MonoBehaviour
             if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave ||
                 pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
                 pU.projectileTypeThrown == EnumData.Projectiles.MightyWind||
+                pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar||
                 pU.projectileTypeThrown == EnumData.Projectiles.MightyWindMirrorKnight)
             {
                 if (pU.actorMePushing != null)

@@ -50,9 +50,9 @@ public class Attack
                 case EnumData.Projectiles.EyeLaserMirrorKnight:
                     actorHit.Petrify();
                     break;
-                case EnumData.Projectiles.FlamePillar:
-                    actorHit.TakeDamage(damage);
-                    break;
+                //case EnumData.Projectiles.FlamePillar:
+                //    actorHit.TakeDamage(damage);
+                //    break;
                 case EnumData.Projectiles.Arrow:
                     actorHit.TakeDamage(damage);
                     break;

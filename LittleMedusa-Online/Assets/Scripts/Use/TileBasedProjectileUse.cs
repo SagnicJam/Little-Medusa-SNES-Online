@@ -39,6 +39,7 @@ public class TileBasedProjectileUse : Use
             {
                 if (projectileTypeThrown == EnumData.Projectiles.TidalWave
                     || projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
+                    projectileTypeThrown == EnumData.Projectiles.FlamePillar ||
                     projectileTypeThrown == EnumData.Projectiles.MightyWind)
                 {
                     if (GridManager.instance.HasTileAtCellPoint(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position),EnumData.TileType.Boulder))
@@ -110,11 +111,11 @@ public class TileBasedProjectileUse : Use
         tileMovementDirection = actorUsing.Facing;
         liveProjectile.Initialise(this);
         
-        if (projectileTypeThrown==EnumData.Projectiles.FlamePillar)
-        {
-            liveProjectile.transform.position = actorUsing.actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing);
-            finalPos = actorUsing.actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing) + (liveProjectile.projectileTileTravelDistance * GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing));
-        }
+        //if (projectileTypeThrown==EnumData.Projectiles.FlamePillar)
+        //{
+        //    liveProjectile.transform.position = actorUsing.actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing);
+        //    finalPos = actorUsing.actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing) + (liveProjectile.projectileTileTravelDistance * GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing));
+        //}
     }
 
     public override void EndOfUse()

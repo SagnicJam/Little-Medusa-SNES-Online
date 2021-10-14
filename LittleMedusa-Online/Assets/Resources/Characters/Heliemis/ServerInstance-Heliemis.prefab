@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c84f55c3bf2b7145953faf184ef365d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 31
+  tileType: 32
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
   projectileThrownType: 15
   projectileThrownType_2: 0
   invincibilityTickTimer: 250
-  petrificationTimeTickRate: 1000
+  petrificationTimeTickRate: 300
   maxHP: 8
   maxStockLives: 99
   walkSpeed: 4

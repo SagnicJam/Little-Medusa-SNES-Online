@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2a67572b2602774294ba4e280b04cf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 28
+  tileType: 29
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -525,6 +525,7 @@ MonoBehaviour:
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
+  ownerId: 0
   isWalking: 0
   isUsingPrimaryMove: 0
   isUsingSecondaryMove: 0
@@ -536,7 +537,6 @@ MonoBehaviour:
   chainIDLinkedTo: -1
   clientMasterController: {fileID: 0}
   serverMasterController: {fileID: 0}
-  ownerId: 0
   previousMovePointCellPosition: {x: 0, y: 0, z: 0}
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
@@ -570,6 +570,7 @@ MonoBehaviour:
   force: 1
   hardboxCollider2D: {fileID: 3725772881182195639}
   gameCollider2D: {fileID: 1024727800281929132}
+  tilePullPositions: []
   direction: {x: 0, y: 0, z: 0}
   isPhysicsEnabled: 0
 --- !u!61 &3725772881182195639
@@ -611,3 +612,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInitialised: 0
+  monsterBreed: 0
