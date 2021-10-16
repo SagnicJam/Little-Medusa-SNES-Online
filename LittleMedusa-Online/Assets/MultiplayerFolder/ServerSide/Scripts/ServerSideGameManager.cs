@@ -56,7 +56,7 @@ public class ServerSideGameManager : MonoBehaviour
                 matchConditionDto = new MatchConditionDto
                 {
                     enemy = 5,
-                    enemyCount = 1
+                    enemyCount = 0
                 }
             };
             Server.Start(10, MultiplayerManager.instance.matchBeginDto);

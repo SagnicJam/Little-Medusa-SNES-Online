@@ -120095,7 +120095,7 @@ MonoBehaviour:
   characterSelectionScreen: {fileID: 256209095372272350, guid: 125f7419cbf8e89478566ac42fdd5a36,
     type: 3}
   isDebug: 1
-  isServer: 1
+  isServer: 0
   matchBeginDto:
     <matchId>k__BackingField: 0
     <matchConditionDto>k__BackingField:
