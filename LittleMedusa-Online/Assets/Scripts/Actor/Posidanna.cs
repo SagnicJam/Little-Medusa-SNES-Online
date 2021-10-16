@@ -19,20 +19,9 @@ public class Posidanna : Hero
         }
         return false;
     }
-
     public override bool IsHeroAbleToFireProjectiles(FaceDirection direction)
     {
         Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(direction);
-        if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection direction)
-    {
-        Vector3 objectPosition = GridManager.instance.cellToworld(predictedPos) + GridManager.instance.GetFacingDirectionOffsetVector3(direction);
         if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
         {
             return true;
@@ -149,63 +138,44 @@ public class Posidanna : Hero
 
     public override void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
     {
-        if (isInputFreezed)
+        bool secondaryAttackReady = !waitingActionForSecondaryMove.Perform();
+        if (!MultiplayerManager.instance.isServer && hasAuthority())
         {
-            return;
-        }
-        if (isPushed)
-        {
-            return;
-        }
-        if (isPetrified)
-        {
-            return;
-        }
-        if (!isInFlyingState)
-        {
-            bool secondaryAttackReady = !waitingActionForSecondaryMove.Perform();
-
-            if (!MultiplayerManager.instance.isServer && hasAuthority())
+            if (completedMotionToMovePoint)
             {
-                if (completedMotionToMovePoint&& isRespawnningPlayer)
+                if (inputs[(int)EnumData.PosidannaInputs.RespawnPlayer] && previousInputs[(int)EnumData.PosidannaInputs.RespawnPlayer] != inputs[(int)EnumData.PosidannaInputs.RespawnPlayer])
                 {
-                    if (inputs[(int)EnumData.PosidannaInputs.RespawnPlayer] && previousInputs[(int)EnumData.PosidannaInputs.RespawnPlayer] != inputs[(int)EnumData.PosidannaInputs.RespawnPlayer])
+                    Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                    if (IsPlayerSpawnable(cellToCheckFor))
                     {
-                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
-                        if (IsPlayerSpawnable(cellToCheckFor))
-                        {
-                            //Respawn player command
-                            RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
-                            ClientSend.RespawnPlayer(respawnPlayerCommand);
-                        }
-                        else
-                        {
-                            Debug.LogError("Invalid location to spawn player");
-                        }
+                        //Respawn player command
+                        RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                        ClientSend.RespawnPlayer(respawnPlayerCommand);
+                    }
+                    else
+                    {
+                        Debug.LogError("Invalid location to spawn player");
                     }
                 }
-                else if(!isRespawnningPlayer&&!isInvincible)
+            }
+            if (inputs[(int)EnumData.PosidannaInputs.ShootTidalWave] && previousInputs[(int)EnumData.PosidannaInputs.ShootTidalWave] != inputs[(int)EnumData.PosidannaInputs.ShootTidalWave])
+            {
+                if (IsHeroAbleToFireProjectiles())
                 {
-                    if (inputs[(int)EnumData.PosidannaInputs.ShootTidalWave] && previousInputs[(int)EnumData.PosidannaInputs.ShootTidalWave] != inputs[(int)EnumData.PosidannaInputs.ShootTidalWave])
-                    {
-                        if (IsHeroAbleToFireProjectiles())
-                        {
-                            FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(GetLocalSequenceNo(), (int)Facing, GridManager.instance.grid.WorldToCell(actorTransform.position));
-                            ClientSend.FireTidalWave(fireTidalWaveCommand);
-                            isFiringServerProjectiles = true;
-                            onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
-                        }
-                    }
-                    else if (inputs[(int)EnumData.PosidannaInputs.CastBubbleShield] && secondaryAttackReady)
-                    {
-                        waitingActionForSecondaryMove.ReInitialiseTimerToBegin(secondaryMoveAttackRateTickRate);
-                        CastBubbleShieldCommand castBubbleShieldCommand = new CastBubbleShieldCommand(GetLocalSequenceNo(), GridManager.instance.grid.WorldToCell(actorTransform.position));
-                        ClientSend.CastBubbleShield(castBubbleShieldCommand);
+                    FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(GetLocalSequenceNo(), (int)Facing, GridManager.instance.grid.WorldToCell(actorTransform.position));
+                    ClientSend.FireTidalWave(fireTidalWaveCommand);
+                    isFiringServerProjectiles = true;
+                    onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
+                }
+            }
+            else if (inputs[(int)EnumData.PosidannaInputs.CastBubbleShield] && previousInputs[(int)EnumData.PosidannaInputs.CastBubbleShield] != inputs[(int)EnumData.PosidannaInputs.CastBubbleShield] && secondaryAttackReady)
+            {
+                waitingActionForSecondaryMove.ReInitialiseTimerToBegin(secondaryMoveAttackRateTickRate);
+                CastBubbleShieldCommand castBubbleShieldCommand = new CastBubbleShieldCommand(GetLocalSequenceNo(), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                ClientSend.CastBubbleShield(castBubbleShieldCommand);
 
-                        isFiringServerProjectiles = true;
-                        onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
-                    }
-                }
+                isFiringServerProjectiles = true;
+                onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
             }
         }
     }
@@ -430,5 +400,15 @@ public class Posidanna : Hero
     public override void ProcessInputFrameCount(bool[] inputs, bool[] previousInputs)
     {
         inputFrameCounter.ProcessInputFrameCount(inputs, previousInputs);
+    }
+
+    public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection facing)
+    {
+        Vector3 objectPosition = GridManager.instance.cellToworld(predictedPos) + GridManager.instance.GetFacingDirectionOffsetVector3(facing);
+        if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
+        {
+            return true;
+        }
+        return false;
     }
 }

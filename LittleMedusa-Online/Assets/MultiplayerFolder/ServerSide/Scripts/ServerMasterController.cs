@@ -163,9 +163,10 @@ public class ServerMasterController : MonoBehaviour
             if (castFlamePillarRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out castFlamePillar))
             {
                 int direction = castFlamePillar.direction;
+                Vector3Int cellPredicted = castFlamePillar.predictedCell;
                 castFlamePillarRequestReceivedFromClientToServerDic.Remove(castFlamePillar.sequenceNoCastingFlamePillarCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                CastFlamePillarForPlayerImplementation(direction);
+                CastFlamePillarForPlayerImplementation(direction, cellPredicted);
             }
         }
 
@@ -176,9 +177,10 @@ public class ServerMasterController : MonoBehaviour
             if (castFlamePillarRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out castFlamePillar))
             {
                 int direction = castFlamePillar.direction;
+                Vector3Int cellPredicted = castFlamePillar.predictedCell;
                 castFlamePillarRequestReceivedFromClientToServerDic.Remove(castFlamePillar.sequenceNoCastingFlamePillarCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                CastFlamePillarForPlayerImplementation(direction);
+                CastFlamePillarForPlayerImplementation(direction, cellPredicted);
             }
         }
     }
@@ -466,9 +468,10 @@ public class ServerMasterController : MonoBehaviour
             if (mightyWindFireRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out fireMightyWindCommand))
             {
                 int direction = fireMightyWindCommand.direction;
+                Vector3Int cellPredicted = fireMightyWindCommand.cellPredicted;
                 mightyWindFireRequestReceivedFromClientToServerDic.Remove(fireMightyWindCommand.sequenceNoForFiringMightyWindCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                MightyWindFirePlayerRequestImplementation(direction);
+                MightyWindFirePlayerRequestImplementation(direction, cellPredicted);
             }
         }
 
@@ -479,9 +482,10 @@ public class ServerMasterController : MonoBehaviour
             if (mightyWindFireRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out fireMightyWindCommand))
             {
                 int direction = fireMightyWindCommand.direction;
+                Vector3Int cellPredicted = fireMightyWindCommand.cellPredicted;
                 mightyWindFireRequestReceivedFromClientToServerDic.Remove(fireMightyWindCommand.sequenceNoForFiringMightyWindCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                MightyWindFirePlayerRequestImplementation(direction);
+                MightyWindFirePlayerRequestImplementation(direction, cellPredicted);
             }
         }
     }
@@ -1326,20 +1330,15 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void CastFlamePillarForPlayerImplementation(int direction)
+    void CastFlamePillarForPlayerImplementation(int direction,Vector3Int predictedCell)
     {
         if (!CanDoAction("CastFlamePillarForPlayerImplementation"))
         {
             return;
         }
-        if (!serverInstanceHero.completedMotionToMovePoint)
+        if (serverInstanceHero.IsProjectilePlacable(predictedCell, (FaceDirection)direction))
         {
-            Debug.LogError("havent completed motion");
-            return;
-        }
-        if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
-        {
-            serverInstanceHero.CastFlamePillar();
+            serverInstanceHero.CastFlamePillar(predictedCell);
         }
         else
         {
@@ -1415,11 +1414,6 @@ public class ServerMasterController : MonoBehaviour
         {
             return;
         }
-        if (!serverInstanceHero.completedMotionToMovePoint)
-        {
-            Debug.LogError("havent completed motion");
-            return;
-        }
         Debug.Log("CastTornadoForPlayerImplementation ");
         if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
         {
@@ -1432,16 +1426,16 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void MightyWindFirePlayerRequestImplementation(int direction)
+    void MightyWindFirePlayerRequestImplementation(int direction,Vector3Int cellPredicted)
     {
         if (!CanDoAction("MightyWindFirePlayerRequestImplementation"))
         {
             return;
         }
         Debug.Log("MightyWindFirePlayerRequestImplementation ");
-        if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
+        if (serverInstanceHero.IsProjectilePlacable(cellPredicted, (FaceDirection)direction))
         {
-            serverInstanceHero.Fire();
+            serverInstanceHero.FireProjectile(cellPredicted);
         }
         else
         {

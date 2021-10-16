@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Medusa : Hero
 {
-
     public override void ProcessAuthoratativeEvents()
     {
         if (isRespawnningPlayer)
@@ -139,121 +138,89 @@ public class Medusa : Hero
     }
 
 
-
     public override void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
     {
-
-        if (isInputFreezed)
+        if (inputs[(int)EnumData.Inputs.Shoot])
         {
-            return;
-        }
-        if (isPushed)
-        {
-            return;
-        }
-        if (isPetrified)
-        {
-            return;
-        }
-        if (!isInFlyingState)
-        {
-            if (!isRespawnningPlayer)
+            if (IsHeroAbleToFireProjectiles())
             {
-                if (!isInvincible)
+                if (!waitingActionForPrimaryMove.Perform())
                 {
-                    if (inputs[(int)EnumData.Inputs.Shoot])
-                    {
-                        if (IsHeroAbleToFireProjectiles())
-                        {
-                            if (!waitingActionForPrimaryMove.Perform())
-                            {
-                                isFiringPrimaryProjectile = true;
-                                waitingActionForPrimaryMove.ReInitialiseTimerToBegin(primaryMoveAttackRateTickRate);
-                            }
-                            else
-                            {
-                                isFiringPrimaryProjectile = false;
-                            }
-                        }
-                    }
-                    else if (!inputs[(int)EnumData.Inputs.Shoot] && previousInputs[(int)EnumData.Inputs.Shoot] != inputs[(int)EnumData.Inputs.Shoot])
-                    {
-                        isFiringPrimaryProjectile = false;
-                        waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
-                    }
+                    isFiringPrimaryProjectile = true;
+                    waitingActionForPrimaryMove.ReInitialiseTimerToBegin(primaryMoveAttackRateTickRate);
                 }
-
-            }
-
-
-
-            if (!MultiplayerManager.instance.isServer && hasAuthority())
-            {
-                if (completedMotionToMovePoint)
+                else
                 {
-                    if (isRespawnningPlayer)
+                    isFiringPrimaryProjectile = false;
+                }
+            }
+        }
+        else if (!inputs[(int)EnumData.Inputs.Shoot] && previousInputs[(int)EnumData.Inputs.Shoot] != inputs[(int)EnumData.Inputs.Shoot])
+        {
+            isFiringPrimaryProjectile = false;
+            waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
+        }
+
+        if (!MultiplayerManager.instance.isServer && hasAuthority())
+        {
+            if (completedMotionToMovePoint)
+            {
+                if (inputs[(int)EnumData.Inputs.RespawnPlayer] && previousInputs[(int)EnumData.Inputs.RespawnPlayer] != inputs[(int)EnumData.Inputs.RespawnPlayer])
+                {
+                    Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                    if (IsPlayerSpawnable(cellToCheckFor))
                     {
-                        if (inputs[(int)EnumData.Inputs.RespawnPlayer] && previousInputs[(int)EnumData.Inputs.RespawnPlayer] != inputs[(int)EnumData.Inputs.RespawnPlayer])
-                        {
-                            Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
-                            if (IsPlayerSpawnable(cellToCheckFor))
-                            {
-                                //Respawn player command
-                                RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
-                                ClientSend.RespawnPlayer(respawnPlayerCommand);
-                            }
-                            else
-                            {
-                                Debug.LogError("Invalid location to spawn player");
-                            }
-                        }
+                        //Respawn player command
+                        RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                        ClientSend.RespawnPlayer(respawnPlayerCommand);
                     }
                     else
                     {
-                        if (inputs[(int)EnumData.Inputs.Push] && previousInputs[(int)EnumData.Inputs.Push] != inputs[(int)EnumData.Inputs.Push])
+                        Debug.LogError("Invalid location to spawn player");
+                    }
+                }
+                else if (inputs[(int)EnumData.Inputs.Push] && previousInputs[(int)EnumData.Inputs.Push] != inputs[(int)EnumData.Inputs.Push])
+                {
+                    Vector3Int cellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                    Actor actorToPush = GridManager.instance.GetActorOnPos(cellPos);
+
+                    if (actorToPush != null)
+                    {
+                        if (IsActorAbleToPush(Facing) && IsActorPushableInDirection(actorToPush, Facing))
                         {
-                            Vector3Int cellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                            Actor actorToPush = GridManager.instance.GetActorOnPos(cellPos);
-
-                            if (actorToPush != null)
-                            {
-                                if (IsActorAbleToPush(Facing) && IsActorPushableInDirection(actorToPush, Facing))
-                                {
-                                    //Send reliable request of push to server here
-                                    PushCommand pushCommand = new PushCommand(GetLocalSequenceNo(), (int)Facing, actorToPush.ownerId);
-                                    ClientSend.PushPlayerCommand(pushCommand);
-                                }
-                            }
-
-                            ClientEnemyManager clientEnemy = GridManager.instance.GetClientEnemyOnPos(cellPos);
-
-                            if(clientEnemy!=null)
-                            {
-                                if(IsClientEnemyPushable(Facing))
-                                {
-                                    PushCommand pushCommand = new PushCommand(GetLocalSequenceNo(), (int)Facing, clientEnemy.id);
-                                    ClientSend.PushPlayerCommand(pushCommand);
-                                }
-                            }
-                        }
-                        else if (inputs[(int)EnumData.Inputs.PlaceRemovalBoulder] && previousInputs[(int)EnumData.Inputs.PlaceRemovalBoulder] != inputs[(int)EnumData.Inputs.PlaceRemovalBoulder])
-                        {
-                            Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                            if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing))
-                            {
-                                //send command to server of placement
-                                PlaceBoulderCommand placeBoulderCommand = new PlaceBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
-                                ClientSend.PlaceBoulderCommand(placeBoulderCommand);
-                            }
-                            else if (GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.Boulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderDisappearing))
-                            {
-                                RemoveBoulderCommand removeBoulderCommand = new RemoveBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
-                                ClientSend.RemoveBoulderCommand(removeBoulderCommand);
-                            }
+                            //Send reliable request of push to server here
+                            PushCommand pushCommand = new PushCommand(GetLocalSequenceNo(), (int)Facing, actorToPush.ownerId);
+                            ClientSend.PushPlayerCommand(pushCommand);
                         }
                     }
 
+                    ClientEnemyManager clientEnemy = GridManager.instance.GetClientEnemyOnPos(cellPos);
+
+                    if (clientEnemy != null)
+                    {
+                        if (IsClientEnemyPushable(Facing))
+                        {
+                            PushCommand pushCommand = new PushCommand(GetLocalSequenceNo(), (int)Facing, clientEnemy.id);
+                            ClientSend.PushPlayerCommand(pushCommand);
+                        }
+                    }
                 }
+                else if (inputs[(int)EnumData.Inputs.PlaceRemovalBoulder] && previousInputs[(int)EnumData.Inputs.PlaceRemovalBoulder] != inputs[(int)EnumData.Inputs.PlaceRemovalBoulder])
+                {
+                    Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                    if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing))
+                    {
+                        //send command to server of placement
+                        PlaceBoulderCommand placeBoulderCommand = new PlaceBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
+                        ClientSend.PlaceBoulderCommand(placeBoulderCommand);
+                    }
+                    else if (GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.Boulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderDisappearing))
+                    {
+                        RemoveBoulderCommand removeBoulderCommand = new RemoveBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
+                        ClientSend.RemoveBoulderCommand(removeBoulderCommand);
+                    }
+                }
+
             }
         }
     }
@@ -437,6 +404,13 @@ public class Medusa : Hero
             placeORRemovalBoulder = false;
             respawnPlayer = false;
         }
+        else if (isFiringServerProjectiles)
+        {
+            up = false;
+            left = false;
+            down = false;
+            right = false;
+        }
         else
         {
             up = Input.GetKey(KeyCode.W);
@@ -473,6 +447,11 @@ public class Medusa : Hero
 
     public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection facing)
     {
-        throw new System.NotImplementedException();
+        Vector3 objectPosition = GridManager.instance.cellToworld(predictedPos) + GridManager.instance.GetFacingDirectionOffsetVector3(facing);
+        if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
+        {
+            return true;
+        }
+        return false;
     }
 }

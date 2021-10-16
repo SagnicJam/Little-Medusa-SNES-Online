@@ -548,11 +548,13 @@ public struct FireMightyWindCommand
 {
     public int sequenceNoForFiringMightyWindCommand;
     public int direction;
+    public Vector3Int cellPredicted;
 
-    public FireMightyWindCommand(int sequenceNoForFiringMightyWindCommand,int direction)
+    public FireMightyWindCommand(int sequenceNoForFiringMightyWindCommand,int direction,Vector3Int cellPredicted)
     {
         this.sequenceNoForFiringMightyWindCommand = sequenceNoForFiringMightyWindCommand;
         this.direction = direction;
+        this.cellPredicted = cellPredicted;
     }
 }
 
@@ -572,11 +574,13 @@ public struct CastFlamePillar
 {
     public int sequenceNoCastingFlamePillarCommand;
     public int direction;
+    public Vector3Int predictedCell;
 
-    public CastFlamePillar(int sequenceNoCastingFlamePillarCommand, int direction)
+    public CastFlamePillar(int sequenceNoCastingFlamePillarCommand, int direction, Vector3Int predictedCell)
     {
         this.sequenceNoCastingFlamePillarCommand = sequenceNoCastingFlamePillarCommand;
         this.direction = direction;
+        this.predictedCell = predictedCell;
     }
 }
 

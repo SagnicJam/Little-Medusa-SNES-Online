@@ -74,6 +74,7 @@ public class ClientSend : MonoBehaviour
         using (Packet packet = new Packet((int)ClientPackets.playerFiringMightyWindCommand))
         {
             packet.Write(fireMightyWindCommand.direction);
+            packet.Write(fireMightyWindCommand.cellPredicted);
             packet.Write(fireMightyWindCommand.sequenceNoForFiringMightyWindCommand);
             SendTCPData(packet);
         }
@@ -94,6 +95,7 @@ public class ClientSend : MonoBehaviour
         using (Packet packet = new Packet((int)ClientPackets.castingFlamePillarCommand))
         {
             packet.Write(castFlamePillar.direction);
+            packet.Write(castFlamePillar.predictedCell);
             packet.Write(castFlamePillar.sequenceNoCastingFlamePillarCommand);
 
             SendTCPData(packet);

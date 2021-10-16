@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Heliemis : Hero
 {
-    
-
     public override bool IsHeroAbleToFireProjectiles()
     {
         Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
@@ -134,62 +132,42 @@ public class Heliemis : Hero
 
     public override void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
     {
-
-        if (isInputFreezed)
+        if (!MultiplayerManager.instance.isServer && hasAuthority())
         {
-            return;
-        }
-        if (isPushed)
-        {
-            return;
-        }
-        if (isPetrified)
-        {
-            return;
-        }
-        if (!isInFlyingState)
-        {
-            if (!MultiplayerManager.instance.isServer && hasAuthority())
+            if (completedMotionToMovePoint)
             {
-                if (completedMotionToMovePoint)
+                if (inputs[(int)EnumData.HeliemisInputs.RespawnPlayer] && previousInputs[(int)EnumData.HeliemisInputs.RespawnPlayer] != inputs[(int)EnumData.HeliemisInputs.RespawnPlayer])
                 {
-                    if (isRespawnningPlayer)
+                    Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                    if (IsPlayerSpawnable(cellToCheckFor))
                     {
-                        if (inputs[(int)EnumData.HeliemisInputs.RespawnPlayer] && previousInputs[(int)EnumData.HeliemisInputs.RespawnPlayer] != inputs[(int)EnumData.HeliemisInputs.RespawnPlayer])
-                        {
-                            Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
-                            if (IsPlayerSpawnable(cellToCheckFor))
-                            {
-                                //Respawn player command
-                                RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
-                                ClientSend.RespawnPlayer(respawnPlayerCommand);
-                            }
-                            else
-                            {
-                                Debug.LogError("Invalid location to spawn player");
-                            }
-                        }
+                        //Respawn player command
+                        RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                        ClientSend.RespawnPlayer(respawnPlayerCommand);
                     }
                     else
                     {
-                        if (inputs[(int)EnumData.HeliemisInputs.ShootMightyWind] && previousInputs[(int)EnumData.HeliemisInputs.ShootMightyWind] != inputs[(int)EnumData.HeliemisInputs.ShootMightyWind])
-                        {
-                            if (IsHeroAbleToFireProjectiles())
-                            {
-                                FireMightyWindCommand fireMightyWindCommand = new FireMightyWindCommand(GetLocalSequenceNo(), (int)Facing);
-                                ClientSend.FireMightyWind(fireMightyWindCommand);
-                            }
-                        }
-                        else if (inputs[(int)EnumData.HeliemisInputs.PlaceTornado] && previousInputs[(int)EnumData.HeliemisInputs.PlaceTornado] != inputs[(int)EnumData.HeliemisInputs.PlaceTornado])
-                        {
-                            Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(actorTransform.position+GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                            if(!GridManager.instance.IsCellBlockedForUnitMotionAtPos(cellToCheck))
-                            {
-                                PlaceTornadoCommand placeTornoadoCommand = new PlaceTornadoCommand(GetLocalSequenceNo(), (int)Facing);
-                                ClientSend.PlaceTornadoCommand(placeTornoadoCommand);
-                            }
-                        }
+                        Debug.LogError("Invalid location to spawn player");
                     }
+                }
+                else if (inputs[(int)EnumData.HeliemisInputs.PlaceTornado] && previousInputs[(int)EnumData.HeliemisInputs.PlaceTornado] != inputs[(int)EnumData.HeliemisInputs.PlaceTornado])
+                {
+                    Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                    if (!GridManager.instance.IsCellBlockedForUnitMotionAtPos(cellToCheck))
+                    {
+                        PlaceTornadoCommand placeTornoadoCommand = new PlaceTornadoCommand(GetLocalSequenceNo(), (int)Facing);
+                        ClientSend.PlaceTornadoCommand(placeTornoadoCommand);
+                    }
+                }
+            }
+            if (inputs[(int)EnumData.HeliemisInputs.ShootMightyWind] && previousInputs[(int)EnumData.HeliemisInputs.ShootMightyWind] != inputs[(int)EnumData.HeliemisInputs.ShootMightyWind])
+            {
+                if (IsHeroAbleToFireProjectiles())
+                {
+                    FireMightyWindCommand fireMightyWindCommand = new FireMightyWindCommand(GetLocalSequenceNo(), (int)Facing, GridManager.instance.grid.WorldToCell(actorTransform.position));
+                    ClientSend.FireMightyWind(fireMightyWindCommand);
+                    isFiringServerProjectiles = true;
+                    onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
                 }
             }
         }
@@ -376,6 +354,13 @@ public class Heliemis : Hero
             placeTornado = false;
             respawnPlayer = false;
         }
+        else if(isFiringServerProjectiles)
+        {
+            up = false;
+            left = false;
+            down = false;
+            right = false;
+        }
         else
         {
             up = Input.GetKey(KeyCode.W);
@@ -409,6 +394,11 @@ public class Heliemis : Hero
 
     public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection facing)
     {
-        throw new System.NotImplementedException();
+        Vector3 objectPosition = GridManager.instance.cellToworld(predictedPos) + GridManager.instance.GetFacingDirectionOffsetVector3(facing);
+        if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
+        {
+            return true;
+        }
+        return false;
     }
 }

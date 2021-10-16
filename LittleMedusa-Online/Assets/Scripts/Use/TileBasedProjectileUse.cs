@@ -52,6 +52,12 @@ public class TileBasedProjectileUse : Use
                         previousValidPosCell = currentValidPosCell;
                         currentValidPosCell = GridManager.instance.grid.WorldToCell(liveProjectile.transform.position);
                     }
+
+                    if (GridManager.instance.IsCellBlockedForProjectiles(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position)))
+                    {
+                        EndOfUse();
+                        return;
+                    }
                 }
                 else
                 {

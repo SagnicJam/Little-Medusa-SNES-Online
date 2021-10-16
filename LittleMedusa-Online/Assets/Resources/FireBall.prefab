@@ -99,14 +99,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isServerNetworked: 0
   projectileTileTravelDistance: 5
-  projectileSpeed: 4
+  projectileSpeed: 6
   selfDestroyOnTargetTouch: 1
   isDispersing: 1
   dispersionRadius: 1
   dispersionSpeed: 6
   dispersedGO: {fileID: 94336416680244386, guid: 95f2ec3fa2c53f54b976faeb142065b1,
-    type: 3}
-  dispersedGOCollider: {fileID: 6471361220817513155, guid: d7a9156802681144e90c7a689bbfd02e,
     type: 3}
   frameLooper: {fileID: 1942351832986607419}
   isDynamicTravellingSprites: 0

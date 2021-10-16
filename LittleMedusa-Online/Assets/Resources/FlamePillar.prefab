@@ -159,8 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isServerNetworked: 1
-  projectileTileTravelDistance: 1
-  projectileSpeed: 4
+  projectileTileTravelDistance: 2
+  projectileSpeed: 6
   selfDestroyOnTargetTouch: 0
   isDispersing: 0
   dispersionRadius: 0

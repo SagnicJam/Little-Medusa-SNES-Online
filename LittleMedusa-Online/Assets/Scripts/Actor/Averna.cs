@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Averna : Hero
 {
-
     public override void Start()
     {
         base.Start();
@@ -141,79 +140,54 @@ public class Averna : Hero
 
     public override void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
     {
-        if (isInputFreezed)
+        if (inputs[(int)EnumData.AvernaInputs.ShootFireBall])
         {
-            return;
-        }
-        if (isPushed)
-        {
-            return;
-        }
-        if (isPetrified)
-        {
-            return;
-        }
-        if (!isInFlyingState)
-        {
-            if (!isRespawnningPlayer)
+            if (IsHeroAbleToFireProjectiles())
             {
-                if (!isInvincible)
+                if (!waitingActionForPrimaryMove.Perform())
                 {
-                    if (inputs[(int)EnumData.AvernaInputs.ShootFireBall])
-                    {
-                        if (IsHeroAbleToFireProjectiles())
-                        {
-                            if (!waitingActionForPrimaryMove.Perform())
-                            {
-                                isFiringPrimaryProjectile = true;
-                                waitingActionForPrimaryMove.ReInitialiseTimerToBegin(primaryMoveAttackRateTickRate);
-                            }
-                            else
-                            {
-                                isFiringPrimaryProjectile = false;
-                            }
-                        }
-                    }
-                    else if (!inputs[(int)EnumData.AvernaInputs.ShootFireBall] && previousInputs[(int)EnumData.AvernaInputs.ShootFireBall] != inputs[(int)EnumData.AvernaInputs.ShootFireBall])
-                    {
-                        isFiringPrimaryProjectile = false;
-                        waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
-                    }
+                    isFiringPrimaryProjectile = true;
+                    waitingActionForPrimaryMove.ReInitialiseTimerToBegin(primaryMoveAttackRateTickRate);
+                }
+                else
+                {
+                    isFiringPrimaryProjectile = false;
                 }
             }
+        }
+        else if (!inputs[(int)EnumData.AvernaInputs.ShootFireBall] && previousInputs[(int)EnumData.AvernaInputs.ShootFireBall] != inputs[(int)EnumData.AvernaInputs.ShootFireBall])
+        {
+            isFiringPrimaryProjectile = false;
+            waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
+        }
 
-            if (!MultiplayerManager.instance.isServer && hasAuthority())
+        if (!MultiplayerManager.instance.isServer && hasAuthority())
+        {
+            if (completedMotionToMovePoint)
             {
-                if (completedMotionToMovePoint)
+                if (inputs[(int)EnumData.AvernaInputs.RespawnPlayer] && previousInputs[(int)EnumData.AvernaInputs.RespawnPlayer] != inputs[(int)EnumData.AvernaInputs.RespawnPlayer])
                 {
-                    if (isRespawnningPlayer)
+                    Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                    if (IsPlayerSpawnable(cellToCheckFor))
                     {
-                        if (inputs[(int)EnumData.AvernaInputs.RespawnPlayer] && previousInputs[(int)EnumData.AvernaInputs.RespawnPlayer] != inputs[(int)EnumData.AvernaInputs.RespawnPlayer])
-                        {
-                            Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
-                            if (IsPlayerSpawnable(cellToCheckFor))
-                            {
-                                //Respawn player command
-                                RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
-                                ClientSend.RespawnPlayer(respawnPlayerCommand);
-                            }
-                            else
-                            {
-                                Debug.LogError("Invalid location to spawn player");
-                            }
-                        }
+                        //Respawn player command
+                        RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                        ClientSend.RespawnPlayer(respawnPlayerCommand);
                     }
                     else
                     {
-                        if (inputs[(int)EnumData.AvernaInputs.CastFlamePillar] && previousInputs[(int)EnumData.AvernaInputs.CastFlamePillar] != inputs[(int)EnumData.AvernaInputs.CastFlamePillar])
-                        {
-                            if (IsHeroAbleToFireProjectiles())
-                            {
-                                CastFlamePillar castFlamePillar = new CastFlamePillar(GetLocalSequenceNo(), (int)Facing);
-                                ClientSend.CastFlamePillar(castFlamePillar);
-                            }
-                        }
+                        Debug.LogError("Invalid location to spawn player");
                     }
+                }
+            }
+            if (inputs[(int)EnumData.AvernaInputs.CastFlamePillar] && previousInputs[(int)EnumData.AvernaInputs.CastFlamePillar] != inputs[(int)EnumData.AvernaInputs.CastFlamePillar])
+            {
+                if (IsHeroAbleToFireProjectiles())
+                {
+                    CastFlamePillar castFlamePillar = new CastFlamePillar(GetLocalSequenceNo(), (int)Facing, GridManager.instance.grid.WorldToCell(actorTransform.position));
+                    ClientSend.CastFlamePillar(castFlamePillar);
+                    isFiringServerProjectiles = true;
+                    onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
                 }
             }
         }
@@ -263,16 +237,13 @@ public class Averna : Hero
         }
         if (isFiringPrimaryProjectile)
         {
+            positionToSpawnProjectile = GridManager.instance.grid.WorldToCell(actorTransform.position);
             rangedAttack_1.SetAttackingActorId(ownerId);
             DynamicItem dynamicItem = new DynamicItem
             {
                 ranged = rangedAttack_1,
                 activate = new TileBasedProjectileUse()
             };
-            if(rangedAttack_1==null)
-            {
-                Debug.LogError("Got nothing");
-            }
             currentAttack = rangedAttack_1;
             dynamicItem.activate.BeginToUse(this, null, null);
         }
@@ -412,6 +383,13 @@ public class Averna : Hero
             respawnPlayer = false;
             selectMedusa = false;
         }
+        else if (isFiringServerProjectiles)
+        {
+            up = false;
+            left = false;
+            down = false;
+            right = false;
+        }
         else
         {
             up = Input.GetKey(KeyCode.W);
@@ -447,6 +425,11 @@ public class Averna : Hero
 
     public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection facing)
     {
-        throw new System.NotImplementedException();
+        Vector3 objectPosition = GridManager.instance.cellToworld(predictedPos) + GridManager.instance.GetFacingDirectionOffsetVector3(facing);
+        if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
+        {
+            return true;
+        }
+        return false;
     }
 }

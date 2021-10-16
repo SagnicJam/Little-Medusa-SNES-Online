@@ -133,58 +133,37 @@ public class Ermolai : Hero
 
     public override void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
     {
-        if (isInputFreezed)
+        if (!MultiplayerManager.instance.isServer && hasAuthority())
         {
-            return;
-        }
-        if (isPushed)
-        {
-            return;
-        }
-        if (isPetrified)
-        {
-            return;
-        }
-        if (!isInFlyingState)
-        {
-            if (!MultiplayerManager.instance.isServer && hasAuthority())
+            if (completedMotionToMovePoint)
             {
-                if (completedMotionToMovePoint)
+                if (inputs[(int)EnumData.ErmolaiInputs.RespawnPlayer] && previousInputs[(int)EnumData.ErmolaiInputs.RespawnPlayer] != inputs[(int)EnumData.ErmolaiInputs.RespawnPlayer])
                 {
-                    if (isRespawnningPlayer)
+                    Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                    if (IsPlayerSpawnable(cellToCheckFor))
                     {
-                        if (inputs[(int)EnumData.ErmolaiInputs.RespawnPlayer] && previousInputs[(int)EnumData.ErmolaiInputs.RespawnPlayer] != inputs[(int)EnumData.ErmolaiInputs.RespawnPlayer])
-                        {
-                            Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
-                            if (IsPlayerSpawnable(cellToCheckFor))
-                            {
-                                //Respawn player command
-                                RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
-                                ClientSend.RespawnPlayer(respawnPlayerCommand);
-                            }
-                            else
-                            {
-                                Debug.LogError("Invalid location to spawn player");
-                            }
-                        }
+                        //Respawn player command
+                        RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                        ClientSend.RespawnPlayer(respawnPlayerCommand);
                     }
                     else
                     {
-                        if (inputs[(int)EnumData.ErmolaiInputs.CastPitfall] && previousInputs[(int)EnumData.ErmolaiInputs.CastPitfall] != inputs[(int)EnumData.ErmolaiInputs.CastPitfall])
-                        {
-                            Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(actorTransform.position+2*GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                            if(GridManager.instance.HasTileAtCellPoint(cellToCheck,EnumData.TileType.Normal))
-                            {
-                                CastPitfallCommand castPitfallCommand = new CastPitfallCommand(GetLocalSequenceNo(),(int)Facing);
-                                ClientSend.CastPitfall(castPitfallCommand);
-                            }
-                        }
-                        else if (inputs[(int)EnumData.ErmolaiInputs.CastEarthquake] && previousInputs[(int)EnumData.ErmolaiInputs.CastEarthquake] != inputs[(int)EnumData.ErmolaiInputs.CastEarthquake])
-                        {
-                            CastEarthQuakeCommand castEarthQuakeCommand = new CastEarthQuakeCommand(GetLocalSequenceNo());
-                            ClientSend.CastEarthQuake(castEarthQuakeCommand);
-                        }
+                        Debug.LogError("Invalid location to spawn player");
                     }
+                }
+                else if (inputs[(int)EnumData.ErmolaiInputs.CastPitfall] && previousInputs[(int)EnumData.ErmolaiInputs.CastPitfall] != inputs[(int)EnumData.ErmolaiInputs.CastPitfall])
+                {
+                    Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(actorTransform.position + 2 * GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                    if (GridManager.instance.HasTileAtCellPoint(cellToCheck, EnumData.TileType.Normal))
+                    {
+                        CastPitfallCommand castPitfallCommand = new CastPitfallCommand(GetLocalSequenceNo(), (int)Facing);
+                        ClientSend.CastPitfall(castPitfallCommand);
+                    }
+                }
+                else if (inputs[(int)EnumData.ErmolaiInputs.CastEarthquake] && previousInputs[(int)EnumData.ErmolaiInputs.CastEarthquake] != inputs[(int)EnumData.ErmolaiInputs.CastEarthquake])
+                {
+                    CastEarthQuakeCommand castEarthQuakeCommand = new CastEarthQuakeCommand(GetLocalSequenceNo());
+                    ClientSend.CastEarthQuake(castEarthQuakeCommand);
                 }
             }
         }
@@ -370,6 +349,13 @@ public class Ermolai : Hero
             castEarthQuake = false;
             respawnPlayer = false;
         }
+        else if(isFiringServerProjectiles)
+        {
+            up = false;
+            left = false;
+            down = false;
+            right = false;
+        }
         else
         {
             up = Input.GetKey(KeyCode.W);
@@ -403,6 +389,11 @@ public class Ermolai : Hero
 
     public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection facing)
     {
-        throw new System.NotImplementedException();
+        Vector3 objectPosition = GridManager.instance.cellToworld(predictedPos) + GridManager.instance.GetFacingDirectionOffsetVector3(facing);
+        if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
+        {
+            return true;
+        }
+        return false;
     }
 }

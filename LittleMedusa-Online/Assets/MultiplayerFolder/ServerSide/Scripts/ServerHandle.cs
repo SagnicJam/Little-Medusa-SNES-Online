@@ -52,8 +52,9 @@ public class ServerHandle
     public static void PlayerCastingFlamePillarCommandReceived(int fromClient, Packet packet)
     {
         int direction = packet.ReadInt();
+        Vector3Int cellPredicted = packet.ReadVector3Int();
         int sequenceNumber = packet.ReadInt();
-        CastFlamePillar castFlamePillar = new CastFlamePillar(sequenceNumber, direction);
+        CastFlamePillar castFlamePillar = new CastFlamePillar(sequenceNumber, direction, cellPredicted);
         Server.clients[fromClient].serverMasterController.AccumulateCastingFlamePillarRequestToBePlayedOnServerFromClient(castFlamePillar);
     }
 
@@ -68,9 +69,10 @@ public class ServerHandle
     public static void PlayerFiringMightyWindCommandReceived(int fromClient, Packet packet)
     {
         int direction = packet.ReadInt();
+        Vector3Int cellPredicted = packet.ReadVector3Int();
         int sequenceNumber = packet.ReadInt();
 
-        FireMightyWindCommand fireMightyWindCommand = new FireMightyWindCommand(sequenceNumber, direction);
+        FireMightyWindCommand fireMightyWindCommand = new FireMightyWindCommand(sequenceNumber, direction, cellPredicted);
         Server.clients[fromClient].serverMasterController.AccumulateFiringMightyWindRequestToBePlayedOnServerFromClient(fireMightyWindCommand);
     }
 

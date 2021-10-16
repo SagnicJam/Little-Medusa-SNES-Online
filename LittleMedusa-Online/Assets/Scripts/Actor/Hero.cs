@@ -225,8 +225,10 @@ public abstract class Hero : Actor
     public abstract bool IsProjectilePlacable(Vector3Int predictedPos,FaceDirection facing);
 
     //Abilities
-    public void CastFlamePillar()
+    public void CastFlamePillar(Vector3Int predictedCell)
     {
+        positionToSpawnProjectile = predictedCell;
+
         rangedAttack_2.SetAttackingActorId(ownerId);
         DynamicItem dynamicItem = new DynamicItem
         {
