@@ -470,4 +470,9 @@ public class Medusa : Hero
     {
         inputFrameCounter.ProcessInputFrameCount(inputs,previousInputs);
     }
+
+    public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection facing)
+    {
+        throw new System.NotImplementedException();
+    }
 }

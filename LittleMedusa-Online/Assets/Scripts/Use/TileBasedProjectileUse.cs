@@ -106,7 +106,7 @@ public class TileBasedProjectileUse : Use
             return;
         }
         liveProjectile = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ProjectileUtil>();
-        liveProjectile.transform.position = actorUsing.actorTransform.position;
+        liveProjectile.transform.position = GridManager.instance.cellToworld(actorUsing.positionToSpawnProjectile);
         finalPos = actorUsing.actorTransform.position + (liveProjectile.projectileTileTravelDistance * GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing));
         tileMovementDirection = actorUsing.Facing;
         liveProjectile.Initialise(this);

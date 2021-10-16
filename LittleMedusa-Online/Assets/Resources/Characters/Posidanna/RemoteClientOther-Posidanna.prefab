@@ -370,6 +370,7 @@ MonoBehaviour:
   inputFrameCounter: {fileID: 3419446859251525054}
   hero: 0
   isInputFreezed: 0
+  isFiringServerProjectiles: 0
   up: 0
   left: 0
   down: 0

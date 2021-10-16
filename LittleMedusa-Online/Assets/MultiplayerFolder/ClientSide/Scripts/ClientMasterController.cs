@@ -500,11 +500,13 @@ public struct FireTidalWaveCommand
 {
     public int sequenceNoForFiringTidalWaveCommand;
     public int direction;
+    public Vector3Int predictedCell;
 
-    public FireTidalWaveCommand(int sequenceNoForFiringTidalWaveCommand,int direction)
+    public FireTidalWaveCommand(int sequenceNoForFiringTidalWaveCommand,int direction,Vector3Int predictedCell)
     {
         this.sequenceNoForFiringTidalWaveCommand = sequenceNoForFiringTidalWaveCommand;
         this.direction = direction;
+        this.predictedCell = predictedCell;
     }
 }
 
@@ -533,10 +535,12 @@ public struct CastPitfallCommand
 public struct CastBubbleShieldCommand
 {
     public int sequenceNoForCastingBubbleShield;
+    public Vector3Int predictedCell;
 
-    public CastBubbleShieldCommand(int sequenceNoForCastingBubbleShield)
+    public CastBubbleShieldCommand(int sequenceNoForCastingBubbleShield,Vector3Int predictedCell)
     {
         this.sequenceNoForCastingBubbleShield = sequenceNoForCastingBubbleShield;
+        this.predictedCell = predictedCell;
     }
 }
 

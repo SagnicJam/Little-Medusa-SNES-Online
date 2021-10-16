@@ -404,9 +404,10 @@ public class ServerMasterController : MonoBehaviour
             CastBubbleShieldCommand castBubbleShieldCommand;
             if (castBubbleShieldRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out castBubbleShieldCommand))
             {
+                Vector3Int cellPredicted = castBubbleShieldCommand.predictedCell;
                 castBubbleShieldRequestReceivedFromClientToServerDic.Remove(castBubbleShieldCommand.sequenceNoForCastingBubbleShield);
                 //do server rollback here to check to check if damage actually occured on server
-                CastBubbleShieldForPlayerImplementation();
+                CastBubbleShieldForPlayerImplementation(cellPredicted);
             }
         }
 
@@ -416,9 +417,10 @@ public class ServerMasterController : MonoBehaviour
             CastBubbleShieldCommand castBubbleShieldCommand;
             if (castBubbleShieldRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out castBubbleShieldCommand))
             {
+                Vector3Int cellPredicted = castBubbleShieldCommand.predictedCell;
                 castBubbleShieldRequestReceivedFromClientToServerDic.Remove(castBubbleShieldCommand.sequenceNoForCastingBubbleShield);
                 //do server rollback here to check to check if damage actually occured on server
-                CastBubbleShieldForPlayerImplementation();
+                CastBubbleShieldForPlayerImplementation(cellPredicted);
             }
         }
     }
@@ -525,9 +527,10 @@ public class ServerMasterController : MonoBehaviour
             if (tidalWaveFireRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out tidalWaveFireCommand))
             {
                 int direction = tidalWaveFireCommand.direction;
+                Vector3Int cellPredicted = tidalWaveFireCommand.predictedCell;
                 tidalWaveFireRequestReceivedFromClientToServerDic.Remove(tidalWaveFireCommand.sequenceNoForFiringTidalWaveCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                TidalWaveFirePlayerRequestImplementation(direction);
+                TidalWaveFirePlayerRequestImplementation(cellPredicted, direction);
             }
         }
 
@@ -538,9 +541,10 @@ public class ServerMasterController : MonoBehaviour
             if (tidalWaveFireRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out tidalWaveFireCommand))
             {
                 int direction = tidalWaveFireCommand.direction;
+                Vector3Int cellPredicted = tidalWaveFireCommand.predictedCell;
                 tidalWaveFireRequestReceivedFromClientToServerDic.Remove(tidalWaveFireCommand.sequenceNoForFiringTidalWaveCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                TidalWaveFirePlayerRequestImplementation(direction);
+                TidalWaveFirePlayerRequestImplementation(cellPredicted,direction);
             }
         }
     }
@@ -1273,11 +1277,6 @@ public class ServerMasterController : MonoBehaviour
         {
             return;
         }
-        if (!serverInstanceHero.completedMotionToMovePoint)
-        {
-            Debug.LogError("havent completed motion");
-            return;
-        }
         if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellPositionToPlaceBoulder))
         {
             Debug.Log("Setting tile boulder on "+cellPositionToPlaceBoulder);
@@ -1293,11 +1292,6 @@ public class ServerMasterController : MonoBehaviour
     {
         if (!CanDoAction("RemoveBoulderRequestImplementation"))
         {
-            return;
-        }
-        if (!serverInstanceHero.completedMotionToMovePoint)
-        {
-            Debug.LogError("havent completed motion");
             return;
         }
         if (GridManager.instance.HasTileAtCellPoint(cellPositionToRemoveBoulder, EnumData.TileType.Boulder))
@@ -1353,30 +1347,61 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void CastBubbleShieldForPlayerImplementation()
+    void CastBubbleShieldForPlayerImplementation(Vector3Int predictedCell)
     {
         if (!CanDoAction("CastBubbleShieldForPlayerImplementation"))
         {
             return;
         }
-        if (!serverInstanceHero.completedMotionToMovePoint)
+        if (serverInstanceHero.IsProjectilePlacable(predictedCell,FaceDirection.Up))
         {
-            Debug.LogError("havent completed motion");
-            return;
+            serverInstanceHero.CastBubbleShield(predictedCell, FaceDirection.Up);
         }
-        serverInstanceHero.CastBubbleShield();
+        else
+        {
+            Debug.LogError("bubbleshield-Hero is not able to fire up projectiles");
+        }
+
+        if (serverInstanceHero.IsProjectilePlacable(predictedCell, FaceDirection.Down))
+        {
+            serverInstanceHero.CastBubbleShield(predictedCell, FaceDirection.Down);
+        }
+        else
+        {
+            Debug.LogError("bubbleshield-Hero is not able to fire down projectiles");
+        }
+
+
+        if (serverInstanceHero.IsProjectilePlacable(predictedCell, FaceDirection.Left))
+        {
+            serverInstanceHero.CastBubbleShield(predictedCell, FaceDirection.Left);
+        }
+        else
+        {
+            Debug.LogError("bubbleshield-Hero is not able to fire left projectiles");
+        }
+
+
+        if (serverInstanceHero.IsProjectilePlacable(predictedCell, FaceDirection.Right))
+        {
+            serverInstanceHero.CastBubbleShield(predictedCell, FaceDirection.Right);
+        }
+        else
+        {
+            Debug.LogError("bubbleshield-Hero is not able to fire right projectiles");
+        }
     }
 
-    void TidalWaveFirePlayerRequestImplementation(int direction)
+    void TidalWaveFirePlayerRequestImplementation(Vector3Int predictedCell,int direction)
     {
         if (!CanDoAction("TidalWaveFirePlayerRequestImplementation"))
         {
             return;
         }
         Debug.Log("TidalWaveFirePlayerRequestImplementation ");
-        if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
+        if (serverInstanceHero.IsProjectilePlacable(predictedCell, (FaceDirection)direction))
         {
-            serverInstanceHero.Fire();
+            serverInstanceHero.FireProjectile(predictedCell);
         }
         else
         {

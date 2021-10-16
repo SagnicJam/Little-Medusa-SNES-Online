@@ -59,8 +59,9 @@ public class ServerHandle
 
     public static void PlayerCastingBubbleShieldCommandReceived(int fromClient,Packet packet)
     {
+        Vector3Int predictedCell = packet.ReadVector3Int();
         int sequenceNumber = packet.ReadInt();
-        CastBubbleShieldCommand castBubbleShieldCommand = new CastBubbleShieldCommand(sequenceNumber);
+        CastBubbleShieldCommand castBubbleShieldCommand = new CastBubbleShieldCommand(sequenceNumber, predictedCell);
         Server.clients[fromClient].serverMasterController.AccumulateCastingBubbleShieldRequestToBePlayedOnServerFromClient(castBubbleShieldCommand);
     }
 
@@ -76,9 +77,10 @@ public class ServerHandle
     public static void PlayerFiringTidalWaveCommandReceived(int fromClient, Packet packet)
     {
         int direction = packet.ReadInt();
+        Vector3Int predictedCell = packet.ReadVector3Int();
         int sequenceNumber = packet.ReadInt();
 
-        FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(sequenceNumber, direction);
+        FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(sequenceNumber, direction, predictedCell);
         Server.clients[fromClient].serverMasterController.AccumulateFiringTidalWaveRequestToBePlayedOnServerFromClient(fireTidalWaveCommand);
     }
 

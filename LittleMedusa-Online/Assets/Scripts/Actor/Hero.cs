@@ -21,6 +21,7 @@ public abstract class Hero : Actor
     [Header("Live Data")]
     public int hero;
     public bool isInputFreezed;
+    public bool isFiringServerProjectiles;
     
     public override void Awake()
     {
@@ -221,6 +222,7 @@ public abstract class Hero : Actor
     public abstract void ProcessInputMovementsControl();
     public abstract bool IsHeroAbleToFireProjectiles();
     public abstract bool IsHeroAbleToFireProjectiles(FaceDirection facing);
+    public abstract bool IsProjectilePlacable(Vector3Int predictedPos,FaceDirection facing);
 
     //Abilities
     public void CastFlamePillar()
@@ -256,38 +258,46 @@ public abstract class Hero : Actor
         GridManager.instance.SwitchTileAfter(cell, EnumData.TileType.Hole,EnumData.TileType.Normal);
     }
 
-    public void CastBubbleShield()
+    public void CastBubbleShield(Vector3Int predictedCell,FaceDirection facing)
     {
+        positionToSpawnProjectile = predictedCell;
         rangedAttack_2.SetAttackingActorId(ownerId);
         currentAttack = rangedAttack_2;
-        DynamicItem dynamicItem = new DynamicItem
+        switch(facing)
         {
-            ranged = rangedAttack_2,
-            activate = new DirectionBasedProjectileUse(0, actorTransform.right, null)
-        };
-        dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
-
-        DynamicItem dynamicItem2 = new DynamicItem
-        {
-            ranged = rangedAttack_2,
-            activate = new DirectionBasedProjectileUse(90, actorTransform.right, null)
-        };
-        dynamicItem2.activate.BeginToUse(this, null, dynamicItem2.ranged.OnHit);
-
-        DynamicItem dynamicItem3 = new DynamicItem
-        {
-            ranged = rangedAttack_2,
-            activate = new DirectionBasedProjectileUse(180, actorTransform.right, null)
-        };
-        dynamicItem3.activate.BeginToUse(this, null, dynamicItem3.ranged.OnHit);
-
-        DynamicItem dynamicItem4 = new DynamicItem
-        {
-            ranged = rangedAttack_2,
-            activate = new DirectionBasedProjectileUse(270, actorTransform.right, null)
-        };
-        dynamicItem4.activate.BeginToUse(this, null, dynamicItem4.ranged.OnHit);
-
+            case FaceDirection.Up:
+                DynamicItem dynamicItem = new DynamicItem
+                {
+                    ranged = rangedAttack_2,
+                    activate = new DirectionBasedProjectileUse(270, actorTransform.right, null)
+                };
+                dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
+                break;
+            case FaceDirection.Down:
+                DynamicItem dynamicItem1 = new DynamicItem
+                {
+                    ranged = rangedAttack_2,
+                    activate = new DirectionBasedProjectileUse(90, actorTransform.right, null)
+                };
+                dynamicItem1.activate.BeginToUse(this, null, dynamicItem1.ranged.OnHit);
+                break;
+            case FaceDirection.Left:
+                DynamicItem dynamicItem2 = new DynamicItem
+                {
+                    ranged = rangedAttack_2,
+                    activate = new DirectionBasedProjectileUse(180, actorTransform.right, null)
+                };
+                dynamicItem2.activate.BeginToUse(this, null, dynamicItem2.ranged.OnHit);
+                break;
+            case FaceDirection.Right:
+                DynamicItem dynamicItem3 = new DynamicItem
+                {
+                    ranged = rangedAttack_2,
+                    activate = new DirectionBasedProjectileUse(0, actorTransform.right, null)
+                };
+                dynamicItem3.activate.BeginToUse(this, null, dynamicItem3.ranged.OnHit);
+                break;
+        }
     }
     //end abilities
 

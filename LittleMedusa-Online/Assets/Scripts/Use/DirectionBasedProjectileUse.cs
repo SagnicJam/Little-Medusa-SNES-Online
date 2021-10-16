@@ -17,7 +17,7 @@ public class DirectionBasedProjectileUse : TileBasedProjectileUse
     {
         base.BeginToUse(actorUsing, onUseBegin, onDynamicItemUsed);
         Vector3 direction = GetVectorAtAngle(angle, fireDirection, -actorUsing.transform.forward).normalized;
-        Vector3Int finalCellPos = GridManager.instance.grid.WorldToCell(actorUsing.transform.position + (liveProjectile.projectileTileTravelDistance * direction));
+        Vector3Int finalCellPos = GridManager.instance.grid.WorldToCell(actorUsing.positionToSpawnProjectile + (liveProjectile.projectileTileTravelDistance * direction));
         if(angle==0)
         {
             tileMovementDirection = FaceDirection.Right;

@@ -66,6 +66,7 @@ public abstract class Actor : TileData
 
     public int ownerId;
     public Attack currentAttack;
+    public Vector3Int positionToSpawnProjectile;
 
     [Header("Hero Specific Data")]
     public bool isWalking;
@@ -250,6 +251,15 @@ public abstract class Actor : TileData
         waitingForInvinciblityToOver.ReInitialiseTimerToBegin(invincibilityTickTimer);
     }
 
+    public OnWorkDone onCompletedMotionToPoint;
+
+    private void FixedUpdate()
+    {
+        if(completedMotionToMovePoint)
+        {
+            onCompletedMotionToPoint?.Invoke();
+        }
+    }
 
     public bool completedMotionToMovePoint
     {
@@ -473,7 +483,7 @@ public abstract class Actor : TileData
     public void Fire()
     {
         Debug.Log("Firing here!!!!");
-        FireProjectile();
+        FireProjectile(GridManager.instance.grid.WorldToCell(actorTransform.position));
     }
 
     public IEnumerator forceTravelCorCache;
@@ -495,8 +505,9 @@ public abstract class Actor : TileData
         }
     }
 
-    void FireProjectile()
+    public void FireProjectile(Vector3Int positionToSpawn)
     {
+        positionToSpawnProjectile = positionToSpawn;
         rangedAttack_1.SetAttackingActorId(ownerId);
         DynamicItem dynamicItem = new DynamicItem
         {
