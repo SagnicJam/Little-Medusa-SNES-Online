@@ -49,12 +49,22 @@ MonoBehaviour:
   - {x: -3.5, y: 6.5, z: 0}
   - {x: -3.5, y: -0.5, z: 0}
   - {x: 3.5, y: -0.5, z: 0}
-  timeToStartMatch: 900
-  toNetworkTileType: 0300000014000000150000000200000001000000
+  worldDestructionTickRate: 900
+  maxItemCount: 5
+  itemSpawnTickRate: 100
+  timeToStartMatch: 325
+  stopWorldDestructionTimeCount: 100
+  toNetworkTileType: 0300000014000000150000000200000001000000160000001700000013000000060000000b000000
   snapShotsInOnePacket: 4
   packetHistorySize: 3
+  worldDestructionStop: 0
+  liveWorldDestructionTickCountTemp: 0
+  liveStopWorldDestructionTimeCount: 0
+  liveItemSpawnCountTemp: 0
   serverWorldSequenceNumber: 0
   currentGameState: 0
+  xWorldDeathSize: 0
+  yWorldDeathSize: 0
   serverInstancePlayer: {fileID: 984921492705243653, guid: 0ab42de9fd7acb549a69d0766495b6b2,
     type: 3}
 --- !u!114 &490409003049013614

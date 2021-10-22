@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 8438492171484474930}
   - component: {fileID: 5461802819602088926}
   - component: {fileID: 4220674656292707514}
-  - component: {fileID: 6354422439391426448}
   m_Layer: 0
   m_Name: ServerPredictedHero
   m_TagString: Untagged
@@ -160,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9bc853f89d1be488f3c42ba72cafaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 30
+  tileType: 32
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -190,6 +189,8 @@ MonoBehaviour:
   secondaryMoveAttackRateTickRate: 0
   pushSpeed: 4
   faceDirectionInit: 1
+  flySpeed: 6
+  flyingTickCount: 300
   leftIdleSprite: []
   rightIdleSprite: []
   upIdleSprite: []
@@ -256,8 +257,11 @@ MonoBehaviour:
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
+  normalSpeed: 0
   ownerId: 0
+  positionToSpawnProjectile: {x: 0, y: 0, z: 0}
   isWalking: 0
+  isFlying: 0
   isUsingPrimaryMove: 0
   isUsingSecondaryMove: 0
   currentHP: 0
@@ -271,15 +275,14 @@ MonoBehaviour:
   previousMovePointCellPosition: {x: 0, y: 0, z: 0}
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
-  frameDelayForRegisteringInput: 4
   petrificationColor: {r: 0, g: 0, b: 0, a: 0}
   invincibleColor: {r: 0, g: 0, b: 0, a: 0}
   healthFillImage: {fileID: 0}
   currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}
-  inputFrameCounter: {fileID: 6354422439391426448}
   hero: 0
   isInputFreezed: 0
+  isFiringServerProjectiles: 0
   up: 0
   left: 0
   down: 0
@@ -288,6 +291,7 @@ MonoBehaviour:
   push: 0
   placeORRemovalBoulder: 0
   respawnPlayer: 0
+  landPlayer: 0
 --- !u!114 &4220674656292707514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,19 +316,6 @@ MonoBehaviour:
   playonAwakeOneShot: 0
   spriteIndexToShowCache: 0
   playingOneShot: 0
---- !u!114 &6354422439391426448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8438492171484474931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad645ee1ae35c564fa882b402de3729c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputframeCount: 0
 --- !u!1 &8438492171874859207
 GameObject:
   m_ObjectHideFlags: 0

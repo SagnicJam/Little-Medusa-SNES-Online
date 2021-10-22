@@ -230,6 +230,21 @@ public class TileData : MonoBehaviour
                     blockProjectiles = true;
                     solidifyTile = true;
                     break;
+                case EnumData.TileType.VoidDeathTiles:
+                    blockFlyingUnits = false;
+                    blockBoulderPlacement = true;
+                    blockUnitMotion = false;
+                    blockPetrifiedObjects = false;
+                    blockProjectiles = true;
+                    killUnitsInstantlyIfInTheirRegion = true;
+                    break;
+                case EnumData.TileType.ItemSpawner:
+                    blockFlyingUnits = false;
+                    blockBoulderPlacement = true;
+                    blockUnitMotion = false;
+                    blockPetrifiedObjects = false;
+                    blockProjectiles = false;
+                    break;
             }
         }
     }

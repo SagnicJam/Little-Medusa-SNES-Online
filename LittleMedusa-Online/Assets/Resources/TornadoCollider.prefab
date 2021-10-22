@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff00e2d0efe74546a3f95a989804ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 60
+  tileType: 62
   blockFlyingUnits: 0
   blockBoulderPlacement: 0
   blockUnitMotion: 0

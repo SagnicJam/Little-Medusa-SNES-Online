@@ -10,7 +10,6 @@ public class Centaur : Enemy
     public float rangedAttackLineLengthForDetection;
     public int arrowDamage;
 
-    int normalSpeed;
 
     AimlessWandererMapper wandererMapper = new AimlessWandererMapper();
     AStarPathFindMapper pathfindingMapper = new AStarPathFindMapper();
@@ -21,7 +20,6 @@ public class Centaur : Enemy
     public override void Awake()
     {
         base.Awake();
-        normalSpeed = walkSpeed;
         currentMapper = wandererMapper;
 
         rangedAttack_1 = new Attack(arrowDamage, EnumData.AttackTypes.ProjectileAttack, projectileThrownType);

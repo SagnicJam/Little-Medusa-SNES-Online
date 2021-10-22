@@ -40,6 +40,11 @@ public class Heliemis : Hero
 
         if (!isInFlyingState)
         {
+            if (isFlying)
+            {
+                isFlying = false;
+                UpdateFrameSprites();
+            }
             if (inputs[(int)EnumData.HeliemisInputs.ShootMightyWind])
             {
                 if (!isUsingPrimaryMove)
@@ -57,7 +62,7 @@ public class Heliemis : Hero
                 }
             }
 
-            if (inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Right])
+            if (inputs[(int)EnumData.HeliemisInputs.Up] || inputs[(int)EnumData.HeliemisInputs.Down] || inputs[(int)EnumData.HeliemisInputs.Left] || inputs[(int)EnumData.HeliemisInputs.Right])
             {
                 if (!isWalking)
                 {
@@ -65,13 +70,22 @@ public class Heliemis : Hero
                     UpdateFrameSprites();
                 }
             }
-            else if (!(inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Right]))
+            else if (!(inputs[(int)EnumData.HeliemisInputs.Up] || inputs[(int)EnumData.HeliemisInputs.Down] || inputs[(int)EnumData.HeliemisInputs.Left] || inputs[(int)EnumData.HeliemisInputs.Right]))
             {
                 if (isWalking)
                 {
                     isWalking = false;
                     UpdateFrameSprites();
                 }
+            }
+        }
+        else
+        {
+            if (!isFlying)
+            {
+                isWalking = false;
+                isFlying = true;
+                UpdateFrameSprites();
             }
         }
     }
@@ -82,6 +96,19 @@ public class Heliemis : Hero
         {
             return;
         }
+        //if (isInFlyingState)
+        //{
+        //    if (!waitingForFlightToEnd.Perform())
+        //    {
+        //        //land here
+        //        LandPlayer();
+        //        if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+        //        {
+        //            TakeDamage(currentHP);
+        //        }
+        //        return;
+        //    }
+        //}
         if (isPushed)
         {
             if (completedMotionToMovePoint)
@@ -136,38 +163,54 @@ public class Heliemis : Hero
         {
             if (completedMotionToMovePoint)
             {
-                if (inputs[(int)EnumData.HeliemisInputs.RespawnPlayer] && previousInputs[(int)EnumData.HeliemisInputs.RespawnPlayer] != inputs[(int)EnumData.HeliemisInputs.RespawnPlayer])
+                if (isInFlyingState)
                 {
-                    Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
-                    if (IsPlayerSpawnable(cellToCheckFor))
+                    if (inputs[(int)EnumData.HeliemisInputs.LandPlayer] && previousInputs[(int)EnumData.HeliemisInputs.LandPlayer] != inputs[(int)EnumData.HeliemisInputs.LandPlayer])
                     {
-                        //Respawn player command
-                        RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
-                        ClientSend.RespawnPlayer(respawnPlayerCommand);
-                    }
-                    else
-                    {
-                        Debug.LogError("Invalid location to spawn player");
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                        //land player command
+                        LandPlayerCommand landPlayerCommand = new LandPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                        ClientSend.LandPlayer(landPlayerCommand);
                     }
                 }
-                else if (inputs[(int)EnumData.HeliemisInputs.PlaceTornado] && previousInputs[(int)EnumData.HeliemisInputs.PlaceTornado] != inputs[(int)EnumData.HeliemisInputs.PlaceTornado])
+                else
                 {
-                    Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                    if (!GridManager.instance.IsCellBlockedForUnitMotionAtPos(cellToCheck))
+                    if (inputs[(int)EnumData.HeliemisInputs.RespawnPlayer] && previousInputs[(int)EnumData.HeliemisInputs.RespawnPlayer] != inputs[(int)EnumData.HeliemisInputs.RespawnPlayer])
                     {
-                        PlaceTornadoCommand placeTornoadoCommand = new PlaceTornadoCommand(GetLocalSequenceNo(), (int)Facing);
-                        ClientSend.PlaceTornadoCommand(placeTornoadoCommand);
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                        if (IsPlayerSpawnable(cellToCheckFor))
+                        {
+                            //Respawn player command
+                            RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                            ClientSend.RespawnPlayer(respawnPlayerCommand);
+                        }
+                        else
+                        {
+                            Debug.LogError("Invalid location to spawn player");
+                        }
+                    }
+                    else if (inputs[(int)EnumData.HeliemisInputs.PlaceTornado] && previousInputs[(int)EnumData.HeliemisInputs.PlaceTornado] != inputs[(int)EnumData.HeliemisInputs.PlaceTornado])
+                    {
+                        Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                        if (!GridManager.instance.IsCellBlockedForUnitMotionAtPos(cellToCheck))
+                        {
+                            PlaceTornadoCommand placeTornoadoCommand = new PlaceTornadoCommand(GetLocalSequenceNo(), (int)Facing);
+                            ClientSend.PlaceTornadoCommand(placeTornoadoCommand);
+                        }
                     }
                 }
             }
-            if (inputs[(int)EnumData.HeliemisInputs.ShootMightyWind] && previousInputs[(int)EnumData.HeliemisInputs.ShootMightyWind] != inputs[(int)EnumData.HeliemisInputs.ShootMightyWind])
+            if (!isInFlyingState)
             {
-                if (IsHeroAbleToFireProjectiles())
+                if (inputs[(int)EnumData.HeliemisInputs.ShootMightyWind] && previousInputs[(int)EnumData.HeliemisInputs.ShootMightyWind] != inputs[(int)EnumData.HeliemisInputs.ShootMightyWind])
                 {
-                    FireMightyWindCommand fireMightyWindCommand = new FireMightyWindCommand(GetLocalSequenceNo(), (int)Facing, GridManager.instance.grid.WorldToCell(actorTransform.position));
-                    ClientSend.FireMightyWind(fireMightyWindCommand);
-                    isFiringServerProjectiles = true;
-                    onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
+                    if (IsHeroAbleToFireProjectiles())
+                    {
+                        FireMightyWindCommand fireMightyWindCommand = new FireMightyWindCommand(GetLocalSequenceNo(), (int)Facing, GridManager.instance.grid.WorldToCell(actorTransform.position));
+                        ClientSend.FireMightyWind(fireMightyWindCommand);
+                        isFiringServerProjectiles = true;
+                        onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
+                    }
                 }
             }
         }
@@ -202,7 +245,10 @@ public class Heliemis : Hero
         {
             return;
         }
-
+        if (isInFlyingState)
+        {
+            return;
+        }
         if (isInputFreezed)
         {
             return;
@@ -247,7 +293,7 @@ public class Heliemis : Hero
         walkAction.Perform();
     }
 
-    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs,int movementCommandPressCount)
+    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {
         if(isPhysicsControlled)
         {
@@ -268,25 +314,24 @@ public class Heliemis : Hero
         }
         if (completedMotionToMovePoint)
         {
-            if (inputs[(int)EnumData.Inputs.Up])
+            if (inputs[(int)EnumData.HeliemisInputs.Up])
             {
                 Facing = FaceDirection.Up;
             }
-            else if (inputs[(int)EnumData.Inputs.Left])
+            else if (inputs[(int)EnumData.HeliemisInputs.Left])
             {
                 Facing = FaceDirection.Left;
             }
-            else if (inputs[(int)EnumData.Inputs.Down])
+            else if (inputs[(int)EnumData.HeliemisInputs.Down])
             {
                 Facing = FaceDirection.Down;
             }
-            else if (inputs[(int)EnumData.Inputs.Right])
+            else if (inputs[(int)EnumData.HeliemisInputs.Right])
             {
                 Facing = FaceDirection.Right;
             }
 
-            if ((inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Right])
-                && movementCommandPressCount > frameDelayForRegisteringInput)
+            if ((inputs[(int)EnumData.HeliemisInputs.Up] || inputs[(int)EnumData.HeliemisInputs.Left] || inputs[(int)EnumData.HeliemisInputs.Down] || inputs[(int)EnumData.HeliemisInputs.Right]))
             {
                 //Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
@@ -298,7 +343,7 @@ public class Heliemis : Hero
         }
         else
         {
-            if (!inputs[(int)EnumData.Inputs.Up] && previousInputs[(int)EnumData.Inputs.Up] != inputs[(int)EnumData.Inputs.Up])
+            if (!inputs[(int)EnumData.HeliemisInputs.Up] && previousInputs[(int)EnumData.HeliemisInputs.Up] != inputs[(int)EnumData.HeliemisInputs.Up])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
                 if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
@@ -306,7 +351,7 @@ public class Heliemis : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Left] && previousInputs[(int)EnumData.Inputs.Left] != inputs[(int)EnumData.Inputs.Left])
+            else if (!inputs[(int)EnumData.HeliemisInputs.Left] && previousInputs[(int)EnumData.HeliemisInputs.Left] != inputs[(int)EnumData.HeliemisInputs.Left])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
                 if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
@@ -314,7 +359,7 @@ public class Heliemis : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Down] && previousInputs[(int)EnumData.Inputs.Down] != inputs[(int)EnumData.Inputs.Down])
+            else if (!inputs[(int)EnumData.HeliemisInputs.Down] && previousInputs[(int)EnumData.HeliemisInputs.Down] != inputs[(int)EnumData.HeliemisInputs.Down])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
                 if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
@@ -322,7 +367,7 @@ public class Heliemis : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Right] && previousInputs[(int)EnumData.Inputs.Right] != inputs[(int)EnumData.Inputs.Right])
+            else if (!inputs[(int)EnumData.HeliemisInputs.Right] && previousInputs[(int)EnumData.HeliemisInputs.Right] != inputs[(int)EnumData.HeliemisInputs.Right])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
                 if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
@@ -341,6 +386,7 @@ public class Heliemis : Hero
     public bool shootMightyWind;
     public bool placeTornado;
     public bool respawnPlayer;
+    public bool landPlayer;
 
     public override void DealInput()
     {
@@ -353,6 +399,7 @@ public class Heliemis : Hero
             shootMightyWind = false;
             placeTornado = false;
             respawnPlayer = false;
+            landPlayer = false;
         }
         else if(isFiringServerProjectiles)
         {
@@ -370,6 +417,7 @@ public class Heliemis : Hero
             shootMightyWind = Input.GetKey(KeyCode.J);
             placeTornado = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);
+            landPlayer = Input.GetKey(KeyCode.K);
         }
     }
 
@@ -383,13 +431,10 @@ public class Heliemis : Hero
                 right,
                 shootMightyWind,
                 placeTornado,
-                respawnPlayer
+                respawnPlayer,
+                landPlayer
                 };
         return inputs;
-    }
-    public override void ProcessInputFrameCount(bool[] inputs, bool[] previousInputs)
-    {
-        inputFrameCounter.ProcessInputFrameCount(inputs, previousInputs);
     }
 
     public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection facing)

@@ -26,6 +26,8 @@ public abstract class Actor : TileData
     public int secondaryMoveAttackRateTickRate;
     public int pushSpeed;
     public FaceDirection faceDirectionInit;
+    public int flySpeed;
+    public int flyingTickCount;
 
     [Header("Animation Sprites")]
     public Sprite[] leftIdleSprite;
@@ -63,6 +65,7 @@ public abstract class Actor : TileData
     public bool inCharacterSelectionScreen;
     public bool inGame;
     public bool triggerFaceChangeEvent;
+    public int normalSpeed;
 
     public int ownerId;
     public Attack currentAttack;
@@ -70,6 +73,7 @@ public abstract class Actor : TileData
 
     [Header("Hero Specific Data")]
     public bool isWalking;
+    public bool isFlying;
     public bool isUsingPrimaryMove;
     public bool isUsingSecondaryMove;
 
@@ -98,6 +102,7 @@ public abstract class Actor : TileData
     public MoveUseAnimationAction primaryMoveUseAction = new MoveUseAnimationAction();
     public InteractWithTileAction dropAction = new InteractWithTileAction();
     public WaitingForNextAction waitingForInvinciblityToOver = new WaitingForNextAction();
+    public WaitingForNextAction waitingForFlightToEnd = new WaitingForNextAction();
 
 
     [Header("Action Primary Actions")]
@@ -107,6 +112,7 @@ public abstract class Actor : TileData
     public virtual void Awake()
     {
         //
+        normalSpeed = walkSpeed;
         walkAction.Initialise(this);
         petrificationAction.Initialise(this);
         waitingForInvinciblityToOver.Initialise(this);
@@ -118,9 +124,11 @@ public abstract class Actor : TileData
 
         waitingActionForSecondaryMove.Initialise(this);
         waitingActionForSecondaryMove.ReInitialiseTimerToEnd(secondaryMoveAttackRateTickRate);
+
+        waitingForFlightToEnd.Initialise(this);
     }
 
-   
+
 
     public virtual void Start()
     {
@@ -187,6 +195,18 @@ public abstract class Actor : TileData
         currentStockLives = maxStockLives;
     }
 
+    public void FlyPlayer()
+    {
+        isInFlyingState = true;
+        SetFlyingState();
+    }
+
+    public void LandPlayer()
+    {
+        isInFlyingState = false;
+        SetLandState();
+    }
+
     void RespawnPlayer()
     {
         isRespawnningPlayer = true;
@@ -201,20 +221,56 @@ public abstract class Actor : TileData
         SetSpawnState();
     }
 
+    public void SetFrameSpriteState(bool active)
+    {
+        if (frameLooper != null)
+        {
+            frameLooper.spriteRenderer.enabled = active;
+        }
+    }
+
+    public void SetFrameSprite(Sprite sp)
+    {
+        if (frameLooper != null)
+        {
+            frameLooper.spriteRenderer.sprite = sp;
+        }
+    }
+
+    public void SetActorCollider(bool active)
+    {
+        if (actorCollider2D != null)
+        {
+            actorCollider2D.enabled = active;
+        }
+    }
+
+    public void SetFlyingState()
+    {
+        SetActorCollider(false);
+        walkSpeed = flySpeed;
+    }
+
+    public void SetLandState()
+    {
+        SetActorCollider(true);
+        walkSpeed = normalSpeed;
+    }
+
     public void SetRespawnState()
     {
-        actorCollider2D.enabled = false;
+        SetActorCollider(false);
         if (!MultiplayerManager.instance.isServer)
         {
             if (hasAuthority())
             {
                 //crosshair replaces sprite
-                frameLooper.spriteRenderer.sprite = crosshairSprite;
+                SetFrameSprite(crosshairSprite);
             }
             else
             {
                 //sprite enabled false
-                frameLooper.spriteRenderer.enabled = false;
+                SetFrameSpriteState(false);
             }
 
         }
@@ -223,7 +279,7 @@ public abstract class Actor : TileData
 
     public void SetSpawnState()
     {
-        actorCollider2D.enabled = true;
+        SetActorCollider(true);
         if (!MultiplayerManager.instance.isServer)
         {
             if (hasAuthority())
@@ -233,7 +289,7 @@ public abstract class Actor : TileData
             else
             {
                 //sprite enabled true
-                frameLooper.spriteRenderer.enabled = true;
+                SetFrameSpriteState(true);
             }
         }
         //Debug.LogError("Collider on");
@@ -394,6 +450,24 @@ public abstract class Actor : TileData
                         break;
                 }
             }
+            else if (isFlying)
+            {
+                switch (facing)
+                {
+                    case FaceDirection.Left:
+                        frameLooper.UpdateSpriteArr(leftFlySprite);
+                        break;
+                    case FaceDirection.Right:
+                        frameLooper.UpdateSpriteArr(rightFlySprite);
+                        break;
+                    case FaceDirection.Down:
+                        frameLooper.UpdateSpriteArr(downFlySprite);
+                        break;
+                    case FaceDirection.Up:
+                        frameLooper.UpdateSpriteArr(upFlySprite);
+                        break;
+                }
+            }
             else
             {
                 switch (facing)
@@ -518,8 +592,9 @@ public abstract class Actor : TileData
         dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
     }
 
-    public void FireProjectile(Attack rangedAttack)
+    public void FireProjectile(Attack rangedAttack, Vector3Int positionToSpawn)
     {
+        positionToSpawnProjectile = positionToSpawn;
         rangedAttack.SetAttackingActorId(ownerId);
         DynamicItem dynamicItem = new DynamicItem
         {
@@ -946,20 +1021,38 @@ public abstract class Actor : TileData
         {
             return;
         }
-        if (isPetrified && !isPushed)
-        return;
-
+        if(isInFlyingState)
+        {
+            return;
+        }
         TileData collidedTile = collider.GetComponent<TileData>();
+
         if (collidedTile!=null)
         {
-            if (collidedTile.killUnitsInstantlyIfInTheirRegion&& !IsInSpawnJarTerritory && !isInFlyingState)
+            if (collidedTile.killUnitsInstantlyIfInTheirRegion)
             {
                 OnBodyCollidingWithKillingTiles(collidedTile);
             }
         }
+
         if (isPhysicsControlled)
         {
             return;
+        }
+
+        if (collidedTile != null)
+        {
+            if (!isPushed&&!isPetrified)
+            {
+                if (collidedTile.tileType == EnumData.TileType.Hourglass)
+                {
+                    OnBodyCollidedWithHourGlassTile(currentMovePointCellPosition);
+                }
+                if (collidedTile.tileType == EnumData.TileType.IcarusWings)
+                {
+                    OnBodyCollidedWithIcarausWingsTiles(currentMovePointCellPosition);
+                }
+            }
         }
 
         ProjectileUtil projectileUtilCollidedWithMyHead = collider.GetComponent<ProjectileUtil>();
@@ -1148,7 +1241,8 @@ public abstract class Actor : TileData
     public abstract void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmNotPushedAndNotPetrified(Actor collidedActorWithMyHead);
     public abstract void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndAmPetrified(Actor collidedActorWithMyHead);
     public abstract void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead);
-
+    public abstract void OnBodyCollidedWithHourGlassTile(Vector3Int hourGlassTile);
+    public abstract void OnBodyCollidedWithIcarausWingsTiles(Vector3Int icarausCollectedOnTilePos);
     public abstract void OnBodyCollidingWithKillingTiles(TileData tileData);
     public abstract void OnBodyCollidingWithTornadoEffectTiles(TileData tileData);
 
@@ -1199,7 +1293,7 @@ public abstract class Actor : TileData
 
     public bool IsPlayerSpawnable(Vector3Int cellPos)
     {
-        if (GridManager.instance.IsCellBlockedForUnitMotionAtPos(cellPos))
+        if (GridManager.instance.IsCellKillableForSpawnAtPos(cellPos)||GridManager.instance.IsCellBlockedForUnitMotionAtPos(cellPos))
         {
             return false;
         }

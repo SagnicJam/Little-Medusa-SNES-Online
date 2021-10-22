@@ -41,6 +41,11 @@ public class Ermolai : Hero
 
         if (!isInFlyingState)
         {
+            if (isFlying)
+            {
+                isFlying = false;
+                UpdateFrameSprites();
+            }
             if (inputs[(int)EnumData.ErmolaiInputs.CastPitfall])
             {
                 if (!isUsingPrimaryMove)
@@ -58,7 +63,7 @@ public class Ermolai : Hero
                 }
             }
 
-            if (inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Right])
+            if (inputs[(int)EnumData.ErmolaiInputs.Up] || inputs[(int)EnumData.ErmolaiInputs.Down] || inputs[(int)EnumData.ErmolaiInputs.Left] || inputs[(int)EnumData.ErmolaiInputs.Right])
             {
                 if (!isWalking)
                 {
@@ -66,13 +71,22 @@ public class Ermolai : Hero
                     UpdateFrameSprites();
                 }
             }
-            else if (!(inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Right]))
+            else if (!(inputs[(int)EnumData.ErmolaiInputs.Up] || inputs[(int)EnumData.ErmolaiInputs.Down] || inputs[(int)EnumData.ErmolaiInputs.Left] || inputs[(int)EnumData.ErmolaiInputs.Right]))
             {
                 if (isWalking)
                 {
                     isWalking = false;
                     UpdateFrameSprites();
                 }
+            }
+        }
+        else
+        {
+            if (!isFlying)
+            {
+                isWalking = false;
+                isFlying = true;
+                UpdateFrameSprites();
             }
         }
     }
@@ -83,6 +97,19 @@ public class Ermolai : Hero
         {
             return;
         }
+        //if (isInFlyingState)
+        //{
+        //    if (!waitingForFlightToEnd.Perform())
+        //    {
+        //        //land here
+        //        LandPlayer();
+        //        if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+        //        {
+        //            TakeDamage(currentHP);
+        //        }
+        //        return;
+        //    }
+        //}
         if (isPushed)
         {
             if (completedMotionToMovePoint)
@@ -137,34 +164,48 @@ public class Ermolai : Hero
         {
             if (completedMotionToMovePoint)
             {
-                if (inputs[(int)EnumData.ErmolaiInputs.RespawnPlayer] && previousInputs[(int)EnumData.ErmolaiInputs.RespawnPlayer] != inputs[(int)EnumData.ErmolaiInputs.RespawnPlayer])
+                if (isInFlyingState)
                 {
-                    Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
-                    if (IsPlayerSpawnable(cellToCheckFor))
+                    if (inputs[(int)EnumData.ErmolaiInputs.LandPlayer] && previousInputs[(int)EnumData.ErmolaiInputs.LandPlayer] != inputs[(int)EnumData.ErmolaiInputs.LandPlayer])
                     {
-                        //Respawn player command
-                        RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
-                        ClientSend.RespawnPlayer(respawnPlayerCommand);
-                    }
-                    else
-                    {
-                        Debug.LogError("Invalid location to spawn player");
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                        //land player command
+                        LandPlayerCommand landPlayerCommand = new LandPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                        ClientSend.LandPlayer(landPlayerCommand);
                     }
                 }
-                else if (inputs[(int)EnumData.ErmolaiInputs.CastPitfall] && previousInputs[(int)EnumData.ErmolaiInputs.CastPitfall] != inputs[(int)EnumData.ErmolaiInputs.CastPitfall])
+                else
                 {
-                    Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(actorTransform.position + 2 * GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                    if (GridManager.instance.HasTileAtCellPoint(cellToCheck, EnumData.TileType.Normal))
+                    if (inputs[(int)EnumData.ErmolaiInputs.RespawnPlayer] && previousInputs[(int)EnumData.ErmolaiInputs.RespawnPlayer] != inputs[(int)EnumData.ErmolaiInputs.RespawnPlayer])
                     {
-                        CastPitfallCommand castPitfallCommand = new CastPitfallCommand(GetLocalSequenceNo(), (int)Facing);
-                        ClientSend.CastPitfall(castPitfallCommand);
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                        if (IsPlayerSpawnable(cellToCheckFor))
+                        {
+                            //Respawn player command
+                            RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                            ClientSend.RespawnPlayer(respawnPlayerCommand);
+                        }
+                        else
+                        {
+                            Debug.LogError("Invalid location to spawn player");
+                        }
+                    }
+                    else if (inputs[(int)EnumData.ErmolaiInputs.CastPitfall] && previousInputs[(int)EnumData.ErmolaiInputs.CastPitfall] != inputs[(int)EnumData.ErmolaiInputs.CastPitfall])
+                    {
+                        Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(actorTransform.position + 2 * GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                        if (GridManager.instance.HasTileAtCellPoint(cellToCheck, EnumData.TileType.Normal))
+                        {
+                            CastPitfallCommand castPitfallCommand = new CastPitfallCommand(GetLocalSequenceNo(), (int)Facing);
+                            ClientSend.CastPitfall(castPitfallCommand);
+                        }
+                    }
+                    else if (inputs[(int)EnumData.ErmolaiInputs.CastEarthquake] && previousInputs[(int)EnumData.ErmolaiInputs.CastEarthquake] != inputs[(int)EnumData.ErmolaiInputs.CastEarthquake])
+                    {
+                        CastEarthQuakeCommand castEarthQuakeCommand = new CastEarthQuakeCommand(GetLocalSequenceNo());
+                        ClientSend.CastEarthQuake(castEarthQuakeCommand);
                     }
                 }
-                else if (inputs[(int)EnumData.ErmolaiInputs.CastEarthquake] && previousInputs[(int)EnumData.ErmolaiInputs.CastEarthquake] != inputs[(int)EnumData.ErmolaiInputs.CastEarthquake])
-                {
-                    CastEarthQuakeCommand castEarthQuakeCommand = new CastEarthQuakeCommand(GetLocalSequenceNo());
-                    ClientSend.CastEarthQuake(castEarthQuakeCommand);
-                }
+                
             }
         }
     }
@@ -196,6 +237,10 @@ public class Ermolai : Hero
     public override void ProcessInputEventControl()
     {
         if (isRespawnningPlayer)
+        {
+            return;
+        }
+        if (isInFlyingState)
         {
             return;
         }
@@ -243,7 +288,7 @@ public class Ermolai : Hero
         walkAction.Perform();
     }
 
-    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs,int movementCommandPressCount)
+    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {
         if (isPhysicsControlled)
         {
@@ -264,25 +309,24 @@ public class Ermolai : Hero
 
         if (completedMotionToMovePoint)
         {
-            if (inputs[(int)EnumData.Inputs.Up])
+            if (inputs[(int)EnumData.ErmolaiInputs.Up])
             {
                 Facing = FaceDirection.Up;
             }
-            else if (inputs[(int)EnumData.Inputs.Left])
+            else if (inputs[(int)EnumData.ErmolaiInputs.Left])
             {
                 Facing = FaceDirection.Left;
             }
-            else if (inputs[(int)EnumData.Inputs.Down])
+            else if (inputs[(int)EnumData.ErmolaiInputs.Down])
             {
                 Facing = FaceDirection.Down;
             }
-            else if (inputs[(int)EnumData.Inputs.Right])
+            else if (inputs[(int)EnumData.ErmolaiInputs.Right])
             {
                 Facing = FaceDirection.Right;
             }
 
-            if ((inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Right])
-                && movementCommandPressCount > frameDelayForRegisteringInput)
+            if ((inputs[(int)EnumData.ErmolaiInputs.Up] || inputs[(int)EnumData.ErmolaiInputs.Left] || inputs[(int)EnumData.ErmolaiInputs.Down] || inputs[(int)EnumData.ErmolaiInputs.Right]))
             {
                 //Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
@@ -294,7 +338,7 @@ public class Ermolai : Hero
         }
         else
         {
-            if (!inputs[(int)EnumData.Inputs.Up] && previousInputs[(int)EnumData.Inputs.Up] != inputs[(int)EnumData.Inputs.Up])
+            if (!inputs[(int)EnumData.ErmolaiInputs.Up] && previousInputs[(int)EnumData.ErmolaiInputs.Up] != inputs[(int)EnumData.ErmolaiInputs.Up])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
                 if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
@@ -302,7 +346,7 @@ public class Ermolai : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Left] && previousInputs[(int)EnumData.Inputs.Left] != inputs[(int)EnumData.Inputs.Left])
+            else if (!inputs[(int)EnumData.ErmolaiInputs.Left] && previousInputs[(int)EnumData.ErmolaiInputs.Left] != inputs[(int)EnumData.ErmolaiInputs.Left])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
                 if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
@@ -310,7 +354,7 @@ public class Ermolai : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Down] && previousInputs[(int)EnumData.Inputs.Down] != inputs[(int)EnumData.Inputs.Down])
+            else if (!inputs[(int)EnumData.ErmolaiInputs.Down] && previousInputs[(int)EnumData.ErmolaiInputs.Down] != inputs[(int)EnumData.ErmolaiInputs.Down])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
                 if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
@@ -318,7 +362,7 @@ public class Ermolai : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Right] && previousInputs[(int)EnumData.Inputs.Right] != inputs[(int)EnumData.Inputs.Right])
+            else if (!inputs[(int)EnumData.ErmolaiInputs.Right] && previousInputs[(int)EnumData.ErmolaiInputs.Right] != inputs[(int)EnumData.ErmolaiInputs.Right])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
                 if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
@@ -337,6 +381,8 @@ public class Ermolai : Hero
     public bool castPitfall;
     public bool castEarthQuake;
     public bool respawnPlayer;
+    public bool landPlayer;
+
     public override void DealInput()
     {
         if (!inGame || isPushed ||isPetrified || isPhysicsControlled||isInputFreezed)
@@ -348,6 +394,7 @@ public class Ermolai : Hero
             castPitfall = false;
             castEarthQuake = false;
             respawnPlayer = false;
+            landPlayer = false;
         }
         else if(isFiringServerProjectiles)
         {
@@ -365,6 +412,7 @@ public class Ermolai : Hero
             castPitfall = Input.GetKey(KeyCode.J);
             castEarthQuake = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);
+            landPlayer = Input.GetKey(KeyCode.K);
         }
     }
 
@@ -378,13 +426,10 @@ public class Ermolai : Hero
                 right,
                 castPitfall,
                 castEarthQuake,
-                respawnPlayer
+                respawnPlayer,
+                landPlayer
                 };
         return inputs;
-    }
-    public override void ProcessInputFrameCount(bool[] inputs, bool[] previousInputs)
-    {
-        inputFrameCounter.ProcessInputFrameCount(inputs, previousInputs);
     }
 
     public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection facing)

@@ -95,6 +95,15 @@ public class ServerHandle
         Server.clients[fromClient].serverMasterController.AccumulatePetrificationRequestToBePlayedOnServerFromClient(petrificationCommand);
     }
 
+    public static void PlayerLandCommandReceived(int fromClient, Packet packet)
+    {
+        Vector3Int cellPostionToLandPlayerOn = packet.ReadVector3Int();
+        int sequenceNumber = packet.ReadInt();
+
+        LandPlayerCommand landCommand = new LandPlayerCommand(sequenceNumber, cellPostionToLandPlayerOn);
+        Server.clients[fromClient].serverMasterController.AccumulateLandingRequestFromClientToServer(landCommand);
+    }
+
     public static void PlayerRespawnCommandReceived(int fromClient,Packet packet)
     {
         Vector3Int cellPostionToRespawnPlayerOn = packet.ReadVector3Int();
@@ -148,10 +157,9 @@ public class ServerHandle
             {
                 previousInputs[i] = packet.ReadBool();
             }
-            int movementCommandPressCount = packet.ReadInt();
             int inputSequenceNumber = packet.ReadInt();
             //Debug.LogWarning("<color=green>receiving inputs packet to server </color>playerMovingCommandSequenceNumber : " + inputSequenceNumber + " w " + inputs[0] + " a " + inputs[1] + " s " + inputs[2] + " d " + inputs[3]);
-            Server.clients[fromClient].serverMasterController.AccumulateInputsToBePlayedOnServerFromClient(new InputCommands(inputs, previousInputs, movementCommandPressCount, inputSequenceNumber));            
+            Server.clients[fromClient].serverMasterController.AccumulateInputsToBePlayedOnServerFromClient(new InputCommands(inputs, previousInputs, inputSequenceNumber));            
         }
         int previousInputPacks = packet.ReadInt();
         for (int i = 0; i < previousInputPacks; i++)
@@ -170,9 +178,8 @@ public class ServerHandle
                 {
                     previousDataPreviousInputCommands[k] = packet.ReadBool();
                 }
-                int movementCommandPressCount = packet.ReadInt();
                 int previousSeqNo = packet.ReadInt();
-                Server.clients[fromClient].serverMasterController.AccumulateInputsToBePlayedOnServerFromClient(new InputCommands(previousDataInputCommands, previousDataPreviousInputCommands, movementCommandPressCount, previousSeqNo));
+                Server.clients[fromClient].serverMasterController.AccumulateInputsToBePlayedOnServerFromClient(new InputCommands(previousDataInputCommands, previousDataPreviousInputCommands, previousSeqNo));
             }
         }
     }

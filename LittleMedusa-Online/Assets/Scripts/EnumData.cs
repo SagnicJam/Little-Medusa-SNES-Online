@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnumData
 {
-    public enum Inputs
+    public enum MedusaInputs
     {
         Up=0,
         Left,
@@ -13,7 +13,8 @@ public class EnumData
         Shoot,
         Push,
         PlaceRemovalBoulder,
-        RespawnPlayer
+        RespawnPlayer,
+        LandPlayer
     }
 
     public enum PosidannaInputs
@@ -24,7 +25,8 @@ public class EnumData
         Right,
         ShootTidalWave,
         CastBubbleShield,
-        RespawnPlayer
+        RespawnPlayer,
+        LandPlayer
     }
 
     public enum ErmolaiInputs
@@ -35,7 +37,8 @@ public class EnumData
         Right,
         CastPitfall,
         CastEarthquake,
-        RespawnPlayer
+        RespawnPlayer,
+        LandPlayer
     }
 
     public enum HeliemisInputs
@@ -46,7 +49,8 @@ public class EnumData
         Right,
         ShootMightyWind,
         PlaceTornado,
-        RespawnPlayer
+        RespawnPlayer,
+        LandPlayer
     }
 
     public enum AvernaInputs
@@ -57,7 +61,8 @@ public class EnumData
         Right,
         ShootFireBall,
         CastFlamePillar,
-        RespawnPlayer
+        RespawnPlayer,
+        LandPlayer
     }
 
     public enum PlayerStates
@@ -104,6 +109,8 @@ public class EnumData
         NoBoulder,
         Wall,
         Solid,
+        VoidDeathTiles,
+        ItemSpawner,
         Mirror,
         Switch,
         ThunderStruck,

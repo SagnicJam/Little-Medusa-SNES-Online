@@ -10,13 +10,21 @@ public class ServerSideGameManager : MonoBehaviour
 
     [Header("Tweak Params")]
     public List<Vector3> spawnPositions;
+    public int worldDestructionTickRate;
+    public int maxItemCount;
+    public int itemSpawnTickRate;
     public int timeToStartMatch;
+    public int stopWorldDestructionTimeCount;
     public List<EnumData.TileType> toNetworkTileType;
 
     public int snapShotsInOnePacket;
     public int packetHistorySize;
 
     [Header("Live Data")]
+    public bool worldDestructionStop;
+    public int liveWorldDestructionTickCountTemp;
+    public int liveStopWorldDestructionTimeCount;
+    public int liveItemSpawnCountTemp;
     public int serverWorldSequenceNumber=0;
     private List<WorldUpdate> worldUpdatesToBeSentFromServerToClient = new List<WorldUpdate>();
     private List<PreviousWorldUpdatePacks> previousHistoryForWorldUpdatesToBeSentToServerCollection = new List<PreviousWorldUpdatePacks>();
@@ -24,6 +32,8 @@ public class ServerSideGameManager : MonoBehaviour
     public static Dictionary<int, EnemyData> enemiesDic = new Dictionary<int, EnemyData>();
     public static Dictionary<int, AnimatingStaticTile> animatingStaticTileDic = new Dictionary<int, AnimatingStaticTile>();
     public EnumData.GameState currentGameState;
+    public int xWorldDeathSize = 0;
+    public int yWorldDeathSize = 0;
 
     [Header("Unit Template")]
     public GameObject serverInstancePlayer;
@@ -45,7 +55,6 @@ public class ServerSideGameManager : MonoBehaviour
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
-        
 
         if(MultiplayerManager.instance.isDebug)
         {
@@ -55,7 +64,7 @@ public class ServerSideGameManager : MonoBehaviour
                 matchId = 13,
                 matchConditionDto = new MatchConditionDto
                 {
-                    enemy = 5,
+                    enemy = 0,
                     enemyCount = 0
                 }
             };
@@ -105,6 +114,8 @@ public class ServerSideGameManager : MonoBehaviour
     {
         serverWorldSequenceNumber++;
         
+        DealItemSpawn();
+        //DealWorldDestruction();
         DealMatchStartTime();
         //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
 
@@ -139,6 +150,83 @@ public class ServerSideGameManager : MonoBehaviour
         }
     }
 
+    void DealItemSpawn()
+    {
+        if (currentGameState == EnumData.GameState.Gameplay)
+        {
+            if (liveItemSpawnCountTemp <= itemSpawnTickRate)
+            {
+                liveItemSpawnCountTemp++;
+            }
+            else
+            {
+                liveItemSpawnCountTemp = 0;
+                SpawnItem();
+            }
+        }
+    }
+
+    void SpawnItem()
+    {
+        List<Vector3Int> cellPosOfItemSpawners = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.ItemSpawner);
+
+        List<Vector3Int> cellPosForItemTiles = new List<Vector3Int>(cellPosOfItemSpawners);
+
+        foreach (Vector3Int item in cellPosOfItemSpawners)
+        {
+            if (GridManager.instance.HasItemOnTiles(item))
+            {
+                cellPosForItemTiles.Remove(item);
+            }
+        }
+
+        if(cellPosForItemTiles.Count>0 && cellPosForItemTiles.Count <= maxItemCount)
+        {
+            GridManager.instance.SetTile(
+                cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
+            , EnumData.TileType.IcarusWings,
+            true,
+            false);
+        }
+    }
+
+    public void StopWorldDestruction()
+    {
+        liveStopWorldDestructionTimeCount = stopWorldDestructionTimeCount;
+        worldDestructionStop = true;
+    }
+
+    void DealWorldDestruction()
+    {
+        if(currentGameState==EnumData.GameState.Gameplay)
+        {
+            if(worldDestructionStop)
+            {
+                if (liveStopWorldDestructionTimeCount > 0)
+                {
+                    liveStopWorldDestructionTimeCount--;
+                }
+                else
+                {
+                    liveStopWorldDestructionTimeCount = 0;
+                    worldDestructionStop = false;
+                }
+            }
+            else
+            {
+                if (liveWorldDestructionTickCountTemp <= worldDestructionTickRate)
+                {
+                    liveWorldDestructionTickCountTemp++;
+                }
+                else
+                {
+                    liveWorldDestructionTickCountTemp = 0;
+                    UpdateDeathTiles();
+                }
+            }
+        }
+    }
+
     void DealMatchStartTime()
     {
         if(timeToStartMatch>0)
@@ -156,7 +244,87 @@ public class ServerSideGameManager : MonoBehaviour
         }
     }
     
+    
 
+    void UpdateToDeathTilesAtPosition(Vector3Int cellPos)
+    {
+        List<TileData>tileDatas = GridManager.instance.GetAllTileDataInCellPos(cellPos);
+        foreach (TileData item in tileDatas)
+        {
+            GridManager.instance.SetTile(cellPos,item.tileType,false,false);
+        }
+
+        GridManager.instance.SetTile(cellPos,EnumData.TileType.VoidDeathTiles,true,false);
+    }
+
+    void UpdateDeathTiles()
+    {
+        if (GridManager.instance.xMin + xWorldDeathSize < GridManager.instance.xMax - xWorldDeathSize && GridManager.instance.yMin + yWorldDeathSize < GridManager.instance.yMax - yWorldDeathSize)
+        {
+            for (int j = GridManager.instance.yMin + yWorldDeathSize; j <= GridManager.instance.yMax - yWorldDeathSize; j++)
+            {
+                UpdateToDeathTilesAtPosition(new Vector3Int(GridManager.instance.xMin + xWorldDeathSize, j, 0));
+            }
+            for (int j = GridManager.instance.yMin + yWorldDeathSize; j <= GridManager.instance.yMax - yWorldDeathSize; j++)
+            {
+                UpdateToDeathTilesAtPosition(new Vector3Int(GridManager.instance.xMax - xWorldDeathSize, j, 0));
+            }
+            for (int j = GridManager.instance.xMin + xWorldDeathSize; j <= GridManager.instance.xMax - xWorldDeathSize; j++)
+            {
+                UpdateToDeathTilesAtPosition(new Vector3Int(j, GridManager.instance.yMin + yWorldDeathSize, 0));
+            }
+            for (int j = GridManager.instance.xMin + xWorldDeathSize; j <= GridManager.instance.xMax - xWorldDeathSize; j++)
+            {
+                UpdateToDeathTilesAtPosition(new Vector3Int(j, GridManager.instance.yMax - yWorldDeathSize, 0));
+            }
+            if (GridManager.instance.xMin + xWorldDeathSize < GridManager.instance.xMax - xWorldDeathSize)
+            {
+                xWorldDeathSize++;
+            }
+            if (GridManager.instance.yMin + yWorldDeathSize < GridManager.instance.yMax - yWorldDeathSize)
+            {
+                yWorldDeathSize++;
+            }
+        }
+        else if (GridManager.instance.xMin + xWorldDeathSize < GridManager.instance.xMax - xWorldDeathSize || GridManager.instance.yMin + yWorldDeathSize < GridManager.instance.yMax - yWorldDeathSize)
+        {
+            if (GridManager.instance.xMin + xWorldDeathSize < GridManager.instance.xMax - xWorldDeathSize)
+            {
+                UpdateToDeathTilesAtPosition(new Vector3Int(GridManager.instance.xMin + xWorldDeathSize, GridManager.instance.yMin + yWorldDeathSize, 0));
+                UpdateToDeathTilesAtPosition(new Vector3Int(GridManager.instance.xMax - xWorldDeathSize, GridManager.instance.yMax - yWorldDeathSize, 0));
+                xWorldDeathSize++;
+            }
+
+            if (GridManager.instance.yMin + yWorldDeathSize < GridManager.instance.yMax - yWorldDeathSize)
+            {
+                UpdateToDeathTilesAtPosition(new Vector3Int(GridManager.instance.xMin + xWorldDeathSize, GridManager.instance.yMin + yWorldDeathSize, 0));
+                UpdateToDeathTilesAtPosition(new Vector3Int(GridManager.instance.xMax - xWorldDeathSize, GridManager.instance.yMax - yWorldDeathSize, 0));
+                yWorldDeathSize++;
+            }
+        }
+        else if ((GridManager.instance.xMax - GridManager.instance.xMin) > (GridManager.instance.yMax - GridManager.instance.yMin) && GridManager.instance.xMin + xWorldDeathSize == GridManager.instance.xMax - xWorldDeathSize)
+        {
+            if (GridManager.instance.xMin + xWorldDeathSize == GridManager.instance.xMax - xWorldDeathSize)
+            {
+                UpdateToDeathTilesAtPosition(new Vector3Int(GridManager.instance.xMin + xWorldDeathSize, GridManager.instance.yMin + yWorldDeathSize, 0));
+                UpdateToDeathTilesAtPosition(new Vector3Int(GridManager.instance.xMax - xWorldDeathSize, GridManager.instance.yMax - yWorldDeathSize, 0));
+                xWorldDeathSize++;
+            }
+        }
+        else if ((GridManager.instance.xMax - GridManager.instance.xMin) < (GridManager.instance.yMax - GridManager.instance.yMin) && GridManager.instance.yMin + yWorldDeathSize == GridManager.instance.yMax - yWorldDeathSize)
+        {
+            if (GridManager.instance.xMin + xWorldDeathSize == GridManager.instance.xMax - xWorldDeathSize)
+            {
+                UpdateToDeathTilesAtPosition(new Vector3Int(GridManager.instance.xMin + xWorldDeathSize, GridManager.instance.yMin + yWorldDeathSize, 0));
+                UpdateToDeathTilesAtPosition(new Vector3Int(GridManager.instance.xMax - xWorldDeathSize, GridManager.instance.yMax - yWorldDeathSize, 0));
+                yWorldDeathSize++;
+            }
+        }
+        else
+        {
+            //Debug.LogError("finish");
+        }
+    }
     private void OnApplicationQuit()
     {
         Debug.LogError("Server has been stopped................");

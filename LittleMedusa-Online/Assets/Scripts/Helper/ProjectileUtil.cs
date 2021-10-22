@@ -197,7 +197,8 @@ public class ProjectileUtil : MonoBehaviour
         {
             if (MultiplayerManager.instance.isServer && GridManager.instance.IsPureHeadOn(transform.position, collidedActorWithMyHead))
             {
-                collidedActorWithMyHead.FireProjectile(new Attack(pU.attack.damage, pU.attack.attackType, EnumData.Projectiles.EyeLaserMirrorKnight));
+                collidedActorWithMyHead.FireProjectile(new Attack(pU.attack.damage, pU.attack.attackType, EnumData.Projectiles.EyeLaserMirrorKnight),
+                    GridManager.instance.grid.WorldToCell(collidedActorWithMyHead.actorTransform.position));
                 pU.EndOfUse();
             }
             else if (GridManager.instance.IsPureBackOrSideStab(transform.position, collidedActorWithMyHead))
@@ -213,7 +214,8 @@ public class ProjectileUtil : MonoBehaviour
         {
             if (MultiplayerManager.instance.isServer && GridManager.instance.IsPureHeadOn(transform.position, collidedActorWithMyHead))
             {
-                collidedActorWithMyHead.FireProjectile(new Attack(pU.attack.damage, pU.attack.attackType, EnumData.Projectiles.FireBallMirrorKnight));
+                collidedActorWithMyHead.FireProjectile(new Attack(pU.attack.damage, pU.attack.attackType, EnumData.Projectiles.FireBallMirrorKnight),
+                    GridManager.instance.grid.WorldToCell(collidedActorWithMyHead.actorTransform.position));
                 Destroy(gameObject);
             }
             else if (GridManager.instance.IsPureBackOrSideStab(transform.position, collidedActorWithMyHead))
@@ -231,7 +233,8 @@ public class ProjectileUtil : MonoBehaviour
         {
             if (MultiplayerManager.instance.isServer && GridManager.instance.IsPureHeadOn(transform.position, collidedActorWithMyHead))
             {
-                collidedActorWithMyHead.FireProjectile(new Attack(pU.attack.damage, pU.attack.attackType, EnumData.Projectiles.MightyWindMirrorKnight));
+                collidedActorWithMyHead.FireProjectile(new Attack(pU.attack.damage, pU.attack.attackType, EnumData.Projectiles.MightyWindMirrorKnight),
+                    GridManager.instance.grid.WorldToCell(collidedActorWithMyHead.actorTransform.position));
                 pU.EndOfUse();
             }
             else if (GridManager.instance.IsPureBackOrSideStab(transform.position, collidedActorWithMyHead))

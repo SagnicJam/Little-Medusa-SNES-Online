@@ -34,10 +34,12 @@ public class ClientHandle : MonoBehaviour
         int previousfaceDirection = packet.ReadInt();
         bool isFiringPrimaryProjectile = packet.ReadBool();
         bool isWalking = packet.ReadBool();
+        bool isFlying = packet.ReadBool();
         bool isPrimaryMoveAnimationBeingPlayed = packet.ReadBool();
         bool isPetrified = packet.ReadBool();
         bool isPushed = packet.ReadBool();
         bool isPhysicsControlled = packet.ReadBool();
+        bool isFlyingState = packet.ReadBool();
         bool isInputFreezed = packet.ReadBool();
         bool isInvincible = packet.ReadBool();
         bool isRespawning = packet.ReadBool();
@@ -51,8 +53,8 @@ public class ClientHandle : MonoBehaviour
 
         PositionUpdates positionUpdates = new PositionUpdates(position, blockposition, previousBlockposition,faceDirection,previousfaceDirection);
         PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile);
-        PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isWalking, isPrimaryMoveAnimationBeingPlayed);
-        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, hero);
+        PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isWalking, isFlying, isPrimaryMoveAnimationBeingPlayed);
+        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isFlyingState, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, hero);
 
         PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(playerServerSequenceNumber, playerProcessingSequenceNumber, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
         ClientSideGameManager.instance.SpawnPlayer(id, connectionId, username, playerStateUpdates);
@@ -304,10 +306,12 @@ public class ClientHandle : MonoBehaviour
             int previousFacing = packet.ReadInt();
             bool isFiringPrimaryProjectile = packet.ReadBool();
             bool isWalking = packet.ReadBool();
+            bool isFlying = packet.ReadBool();
             bool isPrimaryMoveAnimationBeingPlayed = packet.ReadBool();
             bool isPetrified = packet.ReadBool();
             bool isPushed = packet.ReadBool();
             bool isPhysicsControlled = packet.ReadBool();
+            bool isFlyingState = packet.ReadBool();
             bool isInputFreezed = packet.ReadBool();
             bool isInvincible = packet.ReadBool();
             bool isRespawning = packet.ReadBool();
@@ -320,8 +324,8 @@ public class ClientHandle : MonoBehaviour
 
             PositionUpdates positionUpdates = new PositionUpdates(position, blockposition, previousBlockposition, Facing,previousFacing);
             PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile);
-            PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isWalking, isPrimaryMoveAnimationBeingPlayed);
-            PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, hero);
+            PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isWalking, isFlying, isPrimaryMoveAnimationBeingPlayed);
+            PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isFlyingState, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, hero);
 
             PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(playerServerSequenceNumberReceived, playerProcessedsequenceNumberReceived, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
             //Debug.LogError("<color=blue>Receiving updated position for movement </color>playerUpdatedPositionSequenceNumber: " + sequenceNumberReceived + " position: " + position);
@@ -360,10 +364,12 @@ public class ClientHandle : MonoBehaviour
                 int previousFacing = packet.ReadInt();
                 bool isFiringPrimaryProjectile = packet.ReadBool();
                 bool isWalking = packet.ReadBool();
+                bool isFlying = packet.ReadBool();
                 bool isPrimaryMoveAnimationBeingPlayed = packet.ReadBool();
                 bool isPetrified = packet.ReadBool();
                 bool isPushed = packet.ReadBool();
                 bool isPhysicsControlled = packet.ReadBool();
+                bool isFlyingState = packet.ReadBool();
                 bool isInputFreezed = packet.ReadBool();
                 bool isInvincible = packet.ReadBool();
                 bool isRespawning = packet.ReadBool();
@@ -376,8 +382,8 @@ public class ClientHandle : MonoBehaviour
 
                 PositionUpdates positionUpdates = new PositionUpdates(previousHistoryPositionUpdate, previousHistoryBlockPositionUpdate, previousHistoryPreviousBlockPositionUpdate, Facing, previousFacing);
                 PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile);
-                PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isWalking, isPrimaryMoveAnimationBeingPlayed);
-                PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, previousHistoryPlayerHero);
+                PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isWalking,isFlying, isPrimaryMoveAnimationBeingPlayed);
+                PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isFlyingState, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, previousHistoryPlayerHero);
 
                 PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(previousHistoryServerSequenceNo, previousHistoryPlayerProcessingSequenceNo, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
                 if (ClientSideGameManager.players.ContainsKey(previousHistoryPlayerId))

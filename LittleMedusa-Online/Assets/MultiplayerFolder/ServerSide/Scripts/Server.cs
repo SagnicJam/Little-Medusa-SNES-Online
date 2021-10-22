@@ -146,6 +146,7 @@ public class Server
                 { (int)ClientPackets.playerPlaceBoulderCommand,ServerHandle.PlayerPlaceBoulderBoulderCommandReceived},
                 { (int)ClientPackets.playerRemoveBoulderCommand,ServerHandle.PlayerRemoveBoulderBoulderCommandReceived},
                 { (int)ClientPackets.playerRespawnCommand,ServerHandle.PlayerRespawnCommandReceived},
+                { (int)ClientPackets.landPlayerCommand,ServerHandle.PlayerLandCommandReceived},
                 { (int)ClientPackets.playerFiringTidalWaveCommand,ServerHandle.PlayerFiringTidalWaveCommandReceived},
                 { (int)ClientPackets.castingBubbleShieldCommand,ServerHandle.PlayerCastingBubbleShieldCommandReceived},
                 { (int)ClientPackets.playerTornadoCommand,ServerHandle.PlayerCastingTornadoCommandReceived},

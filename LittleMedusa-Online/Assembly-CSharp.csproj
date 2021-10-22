@@ -138,7 +138,6 @@
     <Compile Include="Assets\Scripts\Helper\StaticAnimatingTileUtil.cs" />
     <Compile Include="Assets\Scripts\Helper\Tornado.cs" />
     <Compile Include="Assets\Scripts\Helper\TornadoCollider.cs" />
-    <Compile Include="Assets\Scripts\InputControl\InputFrameCount.cs" />
     <Compile Include="Assets\Scripts\InputControllers\AvernaInputController.cs" />
     <Compile Include="Assets\Scripts\InputControllers\ErmolaiInputController.cs" />
     <Compile Include="Assets\Scripts\InputControllers\HeliemisInputController.cs" />

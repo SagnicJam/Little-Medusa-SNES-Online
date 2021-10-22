@@ -45,9 +45,14 @@ public class Averna : Hero
         {
             return;
         }
-
         if (!isInFlyingState)
         {
+            if (isFlying)
+            {
+                isFlying = false;
+                UpdateFrameSprites();
+            }
+
             if (inputs[(int)EnumData.AvernaInputs.ShootFireBall])
             {
                 if (!isUsingPrimaryMove)
@@ -65,7 +70,7 @@ public class Averna : Hero
                 }
             }
 
-            if (inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Right])
+            if (inputs[(int)EnumData.AvernaInputs.Up] || inputs[(int)EnumData.AvernaInputs.Down] || inputs[(int)EnumData.AvernaInputs.Left] || inputs[(int)EnumData.AvernaInputs.Right])
             {
                 if (!isWalking)
                 {
@@ -73,13 +78,22 @@ public class Averna : Hero
                     UpdateFrameSprites();
                 }
             }
-            else if (!(inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Right]))
+            else if (!(inputs[(int)EnumData.AvernaInputs.Up] || inputs[(int)EnumData.AvernaInputs.Down] || inputs[(int)EnumData.AvernaInputs.Left] || inputs[(int)EnumData.AvernaInputs.Right]))
             {
                 if (isWalking)
                 {
                     isWalking = false;
                     UpdateFrameSprites();
                 }
+            }
+        }
+        else
+        {
+            if (!isFlying)
+            {
+                isWalking = false;
+                isFlying = true;
+                UpdateFrameSprites();
             }
         }
     }
@@ -90,6 +104,19 @@ public class Averna : Hero
         {
             return;
         }
+        //if (isInFlyingState)
+        //{
+        //    if (!waitingForFlightToEnd.Perform())
+        //    {
+        //        //land here
+        //        LandPlayer();
+        //        if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+        //        {
+        //            TakeDamage(currentHP);
+        //        }
+        //        return;
+        //    }
+        //}
         if (isPushed)
         {
             if (completedMotionToMovePoint)
@@ -140,47 +167,64 @@ public class Averna : Hero
 
     public override void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
     {
-        if (inputs[(int)EnumData.AvernaInputs.ShootFireBall])
+        if(!isInFlyingState)
         {
-            if (IsHeroAbleToFireProjectiles())
+            if (inputs[(int)EnumData.AvernaInputs.ShootFireBall])
             {
-                if (!waitingActionForPrimaryMove.Perform())
+                if (IsHeroAbleToFireProjectiles())
                 {
-                    isFiringPrimaryProjectile = true;
-                    waitingActionForPrimaryMove.ReInitialiseTimerToBegin(primaryMoveAttackRateTickRate);
-                }
-                else
-                {
-                    isFiringPrimaryProjectile = false;
+                    if (!waitingActionForPrimaryMove.Perform())
+                    {
+                        isFiringPrimaryProjectile = true;
+                        waitingActionForPrimaryMove.ReInitialiseTimerToBegin(primaryMoveAttackRateTickRate);
+                    }
+                    else
+                    {
+                        isFiringPrimaryProjectile = false;
+                    }
                 }
             }
+            else if (!inputs[(int)EnumData.AvernaInputs.ShootFireBall] && previousInputs[(int)EnumData.AvernaInputs.ShootFireBall] != inputs[(int)EnumData.AvernaInputs.ShootFireBall])
+            {
+                isFiringPrimaryProjectile = false;
+                waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
+            }
         }
-        else if (!inputs[(int)EnumData.AvernaInputs.ShootFireBall] && previousInputs[(int)EnumData.AvernaInputs.ShootFireBall] != inputs[(int)EnumData.AvernaInputs.ShootFireBall])
-        {
-            isFiringPrimaryProjectile = false;
-            waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
-        }
+        
 
         if (!MultiplayerManager.instance.isServer && hasAuthority())
         {
             if (completedMotionToMovePoint)
             {
-                if (inputs[(int)EnumData.AvernaInputs.RespawnPlayer] && previousInputs[(int)EnumData.AvernaInputs.RespawnPlayer] != inputs[(int)EnumData.AvernaInputs.RespawnPlayer])
+                if (isInFlyingState)
                 {
-                    Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
-                    if (IsPlayerSpawnable(cellToCheckFor))
+                    if (inputs[(int)EnumData.AvernaInputs.LandPlayer] && previousInputs[(int)EnumData.AvernaInputs.LandPlayer] != inputs[(int)EnumData.AvernaInputs.LandPlayer])
                     {
-                        //Respawn player command
-                        RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
-                        ClientSend.RespawnPlayer(respawnPlayerCommand);
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                        //land player command
+                        LandPlayerCommand landPlayerCommand = new LandPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                        ClientSend.LandPlayer(landPlayerCommand);
                     }
-                    else
+                }
+                else
+                {
+                    if (inputs[(int)EnumData.AvernaInputs.RespawnPlayer] && previousInputs[(int)EnumData.AvernaInputs.RespawnPlayer] != inputs[(int)EnumData.AvernaInputs.RespawnPlayer])
                     {
-                        Debug.LogError("Invalid location to spawn player");
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                        if (IsPlayerSpawnable(cellToCheckFor))
+                        {
+                            //Respawn player command
+                            RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                            ClientSend.RespawnPlayer(respawnPlayerCommand);
+                        }
+                        else
+                        {
+                            Debug.LogError("Invalid location to spawn player");
+                        }
                     }
                 }
             }
-            if (inputs[(int)EnumData.AvernaInputs.CastFlamePillar] && previousInputs[(int)EnumData.AvernaInputs.CastFlamePillar] != inputs[(int)EnumData.AvernaInputs.CastFlamePillar])
+            if (!isInFlyingState&&inputs[(int)EnumData.AvernaInputs.CastFlamePillar] && previousInputs[(int)EnumData.AvernaInputs.CastFlamePillar] != inputs[(int)EnumData.AvernaInputs.CastFlamePillar])
             {
                 if (IsHeroAbleToFireProjectiles())
                 {
@@ -214,12 +258,15 @@ public class Averna : Hero
             triggerFaceChangeEvent = false;
         }
         frameLooper.UpdateAnimationFrame();
-
     }
 
     public override void ProcessInputEventControl()
     {
         if (isRespawnningPlayer)
+        {
+            return;
+        }
+        if (isInFlyingState)
         {
             return;
         }
@@ -275,7 +322,7 @@ public class Averna : Hero
         walkAction.Perform();
     }
 
-    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs,int movementCommandPressCount)
+    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {
         if (isPhysicsControlled)
         {
@@ -295,25 +342,24 @@ public class Averna : Hero
         }
         if (completedMotionToMovePoint)
         {
-            if (inputs[(int)EnumData.Inputs.Up])
+            if (inputs[(int)EnumData.AvernaInputs.Up])
             {
                 Facing = FaceDirection.Up;
             }
-            else if (inputs[(int)EnumData.Inputs.Left])
+            else if (inputs[(int)EnumData.AvernaInputs.Left])
             {
                 Facing = FaceDirection.Left;
             }
-            else if (inputs[(int)EnumData.Inputs.Down])
+            else if (inputs[(int)EnumData.AvernaInputs.Down])
             {
                 Facing = FaceDirection.Down;
             }
-            else if (inputs[(int)EnumData.Inputs.Right])
+            else if (inputs[(int)EnumData.AvernaInputs.Right])
             {
                 Facing = FaceDirection.Right;
             }
 
-            if ((inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Right])
-                && movementCommandPressCount > frameDelayForRegisteringInput)
+            if ((inputs[(int)EnumData.AvernaInputs.Up] || inputs[(int)EnumData.AvernaInputs.Left] || inputs[(int)EnumData.AvernaInputs.Down] || inputs[(int)EnumData.AvernaInputs.Right]))
             {
                 //Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
@@ -325,7 +371,7 @@ public class Averna : Hero
         }
         else
         {
-            if (!inputs[(int)EnumData.Inputs.Up] && previousInputs[(int)EnumData.Inputs.Up] != inputs[(int)EnumData.Inputs.Up])
+            if (!inputs[(int)EnumData.AvernaInputs.Up] && previousInputs[(int)EnumData.AvernaInputs.Up] != inputs[(int)EnumData.AvernaInputs.Up])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
                 if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
@@ -333,7 +379,7 @@ public class Averna : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Left] && previousInputs[(int)EnumData.Inputs.Left] != inputs[(int)EnumData.Inputs.Left])
+            else if (!inputs[(int)EnumData.AvernaInputs.Left] && previousInputs[(int)EnumData.AvernaInputs.Left] != inputs[(int)EnumData.AvernaInputs.Left])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
                 if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
@@ -341,7 +387,7 @@ public class Averna : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Down] && previousInputs[(int)EnumData.Inputs.Down] != inputs[(int)EnumData.Inputs.Down])
+            else if (!inputs[(int)EnumData.AvernaInputs.Down] && previousInputs[(int)EnumData.AvernaInputs.Down] != inputs[(int)EnumData.AvernaInputs.Down])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
                 if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
@@ -349,7 +395,7 @@ public class Averna : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Right] && previousInputs[(int)EnumData.Inputs.Right] != inputs[(int)EnumData.Inputs.Right])
+            else if (!inputs[(int)EnumData.AvernaInputs.Right] && previousInputs[(int)EnumData.AvernaInputs.Right] != inputs[(int)EnumData.AvernaInputs.Right])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
                 if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
@@ -368,7 +414,7 @@ public class Averna : Hero
     public bool shootFireBall;
     public bool castFlamePillar;
     public bool respawnPlayer;
-    public bool selectMedusa;
+    public bool landPlayer;
 
     public override void DealInput()
     {
@@ -381,7 +427,7 @@ public class Averna : Hero
             shootFireBall = false;
             castFlamePillar = false;
             respawnPlayer = false;
-            selectMedusa = false;
+            landPlayer = false;
         }
         else if (isFiringServerProjectiles)
         {
@@ -399,7 +445,7 @@ public class Averna : Hero
             shootFireBall = Input.GetKey(KeyCode.J);
             castFlamePillar = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);
-            selectMedusa = Input.GetKey(KeyCode.Backspace);
+            landPlayer = Input.GetKey(KeyCode.K);
         }
     }
 
@@ -414,13 +460,9 @@ public class Averna : Hero
                 shootFireBall,
                 castFlamePillar,
                 respawnPlayer,
-                selectMedusa
+                landPlayer
                 };
         return inputs;
-    }
-    public override void ProcessInputFrameCount(bool[] inputs, bool[] previousInputs)
-    {
-        inputFrameCounter.ProcessInputFrameCount(inputs, previousInputs);
     }
 
     public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection facing)

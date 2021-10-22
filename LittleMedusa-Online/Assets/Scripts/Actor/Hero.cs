@@ -6,7 +6,6 @@ using TMPro;
 public abstract class Hero : Actor
 {
     [Header("Tweak Params")]
-    public int frameDelayForRegisteringInput;
     public Color petrificationColor;
     public Color invincibleColor;
 
@@ -14,15 +13,12 @@ public abstract class Hero : Actor
     public Image healthFillImage;
     public TextMeshProUGUI currentLifeStockText;
     public SpriteRenderer statusSprite;
-    public InputFrameCount inputFrameCounter;
-
-    
 
     [Header("Live Data")]
     public int hero;
     public bool isInputFreezed;
     public bool isFiringServerProjectiles;
-    
+
     public override void Awake()
     {
         base.Awake();
@@ -86,8 +82,8 @@ public abstract class Hero : Actor
             {
                 CharacterSelectionScreen.instance.gameObject.SetActive(false);
             }
-            
         }
+
         inCharacterSelectionScreen = playerAuthoratativeStates.inCharacterSelectionScreen;
         inGame = playerAuthoratativeStates.inGame;
         hero = playerAuthoratativeStates.hero;
@@ -97,41 +93,46 @@ public abstract class Hero : Actor
         isPhysicsControlled = playerAuthoratativeStates.isPhysicsControlled;
         isInvincible = playerAuthoratativeStates.isInvincible;
         
-        if(actorCollider2D!=null)
+       
+        if (!isInFlyingState && isInFlyingState != playerAuthoratativeStates.isFlyingState)
         {
-            
-            if (!isRespawnningPlayer && isRespawnningPlayer != playerAuthoratativeStates.isRespawnningPlayer)
-            {
-                //enable crosshair locally
-                //disable collider
-                if(statusSprite!=null)
-                {
-                    statusSprite.gameObject.SetActive(false);
-                }
-                SetRespawnState();
-            }
-            if (isRespawnningPlayer && isRespawnningPlayer != playerAuthoratativeStates.isRespawnningPlayer)
-            {
-                //disable crosshair locally
-                //enable back collider
-                if (statusSprite != null)
-                {
-                    statusSprite.gameObject.SetActive(true);
-                }
-                SetSpawnState();
-            }
-            if (!isPhysicsControlled && isPhysicsControlled != playerAuthoratativeStates.isPhysicsControlled)
-            {
-                actorCollider2D.enabled = false;
-            }
-            if (isPhysicsControlled && isPhysicsControlled != playerAuthoratativeStates.isPhysicsControlled)
-            {
-                actorCollider2D.enabled = true;
-            }
+            SetFlyingState();
         }
-        
+        if (isInFlyingState && isInFlyingState != playerAuthoratativeStates.isFlyingState)
+        {
+            SetLandState();
+        }
+        if (!isRespawnningPlayer && isRespawnningPlayer != playerAuthoratativeStates.isRespawnningPlayer)
+        {
+            //enable crosshair locally
+            //disable collider
+            if (statusSprite != null)
+            {
+                statusSprite.gameObject.SetActive(false);
+            }
+            SetRespawnState();
+        }
+        if (isRespawnningPlayer && isRespawnningPlayer != playerAuthoratativeStates.isRespawnningPlayer)
+        {
+            //disable crosshair locally
+            //enable back collider
+            if (statusSprite != null)
+            {
+                statusSprite.gameObject.SetActive(true);
+            }
+            SetSpawnState();
+        }
+        if (!isPhysicsControlled && isPhysicsControlled != playerAuthoratativeStates.isPhysicsControlled)
+        {
+            SetActorCollider(false);
+        }
+        if (isPhysicsControlled && isPhysicsControlled != playerAuthoratativeStates.isPhysicsControlled)
+        {
+            SetActorCollider(true);
+        }
 
         isRespawnningPlayer = playerAuthoratativeStates.isRespawnningPlayer;
+        isInFlyingState = playerAuthoratativeStates.isFlyingState;
         currentHP = playerAuthoratativeStates.currentHP;
         currentStockLives = playerAuthoratativeStates.currentStockLives;
 
@@ -141,6 +142,8 @@ public abstract class Hero : Actor
             currentLifeStockText.text =  currentStockLives.ToString();
         }
     }
+
+    
 
     //authoratatively is performed(but is locally is also done)-correction happens
     public void SetActorPositionalState(PositionUpdates positionUpdates)
@@ -168,6 +171,12 @@ public abstract class Hero : Actor
         if (isWalking != playerAnimationEvents.isWalking)
         {
             isWalking = playerAnimationEvents.isWalking;
+            UpdateFrameSprites();
+        }
+
+        if (isFlying != playerAnimationEvents.isFlying)
+        {
+            isFlying = playerAnimationEvents.isFlying;
             UpdateFrameSprites();
         }
     }
@@ -212,9 +221,7 @@ public abstract class Hero : Actor
     /// </summary>
     /// <param name="inputs"></param>
     /// <param name="previousInputs"></param>
-    public abstract void ProcessMovementInputs(bool[] inputs, bool[] previousInputs,int movementCommandPressCount);
-
-    public abstract void ProcessInputFrameCount(bool[]inputs,bool[]previousInputs);
+    public abstract void ProcessMovementInputs(bool[] inputs, bool[] previousInputs);
 
     /// <summary>
     /// Called locally on client and on server
@@ -411,8 +418,19 @@ public abstract class Hero : Actor
         isHeadCollisionWithOtherActor = false;
     }
 
-    
-    
+    public override void OnBodyCollidedWithHourGlassTile(Vector3Int hourGlassTile)
+    {
+        GridManager.instance.SetTile(hourGlassTile, EnumData.TileType.Hourglass, false,false);
+        ServerSideGameManager.instance.StopWorldDestruction();
+    }
+
+    public override void OnBodyCollidedWithIcarausWingsTiles(Vector3Int icarausCollectedOnTilePos)
+    {
+        GridManager.instance.SetTile(icarausCollectedOnTilePos, EnumData.TileType.IcarusWings, false, false);
+        FlyPlayer();
+        //waitingForFlightToEnd.ReInitialiseTimerToBegin(flyingTickCount);
+    }
+
     public override bool CanOccupy(Vector3Int pos)
     {
         if (isRespawnningPlayer)
@@ -426,17 +444,17 @@ public abstract class Hero : Actor
                 return true;
             }
         }
-        //if (isInFlyingState)
-        //{
-        //    //if (GridManager.instance.IsCellBlockedForFlyingUnitsAtPos(pos))
-        //    //{
-        //    //    return false;
-        //    //}
-        //    //else
-        //    //{
-        //        return true;
-        //    //}
-        //}
+        if (isInFlyingState)
+        {
+            if (GridManager.instance.IsCellBlockedForFlyingUnitsAtPos(pos))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         /*else */
         else if (GridManager.instance.IsCellBlockedForUnitMotionAtPos(pos)||GridManager.instance.IsCellContainingMonster(pos,this))
         {

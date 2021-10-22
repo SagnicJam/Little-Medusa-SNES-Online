@@ -74,7 +74,6 @@ GameObject:
   - component: {fileID: 4030668818480613122}
   - component: {fileID: 8675794598119536010}
   - component: {fileID: 3775977635123087892}
-  - component: {fileID: 4996820138809297712}
   m_Layer: 0
   m_Name: ServerPredictedHero
   m_TagString: Untagged
@@ -133,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c44615509c7ab40488dfc56501038600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 34
+  tileType: 36
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -163,6 +162,8 @@ MonoBehaviour:
   secondaryMoveAttackRateTickRate: 0
   pushSpeed: 4
   faceDirectionInit: 1
+  flySpeed: 6
+  flyingTickCount: 300
   leftIdleSprite: []
   rightIdleSprite: []
   upIdleSprite: []
@@ -213,7 +214,9 @@ MonoBehaviour:
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
+  normalSpeed: 0
   ownerId: 0
+  positionToSpawnProjectile: {x: 0, y: 0, z: 0}
   isWalking: 0
   isUsingPrimaryMove: 0
   isUsingSecondaryMove: 0
@@ -228,15 +231,14 @@ MonoBehaviour:
   previousMovePointCellPosition: {x: 0, y: 0, z: 0}
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
-  frameDelayForRegisteringInput: 4
   petrificationColor: {r: 0.4039216, g: 0.4039216, b: 0.4039216, a: 0.6509804}
   invincibleColor: {r: 1, g: 0.9333334, b: 0, a: 0.6509804}
   healthFillImage: {fileID: 0}
   currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}
-  inputFrameCounter: {fileID: 4996820138809297712}
   hero: 0
   isInputFreezed: 0
+  isFiringServerProjectiles: 0
   up: 0
   left: 0
   down: 0
@@ -244,20 +246,7 @@ MonoBehaviour:
   shootFireBall: 0
   castFlamePillar: 0
   respawnPlayer: 0
-  selectMedusa: 0
---- !u!114 &4996820138809297712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4030668818480613123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad645ee1ae35c564fa882b402de3729c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputframeCount: 0
+  landPlayer: 0
 --- !u!1 &4030668818572925679
 GameObject:
   m_ObjectHideFlags: 0

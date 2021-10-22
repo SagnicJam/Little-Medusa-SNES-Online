@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229a325937eeb4e448218055de687c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 29
+  tileType: 31
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -225,6 +225,8 @@ MonoBehaviour:
   secondaryMoveAttackRateTickRate: 0
   pushSpeed: 4
   faceDirectionInit: 0
+  flySpeed: 0
+  flyingTickCount: 0
   leftIdleSprite: []
   rightIdleSprite: []
   upIdleSprite: []
@@ -319,7 +321,9 @@ MonoBehaviour:
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
+  normalSpeed: 0
   ownerId: 0
+  positionToSpawnProjectile: {x: 0, y: 0, z: 0}
   isWalking: 0
   isUsingPrimaryMove: 0
   isUsingSecondaryMove: 0

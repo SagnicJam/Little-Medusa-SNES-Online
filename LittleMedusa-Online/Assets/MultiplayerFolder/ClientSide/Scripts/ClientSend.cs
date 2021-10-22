@@ -176,6 +176,16 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    public static void LandPlayer(LandPlayerCommand landPlayerCommand)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.landPlayerCommand))
+        {
+            packet.Write(landPlayerCommand.landCellPosition);
+            packet.Write(landPlayerCommand.sequenceNumber);
+            SendTCPData(packet);
+        }
+    }
+
     public static void RespawnPlayer(RespawnPlayerCommand respawnPlayerCommand)
     {
         using (Packet packet = new Packet((int)ClientPackets.playerRespawnCommand))
@@ -204,7 +214,6 @@ public class ClientSend : MonoBehaviour
                 {
                     packet.Write(input);
                 }
-                packet.Write(inputCommands[i].movementCommandpressCount);
                 packet.Write(inputCommands[i].sequenceNumber);
                 //Debug.LogWarning("<color=green>Sending inputs packet to server </color>playerMovingCommandSequenceNumber : " + inputCommands[i].sequenceNumber + " w " + inputCommands[i].commands[0] + " a " + inputCommands[i].commands[1] + " s " + inputCommands[i].commands[2] + " d " + inputCommands[i].commands[3] + "<color=green> adding previous : </color>");
             }
@@ -226,7 +235,6 @@ public class ClientSend : MonoBehaviour
                     {
                         packet.Write(input);
                     }
-                    packet.Write(previousInputPacks[i].previousInputCommands[j].movementCommandpressCount);
                     packet.Write(previousInputPacks[i].previousInputCommands[j].sequenceNumber);
                 }
             }

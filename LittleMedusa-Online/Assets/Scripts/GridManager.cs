@@ -41,28 +41,35 @@ public class GridManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        xMin = int.MaxValue;
+        yMin = int.MaxValue;
+        xMax = -int.MaxValue;
+        yMax = -int.MaxValue;
+
         for (int i = 0; i < gameStateDependentTileArray.Length; i++)
         {
             if (gameStateDependentTileArray[i].tileMap != null)
             {
-                if (xMin > gameStateDependentTileArray[i].tileMap.cellBounds.xMin)
+                List<Vector3Int> allPositionList = GetAllPositionForTileMap(gameStateDependentTileArray[i].tileAssetType);
+                for (int j = 0; j < allPositionList.Count; j++)
                 {
-                    xMin = gameStateDependentTileArray[i].tileMap.cellBounds.xMin;
+                    if (xMin > allPositionList[j].x)
+                    {
+                        xMin = allPositionList[j].x;
+                    }
+                    if (yMin > allPositionList[j].y)
+                    {
+                        yMin = allPositionList[j].y;
+                    }
+                    if (xMax < allPositionList[j].x)
+                    {
+                        xMax = allPositionList[j].x;
+                    }
+                    if (yMax < allPositionList[j].y)
+                    {
+                        yMax = allPositionList[j].y;
+                    }
                 }
-                if (yMin > gameStateDependentTileArray[i].tileMap.cellBounds.yMin)
-                {
-                    yMin = gameStateDependentTileArray[i].tileMap.cellBounds.yMin;
-                }
-                if (xMax < gameStateDependentTileArray[i].tileMap.cellBounds.xMax)
-                {
-                    xMax = gameStateDependentTileArray[i].tileMap.cellBounds.xMax;
-                }
-                if (yMax < gameStateDependentTileArray[i].tileMap.cellBounds.yMax)
-                {
-                    yMax = gameStateDependentTileArray[i].tileMap.cellBounds.yMax;
-                }
-
-                List<Vector3Int>allPositionList = GetAllPositionForTileMap(gameStateDependentTileArray[i].tileAssetType);
                 gameStateDependentTileArray[i].initialVectorToTileMapper = new Dictionary<Vector3Int, Tile>();
                 foreach (Vector3Int item in allPositionList)
                 {
@@ -522,6 +529,21 @@ public class GridManager : MonoBehaviour
         return false;
     }
 
+    public bool IsCellKillableForSpawnAtPos(Vector3Int cellPosToCheckFor)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+            if (td != null && (td.killUnitsInstantlyIfInTheirRegion||td.tileType == EnumData.TileType.Monster))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public bool IsCellBlockedForBoulderPlacementAtPos(Vector3Int cellPosToCheckFor)
     {
         Vector3 objectPosition = cellToworld(cellPosToCheckFor);
@@ -810,7 +832,7 @@ public class GridManager : MonoBehaviour
         return false;
     }
 
-    List<TileData>GetAllTileDataInCellPos(Vector3Int cellPos)
+    public List<TileData>GetAllTileDataInCellPos(Vector3Int cellPos)
     {
         List<TileData> tileDatas = new List<TileData>();
         Vector3 objectPosition = cellToworld(cellPos);
@@ -856,6 +878,22 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool HasItemOnTiles(Vector3Int cellPosToCheckFor)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+            if (td != null && (td.tileType == EnumData.TileType.Hourglass||
+                td.tileType == EnumData.TileType.SpawnJar))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<Vector3Int> GetAllPositionForTileMap(EnumData.TileType tileType)

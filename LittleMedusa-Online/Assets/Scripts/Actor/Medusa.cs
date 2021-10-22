@@ -10,6 +10,19 @@ public class Medusa : Hero
         {
             return;
         }
+        //if (isInFlyingState)
+        //{
+        //    if (!waitingForFlightToEnd.Perform())
+        //    {
+        //        //land here
+        //        LandPlayer();
+        //        if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+        //        {
+        //            TakeDamage(currentHP);
+        //        }
+        //        return;
+        //    }
+        //}
         if (isPushed)
         {
             if (completedMotionToMovePoint)
@@ -76,7 +89,12 @@ public class Medusa : Hero
 
         if (!isInFlyingState)
         {
-            if (inputs[(int)EnumData.Inputs.Shoot])
+            if (isFlying)
+            {
+                isFlying = false;
+                UpdateFrameSprites();
+            }
+            if (inputs[(int)EnumData.MedusaInputs.Shoot])
             {
                 if (!isUsingPrimaryMove)
                 {
@@ -84,7 +102,7 @@ public class Medusa : Hero
                     UpdateFrameSprites();
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Shoot])
+            else if (!inputs[(int)EnumData.MedusaInputs.Shoot])
             {
                 if (isUsingPrimaryMove)
                 {
@@ -92,25 +110,32 @@ public class Medusa : Hero
                     UpdateFrameSprites();
                 }
             }
-            
-            if (inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Right])
+            if (inputs[(int)EnumData.MedusaInputs.Up] || inputs[(int)EnumData.MedusaInputs.Down] || inputs[(int)EnumData.MedusaInputs.Left] || inputs[(int)EnumData.MedusaInputs.Right])
             {
-                if(!isWalking)
+                if (!isWalking)
                 {
                     isWalking = true;
                     UpdateFrameSprites();
                 }
             }
-            else if(!(inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Right]))
+            else if (!(inputs[(int)EnumData.MedusaInputs.Up] || inputs[(int)EnumData.MedusaInputs.Down] || inputs[(int)EnumData.MedusaInputs.Left] || inputs[(int)EnumData.MedusaInputs.Right]))
             {
-                if(isWalking)
+                if (isWalking)
                 {
                     isWalking = false;
                     UpdateFrameSprites();
                 }
             }
         }
-
+        else
+        {
+            if (!isFlying)
+            {
+                isWalking = false;
+                isFlying = true;
+                UpdateFrameSprites();
+            }
+        }
     }
 
     
@@ -120,7 +145,6 @@ public class Medusa : Hero
         {
             return;
         }
-        
         if (isPushed)
         {
             return;
@@ -140,87 +164,103 @@ public class Medusa : Hero
 
     public override void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
     {
-        if (inputs[(int)EnumData.Inputs.Shoot])
+        if(!isInFlyingState)
         {
-            if (IsHeroAbleToFireProjectiles())
+            if (inputs[(int)EnumData.MedusaInputs.Shoot])
             {
-                if (!waitingActionForPrimaryMove.Perform())
+                if (IsHeroAbleToFireProjectiles())
                 {
-                    isFiringPrimaryProjectile = true;
-                    waitingActionForPrimaryMove.ReInitialiseTimerToBegin(primaryMoveAttackRateTickRate);
-                }
-                else
-                {
-                    isFiringPrimaryProjectile = false;
+                    if (!waitingActionForPrimaryMove.Perform())
+                    {
+                        isFiringPrimaryProjectile = true;
+                        waitingActionForPrimaryMove.ReInitialiseTimerToBegin(primaryMoveAttackRateTickRate);
+                    }
+                    else
+                    {
+                        isFiringPrimaryProjectile = false;
+                    }
                 }
             }
+            else if (!inputs[(int)EnumData.MedusaInputs.Shoot] && previousInputs[(int)EnumData.MedusaInputs.Shoot] != inputs[(int)EnumData.MedusaInputs.Shoot])
+            {
+                isFiringPrimaryProjectile = false;
+                waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
+            }
         }
-        else if (!inputs[(int)EnumData.Inputs.Shoot] && previousInputs[(int)EnumData.Inputs.Shoot] != inputs[(int)EnumData.Inputs.Shoot])
-        {
-            isFiringPrimaryProjectile = false;
-            waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
-        }
+        
 
         if (!MultiplayerManager.instance.isServer && hasAuthority())
         {
             if (completedMotionToMovePoint)
             {
-                if (inputs[(int)EnumData.Inputs.RespawnPlayer] && previousInputs[(int)EnumData.Inputs.RespawnPlayer] != inputs[(int)EnumData.Inputs.RespawnPlayer])
+                if(isInFlyingState)
                 {
-                    Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
-                    if (IsPlayerSpawnable(cellToCheckFor))
+                    if (inputs[(int)EnumData.MedusaInputs.LandPlayer] && previousInputs[(int)EnumData.MedusaInputs.LandPlayer] != inputs[(int)EnumData.MedusaInputs.LandPlayer])
                     {
-                        //Respawn player command
-                        RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
-                        ClientSend.RespawnPlayer(respawnPlayerCommand);
-                    }
-                    else
-                    {
-                        Debug.LogError("Invalid location to spawn player");
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                        //land player command
+                        LandPlayerCommand landPlayerCommand = new LandPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                        ClientSend.LandPlayer(landPlayerCommand);
                     }
                 }
-                else if (inputs[(int)EnumData.Inputs.Push] && previousInputs[(int)EnumData.Inputs.Push] != inputs[(int)EnumData.Inputs.Push])
+                else
                 {
-                    Vector3Int cellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                    Actor actorToPush = GridManager.instance.GetActorOnPos(cellPos);
-
-                    if (actorToPush != null)
+                    if (inputs[(int)EnumData.MedusaInputs.RespawnPlayer] && previousInputs[(int)EnumData.MedusaInputs.RespawnPlayer] != inputs[(int)EnumData.MedusaInputs.RespawnPlayer])
                     {
-                        if (IsActorAbleToPush(Facing) && IsActorPushableInDirection(actorToPush, Facing))
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                        if (IsPlayerSpawnable(cellToCheckFor))
                         {
-                            //Send reliable request of push to server here
-                            PushCommand pushCommand = new PushCommand(GetLocalSequenceNo(), (int)Facing, actorToPush.ownerId);
-                            ClientSend.PushPlayerCommand(pushCommand);
+                            //Respawn player command
+                            RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                            ClientSend.RespawnPlayer(respawnPlayerCommand);
+                        }
+                        else
+                        {
+                            Debug.LogError("Invalid location to spawn player");
                         }
                     }
-
-                    ClientEnemyManager clientEnemy = GridManager.instance.GetClientEnemyOnPos(cellPos);
-
-                    if (clientEnemy != null)
+                    else if (inputs[(int)EnumData.MedusaInputs.Push] && previousInputs[(int)EnumData.MedusaInputs.Push] != inputs[(int)EnumData.MedusaInputs.Push])
                     {
-                        if (IsClientEnemyPushable(Facing))
+                        Vector3Int cellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                        Actor actorToPush = GridManager.instance.GetActorOnPos(cellPos);
+
+                        if (actorToPush != null)
                         {
-                            PushCommand pushCommand = new PushCommand(GetLocalSequenceNo(), (int)Facing, clientEnemy.id);
-                            ClientSend.PushPlayerCommand(pushCommand);
+                            if (IsActorAbleToPush(Facing) && IsActorPushableInDirection(actorToPush, Facing))
+                            {
+                                //Send reliable request of push to server here
+                                PushCommand pushCommand = new PushCommand(GetLocalSequenceNo(), (int)Facing, actorToPush.ownerId);
+                                ClientSend.PushPlayerCommand(pushCommand);
+                            }
+                        }
+
+                        ClientEnemyManager clientEnemy = GridManager.instance.GetClientEnemyOnPos(cellPos);
+
+                        if (clientEnemy != null)
+                        {
+                            if (IsClientEnemyPushable(Facing))
+                            {
+                                PushCommand pushCommand = new PushCommand(GetLocalSequenceNo(), (int)Facing, clientEnemy.id);
+                                ClientSend.PushPlayerCommand(pushCommand);
+                            }
+                        }
+                    }
+                    else if (inputs[(int)EnumData.MedusaInputs.PlaceRemovalBoulder] && previousInputs[(int)EnumData.MedusaInputs.PlaceRemovalBoulder] != inputs[(int)EnumData.MedusaInputs.PlaceRemovalBoulder])
+                    {
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                        if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing))
+                        {
+                            //send command to server of placement
+                            PlaceBoulderCommand placeBoulderCommand = new PlaceBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
+                            ClientSend.PlaceBoulderCommand(placeBoulderCommand);
+                        }
+                        else if (GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.Boulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderDisappearing))
+                        {
+                            RemoveBoulderCommand removeBoulderCommand = new RemoveBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
+                            ClientSend.RemoveBoulderCommand(removeBoulderCommand);
                         }
                     }
                 }
-                else if (inputs[(int)EnumData.Inputs.PlaceRemovalBoulder] && previousInputs[(int)EnumData.Inputs.PlaceRemovalBoulder] != inputs[(int)EnumData.Inputs.PlaceRemovalBoulder])
-                {
-                    Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                    if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing))
-                    {
-                        //send command to server of placement
-                        PlaceBoulderCommand placeBoulderCommand = new PlaceBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
-                        ClientSend.PlaceBoulderCommand(placeBoulderCommand);
-                    }
-                    else if (GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.Boulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderDisappearing))
-                    {
-                        RemoveBoulderCommand removeBoulderCommand = new RemoveBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
-                        ClientSend.RemoveBoulderCommand(removeBoulderCommand);
-                    }
-                }
-
             }
         }
     }
@@ -228,6 +268,10 @@ public class Medusa : Hero
     public override void ProcessInputEventControl()
     {
         if (isRespawnningPlayer)
+        {
+            return;
+        }
+        if (isInFlyingState)
         {
             return;
         }
@@ -250,7 +294,7 @@ public class Medusa : Hero
     }
 
 
-    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs,int movementCommandPressCount)
+    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {
         if (isPhysicsControlled)
         {
@@ -270,25 +314,24 @@ public class Medusa : Hero
         }
         if (completedMotionToMovePoint)
         {
-            if (inputs[(int)EnumData.Inputs.Up])
+            if (inputs[(int)EnumData.MedusaInputs.Up])
             {
                 Facing = FaceDirection.Up;
             }
-            else if (inputs[(int)EnumData.Inputs.Left])
+            else if (inputs[(int)EnumData.MedusaInputs.Left])
             {
                 Facing = FaceDirection.Left;
             }
-            else if (inputs[(int)EnumData.Inputs.Down])
+            else if (inputs[(int)EnumData.MedusaInputs.Down])
             {
                 Facing = FaceDirection.Down;
             }
-            else if (inputs[(int)EnumData.Inputs.Right])
+            else if (inputs[(int)EnumData.MedusaInputs.Right])
             {
                 Facing = FaceDirection.Right;
             }
 
-            if ((inputs[(int)EnumData.Inputs.Up]|| inputs[(int)EnumData.Inputs.Left]|| inputs[(int)EnumData.Inputs.Down]|| inputs[(int)EnumData.Inputs.Right])
-                && movementCommandPressCount > frameDelayForRegisteringInput)
+            if ((inputs[(int)EnumData.MedusaInputs.Up]|| inputs[(int)EnumData.MedusaInputs.Left]|| inputs[(int)EnumData.MedusaInputs.Down]|| inputs[(int)EnumData.MedusaInputs.Right]))
             {
                 //Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
@@ -300,7 +343,7 @@ public class Medusa : Hero
         }
         else
         {
-            if (!inputs[(int)EnumData.Inputs.Up] && previousInputs[(int)EnumData.Inputs.Up] != inputs[(int)EnumData.Inputs.Up])
+            if (!inputs[(int)EnumData.MedusaInputs.Up] && previousInputs[(int)EnumData.MedusaInputs.Up] != inputs[(int)EnumData.MedusaInputs.Up])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
                 if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
@@ -308,7 +351,7 @@ public class Medusa : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Left] && previousInputs[(int)EnumData.Inputs.Left] != inputs[(int)EnumData.Inputs.Left])
+            else if (!inputs[(int)EnumData.MedusaInputs.Left] && previousInputs[(int)EnumData.MedusaInputs.Left] != inputs[(int)EnumData.MedusaInputs.Left])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
                 if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
@@ -316,7 +359,7 @@ public class Medusa : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Down] && previousInputs[(int)EnumData.Inputs.Down] != inputs[(int)EnumData.Inputs.Down])
+            else if (!inputs[(int)EnumData.MedusaInputs.Down] && previousInputs[(int)EnumData.MedusaInputs.Down] != inputs[(int)EnumData.MedusaInputs.Down])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
                 if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
@@ -324,7 +367,7 @@ public class Medusa : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Right] && previousInputs[(int)EnumData.Inputs.Right] != inputs[(int)EnumData.Inputs.Right])
+            else if (!inputs[(int)EnumData.MedusaInputs.Right] && previousInputs[(int)EnumData.MedusaInputs.Right] != inputs[(int)EnumData.MedusaInputs.Right])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
                 if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
@@ -390,6 +433,7 @@ public class Medusa : Hero
     public bool push;
     public bool placeORRemovalBoulder;
     public bool respawnPlayer;
+    public bool landPlayer;
 
     public override void DealInput()
     {
@@ -403,6 +447,7 @@ public class Medusa : Hero
             push = false;
             placeORRemovalBoulder = false;
             respawnPlayer = false;
+            landPlayer = false;
         }
         else if (isFiringServerProjectiles)
         {
@@ -421,6 +466,7 @@ public class Medusa : Hero
             push = Input.GetKey(KeyCode.J);
             placeORRemovalBoulder = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);
+            landPlayer = Input.GetKey(KeyCode.K);
         }
     }
 
@@ -435,14 +481,10 @@ public class Medusa : Hero
                 shoot,
                 push,
                 placeORRemovalBoulder,
-                respawnPlayer
+                respawnPlayer,
+                landPlayer
                 };
         return inputs;
-    }
-
-    public override void ProcessInputFrameCount(bool[] inputs, bool[] previousInputs)
-    {
-        inputFrameCounter.ProcessInputFrameCount(inputs,previousInputs);
     }
 
     public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection facing)

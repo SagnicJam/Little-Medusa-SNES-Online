@@ -530,7 +530,6 @@ GameObject:
   - component: {fileID: 5972040206206949787}
   - component: {fileID: 3032524789910844975}
   - component: {fileID: 2832247827082558381}
-  - component: {fileID: 6909939247159889829}
   m_Layer: 0
   m_Name: LocalHero
   m_TagString: Untagged
@@ -657,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c84f55c3bf2b7145953faf184ef365d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 32
+  tileType: 34
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -687,6 +686,8 @@ MonoBehaviour:
   secondaryMoveAttackRateTickRate: 0
   pushSpeed: 4
   faceDirectionInit: 1
+  flySpeed: 6
+  flyingTickCount: 300
   leftIdleSprite:
   - {fileID: -2599869090914219938, guid: c8492be59b31aa74a83fffcac29b73e9, type: 3}
   - {fileID: 8782931447823156157, guid: c8492be59b31aa74a83fffcac29b73e9, type: 3}
@@ -831,10 +832,14 @@ MonoBehaviour:
   - {fileID: -4241767944837093030, guid: 889d13c29764b7645a88ea20a5263f0b, type: 3}
   - {fileID: -282164436801602603, guid: 889d13c29764b7645a88ea20a5263f0b, type: 3}
   - {fileID: -6962815235964840108, guid: 889d13c29764b7645a88ea20a5263f0b, type: 3}
-  leftFlySprite: []
-  rightFlySprite: []
-  downFlySprite: []
-  upFlySprite: []
+  leftFlySprite:
+  - {fileID: 449270232329187819, guid: 1a512d638c88b8c47bef9750ac7aeee4, type: 3}
+  rightFlySprite:
+  - {fileID: 8107050334519789146, guid: 45af8bb56dae3fe44bbde309cb713da9, type: 3}
+  downFlySprite:
+  - {fileID: 2939012601175811456, guid: a9034f188142b3f4c91b677e24443ee7, type: 3}
+  upFlySprite:
+  - {fileID: -6808287781411764939, guid: 889d13c29764b7645a88ea20a5263f0b, type: 3}
   petrificationSpriteArr: []
   primaryMoveAnimationSprites:
     upMove:
@@ -957,8 +962,11 @@ MonoBehaviour:
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
+  normalSpeed: 0
   ownerId: 0
+  positionToSpawnProjectile: {x: 0, y: 0, z: 0}
   isWalking: 0
+  isFlying: 0
   isUsingPrimaryMove: 0
   isUsingSecondaryMove: 0
   currentHP: 0
@@ -972,15 +980,14 @@ MonoBehaviour:
   previousMovePointCellPosition: {x: 0, y: 0, z: 0}
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
-  frameDelayForRegisteringInput: 4
   petrificationColor: {r: 0.4039216, g: 0.4039216, b: 0.4039216, a: 0.6509804}
   invincibleColor: {r: 1, g: 0.9333334, b: 0, a: 0.6509804}
   healthFillImage: {fileID: 237778869680218058}
   currentLifeStockText: {fileID: 8874871343262420903}
   statusSprite: {fileID: 6636935392975839726}
-  inputFrameCounter: {fileID: 6909939247159889829}
   hero: 0
   isInputFreezed: 0
+  isFiringServerProjectiles: 0
   up: 0
   left: 0
   down: 0
@@ -988,19 +995,6 @@ MonoBehaviour:
   shootMightyWind: 0
   placeTornado: 0
   respawnPlayer: 0
---- !u!114 &6909939247159889829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6912961816926996302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad645ee1ae35c564fa882b402de3729c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputframeCount: 0
 --- !u!1 &6912961817084951025
 GameObject:
   m_ObjectHideFlags: 0

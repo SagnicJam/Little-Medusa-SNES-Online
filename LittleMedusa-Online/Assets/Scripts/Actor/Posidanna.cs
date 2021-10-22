@@ -46,6 +46,12 @@ public class Posidanna : Hero
 
         if (!isInFlyingState)
         {
+            if (isFlying)
+            {
+                isFlying = false;
+                UpdateFrameSprites();
+            }
+
             if (inputs[(int)EnumData.PosidannaInputs.ShootTidalWave])
             {
                 if (!isUsingPrimaryMove)
@@ -63,7 +69,7 @@ public class Posidanna : Hero
                 }
             }
 
-            if (inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Right])
+            if (inputs[(int)EnumData.PosidannaInputs.Up] || inputs[(int)EnumData.PosidannaInputs.Down] || inputs[(int)EnumData.PosidannaInputs.Left] || inputs[(int)EnumData.PosidannaInputs.Right])
             {
                 if (!isWalking)
                 {
@@ -71,13 +77,22 @@ public class Posidanna : Hero
                     UpdateFrameSprites();
                 }
             }
-            else if (!(inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Right]))
+            else if (!(inputs[(int)EnumData.PosidannaInputs.Up] || inputs[(int)EnumData.PosidannaInputs.Down] || inputs[(int)EnumData.PosidannaInputs.Left] || inputs[(int)EnumData.PosidannaInputs.Right]))
             {
                 if (isWalking)
                 {
                     isWalking = false;
                     UpdateFrameSprites();
                 }
+            }
+        }
+        else
+        {
+            if (!isFlying)
+            {
+                isWalking = false;
+                isFlying = true;
+                UpdateFrameSprites();
             }
         }
     }
@@ -88,6 +103,19 @@ public class Posidanna : Hero
         {
             return;
         }
+        //if (isInFlyingState)
+        //{
+        //    if (!waitingForFlightToEnd.Perform())
+        //    {
+        //        //land here
+        //        LandPlayer();
+        //        if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+        //        {
+        //            TakeDamage(currentHP);
+        //        }
+        //        return;
+        //    }
+        //}
         if (isPushed)
         {
             if (completedMotionToMovePoint)
@@ -143,40 +171,57 @@ public class Posidanna : Hero
         {
             if (completedMotionToMovePoint)
             {
-                if (inputs[(int)EnumData.PosidannaInputs.RespawnPlayer] && previousInputs[(int)EnumData.PosidannaInputs.RespawnPlayer] != inputs[(int)EnumData.PosidannaInputs.RespawnPlayer])
+                if (isInFlyingState)
                 {
-                    Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
-                    if (IsPlayerSpawnable(cellToCheckFor))
+                    if (inputs[(int)EnumData.PosidannaInputs.LandPlayer] && previousInputs[(int)EnumData.PosidannaInputs.LandPlayer] != inputs[(int)EnumData.PosidannaInputs.LandPlayer])
                     {
-                        //Respawn player command
-                        RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
-                        ClientSend.RespawnPlayer(respawnPlayerCommand);
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                        //land player command
+                        LandPlayerCommand landPlayerCommand = new LandPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                        ClientSend.LandPlayer(landPlayerCommand);
                     }
-                    else
+                }
+                else
+                {
+                    if (inputs[(int)EnumData.PosidannaInputs.RespawnPlayer] && previousInputs[(int)EnumData.PosidannaInputs.RespawnPlayer] != inputs[(int)EnumData.PosidannaInputs.RespawnPlayer])
                     {
-                        Debug.LogError("Invalid location to spawn player");
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                        if (IsPlayerSpawnable(cellToCheckFor))
+                        {
+                            //Respawn player command
+                            RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                            ClientSend.RespawnPlayer(respawnPlayerCommand);
+                        }
+                        else
+                        {
+                            Debug.LogError("Invalid location to spawn player");
+                        }
                     }
                 }
             }
-            if (inputs[(int)EnumData.PosidannaInputs.ShootTidalWave] && previousInputs[(int)EnumData.PosidannaInputs.ShootTidalWave] != inputs[(int)EnumData.PosidannaInputs.ShootTidalWave])
+            if(!isInFlyingState)
             {
-                if (IsHeroAbleToFireProjectiles())
+                if (inputs[(int)EnumData.PosidannaInputs.ShootTidalWave] && previousInputs[(int)EnumData.PosidannaInputs.ShootTidalWave] != inputs[(int)EnumData.PosidannaInputs.ShootTidalWave])
                 {
-                    FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(GetLocalSequenceNo(), (int)Facing, GridManager.instance.grid.WorldToCell(actorTransform.position));
-                    ClientSend.FireTidalWave(fireTidalWaveCommand);
+                    if (IsHeroAbleToFireProjectiles())
+                    {
+                        FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(GetLocalSequenceNo(), (int)Facing, GridManager.instance.grid.WorldToCell(actorTransform.position));
+                        ClientSend.FireTidalWave(fireTidalWaveCommand);
+                        isFiringServerProjectiles = true;
+                        onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
+                    }
+                }
+                else if (inputs[(int)EnumData.PosidannaInputs.CastBubbleShield] && previousInputs[(int)EnumData.PosidannaInputs.CastBubbleShield] != inputs[(int)EnumData.PosidannaInputs.CastBubbleShield] && secondaryAttackReady)
+                {
+                    waitingActionForSecondaryMove.ReInitialiseTimerToBegin(secondaryMoveAttackRateTickRate);
+                    CastBubbleShieldCommand castBubbleShieldCommand = new CastBubbleShieldCommand(GetLocalSequenceNo(), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                    ClientSend.CastBubbleShield(castBubbleShieldCommand);
+
                     isFiringServerProjectiles = true;
                     onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
                 }
             }
-            else if (inputs[(int)EnumData.PosidannaInputs.CastBubbleShield] && previousInputs[(int)EnumData.PosidannaInputs.CastBubbleShield] != inputs[(int)EnumData.PosidannaInputs.CastBubbleShield] && secondaryAttackReady)
-            {
-                waitingActionForSecondaryMove.ReInitialiseTimerToBegin(secondaryMoveAttackRateTickRate);
-                CastBubbleShieldCommand castBubbleShieldCommand = new CastBubbleShieldCommand(GetLocalSequenceNo(), GridManager.instance.grid.WorldToCell(actorTransform.position));
-                ClientSend.CastBubbleShield(castBubbleShieldCommand);
-
-                isFiringServerProjectiles = true;
-                onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
-            }
+            
         }
     }
 
@@ -206,6 +251,10 @@ public class Posidanna : Hero
     public override void ProcessInputEventControl()
     {
         if (isPhysicsControlled)
+        {
+            return;
+        }
+        if (isInFlyingState)
         {
             return;
         }
@@ -258,7 +307,7 @@ public class Posidanna : Hero
         walkAction.Perform();
     }
 
-    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs,int movementCommandPressCount)
+    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs/*,int movementCommandPressCount*/)
     {
         if (isPhysicsControlled)
         {
@@ -278,25 +327,24 @@ public class Posidanna : Hero
         }
         if (completedMotionToMovePoint)
         {
-            if (inputs[(int)EnumData.Inputs.Up])
+            if (inputs[(int)EnumData.PosidannaInputs.Up])
             {
                 Facing = FaceDirection.Up;
             }
-            else if (inputs[(int)EnumData.Inputs.Left])
+            else if (inputs[(int)EnumData.PosidannaInputs.Left])
             {
                 Facing = FaceDirection.Left;
             }
-            else if (inputs[(int)EnumData.Inputs.Down])
+            else if (inputs[(int)EnumData.PosidannaInputs.Down])
             {
                 Facing = FaceDirection.Down;
             }
-            else if (inputs[(int)EnumData.Inputs.Right])
+            else if (inputs[(int)EnumData.PosidannaInputs.Right])
             {
                 Facing = FaceDirection.Right;
             }
 
-            if ((inputs[(int)EnumData.Inputs.Up] || inputs[(int)EnumData.Inputs.Left] || inputs[(int)EnumData.Inputs.Down] || inputs[(int)EnumData.Inputs.Right])
-                && movementCommandPressCount > frameDelayForRegisteringInput)
+            if ((inputs[(int)EnumData.PosidannaInputs.Up] || inputs[(int)EnumData.PosidannaInputs.Left] || inputs[(int)EnumData.PosidannaInputs.Down] || inputs[(int)EnumData.PosidannaInputs.Right]))
             {
                 //Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
@@ -308,7 +356,7 @@ public class Posidanna : Hero
         }
         else
         {
-            if (!inputs[(int)EnumData.Inputs.Up] && previousInputs[(int)EnumData.Inputs.Up] != inputs[(int)EnumData.Inputs.Up])
+            if (!inputs[(int)EnumData.PosidannaInputs.Up] && previousInputs[(int)EnumData.PosidannaInputs.Up] != inputs[(int)EnumData.PosidannaInputs.Up])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
                 if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
@@ -316,7 +364,7 @@ public class Posidanna : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Left] && previousInputs[(int)EnumData.Inputs.Left] != inputs[(int)EnumData.Inputs.Left])
+            else if (!inputs[(int)EnumData.PosidannaInputs.Left] && previousInputs[(int)EnumData.PosidannaInputs.Left] != inputs[(int)EnumData.PosidannaInputs.Left])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
                 if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
@@ -324,7 +372,7 @@ public class Posidanna : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Down] && previousInputs[(int)EnumData.Inputs.Down] != inputs[(int)EnumData.Inputs.Down])
+            else if (!inputs[(int)EnumData.PosidannaInputs.Down] && previousInputs[(int)EnumData.PosidannaInputs.Down] != inputs[(int)EnumData.PosidannaInputs.Down])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
                 if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
@@ -332,7 +380,7 @@ public class Posidanna : Hero
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
-            else if (!inputs[(int)EnumData.Inputs.Right] && previousInputs[(int)EnumData.Inputs.Right] != inputs[(int)EnumData.Inputs.Right])
+            else if (!inputs[(int)EnumData.PosidannaInputs.Right] && previousInputs[(int)EnumData.PosidannaInputs.Right] != inputs[(int)EnumData.PosidannaInputs.Right])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
                 if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
@@ -351,6 +399,7 @@ public class Posidanna : Hero
     public bool shootTidalWave;
     public bool castBubbleShield;
     public bool respawnPlayer;
+    public bool landPlayer;
 
     public override void DealInput()
     {
@@ -363,6 +412,7 @@ public class Posidanna : Hero
             shootTidalWave = false;
             castBubbleShield = false;
             respawnPlayer = false;
+            landPlayer = false;
         }
         else if(isFiringServerProjectiles)
         {
@@ -380,6 +430,7 @@ public class Posidanna : Hero
             shootTidalWave = Input.GetKey(KeyCode.J);
             castBubbleShield = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);
+            landPlayer = Input.GetKey(KeyCode.K);
         }
     }
 
@@ -393,15 +444,11 @@ public class Posidanna : Hero
                 right,
                 shootTidalWave,
                 castBubbleShield,
-                respawnPlayer
+                respawnPlayer,
+                landPlayer
                 };
         return inputs;
     }
-    public override void ProcessInputFrameCount(bool[] inputs, bool[] previousInputs)
-    {
-        inputFrameCounter.ProcessInputFrameCount(inputs, previousInputs);
-    }
-
     public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection facing)
     {
         Vector3 objectPosition = GridManager.instance.cellToworld(predictedPos) + GridManager.instance.GetFacingDirectionOffsetVector3(facing);

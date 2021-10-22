@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 1437271955497252468}
   - component: {fileID: 6429447313119799074}
   - component: {fileID: 208322527294787173}
-  - component: {fileID: 3502544515687585993}
   m_Layer: 0
   m_Name: RemoteHero
   m_TagString: Untagged
@@ -184,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bb7594b15f1644791f000bdf88fa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 31
+  tileType: 33
   blockFlyingUnits: 0
   blockBoulderPlacement: 1
   blockUnitMotion: 0
@@ -214,6 +213,8 @@ MonoBehaviour:
   secondaryMoveAttackRateTickRate: 0
   pushSpeed: 4
   faceDirectionInit: 1
+  flySpeed: 6
+  flyingTickCount: 300
   leftIdleSprite: []
   rightIdleSprite: []
   upIdleSprite: []
@@ -264,9 +265,11 @@ MonoBehaviour:
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
+  normalSpeed: 0
   ownerId: 0
   positionToSpawnProjectile: {x: 0, y: 0, z: 0}
   isWalking: 0
+  isFlying: 0
   isUsingPrimaryMove: 0
   isUsingSecondaryMove: 0
   currentHP: 0
@@ -280,13 +283,11 @@ MonoBehaviour:
   previousMovePointCellPosition: {x: 0, y: 0, z: 0}
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
-  frameDelayForRegisteringInput: 4
   petrificationColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 0.6509804}
   invincibleColor: {r: 1, g: 0.9345745, b: 0, a: 0.6509804}
   healthFillImage: {fileID: 0}
   currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}
-  inputFrameCounter: {fileID: 3502544515687585993}
   hero: 0
   isInputFreezed: 0
   isFiringServerProjectiles: 0
@@ -297,19 +298,7 @@ MonoBehaviour:
   shootTidalWave: 0
   castBubbleShield: 0
   respawnPlayer: 0
---- !u!114 &3502544515687585993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1437271955497252471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad645ee1ae35c564fa882b402de3729c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputframeCount: 0
+  landPlayer: 0
 --- !u!1 &1437271956441893786
 GameObject:
   m_ObjectHideFlags: 0

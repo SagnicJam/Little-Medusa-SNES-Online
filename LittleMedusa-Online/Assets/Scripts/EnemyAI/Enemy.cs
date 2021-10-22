@@ -296,6 +296,14 @@ public abstract class Enemy : Actor
         TakeDamage(currentHP);
     }
 
+    public override void OnBodyCollidedWithHourGlassTile(Vector3Int hourGlassTile)
+    {
+    }
+
+    public override void OnBodyCollidedWithIcarausWingsTiles(Vector3Int icarausCollectedOnTilePos)
+    {
+    }
+
     public abstract void UpdateAnimationState(bool isPrimaryMoveActive,bool isSecondaryMoveActive);
 
     public abstract void UpdateMovementState(bool isPrimaryMoveActive, bool isSecondaryMoveActive);

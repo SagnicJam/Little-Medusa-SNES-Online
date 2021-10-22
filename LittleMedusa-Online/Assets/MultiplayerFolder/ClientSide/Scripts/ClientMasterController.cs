@@ -48,7 +48,7 @@ public class ClientMasterController : MonoBehaviour
 
     private void Awake()
     {
-        previousInputs = new bool[Enum.GetNames(typeof(EnumData.Inputs)).Length];
+        previousInputs = new bool[Enum.GetNames(typeof(EnumData.MedusaInputs)).Length];
     }
 
     bool[] previousInputs;
@@ -132,7 +132,6 @@ public class ClientMasterController : MonoBehaviour
                             , latestPlayerStateUpdate.playerAnimationEvents);
                         SetPlayerStateUpdatesReceivedFromServer(playerStateUpdates);
                     }
-                    
                 }
             }
 
@@ -141,13 +140,12 @@ public class ClientMasterController : MonoBehaviour
                 bool[] inputs = getInputs();
                 localSequenceNumber++;
 
-                localPlayer.ProcessInputFrameCount(inputs,previousInputs);
-                ProcessInputsLocally(inputs, previousInputs, localPlayer.inputFrameCounter.inputframeCount);
-                RecordLocalClientActions(localSequenceNumber, inputs, previousInputs, localPlayer.inputFrameCounter.inputframeCount);
+                ProcessInputsLocally(inputs, previousInputs);
+                RecordLocalClientActions(localSequenceNumber, inputs, previousInputs);
 
                 //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
 
-                inputCommandsToBeSentToServerCollection.Add(new InputCommands(inputs, previousInputs, localPlayer.inputFrameCounter.inputframeCount, localSequenceNumber));
+                inputCommandsToBeSentToServerCollection.Add(new InputCommands(inputs, previousInputs, localSequenceNumber));
                 previousInputs = inputs;
 
                 //Local client sending data
@@ -214,18 +212,18 @@ public class ClientMasterController : MonoBehaviour
         return largestInt;
     }
 
-    public void RecordLocalClientActions(int sequenceNumber,bool[] inputs,bool[] previousInputs,int movementCommandPressCount)
+    public void RecordLocalClientActions(int sequenceNumber,bool[] inputs,bool[] previousInputs/*,int movementCommandPressCount*/)
     {
         //Debug.Log("After wards player position locally "+localPlayer.actorTransform.position+"<color=red>Recording here </color>"+"-->"+ sequenceNumber+" "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]+"<color=blue>Previous Inputs</color>"+previousInputs[0]+" "+previousInputs[1]+" "+previousInputs[2]+" "+previousInputs[3]);
-        localClientInputCommands.Add(sequenceNumber,new InputCommands(inputs,previousInputs, movementCommandPressCount,sequenceNumber));
+        localClientInputCommands.Add(sequenceNumber,new InputCommands(inputs,previousInputs/*, movementCommandPressCount*/,sequenceNumber));
         sequenceNoList.Add(sequenceNumber);
         latestPacketProcessedLocally = sequenceNumber;
         //Debug.Log("<color=pink>sequence no recorded </color>" + sequenceNo + "<color=pink> last run is  </color>"+localClientInputCommands.Count);
     }
 
-    private void ProcessInputsLocally(bool[]inputs,bool[] previousInputs,int movementCommandPressCount)
+    private void ProcessInputsLocally(bool[]inputs,bool[] previousInputs)
     {
-        localPlayer.ProcessMovementInputs(inputs, previousInputs, movementCommandPressCount);
+        localPlayer.ProcessMovementInputs(inputs, previousInputs);
         localPlayer.ProcessEventsInputs(inputs, previousInputs);
         localPlayer.ProcessAnimationsInputs(inputs, previousInputs);
 
@@ -279,7 +277,7 @@ public class ClientMasterController : MonoBehaviour
             {
                 //Debug.Log("<color=yellow>prediction done using sequnce no: </color>" + localClientInputCommands[i].sequenceNumber + "<color=green> inputs: </color>" + localClientInputCommands[i].commands[0] + localClientInputCommands[i].commands[1] + localClientInputCommands[i].commands[2] + localClientInputCommands[i].commands[3] + " Previous commands " + localClientInputCommands[i].previousCommands[0] + localClientInputCommands[i].previousCommands[1] + localClientInputCommands[i].previousCommands[2] + localClientInputCommands[i].previousCommands[3]);
                 //Debug.Log(serverPlayer.movePoint.position + "--" + serverPlayer.currentMovePointCellPosition + "Before" + serverPlayer.actorTransform.position + "<color=yellow>Before prediction done using sequnce no: </color>" + localClientInputCommands[i].sequenceNumber);
-                serverPlayer.ProcessMovementInputs(ic2.commands, ic2.previousCommands,ic2.movementCommandpressCount);
+                serverPlayer.ProcessMovementInputs(ic2.commands, ic2.previousCommands);
                 serverPlayer.ProcessInputMovementsControl();
                 //Debug.Log(serverPlayer.movePoint.position + "--" + serverPlayer.currentMovePointCellPosition + "After wards" + serverPlayer.actorTransform.position + "<color=yellow>After prediction done using sequnce no: </color>" + localClientInputCommands[i].sequenceNumber + "<color=green> inputs: </color>" + localClientInputCommands[i].commands[0] + localClientInputCommands[i].commands[1] + localClientInputCommands[i].commands[2] + localClientInputCommands[i].commands[3] + " Previous commands " + localClientInputCommands[i].previousCommands[0] + localClientInputCommands[i].previousCommands[1] + localClientInputCommands[i].previousCommands[2] + localClientInputCommands[i].previousCommands[3]);
             }
@@ -421,6 +419,7 @@ public struct PlayerAuthoratativeStates
     public bool isPushed;
     public bool isInvincible;
     public bool isPhysicsControlled;
+    public bool isFlyingState;
     public bool inputFreezed;
     public bool isRespawnningPlayer;
     public bool inCharacterSelectionScreen;
@@ -429,11 +428,12 @@ public struct PlayerAuthoratativeStates
     public int currentStockLives;
     public int hero;
 
-    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isPhysicsControlled,bool inputFreezed, bool isInvincible,bool isRespawnningPlayer,bool inCharacterSelectionScreen,bool inGame, int currentHP,int currentStockLives,int hero)
+    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isPhysicsControlled,bool isFlyingState, bool inputFreezed, bool isInvincible,bool isRespawnningPlayer,bool inCharacterSelectionScreen,bool inGame, int currentHP,int currentStockLives,int hero)
     {
         this.isPetrified = isPetrified;
         this.isPushed = isPushed;
         this.isPhysicsControlled = isPhysicsControlled;
+        this.isFlyingState = isFlyingState;
         this.inputFreezed = inputFreezed;
         this.isInvincible = isInvincible;
         this.isRespawnningPlayer = isRespawnningPlayer;
@@ -466,11 +466,13 @@ public struct PositionUpdates
 public struct PlayerAnimationEvents
 {
     public bool isWalking;
+    public bool isFlying;
     public bool isPrimaryMoveAnimationBeingPlayed;
 
-    public PlayerAnimationEvents(bool isWalking,bool isPrimaryMoveAnimationBeingPlayed)
+    public PlayerAnimationEvents(bool isWalking,bool isFlying,bool isPrimaryMoveAnimationBeingPlayed)
     {
         this.isWalking = isWalking;
+        this.isFlying = isFlying;
         this.isPrimaryMoveAnimationBeingPlayed = isPrimaryMoveAnimationBeingPlayed;
     }
 }
@@ -634,6 +636,18 @@ public struct RemoveBoulderCommand
     }
 }
 
+public struct LandPlayerCommand
+{
+    public int sequenceNumber;
+    public Vector3Int landCellPosition;
+
+    public LandPlayerCommand(int sequenceNumber, Vector3Int landCellPosition)
+    {
+        this.sequenceNumber = sequenceNumber;
+        this.landCellPosition = landCellPosition;
+    }
+}
+
 public struct RespawnPlayerCommand
 {
     public int sequenceNumber;
@@ -652,13 +666,11 @@ public struct InputCommands
     public int sequenceNumber;
     public bool[] commands;
     public bool[] previousCommands;
-    public int movementCommandpressCount;
 
-    public InputCommands(bool[] commands,bool[] previousCommands,int movementCommandpressCount, int sequenceNumber)
+    public InputCommands(bool[] commands,bool[] previousCommands, int sequenceNumber)
     {
         this.commands = commands;
         this.previousCommands = previousCommands;
-        this.movementCommandpressCount = movementCommandpressCount;
         this.sequenceNumber = sequenceNumber;
     }
 }
