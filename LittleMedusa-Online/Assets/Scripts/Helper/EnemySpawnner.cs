@@ -34,9 +34,25 @@ public class EnemySpawnner : MonoBehaviour
     void SpawnNewEnemy()
     {
         currentEnemyCount++;
+        InstantiateEnemy(spawnIndexList[Random.Range(0, spawnIndexList.Count)]);
+    }
+
+    void InstantiateEnemy(Vector3Int cellPos)
+    {
         GameObject enemy = Instantiate(enemyPrefab[(int)monsterToSpawn]);
         Actor actor = enemy.GetComponentInChildren<Actor>();
-        actor.transform.position = GridManager.instance.cellToworld(spawnIndexList[Random.Range(0,spawnIndexList.Count)]);
+        actor.transform.position = GridManager.instance.cellToworld(cellPos);
+        actor.transform.rotation = Quaternion.identity;
+        actor.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actor.transform.position);
+    }
+
+    public void InstantiateEnemy(Vector3Int cellPos,int direction,int leaderId)
+    {
+        GameObject enemy = Instantiate(enemyPrefab[(int)monsterToSpawn]);
+        Enemy actor = enemy.GetComponentInChildren<Enemy>();
+        actor.leaderNetworkId = leaderId;
+        actor.Facing = (FaceDirection)direction;
+        actor.transform.position = GridManager.instance.cellToworld(cellPos);
         actor.transform.rotation = Quaternion.identity;
         actor.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actor.transform.position);
     }
@@ -46,7 +62,7 @@ public class EnemySpawnner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(MultiplayerManager.instance.isServer&& startSpawnner)
+        if(MultiplayerManager.instance.isServer&& startSpawnner&& spawnIndexList.Count>0)
         {
             liveEnemy = currentEnemyCount < totalEnemyToSpawn;
             if (liveEnemy)

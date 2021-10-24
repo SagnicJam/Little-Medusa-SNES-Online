@@ -13,6 +13,7 @@ public class ServerSideGameManager : MonoBehaviour
     public int worldDestructionTickRate;
     public int maxItemCount;
     public int itemSpawnTickRate;
+    public int cereberausHeadSwitchTickRate;
     public int timeToStartMatch;
     public int stopWorldDestructionTimeCount;
     public List<EnumData.TileType> toNetworkTileType;
@@ -25,6 +26,7 @@ public class ServerSideGameManager : MonoBehaviour
     public int liveWorldDestructionTickCountTemp;
     public int liveStopWorldDestructionTimeCount;
     public int liveItemSpawnCountTemp;
+    public int liveCereberausHeadSwitchTickRateTemp;
     public int serverWorldSequenceNumber=0;
     private List<WorldUpdate> worldUpdatesToBeSentFromServerToClient = new List<WorldUpdate>();
     private List<PreviousWorldUpdatePacks> previousHistoryForWorldUpdatesToBeSentToServerCollection = new List<PreviousWorldUpdatePacks>();
@@ -64,7 +66,7 @@ public class ServerSideGameManager : MonoBehaviour
                 matchId = 13,
                 matchConditionDto = new MatchConditionDto
                 {
-                    enemy = 0,
+                    enemy = 4,
                     enemyCount = 0
                 }
             };
@@ -115,6 +117,7 @@ public class ServerSideGameManager : MonoBehaviour
         serverWorldSequenceNumber++;
         
         DealItemSpawn();
+        DealCereberausHeadRotation();
         //DealWorldDestruction();
         DealMatchStartTime();
         //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
@@ -150,6 +153,22 @@ public class ServerSideGameManager : MonoBehaviour
         }
     }
 
+    void DealCereberausHeadRotation()
+    {
+        if (currentGameState == EnumData.GameState.Gameplay)
+        {
+            if (liveCereberausHeadSwitchTickRateTemp <= cereberausHeadSwitchTickRate)
+            {
+                liveCereberausHeadSwitchTickRateTemp++;
+            }
+            else
+            {
+                liveCereberausHeadSwitchTickRateTemp = 0;
+                RotateCereberausHeads();
+            }
+        }
+    }
+
     void DealItemSpawn()
     {
         if (currentGameState == EnumData.GameState.Gameplay)
@@ -163,6 +182,34 @@ public class ServerSideGameManager : MonoBehaviour
                 liveItemSpawnCountTemp = 0;
                 SpawnItem();
             }
+        }
+    }
+
+    void RotateCereberausHeads()
+    {
+        List<Vector3Int> upcereberuasHead = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.UpCereberusHead);
+        List<Vector3Int> downcereberuasHead = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.DownCereberusHead);
+        List<Vector3Int> leftcereberuasHead = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.LeftCereberusHead);
+        List<Vector3Int> rightcereberuasHead = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.RightCereberusHead);
+
+        foreach (Vector3Int item in upcereberuasHead)
+        {
+            GridManager.instance.ReplaceTileWith(item,EnumData.TileType.UpCereberusHead,EnumData.TileType.RightCereberusHead,false);
+        }
+
+        foreach (Vector3Int item in downcereberuasHead)
+        {
+            GridManager.instance.ReplaceTileWith(item, EnumData.TileType.DownCereberusHead, EnumData.TileType.LeftCereberusHead, false);
+        }
+
+        foreach (Vector3Int item in leftcereberuasHead)
+        {
+            GridManager.instance.ReplaceTileWith(item, EnumData.TileType.LeftCereberusHead, EnumData.TileType.UpCereberusHead, false);
+        }
+
+        foreach (Vector3Int item in rightcereberuasHead)
+        {
+            GridManager.instance.ReplaceTileWith(item, EnumData.TileType.RightCereberusHead, EnumData.TileType.DownCereberusHead, false);
         }
     }
 

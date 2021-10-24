@@ -197,7 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 31
   blockFlyingUnits: 0
-  blockBoulderPlacement: 1
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -325,6 +325,7 @@ MonoBehaviour:
   ownerId: 0
   positionToSpawnProjectile: {x: 0, y: 0, z: 0}
   isWalking: 0
+  isFlying: 0
   isUsingPrimaryMove: 0
   isUsingSecondaryMove: 0
   currentHP: 0
@@ -346,6 +347,7 @@ MonoBehaviour:
   isMelleAttacking: 0
   isRangedAttacking: 0
   followingTarget: 0
+  leaderNetworkId: 0
   heroToChase: {fileID: 0}
   canBePetrified: 0
   dieOnUnPetrification: 0

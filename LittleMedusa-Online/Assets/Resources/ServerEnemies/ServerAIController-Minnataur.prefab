@@ -360,7 +360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 31
   blockFlyingUnits: 0
-  blockBoulderPlacement: 1
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -388,6 +388,8 @@ MonoBehaviour:
   secondaryMoveAttackRateTickRate: 100
   pushSpeed: 4
   faceDirectionInit: 0
+  flySpeed: 0
+  flyingTickCount: 0
   leftIdleSprite: []
   rightIdleSprite: []
   upIdleSprite: []
@@ -474,9 +476,11 @@ MonoBehaviour:
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
+  normalSpeed: 0
   ownerId: 0
   positionToSpawnProjectile: {x: 0, y: 0, z: 0}
   isWalking: 0
+  isFlying: 0
   isUsingPrimaryMove: 0
   isUsingSecondaryMove: 0
   currentHP: 0

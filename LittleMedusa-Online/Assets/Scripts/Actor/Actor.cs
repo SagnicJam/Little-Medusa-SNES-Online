@@ -21,8 +21,10 @@ public abstract class Actor : TileData
     public int walkSpeed;
     public int damagePerStoppedHit;
     public int primaryMoveDamage;
+    public int eyeLaserDamage;
     public float petrificationSnapSpeed;
     public int primaryMoveAttackRateTickRate;
+    public int itemEyeLaserMoveAttackRateTickRate;
     public int secondaryMoveAttackRateTickRate;
     public int pushSpeed;
     public FaceDirection faceDirectionInit;
@@ -60,6 +62,7 @@ public abstract class Actor : TileData
     public bool isPetrified;
     public bool isInFlyingState;
     public bool isFiringPrimaryProjectile;
+    public bool isFiringItemEyeLaser;
     public bool isInvincible;
     public bool isRespawnningPlayer;
     public bool inCharacterSelectionScreen;
@@ -108,9 +111,13 @@ public abstract class Actor : TileData
     [Header("Action Primary Actions")]
     public WaitingForNextAction waitingActionForPrimaryMove = new WaitingForNextAction();
     public WaitingForNextAction waitingActionForSecondaryMove = new WaitingForNextAction();
+    public WaitingForNextAction waitingActionForItemEyeLaserMove = new WaitingForNextAction();
 
-    public virtual void Awake()
+    public override void Awake()
     {
+
+        base.Awake();
+
         //
         normalSpeed = walkSpeed;
         walkAction.Initialise(this);
@@ -124,6 +131,10 @@ public abstract class Actor : TileData
 
         waitingActionForSecondaryMove.Initialise(this);
         waitingActionForSecondaryMove.ReInitialiseTimerToEnd(secondaryMoveAttackRateTickRate);
+
+
+        waitingActionForItemEyeLaserMove.Initialise(this);
+        waitingActionForItemEyeLaserMove.ReInitialiseTimerToEnd(itemEyeLaserMoveAttackRateTickRate);
 
         waitingForFlightToEnd.Initialise(this);
     }
@@ -550,9 +561,9 @@ public abstract class Actor : TileData
                 }
             }
         }
-
-
     }
+
+    
 
     public void Fire()
     {

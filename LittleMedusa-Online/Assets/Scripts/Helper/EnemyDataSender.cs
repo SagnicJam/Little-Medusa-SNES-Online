@@ -33,7 +33,7 @@ public class EnemyDataSender : MonoBehaviour
         {
             monsterBreed = EnumData.MonsterBreed.MirrorKnight;
         }
-        EnemyData enemyData = new EnemyData(enemy.ownerId, (int)monsterBreed, enemy.frameLooper.spriteIndexToShowCache, (int)enemy.Facing, enemy.GetEnemyState(), enemy.actorTransform.position);
+        EnemyData enemyData = new EnemyData(enemy.ownerId,enemy.leaderNetworkId, (int)monsterBreed, enemy.frameLooper.spriteIndexToShowCache, (int)enemy.Facing, enemy.GetEnemyState(), enemy.actorTransform.position);
         ServerSideGameManager.enemiesDic.Add(enemy.ownerId, enemyData);
         this.enemy = enemy;
         isInitialised = true;

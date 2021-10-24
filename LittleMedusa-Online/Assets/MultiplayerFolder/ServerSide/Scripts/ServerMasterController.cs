@@ -20,6 +20,8 @@ public class ServerMasterController : MonoBehaviour
     private Dictionary<int, PushCommand> pushCommandFromClientToServerDic = new Dictionary<int, PushCommand>();
     private Dictionary<int, PlaceBoulderCommand> placeBoulderCommandFromClientToServerDic = new Dictionary<int, PlaceBoulderCommand>();
     private Dictionary<int, RemoveBoulderCommand> removeBoulderCommandFromClientToServerDic = new Dictionary<int, RemoveBoulderCommand>();
+    private Dictionary<int, PlaceCereberausHeadCommand> placeCereberausHeadCommandFromClientToServerDic = new Dictionary<int, PlaceCereberausHeadCommand>();
+    private Dictionary<int, PlaceMinionCommand> placeMinionCommandFromClientToServerDic = new Dictionary<int, PlaceMinionCommand>();
     private Dictionary<int, PetrificationCommand> petrificationRequestReceivedFromClientToServerDic = new Dictionary<int, PetrificationCommand>();
     private Dictionary<int, FireTidalWaveCommand> tidalWaveFireRequestReceivedFromClientToServerDic = new Dictionary<int, FireTidalWaveCommand>();
     private Dictionary<int, FireMightyWindCommand> mightyWindFireRequestReceivedFromClientToServerDic = new Dictionary<int, FireMightyWindCommand>();
@@ -805,6 +807,133 @@ public class ServerMasterController : MonoBehaviour
             }
         }
     }
+
+    public void CheckForPlaceCerebeausHeadRequestOnServer(int sequenceNoToCheck)
+    {
+        List<int> toDiscardSequences = new List<int>();
+        foreach (KeyValuePair<int, PlaceCereberausHeadCommand> kvp in placeCereberausHeadCommandFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
+            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (KeyValuePair<int, PlaceCereberausHeadCommand> kvp in placeCereberausHeadCommandFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
+            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (int i in toDiscardSequences)
+        {
+            if (placeCereberausHeadCommandFromClientToServerDic.ContainsKey(i))
+            {
+                //Debug.Log("<color=red>discarding seq </color>" + i);
+                placeCereberausHeadCommandFromClientToServerDic.Remove(i);
+            }
+            else
+            {
+                Debug.LogError("Could not find the key: " + i);
+            }
+        }
+
+        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
+            PlaceCereberausHeadCommand placeCerebeausHeadCommand;
+            if (placeCereberausHeadCommandFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out placeCerebeausHeadCommand))
+            {
+                placeCereberausHeadCommandFromClientToServerDic.Remove(placeCerebeausHeadCommand.sequenceNumber);
+                //do server rollback here to check to check if damage actually occured on server
+                Vector3Int cellPointToPlaceCereberausHeadOn = placeCerebeausHeadCommand.cereberausHeadPos;
+                int direction = placeCerebeausHeadCommand.direction;
+                PlaceCereberausHeadImplementation(direction,cellPointToPlaceCereberausHeadOn);
+            }
+        }
+
+        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
+            PlaceCereberausHeadCommand placeCerebeausHeadCommand;
+            if (placeCereberausHeadCommandFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out placeCerebeausHeadCommand))
+            {
+                placeCereberausHeadCommandFromClientToServerDic.Remove(placeCerebeausHeadCommand.sequenceNumber);
+                //do server rollback here to check to check if damage actually occured on server
+                Vector3Int cellPointToPlaceCereberausHeadOn = placeCerebeausHeadCommand.cereberausHeadPos;
+                int direction = placeCerebeausHeadCommand.direction;
+                PlaceCereberausHeadImplementation(direction,cellPointToPlaceCereberausHeadOn);
+            }
+        }
+    }
+
+    public void CheckForPlaceMinionRequestOnServer(int sequenceNoToCheck)
+    {
+        List<int> toDiscardSequences = new List<int>();
+        foreach (KeyValuePair<int, PlaceMinionCommand> kvp in placeMinionCommandFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
+            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (KeyValuePair<int, PlaceMinionCommand> kvp in placeMinionCommandFromClientToServerDic)
+        {
+            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
+            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
+            {
+                toDiscardSequences.Add(kvp.Key);
+            }
+        }
+
+        foreach (int i in toDiscardSequences)
+        {
+            if (placeMinionCommandFromClientToServerDic.ContainsKey(i))
+            {
+                //Debug.Log("<color=red>discarding seq </color>" + i);
+                placeMinionCommandFromClientToServerDic.Remove(i);
+            }
+            else
+            {
+                Debug.LogError("Could not find the key: " + i);
+            }
+        }
+
+        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
+            PlaceMinionCommand placeMinionCommand;
+            if (placeMinionCommandFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out placeMinionCommand))
+            {
+                placeMinionCommandFromClientToServerDic.Remove(placeMinionCommand.sequenceNumber);
+                //do server rollback here to check to check if damage actually occured on server
+                Vector3Int cellPoint = placeMinionCommand.placeMinionCellPos;
+                int direction = placeMinionCommand.direction;
+                PlaceMinionImplementation(direction, cellPoint);
+            }
+        }
+
+        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
+        {
+            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
+            PlaceMinionCommand placeMinionCommand;
+            if (placeMinionCommandFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out placeMinionCommand))
+            {
+                placeMinionCommandFromClientToServerDic.Remove(placeMinionCommand.sequenceNumber);
+                //do server rollback here to check to check if damage actually occured on server
+                Vector3Int cellPointToPlaceCereberausHeadOn = placeMinionCommand.placeMinionCellPos;
+                int direction = placeMinionCommand.direction;
+                PlaceMinionImplementation(direction, cellPointToPlaceCereberausHeadOn);
+            }
+        }
+    }
+
     public void CheckForLandingRequestOnServer(int sequenceNoToCheck)
     {
         List<int> toDiscardSequences = new List<int>();
@@ -1139,6 +1268,48 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
+    public void AccumulatePlaceCereberausHeadCommandsToBePlayedOnServerFromClient(PlaceCereberausHeadCommand placeCereberausHeadCommand)
+    {
+        if (placeCereberausHeadCommand.sequenceNumber > playerSequenceNumberProcessed)
+        {
+            PlaceCereberausHeadCommand dataPackage;
+            if (placeCereberausHeadCommandFromClientToServerDic.TryGetValue(placeCereberausHeadCommand.sequenceNumber, out dataPackage))
+            {
+                Debug.Log("<color=orange>AccumulatePlaceCereberausHeadCommandsToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + placeCereberausHeadCommand.sequenceNumber);
+            }
+            else
+            {
+                Debug.Log("<color=green>AccumulatePlaceCereberausHeadCommandsToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + placeCereberausHeadCommand.sequenceNumber);
+                placeCereberausHeadCommandFromClientToServerDic.Add(placeCereberausHeadCommand.sequenceNumber, placeCereberausHeadCommand);
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>AccumulatePlaceCereberausHeadCommandsToBePlayedOnServerFromClient Already processed this sequence no </color>" + placeCereberausHeadCommand.sequenceNumber);
+        }
+    }
+
+    public void AccumulatePlaceMinionCommandsToBePlayedOnServerFromClient(PlaceMinionCommand placeMinionCommand)
+    {
+        if (placeMinionCommand.sequenceNumber > playerSequenceNumberProcessed)
+        {
+            PlaceMinionCommand dataPackage;
+            if (placeMinionCommandFromClientToServerDic.TryGetValue(placeMinionCommand.sequenceNumber, out dataPackage))
+            {
+                Debug.Log("<color=orange>AccumulatePlaceMinionCommandsToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + placeMinionCommand.sequenceNumber);
+            }
+            else
+            {
+                Debug.Log("<color=green>AccumulatePlaceMinionCommandsToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + placeMinionCommand.sequenceNumber);
+                placeMinionCommandFromClientToServerDic.Add(placeMinionCommand.sequenceNumber, placeMinionCommand);
+            }
+        }
+        else
+        {
+            Debug.Log("<color=red>AccumulatePlaceMinionCommandsToBePlayedOnServerFromClient Already processed this sequence no </color>" + placeMinionCommand.sequenceNumber);
+        }
+    }
+
     public void AccumulatePlaceBoulderCommandsToBePlayedOnServerFromClient(PlaceBoulderCommand placeBoulderCommand)
     {
         if (placeBoulderCommand.sequenceNumber > playerSequenceNumberProcessed)
@@ -1363,7 +1534,7 @@ public class ServerMasterController : MonoBehaviour
         {
             return;
         }
-        if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellPositionToPlaceBoulder))
+        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellPositionToPlaceBoulder))
         {
             Debug.Log("Setting tile boulder on "+cellPositionToPlaceBoulder);
             GridManager.instance.SetTile(cellPositionToPlaceBoulder, EnumData.TileType.Boulder, true, false);
@@ -1391,6 +1562,39 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
+    void PlaceMinionImplementation(int direction, Vector3Int cellPositionToPlaceMinion)
+    {
+        if (!CanDoAction("PlaceMinionImplementation"))
+        {
+            return;
+        }
+        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellPositionToPlaceMinion))
+        {
+            Debug.Log("Setting tile minion on " + cellPositionToPlaceMinion);
+            GridManager.instance.enemySpawnner.InstantiateEnemy(cellPositionToPlaceMinion, direction,serverInstanceHero.ownerId);
+        }
+        else
+        {
+            Debug.LogError("Cell is blocked for minion placement : " + cellPositionToPlaceMinion);
+        }
+    }
+
+    void PlaceCereberausHeadImplementation(int direction,Vector3Int cellPositionToPlaceCereberausHead)
+    {
+        if (!CanDoAction("PlaceCereberausHeadImplementation"))
+        {
+            return;
+        }
+        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellPositionToPlaceCereberausHead))
+        {
+            Debug.Log("Setting tile cereberausHead on " + cellPositionToPlaceCereberausHead);
+            GridManager.instance.SetTile(cellPositionToPlaceCereberausHead,GridManager.instance.GetCereberausHeadTypeFromDirection((FaceDirection)direction), true, false);
+        }
+        else
+        {
+            Debug.LogError("Cell is blocked for cereberausHead placement : " + cellPositionToPlaceCereberausHead);
+        }
+    }
 
     void ChangeCharacterCommandForPlayerImplementation(int characterHero)
     {
@@ -1664,6 +1868,8 @@ public class ServerMasterController : MonoBehaviour
             CheckForPushRequestOnServer(playerSequenceNumberProcessed+1);
             CheckForPlaceBoulderRequestOnServer(playerSequenceNumberProcessed+1);
             CheckForRemovingBoulderRequestOnServer(playerSequenceNumberProcessed+1);
+            CheckForPlaceCerebeausHeadRequestOnServer(playerSequenceNumberProcessed+1);
+            CheckForPlaceMinionRequestOnServer(playerSequenceNumberProcessed+1);
             CheckForTidalWaveFireRequestOnPlayer(playerSequenceNumberProcessed+1);
             CheckForMightyWindFireRequestOnPlayer(playerSequenceNumberProcessed+1);
             CheckForBubbleShieldRequestForPlayer(playerSequenceNumberProcessed+1);
@@ -1729,7 +1935,8 @@ public class ServerMasterController : MonoBehaviour
 
         PositionUpdates positionUpdates = new PositionUpdates(serverInstanceHero.actorTransform.position, serverInstanceHero.currentMovePointCellPosition
             , serverInstanceHero.previousMovePointCellPosition,(int)serverInstanceHero.Facing,(int)serverInstanceHero.PreviousFacingDirection);
-        PlayerEvents playerEvents = new PlayerEvents(serverInstanceHero.isFiringPrimaryProjectile);
+        PlayerEvents playerEvents = new PlayerEvents(serverInstanceHero.isFiringPrimaryProjectile,
+            serverInstanceHero.isFiringItemEyeLaser);
         PlayerAnimationEvents playerAnimationEvents = new PlayerAnimationEvents(serverInstanceHero.isWalking,serverInstanceHero.isFlying, serverInstanceHero.isUsingPrimaryMove);
 
         PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(serverLocalSequenceNumber,playerSequenceNumberProcessed, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimationEvents);

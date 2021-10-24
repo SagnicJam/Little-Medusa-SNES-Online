@@ -103,19 +103,19 @@ public class Posidanna : Hero
         {
             return;
         }
-        //if (isInFlyingState)
-        //{
-        //    if (!waitingForFlightToEnd.Perform())
-        //    {
-        //        //land here
-        //        LandPlayer();
-        //        if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-        //        {
-        //            TakeDamage(currentHP);
-        //        }
-        //        return;
-        //    }
-        //}
+        if (isInFlyingState)
+        {
+            if (!waitingForFlightToEnd.Perform())
+            {
+                //land here
+                LandPlayer();
+                if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                {
+                    TakeDamage(currentHP);
+                }
+                return;
+            }
+        }
         if (isPushed)
         {
             if (completedMotionToMovePoint)
@@ -195,6 +195,19 @@ public class Posidanna : Hero
                         else
                         {
                             Debug.LogError("Invalid location to spawn player");
+                        }
+                    }
+                    else if (/*itemToCast is  SpawnItems spawnItems && */inputs[(int)EnumData.PosidannaInputs.UseItem] && previousInputs[(int)EnumData.PosidannaInputs.UseItem] != inputs[(int)EnumData.PosidannaInputs.UseItem])
+                    {
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing, EnumData.TileType.BoulderDisappearing))
+                        {
+                            //send command to server of placement
+                            //PlaceCereberausHeadCommand placeCereberausHead = new PlaceCereberausHeadCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
+                            //ClientSend.PlaceCereberausHeadCommand(placeCereberausHead);
+
+                            PlaceMinionCommand placeMinionCommand = new PlaceMinionCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
+                            ClientSend.PlaceMinionCommand(placeMinionCommand);
                         }
                     }
                 }
@@ -400,6 +413,7 @@ public class Posidanna : Hero
     public bool castBubbleShield;
     public bool respawnPlayer;
     public bool landPlayer;
+    public bool useItem;
 
     public override void DealInput()
     {
@@ -413,6 +427,7 @@ public class Posidanna : Hero
             castBubbleShield = false;
             respawnPlayer = false;
             landPlayer = false;
+            useItem = false;
         }
         else if(isFiringServerProjectiles)
         {
@@ -431,6 +446,7 @@ public class Posidanna : Hero
             castBubbleShield = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);
             landPlayer = Input.GetKey(KeyCode.K);
+            useItem = Input.GetKey(KeyCode.I);
         }
     }
 
@@ -445,7 +461,8 @@ public class Posidanna : Hero
                 shootTidalWave,
                 castBubbleShield,
                 respawnPlayer,
-                landPlayer
+                landPlayer,
+                useItem
                 };
         return inputs;
     }

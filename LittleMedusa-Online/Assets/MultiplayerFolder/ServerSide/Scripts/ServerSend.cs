@@ -91,6 +91,7 @@ public class ServerSend
             packet.Write((int)serverMasterController.serverInstanceHero.Facing);
             packet.Write((int)serverMasterController.serverInstanceHero.PreviousFacingDirection);
             packet.Write(serverMasterController.serverInstanceHero.isFiringPrimaryProjectile);
+            packet.Write(serverMasterController.serverInstanceHero.isFiringItemEyeLaser);
             packet.Write(serverMasterController.serverInstanceHero.isWalking);
             packet.Write(serverMasterController.serverInstanceHero.isFlying);
             packet.Write(serverMasterController.serverInstanceHero.isUsingPrimaryMove);
@@ -144,6 +145,8 @@ public class ServerSend
             foreach (KeyValuePair<int, EnemyData> keyValuePair in worldUpdate.enemyDatas)
             {
                 packet.Write(keyValuePair.Key);
+
+                packet.Write(keyValuePair.Value.leaderNetworkId);
 
                 packet.Write(keyValuePair.Value.enemyType);
 
@@ -216,6 +219,8 @@ public class ServerSend
                 {
                     compressedPacked.Write(keyValuePair.Key);
 
+                    compressedPacked.Write(keyValuePair.Value.leaderNetworkId);
+
                     compressedPacked.Write(keyValuePair.Value.enemyType);
 
                     compressedPacked.Write(keyValuePair.Value.animationIndexNumber);
@@ -283,6 +288,8 @@ public class ServerSend
                     {
                         compressedPacked.Write(keyValuePair.Key);
 
+                        compressedPacked.Write(keyValuePair.Value.leaderNetworkId);
+
                         compressedPacked.Write(keyValuePair.Value.enemyType);
 
                         compressedPacked.Write(keyValuePair.Value.animationIndexNumber);
@@ -336,6 +343,7 @@ public class ServerSend
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.positionUpdates.Facing);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.positionUpdates.previousFacing);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerEvents.firedPrimaryMoveProjectile);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerEvents.firedItemEyeLaserMoveProjectile);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAnimationEvents.isWalking);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAnimationEvents.isFlying);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed);
@@ -370,6 +378,7 @@ public class ServerSend
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.positionUpdates.Facing);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.positionUpdates.previousFacing);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerEvents.firedPrimaryMoveProjectile);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerEvents.firedItemEyeLaserMoveProjectile);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAnimationEvents.isWalking);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAnimationEvents.isFlying);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed);

@@ -13,11 +13,10 @@ public class Cyclops : Enemy
     SenseInLineAction senseInLineAction = new SenseInLineAction();
     SenseInCircleAction senseInCircleAction = new SenseInCircleAction();
 
-    int normalSpeed;
-
     public override void Awake()
     {
         base.Awake();
+
         normalSpeed = walkSpeed;
         currentMapper = wandererMapper;
         senseInLineAction.Initialise(this);

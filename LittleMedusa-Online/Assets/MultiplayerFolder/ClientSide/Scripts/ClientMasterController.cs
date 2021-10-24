@@ -480,10 +480,12 @@ public struct PlayerAnimationEvents
 public struct PlayerEvents
 {
     public bool firedPrimaryMoveProjectile;
+    public bool firedItemEyeLaserMoveProjectile;
 
-    public PlayerEvents(bool firedPrimaryMoveProjectile)
+    public PlayerEvents(bool firedPrimaryMoveProjectile,bool firedItemEyeLaserMoveProjectile)
     {
         this.firedPrimaryMoveProjectile = firedPrimaryMoveProjectile;
+        this.firedItemEyeLaserMoveProjectile = firedItemEyeLaserMoveProjectile;
     }
 }
 
@@ -621,6 +623,34 @@ public struct PlaceBoulderCommand
     {
         this.sequenceNumber = sequenceNumber;
         this.boulderCellPos = boulderCellPos;
+    }
+}
+
+public struct PlaceMinionCommand
+{
+    public int sequenceNumber;
+    public int direction;
+    public Vector3Int placeMinionCellPos;
+
+    public PlaceMinionCommand(int sequenceNumber, int direction, Vector3Int placeMinionCellPos)
+    {
+        this.sequenceNumber = sequenceNumber;
+        this.direction = direction;
+        this.placeMinionCellPos = placeMinionCellPos;
+    }
+}
+
+public struct PlaceCereberausHeadCommand
+{
+    public int sequenceNumber;
+    public int direction;
+    public Vector3Int cereberausHeadPos;
+
+    public PlaceCereberausHeadCommand(int sequenceNumber,int direction, Vector3Int cereberausHeadPos)
+    {
+        this.sequenceNumber = sequenceNumber;
+        this.direction = direction;
+        this.cereberausHeadPos = cereberausHeadPos;
     }
 }
 

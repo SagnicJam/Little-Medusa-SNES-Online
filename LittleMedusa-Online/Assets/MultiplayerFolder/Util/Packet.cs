@@ -33,7 +33,9 @@ public enum ClientPackets
     playerTornadoCommand,
     playerRespawnCommand,
     landPlayerCommand,
-    characterChangeCommand
+    characterChangeCommand,
+    playerPlaceCereberausHeadCommand,
+    playerPlaceMinionCommand
 }
 
 public class Packet : IDisposable

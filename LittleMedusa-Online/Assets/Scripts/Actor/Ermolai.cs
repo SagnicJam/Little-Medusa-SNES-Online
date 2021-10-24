@@ -97,19 +97,19 @@ public class Ermolai : Hero
         {
             return;
         }
-        //if (isInFlyingState)
-        //{
-        //    if (!waitingForFlightToEnd.Perform())
-        //    {
-        //        //land here
-        //        LandPlayer();
-        //        if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-        //        {
-        //            TakeDamage(currentHP);
-        //        }
-        //        return;
-        //    }
-        //}
+        if (isInFlyingState)
+        {
+            if (!waitingForFlightToEnd.Perform())
+            {
+                //land here
+                LandPlayer();
+                if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                {
+                    TakeDamage(currentHP);
+                }
+                return;
+            }
+        }
         if (isPushed)
         {
             if (completedMotionToMovePoint)
@@ -203,6 +203,19 @@ public class Ermolai : Hero
                     {
                         CastEarthQuakeCommand castEarthQuakeCommand = new CastEarthQuakeCommand(GetLocalSequenceNo());
                         ClientSend.CastEarthQuake(castEarthQuakeCommand);
+                    }
+                    else if (/*itemToCast is  SpawnItems spawnItems && */inputs[(int)EnumData.ErmolaiInputs.UseItem] && previousInputs[(int)EnumData.ErmolaiInputs.UseItem] != inputs[(int)EnumData.ErmolaiInputs.UseItem])
+                    {
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing, EnumData.TileType.BoulderDisappearing))
+                        {
+                            //send command to server of placement
+                            //PlaceCereberausHeadCommand placeCereberausHead = new PlaceCereberausHeadCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
+                            //ClientSend.PlaceCereberausHeadCommand(placeCereberausHead);
+
+                            PlaceMinionCommand placeMinionCommand = new PlaceMinionCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
+                            ClientSend.PlaceMinionCommand(placeMinionCommand);
+                        }
                     }
                 }
                 
@@ -382,6 +395,7 @@ public class Ermolai : Hero
     public bool castEarthQuake;
     public bool respawnPlayer;
     public bool landPlayer;
+    public bool useItem;
 
     public override void DealInput()
     {
@@ -395,6 +409,7 @@ public class Ermolai : Hero
             castEarthQuake = false;
             respawnPlayer = false;
             landPlayer = false;
+            useItem = false;
         }
         else if(isFiringServerProjectiles)
         {
@@ -413,6 +428,7 @@ public class Ermolai : Hero
             castEarthQuake = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);
             landPlayer = Input.GetKey(KeyCode.K);
+            useItem = Input.GetKey(KeyCode.I);
         }
     }
 
@@ -427,7 +443,8 @@ public class Ermolai : Hero
                 castPitfall,
                 castEarthQuake,
                 respawnPlayer,
-                landPlayer
+                landPlayer,
+                useItem
                 };
         return inputs;
     }

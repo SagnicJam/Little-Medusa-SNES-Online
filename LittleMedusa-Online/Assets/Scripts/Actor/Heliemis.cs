@@ -96,19 +96,19 @@ public class Heliemis : Hero
         {
             return;
         }
-        //if (isInFlyingState)
-        //{
-        //    if (!waitingForFlightToEnd.Perform())
-        //    {
-        //        //land here
-        //        LandPlayer();
-        //        if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-        //        {
-        //            TakeDamage(currentHP);
-        //        }
-        //        return;
-        //    }
-        //}
+        if (isInFlyingState)
+        {
+            if (!waitingForFlightToEnd.Perform())
+            {
+                //land here
+                LandPlayer();
+                if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                {
+                    TakeDamage(currentHP);
+                }
+                return;
+            }
+        }
         if (isPushed)
         {
             if (completedMotionToMovePoint)
@@ -196,6 +196,19 @@ public class Heliemis : Hero
                         {
                             PlaceTornadoCommand placeTornoadoCommand = new PlaceTornadoCommand(GetLocalSequenceNo(), (int)Facing);
                             ClientSend.PlaceTornadoCommand(placeTornoadoCommand);
+                        }
+                    }
+                    else if (/*itemToCast is  SpawnItems spawnItems && */inputs[(int)EnumData.HeliemisInputs.UseItem] && previousInputs[(int)EnumData.HeliemisInputs.UseItem] != inputs[(int)EnumData.HeliemisInputs.UseItem])
+                    {
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing, EnumData.TileType.BoulderDisappearing))
+                        {
+                            //send command to server of placement
+                            //PlaceCereberausHeadCommand placeCereberausHead = new PlaceCereberausHeadCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
+                            //ClientSend.PlaceCereberausHeadCommand(placeCereberausHead);
+
+                            PlaceMinionCommand placeMinionCommand = new PlaceMinionCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
+                            ClientSend.PlaceMinionCommand(placeMinionCommand);
                         }
                     }
                 }
@@ -387,6 +400,7 @@ public class Heliemis : Hero
     public bool placeTornado;
     public bool respawnPlayer;
     public bool landPlayer;
+    public bool useItem;
 
     public override void DealInput()
     {
@@ -400,6 +414,7 @@ public class Heliemis : Hero
             placeTornado = false;
             respawnPlayer = false;
             landPlayer = false;
+            useItem = false;
         }
         else if(isFiringServerProjectiles)
         {
@@ -418,6 +433,7 @@ public class Heliemis : Hero
             placeTornado = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);
             landPlayer = Input.GetKey(KeyCode.K);
+            useItem = Input.GetKey(KeyCode.I);
         }
     }
 
@@ -432,7 +448,8 @@ public class Heliemis : Hero
                 shootMightyWind,
                 placeTornado,
                 respawnPlayer,
-                landPlayer
+                landPlayer,
+                useItem
                 };
         return inputs;
     }

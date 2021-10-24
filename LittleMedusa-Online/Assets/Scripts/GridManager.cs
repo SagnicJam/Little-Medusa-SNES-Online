@@ -28,6 +28,10 @@ public class GridManager : MonoBehaviour
     public GameObject smallExplosion;
     public GameObject lightning;
     public GameObject tornadoAnimation;
+    public GameObject leftFire;
+    public GameObject rightFire;
+    public GameObject upFire;
+    public GameObject downFire;
 
     [Header("Live Units")]
     public Dictionary<Vector3Int,GameObject> liveTornadoAnimationsDic = new Dictionary<Vector3Int, GameObject>();
@@ -464,6 +468,21 @@ public class GridManager : MonoBehaviour
         return nextActor;
     }
 
+    public bool HasTileAtCellPoint(Vector3Int cellPosToCheckFor, EnumData.TileType tileTypeTocheck_1, EnumData.TileType tileTypeTocheck_2)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+            if (td != null && (td.tileType == tileTypeTocheck_1 || td.tileType == tileTypeTocheck_2))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public bool HasTileAtCellPoint(Vector3Int cellPosToCheckFor, EnumData.TileType tileTypeTocheck)
     {
         Vector3 objectPosition = cellToworld(cellPosToCheckFor);
@@ -544,14 +563,31 @@ public class GridManager : MonoBehaviour
         return false;
     }
 
-    public bool IsCellBlockedForBoulderPlacementAtPos(Vector3Int cellPosToCheckFor)
+    public EnumData.TileType GetCereberausHeadTypeFromDirection(FaceDirection direction)
+    {
+        switch (direction)
+        {
+            case FaceDirection.Down:
+                return EnumData.TileType.DownCereberusHead;
+            case FaceDirection.Up:
+                return EnumData.TileType.UpCereberusHead;
+            case FaceDirection.Left:
+                return EnumData.TileType.LeftCereberusHead;
+            case FaceDirection.Right:
+                return EnumData.TileType.RightCereberusHead;
+        }
+        Debug.LogError("wrong input for direction");
+        return EnumData.TileType.None;
+    }
+
+    public bool IsCellBlockedForSpawnObjectPlacementAtPos(Vector3Int cellPosToCheckFor)
     {
         Vector3 objectPosition = cellToworld(cellPosToCheckFor);
         RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
         for (int i = 0; i < hit2DArr.Length; i++)
         {
             TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
-            if (td != null && td.blockBoulderPlacement)
+            if (td != null && td.blockToSpawnObjectsPlacement)
             {
                 return true;
             }
@@ -598,6 +634,45 @@ public class GridManager : MonoBehaviour
         {
             Destroy(g);
         });
+    }
+
+    public GameObject GetFireObject(Vector3Int cellPosToCheckFor, FaceDirection facing)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+
+        EnumData.TileType toFindEnum = EnumData.TileType.None;
+        switch (facing)
+        {
+            case FaceDirection.Up:
+                toFindEnum = EnumData.TileType.UpCereberusFire;
+                break;
+            case FaceDirection.Down:
+                toFindEnum = EnumData.TileType.DownCereberusFire;
+                break;
+            case FaceDirection.Left:
+                toFindEnum = EnumData.TileType.LeftCereberusFire;
+                break;
+            case FaceDirection.Right:
+                toFindEnum = EnumData.TileType.RightCereberusFire;
+                break;
+        }
+
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+            if (td != null && td.tileType == toFindEnum)
+            {
+                return td.gameObject;
+            }
+        }
+        return null;
+    }
+
+    public void ReplaceTileWith(Vector3Int cellPos, EnumData.TileType toReplaceTile, EnumData.TileType replaceWith,bool playAnimation)
+    {
+        SetTile(cellPos, toReplaceTile, false, playAnimation);
+        SetTile(cellPos, replaceWith, true, playAnimation);
     }
 
     public void SetTile(Vector3Int cellPos, EnumData.TileType tType, bool HasTile,bool playAnimation)
@@ -652,45 +727,45 @@ public class GridManager : MonoBehaviour
             gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, null);
             if (gameStateDependentTileArray[(int)tType - 1].cereberustileToggle)
             {
-                //switch (tType)
-                //{
-                //    case EnumData.TileType.LeftCereberusHead:
-                //        worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Left);
-                //        fireCellPos = grid.WorldToCell(worldPos);
-                //        fire = GetFireObject(fireCellPos, FaceDirection.Left);
-                //        if (fire != null)
-                //        {
-                //            Destroy(fire);
-                //        }
-                //        break;
-                //    case EnumData.TileType.RightCereberusHead:
-                //        worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Right);
-                //        fireCellPos = grid.WorldToCell(worldPos);
-                //        fire = GetFireObject(fireCellPos, FaceDirection.Right);
-                //        if (fire != null)
-                //        {
-                //            Destroy(fire);
-                //        }
-                //        break;
-                //    case EnumData.TileType.UpCereberusHead:
-                //        worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Up);
-                //        fireCellPos = grid.WorldToCell(worldPos);
-                //        fire = GetFireObject(fireCellPos, FaceDirection.Up);
-                //        if (fire != null)
-                //        {
-                //            Destroy(fire);
-                //        }
-                //        break;
-                //    case EnumData.TileType.DownCereberusHead:
-                //        worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Down);
-                //        fireCellPos = grid.WorldToCell(worldPos);
-                //        fire = GetFireObject(fireCellPos, FaceDirection.Down);
-                //        if (fire != null)
-                //        {
-                //            Destroy(fire);
-                //        }
-                //        break;
-                //}
+                switch (tType)
+                {
+                    case EnumData.TileType.LeftCereberusHead:
+                        worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Left);
+                        fireCellPos = grid.WorldToCell(worldPos);
+                        fire = GetFireObject(fireCellPos, FaceDirection.Left);
+                        if (fire != null)
+                        {
+                            Destroy(fire);
+                        }
+                        break;
+                    case EnumData.TileType.RightCereberusHead:
+                        worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Right);
+                        fireCellPos = grid.WorldToCell(worldPos);
+                        fire = GetFireObject(fireCellPos, FaceDirection.Right);
+                        if (fire != null)
+                        {
+                            Destroy(fire);
+                        }
+                        break;
+                    case EnumData.TileType.UpCereberusHead:
+                        worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Up);
+                        fireCellPos = grid.WorldToCell(worldPos);
+                        fire = GetFireObject(fireCellPos, FaceDirection.Up);
+                        if (fire != null)
+                        {
+                            Destroy(fire);
+                        }
+                        break;
+                    case EnumData.TileType.DownCereberusHead:
+                        worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Down);
+                        fireCellPos = grid.WorldToCell(worldPos);
+                        fire = GetFireObject(fireCellPos, FaceDirection.Down);
+                        if (fire != null)
+                        {
+                            Destroy(fire);
+                        }
+                        break;
+                }
             }
 
         }
@@ -698,41 +773,62 @@ public class GridManager : MonoBehaviour
         {
             int xAbs = Mathf.Abs(cellPos.x);
             int yAbs = Mathf.Abs(cellPos.y);
+            
             if (gameStateDependentTileArray[(int)tType - 1].cereberustileToggle)
             {
                 switch (tType)
                 {
-                    //case EnumData.TileType.RightCereberusHead:
-                    //    worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Right);
-                    //    if (!IsCellBlockedForPetrifiedUnitMotionAtPos(grid.WorldToCell(worldPos)) || IsCellContainingMirrorAtPos(grid.WorldToCell(worldPos)))
-                    //    {
-                    //        Instantiate(rightFire, worldPos, Quaternion.identity);
-                    //    }
-                    //    break;
-                    //case EnumData.TileType.LeftCereberusHead:
-                    //    worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Left);
-                    //    if (!IsCellBlockedForPetrifiedUnitMotionAtPos(grid.WorldToCell(worldPos)) || IsCellContainingMirrorAtPos(grid.WorldToCell(worldPos)))
-                    //    {
-                    //        Instantiate(leftFire, worldPos, Quaternion.identity);
-                    //    }
-                    //    break;
-                    //case EnumData.TileType.DownCereberusHead:
-                    //    worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Down);
-                    //    if (!IsCellBlockedForPetrifiedUnitMotionAtPos(grid.WorldToCell(worldPos)) || IsCellContainingMirrorAtPos(grid.WorldToCell(worldPos)))
-                    //    {
-                    //        Instantiate(downFire, worldPos, Quaternion.identity);
-                    //    }
-                    //    break;
-                    //case EnumData.TileType.UpCereberusHead:
-                    //    worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Up);
-                    //    if (!IsCellBlockedForPetrifiedUnitMotionAtPos(grid.WorldToCell(worldPos)) || IsCellContainingMirrorAtPos(grid.WorldToCell(worldPos)))
-                    //    {
-                    //        Instantiate(upFire, worldPos, Quaternion.identity);
-                    //    }
-                    //    break;
+                    case EnumData.TileType.RightCereberusHead:
+                        worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Right);
+                        if (!IsCellBlockedForPetrifiedUnitMotionAtPos(grid.WorldToCell(worldPos)) || IsCellContainingMirrorAtPos(grid.WorldToCell(worldPos)))
+                        {
+                            Instantiate(rightFire, worldPos, Quaternion.identity);
+                            gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tile);
+                        }
+                        else
+                        {
+                            gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tileOff);
+                        }
+                        break;
+                    case EnumData.TileType.LeftCereberusHead:
+                        worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Left);
+                        if (!IsCellBlockedForPetrifiedUnitMotionAtPos(grid.WorldToCell(worldPos)) || IsCellContainingMirrorAtPos(grid.WorldToCell(worldPos)))
+                        {
+                            Instantiate(leftFire, worldPos, Quaternion.identity);
+                            gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tile);
+                        }
+                        else
+                        {
+                            gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tileOff);
+                        }
+                        break;
+                    case EnumData.TileType.DownCereberusHead:
+                        worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Down);
+                        if (!IsCellBlockedForPetrifiedUnitMotionAtPos(grid.WorldToCell(worldPos)) || IsCellContainingMirrorAtPos(grid.WorldToCell(worldPos)))
+                        {
+                            Instantiate(downFire, worldPos, Quaternion.identity);
+                            gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tile);
+                        }
+                        else
+                        {
+                            gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tileOff);
+                        }
+                        break;
+                    case EnumData.TileType.UpCereberusHead:
+                        worldPos = cellToworld(cellPos) + GetFacingDirectionOffsetVector3(FaceDirection.Up);
+                        if (!IsCellBlockedForPetrifiedUnitMotionAtPos(grid.WorldToCell(worldPos)) || IsCellContainingMirrorAtPos(grid.WorldToCell(worldPos)))
+                        {
+                            Instantiate(upFire, worldPos, Quaternion.identity);
+                            gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tile);
+                        }
+                        else
+                        {
+                            gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tileOff);
+                        }
+                        break;
                 }
             }
-            else if(gameStateDependentTileArray[(int)tType - 1].initialVectorToTileMapper.ContainsKey(cellPos))
+            else if (gameStateDependentTileArray[(int)tType - 1].initialVectorToTileMapper.ContainsKey(cellPos))
             {
                 gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].initialVectorToTileMapper[cellPos]);
             }
@@ -763,30 +859,32 @@ public class GridManager : MonoBehaviour
             }
             else
             {
-                //if (gameStateDependentTileArray[(int)tType - 1].cereberustileToggle)
-                //{
-                //    if (!IsCellBlockedForPetrifiedUnitMotionAtPos(grid.WorldToCell(worldPos)) || IsCellContainingMirrorAtPos(grid.WorldToCell(worldPos)))
-                //    {
-                //        gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tile);
-                //    }
-                //    else
-                //    {
-                //        gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tileOff);
-                //    }
-                //}
-                //else
-                //{
                 gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tile);
-                //}
             }
-            if (gameStateDependentTileArray[(int)tType - 1].tileMap.GetComponent<TilemapCollider2D>() != null)
+            if (gameStateDependentTileArray[(int)tType - 1].tilemapCollider2D != null)
             {
-                gameStateDependentTileArray[(int)tType - 1].tileMap.GetComponent<TilemapCollider2D>().enabled = false;
-                gameStateDependentTileArray[(int)tType - 1].tileMap.GetComponent<TilemapCollider2D>().enabled = true;
+                if (!gameStateDependentTileArray[(int)tType - 1].tilemapCollider2D.enabled)
+                {
+                    gameStateDependentTileArray[(int)tType - 1].tilemapCollider2D.enabled = true;
+                }
             }
         }
     }
+    public bool IsCellContainingMirrorAtPos(Vector3Int cellPosToCheckFor)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
 
+            if (td != null && td.tileType == EnumData.TileType.Mirror)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     public bool HasPetrifiedObject(Vector3Int cellPosToCheckFor)
     {
         Vector3 objectPosition = cellToworld(cellPosToCheckFor);
@@ -795,6 +893,25 @@ public class GridManager : MonoBehaviour
         {
             Actor actor = hit2DArr[i].collider.gameObject.GetComponent<Actor>();
             if (actor != null && actor.isPetrified)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool HasLeader(Vector3Int cellPosToCheckFor,int leaderId)
+    {
+        if(leaderId==0)
+        {
+            return false;
+        }
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            Actor actor = hit2DArr[i].collider.gameObject.GetComponent<Actor>();
+            if (actor != null && actor.ownerId == leaderId)
             {
                 return true;
             }
@@ -1244,22 +1361,6 @@ public class GridManager : MonoBehaviour
     
     }
 
-    public bool IsCellContainingMonster(Vector3Int cellPosToCheckFor, Actor actorCalling)
-    {
-        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
-        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
-        for (int i = 0; i < hit2DArr.Length; i++)
-        {
-            Enemy monster = hit2DArr[i].collider.gameObject.GetComponent<Enemy>();
-
-            if (monster != null && actorCalling.gameObject.GetInstanceID() != monster.gameObject.GetInstanceID())
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public bool IsCellBlockedForMonsterWithAnotherMonster(Vector3Int cellPosToCheck, Enemy monster)
     {
         Vector3 objectPosition = cellToworld(cellPosToCheck);
@@ -1301,6 +1402,7 @@ public struct GameStateDependentTiles
     public EnumData.TileType tileAssetType;
     public Tile tile;
     public Tile darkTile;
+    public Tile tileOff;
     public Tilemap tileMap;
     public TileData tileData;
     public TilemapCollider2D tilemapCollider2D;

@@ -16,7 +16,6 @@ public class Snake : Enemy
     DashMapper dashMapper = new DashMapper();
     SenseInLineAction senseInLineAction = new SenseInLineAction();
 
-    int normalSpeed;
     float normalAnimation;
 
     public override void Awake()

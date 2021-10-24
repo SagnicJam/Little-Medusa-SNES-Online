@@ -33,6 +33,7 @@ public class ClientHandle : MonoBehaviour
         int faceDirection = packet.ReadInt();
         int previousfaceDirection = packet.ReadInt();
         bool isFiringPrimaryProjectile = packet.ReadBool();
+        bool isFiringItemEyeLaserProjectile = packet.ReadBool();
         bool isWalking = packet.ReadBool();
         bool isFlying = packet.ReadBool();
         bool isPrimaryMoveAnimationBeingPlayed = packet.ReadBool();
@@ -52,7 +53,7 @@ public class ClientHandle : MonoBehaviour
         Debug.Log(id+"<color=red>Player id Sequence no spawned on: </color>"+ playerServerSequenceNumber);
 
         PositionUpdates positionUpdates = new PositionUpdates(position, blockposition, previousBlockposition,faceDirection,previousfaceDirection);
-        PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile);
+        PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile, isFiringItemEyeLaserProjectile);
         PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isWalking, isFlying, isPrimaryMoveAnimationBeingPlayed);
         PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isFlyingState, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, hero);
 
@@ -101,6 +102,8 @@ public class ClientHandle : MonoBehaviour
         {
             int uid = packet.ReadInt();
 
+            int leaderNetworkId = packet.ReadInt();
+
             int enemyType = packet.ReadInt();
 
             int animationIndexNumber = packet.ReadInt();
@@ -111,7 +114,7 @@ public class ClientHandle : MonoBehaviour
 
             Vector3 enemyPosition = packet.ReadVector3();
 
-            keyValueEnemyPairs.Add(uid, new EnemyData(uid, enemyType, animationIndexNumber,faceDirection, enemyState, enemyPosition));
+            keyValueEnemyPairs.Add(uid, new EnemyData(uid, leaderNetworkId, enemyType, animationIndexNumber,faceDirection, enemyState, enemyPosition));
         }
 
         AnimatingStaticTile[] animatingTiles = new AnimatingStaticTile[packet.ReadInt()];
@@ -192,13 +195,14 @@ public class ClientHandle : MonoBehaviour
             for (int i = 0; i < enemyDatas.Length; i++)
             {
                 int enemyId = decompressedPacket.ReadInt();
+                int leaderNetworkId = decompressedPacket.ReadInt();
                 int enemyType = decompressedPacket.ReadInt();
                 int animationIndexNumber = decompressedPacket.ReadInt();
                 int faceDirection = decompressedPacket.ReadInt();
                 int enemyState = decompressedPacket.ReadInt();
                 Vector3 enemyPosition = decompressedPacket.ReadVector3();
 
-                enemyValuePairs.Add(enemyId, new EnemyData(enemyId, enemyType, animationIndexNumber, faceDirection, enemyState, enemyPosition));
+                enemyValuePairs.Add(enemyId, new EnemyData(enemyId, leaderNetworkId, enemyType, animationIndexNumber, faceDirection, enemyState, enemyPosition));
             }
 
             Dictionary<int, AnimatingStaticTile> keyValuePairsAnimation = new Dictionary<int, AnimatingStaticTile>();
@@ -260,13 +264,14 @@ public class ClientHandle : MonoBehaviour
                 for (int k = 0; k < previousEnemyDatas.Length; k++)
                 {
                     int enemyId = decompressedPacket.ReadInt();
+                    int leaderNetworkId = decompressedPacket.ReadInt();
                     int enemyType = decompressedPacket.ReadInt();
                     int animationIndexNumber = decompressedPacket.ReadInt();
                     int faceDirection = decompressedPacket.ReadInt();
                     int enemyState = decompressedPacket.ReadInt();
                     Vector3 enemyPosition = decompressedPacket.ReadVector3();
 
-                    previousEnemyValuePairs.Add(enemyId, new EnemyData(enemyId, enemyType, animationIndexNumber, faceDirection, enemyState, enemyPosition));
+                    previousEnemyValuePairs.Add(enemyId, new EnemyData(enemyId, leaderNetworkId, enemyType, animationIndexNumber, faceDirection, enemyState, enemyPosition));
                 }
 
                 Dictionary<int, AnimatingStaticTile> keyValuePairsAnimation = new Dictionary<int, AnimatingStaticTile>();
@@ -305,6 +310,7 @@ public class ClientHandle : MonoBehaviour
             int Facing = packet.ReadInt();
             int previousFacing = packet.ReadInt();
             bool isFiringPrimaryProjectile = packet.ReadBool();
+            bool isFiringItemEyeLaserProjectile = packet.ReadBool();
             bool isWalking = packet.ReadBool();
             bool isFlying = packet.ReadBool();
             bool isPrimaryMoveAnimationBeingPlayed = packet.ReadBool();
@@ -323,7 +329,7 @@ public class ClientHandle : MonoBehaviour
             int playerServerSequenceNumberReceived = packet.ReadInt();
 
             PositionUpdates positionUpdates = new PositionUpdates(position, blockposition, previousBlockposition, Facing,previousFacing);
-            PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile);
+            PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile, isFiringItemEyeLaserProjectile);
             PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isWalking, isFlying, isPrimaryMoveAnimationBeingPlayed);
             PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isFlyingState, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, hero);
 
@@ -363,6 +369,7 @@ public class ClientHandle : MonoBehaviour
                 int Facing = packet.ReadInt();
                 int previousFacing = packet.ReadInt();
                 bool isFiringPrimaryProjectile = packet.ReadBool();
+                bool isFiringItemEyeLaserProjectile = packet.ReadBool();
                 bool isWalking = packet.ReadBool();
                 bool isFlying = packet.ReadBool();
                 bool isPrimaryMoveAnimationBeingPlayed = packet.ReadBool();
@@ -381,7 +388,7 @@ public class ClientHandle : MonoBehaviour
                 int previousHistoryServerSequenceNo = packet.ReadInt();
 
                 PositionUpdates positionUpdates = new PositionUpdates(previousHistoryPositionUpdate, previousHistoryBlockPositionUpdate, previousHistoryPreviousBlockPositionUpdate, Facing, previousFacing);
-                PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile);
+                PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile, isFiringItemEyeLaserProjectile);
                 PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isWalking,isFlying, isPrimaryMoveAnimationBeingPlayed);
                 PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isFlyingState, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, previousHistoryPlayerHero);
 

@@ -10,19 +10,19 @@ public class Medusa : Hero
         {
             return;
         }
-        //if (isInFlyingState)
-        //{
-        //    if (!waitingForFlightToEnd.Perform())
-        //    {
-        //        //land here
-        //        LandPlayer();
-        //        if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-        //        {
-        //            TakeDamage(currentHP);
-        //        }
-        //        return;
-        //    }
-        //}
+        if (isInFlyingState)
+        {
+            if (!waitingForFlightToEnd.Perform())
+            {
+                //land here
+                LandPlayer();
+                if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                {
+                    TakeDamage(currentHP);
+                }
+                return;
+            }
+        }
         if (isPushed)
         {
             if (completedMotionToMovePoint)
@@ -186,6 +186,26 @@ public class Medusa : Hero
                 isFiringPrimaryProjectile = false;
                 waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
             }
+            //else if (/*itemToCast is  SpawnItems spawnItems && */inputs[(int)EnumData.MedusaInputs.UseItem])
+            //{
+            //    if (IsHeroAbleToFireProjectiles())
+            //    {
+            //        if (!waitingActionForItemEyeLaserMove.Perform())
+            //        {
+            //            isFiringItemEyeLaser = true;
+            //            waitingActionForItemEyeLaserMove.ReInitialiseTimerToBegin(itemEyeLaserMoveAttackRateTickRate);
+            //        }
+            //        else
+            //        {
+            //            isFiringItemEyeLaser = false;
+            //        }
+            //    }
+            //}
+            //else if (!inputs[(int)EnumData.MedusaInputs.UseItem] && previousInputs[(int)EnumData.MedusaInputs.UseItem] != inputs[(int)EnumData.MedusaInputs.UseItem])
+            //{
+            //    isFiringItemEyeLaser = false;
+            //    waitingActionForItemEyeLaserMove.ReInitialiseTimerToEnd(itemEyeLaserMoveAttackRateTickRate);
+            //}
         }
         
 
@@ -248,7 +268,7 @@ public class Medusa : Hero
                     else if (inputs[(int)EnumData.MedusaInputs.PlaceRemovalBoulder] && previousInputs[(int)EnumData.MedusaInputs.PlaceRemovalBoulder] != inputs[(int)EnumData.MedusaInputs.PlaceRemovalBoulder])
                     {
                         Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                        if (!GridManager.instance.IsCellBlockedForBoulderPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing))
+                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing))
                         {
                             //send command to server of placement
                             PlaceBoulderCommand placeBoulderCommand = new PlaceBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
@@ -258,6 +278,19 @@ public class Medusa : Hero
                         {
                             RemoveBoulderCommand removeBoulderCommand = new RemoveBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
                             ClientSend.RemoveBoulderCommand(removeBoulderCommand);
+                        }
+                    }
+                    else if (/*itemToCast is  SpawnItems spawnItems && */inputs[(int)EnumData.MedusaInputs.UseItem] && previousInputs[(int)EnumData.MedusaInputs.UseItem] != inputs[(int)EnumData.MedusaInputs.UseItem])
+                    {
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing, EnumData.TileType.BoulderDisappearing))
+                        {
+                            //send command to server of placement
+                            //PlaceCereberausHeadCommand placeCereberausHead = new PlaceCereberausHeadCommand(GetLocalSequenceNo(),(int)Facing, cellToCheckFor);
+                            //ClientSend.PlaceCereberausHeadCommand(placeCereberausHead);
+
+                            PlaceMinionCommand placeMinionCommand = new PlaceMinionCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
+                            ClientSend.PlaceMinionCommand(placeMinionCommand);
                         }
                     }
                 }
@@ -290,6 +323,10 @@ public class Medusa : Hero
         if (isFiringPrimaryProjectile)
         {
             Fire();
+        }
+        if (isFiringItemEyeLaser)
+        {
+            FireProjectile(new Attack(eyeLaserDamage,EnumData.AttackTypes.ProjectileAttack,EnumData.Projectiles.EyeLaser),GridManager.instance.grid.WorldToCell(actorTransform.position));
         }
     }
 
@@ -434,6 +471,7 @@ public class Medusa : Hero
     public bool placeORRemovalBoulder;
     public bool respawnPlayer;
     public bool landPlayer;
+    public bool useItem;
 
     public override void DealInput()
     {
@@ -448,6 +486,7 @@ public class Medusa : Hero
             placeORRemovalBoulder = false;
             respawnPlayer = false;
             landPlayer = false;
+            useItem = false;
         }
         else if (isFiringServerProjectiles)
         {
@@ -467,6 +506,7 @@ public class Medusa : Hero
             placeORRemovalBoulder = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);
             landPlayer = Input.GetKey(KeyCode.K);
+            useItem = Input.GetKey(KeyCode.I);
         }
     }
 
@@ -482,7 +522,8 @@ public class Medusa : Hero
                 push,
                 placeORRemovalBoulder,
                 respawnPlayer,
-                landPlayer
+                landPlayer,
+                useItem
                 };
         return inputs;
     }

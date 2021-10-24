@@ -8,7 +8,7 @@ public class Centaur : Enemy
     public float lineRangeForDetection;
     public float circleRangeForDetection;
     public float rangedAttackLineLengthForDetection;
-    public int arrowDamage;
+    public int arrowDamage; 
 
 
     AimlessWandererMapper wandererMapper = new AimlessWandererMapper();
@@ -119,8 +119,6 @@ public class Centaur : Enemy
             OnCantOccupySpace();
             return;
         }
-
-
         walkAction.Perform();
     }
 

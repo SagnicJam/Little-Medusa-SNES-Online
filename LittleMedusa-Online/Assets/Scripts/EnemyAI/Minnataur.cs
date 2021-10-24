@@ -5,7 +5,6 @@ using UnityEngine;
 public class Minnataur : Enemy
 {
     PermiterMapper perimeterMapper = new PermiterMapper();
-    int normalSpeed;
     public override void Awake()
     {
         base.Awake();

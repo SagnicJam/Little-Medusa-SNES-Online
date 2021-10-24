@@ -97,12 +97,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7881f7b01d4f8bb42a9a8821161377f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  selfMinionColor: {r: 0.4911769, g: 1, b: 0.2783019, a: 1}
+  enemyMinionColor: {r: 1, g: 0.36320752, b: 0.36320752, a: 1}
   spriteRenderer: {fileID: 4381202891389670505}
+  id: 0
   currentEnemyState: 0
   currentFaceDirection: 0
   currentEnemyData:
     uid: 0
+    leaderNetworkId: 0
     enemyType: 0
     faceDirection: 0
     animationIndexNumber: 0
@@ -596,10 +599,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff00e2d0efe74546a3f95a989804ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 28
+  tileType: 31
   blockFlyingUnits: 0
-  blockBoulderPlacement: 1
-  blockUnitMotion: 1
+  blockToSpawnObjectsPlacement: 0
+  blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
   solidifyTile: 0

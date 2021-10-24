@@ -9,7 +9,6 @@ public class ZeusHead : Enemy
     AimlessWandererMapper wandererMapper = new AimlessWandererMapper();
 
     public bool isDroppingThunder;
-    int normalSpeed;
 
     public override void Awake()
     {

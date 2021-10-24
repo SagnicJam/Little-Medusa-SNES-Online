@@ -36,9 +36,13 @@ public class SenseInLineAction : Actions
                 {
                     if (hitCols_Up[i].collider != null && hitCols_Up[i].collider.gameObject.GetComponent<Hero>() != null)
                     {
-                        monsterSensing.Facing = FaceDirection.Up;
-                        heroInLineOfAction = hitCols_Up[i].collider.gameObject.GetComponent<Hero>();
-                        return true;
+                        Hero heroInLine = hitCols_Up[i].collider.gameObject.GetComponent<Hero>();
+                        if(heroInLine.ownerId!=monsterSensing.leaderNetworkId)
+                        {
+                            monsterSensing.Facing = FaceDirection.Up;
+                            heroInLineOfAction = heroInLine;
+                            return true;
+                        }
                     }
                 }
             }
@@ -50,9 +54,13 @@ public class SenseInLineAction : Actions
                 {
                     if (hitCols_Down[i].collider != null && hitCols_Down[i].collider.gameObject.GetComponent<Hero>() != null)
                     {
-                        monsterSensing.Facing = FaceDirection.Down;
-                        heroInLineOfAction = hitCols_Down[i].collider.gameObject.GetComponent<Hero>();
-                        return true;
+                        Hero heroInLine = hitCols_Down[i].collider.gameObject.GetComponent<Hero>();
+                        if (heroInLine.ownerId != monsterSensing.leaderNetworkId)
+                        {
+                            monsterSensing.Facing = FaceDirection.Down;
+                            heroInLineOfAction = heroInLine;
+                            return true;
+                        }
                     }
                 }
             }
@@ -64,9 +72,13 @@ public class SenseInLineAction : Actions
                 {
                     if (hitCols_Left[i].collider != null && hitCols_Left[i].collider.gameObject.GetComponent<Hero>() != null)
                     {
-                        monsterSensing.Facing = FaceDirection.Left;
-                        heroInLineOfAction = hitCols_Left[i].collider.gameObject.GetComponent<Hero>();
-                        return true;
+                        Hero heroInLine = hitCols_Left[i].collider.gameObject.GetComponent<Hero>();
+                        if (heroInLine.ownerId != monsterSensing.leaderNetworkId)
+                        {
+                            monsterSensing.Facing = FaceDirection.Left;
+                            heroInLineOfAction = heroInLine;
+                            return true;
+                        }
                     }
                 }
             }
@@ -78,9 +90,13 @@ public class SenseInLineAction : Actions
                 {
                     if (hitCols_Right[i].collider != null && hitCols_Right[i].collider.gameObject.GetComponent<Hero>() != null)
                     {
-                        monsterSensing.Facing = FaceDirection.Right;
-                        heroInLineOfAction = hitCols_Right[i].collider.gameObject.GetComponent<Hero>();
-                        return true;
+                        Hero heroInLine = hitCols_Right[i].collider.gameObject.GetComponent<Hero>();
+                        if (heroInLine.ownerId != monsterSensing.leaderNetworkId)
+                        {
+                            monsterSensing.Facing = FaceDirection.Right;
+                            heroInLineOfAction = heroInLine;
+                            return true;
+                        }
                     }
                 }
             }

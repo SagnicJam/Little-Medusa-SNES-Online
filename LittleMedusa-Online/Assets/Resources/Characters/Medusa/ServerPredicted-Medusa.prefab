@@ -38,7 +38,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2126608214695116894}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 32
   blockFlyingUnits: 0
-  blockBoulderPlacement: 1
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -184,8 +184,10 @@ MonoBehaviour:
   walkSpeed: 4
   damagePerStoppedHit: 2
   primaryMoveDamage: 2
+  eyeLaserDamage: 2
   petrificationSnapSpeed: 6
   primaryMoveAttackRateTickRate: 20
+  itemEyeLaserMoveAttackRateTickRate: 20
   secondaryMoveAttackRateTickRate: 0
   pushSpeed: 4
   faceDirectionInit: 1
@@ -252,6 +254,7 @@ MonoBehaviour:
   isPetrified: 0
   isInFlyingState: 0
   isFiringPrimaryProjectile: 0
+  isFiringItemEyeLaser: 0
   isInvincible: 0
   isRespawnningPlayer: 0
   inCharacterSelectionScreen: 0
@@ -283,6 +286,7 @@ MonoBehaviour:
   hero: 0
   isInputFreezed: 0
   isFiringServerProjectiles: 0
+  itemToCast: {fileID: 0}
   up: 0
   left: 0
   down: 0
@@ -292,6 +296,7 @@ MonoBehaviour:
   placeORRemovalBoulder: 0
   respawnPlayer: 0
   landPlayer: 0
+  useItem: 0
 --- !u!114 &4220674656292707514
 MonoBehaviour:
   m_ObjectHideFlags: 0

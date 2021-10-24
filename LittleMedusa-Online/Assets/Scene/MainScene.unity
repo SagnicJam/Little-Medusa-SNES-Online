@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 15
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -509,7 +509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 4
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -776,6 +776,7 @@ MonoBehaviour:
   - tileAssetType: 1
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1498150787}
     tileData: {fileID: 1498150784}
     tilemapCollider2D: {fileID: 1498150785}
@@ -785,6 +786,7 @@ MonoBehaviour:
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: f6b5d1f84a1a22d4c9da4e279cdf3283, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 138257219}
     tileData: {fileID: 138257216}
     tilemapCollider2D: {fileID: 138257217}
@@ -794,6 +796,7 @@ MonoBehaviour:
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1569240392}
     tileData: {fileID: 1569240389}
     tilemapCollider2D: {fileID: 1569240390}
@@ -803,6 +806,7 @@ MonoBehaviour:
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1352489839}
     tileData: {fileID: 1352489836}
     tilemapCollider2D: {fileID: 1352489837}
@@ -812,6 +816,7 @@ MonoBehaviour:
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 634762781}
     tileData: {fileID: 634762778}
     tilemapCollider2D: {fileID: 634762779}
@@ -821,6 +826,7 @@ MonoBehaviour:
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1427908547}
     tileData: {fileID: 1427908544}
     tilemapCollider2D: {fileID: 1427908545}
@@ -830,6 +836,7 @@ MonoBehaviour:
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1832071805}
     tileData: {fileID: 1832071802}
     tilemapCollider2D: {fileID: 1832071803}
@@ -839,6 +846,7 @@ MonoBehaviour:
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1363529063}
     tileData: {fileID: 1363529060}
     tilemapCollider2D: {fileID: 1363529061}
@@ -848,6 +856,7 @@ MonoBehaviour:
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1093195405}
     tileData: {fileID: 1093195402}
     tilemapCollider2D: {fileID: 1093195403}
@@ -857,6 +866,7 @@ MonoBehaviour:
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1675437907}
     tileData: {fileID: 1675437904}
     tilemapCollider2D: {fileID: 1675437905}
@@ -866,6 +876,7 @@ MonoBehaviour:
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 922969886}
     tileData: {fileID: 922969883}
     tilemapCollider2D: {fileID: 922969884}
@@ -875,6 +886,7 @@ MonoBehaviour:
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1807594446}
     tileData: {fileID: 1807594443}
     tilemapCollider2D: {fileID: 1807594444}
@@ -884,6 +896,7 @@ MonoBehaviour:
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 877645438}
     tileData: {fileID: 877645435}
     tilemapCollider2D: {fileID: 877645436}
@@ -893,6 +906,7 @@ MonoBehaviour:
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1396838487}
     tileData: {fileID: 1396838484}
     tilemapCollider2D: {fileID: 1396838485}
@@ -902,6 +916,7 @@ MonoBehaviour:
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 353803068}
     tileData: {fileID: 353803065}
     tilemapCollider2D: {fileID: 353803066}
@@ -911,6 +926,7 @@ MonoBehaviour:
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1677991511}
     tileData: {fileID: 1677991508}
     tilemapCollider2D: {fileID: 1677991509}
@@ -920,6 +936,7 @@ MonoBehaviour:
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 531466381}
     tileData: {fileID: 531466378}
     tilemapCollider2D: {fileID: 531466379}
@@ -929,6 +946,7 @@ MonoBehaviour:
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 182606948}
     tileData: {fileID: 182606945}
     tilemapCollider2D: {fileID: 182606946}
@@ -938,6 +956,7 @@ MonoBehaviour:
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 873273792}
     tileData: {fileID: 873273789}
     tilemapCollider2D: {fileID: 873273790}
@@ -947,6 +966,7 @@ MonoBehaviour:
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 9a9dfd88a9cdde548926df267900f310, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1433888222}
     tileData: {fileID: 1433888219}
     tilemapCollider2D: {fileID: 1433888220}
@@ -956,6 +976,7 @@ MonoBehaviour:
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2082906105}
     tileData: {fileID: 2082906102}
     tilemapCollider2D: {fileID: 2082906103}
@@ -965,6 +986,7 @@ MonoBehaviour:
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: be7b2aed65c5cf044bc4862d368ba839, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 893851202}
     tileData: {fileID: 893851199}
     tilemapCollider2D: {fileID: 893851200}
@@ -974,6 +996,7 @@ MonoBehaviour:
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: 6f18e70fd5d38bb48942fd62fc26b914, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 775761515}
     tileData: {fileID: 775761512}
     tilemapCollider2D: {fileID: 775761513}
@@ -983,6 +1006,7 @@ MonoBehaviour:
   - tileAssetType: 24
     tile: {fileID: 11400000, guid: d4e6294ec62009a47af48d48dfc9ce11, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 399938069}
     tileData: {fileID: 399938067}
     tilemapCollider2D: {fileID: 399938066}
@@ -1001,6 +1025,10 @@ MonoBehaviour:
     type: 3}
   tornadoAnimation: {fileID: 5944352837396803624, guid: 1757bb2693e5564468bc9f3ebb41cf34,
     type: 3}
+  leftFire: {fileID: 0}
+  rightFire: {fileID: 0}
+  upFire: {fileID: 0}
+  downFire: {fileID: 0}
   xMin: 0
   yMin: 0
   xMax: 0
@@ -1146,7 +1174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 11
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -1328,7 +1356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 9
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -1510,7 +1538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 6
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -1668,7 +1696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 14
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -1850,7 +1878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 2
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -2925,7 +2953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 22
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -3155,7 +3183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 17
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -3422,6 +3450,7 @@ MonoBehaviour:
   - tileAssetType: 1
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1093030440}
     tileData: {fileID: 1093030437}
     tilemapCollider2D: {fileID: 1093030438}
@@ -3431,6 +3460,7 @@ MonoBehaviour:
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 6b458523ce3b50646a90212f7a1b1b63, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1541188114}
     tileData: {fileID: 1541188111}
     tilemapCollider2D: {fileID: 1541188112}
@@ -3440,6 +3470,7 @@ MonoBehaviour:
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1239899678}
     tileData: {fileID: 1239899675}
     tilemapCollider2D: {fileID: 1239899676}
@@ -3449,6 +3480,7 @@ MonoBehaviour:
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2135699244}
     tileData: {fileID: 2135699241}
     tilemapCollider2D: {fileID: 2135699242}
@@ -3458,6 +3490,7 @@ MonoBehaviour:
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2125557699}
     tileData: {fileID: 2125557696}
     tilemapCollider2D: {fileID: 2125557697}
@@ -3467,6 +3500,7 @@ MonoBehaviour:
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 506106526}
     tileData: {fileID: 506106523}
     tilemapCollider2D: {fileID: 506106524}
@@ -3476,6 +3510,7 @@ MonoBehaviour:
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2052303038}
     tileData: {fileID: 2052303035}
     tilemapCollider2D: {fileID: 2052303036}
@@ -3485,6 +3520,7 @@ MonoBehaviour:
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1547458867}
     tileData: {fileID: 1547458864}
     tilemapCollider2D: {fileID: 1547458865}
@@ -3494,6 +3530,7 @@ MonoBehaviour:
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1759148294}
     tileData: {fileID: 1759148291}
     tilemapCollider2D: {fileID: 1759148292}
@@ -3503,6 +3540,7 @@ MonoBehaviour:
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1182521953}
     tileData: {fileID: 1182521950}
     tilemapCollider2D: {fileID: 1182521951}
@@ -3512,6 +3550,7 @@ MonoBehaviour:
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 38452787}
     tileData: {fileID: 38452784}
     tilemapCollider2D: {fileID: 38452785}
@@ -3521,6 +3560,7 @@ MonoBehaviour:
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 542530960}
     tileData: {fileID: 542530957}
     tilemapCollider2D: {fileID: 542530958}
@@ -3530,6 +3570,7 @@ MonoBehaviour:
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1838683372}
     tileData: {fileID: 1838683369}
     tilemapCollider2D: {fileID: 1838683370}
@@ -3539,6 +3580,7 @@ MonoBehaviour:
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 561854541}
     tileData: {fileID: 561854538}
     tilemapCollider2D: {fileID: 561854539}
@@ -3548,6 +3590,7 @@ MonoBehaviour:
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1461461868}
     tileData: {fileID: 1461461865}
     tilemapCollider2D: {fileID: 1461461866}
@@ -3557,6 +3600,7 @@ MonoBehaviour:
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1748093421}
     tileData: {fileID: 1748093418}
     tilemapCollider2D: {fileID: 1748093419}
@@ -3566,6 +3610,7 @@ MonoBehaviour:
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1437818380}
     tileData: {fileID: 1437818377}
     tilemapCollider2D: {fileID: 1437818378}
@@ -3575,6 +3620,7 @@ MonoBehaviour:
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1848205488}
     tileData: {fileID: 1848205485}
     tilemapCollider2D: {fileID: 1848205486}
@@ -3584,6 +3630,7 @@ MonoBehaviour:
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1729994827}
     tileData: {fileID: 1729994824}
     tilemapCollider2D: {fileID: 1729994825}
@@ -3593,6 +3640,7 @@ MonoBehaviour:
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 74d45107f24b67e40845e641e37d03c9, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 764065759}
     tileData: {fileID: 764065756}
     tilemapCollider2D: {fileID: 764065757}
@@ -3602,6 +3650,7 @@ MonoBehaviour:
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 558442071}
     tileData: {fileID: 558442068}
     tilemapCollider2D: {fileID: 558442069}
@@ -3611,6 +3660,7 @@ MonoBehaviour:
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: c585039eceeac1f4d895b11b4439c14e, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 312444890}
     tileData: {fileID: 312444887}
     tilemapCollider2D: {fileID: 312444888}
@@ -3620,6 +3670,7 @@ MonoBehaviour:
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2138633795}
     tileData: {fileID: 2138633792}
     tilemapCollider2D: {fileID: 2138633793}
@@ -3629,6 +3680,7 @@ MonoBehaviour:
   - tileAssetType: 24
     tile: {fileID: 11400000, guid: d4e6294ec62009a47af48d48dfc9ce11, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 980732168}
     tileData: {fileID: 980732165}
     tilemapCollider2D: {fileID: 980732166}
@@ -3647,6 +3699,10 @@ MonoBehaviour:
     type: 3}
   tornadoAnimation: {fileID: 5944352837396803624, guid: 1757bb2693e5564468bc9f3ebb41cf34,
     type: 3}
+  leftFire: {fileID: 0}
+  rightFire: {fileID: 0}
+  upFire: {fileID: 0}
+  downFire: {fileID: 0}
   xMin: 0
   yMin: 0
   xMax: 0
@@ -3711,7 +3767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 20
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -3893,7 +3949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 15
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -4075,7 +4131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 2
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -5259,7 +5315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 5
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -5442,7 +5498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -5616,7 +5672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 21
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -5827,7 +5883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 20
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -6062,7 +6118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 21
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -6273,7 +6329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 11
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -6455,7 +6511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 18
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -6637,7 +6693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 18
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -6819,7 +6875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 5
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -7002,7 +7058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 18
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -7184,7 +7240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 15
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -7366,7 +7422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 16
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -7554,7 +7610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -7752,7 +7808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -7894,7 +7950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 17
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -8076,7 +8132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 14
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -8420,7 +8476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -12073,7 +12129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 4
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -12255,7 +12311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 22
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -12675,7 +12731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 2
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -13888,7 +13944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -14022,7 +14078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 23
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -14597,7 +14653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 2
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -15529,7 +15585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 12
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -15711,7 +15767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 2
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -17236,7 +17292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 15
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -17418,7 +17474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 11
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -17600,7 +17656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 7
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -17782,7 +17838,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -17964,7 +18020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 22
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -18377,7 +18433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -18559,7 +18615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 13
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -18757,7 +18813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 21
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -18968,7 +19024,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 23
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -19556,7 +19612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 15
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -19819,7 +19875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 18
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -20001,7 +20057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 6
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -20159,7 +20215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 13
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -20341,7 +20397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 15
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -20523,7 +20579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 16
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -20711,7 +20767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 12
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -20893,7 +20949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 10
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -21075,7 +21131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 8
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -21257,7 +21313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 10
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -21439,7 +21495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 20
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -21694,7 +21750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 8
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -21876,7 +21932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 16
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -22064,7 +22120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 23
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -22796,7 +22852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -22954,7 +23010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 21
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -23165,7 +23221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 11
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -23347,7 +23403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 9
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -23529,7 +23585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 5
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -23899,7 +23955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 19
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -24095,7 +24151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -24253,7 +24309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -27663,7 +27719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 14
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -27845,7 +27901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 18
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -28027,7 +28083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 22
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -28407,7 +28463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -28589,7 +28645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 7
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -28771,7 +28827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 14
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -28953,7 +29009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 6
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -29192,7 +29248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -32977,7 +33033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 12
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -33187,7 +33243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 19
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -33383,7 +33439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 4
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -33565,7 +33621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -34652,7 +34708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 17
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -34834,7 +34890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -35016,7 +35072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -38156,7 +38212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 18
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -38338,7 +38394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -39425,7 +39481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 17
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -39607,7 +39663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 12
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -39789,7 +39845,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 20
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -40056,6 +40112,7 @@ MonoBehaviour:
   - tileAssetType: 1
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2122407607}
     tileData: {fileID: 2122407604}
     tilemapCollider2D: {fileID: 2122407605}
@@ -40065,6 +40122,7 @@ MonoBehaviour:
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 8f80e2ac6af701445a72419727e934ab, type: 2}
     darkTile: {fileID: 11400000, guid: 33b697a44ba8fcb40bec30ccac821798, type: 2}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1396184145}
     tileData: {fileID: 1396184142}
     tilemapCollider2D: {fileID: 1396184143}
@@ -40074,6 +40132,7 @@ MonoBehaviour:
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1782379610}
     tileData: {fileID: 1782379607}
     tilemapCollider2D: {fileID: 1782379608}
@@ -40083,6 +40142,7 @@ MonoBehaviour:
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 515868504}
     tileData: {fileID: 515868501}
     tilemapCollider2D: {fileID: 515868502}
@@ -40092,6 +40152,7 @@ MonoBehaviour:
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 610784927}
     tileData: {fileID: 610784924}
     tilemapCollider2D: {fileID: 610784925}
@@ -40101,6 +40162,7 @@ MonoBehaviour:
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1537017249}
     tileData: {fileID: 1537017246}
     tilemapCollider2D: {fileID: 1537017247}
@@ -40110,6 +40172,7 @@ MonoBehaviour:
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1054554645}
     tileData: {fileID: 1054554642}
     tilemapCollider2D: {fileID: 1054554643}
@@ -40119,6 +40182,7 @@ MonoBehaviour:
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 372887219}
     tileData: {fileID: 372887216}
     tilemapCollider2D: {fileID: 372887217}
@@ -40128,6 +40192,7 @@ MonoBehaviour:
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1371286357}
     tileData: {fileID: 1371286354}
     tilemapCollider2D: {fileID: 1371286355}
@@ -40137,6 +40202,7 @@ MonoBehaviour:
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2110318396}
     tileData: {fileID: 2110318393}
     tilemapCollider2D: {fileID: 2110318394}
@@ -40146,6 +40212,7 @@ MonoBehaviour:
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 173833733}
     tileData: {fileID: 173833730}
     tilemapCollider2D: {fileID: 173833731}
@@ -40155,6 +40222,7 @@ MonoBehaviour:
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1399411043}
     tileData: {fileID: 1399411040}
     tilemapCollider2D: {fileID: 1399411041}
@@ -40164,6 +40232,7 @@ MonoBehaviour:
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1083490439}
     tileData: {fileID: 1083490436}
     tilemapCollider2D: {fileID: 1083490437}
@@ -40173,6 +40242,7 @@ MonoBehaviour:
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 569089165}
     tileData: {fileID: 569089162}
     tilemapCollider2D: {fileID: 569089163}
@@ -40182,6 +40252,7 @@ MonoBehaviour:
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2044755479}
     tileData: {fileID: 2044755476}
     tilemapCollider2D: {fileID: 2044755477}
@@ -40191,6 +40262,7 @@ MonoBehaviour:
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 365869125}
     tileData: {fileID: 365869122}
     tilemapCollider2D: {fileID: 365869123}
@@ -40200,6 +40272,7 @@ MonoBehaviour:
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1098252703}
     tileData: {fileID: 1098252700}
     tilemapCollider2D: {fileID: 1098252701}
@@ -40209,6 +40282,7 @@ MonoBehaviour:
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1504190982}
     tileData: {fileID: 1504190979}
     tilemapCollider2D: {fileID: 1504190980}
@@ -40218,6 +40292,7 @@ MonoBehaviour:
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2020348514}
     tileData: {fileID: 2020348511}
     tilemapCollider2D: {fileID: 2020348512}
@@ -40227,6 +40302,7 @@ MonoBehaviour:
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 0c5f2304c1100254580a5aa0168cebe6, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1328386564}
     tileData: {fileID: 1328386561}
     tilemapCollider2D: {fileID: 1328386562}
@@ -40236,6 +40312,7 @@ MonoBehaviour:
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 833906684}
     tileData: {fileID: 833906681}
     tilemapCollider2D: {fileID: 833906682}
@@ -40245,6 +40322,7 @@ MonoBehaviour:
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: 79a8606300089794097a4766610d438c, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 465306113}
     tileData: {fileID: 465306110}
     tilemapCollider2D: {fileID: 465306111}
@@ -40254,6 +40332,7 @@ MonoBehaviour:
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: ae4717d5bbaff764f9ec342a858b6bed, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 984157035}
     tileData: {fileID: 984157032}
     tilemapCollider2D: {fileID: 984157033}
@@ -40263,6 +40342,7 @@ MonoBehaviour:
   - tileAssetType: 24
     tile: {fileID: 11400000, guid: d4e6294ec62009a47af48d48dfc9ce11, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 601108516}
     tileData: {fileID: 601108513}
     tilemapCollider2D: {fileID: 601108514}
@@ -40281,6 +40361,10 @@ MonoBehaviour:
     type: 3}
   tornadoAnimation: {fileID: 5944352837396803624, guid: 1757bb2693e5564468bc9f3ebb41cf34,
     type: 3}
+  leftFire: {fileID: 0}
+  rightFire: {fileID: 0}
+  upFire: {fileID: 0}
+  downFire: {fileID: 0}
   xMin: 0
   yMin: 0
   xMax: 0
@@ -40345,7 +40429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 20
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -40598,7 +40682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 21
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -40809,7 +40893,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 14
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -40991,7 +41075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 14
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -41173,7 +41257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 5
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -41356,7 +41440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 17
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -41619,7 +41703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -41777,7 +41861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 5
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -41960,7 +42044,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -42227,7 +42311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 10
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -42409,7 +42493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 5
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -42592,7 +42676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 22
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -42858,7 +42942,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 11
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -43040,7 +43124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -43222,7 +43306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 22
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -43452,7 +43536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -43634,7 +43718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 8
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -43816,7 +43900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 15
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -43998,7 +44082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 16
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -44267,7 +44351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 13
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -44465,7 +44549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -44607,7 +44691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 23
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -45158,7 +45242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 17
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -45340,7 +45424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -48516,7 +48600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 11
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -48698,7 +48782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -48965,6 +49049,7 @@ MonoBehaviour:
   - tileAssetType: 1
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 447447304}
     tileData: {fileID: 447447301}
     tilemapCollider2D: {fileID: 447447302}
@@ -48974,6 +49059,7 @@ MonoBehaviour:
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: f6b5d1f84a1a22d4c9da4e279cdf3283, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1678848161}
     tileData: {fileID: 1678848158}
     tilemapCollider2D: {fileID: 1678848159}
@@ -48983,6 +49069,7 @@ MonoBehaviour:
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1895458046}
     tileData: {fileID: 1895458043}
     tilemapCollider2D: {fileID: 1895458044}
@@ -48992,6 +49079,7 @@ MonoBehaviour:
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1741571581}
     tileData: {fileID: 1741571578}
     tilemapCollider2D: {fileID: 1741571579}
@@ -49001,6 +49089,7 @@ MonoBehaviour:
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1802622715}
     tileData: {fileID: 1802622712}
     tilemapCollider2D: {fileID: 1802622713}
@@ -49010,6 +49099,7 @@ MonoBehaviour:
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 990947451}
     tileData: {fileID: 990947448}
     tilemapCollider2D: {fileID: 990947449}
@@ -49019,6 +49109,7 @@ MonoBehaviour:
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 492182308}
     tileData: {fileID: 492182305}
     tilemapCollider2D: {fileID: 492182306}
@@ -49028,6 +49119,7 @@ MonoBehaviour:
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1553512220}
     tileData: {fileID: 1553512217}
     tilemapCollider2D: {fileID: 1553512218}
@@ -49037,6 +49129,7 @@ MonoBehaviour:
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1327077393}
     tileData: {fileID: 1327077390}
     tilemapCollider2D: {fileID: 1327077391}
@@ -49046,6 +49139,7 @@ MonoBehaviour:
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1912943987}
     tileData: {fileID: 1912943984}
     tilemapCollider2D: {fileID: 1912943985}
@@ -49055,6 +49149,7 @@ MonoBehaviour:
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1481299702}
     tileData: {fileID: 1481299699}
     tilemapCollider2D: {fileID: 1481299700}
@@ -49064,6 +49159,7 @@ MonoBehaviour:
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2035172712}
     tileData: {fileID: 2035172709}
     tilemapCollider2D: {fileID: 2035172710}
@@ -49073,6 +49169,7 @@ MonoBehaviour:
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 987397291}
     tileData: {fileID: 987397288}
     tilemapCollider2D: {fileID: 987397289}
@@ -49082,6 +49179,7 @@ MonoBehaviour:
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1751704195}
     tileData: {fileID: 1751704192}
     tilemapCollider2D: {fileID: 1751704193}
@@ -49091,6 +49189,7 @@ MonoBehaviour:
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 819865802}
     tileData: {fileID: 819865799}
     tilemapCollider2D: {fileID: 819865800}
@@ -49100,6 +49199,7 @@ MonoBehaviour:
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2019741892}
     tileData: {fileID: 2019741889}
     tilemapCollider2D: {fileID: 2019741890}
@@ -49109,6 +49209,7 @@ MonoBehaviour:
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 585942762}
     tileData: {fileID: 585942759}
     tilemapCollider2D: {fileID: 585942760}
@@ -49118,6 +49219,7 @@ MonoBehaviour:
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1762223683}
     tileData: {fileID: 1762223680}
     tilemapCollider2D: {fileID: 1762223681}
@@ -49127,6 +49229,7 @@ MonoBehaviour:
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1390821976}
     tileData: {fileID: 1390821973}
     tilemapCollider2D: {fileID: 1390821974}
@@ -49136,6 +49239,7 @@ MonoBehaviour:
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 9a9dfd88a9cdde548926df267900f310, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 106768389}
     tileData: {fileID: 106768386}
     tilemapCollider2D: {fileID: 106768387}
@@ -49145,6 +49249,7 @@ MonoBehaviour:
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1176904355}
     tileData: {fileID: 1176904352}
     tilemapCollider2D: {fileID: 1176904353}
@@ -49154,6 +49259,7 @@ MonoBehaviour:
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: be7b2aed65c5cf044bc4862d368ba839, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2119010284}
     tileData: {fileID: 2119010281}
     tilemapCollider2D: {fileID: 2119010282}
@@ -49163,6 +49269,7 @@ MonoBehaviour:
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: 6f18e70fd5d38bb48942fd62fc26b914, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 709658940}
     tileData: {fileID: 709658937}
     tilemapCollider2D: {fileID: 709658938}
@@ -49172,6 +49279,7 @@ MonoBehaviour:
   - tileAssetType: 24
     tile: {fileID: 11400000, guid: d4e6294ec62009a47af48d48dfc9ce11, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1421131584}
     tileData: {fileID: 1421131581}
     tilemapCollider2D: {fileID: 1421131582}
@@ -49190,6 +49298,10 @@ MonoBehaviour:
     type: 3}
   tornadoAnimation: {fileID: 5944352837396803624, guid: 1757bb2693e5564468bc9f3ebb41cf34,
     type: 3}
+  leftFire: {fileID: 0}
+  rightFire: {fileID: 0}
+  upFire: {fileID: 0}
+  downFire: {fileID: 0}
   xMin: 0
   yMin: 0
   xMax: 0
@@ -49254,7 +49366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 20
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -49436,7 +49548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 10
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -49618,7 +49730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 20
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -49828,7 +49940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 19
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -50024,7 +50136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 23
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -50536,7 +50648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 19
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -50732,7 +50844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 9
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -50914,7 +51026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 6
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -51072,7 +51184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 14
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -51335,7 +51447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 15
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -51517,7 +51629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 15
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -51699,7 +51811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 9
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -51881,7 +51993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 11
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -52079,7 +52191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 21
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -52290,7 +52402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 4
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -52472,7 +52584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 12
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -52739,6 +52851,7 @@ MonoBehaviour:
   - tileAssetType: 1
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 228228411}
     tileData: {fileID: 228228408}
     tilemapCollider2D: {fileID: 228228409}
@@ -52748,6 +52861,7 @@ MonoBehaviour:
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 070bbccd46630f640a5c3f8ac3482a75, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1366834785}
     tileData: {fileID: 1366834782}
     tilemapCollider2D: {fileID: 1366834783}
@@ -52757,6 +52871,7 @@ MonoBehaviour:
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1938788395}
     tileData: {fileID: 1938788392}
     tilemapCollider2D: {fileID: 1938788393}
@@ -52766,6 +52881,7 @@ MonoBehaviour:
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1323374356}
     tileData: {fileID: 1323374353}
     tilemapCollider2D: {fileID: 1323374354}
@@ -52775,6 +52891,7 @@ MonoBehaviour:
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 145075754}
     tileData: {fileID: 145075751}
     tilemapCollider2D: {fileID: 145075752}
@@ -52784,6 +52901,7 @@ MonoBehaviour:
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2050732566}
     tileData: {fileID: 2050732563}
     tilemapCollider2D: {fileID: 2050732564}
@@ -52793,6 +52911,7 @@ MonoBehaviour:
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1764866099}
     tileData: {fileID: 1764866096}
     tilemapCollider2D: {fileID: 1764866097}
@@ -52802,6 +52921,7 @@ MonoBehaviour:
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1730788628}
     tileData: {fileID: 1730788625}
     tilemapCollider2D: {fileID: 1730788626}
@@ -52811,6 +52931,7 @@ MonoBehaviour:
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 781196982}
     tileData: {fileID: 781196979}
     tilemapCollider2D: {fileID: 781196980}
@@ -52820,6 +52941,7 @@ MonoBehaviour:
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1338448983}
     tileData: {fileID: 1338448980}
     tilemapCollider2D: {fileID: 1338448981}
@@ -52829,6 +52951,7 @@ MonoBehaviour:
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1984303660}
     tileData: {fileID: 1984303657}
     tilemapCollider2D: {fileID: 1984303658}
@@ -52838,6 +52961,7 @@ MonoBehaviour:
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 508872720}
     tileData: {fileID: 508872717}
     tilemapCollider2D: {fileID: 508872718}
@@ -52847,6 +52971,7 @@ MonoBehaviour:
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1772755073}
     tileData: {fileID: 1772755070}
     tilemapCollider2D: {fileID: 1772755071}
@@ -52856,6 +52981,7 @@ MonoBehaviour:
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1462309392}
     tileData: {fileID: 1462309389}
     tilemapCollider2D: {fileID: 1462309390}
@@ -52865,6 +52991,7 @@ MonoBehaviour:
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 333336322}
     tileData: {fileID: 333336319}
     tilemapCollider2D: {fileID: 333336320}
@@ -52874,6 +53001,7 @@ MonoBehaviour:
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 391799685}
     tileData: {fileID: 391799682}
     tilemapCollider2D: {fileID: 391799683}
@@ -52883,6 +53011,7 @@ MonoBehaviour:
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 717066233}
     tileData: {fileID: 717066230}
     tilemapCollider2D: {fileID: 717066231}
@@ -52892,6 +53021,7 @@ MonoBehaviour:
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 190778961}
     tileData: {fileID: 190778958}
     tilemapCollider2D: {fileID: 190778959}
@@ -52901,6 +53031,7 @@ MonoBehaviour:
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 445479551}
     tileData: {fileID: 445479548}
     tilemapCollider2D: {fileID: 445479549}
@@ -52910,6 +53041,7 @@ MonoBehaviour:
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: f3bdc5ced32d43746a721720762e4d9c, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 547250566}
     tileData: {fileID: 547250563}
     tilemapCollider2D: {fileID: 547250564}
@@ -52919,6 +53051,7 @@ MonoBehaviour:
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 402020848}
     tileData: {fileID: 402020845}
     tilemapCollider2D: {fileID: 402020846}
@@ -52928,6 +53061,7 @@ MonoBehaviour:
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: c585039eceeac1f4d895b11b4439c14e, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 255608603}
     tileData: {fileID: 255608600}
     tilemapCollider2D: {fileID: 255608601}
@@ -52937,6 +53071,7 @@ MonoBehaviour:
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: d76268c8470531146bcc12b8bd63c35d, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1284554906}
     tileData: {fileID: 1284554903}
     tilemapCollider2D: {fileID: 1284554904}
@@ -52946,6 +53081,7 @@ MonoBehaviour:
   - tileAssetType: 24
     tile: {fileID: 11400000, guid: d4e6294ec62009a47af48d48dfc9ce11, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 859722746}
     tileData: {fileID: 859722744}
     tilemapCollider2D: {fileID: 859722743}
@@ -52964,6 +53100,10 @@ MonoBehaviour:
     type: 3}
   tornadoAnimation: {fileID: 5944352837396803624, guid: 1757bb2693e5564468bc9f3ebb41cf34,
     type: 3}
+  leftFire: {fileID: 0}
+  rightFire: {fileID: 0}
+  upFire: {fileID: 0}
+  downFire: {fileID: 0}
   xMin: 0
   yMin: 0
   xMax: 0
@@ -53028,7 +53168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 6
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -53202,7 +53342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -53344,7 +53484,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 6
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -53502,7 +53642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -53660,7 +53800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 16
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -53957,7 +54097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 19
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -54153,7 +54293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 13
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -54363,7 +54503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 19
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -54559,7 +54699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 22
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -55136,7 +55276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -56256,7 +56396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 8
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -56521,7 +56661,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 5
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -56704,7 +56844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 22
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -57196,7 +57336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 11
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -57378,7 +57518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 18
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -57576,7 +57716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 21
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -57868,7 +58008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 20
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -60895,7 +61035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -61110,7 +61250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 23
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -61625,7 +61765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -61864,7 +62004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 5
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -62047,7 +62187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 23
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -62890,7 +63030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 6
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -63048,7 +63188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 13
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -63230,7 +63370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 6
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -63388,7 +63528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 6
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -63627,7 +63767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 8
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -63809,7 +63949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -66396,7 +66536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 2
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -66530,7 +66670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -67617,7 +67757,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 7
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -67799,7 +67939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -68886,7 +69026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 4
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -69068,7 +69208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 13
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -69250,7 +69390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 16
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -69438,7 +69578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -72902,7 +73042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 9
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -73084,7 +73224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 17
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -73351,6 +73491,7 @@ MonoBehaviour:
   - tileAssetType: 1
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1274878550}
     tileData: {fileID: 1274878547}
     tilemapCollider2D: {fileID: 1274878548}
@@ -73360,6 +73501,7 @@ MonoBehaviour:
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: e72bdfaa9b85010429ef7bb19e9ee17b, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 281635911}
     tileData: {fileID: 281635908}
     tilemapCollider2D: {fileID: 281635909}
@@ -73369,6 +73511,7 @@ MonoBehaviour:
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2030076526}
     tileData: {fileID: 2030076523}
     tilemapCollider2D: {fileID: 2030076524}
@@ -73378,6 +73521,7 @@ MonoBehaviour:
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1080090621}
     tileData: {fileID: 1080090618}
     tilemapCollider2D: {fileID: 1080090619}
@@ -73387,6 +73531,7 @@ MonoBehaviour:
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 581817516}
     tileData: {fileID: 581817513}
     tilemapCollider2D: {fileID: 581817514}
@@ -73396,6 +73541,7 @@ MonoBehaviour:
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 55312114}
     tileData: {fileID: 55312111}
     tilemapCollider2D: {fileID: 55312112}
@@ -73405,6 +73551,7 @@ MonoBehaviour:
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1835008492}
     tileData: {fileID: 1835008489}
     tilemapCollider2D: {fileID: 1835008490}
@@ -73414,6 +73561,7 @@ MonoBehaviour:
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 903796292}
     tileData: {fileID: 903796289}
     tilemapCollider2D: {fileID: 903796290}
@@ -73423,6 +73571,7 @@ MonoBehaviour:
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1978056031}
     tileData: {fileID: 1978056028}
     tilemapCollider2D: {fileID: 1978056029}
@@ -73432,6 +73581,7 @@ MonoBehaviour:
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 630264843}
     tileData: {fileID: 630264840}
     tilemapCollider2D: {fileID: 630264841}
@@ -73441,6 +73591,7 @@ MonoBehaviour:
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 821355838}
     tileData: {fileID: 821355835}
     tilemapCollider2D: {fileID: 821355836}
@@ -73450,6 +73601,7 @@ MonoBehaviour:
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1362092639}
     tileData: {fileID: 1362092636}
     tilemapCollider2D: {fileID: 1362092637}
@@ -73459,6 +73611,7 @@ MonoBehaviour:
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 704373840}
     tileData: {fileID: 704373837}
     tilemapCollider2D: {fileID: 704373838}
@@ -73468,6 +73621,7 @@ MonoBehaviour:
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 785857530}
     tileData: {fileID: 785857527}
     tilemapCollider2D: {fileID: 785857528}
@@ -73477,6 +73631,7 @@ MonoBehaviour:
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1834304}
     tileData: {fileID: 1834301}
     tilemapCollider2D: {fileID: 1834302}
@@ -73486,6 +73641,7 @@ MonoBehaviour:
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 194275609}
     tileData: {fileID: 194275606}
     tilemapCollider2D: {fileID: 194275607}
@@ -73495,6 +73651,7 @@ MonoBehaviour:
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 101671168}
     tileData: {fileID: 101671165}
     tilemapCollider2D: {fileID: 101671166}
@@ -73504,6 +73661,7 @@ MonoBehaviour:
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 536898503}
     tileData: {fileID: 536898500}
     tilemapCollider2D: {fileID: 536898501}
@@ -73513,6 +73671,7 @@ MonoBehaviour:
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 769338187}
     tileData: {fileID: 769338184}
     tilemapCollider2D: {fileID: 769338185}
@@ -73522,6 +73681,7 @@ MonoBehaviour:
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 3f3aa5cbdc23a054aa74c210e3b7594b, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 556430275}
     tileData: {fileID: 556430272}
     tilemapCollider2D: {fileID: 556430273}
@@ -73531,6 +73691,7 @@ MonoBehaviour:
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 173380177}
     tileData: {fileID: 173380174}
     tilemapCollider2D: {fileID: 173380175}
@@ -73540,6 +73701,7 @@ MonoBehaviour:
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: 0427a35b3ae289043a1a26972ba1c927, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1249654265}
     tileData: {fileID: 1249654262}
     tilemapCollider2D: {fileID: 1249654263}
@@ -73549,6 +73711,7 @@ MonoBehaviour:
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: 6516da74a37ca374593b306d07f42a9a, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 395548131}
     tileData: {fileID: 395548128}
     tilemapCollider2D: {fileID: 395548129}
@@ -73558,6 +73721,7 @@ MonoBehaviour:
   - tileAssetType: 24
     tile: {fileID: 11400000, guid: d4e6294ec62009a47af48d48dfc9ce11, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 214658405}
     tileData: {fileID: 214658403}
     tilemapCollider2D: {fileID: 214658402}
@@ -73576,6 +73740,10 @@ MonoBehaviour:
     type: 3}
   tornadoAnimation: {fileID: 5944352837396803624, guid: 1757bb2693e5564468bc9f3ebb41cf34,
     type: 3}
+  leftFire: {fileID: 0}
+  rightFire: {fileID: 0}
+  upFire: {fileID: 0}
+  downFire: {fileID: 0}
   xMin: 0
   yMin: 0
   xMax: 0
@@ -73788,7 +73956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -74011,7 +74179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -75098,7 +75266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 7
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -75280,7 +75448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 11
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -75462,7 +75630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 11
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -75660,7 +75828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 21
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -75871,7 +76039,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 15
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -76053,7 +76221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 10
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -76235,7 +76403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 13
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -76417,7 +76585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 8
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -76599,7 +76767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 8
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -76781,7 +76949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 16
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -76969,7 +77137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 2
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -78676,7 +78844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -78858,7 +79026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 22
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -79169,7 +79337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 16
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -79357,7 +79525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -83118,7 +83286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 6
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -83276,7 +83444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 23
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -83498,7 +83666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 4
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -83680,7 +83848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -87036,7 +87204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -87299,7 +87467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -87566,6 +87734,7 @@ MonoBehaviour:
   - tileAssetType: 1
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 728682075}
     tileData: {fileID: 728682072}
     tilemapCollider2D: {fileID: 728682073}
@@ -87575,6 +87744,7 @@ MonoBehaviour:
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 2ec55027b2210b24598054ed13fc9c26, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 285334298}
     tileData: {fileID: 285334295}
     tilemapCollider2D: {fileID: 285334296}
@@ -87584,6 +87754,7 @@ MonoBehaviour:
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 612756219}
     tileData: {fileID: 612756216}
     tilemapCollider2D: {fileID: 612756217}
@@ -87593,6 +87764,7 @@ MonoBehaviour:
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1546115775}
     tileData: {fileID: 1546115772}
     tilemapCollider2D: {fileID: 1546115773}
@@ -87602,6 +87774,7 @@ MonoBehaviour:
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2110442778}
     tileData: {fileID: 2110442775}
     tilemapCollider2D: {fileID: 2110442776}
@@ -87611,6 +87784,7 @@ MonoBehaviour:
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 984258782}
     tileData: {fileID: 984258779}
     tilemapCollider2D: {fileID: 984258780}
@@ -87620,6 +87794,7 @@ MonoBehaviour:
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1842263017}
     tileData: {fileID: 1842263014}
     tilemapCollider2D: {fileID: 1842263015}
@@ -87629,6 +87804,7 @@ MonoBehaviour:
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1206810761}
     tileData: {fileID: 1206810758}
     tilemapCollider2D: {fileID: 1206810759}
@@ -87638,6 +87814,7 @@ MonoBehaviour:
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1798560666}
     tileData: {fileID: 1798560663}
     tilemapCollider2D: {fileID: 1798560664}
@@ -87647,6 +87824,7 @@ MonoBehaviour:
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1732368253}
     tileData: {fileID: 1732368250}
     tilemapCollider2D: {fileID: 1732368251}
@@ -87656,6 +87834,7 @@ MonoBehaviour:
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 294774056}
     tileData: {fileID: 294774053}
     tilemapCollider2D: {fileID: 294774054}
@@ -87665,6 +87844,7 @@ MonoBehaviour:
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1357325689}
     tileData: {fileID: 1357325686}
     tilemapCollider2D: {fileID: 1357325687}
@@ -87674,6 +87854,7 @@ MonoBehaviour:
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 326307504}
     tileData: {fileID: 326307501}
     tilemapCollider2D: {fileID: 326307502}
@@ -87683,6 +87864,7 @@ MonoBehaviour:
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1705433697}
     tileData: {fileID: 1705433694}
     tilemapCollider2D: {fileID: 1705433695}
@@ -87692,6 +87874,7 @@ MonoBehaviour:
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1671501515}
     tileData: {fileID: 1671501512}
     tilemapCollider2D: {fileID: 1671501513}
@@ -87701,6 +87884,7 @@ MonoBehaviour:
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 861467062}
     tileData: {fileID: 861467059}
     tilemapCollider2D: {fileID: 861467060}
@@ -87710,6 +87894,7 @@ MonoBehaviour:
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1382183242}
     tileData: {fileID: 1382183239}
     tilemapCollider2D: {fileID: 1382183240}
@@ -87719,6 +87904,7 @@ MonoBehaviour:
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 460199424}
     tileData: {fileID: 460199421}
     tilemapCollider2D: {fileID: 460199422}
@@ -87728,6 +87914,7 @@ MonoBehaviour:
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 513456575}
     tileData: {fileID: 513456572}
     tilemapCollider2D: {fileID: 513456573}
@@ -87737,6 +87924,7 @@ MonoBehaviour:
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 37a7400647b602e47a31ca5cb43b37ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 171102555}
     tileData: {fileID: 171102552}
     tilemapCollider2D: {fileID: 171102553}
@@ -87746,6 +87934,7 @@ MonoBehaviour:
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 328880253}
     tileData: {fileID: 328880250}
     tilemapCollider2D: {fileID: 328880251}
@@ -87755,6 +87944,7 @@ MonoBehaviour:
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: e9d3127d5b19f394389f9ce620a991d7, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1868471332}
     tileData: {fileID: 1868471329}
     tilemapCollider2D: {fileID: 1868471330}
@@ -87764,6 +87954,7 @@ MonoBehaviour:
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: d2febe3aaf7bcab449f0c41144be1cd9, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 276999457}
     tileData: {fileID: 276999454}
     tilemapCollider2D: {fileID: 276999455}
@@ -87773,6 +87964,7 @@ MonoBehaviour:
   - tileAssetType: 24
     tile: {fileID: 11400000, guid: d4e6294ec62009a47af48d48dfc9ce11, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 705200936}
     tileData: {fileID: 705200934}
     tilemapCollider2D: {fileID: 705200933}
@@ -87791,6 +87983,10 @@ MonoBehaviour:
     type: 3}
   tornadoAnimation: {fileID: 5944352837396803624, guid: 1757bb2693e5564468bc9f3ebb41cf34,
     type: 3}
+  leftFire: {fileID: 0}
+  rightFire: {fileID: 0}
+  upFire: {fileID: 0}
+  downFire: {fileID: 0}
   xMin: 0
   yMin: 0
   xMax: 0
@@ -87855,7 +88051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 4
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -88037,7 +88233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 9
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -88219,7 +88415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 20
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -88401,7 +88597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 9
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -88664,7 +88860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 10
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -88846,7 +89042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 12
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -89028,7 +89224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 13
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -89210,7 +89406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 4
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -89420,7 +89616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 19
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -89632,7 +89828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -89774,7 +89970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 17
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -89956,7 +90152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 12
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -90154,7 +90350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 21
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -90398,7 +90594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 12
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -90580,7 +90776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 8
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -90762,7 +90958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 2
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -92161,7 +92357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 9
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -92343,7 +92539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 17
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -92553,7 +92749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 19
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -92830,7 +93026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 20
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -93012,7 +93208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 2
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -94214,7 +94410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 14
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -94396,7 +94592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 12
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -94578,7 +94774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 9
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -94841,7 +95037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -94999,7 +95195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 6
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -95157,7 +95353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 20
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -95412,7 +95608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 10
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -95594,7 +95790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 18
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -95776,7 +95972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 17
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -95958,7 +96154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 15
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -96140,7 +96336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 14
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -96322,7 +96518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 4
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -96504,7 +96700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 2
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -97696,7 +97892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 11
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -97878,7 +98074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -98060,7 +98256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 17
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -98242,7 +98438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -99362,7 +99558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -102664,7 +102860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -103751,7 +103947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 18
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -104020,6 +104216,7 @@ MonoBehaviour:
   - tileAssetType: 1
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 534557548}
     tileData: {fileID: 534557545}
     tilemapCollider2D: {fileID: 534557546}
@@ -104029,6 +104226,7 @@ MonoBehaviour:
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 2ec55027b2210b24598054ed13fc9c26, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 260701275}
     tileData: {fileID: 260701272}
     tilemapCollider2D: {fileID: 260701273}
@@ -104038,6 +104236,7 @@ MonoBehaviour:
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2044469170}
     tileData: {fileID: 2044469167}
     tilemapCollider2D: {fileID: 2044469168}
@@ -104047,6 +104246,7 @@ MonoBehaviour:
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 836387760}
     tileData: {fileID: 836387757}
     tilemapCollider2D: {fileID: 836387758}
@@ -104056,6 +104256,7 @@ MonoBehaviour:
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 428486710}
     tileData: {fileID: 428486707}
     tilemapCollider2D: {fileID: 428486708}
@@ -104065,6 +104266,7 @@ MonoBehaviour:
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: d71059dcebe10404487c1f39d613d43d, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1282414185}
     tileData: {fileID: 1282414182}
     tilemapCollider2D: {fileID: 1282414183}
@@ -104074,6 +104276,7 @@ MonoBehaviour:
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 307399801}
     tileData: {fileID: 307399798}
     tilemapCollider2D: {fileID: 307399799}
@@ -104083,6 +104286,7 @@ MonoBehaviour:
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 657792566}
     tileData: {fileID: 657792563}
     tilemapCollider2D: {fileID: 657792564}
@@ -104092,6 +104296,7 @@ MonoBehaviour:
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1329066469}
     tileData: {fileID: 1329066466}
     tilemapCollider2D: {fileID: 1329066467}
@@ -104101,6 +104306,7 @@ MonoBehaviour:
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 370923766}
     tileData: {fileID: 370923763}
     tilemapCollider2D: {fileID: 370923764}
@@ -104110,6 +104316,7 @@ MonoBehaviour:
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 735640212}
     tileData: {fileID: 735640209}
     tilemapCollider2D: {fileID: 735640210}
@@ -104117,44 +104324,49 @@ MonoBehaviour:
     multipleTileGraphic: 0
     isDarkOnOdd: 0
   - tileAssetType: 12
-    tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
+    tile: {fileID: 11400000, guid: 233770cdf5f45e04e879f32c1aca5ec4, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 11400000, guid: 0b677b695cb020b45a30fc8e25050d51, type: 2}
     tileMap: {fileID: 281863526}
     tileData: {fileID: 281863523}
     tilemapCollider2D: {fileID: 281863524}
-    cereberustileToggle: 0
+    cereberustileToggle: 1
     multipleTileGraphic: 0
     isDarkOnOdd: 0
   - tileAssetType: 13
-    tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
+    tile: {fileID: 11400000, guid: b9a6c7b1a0751e94dac40cc6dd53edad, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 11400000, guid: 74c7d10b4973c2e479ea027a8d2bcbe8, type: 2}
     tileMap: {fileID: 1604960111}
     tileData: {fileID: 1604960108}
     tilemapCollider2D: {fileID: 1604960109}
-    cereberustileToggle: 0
+    cereberustileToggle: 1
     multipleTileGraphic: 0
     isDarkOnOdd: 0
   - tileAssetType: 14
-    tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
+    tile: {fileID: 11400000, guid: c2afd724deb524c44ba3810ca7e0f120, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 11400000, guid: 44c304eba55cd4948896df2a84d66f33, type: 2}
     tileMap: {fileID: 500747585}
     tileData: {fileID: 500747582}
     tilemapCollider2D: {fileID: 500747583}
-    cereberustileToggle: 0
+    cereberustileToggle: 1
     multipleTileGraphic: 0
     isDarkOnOdd: 0
   - tileAssetType: 15
-    tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
+    tile: {fileID: 11400000, guid: 268e1ee9ef0f7734398639468c7bb7b0, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 11400000, guid: d1489b0e9ce1a6f43b40c185d4b3b015, type: 2}
     tileMap: {fileID: 1179873265}
     tileData: {fileID: 1179873262}
     tilemapCollider2D: {fileID: 1179873263}
-    cereberustileToggle: 0
+    cereberustileToggle: 1
     multipleTileGraphic: 0
     isDarkOnOdd: 0
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1270513963}
     tileData: {fileID: 1270513960}
     tilemapCollider2D: {fileID: 1270513961}
@@ -104164,6 +104376,7 @@ MonoBehaviour:
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1557613260}
     tileData: {fileID: 1557613257}
     tilemapCollider2D: {fileID: 1557613258}
@@ -104173,6 +104386,7 @@ MonoBehaviour:
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2116040692}
     tileData: {fileID: 2116040689}
     tilemapCollider2D: {fileID: 2116040690}
@@ -104182,6 +104396,7 @@ MonoBehaviour:
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1776847564}
     tileData: {fileID: 1776847561}
     tilemapCollider2D: {fileID: 1776847562}
@@ -104191,6 +104406,7 @@ MonoBehaviour:
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 37a7400647b602e47a31ca5cb43b37ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 951628553}
     tileData: {fileID: 951628550}
     tilemapCollider2D: {fileID: 951628551}
@@ -104200,6 +104416,7 @@ MonoBehaviour:
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 156656137}
     tileData: {fileID: 156656134}
     tilemapCollider2D: {fileID: 156656135}
@@ -104209,6 +104426,7 @@ MonoBehaviour:
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: e9d3127d5b19f394389f9ce620a991d7, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1831109454}
     tileData: {fileID: 1831109451}
     tilemapCollider2D: {fileID: 1831109452}
@@ -104218,6 +104436,7 @@ MonoBehaviour:
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: d2febe3aaf7bcab449f0c41144be1cd9, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1582894244}
     tileData: {fileID: 1582894241}
     tilemapCollider2D: {fileID: 1582894242}
@@ -104227,6 +104446,7 @@ MonoBehaviour:
   - tileAssetType: 24
     tile: {fileID: 11400000, guid: d4e6294ec62009a47af48d48dfc9ce11, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1133145808}
     tileData: {fileID: 1133145806}
     tilemapCollider2D: {fileID: 1133145805}
@@ -104236,6 +104456,7 @@ MonoBehaviour:
   - tileAssetType: 25
     tile: {fileID: 11400000, guid: 0da6c90c9e2be7e479af88ade84e3f08, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1660751678}
     tileData: {fileID: 1660751676}
     tilemapCollider2D: {fileID: 1660751675}
@@ -104245,6 +104466,7 @@ MonoBehaviour:
   - tileAssetType: 26
     tile: {fileID: 11400000, guid: d00889bf034d8f14d87f8a1aaa3a9530, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1945666568}
     tileData: {fileID: 1945666566}
     tilemapCollider2D: {fileID: 1945666565}
@@ -104262,6 +104484,13 @@ MonoBehaviour:
   lightning: {fileID: 2401713681578667559, guid: a6149d1855c2d1e4a9b1feda1978b7a9,
     type: 3}
   tornadoAnimation: {fileID: 5944352837396803624, guid: 1757bb2693e5564468bc9f3ebb41cf34,
+    type: 3}
+  leftFire: {fileID: 9069340037902685798, guid: a500c118e772ea44a8a43a0527841128,
+    type: 3}
+  rightFire: {fileID: 4203113539935588243, guid: c960bd0e94c238d4994159bdb116a7c6,
+    type: 3}
+  upFire: {fileID: 1041789045412633665, guid: bb04919464b52b64986b57b3da6fe158, type: 3}
+  downFire: {fileID: 7663534991387501328, guid: b7978166190460648a1dc08778780c03,
     type: 3}
   xMin: 0
   yMin: 0
@@ -104327,7 +104556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 13
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -104509,7 +104738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -105677,7 +105906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 16
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -105865,7 +106094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 6
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -106023,7 +106252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 2
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -107171,7 +107400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 21
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -107397,7 +107626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 14
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -107579,7 +107808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 4
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -107761,7 +107990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 8
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -107943,7 +108172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 8
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -108125,7 +108354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 17
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -108307,7 +108536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -108489,7 +108718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -108671,7 +108900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 4
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -108853,7 +109082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -109116,7 +109345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 23
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -110177,7 +110406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 12
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -110444,6 +110673,7 @@ MonoBehaviour:
   - tileAssetType: 1
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1846806480}
     tileData: {fileID: 1846806477}
     tilemapCollider2D: {fileID: 1846806478}
@@ -110453,6 +110683,7 @@ MonoBehaviour:
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: e72bdfaa9b85010429ef7bb19e9ee17b, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1234862644}
     tileData: {fileID: 1234862641}
     tilemapCollider2D: {fileID: 1234862642}
@@ -110462,6 +110693,7 @@ MonoBehaviour:
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 314362246}
     tileData: {fileID: 314362243}
     tilemapCollider2D: {fileID: 314362244}
@@ -110471,6 +110703,7 @@ MonoBehaviour:
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1290284618}
     tileData: {fileID: 1290284615}
     tilemapCollider2D: {fileID: 1290284616}
@@ -110480,6 +110713,7 @@ MonoBehaviour:
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1681814444}
     tileData: {fileID: 1681814441}
     tilemapCollider2D: {fileID: 1681814442}
@@ -110489,6 +110723,7 @@ MonoBehaviour:
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1002367580}
     tileData: {fileID: 1002367577}
     tilemapCollider2D: {fileID: 1002367578}
@@ -110498,6 +110733,7 @@ MonoBehaviour:
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1149642585}
     tileData: {fileID: 1149642582}
     tilemapCollider2D: {fileID: 1149642583}
@@ -110507,6 +110743,7 @@ MonoBehaviour:
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1740002886}
     tileData: {fileID: 1740002883}
     tilemapCollider2D: {fileID: 1740002884}
@@ -110516,6 +110753,7 @@ MonoBehaviour:
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1404760846}
     tileData: {fileID: 1404760843}
     tilemapCollider2D: {fileID: 1404760844}
@@ -110525,6 +110763,7 @@ MonoBehaviour:
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1435103033}
     tileData: {fileID: 1435103030}
     tilemapCollider2D: {fileID: 1435103031}
@@ -110534,6 +110773,7 @@ MonoBehaviour:
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1173802938}
     tileData: {fileID: 1173802935}
     tilemapCollider2D: {fileID: 1173802936}
@@ -110543,6 +110783,7 @@ MonoBehaviour:
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 838933178}
     tileData: {fileID: 838933175}
     tilemapCollider2D: {fileID: 838933176}
@@ -110552,6 +110793,7 @@ MonoBehaviour:
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 340003401}
     tileData: {fileID: 340003398}
     tilemapCollider2D: {fileID: 340003399}
@@ -110561,6 +110803,7 @@ MonoBehaviour:
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 451590659}
     tileData: {fileID: 451590656}
     tilemapCollider2D: {fileID: 451590657}
@@ -110570,6 +110813,7 @@ MonoBehaviour:
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 291081215}
     tileData: {fileID: 291081212}
     tilemapCollider2D: {fileID: 291081213}
@@ -110579,6 +110823,7 @@ MonoBehaviour:
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 697823862}
     tileData: {fileID: 697823859}
     tilemapCollider2D: {fileID: 697823860}
@@ -110588,6 +110833,7 @@ MonoBehaviour:
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 217234704}
     tileData: {fileID: 217234701}
     tilemapCollider2D: {fileID: 217234702}
@@ -110597,6 +110843,7 @@ MonoBehaviour:
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 187033727}
     tileData: {fileID: 187033724}
     tilemapCollider2D: {fileID: 187033725}
@@ -110606,6 +110853,7 @@ MonoBehaviour:
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1354603596}
     tileData: {fileID: 1354603593}
     tilemapCollider2D: {fileID: 1354603594}
@@ -110615,6 +110863,7 @@ MonoBehaviour:
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 3f3aa5cbdc23a054aa74c210e3b7594b, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 388638214}
     tileData: {fileID: 388638211}
     tilemapCollider2D: {fileID: 388638212}
@@ -110624,6 +110873,7 @@ MonoBehaviour:
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 937651052}
     tileData: {fileID: 937651049}
     tilemapCollider2D: {fileID: 937651050}
@@ -110633,6 +110883,7 @@ MonoBehaviour:
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: 0427a35b3ae289043a1a26972ba1c927, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 655394204}
     tileData: {fileID: 655394201}
     tilemapCollider2D: {fileID: 655394202}
@@ -110642,6 +110893,7 @@ MonoBehaviour:
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: 6516da74a37ca374593b306d07f42a9a, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1847440570}
     tileData: {fileID: 1847440567}
     tilemapCollider2D: {fileID: 1847440568}
@@ -110651,6 +110903,7 @@ MonoBehaviour:
   - tileAssetType: 24
     tile: {fileID: 11400000, guid: d4e6294ec62009a47af48d48dfc9ce11, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 445556828}
     tileData: {fileID: 445556825}
     tilemapCollider2D: {fileID: 445556826}
@@ -110669,6 +110922,10 @@ MonoBehaviour:
     type: 3}
   tornadoAnimation: {fileID: 5944352837396803624, guid: 1757bb2693e5564468bc9f3ebb41cf34,
     type: 3}
+  leftFire: {fileID: 0}
+  rightFire: {fileID: 0}
+  upFire: {fileID: 0}
+  downFire: {fileID: 0}
   xMin: 0
   yMin: 0
   xMax: 0
@@ -110733,7 +110990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 13
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -110915,7 +111172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -112002,7 +112259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 17
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -112250,7 +112507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 11
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -112432,7 +112689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 7
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -112630,7 +112887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 25
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -112772,7 +113029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 15
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -112954,7 +113211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 10
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -113136,7 +113393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 16
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -113324,7 +113581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 2
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -114598,7 +114855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 5
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -114781,7 +115038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 10
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -114963,7 +115220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 14
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -115145,7 +115402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 12
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -115327,7 +115584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 10
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -115509,7 +115766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 14
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -115691,7 +115948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 20
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -116018,7 +116275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 7
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -116228,7 +116485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 19
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -116424,7 +116681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 8
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -116606,7 +116863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 10
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -116788,7 +117045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 8
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -116970,7 +117227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 4
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -117152,7 +117409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 23
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -117639,7 +117896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 23
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -118082,7 +118339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 16
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -118271,7 +118528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 19
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -118494,7 +118751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 14
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -118676,7 +118933,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -118858,7 +119115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 9
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -119040,7 +119297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 16
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -119228,7 +119485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 18
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -119410,7 +119667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 7
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -119592,7 +119849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 18
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -119774,7 +120031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 13
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -119984,7 +120241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 19
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -120345,7 +120602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -120527,7 +120784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -120709,7 +120966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 9
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -120891,7 +121148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 5
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -121074,7 +121331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 12
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -121284,7 +121541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 19
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -121480,7 +121737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 13
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -121662,7 +121919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 22
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -121892,7 +122149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 7
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -122074,7 +122331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 7
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -122256,7 +122513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 13
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -122438,7 +122695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 7
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -122620,7 +122877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 2
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -123948,7 +124205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -127412,7 +127669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 23
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -127634,7 +127891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 18
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -127816,7 +128073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 9
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -127998,7 +128255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 7
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -128196,7 +128453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 21
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -128488,7 +128745,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 22
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -128877,6 +129134,7 @@ MonoBehaviour:
   - tileAssetType: 1
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2033301623}
     tileData: {fileID: 2033301620}
     tilemapCollider2D: {fileID: 2033301621}
@@ -128886,6 +129144,7 @@ MonoBehaviour:
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 070bbccd46630f640a5c3f8ac3482a75, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1469726455}
     tileData: {fileID: 1469726452}
     tilemapCollider2D: {fileID: 1469726453}
@@ -128895,6 +129154,7 @@ MonoBehaviour:
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 204451840}
     tileData: {fileID: 204451837}
     tilemapCollider2D: {fileID: 204451838}
@@ -128904,6 +129164,7 @@ MonoBehaviour:
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1568388409}
     tileData: {fileID: 1568388406}
     tilemapCollider2D: {fileID: 1568388407}
@@ -128913,6 +129174,7 @@ MonoBehaviour:
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 187455125}
     tileData: {fileID: 187455122}
     tilemapCollider2D: {fileID: 187455123}
@@ -128922,6 +129184,7 @@ MonoBehaviour:
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 784847086}
     tileData: {fileID: 784847083}
     tilemapCollider2D: {fileID: 784847084}
@@ -128931,6 +129194,7 @@ MonoBehaviour:
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2028145269}
     tileData: {fileID: 2028145266}
     tilemapCollider2D: {fileID: 2028145267}
@@ -128940,6 +129204,7 @@ MonoBehaviour:
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 389969502}
     tileData: {fileID: 389969499}
     tilemapCollider2D: {fileID: 389969500}
@@ -128949,6 +129214,7 @@ MonoBehaviour:
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 427574502}
     tileData: {fileID: 427574499}
     tilemapCollider2D: {fileID: 427574500}
@@ -128958,6 +129224,7 @@ MonoBehaviour:
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 383915051}
     tileData: {fileID: 383915048}
     tilemapCollider2D: {fileID: 383915049}
@@ -128967,6 +129234,7 @@ MonoBehaviour:
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1651494962}
     tileData: {fileID: 1651494959}
     tilemapCollider2D: {fileID: 1651494960}
@@ -128976,6 +129244,7 @@ MonoBehaviour:
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1598185413}
     tileData: {fileID: 1598185410}
     tilemapCollider2D: {fileID: 1598185411}
@@ -128985,6 +129254,7 @@ MonoBehaviour:
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1822619001}
     tileData: {fileID: 1822618998}
     tilemapCollider2D: {fileID: 1822618999}
@@ -128994,6 +129264,7 @@ MonoBehaviour:
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1542677719}
     tileData: {fileID: 1542677716}
     tilemapCollider2D: {fileID: 1542677717}
@@ -129003,6 +129274,7 @@ MonoBehaviour:
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 695678278}
     tileData: {fileID: 695678275}
     tilemapCollider2D: {fileID: 695678276}
@@ -129012,6 +129284,7 @@ MonoBehaviour:
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1231380449}
     tileData: {fileID: 1231380446}
     tilemapCollider2D: {fileID: 1231380447}
@@ -129021,6 +129294,7 @@ MonoBehaviour:
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 541369878}
     tileData: {fileID: 541369875}
     tilemapCollider2D: {fileID: 541369876}
@@ -129030,6 +129304,7 @@ MonoBehaviour:
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1436709498}
     tileData: {fileID: 1436709495}
     tilemapCollider2D: {fileID: 1436709496}
@@ -129039,6 +129314,7 @@ MonoBehaviour:
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 882537872}
     tileData: {fileID: 882537869}
     tilemapCollider2D: {fileID: 882537870}
@@ -129048,6 +129324,7 @@ MonoBehaviour:
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: f3bdc5ced32d43746a721720762e4d9c, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1728044069}
     tileData: {fileID: 1728044066}
     tilemapCollider2D: {fileID: 1728044067}
@@ -129057,6 +129334,7 @@ MonoBehaviour:
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2102127236}
     tileData: {fileID: 2102127233}
     tilemapCollider2D: {fileID: 2102127234}
@@ -129066,6 +129344,7 @@ MonoBehaviour:
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: c585039eceeac1f4d895b11b4439c14e, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 98908420}
     tileData: {fileID: 98908417}
     tilemapCollider2D: {fileID: 98908418}
@@ -129075,6 +129354,7 @@ MonoBehaviour:
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: d76268c8470531146bcc12b8bd63c35d, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 328910276}
     tileData: {fileID: 328910273}
     tilemapCollider2D: {fileID: 328910274}
@@ -129084,6 +129364,7 @@ MonoBehaviour:
   - tileAssetType: 24
     tile: {fileID: 11400000, guid: d4e6294ec62009a47af48d48dfc9ce11, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 149537522}
     tileData: {fileID: 149537519}
     tilemapCollider2D: {fileID: 149537520}
@@ -129102,6 +129383,10 @@ MonoBehaviour:
     type: 3}
   tornadoAnimation: {fileID: 5944352837396803624, guid: 1757bb2693e5564468bc9f3ebb41cf34,
     type: 3}
+  leftFire: {fileID: 0}
+  rightFire: {fileID: 0}
+  upFire: {fileID: 0}
+  downFire: {fileID: 0}
   xMin: 0
   yMin: 0
   xMax: 0
@@ -129166,7 +129451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -129348,7 +129633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 22
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -130016,7 +130301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 10
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -130198,7 +130483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 5
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -130381,7 +130666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 20
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -130563,7 +130848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -130745,7 +131030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -130943,7 +131228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 26
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -131119,7 +131404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 24
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -131301,7 +131586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -132469,7 +132754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 9
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -132651,7 +132936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 11
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -132833,7 +133118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 16
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -133049,7 +133334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 19
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -133245,7 +133530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 8
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -133427,7 +133712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 7
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -133609,7 +133894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -133791,7 +134076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -137255,7 +137540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 12
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -137437,7 +137722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 3
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -137619,7 +137904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 15
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -137801,7 +138086,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 6
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -137959,7 +138244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 7
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -138189,7 +138474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 21
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -138578,7 +138863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 21
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -138874,6 +139159,7 @@ MonoBehaviour:
   - tileAssetType: 1
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1292460724}
     tileData: {fileID: 1292460721}
     tilemapCollider2D: {fileID: 1292460722}
@@ -138883,6 +139169,7 @@ MonoBehaviour:
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 8f80e2ac6af701445a72419727e934ab, type: 2}
     darkTile: {fileID: 11400000, guid: 33b697a44ba8fcb40bec30ccac821798, type: 2}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1843775680}
     tileData: {fileID: 1843775677}
     tilemapCollider2D: {fileID: 1843775678}
@@ -138892,6 +139179,7 @@ MonoBehaviour:
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 473271121}
     tileData: {fileID: 473271118}
     tilemapCollider2D: {fileID: 473271119}
@@ -138901,6 +139189,7 @@ MonoBehaviour:
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 247733571}
     tileData: {fileID: 247733568}
     tilemapCollider2D: {fileID: 247733569}
@@ -138910,6 +139199,7 @@ MonoBehaviour:
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 982274954}
     tileData: {fileID: 982274951}
     tilemapCollider2D: {fileID: 982274952}
@@ -138919,6 +139209,7 @@ MonoBehaviour:
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 861256805}
     tileData: {fileID: 861256802}
     tilemapCollider2D: {fileID: 861256803}
@@ -138928,6 +139219,7 @@ MonoBehaviour:
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1728971845}
     tileData: {fileID: 1728971842}
     tilemapCollider2D: {fileID: 1728971843}
@@ -138937,6 +139229,7 @@ MonoBehaviour:
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1027783110}
     tileData: {fileID: 1027783107}
     tilemapCollider2D: {fileID: 1027783108}
@@ -138946,6 +139239,7 @@ MonoBehaviour:
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 48219530}
     tileData: {fileID: 48219527}
     tilemapCollider2D: {fileID: 48219528}
@@ -138955,6 +139249,7 @@ MonoBehaviour:
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1715564420}
     tileData: {fileID: 1715564417}
     tilemapCollider2D: {fileID: 1715564418}
@@ -138964,6 +139259,7 @@ MonoBehaviour:
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1172292762}
     tileData: {fileID: 1172292759}
     tilemapCollider2D: {fileID: 1172292760}
@@ -138973,6 +139269,7 @@ MonoBehaviour:
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1341785240}
     tileData: {fileID: 1341785237}
     tilemapCollider2D: {fileID: 1341785238}
@@ -138982,6 +139279,7 @@ MonoBehaviour:
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1192049907}
     tileData: {fileID: 1192049904}
     tilemapCollider2D: {fileID: 1192049905}
@@ -138991,6 +139289,7 @@ MonoBehaviour:
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 69481785}
     tileData: {fileID: 69481782}
     tilemapCollider2D: {fileID: 69481783}
@@ -139000,6 +139299,7 @@ MonoBehaviour:
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 192563921}
     tileData: {fileID: 192563918}
     tilemapCollider2D: {fileID: 192563919}
@@ -139009,6 +139309,7 @@ MonoBehaviour:
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1530223485}
     tileData: {fileID: 1530223482}
     tilemapCollider2D: {fileID: 1530223483}
@@ -139018,6 +139319,7 @@ MonoBehaviour:
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1356795850}
     tileData: {fileID: 1356795847}
     tilemapCollider2D: {fileID: 1356795848}
@@ -139027,6 +139329,7 @@ MonoBehaviour:
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 926286931}
     tileData: {fileID: 926286928}
     tilemapCollider2D: {fileID: 926286929}
@@ -139036,6 +139339,7 @@ MonoBehaviour:
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1817167516}
     tileData: {fileID: 1817167513}
     tilemapCollider2D: {fileID: 1817167514}
@@ -139045,6 +139349,7 @@ MonoBehaviour:
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 0c5f2304c1100254580a5aa0168cebe6, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 769325433}
     tileData: {fileID: 769325430}
     tilemapCollider2D: {fileID: 769325431}
@@ -139054,6 +139359,7 @@ MonoBehaviour:
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1863810850}
     tileData: {fileID: 1863810847}
     tilemapCollider2D: {fileID: 1863810848}
@@ -139063,6 +139369,7 @@ MonoBehaviour:
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: 79a8606300089794097a4766610d438c, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 921051621}
     tileData: {fileID: 921051618}
     tilemapCollider2D: {fileID: 921051619}
@@ -139072,6 +139379,7 @@ MonoBehaviour:
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: ae4717d5bbaff764f9ec342a858b6bed, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1747777563}
     tileData: {fileID: 1747777560}
     tilemapCollider2D: {fileID: 1747777561}
@@ -139081,6 +139389,7 @@ MonoBehaviour:
   - tileAssetType: 24
     tile: {fileID: 11400000, guid: d4e6294ec62009a47af48d48dfc9ce11, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 861343403}
     tileData: {fileID: 861343400}
     tilemapCollider2D: {fileID: 861343401}
@@ -139099,6 +139408,10 @@ MonoBehaviour:
     type: 3}
   tornadoAnimation: {fileID: 5944352837396803624, guid: 1757bb2693e5564468bc9f3ebb41cf34,
     type: 3}
+  leftFire: {fileID: 0}
+  rightFire: {fileID: 0}
+  upFire: {fileID: 0}
+  downFire: {fileID: 0}
   xMin: 0
   yMin: 0
   xMax: 0
@@ -139163,7 +139476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 10
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -139345,7 +139658,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 5
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -139528,7 +139841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 18
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -139704,6 +140017,7 @@ MonoBehaviour:
   - tileAssetType: 1
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 960480977}
     tileData: {fileID: 960480978}
     tilemapCollider2D: {fileID: 960480979}
@@ -139713,6 +140027,7 @@ MonoBehaviour:
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 26fda1622871db64e9b7bdaa3c8f8f31, type: 2}
     darkTile: {fileID: 11400000, guid: 5a1320c5997be2d4a9c3a1a96cfaf3e3, type: 2}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1045922244}
     tileData: {fileID: 1045922245}
     tilemapCollider2D: {fileID: 1045922246}
@@ -139722,6 +140037,7 @@ MonoBehaviour:
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 270348158}
     tileData: {fileID: 270348159}
     tilemapCollider2D: {fileID: 270348160}
@@ -139731,6 +140047,7 @@ MonoBehaviour:
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 20578054}
     tileData: {fileID: 20578051}
     tilemapCollider2D: {fileID: 20578052}
@@ -139740,6 +140057,7 @@ MonoBehaviour:
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 914863419}
     tileData: {fileID: 914863416}
     tilemapCollider2D: {fileID: 914863417}
@@ -139749,6 +140067,7 @@ MonoBehaviour:
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 849134603}
     tileData: {fileID: 849134600}
     tilemapCollider2D: {fileID: 849134601}
@@ -139758,6 +140077,7 @@ MonoBehaviour:
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1655445362}
     tileData: {fileID: 1655445359}
     tilemapCollider2D: {fileID: 1655445360}
@@ -139767,6 +140087,7 @@ MonoBehaviour:
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 2024654117}
     tileData: {fileID: 2024654114}
     tilemapCollider2D: {fileID: 2024654115}
@@ -139776,6 +140097,7 @@ MonoBehaviour:
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 820987653}
     tileData: {fileID: 820987650}
     tilemapCollider2D: {fileID: 820987651}
@@ -139785,6 +140107,7 @@ MonoBehaviour:
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1694595484}
     tileData: {fileID: 1694595481}
     tilemapCollider2D: {fileID: 1694595482}
@@ -139794,6 +140117,7 @@ MonoBehaviour:
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 639945145}
     tileData: {fileID: 639945142}
     tilemapCollider2D: {fileID: 639945143}
@@ -139803,6 +140127,7 @@ MonoBehaviour:
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1706446835}
     tileData: {fileID: 1706446832}
     tilemapCollider2D: {fileID: 1706446833}
@@ -139812,6 +140137,7 @@ MonoBehaviour:
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1350232640}
     tileData: {fileID: 1350232637}
     tilemapCollider2D: {fileID: 1350232638}
@@ -139821,6 +140147,7 @@ MonoBehaviour:
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 217434527}
     tileData: {fileID: 217434524}
     tilemapCollider2D: {fileID: 217434525}
@@ -139830,6 +140157,7 @@ MonoBehaviour:
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 136563235}
     tileData: {fileID: 136563232}
     tilemapCollider2D: {fileID: 136563233}
@@ -139839,6 +140167,7 @@ MonoBehaviour:
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1092264376}
     tileData: {fileID: 1092264373}
     tilemapCollider2D: {fileID: 1092264374}
@@ -139848,6 +140177,7 @@ MonoBehaviour:
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1642284976}
     tileData: {fileID: 1642284973}
     tilemapCollider2D: {fileID: 1642284974}
@@ -139857,6 +140187,7 @@ MonoBehaviour:
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 336427599}
     tileData: {fileID: 336427596}
     tilemapCollider2D: {fileID: 336427597}
@@ -139866,6 +140197,7 @@ MonoBehaviour:
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1749640618}
     tileData: {fileID: 1749640615}
     tilemapCollider2D: {fileID: 1749640616}
@@ -139875,6 +140207,7 @@ MonoBehaviour:
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 74d45107f24b67e40845e641e37d03c9, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1395769771}
     tileData: {fileID: 1395769768}
     tilemapCollider2D: {fileID: 1395769769}
@@ -139884,6 +140217,7 @@ MonoBehaviour:
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1541293339}
     tileData: {fileID: 1541293336}
     tilemapCollider2D: {fileID: 1541293337}
@@ -139893,6 +140227,7 @@ MonoBehaviour:
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: e23b1d5788549f24a8628359a7a83cdc, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1904420466}
     tileData: {fileID: 1904420463}
     tilemapCollider2D: {fileID: 1904420464}
@@ -139902,6 +140237,7 @@ MonoBehaviour:
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1743894817}
     tileData: {fileID: 1743894814}
     tilemapCollider2D: {fileID: 1743894815}
@@ -139911,6 +140247,7 @@ MonoBehaviour:
   - tileAssetType: 24
     tile: {fileID: 11400000, guid: d4e6294ec62009a47af48d48dfc9ce11, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 10878890}
     tileData: {fileID: 10878887}
     tilemapCollider2D: {fileID: 10878888}
@@ -139929,6 +140266,10 @@ MonoBehaviour:
     type: 3}
   tornadoAnimation: {fileID: 5944352837396803624, guid: 1757bb2693e5564468bc9f3ebb41cf34,
     type: 3}
+  leftFire: {fileID: 0}
+  rightFire: {fileID: 0}
+  upFire: {fileID: 0}
+  downFire: {fileID: 0}
   xMin: 0
   yMin: 0
   xMax: 0
@@ -140084,7 +140425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 22
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -140765,7 +141106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -143959,7 +144300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 5
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -144227,6 +144568,7 @@ MonoBehaviour:
   - tileAssetType: 1
     tile: {fileID: 11400000, guid: 16a6486b55af6a44883ad763265a67ef, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 508001017}
     tileData: {fileID: 508001014}
     tilemapCollider2D: {fileID: 508001015}
@@ -144236,6 +144578,7 @@ MonoBehaviour:
   - tileAssetType: 2
     tile: {fileID: 11400000, guid: 6b458523ce3b50646a90212f7a1b1b63, type: 2}
     darkTile: {fileID: 11400000, guid: f9d692eaa6ae39a4988330a93800c292, type: 2}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 85517944}
     tileData: {fileID: 85517941}
     tilemapCollider2D: {fileID: 85517942}
@@ -144245,6 +144588,7 @@ MonoBehaviour:
   - tileAssetType: 3
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1755658513}
     tileData: {fileID: 1755658510}
     tilemapCollider2D: {fileID: 1755658511}
@@ -144254,6 +144598,7 @@ MonoBehaviour:
   - tileAssetType: 4
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1464392942}
     tileData: {fileID: 1464392939}
     tilemapCollider2D: {fileID: 1464392940}
@@ -144263,6 +144608,7 @@ MonoBehaviour:
   - tileAssetType: 5
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1924066867}
     tileData: {fileID: 1924066864}
     tilemapCollider2D: {fileID: 1924066865}
@@ -144272,6 +144618,7 @@ MonoBehaviour:
   - tileAssetType: 6
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 339368184}
     tileData: {fileID: 339368181}
     tilemapCollider2D: {fileID: 339368182}
@@ -144281,6 +144628,7 @@ MonoBehaviour:
   - tileAssetType: 7
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1853574601}
     tileData: {fileID: 1853574598}
     tilemapCollider2D: {fileID: 1853574599}
@@ -144290,6 +144638,7 @@ MonoBehaviour:
   - tileAssetType: 8
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1195819186}
     tileData: {fileID: 1195819183}
     tilemapCollider2D: {fileID: 1195819184}
@@ -144299,6 +144648,7 @@ MonoBehaviour:
   - tileAssetType: 9
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1850844710}
     tileData: {fileID: 1850844707}
     tilemapCollider2D: {fileID: 1850844708}
@@ -144308,6 +144658,7 @@ MonoBehaviour:
   - tileAssetType: 10
     tile: {fileID: 11400000, guid: 2aa6d1aa915f1734e94dc2cd8b942316, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 764545814}
     tileData: {fileID: 764545811}
     tilemapCollider2D: {fileID: 764545812}
@@ -144317,6 +144668,7 @@ MonoBehaviour:
   - tileAssetType: 11
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 423232491}
     tileData: {fileID: 423232488}
     tilemapCollider2D: {fileID: 423232489}
@@ -144326,6 +144678,7 @@ MonoBehaviour:
   - tileAssetType: 12
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 368443890}
     tileData: {fileID: 368443887}
     tilemapCollider2D: {fileID: 368443888}
@@ -144335,6 +144688,7 @@ MonoBehaviour:
   - tileAssetType: 13
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1513702322}
     tileData: {fileID: 1513702319}
     tilemapCollider2D: {fileID: 1513702320}
@@ -144344,6 +144698,7 @@ MonoBehaviour:
   - tileAssetType: 14
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1719369458}
     tileData: {fileID: 1719369455}
     tilemapCollider2D: {fileID: 1719369456}
@@ -144353,6 +144708,7 @@ MonoBehaviour:
   - tileAssetType: 15
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 816229203}
     tileData: {fileID: 816229200}
     tilemapCollider2D: {fileID: 816229201}
@@ -144362,6 +144718,7 @@ MonoBehaviour:
   - tileAssetType: 16
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1759453101}
     tileData: {fileID: 1759453098}
     tilemapCollider2D: {fileID: 1759453099}
@@ -144371,6 +144728,7 @@ MonoBehaviour:
   - tileAssetType: 17
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1492035036}
     tileData: {fileID: 1492035033}
     tilemapCollider2D: {fileID: 1492035034}
@@ -144380,6 +144738,7 @@ MonoBehaviour:
   - tileAssetType: 18
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1765668013}
     tileData: {fileID: 1765668010}
     tilemapCollider2D: {fileID: 1765668011}
@@ -144389,6 +144748,7 @@ MonoBehaviour:
   - tileAssetType: 19
     tile: {fileID: 11400000, guid: f6dae0d7d8ceb4f4cbcdc40e69bc9f86, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 776313426}
     tileData: {fileID: 776313423}
     tilemapCollider2D: {fileID: 776313424}
@@ -144398,6 +144758,7 @@ MonoBehaviour:
   - tileAssetType: 20
     tile: {fileID: 11400000, guid: 74d45107f24b67e40845e641e37d03c9, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1926311640}
     tileData: {fileID: 1926311637}
     tilemapCollider2D: {fileID: 1926311638}
@@ -144407,6 +144768,7 @@ MonoBehaviour:
   - tileAssetType: 21
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1360234941}
     tileData: {fileID: 1360234938}
     tilemapCollider2D: {fileID: 1360234939}
@@ -144416,6 +144778,7 @@ MonoBehaviour:
   - tileAssetType: 22
     tile: {fileID: 11400000, guid: c585039eceeac1f4d895b11b4439c14e, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 636413310}
     tileData: {fileID: 636413307}
     tilemapCollider2D: {fileID: 636413308}
@@ -144425,6 +144788,7 @@ MonoBehaviour:
   - tileAssetType: 23
     tile: {fileID: 11400000, guid: cfd39c965bb50af40ad1856efbc5f262, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 975732529}
     tileData: {fileID: 975732526}
     tilemapCollider2D: {fileID: 975732527}
@@ -144434,6 +144798,7 @@ MonoBehaviour:
   - tileAssetType: 24
     tile: {fileID: 11400000, guid: d4e6294ec62009a47af48d48dfc9ce11, type: 2}
     darkTile: {fileID: 0}
+    tileOff: {fileID: 0}
     tileMap: {fileID: 1356263771}
     tileData: {fileID: 1356263769}
     tilemapCollider2D: {fileID: 1356263768}
@@ -144452,6 +144817,10 @@ MonoBehaviour:
     type: 3}
   tornadoAnimation: {fileID: 5944352837396803624, guid: 1757bb2693e5564468bc9f3ebb41cf34,
     type: 3}
+  leftFire: {fileID: 0}
+  rightFire: {fileID: 0}
+  upFire: {fileID: 0}
+  downFire: {fileID: 0}
   xMin: 0
   yMin: 0
   xMax: 0
@@ -144516,7 +144885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 0
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -145603,7 +145972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 4
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -145785,7 +146154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 23
   blockFlyingUnits: 0
-  blockBoulderPlacement: 0
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0

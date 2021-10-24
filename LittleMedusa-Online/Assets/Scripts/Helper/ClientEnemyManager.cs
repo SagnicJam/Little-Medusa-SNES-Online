@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class ClientEnemyManager : MonoBehaviour
 {
-    public int id;
+    [Header("Tweak Params")]
+    public Color selfMinionColor;
+    public Color enemyMinionColor;
 
+    [Header("Scene references")]
     public SpriteRenderer spriteRenderer;
 
+    [Header("Live Data")]
+    public int id;
     public EnumData.EnemyState currentEnemyState;
-
     public FaceDirection currentFaceDirection;
-
     public EnemyData currentEnemyData;
-
     public EnumData.MonsterBreed enemyType;
-
     public EnemyDisplayData cyclopsEnemyDisplayData;
     public EnemyDisplayData snakeEnemyDisplayData;
     public EnemyDisplayData centaurEnemyDisplayData;
@@ -25,6 +26,23 @@ public class ClientEnemyManager : MonoBehaviour
 
 
     public Sprite[] currentAnimationSpriteGroup;
+
+
+    public void SetEnemyColor(int leaderNetworkId)
+    {
+        if(leaderNetworkId == 0)
+        {
+            return;
+        }
+        if (leaderNetworkId == Client.instance.myID)
+        {
+            spriteRenderer.color = selfMinionColor;
+        }
+        else
+        {
+            spriteRenderer.color = enemyMinionColor;
+        }
+    }
 
     public void SetEnemyData(EnemyData enemyData)
     {
@@ -151,15 +169,17 @@ public struct EnemyDisplayData
 public struct EnemyData
 {
     public int uid;
+    public int leaderNetworkId;
     public int enemyType;
     public int faceDirection;
     public int animationIndexNumber;
     public int enemyState;
     public Vector3 enemyPosition;
 
-    public EnemyData(int uid, int enemyType,int animationIndexNumber, int faceDirection, int enemyState, Vector3 enemyPosition)
+    public EnemyData(int uid,int leaderNetworkId, int enemyType,int animationIndexNumber, int faceDirection, int enemyState, Vector3 enemyPosition)
     {
         this.uid = uid;
+        this.leaderNetworkId = leaderNetworkId;
         this.enemyType = enemyType;
         this.animationIndexNumber = animationIndexNumber;
         this.faceDirection = faceDirection;

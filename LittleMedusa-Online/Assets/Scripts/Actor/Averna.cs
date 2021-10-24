@@ -104,19 +104,19 @@ public class Averna : Hero
         {
             return;
         }
-        //if (isInFlyingState)
-        //{
-        //    if (!waitingForFlightToEnd.Perform())
-        //    {
-        //        //land here
-        //        LandPlayer();
-        //        if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-        //        {
-        //            TakeDamage(currentHP);
-        //        }
-        //        return;
-        //    }
-        //}
+        if (isInFlyingState)
+        {
+            if (!waitingForFlightToEnd.Perform())
+            {
+                //land here
+                LandPlayer();
+                if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                {
+                    TakeDamage(currentHP);
+                }
+                return;
+            }
+        }
         if (isPushed)
         {
             if (completedMotionToMovePoint)
@@ -220,6 +220,19 @@ public class Averna : Hero
                         else
                         {
                             Debug.LogError("Invalid location to spawn player");
+                        }
+                    }
+                    else if (/*itemToCast is  SpawnItems spawnItems && */inputs[(int)EnumData.AvernaInputs.UseItem] && previousInputs[(int)EnumData.AvernaInputs.UseItem] != inputs[(int)EnumData.AvernaInputs.UseItem])
+                    {
+                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing, EnumData.TileType.BoulderDisappearing))
+                        {
+                            //send command to server of placement
+                            //PlaceCereberausHeadCommand placeCereberausHead = new PlaceCereberausHeadCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
+                            //ClientSend.PlaceCereberausHeadCommand(placeCereberausHead);
+
+                            PlaceMinionCommand placeMinionCommand = new PlaceMinionCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
+                            ClientSend.PlaceMinionCommand(placeMinionCommand);
                         }
                     }
                 }
@@ -415,6 +428,7 @@ public class Averna : Hero
     public bool castFlamePillar;
     public bool respawnPlayer;
     public bool landPlayer;
+    public bool useItem;
 
     public override void DealInput()
     {
@@ -428,6 +442,7 @@ public class Averna : Hero
             castFlamePillar = false;
             respawnPlayer = false;
             landPlayer = false;
+            useItem = false;
         }
         else if (isFiringServerProjectiles)
         {
@@ -446,6 +461,7 @@ public class Averna : Hero
             castFlamePillar = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);
             landPlayer = Input.GetKey(KeyCode.K);
+            useItem = Input.GetKey(KeyCode.I);
         }
     }
 
@@ -460,7 +476,8 @@ public class Averna : Hero
                 shootFireBall,
                 castFlamePillar,
                 respawnPlayer,
-                landPlayer
+                landPlayer,
+                useItem
                 };
         return inputs;
     }

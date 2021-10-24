@@ -21,6 +21,7 @@ public abstract class Enemy : Actor
     public bool isMelleAttacking;
     public bool isRangedAttacking;
     public bool followingTarget;
+    public int leaderNetworkId;
     public Hero heroToChase;
 
     [Header("Enemy stats")]
@@ -40,6 +41,11 @@ public abstract class Enemy : Actor
         enemies.Add(ownerId, this);
         InitialiseHP();
         waitForPathFindingToWearOff.Initialise(this);
+    }
+
+    public override void Start()
+    {
+        base.Start();
         enemyDataSender.Initialise(this);
     }
 
@@ -95,7 +101,7 @@ public abstract class Enemy : Actor
     {
         Vector3 toCheckPos = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
         Actor actor = GridManager.instance.GetActorOnPos(GridManager.instance.grid.WorldToCell(toCheckPos));
-        if (actor!=null&&actor is Hero hero&&completedMotionToMovePoint&&actor.completedMotionToMovePoint)
+        if (actor!=null&&actor is Hero hero && leaderNetworkId!=actor.ownerId && completedMotionToMovePoint &&actor.completedMotionToMovePoint)
         {
             return true;
         }
@@ -117,7 +123,7 @@ public abstract class Enemy : Actor
     {
         Vector3 toCheckPos = actorTransform.position + range * GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
         Actor actor = GridManager.instance.GetActorOnPos(GridManager.instance.grid.WorldToCell(toCheckPos));
-        if (actor != null && actor is Hero hero && completedMotionToMovePoint)
+        if (actor != null && actor is Hero hero&&leaderNetworkId!=actor.ownerId && completedMotionToMovePoint)
         {
             return true;
         }

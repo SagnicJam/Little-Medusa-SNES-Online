@@ -52,15 +52,17 @@ MonoBehaviour:
   worldDestructionTickRate: 900
   maxItemCount: 5
   itemSpawnTickRate: 100
+  cereberausHeadSwitchTickRate: 200
   timeToStartMatch: 325
   stopWorldDestructionTimeCount: 100
-  toNetworkTileType: 0300000014000000150000000200000001000000160000001700000013000000060000000b000000
+  toNetworkTileType: 0300000014000000150000000200000001000000160000001700000013000000060000000b0000000c0000000d0000000e0000000f000000
   snapShotsInOnePacket: 4
   packetHistorySize: 3
   worldDestructionStop: 0
   liveWorldDestructionTickCountTemp: 0
   liveStopWorldDestructionTimeCount: 0
   liveItemSpawnCountTemp: 0
+  liveCereberausHeadSwitchTickRateTemp: 0
   serverWorldSequenceNumber: 0
   currentGameState: 0
   xWorldDeathSize: 0

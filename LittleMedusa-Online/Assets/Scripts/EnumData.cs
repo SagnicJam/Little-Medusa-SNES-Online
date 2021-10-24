@@ -14,7 +14,8 @@ public class EnumData
         Push,
         PlaceRemovalBoulder,
         RespawnPlayer,
-        LandPlayer
+        LandPlayer,
+        UseItem
     }
 
     public enum PosidannaInputs
@@ -26,7 +27,8 @@ public class EnumData
         ShootTidalWave,
         CastBubbleShield,
         RespawnPlayer,
-        LandPlayer
+        LandPlayer,
+        UseItem
     }
 
     public enum ErmolaiInputs
@@ -38,7 +40,8 @@ public class EnumData
         CastPitfall,
         CastEarthquake,
         RespawnPlayer,
-        LandPlayer
+        LandPlayer,
+        UseItem
     }
 
     public enum HeliemisInputs
@@ -50,7 +53,8 @@ public class EnumData
         ShootMightyWind,
         PlaceTornado,
         RespawnPlayer,
-        LandPlayer
+        LandPlayer,
+        UseItem
     }
 
     public enum AvernaInputs
@@ -62,7 +66,13 @@ public class EnumData
         ShootFireBall,
         CastFlamePillar,
         RespawnPlayer,
-        LandPlayer
+        LandPlayer,
+        UseItem
+    }
+
+    public enum UsableItems
+    {
+        CereberausHead
     }
 
     public enum PlayerStates

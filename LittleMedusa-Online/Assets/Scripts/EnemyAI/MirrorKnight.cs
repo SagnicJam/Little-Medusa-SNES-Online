@@ -8,8 +8,6 @@ public class MirrorKnight : Enemy
     public float lineRangeForDetection;
     public float circleRangeForDetection;
 
-    int normalSpeed;
-
     AimlessWandererMapper wandererMapper = new AimlessWandererMapper();
     AStarPathFindMapper pathfindingMapper = new AStarPathFindMapper();
     SenseInLineAction senseInLineAction = new SenseInLineAction();

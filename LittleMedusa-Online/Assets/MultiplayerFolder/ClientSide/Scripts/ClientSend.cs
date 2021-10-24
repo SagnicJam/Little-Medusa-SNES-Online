@@ -156,6 +156,28 @@ public class ClientSend : MonoBehaviour
         }
     }
 
+    public static void PlaceCereberausHeadCommand(PlaceCereberausHeadCommand placeCereberausHeadCommand)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.playerPlaceCereberausHeadCommand))
+        {
+            packet.Write(placeCereberausHeadCommand.cereberausHeadPos);
+            packet.Write(placeCereberausHeadCommand.direction);
+            packet.Write(placeCereberausHeadCommand.sequenceNumber);
+            SendTCPData(packet);
+        }
+    }
+
+    public static void PlaceMinionCommand(PlaceMinionCommand placeMinionCommand)
+    {
+        using (Packet packet = new Packet((int)ClientPackets.playerPlaceMinionCommand))
+        {
+            packet.Write(placeMinionCommand.placeMinionCellPos);
+            packet.Write(placeMinionCommand.direction);
+            packet.Write(placeMinionCommand.sequenceNumber);
+            SendTCPData(packet);
+        }
+    }
+
     public static void PlaceBoulderCommand(PlaceBoulderCommand placeBoulderCommand)
     {
         using (Packet packet = new Packet((int)ClientPackets.playerPlaceBoulderCommand))

@@ -18,6 +18,7 @@ public abstract class Hero : Actor
     public int hero;
     public bool isInputFreezed;
     public bool isFiringServerProjectiles;
+    public CastItem itemToCast;
 
     public override void Awake()
     {
@@ -185,6 +186,7 @@ public abstract class Hero : Actor
     public void SetActorEventActionState(PlayerEvents playerEvents)
     {
         isFiringPrimaryProjectile = playerEvents.firedPrimaryMoveProjectile;
+        isFiringItemEyeLaser = playerEvents.firedItemEyeLaserMoveProjectile;
     }
 
     /// <summary>
@@ -330,6 +332,13 @@ public abstract class Hero : Actor
     {
         Debug.Log("medusa case occur when i was snapping back as petrified object and got my head collided");
         isHeadCollisionWithOtherActor = false;
+        if(collidedActorWithMyHead is Enemy enemy)
+        {
+            if(enemy.leaderNetworkId!=ownerId)
+            {
+                TakeDamage(enemy.primaryMoveDamage);
+            }
+        }
     }
 
     public override void OnHeadCollidingWithANonPetrifiedNonPushedObjectWhereIAmNotPushedAndAmPetrified(Actor collidedActorWithMyHead)
@@ -428,7 +437,7 @@ public abstract class Hero : Actor
     {
         GridManager.instance.SetTile(icarausCollectedOnTilePos, EnumData.TileType.IcarusWings, false, false);
         FlyPlayer();
-        //waitingForFlightToEnd.ReInitialiseTimerToBegin(flyingTickCount);
+        waitingForFlightToEnd.ReInitialiseTimerToBegin(flyingTickCount);
     }
 
     public override bool CanOccupy(Vector3Int pos)
@@ -456,7 +465,7 @@ public abstract class Hero : Actor
             }
         }
         /*else */
-        else if (GridManager.instance.IsCellBlockedForUnitMotionAtPos(pos)||GridManager.instance.IsCellContainingMonster(pos,this))
+        else if (GridManager.instance.IsCellBlockedForUnitMotionAtPos(pos))
         {
             return false;
         }
