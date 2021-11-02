@@ -10,19 +10,6 @@ public class Medusa : Hero
         {
             return;
         }
-        if (isInFlyingState)
-        {
-            if (!waitingForFlightToEnd.Perform())
-            {
-                //land here
-                LandPlayer();
-                if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-                {
-                    TakeDamage(currentHP);
-                }
-                return;
-            }
-        }
         if (isPushed)
         {
             if (completedMotionToMovePoint)
@@ -186,26 +173,17 @@ public class Medusa : Hero
                 isFiringPrimaryProjectile = false;
                 waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
             }
-            //else if (/*itemToCast is  SpawnItems spawnItems && */inputs[(int)EnumData.MedusaInputs.UseItem])
-            //{
-            //    if (IsHeroAbleToFireProjectiles())
-            //    {
-            //        if (!waitingActionForItemEyeLaserMove.Perform())
-            //        {
-            //            isFiringItemEyeLaser = true;
-            //            waitingActionForItemEyeLaserMove.ReInitialiseTimerToBegin(itemEyeLaserMoveAttackRateTickRate);
-            //        }
-            //        else
-            //        {
-            //            isFiringItemEyeLaser = false;
-            //        }
-            //    }
-            //}
-            //else if (!inputs[(int)EnumData.MedusaInputs.UseItem] && previousInputs[(int)EnumData.MedusaInputs.UseItem] != inputs[(int)EnumData.MedusaInputs.UseItem])
-            //{
-            //    isFiringItemEyeLaser = false;
-            //    waitingActionForItemEyeLaserMove.ReInitialiseTimerToEnd(itemEyeLaserMoveAttackRateTickRate);
-            //}
+            else if(itemToCast != null && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            {
+                if (itemToCast.itemCount>0 && inputs[(int)EnumData.MedusaInputs.UseItem])
+                {
+                    SpawnClientProjectiles();
+                }
+                else if (itemToCast.itemCount<=0 || (!inputs[(int)EnumData.MedusaInputs.UseItem] && previousInputs[(int)EnumData.MedusaInputs.UseItem] != inputs[(int)EnumData.MedusaInputs.UseItem]))
+                {
+                    ResetClientProjectilesVars();
+                }
+            }
         }
         
 
@@ -280,18 +258,25 @@ public class Medusa : Hero
                             ClientSend.RemoveBoulderCommand(removeBoulderCommand);
                         }
                     }
-                    else if (/*itemToCast is  SpawnItems spawnItems && */inputs[(int)EnumData.MedusaInputs.UseItem] && previousInputs[(int)EnumData.MedusaInputs.UseItem] != inputs[(int)EnumData.MedusaInputs.UseItem])
+                    else if (itemToCast!=null&& itemToCast.itemCount>0 && itemToCast.castableItemType == EnumData.CastItemTypes.SpawnnableItems)
                     {
-                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing, EnumData.TileType.BoulderDisappearing))
+                        if (inputs[(int)EnumData.MedusaInputs.UseItem] && previousInputs[(int)EnumData.MedusaInputs.UseItem] != inputs[(int)EnumData.MedusaInputs.UseItem])
                         {
-                            //send command to server of placement
-                            //PlaceCereberausHeadCommand placeCereberausHead = new PlaceCereberausHeadCommand(GetLocalSequenceNo(),(int)Facing, cellToCheckFor);
-                            //ClientSend.PlaceCereberausHeadCommand(placeCereberausHead);
-
-                            PlaceMinionCommand placeMinionCommand = new PlaceMinionCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
-                            ClientSend.PlaceMinionCommand(placeMinionCommand);
+                            SpawnItem();
                         }
+                    }
+                }
+            }
+
+            bubbleShieldAttackReady = !waitingActionForBubbleShieldItemMove.Perform();
+
+            if(!isInFlyingState)
+            {
+                if (itemToCast!=null&& itemToCast.itemCount > 0&&itemToCast.castableItemType == EnumData.CastItemTypes.ServerProjectiles)
+                {
+                    if (inputs[(int)EnumData.MedusaInputs.UseItem] && previousInputs[(int)EnumData.MedusaInputs.UseItem] != inputs[(int)EnumData.MedusaInputs.UseItem])
+                    {
+                        SpawnServerProjectiles();
                     }
                 }
             }
@@ -322,11 +307,29 @@ public class Medusa : Hero
         }
         if (isFiringPrimaryProjectile)
         {
-            Fire();
+            FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
         }
         if (isFiringItemEyeLaser)
         {
-            FireProjectile(new Attack(eyeLaserDamage,EnumData.AttackTypes.ProjectileAttack,EnumData.Projectiles.EyeLaser),GridManager.instance.grid.WorldToCell(actorTransform.position));
+            if(itemToCast!=null&&itemToCast.itemCount>0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            {
+                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                if(MultiplayerManager.instance.isServer)
+                {
+                    itemToCast.itemCount--;
+                }
+            }
+        }
+        if (isFiringItemFireball)
+        {
+            if (itemToCast != null && itemToCast.itemCount > 0&&itemToCast.castableItemType==EnumData.CastItemTypes.ClientProjectiles)
+            {
+                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                if (MultiplayerManager.instance.isServer)
+                {
+                    itemToCast.itemCount--;
+                }
+            }
         }
     }
 
@@ -334,10 +337,6 @@ public class Medusa : Hero
     public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {
         if (isPhysicsControlled)
-        {
-            return;
-        }
-        if (isInputFreezed)
         {
             return;
         }
@@ -422,10 +421,6 @@ public class Medusa : Hero
         {
             return;
         }
-        if (isInputFreezed)
-        {
-            return;
-        }
         if (isPushed)
         {
             return;
@@ -440,6 +435,23 @@ public class Medusa : Hero
             return;
         }
         walkAction.Perform();
+    }
+
+    public override void ProcessClientPredictingEvents(int flyTickTime)
+    {
+        if (isInFlyingState)
+        {
+            if (!waitingForFlightToEnd.Perform())
+            {
+                //land here
+                LandPlayer();
+                if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                {
+                    TakeDamage(currentHP);
+                }
+                return;
+            }
+        }
     }
 
     public override bool IsHeroAbleToFireProjectiles()

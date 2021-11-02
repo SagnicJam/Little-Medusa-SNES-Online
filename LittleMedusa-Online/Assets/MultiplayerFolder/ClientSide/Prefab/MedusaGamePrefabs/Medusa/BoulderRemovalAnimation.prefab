@@ -123,17 +123,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff00e2d0efe74546a3f95a989804ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 44
+  tileType: 42
   blockFlyingUnits: 0
-  blockBoulderPlacement: 1
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 1
   blockPetrifiedObjects: 1
   blockProjectiles: 1
   solidifyTile: 0
-  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
-  overrideInspectorValues: 1
 --- !u!114 &4509440557825455722
 MonoBehaviour:
   m_ObjectHideFlags: 0

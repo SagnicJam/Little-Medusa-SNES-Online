@@ -220,36 +220,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57643b178170d8b49b0340c51764771a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 31
+  tileType: 39
   blockFlyingUnits: 0
-  blockBoulderPlacement: 1
+  blockToSpawnObjectsPlacement: 1
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
   solidifyTile: 0
-  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
-  overrideInspectorValues: 0
   movePoint: {fileID: 2806662213339884483}
   actorTransform: {fileID: 2806662213708595608}
   frameLooper: {fileID: 2806662213708595588}
   gamePhysics: {fileID: 983861729926981442}
   actorCollider2D: {fileID: 2806662213708595589}
-  projectileThrownType: 1
-  projectileThrownType_2: 0
   invincibilityTickTimer: 0
   petrificationTimeTickRate: 500
   maxHP: 8
   maxStockLives: 0
   walkSpeed: 1
   damagePerStoppedHit: 0
-  primaryMoveDamage: 2
   petrificationSnapSpeed: 6
   primaryMoveAttackRateTickRate: 100
   secondaryMoveAttackRateTickRate: 50
   pushSpeed: 4
   faceDirectionInit: 0
+  flySpeed: 0
+  flyingTickCount: 0
   leftIdleSprite: []
   rightIdleSprite: []
   upIdleSprite: []
@@ -319,14 +316,18 @@ MonoBehaviour:
   isPetrified: 0
   isInFlyingState: 0
   isFiringPrimaryProjectile: 0
+  isFiringItemEyeLaser: 0
+  isFiringItemFireball: 0
   isInvincible: 0
   isRespawnningPlayer: 0
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
+  normalSpeed: 0
   ownerId: 0
   positionToSpawnProjectile: {x: 0, y: 0, z: 0}
   isWalking: 0
+  isFlying: 0
   isUsingPrimaryMove: 0
   isUsingSecondaryMove: 0
   currentHP: 0
@@ -342,12 +343,14 @@ MonoBehaviour:
   actorMePushing: {fileID: 0}
   HeadTransform: {fileID: 2806662213051011489}
   enemyDataSender: {fileID: 7809186702346865903}
+  primaryMoveDamage: 2
   waitingTimeWhenStuck: 100
   petrifyAnimationDuration: 0.2
   pathFindingWearOffTickCount: 100
   isMelleAttacking: 0
   isRangedAttacking: 0
   followingTarget: 0
+  leaderNetworkId: 0
   heroToChase: {fileID: 0}
   canBePetrified: 0
   dieOnUnPetrification: 0

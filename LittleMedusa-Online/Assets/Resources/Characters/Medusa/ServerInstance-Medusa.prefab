@@ -47,7 +47,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2610087864896041243}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -207,37 +207,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9bc853f89d1be488f3c42ba72cafaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 32
+  tileType: 40
   blockFlyingUnits: 0
   blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
   solidifyTile: 0
-  isPlayer: 0
+  isItem: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
-  overrideInspectorValues: 0
   movePoint: {fileID: 2610087865448462850}
   actorTransform: {fileID: 2610087865322843382}
   frameLooper: {fileID: 9068615039250995}
   gamePhysics: {fileID: 7885898175221280604}
   actorCollider2D: {fileID: 8868496802668217989}
-  projectileThrownType: 2
-  projectileThrownType_2: 0
   invincibilityTickTimer: 250
   petrificationTimeTickRate: 300
   maxHP: 8
   maxStockLives: 99
   walkSpeed: 4
   damagePerStoppedHit: 2
-  primaryMoveDamage: 23
-  eyeLaserDamage: 2
   petrificationSnapSpeed: 6
   primaryMoveAttackRateTickRate: 20
-  itemEyeLaserMoveAttackRateTickRate: 20
-  secondaryMoveAttackRateTickRate: 0
-  pushSpeed: 4
+  secondaryMoveAttackRateTickRate: 120
+  pushSpeed: 6
   faceDirectionInit: 1
   flySpeed: 6
   flyingTickCount: 300
@@ -531,6 +525,7 @@ MonoBehaviour:
   isInFlyingState: 0
   isFiringPrimaryProjectile: 0
   isFiringItemEyeLaser: 0
+  isFiringItemFireball: 0
   isInvincible: 0
   isRespawnningPlayer: 0
   inCharacterSelectionScreen: 0
@@ -556,13 +551,20 @@ MonoBehaviour:
   actorMePushing: {fileID: 0}
   petrificationColor: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 0.6862745}
   invincibleColor: {r: 1, g: 0.8520418, b: 0, a: 0.7019608}
+  itemEyeLaserMoveAttackRateTickRate: 20
+  itemFireballMoveAttackRateTickRate: 20
+  bubbleShieldItemMoveAttackRateTickRate: 120
   healthFillImage: {fileID: 0}
   currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}
   hero: 0
   isInputFreezed: 0
   isFiringServerProjectiles: 0
-  itemToCast: {fileID: 0}
+  bubbleShieldAttackReady: 0
+  itemToCast:
+    castableItemType: 0
+    usableItemType: 0
+    itemCount: 0
   up: 0
   left: 0
   down: 0

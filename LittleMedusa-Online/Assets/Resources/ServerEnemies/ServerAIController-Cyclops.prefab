@@ -195,31 +195,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229a325937eeb4e448218055de687c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 31
+  tileType: 39
   blockFlyingUnits: 0
-  blockToSpawnObjectsPlacement: 0
+  blockToSpawnObjectsPlacement: 1
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
   solidifyTile: 0
-  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
-  overrideInspectorValues: 0
   movePoint: {fileID: 5471294649117492305}
   actorTransform: {fileID: 5471294648343693710}
   frameLooper: {fileID: 5471294648343693709}
   gamePhysics: {fileID: 5471294648343693712}
   actorCollider2D: {fileID: 5471294648343693708}
-  projectileThrownType: 0
-  projectileThrownType_2: 0
   invincibilityTickTimer: 0
   petrificationTimeTickRate: 500
   maxHP: 8
   maxStockLives: 0
   walkSpeed: 1
   damagePerStoppedHit: 0
-  primaryMoveDamage: 2
   petrificationSnapSpeed: 6
   primaryMoveAttackRateTickRate: 100
   secondaryMoveAttackRateTickRate: 0
@@ -316,6 +311,8 @@ MonoBehaviour:
   isPetrified: 0
   isInFlyingState: 0
   isFiringPrimaryProjectile: 0
+  isFiringItemEyeLaser: 0
+  isFiringItemFireball: 0
   isInvincible: 0
   isRespawnningPlayer: 0
   inCharacterSelectionScreen: 0
@@ -341,6 +338,7 @@ MonoBehaviour:
   actorMePushing: {fileID: 0}
   HeadTransform: {fileID: 5471294648117903948}
   enemyDataSender: {fileID: 8324883396382063199}
+  primaryMoveDamage: 2
   waitingTimeWhenStuck: 100
   petrifyAnimationDuration: 0.2
   pathFindingWearOffTickCount: 100

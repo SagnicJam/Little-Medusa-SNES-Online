@@ -19,10 +19,21 @@ public class RoomList : MonoBehaviour,IRoomList
         SignalRCoreConnect.instance._connection.Remove(nameof(OnNewRoomAdded));
         SignalRCoreConnect.instance._connection.Remove(nameof(OnRoomDeleted));
     }
-
     public void Close()
     {
         Destroy(gameObject);
+    }
+
+    public void OnNewRoomAdded(Room room)
+    {
+        Debug.Log("OnNewRoomAdded " + room.RoomName + " with Room Size: " + room.RoomSize + " room Id: " + room.RoomId);
+        AddNewRoom(room);
+    }
+
+    public void OnRoomDeleted(Room room)
+    {
+        Debug.Log("OnRoomDeleted " + room.RoomName + " with Room Size: " + room.RoomSize);
+        RemoveRoom(room);
     }
 
     public void DisplayRoomList(Lobby lobby)
@@ -40,7 +51,7 @@ public class RoomList : MonoBehaviour,IRoomList
     {
         if (roomInfoDic.ContainsKey(room.RoomId))
         {
-            Debug.LogError("Already containing room id for room: " + room.RoomName);
+            Debug.LogError("Already containing room id for room: " + room.RoomName +" with key: "+room.RoomId);
         }
         else
         {
@@ -61,19 +72,9 @@ public class RoomList : MonoBehaviour,IRoomList
         }
         else
         {
-            Debug.LogError("No rooms found to remove with name " + room.RoomName);
+            Debug.LogError("No rooms found to remove with name " + room.RoomName + " with key: " + room.RoomId);
         }
     }
 
-    public void OnNewRoomAdded(Room room)
-    {
-        Debug.Log("OnNewRoomAdded " + room.RoomName);
-        AddNewRoom(room);
-    }
-
-    public void OnRoomDeleted(Room room)
-    {
-        Debug.Log("OnRoomDeleted " + room.RoomName);
-        RemoveRoom(room);
-    }
+    
 }

@@ -415,37 +415,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9bc853f89d1be488f3c42ba72cafaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 32
+  tileType: 40
   blockFlyingUnits: 0
   blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
   solidifyTile: 0
-  isPlayer: 0
+  isItem: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
-  overrideInspectorValues: 0
   movePoint: {fileID: 4156775102893372363}
   actorTransform: {fileID: 4156775101959196196}
   frameLooper: {fileID: 5982468094641783246}
   gamePhysics: {fileID: 0}
   actorCollider2D: {fileID: 8337709454710503732}
-  projectileThrownType: 2
-  projectileThrownType_2: 0
   invincibilityTickTimer: 250
   petrificationTimeTickRate: 300
   maxHP: 8
   maxStockLives: 99
   walkSpeed: 4
   damagePerStoppedHit: 2
-  primaryMoveDamage: 23
-  eyeLaserDamage: 2
   petrificationSnapSpeed: 6
   primaryMoveAttackRateTickRate: 20
-  itemEyeLaserMoveAttackRateTickRate: 0
-  secondaryMoveAttackRateTickRate: 0
-  pushSpeed: 4
+  secondaryMoveAttackRateTickRate: 120
+  pushSpeed: 6
   faceDirectionInit: 1
   flySpeed: 6
   flyingTickCount: 300
@@ -739,6 +733,7 @@ MonoBehaviour:
   isInFlyingState: 0
   isFiringPrimaryProjectile: 0
   isFiringItemEyeLaser: 0
+  isFiringItemFireball: 0
   isInvincible: 0
   isRespawnningPlayer: 0
   inCharacterSelectionScreen: 0
@@ -764,13 +759,20 @@ MonoBehaviour:
   actorMePushing: {fileID: 0}
   petrificationColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0.6509804}
   invincibleColor: {r: 1, g: 0.9577489, b: 0, a: 0.6509804}
+  itemEyeLaserMoveAttackRateTickRate: 20
+  itemFireballMoveAttackRateTickRate: 20
+  bubbleShieldItemMoveAttackRateTickRate: 120
   healthFillImage: {fileID: 4201844236452040917}
   currentLifeStockText: {fileID: 4170652754415583038}
   statusSprite: {fileID: 6358492327092538958}
   hero: 0
   isInputFreezed: 0
   isFiringServerProjectiles: 0
-  itemToCast: {fileID: 0}
+  bubbleShieldAttackReady: 0
+  itemToCast:
+    castableItemType: 0
+    usableItemType: 0
+    itemCount: 0
   up: 0
   left: 0
   down: 0

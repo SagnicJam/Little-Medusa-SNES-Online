@@ -5,9 +5,12 @@ using UnityEngine;
 using TMPro;
 public class LobbyScreen : MonoBehaviour,ILobby
 {
-    public TMP_InputField roomName;
+    public TMP_InputField roomNameText;
+    public TMP_InputField roomSizeText;
 
-    public static LobbyScreen instance; 
+    public static LobbyScreen instance;
+
+    public int roomSize;
 
     void Awake()
     {
@@ -20,12 +23,51 @@ public class LobbyScreen : MonoBehaviour,ILobby
         GetLobby();
     }
 
+    public void SetCount(TMP_InputField tMP_InputField)
+    {
+        string inputString = tMP_InputField.text;
+        int amount = 0;
+        if (int.TryParse(inputString, out amount))
+        {
+            if (amount <= 4&&amount>0)
+            {
+                roomSize = amount;
+            }
+            else if (amount < 1)
+            {
+                roomSize = 1;
+                tMP_InputField.text = 1.ToString();
+                Debug.LogError("Cant be smaller than 1");
+            }
+            else
+            {
+                roomSize = 4;
+                tMP_InputField.text = 4.ToString();
+                Debug.LogError("Cant be larger than 4");
+            }
+        }
+        else
+        {
+            Debug.LogError("Could not parse string");
+        }
+    }
+
     public void CreateRoomWithName()
     {
-        RoomDto roomDto = new RoomDto(roomName.text);
+        roomSize=2;
+        RoomDto roomDto;
+        if (int.TryParse(roomSizeText.text,out roomSize))
+        {
+            roomDto = new RoomDto(roomNameText.text, roomSize);
+        }
+        else
+        {
+            Debug.LogError("default room size set to 2");
+            roomDto = new RoomDto(roomNameText.text, 2);
+        }
         CreateRoom(roomDto);
     }
-     
+
     public void JoinSpecificRoom(Room room)
     {
         JoinRoom(room);
@@ -44,10 +86,10 @@ public class LobbyScreen : MonoBehaviour,ILobby
 
     void OnRoomCreated(Room room)
     {
-        Debug.Log("OnRoom created : "+room.RoomName);
+        Debug.Log("OnRoom created : "+JsonUtility.ToJson(room));
         MultiplayerManager.instance.InitialisePlayerList(room);
         MultiplayerManager.instance.InstantiateMatchOptions(room.RoomId);
-        MultiplayerManager.instance.matchOwnerConnectionId = room.RoomOwnerConnectionID;
+        MultiplayerManager.instance.matchOwnerConnectionId = room.roomOwnerConnectionID;
     }
 
     void OnRoomLeft(Room room)
@@ -69,7 +111,7 @@ public class LobbyScreen : MonoBehaviour,ILobby
         Debug.Log("OnJoinedRoom");
         MultiplayerManager.instance.InitialisePlayerList(room);
         MultiplayerManager.instance.DestroyRoomList();
-        MultiplayerManager.instance.matchOwnerConnectionId = room.RoomOwnerConnectionID;
+        MultiplayerManager.instance.matchOwnerConnectionId = room.roomOwnerConnectionID;
     }
 
     public async Task JoinRandomRoom()

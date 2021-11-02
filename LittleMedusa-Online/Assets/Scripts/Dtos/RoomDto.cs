@@ -5,9 +5,10 @@ using UnityEngine;
 public struct RoomDto
 {
     public string RoomName;
-
-    public RoomDto(string roomName)
+    public int RoomSize;
+    public RoomDto(string roomName,int roomSize)
     {
         RoomName = roomName;
+        RoomSize = roomSize;
     }
 }

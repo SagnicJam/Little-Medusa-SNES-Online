@@ -22,8 +22,6 @@ public class Centaur : Enemy
         base.Awake();
         currentMapper = wandererMapper;
 
-        rangedAttack_1 = new Attack(arrowDamage, EnumData.AttackTypes.ProjectileAttack, projectileThrownType);
-
         senseInLineAction.Initialise(this);
         senseInLineAction.InitialiseLineSize(lineRangeForDetection);
 
@@ -328,7 +326,8 @@ public class Centaur : Enemy
             //Check for player
             //Attack player
             Debug.Log("Range Attacking player");
-            Fire();
+            FireProjectile(new Attack(arrowDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.Arrow),
+                GridManager.instance.grid.WorldToCell(actorTransform.position));
         }
     }
 

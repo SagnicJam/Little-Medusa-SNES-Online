@@ -34,6 +34,7 @@ public class ClientHandle : MonoBehaviour
         int previousfaceDirection = packet.ReadInt();
         bool isFiringPrimaryProjectile = packet.ReadBool();
         bool isFiringItemEyeLaserProjectile = packet.ReadBool();
+        bool isFiringItemFireBallProjectile = packet.ReadBool();
         bool isWalking = packet.ReadBool();
         bool isFlying = packet.ReadBool();
         bool isPrimaryMoveAnimationBeingPlayed = packet.ReadBool();
@@ -48,14 +49,19 @@ public class ClientHandle : MonoBehaviour
         bool inGame = packet.ReadBool();
         int currentHP = packet.ReadInt();
         int currentStockLives = packet.ReadInt();
+
+        int castItemType = packet.ReadInt();
+        int usableItemType = packet.ReadInt();
+        int itemCount = packet.ReadInt();
+
         int playerProcessingSequenceNumber = packet.ReadInt();
         int playerServerSequenceNumber = packet.ReadInt();
         Debug.Log(id+"<color=red>Player id Sequence no spawned on: </color>"+ playerServerSequenceNumber);
 
         PositionUpdates positionUpdates = new PositionUpdates(position, blockposition, previousBlockposition,faceDirection,previousfaceDirection);
-        PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile, isFiringItemEyeLaserProjectile);
+        PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile, isFiringItemEyeLaserProjectile, isFiringItemFireBallProjectile);
         PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isWalking, isFlying, isPrimaryMoveAnimationBeingPlayed);
-        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isFlyingState, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, hero);
+        PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isFlyingState, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, hero, new ItemToCast(castItemType,usableItemType, itemCount));
 
         PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(playerServerSequenceNumber, playerProcessingSequenceNumber, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
         ClientSideGameManager.instance.SpawnPlayer(id, connectionId, username, playerStateUpdates);
@@ -311,6 +317,7 @@ public class ClientHandle : MonoBehaviour
             int previousFacing = packet.ReadInt();
             bool isFiringPrimaryProjectile = packet.ReadBool();
             bool isFiringItemEyeLaserProjectile = packet.ReadBool();
+            bool isFiringItemFireBallProjectile = packet.ReadBool();
             bool isWalking = packet.ReadBool();
             bool isFlying = packet.ReadBool();
             bool isPrimaryMoveAnimationBeingPlayed = packet.ReadBool();
@@ -325,13 +332,18 @@ public class ClientHandle : MonoBehaviour
             bool inGame = packet.ReadBool();
             int currentHP = packet.ReadInt();
             int currentStockLives = packet.ReadInt();
+
+            int castItemType = packet.ReadInt();
+            int usableItemType = packet.ReadInt();
+            int itemCount = packet.ReadInt();
+
             int playerProcessedsequenceNumberReceived = packet.ReadInt();
             int playerServerSequenceNumberReceived = packet.ReadInt();
 
             PositionUpdates positionUpdates = new PositionUpdates(position, blockposition, previousBlockposition, Facing,previousFacing);
-            PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile, isFiringItemEyeLaserProjectile);
+            PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile, isFiringItemEyeLaserProjectile, isFiringItemFireBallProjectile);
             PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isWalking, isFlying, isPrimaryMoveAnimationBeingPlayed);
-            PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isFlyingState, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, hero);
+            PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isFlyingState, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, hero,new ItemToCast(castItemType,usableItemType, itemCount));
 
             PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(playerServerSequenceNumberReceived, playerProcessedsequenceNumberReceived, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
             //Debug.LogError("<color=blue>Receiving updated position for movement </color>playerUpdatedPositionSequenceNumber: " + sequenceNumberReceived + " position: " + position);
@@ -370,6 +382,7 @@ public class ClientHandle : MonoBehaviour
                 int previousFacing = packet.ReadInt();
                 bool isFiringPrimaryProjectile = packet.ReadBool();
                 bool isFiringItemEyeLaserProjectile = packet.ReadBool();
+                bool isFiringItemFireBallProjectile = packet.ReadBool();
                 bool isWalking = packet.ReadBool();
                 bool isFlying = packet.ReadBool();
                 bool isPrimaryMoveAnimationBeingPlayed = packet.ReadBool();
@@ -384,13 +397,18 @@ public class ClientHandle : MonoBehaviour
                 bool inGame = packet.ReadBool();
                 int currentHP = packet.ReadInt();
                 int currentStockLives = packet.ReadInt();
+
+                int castItemType = packet.ReadInt();
+                int usableItemType = packet.ReadInt();
+                int itemCount = packet.ReadInt();
+
                 int previousHistoryPlayerProcessingSequenceNo = packet.ReadInt();
                 int previousHistoryServerSequenceNo = packet.ReadInt();
 
                 PositionUpdates positionUpdates = new PositionUpdates(previousHistoryPositionUpdate, previousHistoryBlockPositionUpdate, previousHistoryPreviousBlockPositionUpdate, Facing, previousFacing);
-                PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile, isFiringItemEyeLaserProjectile);
+                PlayerEvents playerEvents = new PlayerEvents(isFiringPrimaryProjectile, isFiringItemEyeLaserProjectile, isFiringItemFireBallProjectile);
                 PlayerAnimationEvents playerAnimtaionEvents = new PlayerAnimationEvents(isWalking,isFlying, isPrimaryMoveAnimationBeingPlayed);
-                PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isFlyingState, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, previousHistoryPlayerHero);
+                PlayerAuthoratativeStates playerAuthoratativeStates = new PlayerAuthoratativeStates(isPetrified, isPushed, isPhysicsControlled, isFlyingState, isInputFreezed, isInvincible, isRespawning, inCharacterSelectionScreen, inGame, currentHP, currentStockLives, previousHistoryPlayerHero,new ItemToCast(castItemType, usableItemType,itemCount));
 
                 PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(previousHistoryServerSequenceNo, previousHistoryPlayerProcessingSequenceNo, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimtaionEvents);
                 if (ClientSideGameManager.players.ContainsKey(previousHistoryPlayerId))

@@ -13,6 +13,7 @@ public abstract class Enemy : Actor
     public EnemyDataSender enemyDataSender;
 
     [Header("Tweak  Params")]
+    public int primaryMoveDamage;
     public float waitingTimeWhenStuck;
     public float petrifyAnimationDuration;
     public int pathFindingWearOffTickCount;
@@ -84,7 +85,10 @@ public abstract class Enemy : Actor
         {
             enemies.Remove(ownerId);
             Destroy(HeadTransform.gameObject);
-            GridManager.instance.enemySpawnner.currentEnemyCount--;
+            if (GridManager.instance.enemySpawnner.totalEnemyToSpawn > 0)
+            {
+                GridManager.instance.enemySpawnner.currentEnemyCount--;
+            }
         }
     }
 
@@ -297,17 +301,83 @@ public abstract class Enemy : Actor
         GridManager.instance.tornado.OnEnterTornadoRegion(tileData, this);
     }
 
-    public override void OnBodyCollidingWithKillingTiles(TileData tileData)
+    public override void OnBodyCollidingWithKillingTiles(int killingTileSpawnerId,TileData tileData)
     {
         TakeDamage(currentHP);
     }
 
     public override void OnBodyCollidedWithHourGlassTile(Vector3Int hourGlassTile)
     {
+        throw new System.NotImplementedException();
     }
 
-    public override void OnBodyCollidedWithIcarausWingsTiles(Vector3Int icarausCollectedOnTilePos)
+    public override void OnBodyCollidedWithIcarausWingsItemTiles(Vector3Int icarausCollectedOnTilePos)
     {
+        throw new System.NotImplementedException();
+    }
+    public override void OnBodyCollidedWithHeartItemTiles(Vector3Int cellPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnBodyCollidedWithCereberausHeadItemTiles(Vector3Int cellPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnBodyCollidedWithMinionItemTiles(Vector3Int cellPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnBodyCollidedWithEyeLaserItemTiles(Vector3Int cellPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnBodyCollidedWithBoulderItemTiles(Vector3Int cellPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnBodyCollidedWithTidalWaveItemTiles(Vector3Int cellPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnBodyCollidedWithBubbleShieldItemTiles(Vector3Int cellPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnBodyCollidedWithMightyWindItemTiles(Vector3Int cellPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnBodyCollidedWithTornadoItemTiles(Vector3Int cellPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnBodyCollidedWithPitfallItemTiles(Vector3Int cellPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnBodyCollidedWithEarthquakeItemTiles(Vector3Int cellPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnBodyCollidedWithFireballItemTiles(Vector3Int cellPos)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnBodyCollidedWithFlamePillarItemTiles(Vector3Int cellPos)
+    {
+        throw new System.NotImplementedException();
     }
 
     public abstract void UpdateAnimationState(bool isPrimaryMoveActive,bool isSecondaryMoveActive);

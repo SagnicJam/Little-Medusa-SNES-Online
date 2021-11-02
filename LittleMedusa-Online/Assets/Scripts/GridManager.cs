@@ -27,6 +27,7 @@ public class GridManager : MonoBehaviour
     public GameObject bigExplosion;
     public GameObject smallExplosion;
     public GameObject lightning;
+    public GameObject earthquake;
     public GameObject tornadoAnimation;
     public GameObject leftFire;
     public GameObject rightFire;
@@ -860,12 +861,27 @@ public class GridManager : MonoBehaviour
             else
             {
                 gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tile);
+                if (gameStateDependentTileArray[(int)tType - 1].hasGhost)
+                {
+                    gameStateDependentTileArray[(int)tType - 1].ghosttileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tile);
+                }
             }
             if (gameStateDependentTileArray[(int)tType - 1].tilemapCollider2D != null)
             {
                 if (!gameStateDependentTileArray[(int)tType - 1].tilemapCollider2D.enabled)
                 {
                     gameStateDependentTileArray[(int)tType - 1].tilemapCollider2D.enabled = true;
+                }
+            }
+
+            if(gameStateDependentTileArray[(int)tType - 1].hasGhost)
+            {
+                if (gameStateDependentTileArray[(int)tType - 1].ghosttilemapCollider2D != null)
+                {
+                    if (!gameStateDependentTileArray[(int)tType - 1].ghosttilemapCollider2D.enabled)
+                    {
+                        gameStateDependentTileArray[(int)tType - 1].ghosttilemapCollider2D.enabled = true;
+                    }
                 }
             }
         }
@@ -970,6 +986,7 @@ public class GridManager : MonoBehaviour
         foreach (Vector3Int cell in cellList)
         {
             List<TileData> tileDatas = GetAllTileDataInCellPos(cell);
+            
             foreach (TileData item in tileDatas)
             {
                 if(item.solidifyTile)
@@ -1004,8 +1021,7 @@ public class GridManager : MonoBehaviour
         for (int i = 0; i < hit2DArr.Length; i++)
         {
             TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
-            if (td != null && (td.tileType == EnumData.TileType.Hourglass||
-                td.tileType == EnumData.TileType.SpawnJar))
+            if (td != null && td.isItem)
             {
                 return true;
             }
@@ -1146,7 +1162,7 @@ public class GridManager : MonoBehaviour
         //List<Vector3Int> vList2 = GetCornerNeighbours(explodeCell);
         //vList.AddRange(vList2);
         List<Vector3Int> vList = GetPlusNeighbours(explodeCell);
-        Explode(hero,vList);
+        Earthquake(hero,vList);
     }
 
     public void ExplodeCells(Vector3Int cellLightningBoltDropped)
@@ -1340,19 +1356,21 @@ public class GridManager : MonoBehaviour
     }
 
 
-    void Explode(Hero hero,List<Vector3Int> plusCell)
+    void Earthquake(Hero hero,List<Vector3Int> plusCell)
     {
         hero.isInputFreezed = true;
         for (int i = 0; i < plusCell.Count; i++)
         {
-            GameObject smallThunderGOPlus = Instantiate(smallExplosion, cellToworld(plusCell[i]), Quaternion.identity);
-            StaticAnimatingTileUtil smallThunderGOPlusStaticTileAnimating = smallThunderGOPlus.GetComponent<StaticAnimatingTileUtil>();
+            EarthQuake earthQuake = Instantiate(earthquake, cellToworld(plusCell[i]), Quaternion.identity).GetComponent<EarthQuake>();
+            earthQuake.InitialiseEarthquake(hero.ownerId);
+
+            StaticAnimatingTileUtil smallThunderGOPlusStaticTileAnimating = earthQuake.GetComponent<StaticAnimatingTileUtil>();
 
             smallThunderGOPlusStaticTileAnimating.Initialise(plusCell[i]);
 
-            smallThunderGOPlus.GetComponent<FrameLooper>().PlayOneShotAnimation();
-            smallThunderGOPlus.GetComponent<FrameLooper>().onPlayOneShotAnimation.RemoveAllListeners();
-            smallThunderGOPlus.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
+            earthQuake.GetComponent<FrameLooper>().PlayOneShotAnimation();
+            earthQuake.GetComponent<FrameLooper>().onPlayOneShotAnimation.RemoveAllListeners();
+            earthQuake.GetComponent<FrameLooper>().onPlayOneShotAnimation.AddListener(() =>
             {
                 smallThunderGOPlusStaticTileAnimating.DestroyObject();
                 hero.isInputFreezed = false;
@@ -1406,6 +1424,10 @@ public struct GameStateDependentTiles
     public Tilemap tileMap;
     public TileData tileData;
     public TilemapCollider2D tilemapCollider2D;
+    public Tilemap ghosttileMap;
+    public TileData ghosttileData;
+    public TilemapCollider2D ghosttilemapCollider2D;
+    public bool hasGhost;
     public bool cereberustileToggle;
     public bool multipleTileGraphic;
     public bool isDarkOnOdd;

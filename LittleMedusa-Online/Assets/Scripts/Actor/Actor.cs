@@ -12,19 +12,14 @@ public abstract class Actor : TileData
 
     [Header("Tweak params")]
     public BoxCollider2D actorCollider2D;
-    public EnumData.Projectiles projectileThrownType;
-    public EnumData.Projectiles projectileThrownType_2;
     public int invincibilityTickTimer;
     public int petrificationTimeTickRate;
     public int maxHP;
     public int maxStockLives;
     public int walkSpeed;
     public int damagePerStoppedHit;
-    public int primaryMoveDamage;
-    public int eyeLaserDamage;
     public float petrificationSnapSpeed;
     public int primaryMoveAttackRateTickRate;
-    public int itemEyeLaserMoveAttackRateTickRate;
     public int secondaryMoveAttackRateTickRate;
     public int pushSpeed;
     public FaceDirection faceDirectionInit;
@@ -63,6 +58,7 @@ public abstract class Actor : TileData
     public bool isInFlyingState;
     public bool isFiringPrimaryProjectile;
     public bool isFiringItemEyeLaser;
+    public bool isFiringItemFireball;
     public bool isInvincible;
     public bool isRespawnningPlayer;
     public bool inCharacterSelectionScreen;
@@ -95,10 +91,6 @@ public abstract class Actor : TileData
     public ClientMasterController clientMasterController;
     public ServerMasterController serverMasterController;
 
-    [Header("Attack")]
-    public Attack rangedAttack_1;
-    public Attack rangedAttack_2;
-
     [Header("Actor Actions")]
     public WalkAction walkAction = new WalkAction();
     public PetrificationAction petrificationAction = new PetrificationAction();
@@ -111,13 +103,11 @@ public abstract class Actor : TileData
     [Header("Action Primary Actions")]
     public WaitingForNextAction waitingActionForPrimaryMove = new WaitingForNextAction();
     public WaitingForNextAction waitingActionForSecondaryMove = new WaitingForNextAction();
-    public WaitingForNextAction waitingActionForItemEyeLaserMove = new WaitingForNextAction();
+    
 
     public override void Awake()
     {
-
         base.Awake();
-
         //
         normalSpeed = walkSpeed;
         walkAction.Initialise(this);
@@ -131,10 +121,6 @@ public abstract class Actor : TileData
 
         waitingActionForSecondaryMove.Initialise(this);
         waitingActionForSecondaryMove.ReInitialiseTimerToEnd(secondaryMoveAttackRateTickRate);
-
-
-        waitingActionForItemEyeLaserMove.Initialise(this);
-        waitingActionForItemEyeLaserMove.ReInitialiseTimerToEnd(itemEyeLaserMoveAttackRateTickRate);
 
         waitingForFlightToEnd.Initialise(this);
     }
@@ -563,14 +549,6 @@ public abstract class Actor : TileData
         }
     }
 
-    
-
-    public void Fire()
-    {
-        Debug.Log("Firing here!!!!");
-        FireProjectile(GridManager.instance.grid.WorldToCell(actorTransform.position));
-    }
-
     public IEnumerator forceTravelCorCache;
 
     public void StopForceTravelCor()
@@ -588,19 +566,6 @@ public abstract class Actor : TileData
             StopCoroutine(forceTravelCorCache);
             StartCoroutine(forceTravelCorCache);
         }
-    }
-
-    public void FireProjectile(Vector3Int positionToSpawn)
-    {
-        positionToSpawnProjectile = positionToSpawn;
-        rangedAttack_1.SetAttackingActorId(ownerId);
-        DynamicItem dynamicItem = new DynamicItem
-        {
-            ranged = rangedAttack_1,
-            activate = new TileBasedProjectileUse()
-        };
-        currentAttack = rangedAttack_1;
-        dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
     }
 
     public void FireProjectile(Attack rangedAttack, Vector3Int positionToSpawn)
@@ -973,7 +938,6 @@ public abstract class Actor : TileData
         actorToStop.isPushed = false;
     }
 
-
     public void TakeDamage(int damageReceived)
     {
         if(isInvincible)
@@ -1042,7 +1006,15 @@ public abstract class Actor : TileData
         {
             if (collidedTile.killUnitsInstantlyIfInTheirRegion)
             {
-                OnBodyCollidingWithKillingTiles(collidedTile);
+                if(collidedTile.tileType == EnumData.TileType.Earthquake)
+                {
+                    EarthQuake earthquakeElement = collidedTile.GetComponent<EarthQuake>();
+                    OnBodyCollidingWithKillingTiles(earthquakeElement.earthquakeSpawner, collidedTile);
+                }
+                else
+                {
+                    OnBodyCollidingWithKillingTiles(0, collidedTile);
+                }
             }
         }
 
@@ -1055,13 +1027,66 @@ public abstract class Actor : TileData
         {
             if (!isPushed&&!isPetrified)
             {
+                //Debug.LogError(collidedTile.tileType.ToString());
                 if (collidedTile.tileType == EnumData.TileType.Hourglass)
                 {
                     OnBodyCollidedWithHourGlassTile(currentMovePointCellPosition);
                 }
-                if (collidedTile.tileType == EnumData.TileType.IcarusWings)
+                else if (collidedTile.tileType == EnumData.TileType.IcarusWingsItem)
                 {
-                    OnBodyCollidedWithIcarausWingsTiles(currentMovePointCellPosition);
+                    OnBodyCollidedWithIcarausWingsItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.HeartItem)
+                {
+                    OnBodyCollidedWithHeartItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.CereberausHeadItem)
+                {
+                    OnBodyCollidedWithCereberausHeadItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.MinionItem)
+                {
+                    OnBodyCollidedWithMinionItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.EyeLaserItem)
+                {
+                    OnBodyCollidedWithEyeLaserItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.BoulderItem)
+                {
+                    OnBodyCollidedWithBoulderItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.TidalWaveItem)
+                {
+                    OnBodyCollidedWithTidalWaveItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.BubbleShieldItem)
+                {
+                    OnBodyCollidedWithBubbleShieldItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.MightyWindItem)
+                {
+                    OnBodyCollidedWithMightyWindItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.TornadoPullItem)
+                {
+                    OnBodyCollidedWithTornadoItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.PitfallItem)
+                {
+                    OnBodyCollidedWithPitfallItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.EarthQuakeItem)
+                {
+                    OnBodyCollidedWithEarthquakeItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.FireballItem)
+                {
+                    OnBodyCollidedWithFireballItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.FlamePillarItem)
+                {
+                    OnBodyCollidedWithFlamePillarItemTiles(currentMovePointCellPosition);
                 }
             }
         }
@@ -1252,10 +1277,25 @@ public abstract class Actor : TileData
     public abstract void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmNotPushedAndNotPetrified(Actor collidedActorWithMyHead);
     public abstract void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndAmPetrified(Actor collidedActorWithMyHead);
     public abstract void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead);
-    public abstract void OnBodyCollidedWithHourGlassTile(Vector3Int hourGlassTile);
-    public abstract void OnBodyCollidedWithIcarausWingsTiles(Vector3Int icarausCollectedOnTilePos);
-    public abstract void OnBodyCollidingWithKillingTiles(TileData tileData);
+    
+    public abstract void OnBodyCollidingWithKillingTiles(int killingTileSpawnerId,TileData tileData);
     public abstract void OnBodyCollidingWithTornadoEffectTiles(TileData tileData);
+
+    public abstract void OnBodyCollidedWithIcarausWingsItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithHeartItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithCereberausHeadItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithMinionItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithEyeLaserItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithBoulderItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithTidalWaveItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithBubbleShieldItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithMightyWindItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithTornadoItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithPitfallItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithEarthquakeItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithFireballItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithFlamePillarItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithHourGlassTile(Vector3Int cellPos);
 
     public abstract void OnPushStart();
     public abstract void OnPushStop();

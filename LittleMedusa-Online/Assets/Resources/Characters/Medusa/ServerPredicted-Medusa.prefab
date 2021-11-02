@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3298780331883113424}
   - component: {fileID: 3483783060163162999}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: New Sprite (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7320712843249165686}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ServerPredicted-Medusa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 8438492171484474930}
   - component: {fileID: 5461802819602088926}
   - component: {fileID: 4220674656292707514}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ServerPredictedHero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,37 +159,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9bc853f89d1be488f3c42ba72cafaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 32
+  tileType: 40
   blockFlyingUnits: 0
   blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
   solidifyTile: 0
-  isPlayer: 0
+  isItem: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
-  overrideInspectorValues: 0
   movePoint: {fileID: 8438492171874859206}
   actorTransform: {fileID: 8438492171484474930}
   frameLooper: {fileID: 4220674656292707514}
   gamePhysics: {fileID: 0}
   actorCollider2D: {fileID: 0}
-  projectileThrownType: 2
-  projectileThrownType_2: 0
   invincibilityTickTimer: 250
   petrificationTimeTickRate: 300
   maxHP: 8
   maxStockLives: 99
   walkSpeed: 4
   damagePerStoppedHit: 2
-  primaryMoveDamage: 2
-  eyeLaserDamage: 2
   petrificationSnapSpeed: 6
   primaryMoveAttackRateTickRate: 20
-  itemEyeLaserMoveAttackRateTickRate: 20
-  secondaryMoveAttackRateTickRate: 0
-  pushSpeed: 4
+  secondaryMoveAttackRateTickRate: 120
+  pushSpeed: 6
   faceDirectionInit: 1
   flySpeed: 6
   flyingTickCount: 300
@@ -255,6 +249,7 @@ MonoBehaviour:
   isInFlyingState: 0
   isFiringPrimaryProjectile: 0
   isFiringItemEyeLaser: 0
+  isFiringItemFireball: 0
   isInvincible: 0
   isRespawnningPlayer: 0
   inCharacterSelectionScreen: 0
@@ -280,13 +275,20 @@ MonoBehaviour:
   actorMePushing: {fileID: 0}
   petrificationColor: {r: 0, g: 0, b: 0, a: 0}
   invincibleColor: {r: 0, g: 0, b: 0, a: 0}
+  itemEyeLaserMoveAttackRateTickRate: 20
+  itemFireballMoveAttackRateTickRate: 20
+  bubbleShieldItemMoveAttackRateTickRate: 120
   healthFillImage: {fileID: 0}
   currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}
   hero: 0
   isInputFreezed: 0
   isFiringServerProjectiles: 0
-  itemToCast: {fileID: 0}
+  bubbleShieldAttackReady: 0
+  itemToCast:
+    castableItemType: 0
+    usableItemType: 0
+    itemCount: 0
   up: 0
   left: 0
   down: 0
@@ -330,7 +332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8438492171874859206}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MovePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,7 +365,7 @@ GameObject:
   - component: {fileID: 8438492172532102110}
   - component: {fileID: 8438492172532102108}
   - component: {fileID: 8438492172532102109}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

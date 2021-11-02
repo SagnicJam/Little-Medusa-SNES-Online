@@ -321,6 +321,7 @@ public class ClientMasterController : MonoBehaviour
                 Destroy(previousClientHero.transform.parent.gameObject);
             }
         }
+
         clientPlayer.SetActorPositionalState(playerStateUpdates.positionUpdates);
         clientPlayer.SetActorEventActionState(playerStateUpdates.playerEvents);
         clientPlayer.SetActorAnimationState(playerStateUpdates.playerAnimationEvents);
@@ -427,8 +428,8 @@ public struct PlayerAuthoratativeStates
     public int currentHP;
     public int currentStockLives;
     public int hero;
-
-    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isPhysicsControlled,bool isFlyingState, bool inputFreezed, bool isInvincible,bool isRespawnningPlayer,bool inCharacterSelectionScreen,bool inGame, int currentHP,int currentStockLives,int hero)
+    public ItemToCast itemToCast;
+    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isPhysicsControlled,bool isFlyingState, bool inputFreezed, bool isInvincible,bool isRespawnningPlayer,bool inCharacterSelectionScreen,bool inGame, int currentHP,int currentStockLives,int hero, ItemToCast itemToCast)
     {
         this.isPetrified = isPetrified;
         this.isPushed = isPushed;
@@ -442,6 +443,21 @@ public struct PlayerAuthoratativeStates
         this.currentHP = currentHP;
         this.currentStockLives = currentStockLives;
         this.hero = hero;
+        this.itemToCast = itemToCast;
+    }
+}
+
+public class ItemToCast
+{
+    public int castItemType;
+    public int usableItemType;
+    public int itemCount;
+
+    public ItemToCast(int castItemType, int usableItemType, int itemCount)
+    {
+        this.castItemType = castItemType;
+        this.usableItemType = usableItemType;
+        this.itemCount = itemCount;
     }
 }
 
@@ -481,11 +497,13 @@ public struct PlayerEvents
 {
     public bool firedPrimaryMoveProjectile;
     public bool firedItemEyeLaserMoveProjectile;
+    public bool firedItemFireballMoveProjectile;
 
-    public PlayerEvents(bool firedPrimaryMoveProjectile,bool firedItemEyeLaserMoveProjectile)
+    public PlayerEvents(bool firedPrimaryMoveProjectile,bool firedItemEyeLaserMoveProjectile,bool firedItemFireballMoveProjectile)
     {
         this.firedPrimaryMoveProjectile = firedPrimaryMoveProjectile;
         this.firedItemEyeLaserMoveProjectile = firedItemEyeLaserMoveProjectile;
+        this.firedItemFireballMoveProjectile = firedItemFireballMoveProjectile;
     }
 }
 
@@ -626,31 +644,19 @@ public struct PlaceBoulderCommand
     }
 }
 
-public struct PlaceMinionCommand
+public struct SpawnItemCommand
 {
     public int sequenceNumber;
     public int direction;
-    public Vector3Int placeMinionCellPos;
+    public int spawnItemType;
+    public Vector3Int spawnCell;
 
-    public PlaceMinionCommand(int sequenceNumber, int direction, Vector3Int placeMinionCellPos)
+    public SpawnItemCommand(int sequenceNumber, int direction,int spawnItemType, Vector3Int spawnCell)
     {
         this.sequenceNumber = sequenceNumber;
         this.direction = direction;
-        this.placeMinionCellPos = placeMinionCellPos;
-    }
-}
-
-public struct PlaceCereberausHeadCommand
-{
-    public int sequenceNumber;
-    public int direction;
-    public Vector3Int cereberausHeadPos;
-
-    public PlaceCereberausHeadCommand(int sequenceNumber,int direction, Vector3Int cereberausHeadPos)
-    {
-        this.sequenceNumber = sequenceNumber;
-        this.direction = direction;
-        this.cereberausHeadPos = cereberausHeadPos;
+        this.spawnItemType = spawnItemType;
+        this.spawnCell = spawnCell;
     }
 }
 

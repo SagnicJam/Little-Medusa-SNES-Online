@@ -334,4 +334,6 @@ public class Cyclops : Enemy
         FinishFollowing();
         walkSpeed = normalSpeed;
     }
+
+    
 }

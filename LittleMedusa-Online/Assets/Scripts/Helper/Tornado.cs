@@ -33,7 +33,7 @@ public class Tornado : MonoBehaviour
 
         //place tile tornado
         GridManager.instance.SetTile(cellToPlaceOn, EnumData.TileType.Tornado, true, false);
-
+        GridManager.instance.SetTile(cellToPlaceOn,EnumData.TileType.Solid,true,false);
         List<Vector3Int> getCellToSolidify = GridManager.instance.GetSizeCells(calSize, cellToPlaceOn);
 
         if (actorIdToPlacedTornadoDic.ContainsKey(ownerCastingId))

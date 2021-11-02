@@ -159,8 +159,7 @@ public class Server
                 { (int)ClientPackets.castingFlamePillarCommand,ServerHandle.PlayerCastingFlamePillarCommandReceived},
                 { (int)ClientPackets.playerFiringMightyWindCommand,ServerHandle.PlayerFiringMightyWindCommandReceived},
                 { (int)ClientPackets.characterChangeCommand,ServerHandle.ChangeCharacterRequest},
-                { (int)ClientPackets.playerPlaceCereberausHeadCommand,ServerHandle.PlayerPlaceCereberausHeadCommandReceived},
-                { (int)ClientPackets.playerPlaceMinionCommand,ServerHandle.PlayerPlaceMinionCommandReceived}
+                { (int)ClientPackets.playerSpawnItemCommand,ServerHandle.PlayerSpawnItemCommand}
             };
 
         Debug.Log("Initialise packets");

@@ -20,8 +20,7 @@ public class ServerMasterController : MonoBehaviour
     private Dictionary<int, PushCommand> pushCommandFromClientToServerDic = new Dictionary<int, PushCommand>();
     private Dictionary<int, PlaceBoulderCommand> placeBoulderCommandFromClientToServerDic = new Dictionary<int, PlaceBoulderCommand>();
     private Dictionary<int, RemoveBoulderCommand> removeBoulderCommandFromClientToServerDic = new Dictionary<int, RemoveBoulderCommand>();
-    private Dictionary<int, PlaceCereberausHeadCommand> placeCereberausHeadCommandFromClientToServerDic = new Dictionary<int, PlaceCereberausHeadCommand>();
-    private Dictionary<int, PlaceMinionCommand> placeMinionCommandFromClientToServerDic = new Dictionary<int, PlaceMinionCommand>();
+    private Dictionary<int, SpawnItemCommand> spawnItemCommandFromClientToServerDic = new Dictionary<int, SpawnItemCommand>();
     private Dictionary<int, PetrificationCommand> petrificationRequestReceivedFromClientToServerDic = new Dictionary<int, PetrificationCommand>();
     private Dictionary<int, FireTidalWaveCommand> tidalWaveFireRequestReceivedFromClientToServerDic = new Dictionary<int, FireTidalWaveCommand>();
     private Dictionary<int, FireMightyWindCommand> mightyWindFireRequestReceivedFromClientToServerDic = new Dictionary<int, FireMightyWindCommand>();
@@ -537,7 +536,7 @@ public class ServerMasterController : MonoBehaviour
                 Vector3Int cellPredicted = tidalWaveFireCommand.predictedCell;
                 tidalWaveFireRequestReceivedFromClientToServerDic.Remove(tidalWaveFireCommand.sequenceNoForFiringTidalWaveCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                TidalWaveFirePlayerRequestImplementation(cellPredicted, direction);
+                TidalWaveFirePlayerRequestImplementation(direction,cellPredicted);
             }
         }
 
@@ -551,7 +550,7 @@ public class ServerMasterController : MonoBehaviour
                 Vector3Int cellPredicted = tidalWaveFireCommand.predictedCell;
                 tidalWaveFireRequestReceivedFromClientToServerDic.Remove(tidalWaveFireCommand.sequenceNoForFiringTidalWaveCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                TidalWaveFirePlayerRequestImplementation(cellPredicted,direction);
+                TidalWaveFirePlayerRequestImplementation(direction, cellPredicted);
             }
         }
     }
@@ -808,10 +807,10 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    public void CheckForPlaceCerebeausHeadRequestOnServer(int sequenceNoToCheck)
+    public void CheckForSpawnItemRequestOnServer(int sequenceNoToCheck)
     {
         List<int> toDiscardSequences = new List<int>();
-        foreach (KeyValuePair<int, PlaceCereberausHeadCommand> kvp in placeCereberausHeadCommandFromClientToServerDic)
+        foreach (KeyValuePair<int, SpawnItemCommand> kvp in spawnItemCommandFromClientToServerDic)
         {
             int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
             if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
@@ -820,7 +819,7 @@ public class ServerMasterController : MonoBehaviour
             }
         }
 
-        foreach (KeyValuePair<int, PlaceCereberausHeadCommand> kvp in placeCereberausHeadCommandFromClientToServerDic)
+        foreach (KeyValuePair<int, SpawnItemCommand> kvp in spawnItemCommandFromClientToServerDic)
         {
             int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
             if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
@@ -831,10 +830,10 @@ public class ServerMasterController : MonoBehaviour
 
         foreach (int i in toDiscardSequences)
         {
-            if (placeCereberausHeadCommandFromClientToServerDic.ContainsKey(i))
+            if (spawnItemCommandFromClientToServerDic.ContainsKey(i))
             {
                 //Debug.Log("<color=red>discarding seq </color>" + i);
-                placeCereberausHeadCommandFromClientToServerDic.Remove(i);
+                spawnItemCommandFromClientToServerDic.Remove(i);
             }
             else
             {
@@ -845,91 +844,30 @@ public class ServerMasterController : MonoBehaviour
         for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
         {
             int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
-            PlaceCereberausHeadCommand placeCerebeausHeadCommand;
-            if (placeCereberausHeadCommandFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out placeCerebeausHeadCommand))
+            SpawnItemCommand placeMinionCommand;
+            if (spawnItemCommandFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out placeMinionCommand))
             {
-                placeCereberausHeadCommandFromClientToServerDic.Remove(placeCerebeausHeadCommand.sequenceNumber);
+                spawnItemCommandFromClientToServerDic.Remove(placeMinionCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
-                Vector3Int cellPointToPlaceCereberausHeadOn = placeCerebeausHeadCommand.cereberausHeadPos;
-                int direction = placeCerebeausHeadCommand.direction;
-                PlaceCereberausHeadImplementation(direction,cellPointToPlaceCereberausHeadOn);
+                Vector3Int spawnCell = placeMinionCommand.spawnCell;
+                int spawnItemType = placeMinionCommand.spawnItemType;
+                int direction = placeMinionCommand.direction;
+                SpawnItemImplementation(direction, spawnItemType, spawnCell);
             }
         }
 
         for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
         {
             int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
-            PlaceCereberausHeadCommand placeCerebeausHeadCommand;
-            if (placeCereberausHeadCommandFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out placeCerebeausHeadCommand))
+            SpawnItemCommand placeMinionCommand;
+            if (spawnItemCommandFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out placeMinionCommand))
             {
-                placeCereberausHeadCommandFromClientToServerDic.Remove(placeCerebeausHeadCommand.sequenceNumber);
+                spawnItemCommandFromClientToServerDic.Remove(placeMinionCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
-                Vector3Int cellPointToPlaceCereberausHeadOn = placeCerebeausHeadCommand.cereberausHeadPos;
-                int direction = placeCerebeausHeadCommand.direction;
-                PlaceCereberausHeadImplementation(direction,cellPointToPlaceCereberausHeadOn);
-            }
-        }
-    }
-
-    public void CheckForPlaceMinionRequestOnServer(int sequenceNoToCheck)
-    {
-        List<int> toDiscardSequences = new List<int>();
-        foreach (KeyValuePair<int, PlaceMinionCommand> kvp in placeMinionCommandFromClientToServerDic)
-        {
-            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
-            if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
-            {
-                toDiscardSequences.Add(kvp.Key);
-            }
-        }
-
-        foreach (KeyValuePair<int, PlaceMinionCommand> kvp in placeMinionCommandFromClientToServerDic)
-        {
-            int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
-            if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
-            {
-                toDiscardSequences.Add(kvp.Key);
-            }
-        }
-
-        foreach (int i in toDiscardSequences)
-        {
-            if (placeMinionCommandFromClientToServerDic.ContainsKey(i))
-            {
-                //Debug.Log("<color=red>discarding seq </color>" + i);
-                placeMinionCommandFromClientToServerDic.Remove(i);
-            }
-            else
-            {
-                Debug.LogError("Could not find the key: " + i);
-            }
-        }
-
-        for (int i = (reliabilityCheckBufferCount - 1); i >= 0; i--)
-        {
-            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
-            PlaceMinionCommand placeMinionCommand;
-            if (placeMinionCommandFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out placeMinionCommand))
-            {
-                placeMinionCommandFromClientToServerDic.Remove(placeMinionCommand.sequenceNumber);
-                //do server rollback here to check to check if damage actually occured on server
-                Vector3Int cellPoint = placeMinionCommand.placeMinionCellPos;
+                Vector3Int spawnCell = placeMinionCommand.spawnCell;
+                int spawnItemType = placeMinionCommand.spawnItemType;
                 int direction = placeMinionCommand.direction;
-                PlaceMinionImplementation(direction, cellPoint);
-            }
-        }
-
-        for (int i = 0; i <= (reliabilityCheckBufferCount - 1); i++)
-        {
-            int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
-            PlaceMinionCommand placeMinionCommand;
-            if (placeMinionCommandFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out placeMinionCommand))
-            {
-                placeMinionCommandFromClientToServerDic.Remove(placeMinionCommand.sequenceNumber);
-                //do server rollback here to check to check if damage actually occured on server
-                Vector3Int cellPointToPlaceCereberausHeadOn = placeMinionCommand.placeMinionCellPos;
-                int direction = placeMinionCommand.direction;
-                PlaceMinionImplementation(direction, cellPointToPlaceCereberausHeadOn);
+                SpawnItemImplementation(direction, spawnItemType, spawnCell);
             }
         }
     }
@@ -1268,45 +1206,24 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    public void AccumulatePlaceCereberausHeadCommandsToBePlayedOnServerFromClient(PlaceCereberausHeadCommand placeCereberausHeadCommand)
+    public void AccumulateSpawnItemCommandsToBePlayedOnServerFromClient(SpawnItemCommand spawnItemCommand)
     {
-        if (placeCereberausHeadCommand.sequenceNumber > playerSequenceNumberProcessed)
+        if (spawnItemCommand.sequenceNumber > playerSequenceNumberProcessed)
         {
-            PlaceCereberausHeadCommand dataPackage;
-            if (placeCereberausHeadCommandFromClientToServerDic.TryGetValue(placeCereberausHeadCommand.sequenceNumber, out dataPackage))
+            SpawnItemCommand dataPackage;
+            if (spawnItemCommandFromClientToServerDic.TryGetValue(spawnItemCommand.sequenceNumber, out dataPackage))
             {
-                Debug.Log("<color=orange>AccumulatePlaceCereberausHeadCommandsToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + placeCereberausHeadCommand.sequenceNumber);
+                Debug.Log("<color=orange>AccumulateSpawnItemCommandsToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + spawnItemCommand.sequenceNumber);
             }
             else
             {
-                Debug.Log("<color=green>AccumulatePlaceCereberausHeadCommandsToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + placeCereberausHeadCommand.sequenceNumber);
-                placeCereberausHeadCommandFromClientToServerDic.Add(placeCereberausHeadCommand.sequenceNumber, placeCereberausHeadCommand);
+                Debug.Log("<color=green>AccumulateSpawnItemCommandsToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + spawnItemCommand.sequenceNumber);
+                spawnItemCommandFromClientToServerDic.Add(spawnItemCommand.sequenceNumber, spawnItemCommand);
             }
         }
         else
         {
-            Debug.Log("<color=red>AccumulatePlaceCereberausHeadCommandsToBePlayedOnServerFromClient Already processed this sequence no </color>" + placeCereberausHeadCommand.sequenceNumber);
-        }
-    }
-
-    public void AccumulatePlaceMinionCommandsToBePlayedOnServerFromClient(PlaceMinionCommand placeMinionCommand)
-    {
-        if (placeMinionCommand.sequenceNumber > playerSequenceNumberProcessed)
-        {
-            PlaceMinionCommand dataPackage;
-            if (placeMinionCommandFromClientToServerDic.TryGetValue(placeMinionCommand.sequenceNumber, out dataPackage))
-            {
-                Debug.Log("<color=orange>AccumulatePlaceMinionCommandsToBePlayedOnServerFromClient dataPackage already exists for sequence no. </color>" + placeMinionCommand.sequenceNumber);
-            }
-            else
-            {
-                Debug.Log("<color=green>AccumulatePlaceMinionCommandsToBePlayedOnServerFromClient Added successfully to processing buffer dic </color>" + placeMinionCommand.sequenceNumber);
-                placeMinionCommandFromClientToServerDic.Add(placeMinionCommand.sequenceNumber, placeMinionCommand);
-            }
-        }
-        else
-        {
-            Debug.Log("<color=red>AccumulatePlaceMinionCommandsToBePlayedOnServerFromClient Already processed this sequence no </color>" + placeMinionCommand.sequenceNumber);
+            Debug.Log("<color=red>AccumulateSpawnItemCommandsToBePlayedOnServerFromClient Already processed this sequence no </color>" + spawnItemCommand.sequenceNumber);
         }
     }
 
@@ -1451,6 +1368,11 @@ public class ServerMasterController : MonoBehaviour
             Debug.LogError(function + " server player is isInvincible hence request failed");
             return false;
         }
+        if (serverInstanceHero.isInputFreezed)
+        {
+            Debug.LogError(function + " server player is isinputfreezed hence request failed");
+            return false;
+        }
         return true;
     }
     #endregion
@@ -1562,6 +1484,47 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
+    void SpawnItemImplementation(int direction,int spawnItemType, Vector3Int spawnCell)
+    {
+        if(serverInstanceHero.itemToCast.itemCount>0)
+        {
+            switch ((EnumData.UsableItemTypes)spawnItemType)
+            {
+                case EnumData.UsableItemTypes.Boulder:
+                    PlaceBoulderRequestImplementation(spawnCell);
+                    break;
+                case EnumData.UsableItemTypes.Pitfall:
+                    CastPitfallImplementation(direction);
+                    break;
+                case EnumData.UsableItemTypes.Earthquake:
+                    CastEarthQuakeImplementation();
+                    break;
+                case EnumData.UsableItemTypes.Tornado:
+                    CastTornadoForPlayerImplementation(direction);
+                    break;
+                case EnumData.UsableItemTypes.Minion:
+                    PlaceMinionImplementation(direction, spawnCell);
+                    break;
+                case EnumData.UsableItemTypes.CereberausHead:
+                    PlaceCereberausHeadImplementation(direction, spawnCell);
+                    break;
+                case EnumData.UsableItemTypes.TidalWave:
+                    TidalWaveFirePlayerRequestImplementation(direction,spawnCell);
+                    break;
+                case EnumData.UsableItemTypes.BubbleShield:
+                    CastBubbleShieldForPlayerImplementation(spawnCell);
+                    break;
+                case EnumData.UsableItemTypes.MightyWind:
+                    MightyWindFirePlayerRequestImplementation(direction,spawnCell);
+                    break;
+                case EnumData.UsableItemTypes.FlamePillar:
+                    CastFlamePillarForPlayerImplementation(direction, spawnCell);
+                    break;
+            }
+            serverInstanceHero.itemToCast.itemCount--;
+        }
+    }
+
     void PlaceMinionImplementation(int direction, Vector3Int cellPositionToPlaceMinion)
     {
         if (!CanDoAction("PlaceMinionImplementation"))
@@ -1571,7 +1534,7 @@ public class ServerMasterController : MonoBehaviour
         if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellPositionToPlaceMinion))
         {
             Debug.Log("Setting tile minion on " + cellPositionToPlaceMinion);
-            GridManager.instance.enemySpawnner.InstantiateEnemy(cellPositionToPlaceMinion, direction,serverInstanceHero.ownerId);
+            GridManager.instance.enemySpawnner.InstantiateEnemy(cellPositionToPlaceMinion, direction, serverInstanceHero.ownerId);
         }
         else
         {
@@ -1624,7 +1587,7 @@ public class ServerMasterController : MonoBehaviour
         }
         if (serverInstanceHero.IsProjectilePlacable(predictedCell, (FaceDirection)direction))
         {
-            serverInstanceHero.CastFlamePillar(predictedCell);
+            serverInstanceHero.CastFlamePillar(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FlamePillar),predictedCell);
         }
         else
         {
@@ -1640,44 +1603,44 @@ public class ServerMasterController : MonoBehaviour
         }
         if (serverInstanceHero.IsProjectilePlacable(predictedCell,FaceDirection.Up))
         {
-            serverInstanceHero.CastBubbleShield(predictedCell, FaceDirection.Up);
+            serverInstanceHero.CastBubbleShield(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.BubbleShield),predictedCell, FaceDirection.Up);
         }
         else
         {
-            Debug.LogError("bubbleshield-Hero is not able to fire up projectiles");
+            Debug.Log("bubbleshield-Hero is not able to fire up projectiles");
         }
 
         if (serverInstanceHero.IsProjectilePlacable(predictedCell, FaceDirection.Down))
         {
-            serverInstanceHero.CastBubbleShield(predictedCell, FaceDirection.Down);
+            serverInstanceHero.CastBubbleShield(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.BubbleShield), predictedCell, FaceDirection.Down);
         }
         else
         {
-            Debug.LogError("bubbleshield-Hero is not able to fire down projectiles");
+            Debug.Log("bubbleshield-Hero is not able to fire down projectiles");
         }
 
 
         if (serverInstanceHero.IsProjectilePlacable(predictedCell, FaceDirection.Left))
         {
-            serverInstanceHero.CastBubbleShield(predictedCell, FaceDirection.Left);
+            serverInstanceHero.CastBubbleShield(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.BubbleShield),predictedCell, FaceDirection.Left);
         }
         else
         {
-            Debug.LogError("bubbleshield-Hero is not able to fire left projectiles");
+            Debug.Log("bubbleshield-Hero is not able to fire left projectiles");
         }
 
 
         if (serverInstanceHero.IsProjectilePlacable(predictedCell, FaceDirection.Right))
         {
-            serverInstanceHero.CastBubbleShield(predictedCell, FaceDirection.Right);
+            serverInstanceHero.CastBubbleShield(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.BubbleShield),predictedCell, FaceDirection.Right);
         }
         else
         {
-            Debug.LogError("bubbleshield-Hero is not able to fire right projectiles");
+            Debug.Log("bubbleshield-Hero is not able to fire right projectiles");
         }
     }
 
-    void TidalWaveFirePlayerRequestImplementation(Vector3Int predictedCell,int direction)
+    void TidalWaveFirePlayerRequestImplementation(int direction,Vector3Int predictedCell)
     {
         if (!CanDoAction("TidalWaveFirePlayerRequestImplementation"))
         {
@@ -1686,7 +1649,7 @@ public class ServerMasterController : MonoBehaviour
         Debug.Log("TidalWaveFirePlayerRequestImplementation ");
         if (serverInstanceHero.IsProjectilePlacable(predictedCell, (FaceDirection)direction))
         {
-            serverInstanceHero.FireProjectile(predictedCell);
+            serverInstanceHero.FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.TidalWave), predictedCell);
         }
         else
         {
@@ -1721,7 +1684,8 @@ public class ServerMasterController : MonoBehaviour
         Debug.Log("MightyWindFirePlayerRequestImplementation ");
         if (serverInstanceHero.IsProjectilePlacable(cellPredicted, (FaceDirection)direction))
         {
-            serverInstanceHero.FireProjectile(cellPredicted);
+            serverInstanceHero.FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.MightyWind),
+                cellPredicted);
         }
         else
         {
@@ -1868,8 +1832,7 @@ public class ServerMasterController : MonoBehaviour
             CheckForPushRequestOnServer(playerSequenceNumberProcessed+1);
             CheckForPlaceBoulderRequestOnServer(playerSequenceNumberProcessed+1);
             CheckForRemovingBoulderRequestOnServer(playerSequenceNumberProcessed+1);
-            CheckForPlaceCerebeausHeadRequestOnServer(playerSequenceNumberProcessed+1);
-            CheckForPlaceMinionRequestOnServer(playerSequenceNumberProcessed+1);
+            CheckForSpawnItemRequestOnServer(playerSequenceNumberProcessed+1);
             CheckForTidalWaveFireRequestOnPlayer(playerSequenceNumberProcessed+1);
             CheckForMightyWindFireRequestOnPlayer(playerSequenceNumberProcessed+1);
             CheckForBubbleShieldRequestForPlayer(playerSequenceNumberProcessed+1);
@@ -1931,12 +1894,13 @@ public class ServerMasterController : MonoBehaviour
             , serverInstanceHero.inGame
             , serverInstanceHero.currentHP
             , serverInstanceHero.currentStockLives
-            , serverInstanceHero.hero);
+            , serverInstanceHero.hero
+            , new ItemToCast((int)serverInstanceHero.itemToCast.castableItemType, (int)serverInstanceHero.itemToCast.usableItemType, serverInstanceHero.itemToCast.itemCount));
 
         PositionUpdates positionUpdates = new PositionUpdates(serverInstanceHero.actorTransform.position, serverInstanceHero.currentMovePointCellPosition
             , serverInstanceHero.previousMovePointCellPosition,(int)serverInstanceHero.Facing,(int)serverInstanceHero.PreviousFacingDirection);
         PlayerEvents playerEvents = new PlayerEvents(serverInstanceHero.isFiringPrimaryProjectile,
-            serverInstanceHero.isFiringItemEyeLaser);
+            serverInstanceHero.isFiringItemEyeLaser, serverInstanceHero.isFiringItemFireball);
         PlayerAnimationEvents playerAnimationEvents = new PlayerAnimationEvents(serverInstanceHero.isWalking,serverInstanceHero.isFlying, serverInstanceHero.isUsingPrimaryMove);
 
         PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(serverLocalSequenceNumber,playerSequenceNumberProcessed, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimationEvents);
@@ -2003,8 +1967,10 @@ public class ServerMasterController : MonoBehaviour
     public void SetCharacter(int characterHero,PositionUpdates positionUpdate)
     {
         Hero serverInstanceHero = Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)characterHero).ToString() + "/ServerInstance-" + ((EnumData.Heroes)characterHero).ToString()) as GameObject, transform, false).GetComponentInChildren<Hero>();
+        
         this.serverInstanceHero = serverInstanceHero;
         this.serverInstanceHero.hero = characterHero;
+        
         this.serverInstanceHero.inCharacterSelectionScreen = (ServerSideGameManager.instance.currentGameState == EnumData.GameState.CharacterSelection);
         this.serverInstanceHero.inGame = (ServerSideGameManager.instance.currentGameState == EnumData.GameState.Gameplay);
 

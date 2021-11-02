@@ -7,7 +7,6 @@ public class Posidanna : Hero
     public override void Start()
     {
         base.Start();
-        rangedAttack_2 = new Attack(primaryMoveDamage, EnumData.AttackTypes.ProjectileAttack, projectileThrownType_2);
     }
 
     public override bool IsHeroAbleToFireProjectiles()
@@ -166,6 +165,21 @@ public class Posidanna : Hero
 
     public override void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
     {
+        if (!isInFlyingState)
+        {
+            if (itemToCast != null && itemToCast.castableItemType==EnumData.CastItemTypes.ClientProjectiles)
+            {
+                if (itemToCast.itemCount > 0 && inputs[(int)EnumData.PosidannaInputs.UseItem])
+                {
+                    SpawnClientProjectiles();
+                }
+                else if (itemToCast.itemCount <= 0 || (!inputs[(int)EnumData.PosidannaInputs.UseItem] && previousInputs[(int)EnumData.PosidannaInputs.UseItem] != inputs[(int)EnumData.PosidannaInputs.UseItem]))
+                {
+                    ResetClientProjectilesVars();
+                }
+            }
+        }
+
         bool secondaryAttackReady = !waitingActionForSecondaryMove.Perform();
         if (!MultiplayerManager.instance.isServer && hasAuthority())
         {
@@ -197,22 +211,18 @@ public class Posidanna : Hero
                             Debug.LogError("Invalid location to spawn player");
                         }
                     }
-                    else if (/*itemToCast is  SpawnItems spawnItems && */inputs[(int)EnumData.PosidannaInputs.UseItem] && previousInputs[(int)EnumData.PosidannaInputs.UseItem] != inputs[(int)EnumData.PosidannaInputs.UseItem])
+                    else if (itemToCast != null&& itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.SpawnnableItems)
                     {
-                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing, EnumData.TileType.BoulderDisappearing))
+                        if (inputs[(int)EnumData.PosidannaInputs.UseItem] && previousInputs[(int)EnumData.PosidannaInputs.UseItem] != inputs[(int)EnumData.PosidannaInputs.UseItem])
                         {
-                            //send command to server of placement
-                            //PlaceCereberausHeadCommand placeCereberausHead = new PlaceCereberausHeadCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
-                            //ClientSend.PlaceCereberausHeadCommand(placeCereberausHead);
-
-                            PlaceMinionCommand placeMinionCommand = new PlaceMinionCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
-                            ClientSend.PlaceMinionCommand(placeMinionCommand);
+                            SpawnItem();
                         }
                     }
                 }
             }
-            if(!isInFlyingState)
+            bubbleShieldAttackReady = !waitingActionForBubbleShieldItemMove.Perform();
+
+            if (!isInFlyingState)
             {
                 if (inputs[(int)EnumData.PosidannaInputs.ShootTidalWave] && previousInputs[(int)EnumData.PosidannaInputs.ShootTidalWave] != inputs[(int)EnumData.PosidannaInputs.ShootTidalWave])
                 {
@@ -233,8 +243,14 @@ public class Posidanna : Hero
                     isFiringServerProjectiles = true;
                     onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
                 }
+                else if (itemToCast!=null&& itemToCast.itemCount > 0&&itemToCast.castableItemType == EnumData.CastItemTypes.ServerProjectiles)
+                {
+                    if (inputs[(int)EnumData.PosidannaInputs.UseItem] && previousInputs[(int)EnumData.PosidannaInputs.UseItem] != inputs[(int)EnumData.PosidannaInputs.UseItem])
+                    {
+                        SpawnServerProjectiles();
+                    }
+                }
             }
-            
         }
     }
 
@@ -291,16 +307,33 @@ public class Posidanna : Hero
         {
             //Fire(this);
         }
+        if (isFiringItemEyeLaser)
+        {
+            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            {
+                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                if (MultiplayerManager.instance.isServer)
+                {
+                    itemToCast.itemCount--;
+                }
+            }
+        }
+        if (isFiringItemFireball)
+        {
+            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            {
+                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                if (MultiplayerManager.instance.isServer)
+                {
+                    itemToCast.itemCount--;
+                }
+            }
+        }
     }
 
     public override void ProcessInputMovementsControl()
     {
         if (isPhysicsControlled)
-        {
-            return;
-        }
-
-        if (isInputFreezed)
         {
             return;
         }
@@ -320,13 +353,9 @@ public class Posidanna : Hero
         walkAction.Perform();
     }
 
-    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs/*,int movementCommandPressCount*/)
+    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {
         if (isPhysicsControlled)
-        {
-            return;
-        }
-        if (isInputFreezed)
         {
             return;
         }

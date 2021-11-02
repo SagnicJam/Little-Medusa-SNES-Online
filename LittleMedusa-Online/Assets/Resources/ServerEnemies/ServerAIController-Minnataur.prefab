@@ -358,31 +358,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1179f6d09fd62047b6ef4ab0cc36776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 31
+  tileType: 39
   blockFlyingUnits: 0
-  blockToSpawnObjectsPlacement: 0
+  blockToSpawnObjectsPlacement: 1
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
   solidifyTile: 0
-  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
-  overrideInspectorValues: 0
   movePoint: {fileID: 4134259612590487916}
   actorTransform: {fileID: 4134259614025084152}
   frameLooper: {fileID: 4134259614025084146}
   gamePhysics: {fileID: 4134259614025084150}
   actorCollider2D: {fileID: 4134259614025084147}
-  projectileThrownType: 0
-  projectileThrownType_2: 0
   invincibilityTickTimer: 0
   petrificationTimeTickRate: 500
   maxHP: 8
   maxStockLives: 0
   walkSpeed: 1
   damagePerStoppedHit: 0
-  primaryMoveDamage: 3
   petrificationSnapSpeed: 6
   primaryMoveAttackRateTickRate: 100
   secondaryMoveAttackRateTickRate: 100
@@ -471,6 +466,8 @@ MonoBehaviour:
   isPetrified: 0
   isInFlyingState: 0
   isFiringPrimaryProjectile: 0
+  isFiringItemEyeLaser: 0
+  isFiringItemFireball: 0
   isInvincible: 0
   isRespawnningPlayer: 0
   inCharacterSelectionScreen: 0
@@ -496,12 +493,14 @@ MonoBehaviour:
   actorMePushing: {fileID: 0}
   HeadTransform: {fileID: 4134259614088450870}
   enemyDataSender: {fileID: 6094545879810690017}
+  primaryMoveDamage: 3
   waitingTimeWhenStuck: 100
   petrifyAnimationDuration: 0.2
   pathFindingWearOffTickCount: 0
   isMelleAttacking: 0
   isRangedAttacking: 0
   followingTarget: 0
+  leaderNetworkId: 0
   heroToChase: {fileID: 0}
   canBePetrified: 0
   dieOnUnPetrification: 0

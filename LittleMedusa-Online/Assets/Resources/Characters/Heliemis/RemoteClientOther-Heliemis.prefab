@@ -702,35 +702,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c84f55c3bf2b7145953faf184ef365d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 34
+  tileType: 40
   blockFlyingUnits: 0
-  blockBoulderPlacement: 1
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
   solidifyTile: 0
-  isPlayer: 0
+  isItem: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
-  overrideInspectorValues: 0
   movePoint: {fileID: 7256509176430748646}
   actorTransform: {fileID: 7256509175496613385}
   frameLooper: {fileID: 1017364097330221539}
   gamePhysics: {fileID: 0}
   actorCollider2D: {fileID: 3363879797578967321}
-  projectileThrownType: 15
-  projectileThrownType_2: 0
   invincibilityTickTimer: 250
   petrificationTimeTickRate: 300
   maxHP: 8
   maxStockLives: 99
   walkSpeed: 4
   damagePerStoppedHit: 2
-  primaryMoveDamage: 23
   petrificationSnapSpeed: 6
   primaryMoveAttackRateTickRate: 20
   secondaryMoveAttackRateTickRate: 0
-  pushSpeed: 4
+  pushSpeed: 6
   faceDirectionInit: 1
   flySpeed: 6
   flyingTickCount: 300
@@ -1003,6 +999,8 @@ MonoBehaviour:
   isPetrified: 0
   isInFlyingState: 0
   isFiringPrimaryProjectile: 0
+  isFiringItemEyeLaser: 0
+  isFiringItemFireball: 0
   isInvincible: 0
   isRespawnningPlayer: 0
   inCharacterSelectionScreen: 0
@@ -1028,12 +1026,20 @@ MonoBehaviour:
   actorMePushing: {fileID: 0}
   petrificationColor: {r: 0.4039216, g: 0.4039216, b: 0.4039216, a: 0.6509804}
   invincibleColor: {r: 1, g: 0.9333334, b: 0, a: 0.6509804}
+  itemEyeLaserMoveAttackRateTickRate: 20
+  itemFireballMoveAttackRateTickRate: 20
+  bubbleShieldItemMoveAttackRateTickRate: 120
   healthFillImage: {fileID: 7445694120835596536}
   currentLifeStockText: {fileID: 7276333609639751443}
   statusSprite: {fileID: 371124059645419107}
   hero: 0
   isInputFreezed: 0
   isFiringServerProjectiles: 0
+  bubbleShieldAttackReady: 0
+  itemToCast:
+    castableItemType: 0
+    usableItemType: 0
+    itemCount: 0
   up: 0
   left: 0
   down: 0
@@ -1041,6 +1047,8 @@ MonoBehaviour:
   shootMightyWind: 0
   placeTornado: 0
   respawnPlayer: 0
+  landPlayer: 0
+  useItem: 0
 --- !u!1 &7256509176430748647
 GameObject:
   m_ObjectHideFlags: 0

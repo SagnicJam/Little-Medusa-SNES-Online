@@ -156,24 +156,14 @@ public class ClientSend : MonoBehaviour
         }
     }
 
-    public static void PlaceCereberausHeadCommand(PlaceCereberausHeadCommand placeCereberausHeadCommand)
+    public static void SpawnItemCommand(SpawnItemCommand spawnItemCommand)
     {
-        using (Packet packet = new Packet((int)ClientPackets.playerPlaceCereberausHeadCommand))
+        using (Packet packet = new Packet((int)ClientPackets.playerSpawnItemCommand))
         {
-            packet.Write(placeCereberausHeadCommand.cereberausHeadPos);
-            packet.Write(placeCereberausHeadCommand.direction);
-            packet.Write(placeCereberausHeadCommand.sequenceNumber);
-            SendTCPData(packet);
-        }
-    }
-
-    public static void PlaceMinionCommand(PlaceMinionCommand placeMinionCommand)
-    {
-        using (Packet packet = new Packet((int)ClientPackets.playerPlaceMinionCommand))
-        {
-            packet.Write(placeMinionCommand.placeMinionCellPos);
-            packet.Write(placeMinionCommand.direction);
-            packet.Write(placeMinionCommand.sequenceNumber);
+            packet.Write(spawnItemCommand.spawnCell);
+            packet.Write(spawnItemCommand.direction);
+            packet.Write(spawnItemCommand.spawnItemType);
+            packet.Write(spawnItemCommand.sequenceNumber);
             SendTCPData(packet);
         }
     }

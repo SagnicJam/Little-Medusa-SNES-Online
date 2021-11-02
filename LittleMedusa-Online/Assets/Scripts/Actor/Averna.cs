@@ -7,7 +7,6 @@ public class Averna : Hero
     public override void Start()
     {
         base.Start();
-        rangedAttack_2 = new Attack(primaryMoveDamage, EnumData.AttackTypes.ProjectileAttack, projectileThrownType_2);
     }
 
     public override bool IsHeroAbleToFireProjectiles()
@@ -189,6 +188,17 @@ public class Averna : Hero
                 isFiringPrimaryProjectile = false;
                 waitingActionForPrimaryMove.ReInitialiseTimerToEnd(primaryMoveAttackRateTickRate);
             }
+            else if (itemToCast != null&& itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            {
+                if (itemToCast.itemCount > 0 && inputs[(int)EnumData.AvernaInputs.UseItem])
+                {
+                    SpawnClientProjectiles();
+                }
+                else if (itemToCast.itemCount <= 0 || (!inputs[(int)EnumData.AvernaInputs.UseItem] && previousInputs[(int)EnumData.AvernaInputs.UseItem] != inputs[(int)EnumData.AvernaInputs.UseItem]))
+                {
+                    ResetClientProjectilesVars();
+                }
+            }
         }
         
 
@@ -222,29 +232,35 @@ public class Averna : Hero
                             Debug.LogError("Invalid location to spawn player");
                         }
                     }
-                    else if (/*itemToCast is  SpawnItems spawnItems && */inputs[(int)EnumData.AvernaInputs.UseItem] && previousInputs[(int)EnumData.AvernaInputs.UseItem] != inputs[(int)EnumData.AvernaInputs.UseItem])
+                    else if (itemToCast != null&& itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.SpawnnableItems)
                     {
-                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing, EnumData.TileType.BoulderDisappearing))
+                        if (inputs[(int)EnumData.AvernaInputs.UseItem] && previousInputs[(int)EnumData.AvernaInputs.UseItem] != inputs[(int)EnumData.AvernaInputs.UseItem])
                         {
-                            //send command to server of placement
-                            //PlaceCereberausHeadCommand placeCereberausHead = new PlaceCereberausHeadCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
-                            //ClientSend.PlaceCereberausHeadCommand(placeCereberausHead);
-
-                            PlaceMinionCommand placeMinionCommand = new PlaceMinionCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
-                            ClientSend.PlaceMinionCommand(placeMinionCommand);
+                            SpawnItem();
                         }
                     }
                 }
             }
-            if (!isInFlyingState&&inputs[(int)EnumData.AvernaInputs.CastFlamePillar] && previousInputs[(int)EnumData.AvernaInputs.CastFlamePillar] != inputs[(int)EnumData.AvernaInputs.CastFlamePillar])
+            bubbleShieldAttackReady = !waitingActionForBubbleShieldItemMove.Perform();
+
+            if (!isInFlyingState)
             {
-                if (IsHeroAbleToFireProjectiles())
+                if (inputs[(int)EnumData.AvernaInputs.CastFlamePillar] && previousInputs[(int)EnumData.AvernaInputs.CastFlamePillar] != inputs[(int)EnumData.AvernaInputs.CastFlamePillar])
                 {
-                    CastFlamePillar castFlamePillar = new CastFlamePillar(GetLocalSequenceNo(), (int)Facing, GridManager.instance.grid.WorldToCell(actorTransform.position));
-                    ClientSend.CastFlamePillar(castFlamePillar);
-                    isFiringServerProjectiles = true;
-                    onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
+                    if (IsHeroAbleToFireProjectiles())
+                    {
+                        CastFlamePillar castFlamePillar = new CastFlamePillar(GetLocalSequenceNo(), (int)Facing, GridManager.instance.grid.WorldToCell(actorTransform.position));
+                        ClientSend.CastFlamePillar(castFlamePillar);
+                        isFiringServerProjectiles = true;
+                        onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
+                    }
+                }
+                else if (itemToCast!=null&& itemToCast.itemCount > 0&& itemToCast.castableItemType == EnumData.CastItemTypes.ServerProjectiles)
+                {
+                    if (inputs[(int)EnumData.AvernaInputs.UseItem] && previousInputs[(int)EnumData.AvernaInputs.UseItem] != inputs[(int)EnumData.AvernaInputs.UseItem])
+                    {
+                        SpawnServerProjectiles();
+                    }
                 }
             }
         }
@@ -297,25 +313,35 @@ public class Averna : Hero
         }
         if (isFiringPrimaryProjectile)
         {
-            positionToSpawnProjectile = GridManager.instance.grid.WorldToCell(actorTransform.position);
-            rangedAttack_1.SetAttackingActorId(ownerId);
-            DynamicItem dynamicItem = new DynamicItem
+            FireProjectile(new Attack(0,EnumData.AttackTypes.ProjectileAttack,EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+        }
+        if (isFiringItemEyeLaser)
+        {
+            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
             {
-                ranged = rangedAttack_1,
-                activate = new TileBasedProjectileUse()
-            };
-            currentAttack = rangedAttack_1;
-            dynamicItem.activate.BeginToUse(this, null, null);
+                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                if (MultiplayerManager.instance.isServer)
+                {
+                    itemToCast.itemCount--;
+                }
+            }
+        }
+        if (isFiringItemFireball)
+        {
+            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            {
+                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                if (MultiplayerManager.instance.isServer)
+                {
+                    itemToCast.itemCount--;
+                }
+            }
         }
     }
 
     public override void ProcessInputMovementsControl()
     {
         if (isPhysicsControlled)
-        {
-            return;
-        }
-        if (isInputFreezed)
         {
             return;
         }
@@ -338,10 +364,6 @@ public class Averna : Hero
     public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {
         if (isPhysicsControlled)
-        {
-            return;
-        }
-        if(isInputFreezed)
         {
             return;
         }

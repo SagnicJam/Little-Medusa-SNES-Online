@@ -70,9 +70,27 @@ public class EnumData
         UseItem
     }
 
-    public enum UsableItems
+    public enum CastItemTypes
     {
-        CereberausHead
+        SpawnnableItems=0,
+        ServerProjectiles,
+        ClientProjectiles
+    }
+
+    public enum UsableItemTypes
+    {
+        Boulder=0,
+        Pitfall,
+        Earthquake,
+        Tornado,
+        Minion,
+        CereberausHead,
+        TidalWave,
+        BubbleShield,
+        MightyWind,
+        FlamePillar,
+        EyeLaser,
+        Fireball
     }
 
     public enum PlayerStates
@@ -98,21 +116,15 @@ public class EnumData
         Empty,
         Normal,
         Boulder,
-        WaterChannels,
-        Up,
         Hourglass,
         UpArrow,
         DownArrow,
         LeftArrow,
         RightArrow,
-        IcarusWings,
         UpCereberusHead,
         DownCereberusHead,
         LeftCereberusHead,
         RightCereberusHead,
-        Star,
-        Key,
-        Chest,
         SpawnJar,
         Hole,
         Tornado,
@@ -120,42 +132,33 @@ public class EnumData
         Wall,
         Solid,
         VoidDeathTiles,
-        ItemSpawner,
         Mirror,
-        Switch,
+        ItemSpawner,
+        IcarusWingsItem,
+        HeartItem,
+        CereberausHeadItem,
+        MinionItem,
+        EyeLaserItem,
+        BoulderItem,
+        TidalWaveItem,
+        BubbleShieldItem,
+        MightyWindItem,
+        TornadoPullItem,
+        PitfallItem,
+        EarthQuakeItem,
+        FireballItem,
+        FlamePillarItem,
         ThunderStruck,
         LightningBolt,
+        Earthquake,
         Monster,
-        Medusa,
-        Poseidanna,
-        Heliemis,
-        Ermolai,
-        Averna,
-        WaterTitan,
-        WindTitan,
-        EarthTitan,
-        FireTitan,
-        Fiora,
-        Kronus,
+        Hero,
         BoulderAppearing,
         BoulderDisappearing,
-        HurricaneWind,
-        BoulderProjectile,
-        DispersedBoulder,
-        CrackEffect,
-        DispersedFire,
-        GravityChunks,
         LeftCereberusFire,
         RightCereberusFire,
         UpCereberusFire,
         DownCereberusFire,
-        ChestOpenAnimation,
-        BossBlockTile,
-        SafeTile,
-        RightRailIceWorldTile,
-        LeftRailIceWorldTile,
-        WaveBlocks,
-        Stagalmite,
         TornadoEffect
     }
 
@@ -163,7 +166,8 @@ public class EnumData
     {
         SmallExplosion,
         BigExplosion,
-        Lightning
+        Lightning,
+        Earthquake
     }
 
     public enum Projectiles

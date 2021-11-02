@@ -159,6 +159,21 @@ public class Heliemis : Hero
 
     public override void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
     {
+        if (!isInFlyingState)
+        {
+            if (itemToCast != null && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            {
+                if (itemToCast.itemCount > 0 && inputs[(int)EnumData.HeliemisInputs.UseItem])
+                {
+                    SpawnClientProjectiles();
+                }
+                else if (itemToCast.itemCount <= 0 || (!inputs[(int)EnumData.HeliemisInputs.UseItem] && previousInputs[(int)EnumData.HeliemisInputs.UseItem] != inputs[(int)EnumData.HeliemisInputs.UseItem]))
+                {
+                    ResetClientProjectilesVars();
+                }
+            }
+        }
+
         if (!MultiplayerManager.instance.isServer && hasAuthority())
         {
             if (completedMotionToMovePoint)
@@ -198,21 +213,17 @@ public class Heliemis : Hero
                             ClientSend.PlaceTornadoCommand(placeTornoadoCommand);
                         }
                     }
-                    else if (/*itemToCast is  SpawnItems spawnItems && */inputs[(int)EnumData.HeliemisInputs.UseItem] && previousInputs[(int)EnumData.HeliemisInputs.UseItem] != inputs[(int)EnumData.HeliemisInputs.UseItem])
+                    else if (itemToCast!=null&& itemToCast.itemCount > 0&& itemToCast.castableItemType == EnumData.CastItemTypes.SpawnnableItems)
                     {
-                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing, EnumData.TileType.BoulderDisappearing))
+                        if (inputs[(int)EnumData.HeliemisInputs.UseItem] && previousInputs[(int)EnumData.HeliemisInputs.UseItem] != inputs[(int)EnumData.HeliemisInputs.UseItem])
                         {
-                            //send command to server of placement
-                            //PlaceCereberausHeadCommand placeCereberausHead = new PlaceCereberausHeadCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
-                            //ClientSend.PlaceCereberausHeadCommand(placeCereberausHead);
-
-                            PlaceMinionCommand placeMinionCommand = new PlaceMinionCommand(GetLocalSequenceNo(), (int)Facing, cellToCheckFor);
-                            ClientSend.PlaceMinionCommand(placeMinionCommand);
+                            SpawnItem();
                         }
                     }
                 }
             }
+            bubbleShieldAttackReady = !waitingActionForBubbleShieldItemMove.Perform();
+
             if (!isInFlyingState)
             {
                 if (inputs[(int)EnumData.HeliemisInputs.ShootMightyWind] && previousInputs[(int)EnumData.HeliemisInputs.ShootMightyWind] != inputs[(int)EnumData.HeliemisInputs.ShootMightyWind])
@@ -223,6 +234,13 @@ public class Heliemis : Hero
                         ClientSend.FireMightyWind(fireMightyWindCommand);
                         isFiringServerProjectiles = true;
                         onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
+                    }
+                }
+                else if (itemToCast!=null&& itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ServerProjectiles)
+                {
+                    if (inputs[(int)EnumData.HeliemisInputs.UseItem] && previousInputs[(int)EnumData.HeliemisInputs.UseItem] != inputs[(int)EnumData.HeliemisInputs.UseItem])
+                    {
+                        SpawnServerProjectiles();
                     }
                 }
             }
@@ -278,15 +296,33 @@ public class Heliemis : Hero
         {
             //Fire(this);
         }
+        if (isFiringItemEyeLaser)
+        {
+            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            {
+                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                if (MultiplayerManager.instance.isServer)
+                {
+                    itemToCast.itemCount--;
+                }
+            }
+        }
+        if (isFiringItemFireball)
+        {
+            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            {
+                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                if (MultiplayerManager.instance.isServer)
+                {
+                    itemToCast.itemCount--;
+                }
+            }
+        }
     }
 
     public override void ProcessInputMovementsControl()
     {
         if(isPhysicsControlled)
-        {
-            return;
-        }
-        if (isInputFreezed)
         {
             return;
         }
@@ -309,11 +345,6 @@ public class Heliemis : Hero
     public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {
         if(isPhysicsControlled)
-        {
-            return;
-        }
-
-        if (isInputFreezed)
         {
             return;
         }

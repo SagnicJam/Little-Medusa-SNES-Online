@@ -98,17 +98,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff00e2d0efe74546a3f95a989804ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 29
+  tileType: 36
   blockFlyingUnits: 0
-  blockBoulderPlacement: 1
+  blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
   solidifyTile: 0
-  isPlayer: 0
   killUnitsInstantlyIfInTheirRegion: 1
   isPhysicsControlled: 0
-  overrideInspectorValues: 0
 --- !u!61 &9073788204147551050
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -200,7 +198,7 @@ MonoBehaviour:
   - {fileID: 5918102335919774044, guid: c77a56daf81a89044810296a81a01707, type: 3}
   - {fileID: -8390114349433926962, guid: c77a56daf81a89044810296a81a01707, type: 3}
   spriteRenderer: {fileID: 9073788204147551048}
-  animationDuration: 0.5
+  animationDuration: 2
   temp: 0
   IsLoopComplete: 0
   playonAwakeWithLoop: 0

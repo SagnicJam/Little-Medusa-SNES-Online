@@ -31,6 +31,10 @@ public class Attack
         {
             return;
         }
+        if(actorHit==null)
+        {
+            return;
+        }
         if(actorHit.isInvincible)
         {
             return;
@@ -56,6 +60,9 @@ public class Attack
                 case EnumData.Projectiles.Arrow:
                     actorHit.TakeDamage(damage);
                     break;
+                //case EnumData.Projectiles.MightyWind:
+                //    actorHit.TakeDamage(damage);
+                //    break;
             }
         }
         //if(actorHit is Boss bossHit)

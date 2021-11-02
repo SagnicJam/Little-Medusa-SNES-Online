@@ -141,24 +141,15 @@ public class ServerHandle
         Server.clients[fromClient].serverMasterController.AccumulateRemoveBoulderCommandsToBePlayedOnServerFromClient(removeBoulderCommand);
     }
 
-    public static void PlayerPlaceCereberausHeadCommandReceived(int fromClient, Packet packet)
+    public static void PlayerSpawnItemCommand(int fromClient, Packet packet)
     {
-        Vector3Int cellPosToSpawnCereberausHead = packet.ReadVector3Int();
+        Vector3Int spawnCell = packet.ReadVector3Int();
         int direction = packet.ReadInt();
+        int spawnItemType = packet.ReadInt();
         int sequenceNumber = packet.ReadInt();
 
-        PlaceCereberausHeadCommand placeCereberausHeadCommand = new PlaceCereberausHeadCommand(sequenceNumber, direction, cellPosToSpawnCereberausHead);
-        Server.clients[fromClient].serverMasterController.AccumulatePlaceCereberausHeadCommandsToBePlayedOnServerFromClient(placeCereberausHeadCommand);
-    }
-
-    public static void PlayerPlaceMinionCommandReceived(int fromClient, Packet packet)
-    {
-        Vector3Int minionToSpawnCell = packet.ReadVector3Int();
-        int direction = packet.ReadInt();
-        int sequenceNumber = packet.ReadInt();
-
-        PlaceMinionCommand placeMinionCommand = new PlaceMinionCommand(sequenceNumber, direction, minionToSpawnCell);
-        Server.clients[fromClient].serverMasterController.AccumulatePlaceMinionCommandsToBePlayedOnServerFromClient(placeMinionCommand);
+        SpawnItemCommand spawnItemCommand = new SpawnItemCommand(sequenceNumber, direction, spawnItemType, spawnCell);
+        Server.clients[fromClient].serverMasterController.AccumulateSpawnItemCommandsToBePlayedOnServerFromClient(spawnItemCommand);
     }
 
     public static void PlayerInputs(int fromClient, Packet packet)

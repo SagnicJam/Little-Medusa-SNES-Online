@@ -17,9 +17,11 @@ public class ServerSideGameManager : MonoBehaviour
     public int timeToStartMatch;
     public int stopWorldDestructionTimeCount;
     public List<EnumData.TileType> toNetworkTileType;
+    public List<EnumData.TileType> itemTilesType;
 
     public int snapShotsInOnePacket;
     public int packetHistorySize;
+
 
     [Header("Live Data")]
     public bool worldDestructionStop;
@@ -229,11 +231,17 @@ public class ServerSideGameManager : MonoBehaviour
 
         if(cellPosForItemTiles.Count>0 && cellPosForItemTiles.Count <= maxItemCount)
         {
+            //GridManager.instance.SetTile(
+            //    cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
+            //, itemTilesType[UnityEngine.Random.Range(0, itemTilesType.Count)],
+            //true,
+            //false);
+
             GridManager.instance.SetTile(
-                cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
-            , EnumData.TileType.IcarusWings,
-            true,
-            false);
+               cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
+           , EnumData.TileType.IcarusWingsItem,
+           true,
+           false);
         }
     }
 
