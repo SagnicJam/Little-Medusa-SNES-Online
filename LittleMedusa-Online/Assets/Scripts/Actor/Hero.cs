@@ -212,8 +212,6 @@ public abstract class Hero : Actor
         isFiringItemFireball = playerEvents.firedItemFireballMoveProjectile;
     }
 
-    public abstract void ProcessClientPredictingEvents();
-
     /// <summary>
     /// Called on server only
     /// </summary>

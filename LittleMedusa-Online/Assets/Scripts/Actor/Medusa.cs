@@ -10,6 +10,19 @@ public class Medusa : Hero
         {
             return;
         }
+        if (isInFlyingState)
+        {
+            if (!waitingForFlightToEnd.Perform())
+            {
+                //land here
+                LandPlayer();
+                if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                {
+                    TakeDamage(currentHP);
+                }
+                return;
+            }
+        }
         if (isPushed)
         {
             if (completedMotionToMovePoint)
@@ -437,23 +450,6 @@ public class Medusa : Hero
         walkAction.Perform();
     }
 
-    public override void ProcessClientPredictingEvents(int flyTickTime)
-    {
-        if (isInFlyingState)
-        {
-            if (!waitingForFlightToEnd.Perform())
-            {
-                //land here
-                LandPlayer();
-                if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-                {
-                    TakeDamage(currentHP);
-                }
-                return;
-            }
-        }
-    }
-
     public override bool IsHeroAbleToFireProjectiles()
     {
         Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
@@ -549,4 +545,6 @@ public class Medusa : Hero
         }
         return false;
     }
+
+    
 }
