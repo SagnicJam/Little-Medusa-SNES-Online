@@ -21,7 +21,7 @@ public class ClientMasterController : MonoBehaviour
 
     //private float moveSpeed = 5f / Constants.TICKS_PER_SECONDS;
     
-    private Dictionary<int, InputCommands> localClientInputCommands = new Dictionary<int, InputCommands>();
+    private Dictionary<int, InputCommands> localClientActions = new Dictionary<int, InputCommands>();
     private Dictionary<int, PlayerStateUpdates> playerStateUpdatesDic = new Dictionary<int, PlayerStateUpdates>();
     private List<InputCommands> inputCommandsToBeSentToServerCollection = new List<InputCommands>();
     private List<PreviousInputPacks> previousHistoryForInputCommandsToBeSentToServerCollection = new List<PreviousInputPacks>();
@@ -53,7 +53,7 @@ public class ClientMasterController : MonoBehaviour
 
     bool[] previousInputs;
 
-    public void SetCharacter(int hero,PositionUpdates positionUpdates)
+    public void SetCharacter(int hero,PlayerFlyData playerFlyData,PositionUpdates positionUpdates)
     {
         if (id == Client.instance.myID)
         {
@@ -70,6 +70,11 @@ public class ClientMasterController : MonoBehaviour
             localPlayer.SetActorPositionalState(positionUpdates);
             serverPlayer.SetActorPositionalState(positionUpdates);
             clientPlayer.SetActorPositionalState(positionUpdates);
+            
+            localPlayer.SetFlyingTickCount(playerFlyData);
+            serverPlayer.SetFlyingTickCount(playerFlyData);
+            clientPlayer.SetFlyingTickCount(playerFlyData);
+
 
             localPlayer.InitialiseClientActor(this,connectionId, id);
             serverPlayer.InitialiseClientActor(this, connectionId, id);
@@ -83,6 +88,7 @@ public class ClientMasterController : MonoBehaviour
             Hero remoteOtherClient = (Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)hero).ToString() + "/RemoteClientOther-" + ((EnumData.Heroes)hero).ToString()), transform, false) as GameObject).GetComponentInChildren<Hero>();
             clientPlayer = remoteOtherClient;
             clientPlayer.SetActorPositionalState(positionUpdates);
+            clientPlayer.SetFlyingTickCount(playerFlyData);
             clientPlayer.InitialiseClientActor(this, connectionId, id);
         }
     }
@@ -113,7 +119,8 @@ public class ClientMasterController : MonoBehaviour
                         , updateCorrespondingToSeq.playerAuthoratativeStates
                         , updateCorrespondingToSeq.positionUpdates
                         , updateCorrespondingToSeq.playerEvents
-                        , updateCorrespondingToSeq.playerAnimationEvents);
+                        , updateCorrespondingToSeq.playerAnimationEvents
+                        , updateCorrespondingToSeq.playerFlyData);
 
                     SetPlayerStateUpdatesReceivedFromServer(playerStateUpdates);
                 }
@@ -129,7 +136,8 @@ public class ClientMasterController : MonoBehaviour
                             , latestPlayerStateUpdate.playerAuthoratativeStates
                             , latestPlayerStateUpdate.positionUpdates
                             , latestPlayerStateUpdate.playerEvents
-                            , latestPlayerStateUpdate.playerAnimationEvents);
+                            , latestPlayerStateUpdate.playerAnimationEvents
+                            ,latestPlayerStateUpdate.playerFlyData);
                         SetPlayerStateUpdatesReceivedFromServer(playerStateUpdates);
                     }
                 }
@@ -212,10 +220,10 @@ public class ClientMasterController : MonoBehaviour
         return largestInt;
     }
 
-    public void RecordLocalClientActions(int sequenceNumber,bool[] inputs,bool[] previousInputs/*,int movementCommandPressCount*/)
+    public void RecordLocalClientActions(int sequenceNumber,bool[] inputs,bool[] previousInputs)
     {
         //Debug.Log("After wards player position locally "+localPlayer.actorTransform.position+"<color=red>Recording here </color>"+"-->"+ sequenceNumber+" "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]+"<color=blue>Previous Inputs</color>"+previousInputs[0]+" "+previousInputs[1]+" "+previousInputs[2]+" "+previousInputs[3]);
-        localClientInputCommands.Add(sequenceNumber,new InputCommands(inputs,previousInputs/*, movementCommandPressCount*/,sequenceNumber));
+        localClientActions.Add(sequenceNumber, new InputCommands(inputs, previousInputs, sequenceNumber));
         sequenceNoList.Add(sequenceNumber);
         latestPacketProcessedLocally = sequenceNumber;
         //Debug.Log("<color=pink>sequence no recorded </color>" + sequenceNo + "<color=pink> last run is  </color>"+localClientInputCommands.Count);
@@ -228,17 +236,18 @@ public class ClientMasterController : MonoBehaviour
         localPlayer.ProcessAnimationsInputs(inputs, previousInputs);
 
         localPlayer.ProcessInputMovementsControl();
+        localPlayer.ProcessFlyingControl();
         localPlayer.ProcessInputEventControl();
         localPlayer.ProcessInputAnimationControl();
     }
 
     public List<int> sequenceNoList=new List<int>();
 
-    private void UpdateServerPredictedPosition(PlayerStateUpdates playerStateUpdates)
+    private void UpdatePredictedGhost(PlayerStateUpdates playerStateUpdates)
     {
         //Discard all previous sequence number records
         List<int> toDiscardSequencesInputs = new List<int>();
-        foreach (KeyValuePair<int, InputCommands> kvp in localClientInputCommands)
+        foreach (KeyValuePair<int, InputCommands> kvp in localClientActions)
         {
             if (kvp.Key <= playerStateUpdates.playerProcessedSequenceNumber)
             {
@@ -249,11 +258,10 @@ public class ClientMasterController : MonoBehaviour
 
         foreach (int i in toDiscardSequencesInputs)
         {
-
-            if (localClientInputCommands.ContainsKey(i))
+            if (localClientActions.ContainsKey(i))
             {
                 //Debug.Log("<color=red>discarding seq </color>" + i);
-                localClientInputCommands.Remove(i);
+                localClientActions.Remove(i);
 
                 if (sequenceNoList.Contains(i))
                 {
@@ -272,13 +280,16 @@ public class ClientMasterController : MonoBehaviour
         //Debug.Break();
         for (int i = playerStateUpdates.playerProcessedSequenceNumber + 1; i <= latestPacketProcessedLocally; i++)
         {
-            InputCommands ic2;
-            if (localClientInputCommands.TryGetValue(i, out ic2))
+            InputCommands la;
+            if (localClientActions.TryGetValue(i, out la))
             {
                 //Debug.Log("<color=yellow>prediction done using sequnce no: </color>" + localClientInputCommands[i].sequenceNumber + "<color=green> inputs: </color>" + localClientInputCommands[i].commands[0] + localClientInputCommands[i].commands[1] + localClientInputCommands[i].commands[2] + localClientInputCommands[i].commands[3] + " Previous commands " + localClientInputCommands[i].previousCommands[0] + localClientInputCommands[i].previousCommands[1] + localClientInputCommands[i].previousCommands[2] + localClientInputCommands[i].previousCommands[3]);
                 //Debug.Log(serverPlayer.movePoint.position + "--" + serverPlayer.currentMovePointCellPosition + "Before" + serverPlayer.actorTransform.position + "<color=yellow>Before prediction done using sequnce no: </color>" + localClientInputCommands[i].sequenceNumber);
-                serverPlayer.ProcessMovementInputs(ic2.commands, ic2.previousCommands);
+                serverPlayer.ProcessMovementInputs(la.commands, la.previousCommands);
+                
                 serverPlayer.ProcessInputMovementsControl();
+                serverPlayer.ProcessCollisionEnter();
+                serverPlayer.ProcessFlyingControl();
                 //Debug.Log(serverPlayer.movePoint.position + "--" + serverPlayer.currentMovePointCellPosition + "After wards" + serverPlayer.actorTransform.position + "<color=yellow>After prediction done using sequnce no: </color>" + localClientInputCommands[i].sequenceNumber + "<color=green> inputs: </color>" + localClientInputCommands[i].commands[0] + localClientInputCommands[i].commands[1] + localClientInputCommands[i].commands[2] + localClientInputCommands[i].commands[3] + " Previous commands " + localClientInputCommands[i].previousCommands[0] + localClientInputCommands[i].previousCommands[1] + localClientInputCommands[i].previousCommands[2] + localClientInputCommands[i].previousCommands[3]);
             }
             else
@@ -299,7 +310,7 @@ public class ClientMasterController : MonoBehaviour
                 Hero previousServerHero = serverPlayer;
                 Hero previousClientHero = clientPlayer;
                 Hero previousLocalHero = localPlayer;
-                SetCharacter(playerStateUpdates.playerAuthoratativeStates.hero, playerStateUpdates.positionUpdates);
+                SetCharacter(playerStateUpdates.playerAuthoratativeStates.hero, playerStateUpdates.playerFlyData, playerStateUpdates.positionUpdates);
 
                 CharacterSelectionScreen.instance.AssignCharacterToId(playerStateUpdates.playerAuthoratativeStates.hero,id);
 
@@ -314,7 +325,7 @@ public class ClientMasterController : MonoBehaviour
             {
                 Hero previousClientHero = clientPlayer;
 
-                SetCharacter(playerStateUpdates.playerAuthoratativeStates.hero, playerStateUpdates.positionUpdates);
+                SetCharacter(playerStateUpdates.playerAuthoratativeStates.hero, playerStateUpdates.playerFlyData, playerStateUpdates.positionUpdates);
 
                 CharacterSelectionScreen.instance.AssignCharacterToId(playerStateUpdates.playerAuthoratativeStates.hero, id);
 
@@ -323,6 +334,7 @@ public class ClientMasterController : MonoBehaviour
         }
 
         clientPlayer.SetActorPositionalState(playerStateUpdates.positionUpdates);
+        clientPlayer.SetFlyingTickCount(playerStateUpdates.playerFlyData);
         clientPlayer.SetActorEventActionState(playerStateUpdates.playerEvents);
         clientPlayer.SetActorAnimationState(playerStateUpdates.playerAnimationEvents);
         clientPlayer.SetAuthoratativeStates(playerStateUpdates.playerAuthoratativeStates);
@@ -331,26 +343,31 @@ public class ClientMasterController : MonoBehaviour
             if (playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer && localPlayer.isRespawnningPlayer != playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer)
             {
                 localPlayer.SetActorPositionalState(playerStateUpdates.positionUpdates);
+                localPlayer.SetFlyingTickCount(playerStateUpdates.playerFlyData);
             }
             localPlayer.SetAuthoratativeStates(playerStateUpdates.playerAuthoratativeStates);
 
             if (localPlayer.isPetrified || localPlayer.isPushed||localPlayer.isPhysicsControlled)
             {
                 localPlayer.SetActorPositionalState(playerStateUpdates.positionUpdates);
+                localPlayer.SetFlyingTickCount(playerStateUpdates.playerFlyData);
             }
 
             serverPlayer.SetActorPositionalState(playerStateUpdates.positionUpdates);
+            serverPlayer.SetFlyingTickCount(playerStateUpdates.playerFlyData);
+
             serverPlayer.SetActorEventActionState(playerStateUpdates.playerEvents);
             serverPlayer.SetActorAnimationState(playerStateUpdates.playerAnimationEvents);
             serverPlayer.SetAuthoratativeStates(playerStateUpdates.playerAuthoratativeStates);
-            UpdateServerPredictedPosition(playerStateUpdates);
+
+            UpdatePredictedGhost(playerStateUpdates);
             if (Vector3.Distance(serverPlayer.actorTransform.position, localPlayer.actorTransform.position) >= positionThreshold)
             {
                 Debug.Log("Correction regarding position difference " + serverPlayer.actorTransform.position + "local---server" + localPlayer.actorTransform.position + "<color=red>Corrected player position</color>" + playerStateUpdates.playerProcessedSequenceNumber);
-                //Debug.Break();
                 PositionUpdates positionUpdates = new PositionUpdates(serverPlayer.actorTransform.position, serverPlayer.currentMovePointCellPosition, serverPlayer.previousMovePointCellPosition,
                     (int)serverPlayer.Facing, (int)serverPlayer.PreviousFacingDirection);
                 localPlayer.SetActorPositionalState(positionUpdates);
+                localPlayer.SetFlyingTickCount(new PlayerFlyData(serverPlayer.flyingTickCountTemp));
             }
         }
         else
@@ -402,8 +419,9 @@ public struct PlayerStateUpdates
     public PlayerAuthoratativeStates playerAuthoratativeStates;
     public PlayerEvents playerEvents;
     public PlayerAnimationEvents playerAnimationEvents;
+    public PlayerFlyData playerFlyData;
 
-    public PlayerStateUpdates(int playerServerSequenceNumber, int playerProcessedSequenceNumber, PlayerAuthoratativeStates playerAuthoratativeStates, PositionUpdates positionUpdates,PlayerEvents playerEvents,PlayerAnimationEvents playerAnimationEvents)
+    public PlayerStateUpdates(int playerServerSequenceNumber, int playerProcessedSequenceNumber, PlayerAuthoratativeStates playerAuthoratativeStates, PositionUpdates positionUpdates,PlayerEvents playerEvents,PlayerAnimationEvents playerAnimationEvents, PlayerFlyData playerFlyData)
     {
         this.playerServerSequenceNumber = playerServerSequenceNumber;
         this.playerProcessedSequenceNumber = playerProcessedSequenceNumber;
@@ -411,6 +429,17 @@ public struct PlayerStateUpdates
         this.playerEvents = playerEvents;
         this.playerAuthoratativeStates = playerAuthoratativeStates;
         this.playerAnimationEvents = playerAnimationEvents;
+        this.playerFlyData = playerFlyData;
+    }
+}
+
+public struct PlayerFlyData
+{
+    public int flyingTickCount;
+
+    public PlayerFlyData(int flyingTickCount)
+    {
+        this.flyingTickCount = flyingTickCount;
     }
 }
 
@@ -420,7 +449,6 @@ public struct PlayerAuthoratativeStates
     public bool isPushed;
     public bool isInvincible;
     public bool isPhysicsControlled;
-    public bool isFlyingState;
     public bool inputFreezed;
     public bool isRespawnningPlayer;
     public bool inCharacterSelectionScreen;
@@ -429,12 +457,11 @@ public struct PlayerAuthoratativeStates
     public int currentStockLives;
     public int hero;
     public ItemToCast itemToCast;
-    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isPhysicsControlled,bool isFlyingState, bool inputFreezed, bool isInvincible,bool isRespawnningPlayer,bool inCharacterSelectionScreen,bool inGame, int currentHP,int currentStockLives,int hero, ItemToCast itemToCast)
+    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isPhysicsControlled, bool inputFreezed, bool isInvincible,bool isRespawnningPlayer,bool inCharacterSelectionScreen,bool inGame, int currentHP,int currentStockLives,int hero, ItemToCast itemToCast)
     {
         this.isPetrified = isPetrified;
         this.isPushed = isPushed;
         this.isPhysicsControlled = isPhysicsControlled;
-        this.isFlyingState = isFlyingState;
         this.inputFreezed = inputFreezed;
         this.isInvincible = isInvincible;
         this.isRespawnningPlayer = isRespawnningPlayer;
@@ -518,6 +545,9 @@ public struct PetrificationCommand
         this.playerIdPetrified = playerIdPetrified;
     }
 }
+
+
+
 public struct FireTidalWaveCommand
 {
     public int sequenceNoForFiringTidalWaveCommand;
@@ -675,27 +705,22 @@ public struct RemoveBoulderCommand
 public struct LandPlayerCommand
 {
     public int sequenceNumber;
-    public Vector3Int landCellPosition;
 
-    public LandPlayerCommand(int sequenceNumber, Vector3Int landCellPosition)
+    public LandPlayerCommand(int sequenceNumber)
     {
         this.sequenceNumber = sequenceNumber;
-        this.landCellPosition = landCellPosition;
     }
 }
 
 public struct RespawnPlayerCommand
 {
     public int sequenceNumber;
-    public Vector3Int respawnCellPostion;
 
-    public RespawnPlayerCommand(int sequenceNumber, Vector3Int respawnCellPostion)
+    public RespawnPlayerCommand(int sequenceNumber)
     {
         this.sequenceNumber = sequenceNumber;
-        this.respawnCellPostion = respawnCellPostion;
     }
 }
-
 
 public struct InputCommands
 {

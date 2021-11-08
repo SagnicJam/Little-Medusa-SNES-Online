@@ -31,7 +31,7 @@ public class ServerMasterController : MonoBehaviour
     private Dictionary<int, PlaceTornadoCommand> placeTornadoRequestReceivedFromClientToServerDic = new Dictionary<int, PlaceTornadoCommand>();
     private Dictionary<int, CharacterChangeCommand> changeCharacterRequestReceivedFromClientToServerDic = new Dictionary<int, CharacterChangeCommand>();
     private Dictionary<int, RespawnPlayerCommand> respawnCommandRequestReceivedFromClientToServerDic = new Dictionary<int, RespawnPlayerCommand>();
-    private Dictionary<int, LandPlayerCommand> landCommandRequestReceivedFromClientToServerDic = new Dictionary<int, LandPlayerCommand>();
+    private Dictionary<int, LandPlayerCommand> landplayerCommandRequestReceivedFromClientToServerDic = new Dictionary<int, LandPlayerCommand>();
     private List<PlayerStateServerUpdates> playerStateListOnServer = new List<PlayerStateServerUpdates>();
     private List<PreviousPlayerUpdatedStatePacks> previousPlayerUpdatedStatePacks = new List<PreviousPlayerUpdatedStatePacks>();
 
@@ -871,11 +871,10 @@ public class ServerMasterController : MonoBehaviour
             }
         }
     }
-
-    public void CheckForLandingRequestOnServer(int sequenceNoToCheck)
+    public void CheckForLandingPlayerRequestOnServer(int sequenceNoToCheck)
     {
         List<int> toDiscardSequences = new List<int>();
-        foreach (KeyValuePair<int, LandPlayerCommand> kvp in landCommandRequestReceivedFromClientToServerDic)
+        foreach (KeyValuePair<int, LandPlayerCommand> kvp in landplayerCommandRequestReceivedFromClientToServerDic)
         {
             int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck - reliabilityCheckBufferCount;
             if (kvp.Key <= sequenceNoToCheckReliablilityEventFrom)
@@ -884,7 +883,7 @@ public class ServerMasterController : MonoBehaviour
             }
         }
 
-        foreach (KeyValuePair<int, LandPlayerCommand> kvp in landCommandRequestReceivedFromClientToServerDic)
+        foreach (KeyValuePair<int, LandPlayerCommand> kvp in landplayerCommandRequestReceivedFromClientToServerDic)
         {
             int sequenceNoToCheckReliablilityEventFrom = sequenceNoToCheck + reliabilityCheckBufferCount;
             if (kvp.Key >= sequenceNoToCheckReliablilityEventFrom)
@@ -895,10 +894,10 @@ public class ServerMasterController : MonoBehaviour
 
         foreach (int i in toDiscardSequences)
         {
-            if (landCommandRequestReceivedFromClientToServerDic.ContainsKey(i))
+            if (landplayerCommandRequestReceivedFromClientToServerDic.ContainsKey(i))
             {
                 //Debug.Log("<color=red>discarding seq </color>" + i);
-                landCommandRequestReceivedFromClientToServerDic.Remove(i);
+                landplayerCommandRequestReceivedFromClientToServerDic.Remove(i);
             }
             else
             {
@@ -910,12 +909,11 @@ public class ServerMasterController : MonoBehaviour
         {
             int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck - i;
             LandPlayerCommand landPlayerCommand;
-            if (landCommandRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out landPlayerCommand))
+            if (landplayerCommandRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out landPlayerCommand))
             {
-                landCommandRequestReceivedFromClientToServerDic.Remove(landPlayerCommand.sequenceNumber);
+                landplayerCommandRequestReceivedFromClientToServerDic.Remove(landPlayerCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
-                Vector3Int cellPointToLandPlayerOver = landPlayerCommand.landCellPosition;
-                LandPlayerImplementation(cellPointToLandPlayerOver);
+                LandPlayerImplementation();
             }
         }
 
@@ -923,16 +921,14 @@ public class ServerMasterController : MonoBehaviour
         {
             int sequenceNoToCheckReliablilityEventFor = sequenceNoToCheck + i;
             LandPlayerCommand landPlayerCommand;
-            if (landCommandRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out landPlayerCommand))
+            if (landplayerCommandRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out landPlayerCommand))
             {
-                landCommandRequestReceivedFromClientToServerDic.Remove(landPlayerCommand.sequenceNumber);
+                landplayerCommandRequestReceivedFromClientToServerDic.Remove(landPlayerCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
-                Vector3Int cellPointToLandPlayerOver = landPlayerCommand.landCellPosition;
-                LandPlayerImplementation(cellPointToLandPlayerOver);
+                LandPlayerImplementation();
             }
         }
     }
-
     public void CheckForRespawnningRequestOnServer(int sequenceNoToCheck)
     {
         List<int> toDiscardSequences = new List<int>();
@@ -975,8 +971,7 @@ public class ServerMasterController : MonoBehaviour
             {
                 respawnCommandRequestReceivedFromClientToServerDic.Remove(respawnPlayerCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
-                Vector3Int cellPointToRespawnPlayerOver = respawnPlayerCommand.respawnCellPostion;
-                RespawnPlayerRequestImplementation(cellPointToRespawnPlayerOver);
+                RespawnPlayerRequestImplementation();
             }
         }
 
@@ -988,8 +983,7 @@ public class ServerMasterController : MonoBehaviour
             {
                 respawnCommandRequestReceivedFromClientToServerDic.Remove(respawnPlayerCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
-                Vector3Int cellPointToRespawnPlayerOver = respawnPlayerCommand.respawnCellPostion;
-                RespawnPlayerRequestImplementation(cellPointToRespawnPlayerOver);
+                RespawnPlayerRequestImplementation();
             }
         }
     }
@@ -1290,24 +1284,24 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    public void AccumulateLandingRequestFromClientToServer(LandPlayerCommand landPlayerCommand)
+    public void AccumulateLandingPlayerRequestFromClientToServer(LandPlayerCommand landPlayerCommand)
     {
         if (landPlayerCommand.sequenceNumber > playerSequenceNumberProcessed)
         {
             LandPlayerCommand dataPackage;
-            if (landCommandRequestReceivedFromClientToServerDic.TryGetValue(landPlayerCommand.sequenceNumber, out dataPackage))
+            if (landplayerCommandRequestReceivedFromClientToServerDic.TryGetValue(landPlayerCommand.sequenceNumber, out dataPackage))
             {
-                Debug.Log("<color=orange>AccumulateLandingRequestFromClientToServer dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNumber);
+                Debug.Log("<color=orange>AccumulateLandingPlayerRequestFromClientToServer dataPackage already exists for sequence no. </color>" + dataPackage.sequenceNumber);
             }
             else
             {
-                Debug.Log("<color=green>AccumulateLandingRequestFromClientToServer Added successfully to processing buffer dic </color>" + landPlayerCommand.sequenceNumber);
-                landCommandRequestReceivedFromClientToServerDic.Add(landPlayerCommand.sequenceNumber, landPlayerCommand);
+                Debug.Log("<color=green>AccumulateLandingPlayerRequestFromClientToServer Added successfully to processing buffer dic </color>" + landPlayerCommand.sequenceNumber);
+                landplayerCommandRequestReceivedFromClientToServerDic.Add(landPlayerCommand.sequenceNumber, landPlayerCommand);
             }
         }
         else
         {
-            Debug.Log("<color=red>AccumulateLandingRequestFromClientToServer Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + landPlayerCommand.sequenceNumber);
+            Debug.Log("<color=red>AccumulateLandingPlayerRequestFromClientToServer Already processed this sequence no </color>" + playerSequenceNumberProcessed + " got the sequence for : " + landPlayerCommand.sequenceNumber);
         }
     }
     #endregion
@@ -1568,8 +1562,9 @@ public class ServerMasterController : MonoBehaviour
             Hero previousHero = serverInstanceHero;
 
             PositionUpdates positionUpdate = new PositionUpdates(previousHero.actorTransform.position,previousHero.currentMovePointCellPosition,previousHero.previousMovePointCellPosition, (int)previousHero.Facing,(int)previousHero.PreviousFacingDirection);
+            PlayerFlyData playerFlyData = new PlayerFlyData(previousHero.flyingTickCountTemp);
 
-            SetCharacter(characterHero, positionUpdate);
+            SetCharacter(characterHero, playerFlyData, positionUpdate);
 
             Destroy(previousHero.transform.parent.gameObject);
         }
@@ -1748,7 +1743,7 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void LandPlayerImplementation(Vector3Int cellPositionToLandOn)
+    void LandPlayerImplementation()
     {
         if (serverInstanceHero.isRespawnningPlayer)
         {
@@ -1775,16 +1770,15 @@ public class ServerMasterController : MonoBehaviour
             Debug.LogError("LandPlayerImplementation server player is not isInFlyingState hence request failed");
             return;
         }
-
         //land here
-        serverInstanceHero.LandPlayer();
-        if (!serverInstanceHero.IsPlayerSpawnable(cellPositionToLandOn))
+        if (serverInstanceHero.isInFlyingState)
         {
-            serverInstanceHero.TakeDamage(serverInstanceHero.currentHP);
+            //land here
+            serverInstanceHero.flyingTickCountTemp = 0;
         }
     }
 
-    void RespawnPlayerRequestImplementation(Vector3Int cellPostionToRespawnPlayerOn)
+    void RespawnPlayerRequestImplementation()
     {
         if (!serverInstanceHero.isRespawnningPlayer)
         {
@@ -1811,10 +1805,11 @@ public class ServerMasterController : MonoBehaviour
             Debug.LogError("RespawnPlayerRequestImplementation server player is isInFlyingState hence request failed");
             return;
         }
-        if (serverInstanceHero.IsPlayerSpawnable(cellPostionToRespawnPlayerOn))
+        Vector3Int cell = GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position);
+        if (serverInstanceHero.IsPlayerSpawnable(cell))
         {
             //Respawn here
-            Debug.Log("RespawnPlayerRequestImplementation " + cellPostionToRespawnPlayerOn);
+            Debug.Log("RespawnPlayerRequestImplementation " + cell);
             serverInstanceHero.SpawnPlayer();
         }
         else
@@ -1842,7 +1837,7 @@ public class ServerMasterController : MonoBehaviour
             CheckForFlamePillarRequestForPlayer(playerSequenceNumberProcessed+1);
             CheckForPetrificationRequestOnPlayer(playerSequenceNumberProcessed+1);
             CheckForRespawnningRequestOnServer(playerSequenceNumberProcessed+1);
-            CheckForLandingRequestOnServer(playerSequenceNumberProcessed+1);
+            CheckForLandingPlayerRequestOnServer(playerSequenceNumberProcessed+1);
 
             InputCommands inputPackageCorrespondingToSeq;
 
@@ -1854,10 +1849,12 @@ public class ServerMasterController : MonoBehaviour
 
                 serverInstanceHero.ProcessMovementInputs(inputPackageCorrespondingToSeq.commands
                     , inputPackageCorrespondingToSeq.previousCommands);
+
                 serverInstanceHero.ProcessEventsInputs(inputPackageCorrespondingToSeq.commands, inputPackageCorrespondingToSeq.previousCommands);
                 serverInstanceHero.ProcessAnimationsInputs(inputPackageCorrespondingToSeq.commands, inputPackageCorrespondingToSeq.previousCommands);
 
                 serverInstanceHero.ProcessInputMovementsControl();
+                serverInstanceHero.ProcessFlyingControl();
                 serverInstanceHero.ProcessInputEventControl();
                 serverInstanceHero.ProcessInputAnimationControl();
                 //Debug.Log(serverInstanceHero.movePoint.position + "Block pos "+serverInstanceHero.GetBlockPosition()+"<color=yellow>Processing seqence no </color>" + inputPackageCorrespondingToSeq.sequenceNumber + "<color=green>position </color>" + serverInstanceHero.actorTransform.position + "<color=green>inputs </color>" + inputPackageCorrespondingToSeq.commands[0] + inputPackageCorrespondingToSeq.commands[1] + inputPackageCorrespondingToSeq.commands[2] + inputPackageCorrespondingToSeq.commands[3]+" Previous Commands "+ inputPackageCorrespondingToSeq.previousCommands[0] + inputPackageCorrespondingToSeq.previousCommands[1] + inputPackageCorrespondingToSeq.previousCommands[2] + inputPackageCorrespondingToSeq.previousCommands[3]);
@@ -1869,10 +1866,14 @@ public class ServerMasterController : MonoBehaviour
                     //Debug.LogError("Could not find any inputToProcess for  seq: " + (sequenceNumberProcessed + 1));
                     playerSequenceNumberProcessed = playerSequenceNumberProcessed + 1;
 
+                    serverInstanceHero.ProcessMovementInputs(latestPlayerInputPackage.commands
+                    , latestPlayerInputPackage.previousCommands);
+
                     serverInstanceHero.ProcessEventsInputs(latestPlayerInputPackage.commands, latestPlayerInputPackage.previousCommands);
                     serverInstanceHero.ProcessAnimationsInputs(latestPlayerInputPackage.commands, latestPlayerInputPackage.previousCommands);
 
                     serverInstanceHero.ProcessInputMovementsControl();
+                    serverInstanceHero.ProcessFlyingControl();
                     serverInstanceHero.ProcessInputEventControl();
                     serverInstanceHero.ProcessInputAnimationControl();
                 }
@@ -1886,7 +1887,6 @@ public class ServerMasterController : MonoBehaviour
               serverInstanceHero.isPetrified
             , serverInstanceHero.isPushed
             , serverInstanceHero.isPhysicsControlled
-            , serverInstanceHero.isInFlyingState
             , serverInstanceHero.isInputFreezed
             , serverInstanceHero.isInvincible
             , serverInstanceHero.isRespawnningPlayer
@@ -1902,8 +1902,9 @@ public class ServerMasterController : MonoBehaviour
         PlayerEvents playerEvents = new PlayerEvents(serverInstanceHero.isFiringPrimaryProjectile,
             serverInstanceHero.isFiringItemEyeLaser, serverInstanceHero.isFiringItemFireball);
         PlayerAnimationEvents playerAnimationEvents = new PlayerAnimationEvents(serverInstanceHero.isWalking,serverInstanceHero.isFlying, serverInstanceHero.isUsingPrimaryMove);
+        PlayerFlyData playerFlyData = new PlayerFlyData(serverInstanceHero.flyingTickCountTemp);
 
-        PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(serverLocalSequenceNumber,playerSequenceNumberProcessed, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimationEvents);
+        PlayerStateUpdates playerStateUpdates = new PlayerStateUpdates(serverLocalSequenceNumber,playerSequenceNumberProcessed, playerAuthoratativeStates, positionUpdates, playerEvents, playerAnimationEvents, playerFlyData);
         PlayerStateServerUpdates playerStateServerUpdates = new PlayerStateServerUpdates(id,connectionID, playerStateUpdates);
         //Debug.LogError("Server sequence number : "+ serverLocalSequenceNumber+" player sequence number processeed: "+ playerSequenceNumberProcessed+" player position : "+serverInstanceHero.actorTransform.position);
 
@@ -1964,7 +1965,7 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    public void SetCharacter(int characterHero,PositionUpdates positionUpdate)
+    public void SetCharacter(int characterHero,PlayerFlyData playerFlyData,PositionUpdates positionUpdate)
     {
         Hero serverInstanceHero = Instantiate(Resources.Load("Characters/" + ((EnumData.Heroes)characterHero).ToString() + "/ServerInstance-" + ((EnumData.Heroes)characterHero).ToString()) as GameObject, transform, false).GetComponentInChildren<Hero>();
         
@@ -1975,6 +1976,7 @@ public class ServerMasterController : MonoBehaviour
         this.serverInstanceHero.inGame = (ServerSideGameManager.instance.currentGameState == EnumData.GameState.Gameplay);
 
         this.serverInstanceHero.SetActorPositionalState(positionUpdate);
+        this.serverInstanceHero.SetFlyingTickCount(playerFlyData);
         this.serverInstanceHero.InitialiseHP();
         this.serverInstanceHero.InitialiseStockLives();
         this.serverInstanceHero.InitialiseServerActor(this, id);

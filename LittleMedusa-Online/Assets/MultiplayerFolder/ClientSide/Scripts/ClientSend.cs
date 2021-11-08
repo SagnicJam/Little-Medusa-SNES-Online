@@ -190,9 +190,8 @@ public class ClientSend : MonoBehaviour
 
     public static void LandPlayer(LandPlayerCommand landPlayerCommand)
     {
-        using (Packet packet = new Packet((int)ClientPackets.landPlayerCommand))
+        using (Packet packet = new Packet((int)ClientPackets.playerLandCommand))
         {
-            packet.Write(landPlayerCommand.landCellPosition);
             packet.Write(landPlayerCommand.sequenceNumber);
             SendTCPData(packet);
         }
@@ -202,7 +201,6 @@ public class ClientSend : MonoBehaviour
     {
         using (Packet packet = new Packet((int)ClientPackets.playerRespawnCommand))
         {
-            packet.Write(respawnPlayerCommand.respawnCellPostion);
             packet.Write(respawnPlayerCommand.sequenceNumber);
             SendTCPData(packet);
         }

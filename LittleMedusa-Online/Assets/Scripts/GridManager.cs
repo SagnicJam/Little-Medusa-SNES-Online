@@ -469,14 +469,14 @@ public class GridManager : MonoBehaviour
         return nextActor;
     }
 
-    public bool HasTileAtCellPoint(Vector3Int cellPosToCheckFor, EnumData.TileType tileTypeTocheck_1, EnumData.TileType tileTypeTocheck_2)
+    public bool HasTileAtCellPoint(Vector3Int cellPosToCheckFor, EnumData.GameObjectEnums tileTypeTocheck_1, EnumData.GameObjectEnums tileTypeTocheck_2)
     {
         Vector3 objectPosition = cellToworld(cellPosToCheckFor);
         RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
         for (int i = 0; i < hit2DArr.Length; i++)
         {
             TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
-            if (td != null && (td.tileType == tileTypeTocheck_1 || td.tileType == tileTypeTocheck_2))
+            if (td != null && (td.gameObjectEnums == tileTypeTocheck_1 || td.gameObjectEnums == tileTypeTocheck_2))
             {
                 return true;
             }
@@ -492,6 +492,21 @@ public class GridManager : MonoBehaviour
         {
             TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
             if (td != null && td.tileType == tileTypeTocheck)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool HasTileAtCellPoint(Vector3Int cellPosToCheckFor, EnumData.GameObjectEnums tileTypeTocheck)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+            if (td != null && td.gameObjectEnums == tileTypeTocheck)
             {
                 return true;
             }
@@ -556,7 +571,7 @@ public class GridManager : MonoBehaviour
         for (int i = 0; i < hit2DArr.Length; i++)
         {
             TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
-            if (td != null && (td.killUnitsInstantlyIfInTheirRegion||td.tileType == EnumData.TileType.Monster))
+            if (td != null && (td.killUnitsInstantlyIfInTheirRegion||td is Enemy))
             {
                 return true;
             }
@@ -642,27 +657,27 @@ public class GridManager : MonoBehaviour
         Vector3 objectPosition = cellToworld(cellPosToCheckFor);
         RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
 
-        EnumData.TileType toFindEnum = EnumData.TileType.None;
+        EnumData.GameObjectEnums toFindEnum = EnumData.GameObjectEnums.None;
         switch (facing)
         {
             case FaceDirection.Up:
-                toFindEnum = EnumData.TileType.UpCereberusFire;
+                toFindEnum = EnumData.GameObjectEnums.UpCereberusFire;
                 break;
             case FaceDirection.Down:
-                toFindEnum = EnumData.TileType.DownCereberusFire;
+                toFindEnum = EnumData.GameObjectEnums.DownCereberusFire;
                 break;
             case FaceDirection.Left:
-                toFindEnum = EnumData.TileType.LeftCereberusFire;
+                toFindEnum = EnumData.GameObjectEnums.LeftCereberusFire;
                 break;
             case FaceDirection.Right:
-                toFindEnum = EnumData.TileType.RightCereberusFire;
+                toFindEnum = EnumData.GameObjectEnums.RightCereberusFire;
                 break;
         }
 
         for (int i = 0; i < hit2DArr.Length; i++)
         {
             TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
-            if (td != null && td.tileType == toFindEnum)
+            if (td != null && td.gameObjectEnums == toFindEnum)
             {
                 return td.gameObject;
             }
@@ -726,6 +741,10 @@ public class GridManager : MonoBehaviour
         if (!HasTile)
         {
             gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, null);
+            if(gameStateDependentTileArray[(int)tType - 1].hasGhost)
+            {
+                gameStateDependentTileArray[(int)tType - 1].ghosttileMap.SetTile(cellPos, null);
+            }
             if (gameStateDependentTileArray[(int)tType - 1].cereberustileToggle)
             {
                 switch (tType)

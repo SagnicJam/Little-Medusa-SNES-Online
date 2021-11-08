@@ -76,9 +76,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9bc853f89d1be488f3c42ba72cafaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 40
+  tileType: 0
+  gameObjectEnums: 11
   blockFlyingUnits: 0
-  blockToSpawnObjectsPlacement: 0
+  blockToSpawnObjectsPlacement: 1
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
@@ -90,6 +91,7 @@ MonoBehaviour:
   actorTransform: {fileID: 372081835019727393}
   frameLooper: {fileID: 5756212802795266935}
   gamePhysics: {fileID: 0}
+  isGhost: 0
   actorCollider2D: {fileID: 0}
   invincibilityTickTimer: 250
   petrificationTimeTickRate: 300
@@ -281,6 +283,7 @@ MonoBehaviour:
   inGame: 0
   triggerFaceChangeEvent: 0
   normalSpeed: 0
+  flyingTickCountTemp: 0
   ownerId: 0
   positionToSpawnProjectile: {x: 0, y: 0, z: 0}
   isWalking: 0
@@ -465,7 +468,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380461499231229189}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

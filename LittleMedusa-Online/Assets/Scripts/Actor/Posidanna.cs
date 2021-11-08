@@ -96,24 +96,33 @@ public class Posidanna : Hero
         }
     }
 
+    public override void ProcessFlyingControl()
+    {
+        if (flyingTickCountTemp > 0)
+        {
+            //is flying
+            flyingTickCountTemp--;
+            if (!isInFlyingState)
+            {
+                //Start flying here
+                FlyPlayer();
+            }
+        }
+        else
+        {
+            if (isInFlyingState)
+            {
+                //land here
+                LandPlayer(GridManager.instance.grid.WorldToCell(actorTransform.position));
+            }
+        }
+    }
+
     public override void ProcessAuthoratativeEvents()
     {
         if (isRespawnningPlayer)
         {
             return;
-        }
-        if (isInFlyingState)
-        {
-            if (!waitingForFlightToEnd.Perform())
-            {
-                //land here
-                LandPlayer();
-                if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-                {
-                    TakeDamage(currentHP);
-                }
-                return;
-            }
         }
         if (isPushed)
         {
@@ -189,10 +198,14 @@ public class Posidanna : Hero
                 {
                     if (inputs[(int)EnumData.PosidannaInputs.LandPlayer] && previousInputs[(int)EnumData.PosidannaInputs.LandPlayer] != inputs[(int)EnumData.PosidannaInputs.LandPlayer])
                     {
-                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
-                        //land player command
-                        LandPlayerCommand landPlayerCommand = new LandPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
-                        ClientSend.LandPlayer(landPlayerCommand);
+                        if (isInFlyingState)
+                        {
+                            //land here
+                            flyingTickCountTemp = 0;
+
+                            LandPlayerCommand landPlayerCommand = new LandPlayerCommand(GetLocalSequenceNo());
+                            ClientSend.LandPlayer(landPlayerCommand);
+                        }
                     }
                 }
                 else
@@ -203,7 +216,7 @@ public class Posidanna : Hero
                         if (IsPlayerSpawnable(cellToCheckFor))
                         {
                             //Respawn player command
-                            RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                            RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo());
                             ClientSend.RespawnPlayer(respawnPlayerCommand);
                         }
                         else

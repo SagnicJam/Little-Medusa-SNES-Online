@@ -54,6 +54,7 @@ public abstract class Hero : Actor
     public void InitialiseActor(PlayerStateUpdates playerStateUpdates)
     {
         SetActorPositionalState(playerStateUpdates.positionUpdates);
+        SetFlyingTickCount(playerStateUpdates.playerFlyData);
         SetActorAnimationState(playerStateUpdates.playerAnimationEvents);
         SetActorEventActionState(playerStateUpdates.playerEvents);
         SetAuthoratativeStates(playerStateUpdates.playerAuthoratativeStates);
@@ -112,14 +113,6 @@ public abstract class Hero : Actor
         isPhysicsControlled = playerAuthoratativeStates.isPhysicsControlled;
         isInvincible = playerAuthoratativeStates.isInvincible;
 
-        if (!isInFlyingState && isInFlyingState != playerAuthoratativeStates.isFlyingState)
-        {
-            SetFlyingState();
-        }
-        if (isInFlyingState && isInFlyingState != playerAuthoratativeStates.isFlyingState)
-        {
-            SetLandState();
-        }
         if (!isRespawnningPlayer && isRespawnningPlayer != playerAuthoratativeStates.isRespawnningPlayer)
         {
             //enable crosshair locally
@@ -150,7 +143,6 @@ public abstract class Hero : Actor
         }
 
         isRespawnningPlayer = playerAuthoratativeStates.isRespawnningPlayer;
-        isInFlyingState = playerAuthoratativeStates.isFlyingState;
 
         currentHP = playerAuthoratativeStates.currentHP;
         currentStockLives = playerAuthoratativeStates.currentStockLives;
@@ -168,7 +160,12 @@ public abstract class Hero : Actor
 
     
 
+
     //authoratatively is performed(but is locally is also done)-correction happens
+    public void SetFlyingTickCount(PlayerFlyData playerFlyData)
+    {
+        flyingTickCountTemp = playerFlyData.flyingTickCount;
+    }
     public void SetActorPositionalState(PositionUpdates positionUpdates)
     {
         actorTransform.position = positionUpdates.updatedActorPosition;
@@ -247,7 +244,7 @@ public abstract class Hero : Actor
     /// <param name="inputs"></param>
     /// <param name="previousInputs"></param>
     public abstract void ProcessMovementInputs(bool[] inputs, bool[] previousInputs);
-
+    public abstract void ProcessFlyingControl();
     /// <summary>
     /// Called locally on client and on server
     /// </summary>
@@ -450,17 +447,24 @@ public abstract class Hero : Actor
         isHeadCollisionWithOtherActor = false;
     }
 
+    public override void OnBodyCollidedWithPortalTiles(TileData tileData)
+    {
+        Portal portal = tileData.GetComponent<Portal>();
+        portal.ActorUnitEnter(this,currentMovePointCellPosition);
+    }
+
     public override void OnBodyCollidedWithHourGlassTile(Vector3Int hourGlassTile)
     {
         GridManager.instance.SetTile(hourGlassTile, EnumData.TileType.Hourglass, false,false);
         ServerSideGameManager.instance.StopWorldDestruction();
     }
-
     public override void OnBodyCollidedWithIcarausWingsItemTiles(Vector3Int icarausCollectedOnTilePos)
     {
-        GridManager.instance.SetTile(icarausCollectedOnTilePos, EnumData.TileType.IcarusWingsItem, false, false);
-        FlyPlayer();
-        waitingForFlightToEnd.ReInitialiseTimerToBegin(flyingTickCount);
+        if(MultiplayerManager.instance.isServer)
+        {
+            GridManager.instance.SetTile(icarausCollectedOnTilePos, EnumData.TileType.IcarusWingsItem, false, false);
+        }
+        flyingTickCountTemp = flyingTickCount;
     }
 
     public override void OnBodyCollidedWithHeartItemTiles(Vector3Int cellPos)
@@ -606,7 +610,7 @@ public abstract class Hero : Actor
 
     public override void OnBodyCollidingWithKillingTiles(int killingTileSpawnerId, TileData tileData)
     {
-        if(tileData.tileType==EnumData.TileType.Earthquake)
+        if(tileData.gameObjectEnums==EnumData.GameObjectEnums.Earthquake)
         {
             if(killingTileSpawnerId != ownerId)
             {
@@ -740,7 +744,7 @@ public abstract class Hero : Actor
         if (itemToCast.usableItemType == EnumData.UsableItemTypes.Minion)
         {
             Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing, EnumData.TileType.BoulderDisappearing))
+            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing, EnumData.GameObjectEnums.BoulderDisappearing))
             {
                 //send command to server of placement
                 SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, cellToCheckFor);
@@ -750,7 +754,7 @@ public abstract class Hero : Actor
         else if(itemToCast.usableItemType == EnumData.UsableItemTypes.CereberausHead)
         {
             Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing, EnumData.TileType.BoulderDisappearing))
+            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing, EnumData.GameObjectEnums.BoulderDisappearing))
             {
                 //send command to server of placement
                 SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, cellToCheckFor);
@@ -760,7 +764,7 @@ public abstract class Hero : Actor
         else if(itemToCast.usableItemType == EnumData.UsableItemTypes.Boulder)
         {
             Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing))
+            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing))
             {
                 //send command to server of placement
                 SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, cellToCheckFor);

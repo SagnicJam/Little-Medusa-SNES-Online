@@ -11,6 +11,7 @@ public abstract class Actor : TileData
     public GamePhysics gamePhysics;
 
     [Header("Tweak params")]
+    public bool isGhost;
     public BoxCollider2D actorCollider2D;
     public int invincibilityTickTimer;
     public int petrificationTimeTickRate;
@@ -65,6 +66,7 @@ public abstract class Actor : TileData
     public bool inGame;
     public bool triggerFaceChangeEvent;
     public int normalSpeed;
+    public int flyingTickCountTemp;
 
     public int ownerId;
     public Attack currentAttack;
@@ -97,7 +99,6 @@ public abstract class Actor : TileData
     public MoveUseAnimationAction primaryMoveUseAction = new MoveUseAnimationAction();
     public InteractWithTileAction dropAction = new InteractWithTileAction();
     public WaitingForNextAction waitingForInvinciblityToOver = new WaitingForNextAction();
-    public WaitingForNextAction waitingForFlightToEnd = new WaitingForNextAction();
 
 
     [Header("Action Primary Actions")]
@@ -122,7 +123,6 @@ public abstract class Actor : TileData
         waitingActionForSecondaryMove.Initialise(this);
         waitingActionForSecondaryMove.ReInitialiseTimerToEnd(secondaryMoveAttackRateTickRate);
 
-        waitingForFlightToEnd.Initialise(this);
     }
 
 
@@ -198,10 +198,15 @@ public abstract class Actor : TileData
         SetFlyingState();
     }
 
-    public void LandPlayer()
+    public void LandPlayer(Vector3Int cellPositionToLandOn)
     {
         isInFlyingState = false;
         SetLandState();
+
+        if(MultiplayerManager.instance.isServer&&!IsPlayerSpawnable(cellPositionToLandOn))
+        {
+            TakeDamage(currentHP);
+        }
     }
 
     void RespawnPlayer()
@@ -979,15 +984,81 @@ public abstract class Actor : TileData
                 UnPetrify();
                 MakeInvincible();
             }
-            
         }
     }
 
-    
+
+    List<RaycastHit2D> hit2DArrLastFrame=new List<RaycastHit2D>();
+    List<RaycastHit2D> hit2DArrLastFrameCache=new List<RaycastHit2D>();
+    List<RaycastHit2D> hit2DArrThisFrame=new List<RaycastHit2D>();
+    public void ProcessCollisionEnter()
+    {
+        if(!isGhost)
+        {
+            return;
+        }
+        hit2DArrThisFrame = new List<RaycastHit2D>(Physics2D.BoxCastAll(actorTransform.position, GridManager.instance.grid.cellSize * GameConfig.boxCastCellSizePercent, 0, actorTransform.position, 0));
+        for (int i = 0; i < hit2DArrThisFrame.Count; i++)
+        {
+            if(!hit2DArrLastFrame.Contains(hit2DArrThisFrame[i]))
+            {
+                CustomTriggerEnter(hit2DArrThisFrame[i].collider);
+                hit2DArrLastFrame.Add(hit2DArrThisFrame[i]);
+            }
+        }
+
+        hit2DArrLastFrameCache = new List<RaycastHit2D>(hit2DArrLastFrame);
+        for (int i = 0; i < hit2DArrLastFrame.Count; i++)
+        {
+            if (hit2DArrLastFrame[i].collider==null || !hit2DArrThisFrame.Contains(hit2DArrLastFrame[i]))
+            {
+                CustomTriggerExit(hit2DArrLastFrame[i].collider);
+                hit2DArrLastFrameCache.Remove(hit2DArrLastFrame[i]);
+            }
+        }
+
+        hit2DArrLastFrame = new List<RaycastHit2D>(hit2DArrLastFrameCache);
+    }
+
+    void CustomTriggerExit(Collider2D collider)
+    {
+
+    }
+
+    void CustomTriggerEnter(Collider2D collider)
+    {
+        TileData collidedTile = collider.GetComponent<TileData>();
+        if(collidedTile!=null)
+        {
+            if (!isPushed && !isPetrified)
+            {
+                if (collidedTile.tileType == EnumData.TileType.IcarusWingsItem)
+                {
+                    OnBodyCollidedWithIcarausWingsItemTiles(currentMovePointCellPosition);
+                }
+            }
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         //Debug.LogError("chal raha hai na "+gamePhysics.gameCollider2D.enabled);
+        if(isGhost)
+        {
+            return;
+        }
+        TileData collidedTile = collider.GetComponent<TileData>();
+        if(collidedTile!=null)
+        {
+            if (!isPushed && !isPetrified)
+            {
+                if (collidedTile.tileType == EnumData.TileType.IcarusWingsItem)
+                {
+                    OnBodyCollidedWithIcarausWingsItemTiles(currentMovePointCellPosition);
+                }
+            }
+        }
+        
         if (!MultiplayerManager.instance.isServer)
         {
             return;
@@ -1000,13 +1071,11 @@ public abstract class Actor : TileData
         {
             return;
         }
-        TileData collidedTile = collider.GetComponent<TileData>();
-
-        if (collidedTile!=null)
+        if(collidedTile != null)
         {
             if (collidedTile.killUnitsInstantlyIfInTheirRegion)
             {
-                if(collidedTile.tileType == EnumData.TileType.Earthquake)
+                if (collidedTile.gameObjectEnums == EnumData.GameObjectEnums.Earthquake)
                 {
                     EarthQuake earthquakeElement = collidedTile.GetComponent<EarthQuake>();
                     OnBodyCollidingWithKillingTiles(earthquakeElement.earthquakeSpawner, collidedTile);
@@ -1017,15 +1086,19 @@ public abstract class Actor : TileData
                 }
             }
         }
+        
 
         if (isPhysicsControlled)
         {
             return;
         }
-
         if (collidedTile != null)
         {
-            if (!isPushed&&!isPetrified)
+            if (collidedTile.tileType == EnumData.TileType.Portal)
+            {
+                OnBodyCollidedWithPortalTiles(collidedTile);
+            }
+            if (!isPushed && !isPetrified)
             {
                 //Debug.LogError(collidedTile.tileType.ToString());
                 if (collidedTile.tileType == EnumData.TileType.Hourglass)
@@ -1090,6 +1163,7 @@ public abstract class Actor : TileData
                 }
             }
         }
+        
 
         ProjectileUtil projectileUtilCollidedWithMyHead = collider.GetComponent<ProjectileUtil>();
         if (projectileUtilCollidedWithMyHead != null)
@@ -1107,29 +1181,17 @@ public abstract class Actor : TileData
             }
         }
 
-        if (collider.GetComponent<Actor>() == null)
+        if (collidedTile is Actor collidedActorWithMyHead)
         {
-            return;
-        }
-
-        Actor collidedActorWithMyHead = collider.GetComponent<Actor>();
-
-        //if (isPushed)
-        //{
-        //    if (collidedActorWithMyHead != null && collidedActorWithMyHead.gameObject.GetInstanceID() != actorTransform.gameObject.GetInstanceID() && IsCollidingWithChainElement(collidedActorWithMyHead))
-        //    {
-        //        return;
-        //    }
-        //}
-
-        if (collidedActorWithMyHead != null &&!collidedActorWithMyHead.isInvincible&& collidedActorWithMyHead.gameObject.GetInstanceID() != actorTransform.gameObject.GetInstanceID() && GridManager.instance.IsHeadCollision(collidedActorWithMyHead.actorTransform.position, actorTransform.position, Facing))
-        {
-            if (collidedActorWithMyHead.isDead)
+            if (collidedActorWithMyHead != null &&!collidedActorWithMyHead.isInvincible&& collidedActorWithMyHead.gameObject.GetInstanceID() != actorTransform.gameObject.GetInstanceID() && GridManager.instance.IsHeadCollision(collidedActorWithMyHead.actorTransform.position, actorTransform.position, Facing))
             {
-                return;
+                if (collidedActorWithMyHead.isDead)
+                {
+                    return;
+                }
+                isHeadCollisionWithOtherActor = true;
+                OnHeadCollision(collidedActorWithMyHead);
             }
-            isHeadCollisionWithOtherActor = true;
-            OnHeadCollision(collidedActorWithMyHead);
         }
     }
     public virtual void OnHeadCollision(Actor collidedActorWithMyHead)
@@ -1296,6 +1358,7 @@ public abstract class Actor : TileData
     public abstract void OnBodyCollidedWithFireballItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithFlamePillarItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithHourGlassTile(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithPortalTiles(TileData tileData);
 
     public abstract void OnPushStart();
     public abstract void OnPushStop();

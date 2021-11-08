@@ -10,19 +10,6 @@ public class Medusa : Hero
         {
             return;
         }
-        if (isInFlyingState)
-        {
-            if (!waitingForFlightToEnd.Perform())
-            {
-                //land here
-                LandPlayer();
-                if (!IsPlayerSpawnable(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-                {
-                    TakeDamage(currentHP);
-                }
-                return;
-            }
-        }
         if (isPushed)
         {
             if (completedMotionToMovePoint)
@@ -71,6 +58,27 @@ public class Medusa : Hero
         }
     }
 
+    public override void ProcessFlyingControl()
+    {
+        if (flyingTickCountTemp > 0)
+        {
+            //is flying
+            flyingTickCountTemp--;
+            if (!isInFlyingState)
+            {
+                //Start flying here
+                FlyPlayer();
+            }
+        }
+        else
+        {
+            if(isInFlyingState)
+            {
+                //land here
+                LandPlayer(GridManager.instance.grid.WorldToCell(actorTransform.position));
+            }
+        }
+    }
 
     public override void ProcessAnimationsInputs(bool[] inputs, bool[] previousInputs)
     {
@@ -208,10 +216,13 @@ public class Medusa : Hero
                 {
                     if (inputs[(int)EnumData.MedusaInputs.LandPlayer] && previousInputs[(int)EnumData.MedusaInputs.LandPlayer] != inputs[(int)EnumData.MedusaInputs.LandPlayer])
                     {
-                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
-                        //land player command
-                        LandPlayerCommand landPlayerCommand = new LandPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
-                        ClientSend.LandPlayer(landPlayerCommand);
+                        if (isInFlyingState)
+                        {
+                            //land here
+                            flyingTickCountTemp = 0;
+                            LandPlayerCommand landPlayerCommand = new LandPlayerCommand(GetLocalSequenceNo());
+                            ClientSend.LandPlayer(landPlayerCommand);
+                        }
                     }
                 }
                 else
@@ -222,7 +233,7 @@ public class Medusa : Hero
                         if (IsPlayerSpawnable(cellToCheckFor))
                         {
                             //Respawn player command
-                            RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo(), cellToCheckFor);
+                            RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo());
                             ClientSend.RespawnPlayer(respawnPlayerCommand);
                         }
                         else
@@ -259,19 +270,19 @@ public class Medusa : Hero
                     else if (inputs[(int)EnumData.MedusaInputs.PlaceRemovalBoulder] && previousInputs[(int)EnumData.MedusaInputs.PlaceRemovalBoulder] != inputs[(int)EnumData.MedusaInputs.PlaceRemovalBoulder])
                     {
                         Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderAppearing))
+                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing))
                         {
                             //send command to server of placement
                             PlaceBoulderCommand placeBoulderCommand = new PlaceBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
                             ClientSend.PlaceBoulderCommand(placeBoulderCommand);
                         }
-                        else if (GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.Boulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.BoulderDisappearing))
+                        else if (GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.Boulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderDisappearing))
                         {
                             RemoveBoulderCommand removeBoulderCommand = new RemoveBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
                             ClientSend.RemoveBoulderCommand(removeBoulderCommand);
                         }
                     }
-                    else if (itemToCast!=null&& itemToCast.itemCount>0 && itemToCast.castableItemType == EnumData.CastItemTypes.SpawnnableItems)
+                    else if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.SpawnnableItems)
                     {
                         if (inputs[(int)EnumData.MedusaInputs.UseItem] && previousInputs[(int)EnumData.MedusaInputs.UseItem] != inputs[(int)EnumData.MedusaInputs.UseItem])
                         {
@@ -345,7 +356,6 @@ public class Medusa : Hero
             }
         }
     }
-
 
     public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
     {

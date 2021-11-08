@@ -132,22 +132,28 @@ public class ProjectileUtil : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Actor collidedActorWithMyHead = collision.GetComponent<Actor>();
-        if (collidedActorWithMyHead != null && !collidedActorWithMyHead.isPushed && !collidedActorWithMyHead.isPhysicsControlled)
+        TileData collidedTile = collision.GetComponent<TileData>();
+
+        if (collidedTile != null)
         {
-            if (pU.gameObjectInstanceId != collidedActorWithMyHead.gameObject.GetInstanceID() && pU.ownerId != collidedActorWithMyHead.ownerId)
+            if(collidedTile is Actor collidedActorWithMyHead)
             {
-                if (collidedActorWithMyHead is MirrorKnight)
+                if (!collidedActorWithMyHead.isPushed && !collidedActorWithMyHead.isPhysicsControlled)
                 {
-                    DealProjectileOnMirrorKnight(collidedActorWithMyHead);
-                }
-                else
-                {
-                    DealProjectileOnActor(collidedActorWithMyHead);
+                    if (pU.gameObjectInstanceId != collidedActorWithMyHead.gameObject.GetInstanceID() && pU.ownerId != collidedActorWithMyHead.ownerId)
+                    {
+                        if (collidedActorWithMyHead is MirrorKnight)
+                        {
+                            DealProjectileOnMirrorKnight(collidedActorWithMyHead);
+                        }
+                        else
+                        {
+                            DealProjectileOnActor(collidedActorWithMyHead);
+                        }
+                    }
                 }
             }
         }
-
         ClientEnemyManager clientEnemyManager = collision.GetComponent<ClientEnemyManager>();
         if (clientEnemyManager != null)
         {

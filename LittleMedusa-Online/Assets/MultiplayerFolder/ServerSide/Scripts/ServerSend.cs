@@ -99,7 +99,6 @@ public class ServerSend
             packet.Write(serverMasterController.serverInstanceHero.isPetrified);
             packet.Write(serverMasterController.serverInstanceHero.isPushed);
             packet.Write(serverMasterController.serverInstanceHero.isPhysicsControlled);
-            packet.Write(serverMasterController.serverInstanceHero.isInFlyingState);
             packet.Write(serverMasterController.serverInstanceHero.isInputFreezed);
             packet.Write(serverMasterController.serverInstanceHero.isInvincible);
             packet.Write(serverMasterController.serverInstanceHero.isRespawnningPlayer);
@@ -107,6 +106,8 @@ public class ServerSend
             packet.Write(serverMasterController.serverInstanceHero.inGame);
             packet.Write(serverMasterController.serverInstanceHero.currentHP);
             packet.Write(serverMasterController.serverInstanceHero.currentStockLives);
+
+            packet.Write(serverMasterController.serverInstanceHero.flyingTickCountTemp);
 
             packet.Write((int)serverMasterController.serverInstanceHero.itemToCast.castableItemType);
             packet.Write((int)serverMasterController.serverInstanceHero.itemToCast.usableItemType);
@@ -357,7 +358,6 @@ public class ServerSend
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPetrified);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPushed);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPhysicsControlled);
-                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isFlyingState);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.inputFreezed);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isInvincible);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer);
@@ -365,6 +365,8 @@ public class ServerSend
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.inGame);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.currentHP);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.currentStockLives);
+
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerFlyData.flyingTickCount);
 
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.itemToCast.castItemType);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.itemToCast.usableItemType);
@@ -398,7 +400,6 @@ public class ServerSend
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPetrified);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPushed);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPhysicsControlled);
-                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isFlyingState);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.inputFreezed);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isInvincible);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer);
@@ -406,6 +407,8 @@ public class ServerSend
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.inGame);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.currentHP);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.currentStockLives);
+
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerFlyData.flyingTickCount);
 
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.itemToCast.castItemType);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.itemToCast.usableItemType);

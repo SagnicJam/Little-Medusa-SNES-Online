@@ -134,6 +134,7 @@
     <Compile Include="Assets\Scripts\Helper\GamePhysics.cs" />
     <Compile Include="Assets\Scripts\Helper\JoinOrderText.cs" />
     <Compile Include="Assets\Scripts\Helper\MatchConditionManager.cs" />
+    <Compile Include="Assets\Scripts\Helper\Portal.cs" />
     <Compile Include="Assets\Scripts\Helper\ProjectileUtil.cs" />
     <Compile Include="Assets\Scripts\Helper\StaticAnimatingTileManager.cs" />
     <Compile Include="Assets\Scripts\Helper\StaticAnimatingTileUtil.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Assets\Scripts\Use\Use.cs" />
     <Compile Include="Assets\Scripts\items\DynamicItem.cs" />
     <Compile Include="Assets\test.cs" />
+    <Compile Include="Assets\test2.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />

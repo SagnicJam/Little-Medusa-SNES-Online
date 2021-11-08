@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  connectionId: 
   username: 
   masterController: {fileID: 3850397219797001270}
 --- !u!114 &3850397219797001270
@@ -67,8 +68,9 @@ MonoBehaviour:
   snapShotsInOnePacket: 4
   idealSnapshotBufferCount: 8
   maxedOutSnapshotBufferCount: 20
-  positionThreshold: 0.5
+  positionThreshold: 1
   id: 0
+  connectionId: 
   currentStateProcessingModeOnClient: 0
   localSequenceNumber: 0
   serverSequenceNumberToBeProcessed: 0

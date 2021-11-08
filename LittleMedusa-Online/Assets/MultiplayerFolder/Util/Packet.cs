@@ -32,7 +32,7 @@ public enum ClientPackets
     playerRemoveBoulderCommand,
     playerTornadoCommand,
     playerRespawnCommand,
-    landPlayerCommand,
+    playerLandCommand,
     characterChangeCommand,
     playerSpawnItemCommand
 }

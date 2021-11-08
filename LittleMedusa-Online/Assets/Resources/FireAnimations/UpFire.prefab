@@ -151,12 +151,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff00e2d0efe74546a3f95a989804ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 45
+  tileType: 0
+  gameObjectEnums: 8
   blockFlyingUnits: 0
   blockToSpawnObjectsPlacement: 1
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 1
   solidifyTile: 0
+  isItem: 0
   killUnitsInstantlyIfInTheirRegion: 1
   isPhysicsControlled: 0

@@ -97,19 +97,17 @@ public class ServerHandle
 
     public static void PlayerLandCommandReceived(int fromClient, Packet packet)
     {
-        Vector3Int cellPostionToLandPlayerOn = packet.ReadVector3Int();
         int sequenceNumber = packet.ReadInt();
 
-        LandPlayerCommand landCommand = new LandPlayerCommand(sequenceNumber, cellPostionToLandPlayerOn);
-        Server.clients[fromClient].serverMasterController.AccumulateLandingRequestFromClientToServer(landCommand);
+        LandPlayerCommand landPlayerCommand = new LandPlayerCommand(sequenceNumber);
+        Server.clients[fromClient].serverMasterController.AccumulateLandingPlayerRequestFromClientToServer(landPlayerCommand);
     }
 
     public static void PlayerRespawnCommandReceived(int fromClient,Packet packet)
     {
-        Vector3Int cellPostionToRespawnPlayerOn = packet.ReadVector3Int();
         int sequenceNumber = packet.ReadInt();
 
-        RespawnPlayerCommand respawnCommand = new RespawnPlayerCommand(sequenceNumber,cellPostionToRespawnPlayerOn);
+        RespawnPlayerCommand respawnCommand = new RespawnPlayerCommand(sequenceNumber);
         Server.clients[fromClient].serverMasterController.AccumulateRespawnningRequestFromClientToServer(respawnCommand);
     }
 

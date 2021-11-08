@@ -148,18 +148,25 @@ public class EnumData
         EarthQuakeItem,
         FireballItem,
         FlamePillarItem,
+        PortalItem,
+        Portal
+    }
+
+    public enum GameObjectEnums
+    {
+        None=0,
         ThunderStruck,
         LightningBolt,
         Earthquake,
-        Monster,
-        Hero,
         BoulderAppearing,
         BoulderDisappearing,
         LeftCereberusFire,
         RightCereberusFire,
         UpCereberusFire,
         DownCereberusFire,
-        TornadoEffect
+        TornadoEffect,
+        Hero,
+        Monster
     }
 
     public enum StaticAnimatingTiles

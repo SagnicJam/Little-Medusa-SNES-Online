@@ -305,6 +305,11 @@ public abstract class Enemy : Actor
     {
         TakeDamage(currentHP);
     }
+    public override void OnBodyCollidedWithPortalTiles(TileData tileData)
+    {
+        Portal portal = tileData.GetComponent<Portal>();
+        portal.ActorUnitEnter(this, currentMovePointCellPosition);
+    }
 
     public override void OnBodyCollidedWithHourGlassTile(Vector3Int hourGlassTile)
     {

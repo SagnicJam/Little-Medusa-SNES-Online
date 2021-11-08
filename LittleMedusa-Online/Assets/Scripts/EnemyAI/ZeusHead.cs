@@ -331,8 +331,8 @@ public class ZeusHead : Enemy
 
     public override void OnBodyCollidingWithKillingTiles(int killingTileSpawnerId, TileData tileData)
     {
-        if(tileData.tileType != EnumData.TileType.LightningBolt &&
-            tileData.tileType != EnumData.TileType.ThunderStruck)
+        if(tileData.gameObjectEnums != EnumData.GameObjectEnums.LightningBolt &&
+            tileData.gameObjectEnums != EnumData.GameObjectEnums.ThunderStruck)
         {
             base.OnBodyCollidingWithKillingTiles(killingTileSpawnerId,tileData);
         }
