@@ -168,7 +168,7 @@ public class ServerMasterController : MonoBehaviour
                 Vector3Int cellPredicted = castFlamePillar.predictedCell;
                 castFlamePillarRequestReceivedFromClientToServerDic.Remove(castFlamePillar.sequenceNoCastingFlamePillarCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                CastFlamePillarForPlayerImplementation(direction, cellPredicted);
+                CastFlamePillarForPlayerImplementation(direction, cellPredicted,null);
             }
         }
 
@@ -182,7 +182,7 @@ public class ServerMasterController : MonoBehaviour
                 Vector3Int cellPredicted = castFlamePillar.predictedCell;
                 castFlamePillarRequestReceivedFromClientToServerDic.Remove(castFlamePillar.sequenceNoCastingFlamePillarCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                CastFlamePillarForPlayerImplementation(direction, cellPredicted);
+                CastFlamePillarForPlayerImplementation(direction, cellPredicted,null);
             }
         }
     }
@@ -289,7 +289,7 @@ public class ServerMasterController : MonoBehaviour
                 int direction = castPitfallCommand.direction;
                 castPitfallRequestReceivedFromClientToServerDic.Remove(castPitfallCommand.sequenceNoForCastingPitfallCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                CastPitfallImplementation(direction);
+                CastPitfallImplementation(direction,null);
             }
         }
 
@@ -302,7 +302,7 @@ public class ServerMasterController : MonoBehaviour
                 int direction = castPitfallCommand.direction;
                 castPitfallRequestReceivedFromClientToServerDic.Remove(castPitfallCommand.sequenceNoForCastingPitfallCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                CastPitfallImplementation(direction);
+                CastPitfallImplementation(direction,null);
             }
         }
     }
@@ -350,7 +350,7 @@ public class ServerMasterController : MonoBehaviour
                 int direction = placeTornadoCommand.direction;
                 placeTornadoRequestReceivedFromClientToServerDic.Remove(placeTornadoCommand.sequenceForPlaceTornadoCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                CastTornadoForPlayerImplementation(direction);
+                CastTornadoForPlayerImplementation(direction,null);
             }
         }
 
@@ -363,7 +363,7 @@ public class ServerMasterController : MonoBehaviour
                 int direction = placeTornadoCommand.direction;
                 placeTornadoRequestReceivedFromClientToServerDic.Remove(placeTornadoCommand.sequenceForPlaceTornadoCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                CastTornadoForPlayerImplementation(direction);
+                CastTornadoForPlayerImplementation(direction,null);
             }
         }
     }
@@ -411,7 +411,7 @@ public class ServerMasterController : MonoBehaviour
                 Vector3Int cellPredicted = castBubbleShieldCommand.predictedCell;
                 castBubbleShieldRequestReceivedFromClientToServerDic.Remove(castBubbleShieldCommand.sequenceNoForCastingBubbleShield);
                 //do server rollback here to check to check if damage actually occured on server
-                CastBubbleShieldForPlayerImplementation(cellPredicted);
+                CastBubbleShieldForPlayerImplementation(cellPredicted,null);
             }
         }
 
@@ -424,7 +424,7 @@ public class ServerMasterController : MonoBehaviour
                 Vector3Int cellPredicted = castBubbleShieldCommand.predictedCell;
                 castBubbleShieldRequestReceivedFromClientToServerDic.Remove(castBubbleShieldCommand.sequenceNoForCastingBubbleShield);
                 //do server rollback here to check to check if damage actually occured on server
-                CastBubbleShieldForPlayerImplementation(cellPredicted);
+                CastBubbleShieldForPlayerImplementation(cellPredicted,null);
             }
         }
     }
@@ -473,7 +473,7 @@ public class ServerMasterController : MonoBehaviour
                 Vector3Int cellPredicted = fireMightyWindCommand.cellPredicted;
                 mightyWindFireRequestReceivedFromClientToServerDic.Remove(fireMightyWindCommand.sequenceNoForFiringMightyWindCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                MightyWindFirePlayerRequestImplementation(direction, cellPredicted);
+                MightyWindFirePlayerRequestImplementation(direction, cellPredicted,null);
             }
         }
 
@@ -487,7 +487,7 @@ public class ServerMasterController : MonoBehaviour
                 Vector3Int cellPredicted = fireMightyWindCommand.cellPredicted;
                 mightyWindFireRequestReceivedFromClientToServerDic.Remove(fireMightyWindCommand.sequenceNoForFiringMightyWindCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                MightyWindFirePlayerRequestImplementation(direction, cellPredicted);
+                MightyWindFirePlayerRequestImplementation(direction, cellPredicted,null);
             }
         }
     }
@@ -536,7 +536,7 @@ public class ServerMasterController : MonoBehaviour
                 Vector3Int cellPredicted = tidalWaveFireCommand.predictedCell;
                 tidalWaveFireRequestReceivedFromClientToServerDic.Remove(tidalWaveFireCommand.sequenceNoForFiringTidalWaveCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                TidalWaveFirePlayerRequestImplementation(direction,cellPredicted);
+                TidalWaveFirePlayerRequestImplementation(direction,cellPredicted,null);
             }
         }
 
@@ -550,7 +550,7 @@ public class ServerMasterController : MonoBehaviour
                 Vector3Int cellPredicted = tidalWaveFireCommand.predictedCell;
                 tidalWaveFireRequestReceivedFromClientToServerDic.Remove(tidalWaveFireCommand.sequenceNoForFiringTidalWaveCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                TidalWaveFirePlayerRequestImplementation(direction, cellPredicted);
+                TidalWaveFirePlayerRequestImplementation(direction, cellPredicted,null);
             }
         }
     }
@@ -728,7 +728,7 @@ public class ServerMasterController : MonoBehaviour
                 placeBoulderCommandFromClientToServerDic.Remove(placeBoulderCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
                 Vector3Int cellPointToPlaceBoulder = placeBoulderCommand.boulderCellPos;
-                PlaceBoulderRequestImplementation(cellPointToPlaceBoulder);
+                PlaceBoulderRequestImplementation(cellPointToPlaceBoulder,null);
             }
         }
 
@@ -741,7 +741,7 @@ public class ServerMasterController : MonoBehaviour
                 placeBoulderCommandFromClientToServerDic.Remove(placeBoulderCommand.sequenceNumber);
                 //do server rollback here to check to check if damage actually occured on server
                 Vector3Int cellPointToPlaceBoulder = placeBoulderCommand.boulderCellPos;
-                PlaceBoulderRequestImplementation(cellPointToPlaceBoulder);
+                PlaceBoulderRequestImplementation(cellPointToPlaceBoulder,null);
             }
         }
     }
@@ -1444,7 +1444,7 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void PlaceBoulderRequestImplementation(Vector3Int cellPositionToPlaceBoulder)
+    void PlaceBoulderRequestImplementation(Vector3Int cellPositionToPlaceBoulder,OnWorkDone onSuccess)
     {
         if (!CanDoAction("PlaceBoulderRequestImplementation"))
         {
@@ -1454,6 +1454,7 @@ public class ServerMasterController : MonoBehaviour
         {
             Debug.Log("Setting tile boulder on "+cellPositionToPlaceBoulder);
             GridManager.instance.SetTile(cellPositionToPlaceBoulder, EnumData.TileType.Boulder, true, false);
+            onSuccess?.Invoke();
         }
         else
         {
@@ -1482,44 +1483,52 @@ public class ServerMasterController : MonoBehaviour
     {
         if(serverInstanceHero.itemToCast.itemCount>0)
         {
+            OnWorkDone onSuccess = OnSuccessfullyUsedItem;
             switch ((EnumData.UsableItemTypes)spawnItemType)
             {
                 case EnumData.UsableItemTypes.Boulder:
-                    PlaceBoulderRequestImplementation(spawnCell);
+                    PlaceBoulderRequestImplementation(spawnCell, onSuccess);
                     break;
                 case EnumData.UsableItemTypes.Pitfall:
-                    CastPitfallImplementation(direction);
+                    CastPitfallImplementation(direction, onSuccess);
                     break;
                 case EnumData.UsableItemTypes.Earthquake:
                     CastEarthQuakeImplementation();
                     break;
                 case EnumData.UsableItemTypes.Tornado:
-                    CastTornadoForPlayerImplementation(direction);
+                    CastTornadoForPlayerImplementation(direction, onSuccess);
+                    break;
+                case EnumData.UsableItemTypes.Portal:
+                    CastPortalImplementation(direction, onSuccess);
                     break;
                 case EnumData.UsableItemTypes.Minion:
-                    PlaceMinionImplementation(direction, spawnCell);
+                    PlaceMinionImplementation(direction, spawnCell, onSuccess);
                     break;
                 case EnumData.UsableItemTypes.CereberausHead:
-                    PlaceCereberausHeadImplementation(direction, spawnCell);
+                    PlaceCereberausHeadImplementation(direction, spawnCell, onSuccess);
                     break;
                 case EnumData.UsableItemTypes.TidalWave:
-                    TidalWaveFirePlayerRequestImplementation(direction,spawnCell);
+                    TidalWaveFirePlayerRequestImplementation(direction,spawnCell, onSuccess);
                     break;
                 case EnumData.UsableItemTypes.BubbleShield:
-                    CastBubbleShieldForPlayerImplementation(spawnCell);
+                    CastBubbleShieldForPlayerImplementation(spawnCell, onSuccess);
                     break;
                 case EnumData.UsableItemTypes.MightyWind:
-                    MightyWindFirePlayerRequestImplementation(direction,spawnCell);
+                    MightyWindFirePlayerRequestImplementation(direction,spawnCell, onSuccess);
                     break;
                 case EnumData.UsableItemTypes.FlamePillar:
-                    CastFlamePillarForPlayerImplementation(direction, spawnCell);
+                    CastFlamePillarForPlayerImplementation(direction, spawnCell, onSuccess);
                     break;
             }
-            serverInstanceHero.itemToCast.itemCount--;
         }
     }
 
-    void PlaceMinionImplementation(int direction, Vector3Int cellPositionToPlaceMinion)
+    void OnSuccessfullyUsedItem()
+    {
+        serverInstanceHero.itemToCast.itemCount--;
+    }
+
+    void PlaceMinionImplementation(int direction, Vector3Int cellPositionToPlaceMinion, OnWorkDone onSuccess)
     {
         if (!CanDoAction("PlaceMinionImplementation"))
         {
@@ -1529,6 +1538,7 @@ public class ServerMasterController : MonoBehaviour
         {
             Debug.Log("Setting tile minion on " + cellPositionToPlaceMinion);
             GridManager.instance.enemySpawnner.InstantiateEnemy(cellPositionToPlaceMinion, direction, serverInstanceHero.ownerId);
+            onSuccess?.Invoke();
         }
         else
         {
@@ -1536,7 +1546,7 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void PlaceCereberausHeadImplementation(int direction,Vector3Int cellPositionToPlaceCereberausHead)
+    void PlaceCereberausHeadImplementation(int direction,Vector3Int cellPositionToPlaceCereberausHead, OnWorkDone onSuccess)
     {
         if (!CanDoAction("PlaceCereberausHeadImplementation"))
         {
@@ -1546,6 +1556,7 @@ public class ServerMasterController : MonoBehaviour
         {
             Debug.Log("Setting tile cereberausHead on " + cellPositionToPlaceCereberausHead);
             GridManager.instance.SetTile(cellPositionToPlaceCereberausHead,GridManager.instance.GetCereberausHeadTypeFromDirection((FaceDirection)direction), true, false);
+            onSuccess?.Invoke();
         }
         else
         {
@@ -1574,7 +1585,7 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void CastFlamePillarForPlayerImplementation(int direction,Vector3Int predictedCell)
+    void CastFlamePillarForPlayerImplementation(int direction,Vector3Int predictedCell,OnWorkDone onSuccess)
     {
         if (!CanDoAction("CastFlamePillarForPlayerImplementation"))
         {
@@ -1583,6 +1594,7 @@ public class ServerMasterController : MonoBehaviour
         if (serverInstanceHero.IsProjectilePlacable(predictedCell, (FaceDirection)direction))
         {
             serverInstanceHero.CastFlamePillar(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FlamePillar),predictedCell);
+            onSuccess?.Invoke();
         }
         else
         {
@@ -1590,13 +1602,17 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void CastBubbleShieldForPlayerImplementation(Vector3Int predictedCell)
+    void CastBubbleShieldForPlayerImplementation(Vector3Int predictedCell,OnWorkDone onSuccess)
     {
         if (!CanDoAction("CastBubbleShieldForPlayerImplementation"))
         {
             return;
         }
-        if (serverInstanceHero.IsProjectilePlacable(predictedCell,FaceDirection.Up))
+        bool isProjectilePlacableUp = serverInstanceHero.IsProjectilePlacable(predictedCell, FaceDirection.Up);
+        bool isProjectilePlacableDown = serverInstanceHero.IsProjectilePlacable(predictedCell, FaceDirection.Down);
+        bool isProjectilePlacableLeft = serverInstanceHero.IsProjectilePlacable(predictedCell, FaceDirection.Left);
+        bool isProjectilePlacableRight = serverInstanceHero.IsProjectilePlacable(predictedCell, FaceDirection.Right);
+        if (isProjectilePlacableUp)
         {
             serverInstanceHero.CastBubbleShield(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.BubbleShield),predictedCell, FaceDirection.Up);
         }
@@ -1605,7 +1621,7 @@ public class ServerMasterController : MonoBehaviour
             Debug.Log("bubbleshield-Hero is not able to fire up projectiles");
         }
 
-        if (serverInstanceHero.IsProjectilePlacable(predictedCell, FaceDirection.Down))
+        if (isProjectilePlacableDown)
         {
             serverInstanceHero.CastBubbleShield(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.BubbleShield), predictedCell, FaceDirection.Down);
         }
@@ -1615,7 +1631,7 @@ public class ServerMasterController : MonoBehaviour
         }
 
 
-        if (serverInstanceHero.IsProjectilePlacable(predictedCell, FaceDirection.Left))
+        if (isProjectilePlacableLeft)
         {
             serverInstanceHero.CastBubbleShield(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.BubbleShield),predictedCell, FaceDirection.Left);
         }
@@ -1625,7 +1641,7 @@ public class ServerMasterController : MonoBehaviour
         }
 
 
-        if (serverInstanceHero.IsProjectilePlacable(predictedCell, FaceDirection.Right))
+        if (isProjectilePlacableRight)
         {
             serverInstanceHero.CastBubbleShield(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.BubbleShield),predictedCell, FaceDirection.Right);
         }
@@ -1633,9 +1649,14 @@ public class ServerMasterController : MonoBehaviour
         {
             Debug.Log("bubbleshield-Hero is not able to fire right projectiles");
         }
+
+        if(isProjectilePlacableUp|| isProjectilePlacableDown|| isProjectilePlacableLeft|| isProjectilePlacableRight)
+        {
+            onSuccess?.Invoke();
+        }
     }
 
-    void TidalWaveFirePlayerRequestImplementation(int direction,Vector3Int predictedCell)
+    void TidalWaveFirePlayerRequestImplementation(int direction,Vector3Int predictedCell,OnWorkDone onSuccess)
     {
         if (!CanDoAction("TidalWaveFirePlayerRequestImplementation"))
         {
@@ -1645,6 +1666,7 @@ public class ServerMasterController : MonoBehaviour
         if (serverInstanceHero.IsProjectilePlacable(predictedCell, (FaceDirection)direction))
         {
             serverInstanceHero.FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.TidalWave), predictedCell);
+            onSuccess?.Invoke();
         }
         else
         {
@@ -1652,7 +1674,26 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void CastTornadoForPlayerImplementation(int direction)
+    void CastPortalImplementation(int direction, OnWorkDone onSuccess)
+    {
+        if (!CanDoAction("CastPortalImplementation"))
+        {
+            return;
+        }
+        Debug.Log("CastPortalImplementation ");
+        Vector3Int cellToPlacePortalOn = GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)direction));
+        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToPlacePortalOn))
+        {
+            serverInstanceHero.PlacePortal(cellToPlacePortalOn);
+            onSuccess?.Invoke();
+        }
+        else
+        {
+            Debug.LogError("Portal-Hero is not able to place portals");
+        }
+    }
+
+    void CastTornadoForPlayerImplementation(int direction, OnWorkDone onSuccess)
     {
         if (!CanDoAction("CastTornadoForPlayerImplementation"))
         {
@@ -1663,6 +1704,7 @@ public class ServerMasterController : MonoBehaviour
         {
             Vector3Int cellToPlaceTornadoOn = GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position+GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)direction));
             serverInstanceHero.PlaceTornado(cellToPlaceTornadoOn);
+            onSuccess?.Invoke();
         }
         else
         {
@@ -1670,7 +1712,7 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void MightyWindFirePlayerRequestImplementation(int direction,Vector3Int cellPredicted)
+    void MightyWindFirePlayerRequestImplementation(int direction,Vector3Int cellPredicted,OnWorkDone onSuccess)
     {
         if (!CanDoAction("MightyWindFirePlayerRequestImplementation"))
         {
@@ -1681,6 +1723,8 @@ public class ServerMasterController : MonoBehaviour
         {
             serverInstanceHero.FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.MightyWind),
                 cellPredicted);
+
+            onSuccess?.Invoke();
         }
         else
         {
@@ -1703,7 +1747,7 @@ public class ServerMasterController : MonoBehaviour
         GridManager.instance.EarthQuake(serverInstanceHero,GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position));
     }
 
-    void CastPitfallImplementation(int direction)
+    void CastPitfallImplementation(int direction, OnWorkDone onSuccess)
     {
         if (!CanDoAction("CastPitfallImplementation"))
         {
@@ -1719,6 +1763,7 @@ public class ServerMasterController : MonoBehaviour
         if (GridManager.instance.HasTileAtCellPoint(cellToCheck, EnumData.TileType.Normal))
         {
             serverInstanceHero.CastPitfall(cellToCheck);
+            onSuccess?.Invoke();
         }
         else
         {

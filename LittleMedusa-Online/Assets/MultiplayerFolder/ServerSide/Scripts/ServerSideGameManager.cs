@@ -17,7 +17,6 @@ public class ServerSideGameManager : MonoBehaviour
     public int timeToStartMatch;
     public int stopWorldDestructionTimeCount;
     public List<EnumData.TileType> toNetworkTileType;
-    public List<EnumData.TileType> itemTilesType;
 
     public int snapShotsInOnePacket;
     public int packetHistorySize;
@@ -151,7 +150,6 @@ public class ServerSideGameManager : MonoBehaviour
             worldUpdatesToBeSentFromServerToClient.Clear();
 
             //Debug.Log("<color=red>--------------------------------------------------------------------</color>");
-
         }
     }
 
@@ -239,7 +237,7 @@ public class ServerSideGameManager : MonoBehaviour
 
             GridManager.instance.SetTile(
                cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
-           , EnumData.TileType.IcarusWingsItem,
+           , EnumData.TileType.PortalItem,
            true,
            false);
         }

@@ -67,14 +67,17 @@ public class CharacterSelectionScreen : MonoBehaviour
     {
         EnumData.Heroes heroEnum = (EnumData.Heroes)Enum.Parse(typeof(EnumData.Heroes), hero);
 
-        if(heroEnum!= (EnumData.Heroes)clientlocalActor.hero)
+        if(clientlocalActor!=null)
         {
-            CharacterChangeCommand characterChangeCommand = new CharacterChangeCommand(clientlocalActor.GetLocalSequenceNo(), (int)heroEnum);
-            ClientSend.ChangeCharacter(characterChangeCommand);
-        }
-        else
-        {
-            Debug.Log("Cant change character");
+            if (heroEnum != (EnumData.Heroes)clientlocalActor.hero)
+            {
+                CharacterChangeCommand characterChangeCommand = new CharacterChangeCommand(clientlocalActor.GetLocalSequenceNo(), (int)heroEnum);
+                ClientSend.ChangeCharacter(characterChangeCommand);
+            }
+            else
+            {
+                Debug.Log("Cant change character");
+            }
         }
     }
 }

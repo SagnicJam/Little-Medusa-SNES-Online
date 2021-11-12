@@ -13,6 +13,7 @@ public class GridManager : MonoBehaviour
     public AStar aStar;
     public Grid grid;
     public Tornado tornado;
+    public Portal portal;
     public EnemySpawnner enemySpawnner;
 
     [Header("Tweak Params")]
@@ -482,6 +483,21 @@ public class GridManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public TileData GetTileAtCellPoint(Vector3Int cellPosToCheckFor, EnumData.TileType tileTypeTocheck)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+            if (td != null && td.tileType == tileTypeTocheck)
+            {
+                return td;
+            }
+        }
+        return null;
     }
 
     public bool HasTileAtCellPoint(Vector3Int cellPosToCheckFor, EnumData.TileType tileTypeTocheck)

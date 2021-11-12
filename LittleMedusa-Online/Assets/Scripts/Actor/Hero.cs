@@ -268,6 +268,10 @@ public abstract class Hero : Actor
         dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
     }
 
+    public void PlacePortal(Vector3Int cell)
+    {
+        GridManager.instance.portal.PlacePortal(ownerId, cell);
+    }
 
     public void PlaceTornado(Vector3Int cell)
     {
@@ -523,6 +527,12 @@ public abstract class Hero : Actor
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.TornadoPullItem, false, false);
         itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.Tornado, 5);
+    }
+
+    public override void OnBodyCollidedWithPortalItemTiles(Vector3Int cellPos)
+    {
+        GridManager.instance.SetTile(cellPos, EnumData.TileType.PortalItem, false, false);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.Portal, 1);
     }
 
     public override void OnBodyCollidedWithPitfallItemTiles(Vector3Int cellPos)
@@ -788,7 +798,16 @@ public abstract class Hero : Actor
         else if(itemToCast.usableItemType == EnumData.UsableItemTypes.Tornado)
         {
             Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-            if (!GridManager.instance.IsCellBlockedForUnitMotionAtPos(cellToCheck))
+            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheck))
+            {
+                SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, Vector3Int.zero);
+                ClientSend.SpawnItemCommand(spawnItemCommand);
+            }
+        }
+        else if (itemToCast.usableItemType == EnumData.UsableItemTypes.Portal)
+        {
+            Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheck))
             {
                 SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, Vector3Int.zero);
                 ClientSend.SpawnItemCommand(spawnItemCommand);

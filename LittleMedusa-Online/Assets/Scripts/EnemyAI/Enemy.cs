@@ -313,76 +313,66 @@ public abstract class Enemy : Actor
 
     public override void OnBodyCollidedWithHourGlassTile(Vector3Int hourGlassTile)
     {
-        throw new System.NotImplementedException();
+    }
+
+    public override void OnBodyCollidedWithPortalItemTiles(Vector3Int cellPos)
+    {
+
     }
 
     public override void OnBodyCollidedWithIcarausWingsItemTiles(Vector3Int icarausCollectedOnTilePos)
     {
-        throw new System.NotImplementedException();
     }
     public override void OnBodyCollidedWithHeartItemTiles(Vector3Int cellPos)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnBodyCollidedWithCereberausHeadItemTiles(Vector3Int cellPos)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnBodyCollidedWithMinionItemTiles(Vector3Int cellPos)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnBodyCollidedWithEyeLaserItemTiles(Vector3Int cellPos)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnBodyCollidedWithBoulderItemTiles(Vector3Int cellPos)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnBodyCollidedWithTidalWaveItemTiles(Vector3Int cellPos)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnBodyCollidedWithBubbleShieldItemTiles(Vector3Int cellPos)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnBodyCollidedWithMightyWindItemTiles(Vector3Int cellPos)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnBodyCollidedWithTornadoItemTiles(Vector3Int cellPos)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnBodyCollidedWithPitfallItemTiles(Vector3Int cellPos)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnBodyCollidedWithEarthquakeItemTiles(Vector3Int cellPos)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnBodyCollidedWithFireballItemTiles(Vector3Int cellPos)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void OnBodyCollidedWithFlamePillarItemTiles(Vector3Int cellPos)
     {
-        throw new System.NotImplementedException();
     }
 
     public abstract void UpdateAnimationState(bool isPrimaryMoveActive,bool isSecondaryMoveActive);

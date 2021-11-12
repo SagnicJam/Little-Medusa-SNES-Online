@@ -57,7 +57,8 @@ public class ProjectileUtil : MonoBehaviour
 
             if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave ||
                 pU.projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
-                pU.projectileTypeThrown == EnumData.Projectiles.MightyWind||
+                pU.projectileTypeThrown == EnumData.Projectiles.MightyWind|| 
+                pU.projectileTypeThrown == EnumData.Projectiles.MightyWindMirrorKnight ||
                 pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
             {
                 chainIDLinkedTo = ++GridManager.chainIDGlobal;
@@ -377,7 +378,6 @@ public class ProjectileUtil : MonoBehaviour
                             pU.EndOfUse();
                         }
                     }
-
                 }
             }
         }
@@ -477,7 +477,7 @@ public class ProjectileUtil : MonoBehaviour
         }
         if (pU.projectileTypeThrown == EnumData.Projectiles.FireBall|| pU.projectileTypeThrown == EnumData.Projectiles.FireBallMirrorKnight)
         {
-            Debug.LogError("DestroyProjectile");
+            //Debug.LogError("DestroyProjectile");
             GridManager.instance.Disperse( dispersedGO
                 , dispersionRadius
                 , dispersionSpeed

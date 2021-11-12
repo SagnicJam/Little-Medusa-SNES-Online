@@ -30,6 +30,6 @@ public class test2 : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("other 2: " + other.name);
-        test.IsKepe = true;
+        //test.IsKepe = true;
     }
 }

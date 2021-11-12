@@ -747,9 +747,10 @@ public abstract class Actor : TileData
     {
         if (MultiplayerManager.instance.isServer)
         {
-            Actor actorToPush = Server.clients[actorToPushId].serverMasterController.serverInstanceHero;
-            if (actorToPush != null)
+            ServerMasterController serverMasterController = Server.clients[actorToPushId].serverMasterController;
+            if (serverMasterController != null)
             {
+                Actor actorToPush = serverMasterController.serverInstanceHero;
                 if (completedMotionToMovePoint)
                 {
                     Vector3Int cellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)pushDirection));
@@ -1145,6 +1146,10 @@ public abstract class Actor : TileData
                 {
                     OnBodyCollidedWithTornadoItemTiles(currentMovePointCellPosition);
                 }
+                else if (collidedTile.tileType == EnumData.TileType.PortalItem)
+                {
+                    OnBodyCollidedWithPortalItemTiles(currentMovePointCellPosition);
+                }
                 else if (collidedTile.tileType == EnumData.TileType.PitfallItem)
                 {
                     OnBodyCollidedWithPitfallItemTiles(currentMovePointCellPosition);
@@ -1353,6 +1358,7 @@ public abstract class Actor : TileData
     public abstract void OnBodyCollidedWithBubbleShieldItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithMightyWindItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithTornadoItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithPortalItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithPitfallItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithEarthquakeItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithFireballItemTiles(Vector3Int cellPos);

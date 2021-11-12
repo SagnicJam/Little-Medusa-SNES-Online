@@ -90,7 +90,8 @@ public class EnumData
         MightyWind,
         FlamePillar,
         EyeLaser,
-        Fireball
+        Fireball,
+        Portal
     }
 
     public enum PlayerStates
@@ -199,7 +200,8 @@ public class EnumData
         EyeLaserMirrorKnight,
         MightyWindMirrorKnight,
         FireBallMirrorKnight,
-        DispersedFireBallMirrorKnight
+        DispersedFireBallMirrorKnight,
+        EyeLaserPortal
     }
 
     public enum MonsterBreed

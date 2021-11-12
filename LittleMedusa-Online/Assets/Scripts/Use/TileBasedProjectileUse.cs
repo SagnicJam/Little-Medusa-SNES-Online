@@ -6,6 +6,7 @@ public class TileBasedProjectileUse : Use
 {
     public OnUsed<Vector3Int> onPointReached;
     public Vector3 finalPos;
+    public Vector3 initPos;
     public ProjectileUtil liveProjectile;
     public Vector3Int previousValidPosCell;
     public Vector3Int currentValidPosCell;
@@ -37,10 +38,33 @@ public class TileBasedProjectileUse : Use
             
             if (Vector3.Distance(liveProjectile.transform.position, finalPos) >= 0.05f)
             {
+                TileData tileData = GridManager.instance.GetTileAtCellPoint(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position), EnumData.TileType.Portal);
+                if (tileData!=null)
+                {
+                    Portal portal = tileData.GetComponent<Portal>();
+                    if (ownerId == portal.portalEntranceDic[GridManager.instance.grid.WorldToCell(liveProjectile.transform.position)].portalOwner)
+                    { 
+                        
+                    }
+                    if (MultiplayerManager.instance.isServer && )
+                    {
+                        if ()
+                        {
+                            TeleportProjectiles(projectileUtil, portalEntranceDic[portalCellPosition].portalOutlet);
+                        }
+                        portal.ProjectileUnitEnter(liveProjectile, );
+                    }
+                    else
+                    {
+                        EndOfUse();
+                        return;
+                    }
+                }
+
                 if (projectileTypeThrown == EnumData.Projectiles.TidalWave
                     || projectileTypeThrown == EnumData.Projectiles.BubbleShield ||
                     projectileTypeThrown == EnumData.Projectiles.FlamePillar ||
-                    projectileTypeThrown == EnumData.Projectiles.MightyWind)
+                    projectileTypeThrown == EnumData.Projectiles.MightyWind|| projectileTypeThrown == EnumData.Projectiles.MightyWindMirrorKnight)
                 {
                     if (GridManager.instance.HasTileAtCellPoint(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position),EnumData.TileType.Boulder))
                     {
@@ -84,7 +108,6 @@ public class TileBasedProjectileUse : Use
                         currentValidPosCell = GridManager.instance.grid.WorldToCell(liveProjectile.transform.position);
                     }
                 }
-                
             }
             else
             {
@@ -113,6 +136,7 @@ public class TileBasedProjectileUse : Use
         }
         liveProjectile = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ProjectileUtil>();
         liveProjectile.transform.position = GridManager.instance.cellToworld(actorUsing.positionToSpawnProjectile);
+        initPos = liveProjectile.transform.position;
         finalPos = actorUsing.actorTransform.position + (liveProjectile.projectileTileTravelDistance * GridManager.instance.GetFacingDirectionOffsetVector3(actorUsing.Facing));
         tileMovementDirection = actorUsing.Facing;
         liveProjectile.Initialise(this);
