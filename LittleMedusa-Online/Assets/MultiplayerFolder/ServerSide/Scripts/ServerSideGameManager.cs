@@ -17,6 +17,7 @@ public class ServerSideGameManager : MonoBehaviour
     public int timeToStartMatch;
     public int stopWorldDestructionTimeCount;
     public List<EnumData.TileType> toNetworkTileType;
+    public List<EnumData.TileType> itemTilesType;
 
     public int snapShotsInOnePacket;
     public int packetHistorySize;
@@ -67,7 +68,7 @@ public class ServerSideGameManager : MonoBehaviour
                 matchId = 13,
                 matchConditionDto = new MatchConditionDto
                 {
-                    enemy = 4,
+                    enemy = 2,
                     enemyCount = 0
                 }
             };
@@ -132,8 +133,10 @@ public class ServerSideGameManager : MonoBehaviour
             WorldGridItem worldGridItem = new WorldGridItem((int)toNetworkTileType[i], positionsOfTile);
             worldGridItemList.Add(worldGridItem);
         }
+
+
         GameData gameData = new GameData((int)currentGameState, timeToStartMatch);
-        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), gameData, new Dictionary<int, ProjectileData>(projectilesDic), new Dictionary<int, EnemyData>(enemiesDic), new Dictionary<int, AnimatingStaticTile>(animatingStaticTileDic)));
+        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), gameData, new Dictionary<int, ProjectileData>(projectilesDic), new Dictionary<int, EnemyData>(enemiesDic), new Dictionary<int, AnimatingStaticTile>(animatingStaticTileDic), GridManager.instance.portal.portalEntranceDic));
 
         //Local client sending data
         if (worldUpdatesToBeSentFromServerToClient.Count >= snapShotsInOnePacket)
@@ -229,17 +232,17 @@ public class ServerSideGameManager : MonoBehaviour
 
         if(cellPosForItemTiles.Count>0 && cellPosForItemTiles.Count <= maxItemCount)
         {
-            //GridManager.instance.SetTile(
-            //    cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
-            //, itemTilesType[UnityEngine.Random.Range(0, itemTilesType.Count)],
-            //true,
-            //false);
-
             GridManager.instance.SetTile(
-               cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
-           , EnumData.TileType.PortalItem,
-           true,
-           false);
+                cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
+            , itemTilesType[UnityEngine.Random.Range(0, itemTilesType.Count)],
+            true,
+            false);
+
+           // GridManager.instance.SetTile(
+           //    cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
+           //, EnumData.TileType.FireballItem,
+           //true,
+           //false);
         }
     }
 
@@ -389,11 +392,12 @@ public struct WorldUpdate
     public int sequenceNumber;
     public WorldGridItem[] worldGridItems;
     public GameData gameData;
+    public Dictionary<Vector3Int, PortalInfo> portalEntranceDic;
     public Dictionary<int,ProjectileData> projectileDatas;
     public Dictionary<int,EnemyData> enemyDatas;
     public Dictionary<int,AnimatingStaticTile> animatingTileDatas;
 
-    public WorldUpdate(int sequenceNumber, WorldGridItem[] worldGridItems,GameData gameData, Dictionary<int, ProjectileData> projectileDatas,Dictionary<int,EnemyData> enemyDatas, Dictionary<int, AnimatingStaticTile> animatingTileDatas)
+    public WorldUpdate(int sequenceNumber, WorldGridItem[] worldGridItems,GameData gameData, Dictionary<int, ProjectileData> projectileDatas,Dictionary<int,EnemyData> enemyDatas, Dictionary<int, AnimatingStaticTile> animatingTileDatas, Dictionary<Vector3Int, PortalInfo> portalEntranceDic)
     {
         this.sequenceNumber = sequenceNumber;
         this.worldGridItems = worldGridItems;
@@ -401,6 +405,7 @@ public struct WorldUpdate
         this.projectileDatas = projectileDatas;
         this.enemyDatas = enemyDatas;
         this.animatingTileDatas = animatingTileDatas;
+        this.portalEntranceDic = portalEntranceDic;
     }
 }
 
@@ -458,14 +463,15 @@ public struct ProjectileData
     }
 }
 
+
 public struct WorldGridItem
 {
     public int tileType;
     public List<Vector3Int> updatedCellGridWorldPositionList;
 
-    public WorldGridItem(int tileType, List<Vector3Int> updatedCellPositionList)
+    public WorldGridItem(int tileType, List<Vector3Int> updatedCellGridWorldPositionList)
     {
         this.tileType = tileType;
-        this.updatedCellGridWorldPositionList = updatedCellPositionList;
+        this.updatedCellGridWorldPositionList = updatedCellGridWorldPositionList;
     }
 }

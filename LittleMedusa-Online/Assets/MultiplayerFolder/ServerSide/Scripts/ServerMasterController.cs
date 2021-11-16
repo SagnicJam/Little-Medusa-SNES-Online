@@ -229,7 +229,7 @@ public class ServerMasterController : MonoBehaviour
             {
                 castEarthQuakeRequestReceivedFromClientToServerDic.Remove(castEarthQuakeCommand.sequenceNoForCastingEarthQuakeCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                CastEarthQuakeImplementation();
+                CastEarthQuakeImplementation(null);
             }
         }
 
@@ -241,7 +241,7 @@ public class ServerMasterController : MonoBehaviour
             {
                 castEarthQuakeRequestReceivedFromClientToServerDic.Remove(castEarthQuakeCommand.sequenceNoForCastingEarthQuakeCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                CastEarthQuakeImplementation();
+                CastEarthQuakeImplementation(null);
             }
         }
     }
@@ -1493,7 +1493,7 @@ public class ServerMasterController : MonoBehaviour
                     CastPitfallImplementation(direction, onSuccess);
                     break;
                 case EnumData.UsableItemTypes.Earthquake:
-                    CastEarthQuakeImplementation();
+                    CastEarthQuakeImplementation(onSuccess);
                     break;
                 case EnumData.UsableItemTypes.Tornado:
                     CastTornadoForPlayerImplementation(direction, onSuccess);
@@ -1519,6 +1519,15 @@ public class ServerMasterController : MonoBehaviour
                 case EnumData.UsableItemTypes.FlamePillar:
                     CastFlamePillarForPlayerImplementation(direction, spawnCell, onSuccess);
                     break;
+                case EnumData.UsableItemTypes.AeloianMight:
+                    CastAeloianMightForPlayerImplementation(onSuccess);
+                    break;
+                case EnumData.UsableItemTypes.QuickSand:
+                    CastQuickSandForPlayerImplementation(onSuccess);
+                    break;
+                case EnumData.UsableItemTypes.PermamnentBlock:
+                    CastPermamentBlock(direction, spawnCell, onSuccess);
+                    break;
             }
         }
     }
@@ -1526,6 +1535,20 @@ public class ServerMasterController : MonoBehaviour
     void OnSuccessfullyUsedItem()
     {
         serverInstanceHero.itemToCast.itemCount--;
+    }
+
+    void CastPermamentBlock(int direction, Vector3Int cellPositionToPlaceMinion, OnWorkDone onSuccess)
+    {
+        if (!CanDoAction("CastPermamentBlock"))
+        {
+            return;
+        }
+        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellPositionToPlaceMinion))
+        {
+            Debug.Log("Setting tile permewmnt block minion on " + cellPositionToPlaceMinion);
+            GridManager.instance.enemySpawnner.InstantiatePetrifiedEnemy(cellPositionToPlaceMinion, direction,EnumData.MonsterBreed.Cyclops);
+            onSuccess?.Invoke();
+        }
     }
 
     void PlaceMinionImplementation(int direction, Vector3Int cellPositionToPlaceMinion, OnWorkDone onSuccess)
@@ -1583,6 +1606,26 @@ public class ServerMasterController : MonoBehaviour
         {
             Debug.LogError("Character cant be changed");
         }
+    }
+
+    void CastQuickSandForPlayerImplementation(OnWorkDone onSuccess)
+    {
+        if (!CanDoAction("CastQuickSandForPlayerImplementation"))
+        {
+            return;
+        }
+        GridManager.instance.CastQuickSand(serverInstanceHero);
+        onSuccess?.Invoke();
+    }
+
+    void CastAeloianMightForPlayerImplementation(OnWorkDone onSuccess)
+    {
+        if (!CanDoAction("CastAeloianMightForPlayerImplementation"))
+        {
+            return;
+        }
+        GridManager.instance.CastAeloianMight(serverInstanceHero.ownerId);
+        onSuccess?.Invoke();
     }
 
     void CastFlamePillarForPlayerImplementation(int direction,Vector3Int predictedCell,OnWorkDone onSuccess)
@@ -1684,8 +1727,7 @@ public class ServerMasterController : MonoBehaviour
         Vector3Int cellToPlacePortalOn = GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)direction));
         if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToPlacePortalOn))
         {
-            serverInstanceHero.PlacePortal(cellToPlacePortalOn);
-            onSuccess?.Invoke();
+            GridManager.instance.portal.PlacePortal(serverInstanceHero.ownerId, cellToPlacePortalOn, onSuccess);
         }
         else
         {
@@ -1703,7 +1745,7 @@ public class ServerMasterController : MonoBehaviour
         if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
         {
             Vector3Int cellToPlaceTornadoOn = GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position+GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)direction));
-            serverInstanceHero.PlaceTornado(cellToPlaceTornadoOn);
+            GridManager.instance.tornado.PlaceTornadoObject(serverInstanceHero.ownerId, cellToPlaceTornadoOn);
             onSuccess?.Invoke();
         }
         else
@@ -1732,7 +1774,7 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void CastEarthQuakeImplementation()
+    void CastEarthQuakeImplementation(OnWorkDone onSuccess)
     {
         if (!CanDoAction("CastEarthQuakeImplementation"))
         {
@@ -1745,6 +1787,7 @@ public class ServerMasterController : MonoBehaviour
         }
         Debug.Log("CastEarthQuake ");
         GridManager.instance.EarthQuake(serverInstanceHero,GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position));
+        onSuccess?.Invoke();
     }
 
     void CastPitfallImplementation(int direction, OnWorkDone onSuccess)
@@ -1933,6 +1976,7 @@ public class ServerMasterController : MonoBehaviour
             , serverInstanceHero.isPushed
             , serverInstanceHero.isPhysicsControlled
             , serverInstanceHero.isInputFreezed
+            , serverInstanceHero.isMovementFreezed
             , serverInstanceHero.isInvincible
             , serverInstanceHero.isRespawnningPlayer
             , serverInstanceHero.inCharacterSelectionScreen
@@ -1945,7 +1989,10 @@ public class ServerMasterController : MonoBehaviour
         PositionUpdates positionUpdates = new PositionUpdates(serverInstanceHero.actorTransform.position, serverInstanceHero.currentMovePointCellPosition
             , serverInstanceHero.previousMovePointCellPosition,(int)serverInstanceHero.Facing,(int)serverInstanceHero.PreviousFacingDirection);
         PlayerEvents playerEvents = new PlayerEvents(serverInstanceHero.isFiringPrimaryProjectile,
-            serverInstanceHero.isFiringItemEyeLaser, serverInstanceHero.isFiringItemFireball);
+            serverInstanceHero.isFiringItemEyeLaser
+            , serverInstanceHero.isFiringItemFireball
+            , serverInstanceHero.isFiringItemStarShower
+            , serverInstanceHero.isFiringItemCentaurBow);
         PlayerAnimationEvents playerAnimationEvents = new PlayerAnimationEvents(serverInstanceHero.isWalking,serverInstanceHero.isFlying, serverInstanceHero.isUsingPrimaryMove);
         PlayerFlyData playerFlyData = new PlayerFlyData(serverInstanceHero.flyingTickCountTemp);
 

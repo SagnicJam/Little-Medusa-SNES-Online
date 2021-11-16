@@ -6,20 +6,11 @@ using UnityEngine.Tilemaps;
 
 public class Tornado : MonoBehaviour
 {
-    [Header("TweakParams")]
-    public int size = 10;
-
     [Header("Unit Template")]
     public GameObject tornadoColliderUnit;
 
     [Header("Live Data")]
     Dictionary<int, Dictionary<int, TornadoChild>> actorIdToPlacedTornadoDic = new Dictionary<int, Dictionary<int, TornadoChild>>();
-    int calSize;
-
-    private void Awake()
-    {
-        calSize = size / 2;
-    }
 
     public void PlaceTornadoObject(int ownerCastingId,Vector3Int cellToPlaceOn)
     {
@@ -34,7 +25,7 @@ public class Tornado : MonoBehaviour
         //place tile tornado
         GridManager.instance.SetTile(cellToPlaceOn, EnumData.TileType.Tornado, true, false);
         GridManager.instance.SetTile(cellToPlaceOn,EnumData.TileType.Solid,true,false);
-        List<Vector3Int> getCellToSolidify = GridManager.instance.GetSizeCells(calSize, cellToPlaceOn);
+        List<Vector3Int> getCellToSolidify = GridManager.instance.GetSizeCells(GameConfig.tornadoSize / 2, cellToPlaceOn);
 
         if (actorIdToPlacedTornadoDic.ContainsKey(ownerCastingId))
         {
@@ -92,12 +83,12 @@ public class Tornado : MonoBehaviour
         GridManager.instance.SetTile(cellToRemoveFrom, EnumData.TileType.Solid, false, false);
 
         //set tiles to normal
-        List<Vector3Int> getCellToNormalise = GridManager.instance.GetSizeCells(calSize, cellToRemoveFrom);
+        List<Vector3Int> getCellToNormalise = GridManager.instance.GetSizeCells(GameConfig.tornadoSize / 2, cellToRemoveFrom);
         foreach (KeyValuePair<int, Dictionary<int, TornadoChild>> kvp in actorIdToPlacedTornadoDic)
         {
             foreach (KeyValuePair<int, TornadoChild> item in kvp.Value)
             {
-                List<Vector3Int> regionPositions = GridManager.instance.GetSizeCells(calSize, GridManager.instance.grid.WorldToCell(item.Value.tornadoCollider.transform.position));
+                List<Vector3Int> regionPositions = GridManager.instance.GetSizeCells(GameConfig.tornadoSize / 2, GridManager.instance.grid.WorldToCell(item.Value.tornadoCollider.transform.position));
                 foreach (Vector3Int pos in regionPositions)
                 {
                     if (getCellToNormalise.Contains(pos))

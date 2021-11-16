@@ -282,7 +282,55 @@ public class Heliemis : Hero
         }
         frameLooper.UpdateAnimationFrame();
     }
+    public override void ProcessRemoteClientInputEventControl()
+    {
+        if (isRespawnningPlayer)
+        {
+            return;
+        }
+        if (isInFlyingState)
+        {
+            return;
+        }
+        if (isInputFreezed)
+        {
+            return;
+        }
+        if (isPushed)
+        {
+            return;
+        }
+        if (isPetrified)
+        {
+            return;
+        }
+        if (isFiringPrimaryProjectile)
+        {
+            FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
+        }
+        if (isFiringItemEyeLaser)
+        {
+            FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
 
+        }
+        if (isFiringItemFireball)
+        {
+            FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+
+        }
+        if (isFiringItemStarShower)
+        {
+            FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Up);
+            FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Down);
+            FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Left);
+            FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Right);
+        }
+        if (isFiringItemCentaurBow)
+        {
+            FireProjectile(new Attack(GameConfig.arrowDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.CentaurBow), GridManager.instance.grid.WorldToCell(actorTransform.position));
+
+        }
+    }
     public override void ProcessInputEventControl()
     {
         if (isRespawnningPlayer)
@@ -325,6 +373,28 @@ public class Heliemis : Hero
             if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
             {
                 FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                if (MultiplayerManager.instance.isServer)
+                {
+                    itemToCast.itemCount--;
+                }
+            }
+        }
+        if (isFiringItemStarShower)
+        {
+            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            {
+                FireProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                if (MultiplayerManager.instance.isServer)
+                {
+                    itemToCast.itemCount--;
+                }
+            }
+        }
+        if (isFiringItemCentaurBow)
+        {
+            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            {
+                FireProjectile(new Attack(GameConfig.arrowDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.Arrow), GridManager.instance.grid.WorldToCell(actorTransform.position));
                 if (MultiplayerManager.instance.isServer)
                 {
                     itemToCast.itemCount--;
@@ -460,7 +530,7 @@ public class Heliemis : Hero
             landPlayer = false;
             useItem = false;
         }
-        else if(isFiringServerProjectiles)
+        else if(isFiringServerProjectiles || isMovementFreezed)
         {
             up = false;
             left = false;

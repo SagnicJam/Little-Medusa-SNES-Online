@@ -17,9 +17,6 @@ public class GridManager : MonoBehaviour
     public EnemySpawnner enemySpawnner;
 
     [Header("Tweak Params")]
-    public float switchHoleToNormalTileAfterDuration = 3;
-    public float pullforce = 1;
-    public float timeOfForce = 5;
     public GameStateDependentTiles[] gameStateDependentTileArray;
 
     [Header("Unit Templates")]
@@ -77,6 +74,7 @@ public class GridManager : MonoBehaviour
                     }
                 }
                 gameStateDependentTileArray[i].initialVectorToTileMapper = new Dictionary<Vector3Int, Tile>();
+                gameStateDependentTileArray[i].liveAnimatedGORef = new Dictionary<Vector3Int, GameObject>();
                 foreach (Vector3Int item in allPositionList)
                 {
                     gameStateDependentTileArray[i].initialVectorToTileMapper.Add(item,gameStateDependentTileArray[i].tileMap.GetTile(item)as Tile);
@@ -87,6 +85,81 @@ public class GridManager : MonoBehaviour
         {
             aStar.Initialise();
         }
+    }
+
+    public void CastQuickSand(Actor serverActor)
+    {
+        List<Vector3Int> vList = GetSizeCells(GameConfig.quickSandSize / 2, grid.WorldToCell(serverActor.actorTransform.position));
+        List<Actor> actorseffected = new List<Actor>();
+
+        foreach (Vector3Int v in vList)
+        {
+            Actor actor = GetActorOnPos(v);
+            if (actor != null && serverActor.ownerId != actor.ownerId)
+            {
+                actor.isMovementFreezed = true;
+                actorseffected.Add(actor);
+            }
+        }
+        IEnumerator ie = QuickSandTimer(actorseffected);
+        StopCoroutine(ie);
+        StartCoroutine(ie);
+    }
+
+    IEnumerator QuickSandTimer(List<Actor> actorsEffected)
+    {
+        int temp = 0;
+        while (temp < GameConfig.quickSandTimerTickCount)
+        {
+            yield return new WaitForFixedUpdate();
+            temp++;
+        }
+        foreach (Actor actor in actorsEffected)
+        {
+            actor.isMovementFreezed = false;
+        }
+        yield break;
+    }
+
+    public void CastAeloianMight(int ownerCasting)
+    {
+        List<Actor> actorsBeingPushed = new List<Actor>();
+        foreach (KeyValuePair<int, ServerSideClient> kvp in Server.clients)
+        {
+            if (kvp.Value.serverMasterController != null)
+            {
+                Actor actor = kvp.Value.serverMasterController.serverInstanceHero;
+                if (actor.ownerId != ownerCasting)
+                {
+                    actor.StartGettingPushedByWind(FaceDirection.Up);
+                    actorsBeingPushed.Add(actor);
+                }
+            }
+        }
+
+        foreach (KeyValuePair<int,Enemy> kvp in Enemy.enemies)
+        {
+            kvp.Value.StartGettingPushedByWind(FaceDirection.Up);
+            actorsBeingPushed.Add(kvp.Value);
+        }
+        IEnumerator ie = AeloianMightTimer(actorsBeingPushed);
+        StopCoroutine(ie);
+        StartCoroutine(ie);
+    }
+
+    IEnumerator AeloianMightTimer(List<Actor> actorsBeingPushed)
+    {
+        int temp = 0;
+        while (temp < GameConfig.aeloianMightTickCount)
+        {
+            yield return new WaitForFixedUpdate();
+            temp++;
+        }
+        foreach (Actor actor in actorsBeingPushed)
+        {
+            actor.StopPushWithoutDamage(actor);
+        }
+        yield break;
     }
 
     public Vector3 GetFacingDirectionOffsetVector3(FaceDirection facing)
@@ -169,7 +242,7 @@ public class GridManager : MonoBehaviour
         {
             if(actor!=null)
             {
-                actor.actorTransform.position = Vector3.MoveTowards(actor.actorTransform.position, pos, Time.fixedDeltaTime * pullforce);
+                actor.actorTransform.position = Vector3.MoveTowards(actor.actorTransform.position, pos, Time.fixedDeltaTime * GameConfig.pullforce);
                 yield return new WaitForFixedUpdate();
             }
             else
@@ -182,7 +255,7 @@ public class GridManager : MonoBehaviour
 
     public IEnumerator WaitForForceCor(Actor actor,OnUsed<Actor> onUsed)
     {
-        yield return new WaitForSeconds(timeOfForce);
+        yield return new WaitForSeconds(GameConfig.timeOfForce);
         if(onUsed!=null)
         {
             onUsed.Invoke(actor);
@@ -199,7 +272,7 @@ public class GridManager : MonoBehaviour
 
     public IEnumerator SwitchTileCor(Vector3Int cellPos,EnumData.TileType fromTile,EnumData.TileType toTile)
     {
-        yield return new WaitForSeconds(switchHoleToNormalTileAfterDuration);
+        yield return new WaitForSeconds(GameConfig.switchHoleToNormalTileAfterDuration);
         SetTile(cellPos, fromTile,false,false);
         SetTile(cellPos, toTile, true,false);
         yield break;
@@ -757,6 +830,15 @@ public class GridManager : MonoBehaviour
         if (!HasTile)
         {
             gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, null);
+            if(gameStateDependentTileArray[(int)tType - 1].hasGameObjectAnimation)
+            {
+                if(gameStateDependentTileArray[(int)tType - 1].liveAnimatedGORef.ContainsKey(cellPos))
+                {
+                    GameObject go = gameStateDependentTileArray[(int)tType - 1].liveAnimatedGORef[cellPos];
+                    Destroy(go);
+                    gameStateDependentTileArray[(int)tType - 1].liveAnimatedGORef.Remove(cellPos);
+                }
+            }
             if(gameStateDependentTileArray[(int)tType - 1].hasGhost)
             {
                 gameStateDependentTileArray[(int)tType - 1].ghosttileMap.SetTile(cellPos, null);
@@ -896,6 +978,19 @@ public class GridManager : MonoBehaviour
             else
             {
                 gameStateDependentTileArray[(int)tType - 1].tileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tile);
+                if(gameStateDependentTileArray[(int)tType - 1].hasGameObjectAnimation)
+                {
+                    if(!gameStateDependentTileArray[(int)tType - 1].liveAnimatedGORef.ContainsKey(cellPos))
+                    {
+                        GameObject go = Instantiate(gameStateDependentTileArray[(int)tType - 1].animatedGO);
+                        go.transform.position = cellToworld(cellPos);
+                        gameStateDependentTileArray[(int)tType - 1].liveAnimatedGORef.Add(cellPos, go);
+                    }
+                    else
+                    {
+                        Debug.LogError("Already contains animation on the cell");
+                    }
+                }
                 if (gameStateDependentTileArray[(int)tType - 1].hasGhost)
                 {
                     gameStateDependentTileArray[(int)tType - 1].ghosttileMap.SetTile(cellPos, gameStateDependentTileArray[(int)tType - 1].tile);
@@ -1462,7 +1557,10 @@ public struct GameStateDependentTiles
     public Tilemap ghosttileMap;
     public TileData ghosttileData;
     public TilemapCollider2D ghosttilemapCollider2D;
+    public GameObject animatedGO;
+    public Dictionary<Vector3Int, GameObject> liveAnimatedGORef;
     public bool hasGhost;
+    public bool hasGameObjectAnimation;
     public bool cereberustileToggle;
     public bool multipleTileGraphic;
     public bool isDarkOnOdd;

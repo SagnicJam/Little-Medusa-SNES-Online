@@ -136,7 +136,7 @@ public class TileData : MonoBehaviour
                     break;
                 case EnumData.TileType.NoBoulder:
                     blockFlyingUnits = false;
-                    blockToSpawnObjectsPlacement = true;
+                    blockToSpawnObjectsPlacement = false;
                     blockUnitMotion = false;
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
@@ -332,6 +332,51 @@ public class TileData : MonoBehaviour
                     isItem = true;
                     break;
                 case EnumData.TileType.PortalItem:
+                    blockFlyingUnits = false;
+                    blockToSpawnObjectsPlacement = true;
+                    blockUnitMotion = false;
+                    blockPetrifiedObjects = false;
+                    blockProjectiles = false;
+                    solidifyTile = false;
+                    isItem = true;
+                    break;
+                case EnumData.TileType.AeloianMightItem:
+                    blockFlyingUnits = false;
+                    blockToSpawnObjectsPlacement = true;
+                    blockUnitMotion = false;
+                    blockPetrifiedObjects = false;
+                    blockProjectiles = false;
+                    solidifyTile = false;
+                    isItem = true;
+                    break;
+                case EnumData.TileType.QuickSandItem:
+                    blockFlyingUnits = false;
+                    blockToSpawnObjectsPlacement = true;
+                    blockUnitMotion = false;
+                    blockPetrifiedObjects = false;
+                    blockProjectiles = false;
+                    solidifyTile = false;
+                    isItem = true;
+                    break;
+                case EnumData.TileType.PermamnentBlockItem:
+                    blockFlyingUnits = false;
+                    blockToSpawnObjectsPlacement = true;
+                    blockUnitMotion = false;
+                    blockPetrifiedObjects = false;
+                    blockProjectiles = false;
+                    solidifyTile = false;
+                    isItem = true;
+                    break;
+                case EnumData.TileType.StarShowerItem:
+                    blockFlyingUnits = false;
+                    blockToSpawnObjectsPlacement = true;
+                    blockUnitMotion = false;
+                    blockPetrifiedObjects = false;
+                    blockProjectiles = false;
+                    solidifyTile = false;
+                    isItem = true;
+                    break;
+                case EnumData.TileType.CentaurBowItem:
                     blockFlyingUnits = false;
                     blockToSpawnObjectsPlacement = true;
                     blockUnitMotion = false;

@@ -6,24 +6,45 @@ using UnityEngine.Tilemaps;
 public class Portal : MonoBehaviour
 {
     public Dictionary<Vector3Int, PortalInfo> portalEntranceDic = new Dictionary<Vector3Int, PortalInfo>();
-    public void PlacePortal(int portalOwner,Vector3Int portalInLet)
+
+    public void PlacePortal(int portalOwner,Vector3Int portalInLet,OnWorkDone onSuccess)
     {
         if(!portalEntranceDic.ContainsKey(portalInLet))
         {
             List<Vector3Int> placablePositions = GetAllPlacablePortalPoints(GetActorsWithMaxLives(portalOwner));
-            GridManager.instance.SetTile(portalInLet,EnumData.TileType.Portal,true,false);
 
             if(placablePositions.Count>0)
             {
                 Vector3Int portalOutlet = placablePositions[UnityEngine.Random.Range(0, placablePositions.Count)];
+                GridManager.instance.SetTile(portalInLet, EnumData.TileType.Portal, true, false);
                 GridManager.instance.SetTile(portalOutlet, EnumData.TileType.Portal, true, false);
                 portalEntranceDic.Add(portalInLet, new PortalInfo(portalOwner, portalOutlet));
+
+                IEnumerator ie = PortalTimer(portalInLet);
+                StopCoroutine(ie);
+                StartCoroutine(ie);
+                onSuccess?.Invoke();
             }
             else
             {
                 Debug.LogError("No placable position");
             }
         }
+    }
+
+    IEnumerator PortalTimer(Vector3Int portalInlet)
+    {
+        int temp = 0;
+        while(temp<GameConfig.portalExistenceTickCount)
+        {
+            yield return new WaitForFixedUpdate();
+            temp++;
+        }
+
+        GridManager.instance.SetTile(portalEntranceDic[portalInlet].portalOutlet, EnumData.TileType.Portal, false, false);
+        GridManager.instance.SetTile(portalInlet, EnumData.TileType.Portal, false, false);
+        portalEntranceDic.Remove(portalInlet);
+        yield break;
     }
 
     List<Vector3Int>GetAllPlacablePortalPoints(List<Actor>actors)
@@ -80,7 +101,6 @@ public class Portal : MonoBehaviour
                     }
                 }
             }
-                
         }
         return maxLivesActor;
     }
@@ -98,10 +118,7 @@ public class Portal : MonoBehaviour
             }
             else if(actor is Enemy enemy)
             {
-                if(enemy.leaderNetworkId== portalEntranceDic[portalCellPosition].portalOwner)
-                {
-                    TeleportActor(enemy, portalEntranceDic[portalCellPosition].portalOutlet);
-                }
+                TeleportActor(enemy, portalEntranceDic[portalCellPosition].portalOutlet);
             }
         }
     }

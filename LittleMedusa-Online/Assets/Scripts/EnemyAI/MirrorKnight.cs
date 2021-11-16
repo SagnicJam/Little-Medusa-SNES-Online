@@ -46,7 +46,10 @@ public class MirrorKnight : Enemy
         {
             return;
         }
-
+        if (isMovementFreezed)
+        {
+            return;
+        }
         if (!isPrimaryMoveActive && !isSecondaryMoveActive)
         {
             if(!waitForPathFindingToWearOff.Perform())
@@ -108,7 +111,10 @@ public class MirrorKnight : Enemy
         {
             return;
         }
-
+        if (isMovementFreezed)
+        {
+            return;
+        }
         if (!CanOccupy(currentMovePointCellPosition))
         {
             OnCantOccupySpace();
@@ -134,7 +140,10 @@ public class MirrorKnight : Enemy
         {
             return;
         }
-
+        if (isMovementFreezed)
+        {
+            return;
+        }
 
         if (isPrimaryMoveActive)
         {
@@ -171,6 +180,10 @@ public class MirrorKnight : Enemy
             return;
         }
         if (isPetrified)
+        {
+            return;
+        }
+        if (isMovementFreezed)
         {
             return;
         }
@@ -271,6 +284,14 @@ public class MirrorKnight : Enemy
             petrificationAction.Perform();
             return;
         }
+        if (isMovementFreezed)
+        {
+            if (!completedMotionToMovePoint)
+            {
+                actorTransform.position = Vector3.MoveTowards(actorTransform.position, movePoint.position, petrificationSnapSpeed * Time.fixedDeltaTime);
+            }
+            return;
+        }
         if (isMelleAttacking)
         {
             //Check for player
@@ -315,7 +336,11 @@ public class MirrorKnight : Enemy
         FinishFollowing();
         walkSpeed = normalSpeed;
     }
-
+    public override void UnPetrify()
+    {
+        base.UnPetrify();
+        KillMe();
+    }
     public void FinishFollowing()
     {
         if (followingTarget)

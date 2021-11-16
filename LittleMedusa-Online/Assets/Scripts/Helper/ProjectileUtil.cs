@@ -194,6 +194,14 @@ public class ProjectileUtil : MonoBehaviour
                 {
                     Destroy(gameObject);
                 }
+                else if (pU.projectileTypeThrown == EnumData.Projectiles.StarShower)
+                {
+                    Destroy(gameObject);
+                }
+                else if (pU.projectileTypeThrown == EnumData.Projectiles.CentaurBow)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
@@ -294,6 +302,18 @@ public class ProjectileUtil : MonoBehaviour
                 }
             }
         }
+        else if (pU.projectileTypeThrown == EnumData.Projectiles.StarShower)
+        {
+            pU.onUseOver.Invoke(collidedActorWithMyHead);
+        }
+        else if (pU.projectileTypeThrown == EnumData.Projectiles.CentaurBow)
+        {
+            pU.onUseOver.Invoke(collidedActorWithMyHead);
+        }
+        if (selfDestroyOnTargetTouch)
+        {
+            pU.EndOfUse();
+        }
     }
 
     void DealProjectileOnActor(Actor collidedActorWithMyHead)
@@ -312,7 +332,6 @@ public class ProjectileUtil : MonoBehaviour
                 //Send by client to server
                 pU.onUseOver.Invoke(collidedActorWithMyHead);
             }
-
         }
         else if(pU.projectileTypeThrown == EnumData.Projectiles.Arrow)
         {
@@ -341,6 +360,14 @@ public class ProjectileUtil : MonoBehaviour
                 }
             }
 
+        }
+        else if (pU.projectileTypeThrown == EnumData.Projectiles.StarShower)
+        {
+            pU.onUseOver.Invoke(collidedActorWithMyHead);
+        }
+        else if (pU.projectileTypeThrown == EnumData.Projectiles.CentaurBow)
+        {
+            pU.onUseOver.Invoke(collidedActorWithMyHead);
         }
         else if(pU.projectileTypeThrown == EnumData.Projectiles.FireBall)
         {

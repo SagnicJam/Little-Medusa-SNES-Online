@@ -8,7 +8,6 @@ public class Centaur : Enemy
     public float lineRangeForDetection;
     public float circleRangeForDetection;
     public float rangedAttackLineLengthForDetection;
-    public int arrowDamage; 
 
 
     AimlessWandererMapper wandererMapper = new AimlessWandererMapper();
@@ -49,7 +48,10 @@ public class Centaur : Enemy
         {
             return;
         }
-
+        if (isMovementFreezed)
+        {
+            return;
+        }
         if (!isPrimaryMoveActive && !isSecondaryMoveActive)
         {
             if (!waitForPathFindingToWearOff.Perform())
@@ -111,7 +113,10 @@ public class Centaur : Enemy
         {
             return;
         }
-
+        if (isMovementFreezed)
+        {
+            return;
+        }
         if (!CanOccupy(currentMovePointCellPosition))
         {
             OnCantOccupySpace();
@@ -135,7 +140,10 @@ public class Centaur : Enemy
         {
             return;
         }
-
+        if (isMovementFreezed)
+        {
+            return;
+        }
         if (isPrimaryMoveActive)
         {
             if (!isUsingPrimaryMove)
@@ -189,6 +197,10 @@ public class Centaur : Enemy
             return;
         }
         if (isPetrified)
+        {
+            return;
+        }
+        if (isMovementFreezed)
         {
             return;
         }
@@ -309,6 +321,14 @@ public class Centaur : Enemy
             petrificationAction.Perform();
             return;
         }
+        if (isMovementFreezed)
+        {
+            if (!completedMotionToMovePoint)
+            {
+                actorTransform.position = Vector3.MoveTowards(actorTransform.position, movePoint.position, petrificationSnapSpeed * Time.fixedDeltaTime);
+            }
+            return;
+        }
         if (isMelleAttacking)
         {
             //Check for player
@@ -326,7 +346,7 @@ public class Centaur : Enemy
             //Check for player
             //Attack player
             Debug.Log("Range Attacking player");
-            FireProjectile(new Attack(arrowDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.Arrow),
+            FireProjectile(new Attack(GameConfig.arrowDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.Arrow),
                 GridManager.instance.grid.WorldToCell(actorTransform.position));
         }
     }
@@ -383,7 +403,7 @@ public class Centaur : Enemy
 
     public override void OnPushStop()
     {
-        Debug.LogError("OnPushStop " + gameObject.name);
+        //Debug.LogError("OnPushStop " + gameObject.name);
         FinishFollowing();
         walkSpeed = normalSpeed;
     }

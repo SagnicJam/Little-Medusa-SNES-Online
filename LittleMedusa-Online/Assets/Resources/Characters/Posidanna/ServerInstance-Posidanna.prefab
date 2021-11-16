@@ -460,13 +460,25 @@ MonoBehaviour:
   - {fileID: -40113125630341918, guid: 931d4757f06d2484380c0569ca186148, type: 3}
   - {fileID: -4297306093744318235, guid: 931d4757f06d2484380c0569ca186148, type: 3}
   leftFlySprite:
-  - {fileID: -5534030117714579514, guid: d3ed6e978054382438e137e2d1c2e300, type: 3}
+  - {fileID: -3974016287553694039, guid: e0fff97df635dea40938660ff23b6dd6, type: 3}
+  - {fileID: 4176419375040514954, guid: e0fff97df635dea40938660ff23b6dd6, type: 3}
+  - {fileID: 3770691053759131623, guid: e0fff97df635dea40938660ff23b6dd6, type: 3}
+  - {fileID: -2271882310183178802, guid: e0fff97df635dea40938660ff23b6dd6, type: 3}
   rightFlySprite:
-  - {fileID: 8392433002682850257, guid: 66c0a80e16adec54099184cfd5fed824, type: 3}
+  - {fileID: 5089150993754980442, guid: 34b3fcf63e940974fb864ffa4c1b3a0c, type: 3}
+  - {fileID: 5702532991476087871, guid: 34b3fcf63e940974fb864ffa4c1b3a0c, type: 3}
+  - {fileID: -1909259766005877121, guid: 34b3fcf63e940974fb864ffa4c1b3a0c, type: 3}
+  - {fileID: -4053600030968322832, guid: 34b3fcf63e940974fb864ffa4c1b3a0c, type: 3}
   downFlySprite:
-  - {fileID: 225591968933359130, guid: ba8b507ad512fba4bba11ec2526491dc, type: 3}
+  - {fileID: 3748182035230944849, guid: 9ec0cfb22526e1b4599d26118ba826a4, type: 3}
+  - {fileID: 5373561315407025702, guid: 9ec0cfb22526e1b4599d26118ba826a4, type: 3}
+  - {fileID: 9090428384396515564, guid: 9ec0cfb22526e1b4599d26118ba826a4, type: 3}
+  - {fileID: 8939800434682361272, guid: 9ec0cfb22526e1b4599d26118ba826a4, type: 3}
   upFlySprite:
-  - {fileID: -8160189256484558602, guid: 931d4757f06d2484380c0569ca186148, type: 3}
+  - {fileID: -901395953919006904, guid: a07ead2380a95b541a32161233d7f786, type: 3}
+  - {fileID: 7417587263634531175, guid: a07ead2380a95b541a32161233d7f786, type: 3}
+  - {fileID: -529193420504623730, guid: a07ead2380a95b541a32161233d7f786, type: 3}
+  - {fileID: 7941845738567899612, guid: a07ead2380a95b541a32161233d7f786, type: 3}
   petrificationSpriteArr: []
   primaryMoveAnimationSprites:
     upMove:
@@ -540,8 +552,11 @@ MonoBehaviour:
   isFiringPrimaryProjectile: 0
   isFiringItemEyeLaser: 0
   isFiringItemFireball: 0
+  isFiringItemStarShower: 0
+  isFiringItemCentaurBow: 0
   isInvincible: 0
   isRespawnningPlayer: 0
+  isMovementFreezed: 0
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
@@ -566,9 +581,6 @@ MonoBehaviour:
   actorMePushing: {fileID: 0}
   petrificationColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 0.6509804}
   invincibleColor: {r: 1, g: 0.9345745, b: 0, a: 0.6509804}
-  itemEyeLaserMoveAttackRateTickRate: 20
-  itemFireballMoveAttackRateTickRate: 20
-  bubbleShieldItemMoveAttackRateTickRate: 120
   healthFillImage: {fileID: 0}
   currentLifeStockText: {fileID: 0}
   statusSprite: {fileID: 0}

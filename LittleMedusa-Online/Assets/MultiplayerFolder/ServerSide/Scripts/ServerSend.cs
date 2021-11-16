@@ -93,6 +93,8 @@ public class ServerSend
             packet.Write(serverMasterController.serverInstanceHero.isFiringPrimaryProjectile);
             packet.Write(serverMasterController.serverInstanceHero.isFiringItemEyeLaser);
             packet.Write(serverMasterController.serverInstanceHero.isFiringItemFireball);
+            packet.Write(serverMasterController.serverInstanceHero.isFiringItemStarShower);
+            packet.Write(serverMasterController.serverInstanceHero.isFiringItemCentaurBow);
             packet.Write(serverMasterController.serverInstanceHero.isWalking);
             packet.Write(serverMasterController.serverInstanceHero.isFlying);
             packet.Write(serverMasterController.serverInstanceHero.isUsingPrimaryMove);
@@ -100,6 +102,7 @@ public class ServerSend
             packet.Write(serverMasterController.serverInstanceHero.isPushed);
             packet.Write(serverMasterController.serverInstanceHero.isPhysicsControlled);
             packet.Write(serverMasterController.serverInstanceHero.isInputFreezed);
+            packet.Write(serverMasterController.serverInstanceHero.isMovementFreezed);
             packet.Write(serverMasterController.serverInstanceHero.isInvincible);
             packet.Write(serverMasterController.serverInstanceHero.isRespawnningPlayer);
             packet.Write(serverMasterController.serverInstanceHero.inCharacterSelectionScreen);
@@ -178,6 +181,16 @@ public class ServerSend
                 packet.Write(keyValuePair.Value.pos);
             }
 
+            packet.Write(worldUpdate.portalEntranceDic.Count);
+            foreach (KeyValuePair<Vector3Int,PortalInfo> item in worldUpdate.portalEntranceDic)
+            {
+                packet.Write(item.Key);
+
+                packet.Write(item.Value.portalOutlet);
+
+                packet.Write(item.Value.portalOwner);
+            }
+
             packet.Write(worldUpdate.gameData.gameState);
             packet.Write(worldUpdate.gameData.matchStartTime);
 
@@ -251,6 +264,16 @@ public class ServerSend
                     compressedPacked.Write(keyValuePair.Value.pos);
                 }
 
+                compressedPacked.Write(worldUpdates[i].portalEntranceDic.Count);
+                foreach (KeyValuePair<Vector3Int, PortalInfo> item in worldUpdates[i].portalEntranceDic)
+                {
+                    compressedPacked.Write(item.Key);
+
+                    compressedPacked.Write(item.Value.portalOutlet);
+
+                    compressedPacked.Write(item.Value.portalOwner);
+                }
+
                 compressedPacked.Write(worldUpdates[i].gameData.gameState);
                 compressedPacked.Write(worldUpdates[i].gameData.matchStartTime);
 
@@ -319,6 +342,17 @@ public class ServerSend
 
                         compressedPacked.Write(keyValuePair.Value.pos);
                     }
+
+                    compressedPacked.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].portalEntranceDic.Count);
+                    foreach (KeyValuePair<Vector3Int, PortalInfo> item in previousWorldUpdatePacks[i].previousWorldUpdates[j].portalEntranceDic)
+                    {
+                        compressedPacked.Write(item.Key);
+
+                        compressedPacked.Write(item.Value.portalOutlet);
+
+                        compressedPacked.Write(item.Value.portalOwner);
+                    }
+
                     compressedPacked.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].gameData.gameState);
                     compressedPacked.Write(previousWorldUpdatePacks[i].previousWorldUpdates[j].gameData.matchStartTime);
 
@@ -352,6 +386,8 @@ public class ServerSend
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerEvents.firedPrimaryMoveProjectile);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerEvents.firedItemEyeLaserMoveProjectile);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerEvents.firedItemFireballMoveProjectile);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerEvents.firedItemStarShowerMoveProjectile);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerEvents.firedItemCentaurBowMoveProjectile);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAnimationEvents.isWalking);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAnimationEvents.isFlying);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed);
@@ -359,6 +395,7 @@ public class ServerSend
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPushed);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isPhysicsControlled);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.inputFreezed);
+                packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isMovementFreezed);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isInvincible);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer);
                 packet.Write(playerUpdatedPosition[i].playerStateUpdates.playerAuthoratativeStates.inCharacterSelectionScreen);
@@ -394,6 +431,8 @@ public class ServerSend
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerEvents.firedPrimaryMoveProjectile);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerEvents.firedItemEyeLaserMoveProjectile);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerEvents.firedItemFireballMoveProjectile);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerEvents.firedItemStarShowerMoveProjectile);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerEvents.firedItemCentaurBowMoveProjectile);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAnimationEvents.isWalking);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAnimationEvents.isFlying);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAnimationEvents.isPrimaryMoveAnimationBeingPlayed);
@@ -401,6 +440,7 @@ public class ServerSend
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPushed);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isPhysicsControlled);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.inputFreezed);
+                    packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isMovementFreezed);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isInvincible);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.isRespawnningPlayer);
                     packet.Write(previousPlayerUpdatedPositionPacks[i].previousUpdatedStates[j].playerStateUpdates.playerAuthoratativeStates.inCharacterSelectionScreen);

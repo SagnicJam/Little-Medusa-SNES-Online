@@ -270,13 +270,13 @@ public class Medusa : Hero
                     else if (inputs[(int)EnumData.MedusaInputs.PlaceRemovalBoulder] && previousInputs[(int)EnumData.MedusaInputs.PlaceRemovalBoulder] != inputs[(int)EnumData.MedusaInputs.PlaceRemovalBoulder])
                     {
                         Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing))
+                        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.NoBoulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing))
                         {
                             //send command to server of placement
                             PlaceBoulderCommand placeBoulderCommand = new PlaceBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
                             ClientSend.PlaceBoulderCommand(placeBoulderCommand);
                         }
-                        else if (GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.Boulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderDisappearing))
+                        else if (GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.Boulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.NoBoulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderDisappearing))
                         {
                             RemoveBoulderCommand removeBoulderCommand = new RemoveBoulderCommand(GetLocalSequenceNo(), cellToCheckFor);
                             ClientSend.RemoveBoulderCommand(removeBoulderCommand);
@@ -304,6 +304,53 @@ public class Medusa : Hero
                     }
                 }
             }
+        }
+    }
+
+    public override void ProcessRemoteClientInputEventControl()
+    {
+        if (isRespawnningPlayer)
+        {
+            return;
+        }
+        if (isInFlyingState)
+        {
+            return;
+        }
+        if (isInputFreezed)
+        {
+            return;
+        }
+        if (isPushed)
+        {
+            return;
+        }
+        if (isPetrified)
+        {
+            return;
+        }
+        if (isFiringPrimaryProjectile)
+        {
+            FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
+        }
+        if (isFiringItemEyeLaser)
+        {
+            FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
+        }
+        if (isFiringItemFireball)
+        {
+            FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+        }
+        if (isFiringItemStarShower)
+        {
+            FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Up);
+            FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Down);
+            FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Left);
+            FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Right);
+        }
+        if (isFiringItemCentaurBow)
+        {
+            FireProjectile(new Attack(GameConfig.arrowDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.CentaurBow), GridManager.instance.grid.WorldToCell(actorTransform.position));
         }
     }
 
@@ -349,6 +396,31 @@ public class Medusa : Hero
             if (itemToCast != null && itemToCast.itemCount > 0&&itemToCast.castableItemType==EnumData.CastItemTypes.ClientProjectiles)
             {
                 FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                if (MultiplayerManager.instance.isServer)
+                {
+                    itemToCast.itemCount--;
+                }
+            }
+        }
+        if (isFiringItemStarShower)
+        {
+            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            {
+                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position),FaceDirection.Up);
+                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position),FaceDirection.Down);
+                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position),FaceDirection.Left);
+                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position),FaceDirection.Right);
+                if (MultiplayerManager.instance.isServer)
+                {
+                    itemToCast.itemCount--;
+                }
+            }
+        }
+        if(isFiringItemCentaurBow)
+        {
+            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            {
+                FireProjectile(new Attack(GameConfig.arrowDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.CentaurBow), GridManager.instance.grid.WorldToCell(actorTransform.position));
                 if (MultiplayerManager.instance.isServer)
                 {
                     itemToCast.itemCount--;
@@ -506,7 +578,7 @@ public class Medusa : Hero
             landPlayer = false;
             useItem = false;
         }
-        else if (isFiringServerProjectiles)
+        else if (isFiringServerProjectiles || isMovementFreezed)
         {
             up = false;
             left = false;

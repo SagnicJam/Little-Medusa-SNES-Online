@@ -40,7 +40,8 @@ public class EnemySpawnner : MonoBehaviour
     void InstantiateEnemy(Vector3Int cellPos)
     {
         GameObject enemy = Instantiate(enemyPrefab[(int)monsterToSpawn]);
-        Actor actor = enemy.GetComponentInChildren<Actor>();
+        Enemy actor = enemy.GetComponentInChildren<Enemy>();
+        actor.isSpawnned = true;
         actor.transform.position = GridManager.instance.cellToworld(cellPos);
         actor.transform.rotation = Quaternion.identity;
         actor.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actor.transform.position);
@@ -55,6 +56,17 @@ public class EnemySpawnner : MonoBehaviour
         actor.transform.position = GridManager.instance.cellToworld(cellPos);
         actor.transform.rotation = Quaternion.identity;
         actor.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actor.transform.position);
+    }
+
+    public void InstantiatePetrifiedEnemy(Vector3Int cellPos, int direction,EnumData.MonsterBreed monsterBreed)
+    {
+        GameObject enemy = Instantiate(enemyPrefab[(int)monsterBreed]);
+        Enemy actor = enemy.GetComponentInChildren<Enemy>();
+        actor.Facing = (FaceDirection)direction;
+        actor.transform.position = GridManager.instance.cellToworld(cellPos);
+        actor.transform.rotation = Quaternion.identity;
+        actor.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actor.transform.position);
+        actor.Petrify();
     }
 
     public int spawnTickRate;

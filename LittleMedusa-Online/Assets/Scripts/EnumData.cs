@@ -91,7 +91,12 @@ public class EnumData
         FlamePillar,
         EyeLaser,
         Fireball,
-        Portal
+        Portal,
+        AeloianMight,
+        QuickSand,
+        PermamnentBlock,
+        StarShower,
+        CentaurBow
     }
 
     public enum PlayerStates
@@ -150,7 +155,12 @@ public class EnumData
         FireballItem,
         FlamePillarItem,
         PortalItem,
-        Portal
+        Portal,
+        AeloianMightItem,
+        QuickSandItem,
+        PermamnentBlockItem,
+        StarShowerItem,
+        CentaurBowItem,
     }
 
     public enum GameObjectEnums
@@ -201,7 +211,9 @@ public class EnumData
         MightyWindMirrorKnight,
         FireBallMirrorKnight,
         DispersedFireBallMirrorKnight,
-        EyeLaserPortal
+        EyeLaserPortal,
+        StarShower,
+        CentaurBow
     }
 
     public enum MonsterBreed

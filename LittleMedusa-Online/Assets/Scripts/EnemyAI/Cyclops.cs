@@ -45,6 +45,10 @@ public class Cyclops : Enemy
         {
             return;
         }
+        if(isMovementFreezed)
+        {
+            return;
+        }
 
         if (!isPrimaryMoveActive && !isSecondaryMoveActive)
         {
@@ -107,6 +111,10 @@ public class Cyclops : Enemy
         {
             return;
         }
+        if(isMovementFreezed)
+        {
+            return;
+        }
         
         if (!CanOccupy(currentMovePointCellPosition))
         {
@@ -130,6 +138,11 @@ public class Cyclops : Enemy
         }
 
         if (isPetrified)
+        {
+            return;
+        }
+
+        if(isMovementFreezed)
         {
             return;
         }
@@ -171,6 +184,10 @@ public class Cyclops : Enemy
             return;
         }
         if (isPetrified)
+        {
+            return;
+        }
+        if(isMovementFreezed)
         {
             return;
         }
@@ -271,6 +288,14 @@ public class Cyclops : Enemy
             petrificationAction.Perform();
             return;
         }
+        if(isMovementFreezed)
+        {
+            if (!completedMotionToMovePoint)
+            {
+                actorTransform.position = Vector3.MoveTowards(actorTransform.position, movePoint.position, petrificationSnapSpeed * Time.fixedDeltaTime);
+            }
+            return;
+        }
         if (isMelleAttacking)
         {
             //Check for player
@@ -300,6 +325,12 @@ public class Cyclops : Enemy
         PerformEvents();
 
         previousIsPrimaryMoveActive = newIsPrimaryMoveActive;
+    }
+
+    public override void UnPetrify()
+    {
+        base.UnPetrify();
+        KillMe();
     }
 
     public void FinishFollowing()

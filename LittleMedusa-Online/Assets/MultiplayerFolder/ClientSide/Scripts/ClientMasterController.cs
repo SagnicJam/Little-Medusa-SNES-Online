@@ -372,7 +372,7 @@ public class ClientMasterController : MonoBehaviour
         }
         else
         {
-            clientPlayer.ProcessInputEventControl();
+            clientPlayer.ProcessRemoteClientInputEventControl();
             clientPlayer.ProcessInputAnimationControl();
         }
     }
@@ -450,6 +450,7 @@ public struct PlayerAuthoratativeStates
     public bool isInvincible;
     public bool isPhysicsControlled;
     public bool inputFreezed;
+    public bool isMovementFreezed;
     public bool isRespawnningPlayer;
     public bool inCharacterSelectionScreen;
     public bool inGame;
@@ -457,12 +458,13 @@ public struct PlayerAuthoratativeStates
     public int currentStockLives;
     public int hero;
     public ItemToCast itemToCast;
-    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isPhysicsControlled, bool inputFreezed, bool isInvincible,bool isRespawnningPlayer,bool inCharacterSelectionScreen,bool inGame, int currentHP,int currentStockLives,int hero, ItemToCast itemToCast)
+    public PlayerAuthoratativeStates(bool isPetrified, bool isPushed,bool isPhysicsControlled, bool inputFreezed,bool isMovementFreezed, bool isInvincible,bool isRespawnningPlayer,bool inCharacterSelectionScreen,bool inGame, int currentHP,int currentStockLives,int hero, ItemToCast itemToCast)
     {
         this.isPetrified = isPetrified;
         this.isPushed = isPushed;
         this.isPhysicsControlled = isPhysicsControlled;
         this.inputFreezed = inputFreezed;
+        this.isMovementFreezed = isMovementFreezed;
         this.isInvincible = isInvincible;
         this.isRespawnningPlayer = isRespawnningPlayer;
         this.inCharacterSelectionScreen = inCharacterSelectionScreen;
@@ -525,12 +527,16 @@ public struct PlayerEvents
     public bool firedPrimaryMoveProjectile;
     public bool firedItemEyeLaserMoveProjectile;
     public bool firedItemFireballMoveProjectile;
+    public bool firedItemStarShowerMoveProjectile;
+    public bool firedItemCentaurBowMoveProjectile;
 
-    public PlayerEvents(bool firedPrimaryMoveProjectile,bool firedItemEyeLaserMoveProjectile,bool firedItemFireballMoveProjectile)
+    public PlayerEvents(bool firedPrimaryMoveProjectile,bool firedItemEyeLaserMoveProjectile,bool firedItemFireballMoveProjectile, bool firedItemStarShowerMoveProjectile, bool firedItemCentaurBowMoveProjectile)
     {
         this.firedPrimaryMoveProjectile = firedPrimaryMoveProjectile;
         this.firedItemEyeLaserMoveProjectile = firedItemEyeLaserMoveProjectile;
         this.firedItemFireballMoveProjectile = firedItemFireballMoveProjectile;
+        this.firedItemStarShowerMoveProjectile = firedItemStarShowerMoveProjectile;
+        this.firedItemCentaurBowMoveProjectile = firedItemCentaurBowMoveProjectile;
     }
 }
 

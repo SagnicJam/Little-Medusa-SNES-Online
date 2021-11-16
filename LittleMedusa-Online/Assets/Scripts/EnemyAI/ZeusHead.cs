@@ -36,7 +36,10 @@ public class ZeusHead : Enemy
         {
             return;
         }
-
+        if (isMovementFreezed)
+        {
+            return;
+        }
         if (!isPrimaryMoveActive&&!isSecondaryMoveActive)
         {
             if (waitingForNextActionToCheckForPath.isWaitingForNextActionCheck)
@@ -67,7 +70,10 @@ public class ZeusHead : Enemy
         {
             return;
         }
-
+        if (isMovementFreezed)
+        {
+            return;
+        }
         if (!CanOccupy(currentMovePointCellPosition))
         {
             OnCantOccupySpace();
@@ -92,7 +98,10 @@ public class ZeusHead : Enemy
         {
             return;
         }
-
+        if (isMovementFreezed)
+        {
+            return;
+        }
 
         if (isPrimaryMoveActive)
         {
@@ -147,6 +156,10 @@ public class ZeusHead : Enemy
             return;
         }
         if (isPetrified)
+        {
+            return;
+        }
+        if (isMovementFreezed)
         {
             return;
         }
@@ -263,6 +276,14 @@ public class ZeusHead : Enemy
         if (isPetrified)
         {
             petrificationAction.Perform();
+            return;
+        }
+        if (isMovementFreezed)
+        {
+            if (!completedMotionToMovePoint)
+            {
+                actorTransform.position = Vector3.MoveTowards(actorTransform.position, movePoint.position, petrificationSnapSpeed * Time.fixedDeltaTime);
+            }
             return;
         }
         if (isMelleAttacking)

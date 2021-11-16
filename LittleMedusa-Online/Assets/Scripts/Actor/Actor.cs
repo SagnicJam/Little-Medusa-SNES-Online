@@ -60,8 +60,11 @@ public abstract class Actor : TileData
     public bool isFiringPrimaryProjectile;
     public bool isFiringItemEyeLaser;
     public bool isFiringItemFireball;
+    public bool isFiringItemStarShower;
+    public bool isFiringItemCentaurBow;
     public bool isInvincible;
     public bool isRespawnningPlayer;
+    public bool isMovementFreezed;
     public bool inCharacterSelectionScreen;
     public bool inGame;
     public bool triggerFaceChangeEvent;
@@ -573,6 +576,35 @@ public abstract class Actor : TileData
         }
     }
 
+    public void FireDirectionalProjectile(Attack rangedAttack, Vector3Int positionToSpawn,FaceDirection direction)
+    {
+        positionToSpawnProjectile = positionToSpawn;
+        rangedAttack.SetAttackingActorId(ownerId);
+        int angle=0;
+        switch(direction)
+        {
+            case FaceDirection.Up:
+                angle = 270;
+                break;
+            case FaceDirection.Down:
+                angle = 90;
+                break;
+            case FaceDirection.Left:
+                angle = 180;
+                break;
+            case FaceDirection.Right:
+                angle = 0;
+                break;
+        }
+        DynamicItem dynamicItem = new DynamicItem
+        {
+            ranged = rangedAttack,
+            activate = new DirectionBasedProjectileUse(angle, actorTransform.right, null)
+        };
+        currentAttack = rangedAttack;
+        dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
+    }
+
     public void FireProjectile(Attack rangedAttack, Vector3Int positionToSpawn)
     {
         positionToSpawnProjectile = positionToSpawn;
@@ -590,6 +622,10 @@ public abstract class Actor : TileData
     public virtual void Petrify()
     {
         if (isPhysicsControlled||isPushed)
+        {
+            return;
+        }
+        if(this is Minnataur)
         {
             return;
         }
@@ -704,6 +740,18 @@ public abstract class Actor : TileData
             actor.chainIDLinkedTo = chainIDLinkedTo;
             StartPush(actor, faceDirectionToPushActor);
             SetActorMePushing(actor);
+        }
+        else
+        {
+            StopPush(this);
+        }
+    }
+
+    public void StartGettingPushedByWind(FaceDirection faceDirection)
+    {
+        if (IsActorPushableInDirection(this, faceDirection))
+        {
+            StartPush(this, faceDirection);
         }
         else
         {
@@ -959,7 +1007,7 @@ public abstract class Actor : TileData
             if (currentStockLives > 0)
             {
                 currentStockLives--;
-                Debug.LogError("Respawn Player");
+                Debug.Log("Respawn Player");
                 UnPetrify();
                 RespawnPlayer();
                 Die();
@@ -1166,6 +1214,26 @@ public abstract class Actor : TileData
                 {
                     OnBodyCollidedWithFlamePillarItemTiles(currentMovePointCellPosition);
                 }
+                else if (collidedTile.tileType == EnumData.TileType.AeloianMightItem)
+                {
+                    OnBodyCollidedWithAeloianItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.QuickSandItem)
+                {
+                    OnBodyCollidedWithQuicksandItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.PermamnentBlockItem)
+                {
+                    OnBodyCollidedWithPermamentBlockItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.StarShowerItem)
+                {
+                    OnBodyCollidedWithStarShowerItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.CentaurBowItem)
+                {
+                    OnBodyCollidedWithCentaurBowItemTiles(currentMovePointCellPosition);
+                }
             }
         }
         
@@ -1359,6 +1427,11 @@ public abstract class Actor : TileData
     public abstract void OnBodyCollidedWithMightyWindItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithTornadoItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithPortalItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithAeloianItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithQuicksandItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithPermamentBlockItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithStarShowerItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithCentaurBowItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithPitfallItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithEarthquakeItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithFireballItemTiles(Vector3Int cellPos);

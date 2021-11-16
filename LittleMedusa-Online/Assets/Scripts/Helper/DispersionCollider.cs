@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class DispersionCollider : MonoBehaviour
 {
-    [Header("Tweak Params")]
-    public int damage;
-
     [Header("LiveData")]
     public int ownerId;
 
@@ -40,7 +37,7 @@ public class DispersionCollider : MonoBehaviour
                     else if (collidedActor is Hero hero)
                     {
                         Debug.LogError("Herop taking damage");
-                        hero.TakeDamage(damage);
+                        hero.TakeDamage(GameConfig.dispersedFireBallDamage);
                     }
                 }
             }

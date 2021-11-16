@@ -22,6 +22,7 @@ public abstract class Enemy : Actor
     public bool isMelleAttacking;
     public bool isRangedAttacking;
     public bool followingTarget;
+    public bool isSpawnned;
     public int leaderNetworkId;
     public Hero heroToChase;
 
@@ -85,7 +86,7 @@ public abstract class Enemy : Actor
         {
             enemies.Remove(ownerId);
             Destroy(HeadTransform.gameObject);
-            if (GridManager.instance.enemySpawnner.totalEnemyToSpawn > 0)
+            if (isSpawnned && GridManager.instance.enemySpawnner.totalEnemyToSpawn > 0)
             {
                 GridManager.instance.enemySpawnner.currentEnemyCount--;
             }
@@ -155,7 +156,7 @@ public abstract class Enemy : Actor
 
     public override void OnCantOccupySpace()
     {
-        if (isPetrified || isPushed)
+        if (isPetrified || isPushed||isMovementFreezed)
         {
             currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actorTransform.position);
             previousMovePointCellPosition = currentMovePointCellPosition;
@@ -310,7 +311,25 @@ public abstract class Enemy : Actor
         Portal portal = tileData.GetComponent<Portal>();
         portal.ActorUnitEnter(this, currentMovePointCellPosition);
     }
+    public override void OnBodyCollidedWithAeloianItemTiles(Vector3Int cellPos)
+    {
+    }
 
+    public override void OnBodyCollidedWithQuicksandItemTiles(Vector3Int cellPos)
+    {
+    }
+
+    public override void OnBodyCollidedWithPermamentBlockItemTiles(Vector3Int cellPos)
+    {
+    }
+
+    public override void OnBodyCollidedWithStarShowerItemTiles(Vector3Int cellPos)
+    {
+    }
+
+    public override void OnBodyCollidedWithCentaurBowItemTiles(Vector3Int cellPos)
+    {
+    }
     public override void OnBodyCollidedWithHourGlassTile(Vector3Int hourGlassTile)
     {
     }

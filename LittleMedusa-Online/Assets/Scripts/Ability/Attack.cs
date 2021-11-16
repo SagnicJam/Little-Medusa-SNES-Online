@@ -43,7 +43,6 @@ public class Attack
         //{
         //    return;
         //}
-
         if (attackType == EnumData.AttackTypes.ProjectileAttack)
         {
             switch(projectiles)
@@ -58,11 +57,34 @@ public class Attack
                 //    actorHit.TakeDamage(damage);
                 //    break;
                 case EnumData.Projectiles.Arrow:
-                    actorHit.TakeDamage(damage);
+                    if (actorHit is Hero)
+                    {
+                        actorHit.TakeDamage(damage);
+                    }
                     break;
-                //case EnumData.Projectiles.MightyWind:
-                //    actorHit.TakeDamage(damage);
-                //    break;
+                case EnumData.Projectiles.StarShower:
+                    if(actorHit is Enemy)
+                    {
+                        actorHit.TakeDamage(actorHit.currentHP);
+                    }
+                    else if(actorHit is Hero)
+                    {
+                        actorHit.TakeDamage(damage);
+                    }
+                    break;
+                case EnumData.Projectiles.CentaurBow:
+                    if (actorHit is Enemy)
+                    {
+                        actorHit.TakeDamage(actorHit.currentHP);
+                    }
+                    else if (actorHit is Hero)
+                    {
+                        actorHit.TakeDamage(damage);
+                    }
+                    break;
+                    //case EnumData.Projectiles.MightyWind:
+                    //    actorHit.TakeDamage(damage);
+                    //    break;
             }
         }
         //if(actorHit is Boss bossHit)

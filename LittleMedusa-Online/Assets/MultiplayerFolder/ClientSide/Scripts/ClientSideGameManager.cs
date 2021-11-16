@@ -268,6 +268,8 @@ public class ClientSideGameManager : MonoBehaviour
                 staticAnimatingTileDic.Add(kvp.Key, newstaticAnimatingTileManager);
             }
         }
+
+        GridManager.instance.portal.portalEntranceDic = newWorldUpdate.portalEntranceDic;
         MultiplayerManager.instance.matchStartTimeText.text = Mathf.RoundToInt(newWorldUpdate.gameData.matchStartTime * Time.fixedDeltaTime).ToString();
         latestWorldUpdate = newWorldUpdate;
     }
@@ -472,6 +474,7 @@ public class ClientSideGameManager : MonoBehaviour
                 }
             }
         }
+        GridManager.instance.portal.portalEntranceDic = newWorldUpdate.portalEntranceDic;
 
         MultiplayerManager.instance.matchStartTimeText.text = Mathf.RoundToInt(newWorldUpdate.gameData.matchStartTime * Time.fixedDeltaTime).ToString();
 

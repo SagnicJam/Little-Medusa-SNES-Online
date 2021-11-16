@@ -31,8 +31,11 @@ public class Minnataur : Enemy
         {
             return;
         }
-        
-        if(!isPrimaryMoveActive)
+        if (isMovementFreezed)
+        {
+            return;
+        }
+        if (!isPrimaryMoveActive)
         {
             if (waitingForNextActionToCheckForPath.isWaitingForNextActionCheck)
             {
@@ -62,7 +65,10 @@ public class Minnataur : Enemy
         {
             return;
         }
-        
+        if (isMovementFreezed)
+        {
+            return;
+        }
         if (!CanOccupy(currentMovePointCellPosition))
         {
             OnCantOccupySpace();
@@ -88,7 +94,10 @@ public class Minnataur : Enemy
         {
             return;
         }
-        
+        if (isMovementFreezed)
+        {
+            return;
+        }
 
         if (isPrimaryMoveActive)
         {
@@ -126,6 +135,10 @@ public class Minnataur : Enemy
             return;
         }
         if (isPetrified)
+        {
+            return;
+        }
+        if (isMovementFreezed)
         {
             return;
         }
@@ -224,6 +237,14 @@ public class Minnataur : Enemy
         if (isPetrified)
         {
             petrificationAction.Perform();
+            return;
+        }
+        if (isMovementFreezed)
+        {
+            if (!completedMotionToMovePoint)
+            {
+                actorTransform.position = Vector3.MoveTowards(actorTransform.position, movePoint.position, petrificationSnapSpeed * Time.fixedDeltaTime);
+            }
             return;
         }
         if (isMelleAttacking)

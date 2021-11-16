@@ -415,7 +415,7 @@ MonoBehaviour:
   petrificationSnapSpeed: 6
   primaryMoveAttackRateTickRate: 100
   secondaryMoveAttackRateTickRate: 100
-  pushSpeed: 4
+  pushSpeed: 6
   faceDirectionInit: 0
   flySpeed: 0
   flyingTickCount: 0
@@ -522,8 +522,11 @@ MonoBehaviour:
   isFiringPrimaryProjectile: 0
   isFiringItemEyeLaser: 0
   isFiringItemFireball: 0
+  isFiringItemStarShower: 0
+  isFiringItemCentaurBow: 0
   isInvincible: 0
   isRespawnningPlayer: 0
+  isMovementFreezed: 0
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
@@ -555,6 +558,7 @@ MonoBehaviour:
   isMelleAttacking: 0
   isRangedAttacking: 0
   followingTarget: 0
+  isSpawnned: 0
   leaderNetworkId: 0
   heroToChase: {fileID: 0}
   canBePetrified: 0

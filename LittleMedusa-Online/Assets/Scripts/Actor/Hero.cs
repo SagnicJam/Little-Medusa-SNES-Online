@@ -8,9 +8,7 @@ public abstract class Hero : Actor
     [Header("Tweak Params")]
     public Color petrificationColor;
     public Color invincibleColor;
-    public int itemEyeLaserMoveAttackRateTickRate;
-    public int itemFireballMoveAttackRateTickRate;
-    public int bubbleShieldItemMoveAttackRateTickRate;
+    
 
     [Header("Scene References")]
     public Image healthFillImage;
@@ -29,19 +27,21 @@ public abstract class Hero : Actor
     public WaitingForNextAction waitingActionForBubbleShieldItemMove = new WaitingForNextAction();
     public WaitingForNextAction waitingActionForItemEyeLaserMove = new WaitingForNextAction();
     public WaitingForNextAction waitingActionForItemFireballMove = new WaitingForNextAction();
+    public WaitingForNextAction waitingActionForItemStarShowerMove = new WaitingForNextAction();
+    public WaitingForNextAction waitingActionForItemCentaurBowMove = new WaitingForNextAction();
 
     public override void Awake()
     {
         base.Awake();
         itemToCast = new CastItem(0,0,0);
         waitingActionForBubbleShieldItemMove.Initialise(this);
-        waitingActionForBubbleShieldItemMove.ReInitialiseTimerToEnd(bubbleShieldItemMoveAttackRateTickRate);
+        waitingActionForBubbleShieldItemMove.ReInitialiseTimerToEnd(GameConfig.bubbleShieldItemMoveAttackRateTickRate);
 
         waitingActionForItemEyeLaserMove.Initialise(this);
-        waitingActionForItemEyeLaserMove.ReInitialiseTimerToEnd(itemEyeLaserMoveAttackRateTickRate);
+        waitingActionForItemEyeLaserMove.ReInitialiseTimerToEnd(GameConfig.itemEyeLaserMoveAttackRateTickRate);
 
         waitingActionForItemFireballMove.Initialise(this);
-        waitingActionForItemFireballMove.ReInitialiseTimerToEnd(itemFireballMoveAttackRateTickRate);
+        waitingActionForItemFireballMove.ReInitialiseTimerToEnd(GameConfig.itemFireballMoveAttackRateTickRate);
     }
 
     public override void MakeInvincible()
@@ -108,6 +108,7 @@ public abstract class Hero : Actor
         inGame = playerAuthoratativeStates.inGame;
         hero = playerAuthoratativeStates.hero;
         isInputFreezed = playerAuthoratativeStates.inputFreezed;
+        isMovementFreezed = playerAuthoratativeStates.isMovementFreezed;
         isPetrified = playerAuthoratativeStates.isPetrified;
         isPushed = playerAuthoratativeStates.isPushed;
         isPhysicsControlled = playerAuthoratativeStates.isPhysicsControlled;
@@ -207,6 +208,8 @@ public abstract class Hero : Actor
         isFiringPrimaryProjectile = playerEvents.firedPrimaryMoveProjectile;
         isFiringItemEyeLaser = playerEvents.firedItemEyeLaserMoveProjectile;
         isFiringItemFireball = playerEvents.firedItemFireballMoveProjectile;
+        isFiringItemStarShower = playerEvents.firedItemStarShowerMoveProjectile;
+        isFiringItemCentaurBow = playerEvents.firedItemCentaurBowMoveProjectile;
     }
 
     /// <summary>
@@ -234,9 +237,12 @@ public abstract class Hero : Actor
     public abstract void ProcessEventsInputs(bool[] inputs, bool[] previousInputs);
 
     /// <summary>
-    /// Called locally on client,on remote client,on server
+    /// Called locally on client,on server
     /// </summary>
     public abstract void ProcessInputEventControl();
+    
+    //on remote client
+    public abstract void ProcessRemoteClientInputEventControl();
 
     /// <summary>
     /// Called locally on client and on server
@@ -266,17 +272,6 @@ public abstract class Hero : Actor
         };
         currentAttack = attack;
         dynamicItem.activate.BeginToUse(this, null, dynamicItem.ranged.OnHit);
-    }
-
-    public void PlacePortal(Vector3Int cell)
-    {
-        GridManager.instance.portal.PlacePortal(ownerId, cell);
-    }
-
-    public void PlaceTornado(Vector3Int cell)
-    {
-        //StartCoroutine(RunTornado(5, cell));
-        GridManager.instance.tornado.PlaceTornadoObject(ownerId,cell);
     }
 
     public void CastPitfall(Vector3Int cell)
@@ -462,6 +457,37 @@ public abstract class Hero : Actor
         GridManager.instance.SetTile(hourGlassTile, EnumData.TileType.Hourglass, false,false);
         ServerSideGameManager.instance.StopWorldDestruction();
     }
+
+    public override void OnBodyCollidedWithAeloianItemTiles(Vector3Int cellPos)
+    {
+        GridManager.instance.SetTile(cellPos, EnumData.TileType.AeloianMightItem, false, false);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.AeloianMight, 1);
+    }
+
+    public override void OnBodyCollidedWithQuicksandItemTiles(Vector3Int cellPos)
+    {
+        GridManager.instance.SetTile(cellPos, EnumData.TileType.QuickSandItem, false, false);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.QuickSand, 1);
+    }
+
+    public override void OnBodyCollidedWithPermamentBlockItemTiles(Vector3Int cellPos)
+    {
+        GridManager.instance.SetTile(cellPos, EnumData.TileType.PermamnentBlockItem, false, false);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.PermamnentBlock, 1);
+    }
+
+    public override void OnBodyCollidedWithStarShowerItemTiles(Vector3Int cellPos)
+    {
+        GridManager.instance.SetTile(cellPos, EnumData.TileType.StarShowerItem, false, false);
+        itemToCast = new CastItem(EnumData.CastItemTypes.ClientProjectiles, EnumData.UsableItemTypes.StarShower, 1);
+    }
+
+    public override void OnBodyCollidedWithCentaurBowItemTiles(Vector3Int cellPos)
+    {
+        GridManager.instance.SetTile(cellPos, EnumData.TileType.CentaurBowItem, false, false);
+        itemToCast = new CastItem(EnumData.CastItemTypes.ClientProjectiles, EnumData.UsableItemTypes.CentaurBow, 10);
+    }
+
     public override void OnBodyCollidedWithIcarausWingsItemTiles(Vector3Int icarausCollectedOnTilePos)
     {
         if(MultiplayerManager.instance.isServer)
@@ -669,7 +695,7 @@ public abstract class Hero : Actor
         {
             if (bubbleShieldAttackReady)
             {
-                waitingActionForBubbleShieldItemMove.ReInitialiseTimerToBegin(bubbleShieldItemMoveAttackRateTickRate);
+                waitingActionForBubbleShieldItemMove.ReInitialiseTimerToBegin(GameConfig.bubbleShieldItemMoveAttackRateTickRate);
 
                 SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, GridManager.instance.grid.WorldToCell(actorTransform.position));
                 ClientSend.SpawnItemCommand(spawnItemCommand);
@@ -710,7 +736,7 @@ public abstract class Hero : Actor
                 if (!waitingActionForItemEyeLaserMove.Perform())
                 {
                     isFiringItemEyeLaser = true;
-                    waitingActionForItemEyeLaserMove.ReInitialiseTimerToBegin(itemEyeLaserMoveAttackRateTickRate);
+                    waitingActionForItemEyeLaserMove.ReInitialiseTimerToBegin(GameConfig.itemEyeLaserMoveAttackRateTickRate);
                 }
                 else
                 {
@@ -725,11 +751,38 @@ public abstract class Hero : Actor
                 if (!waitingActionForItemFireballMove.Perform())
                 {
                     isFiringItemFireball = true;
-                    waitingActionForItemFireballMove.ReInitialiseTimerToBegin(itemFireballMoveAttackRateTickRate);
+                    waitingActionForItemFireballMove.ReInitialiseTimerToBegin(GameConfig.itemFireballMoveAttackRateTickRate);
                 }
                 else
                 {
                     isFiringItemFireball = false;
+                }
+            }
+        }
+        else if (itemToCast.usableItemType == EnumData.UsableItemTypes.StarShower)
+        {
+            if (!waitingActionForItemStarShowerMove.Perform())
+            {
+                isFiringItemStarShower = true;
+                waitingActionForItemStarShowerMove.ReInitialiseTimerToBegin(GameConfig.itemStarShowerMoveAttackRateTickRate);
+            }
+            else
+            {
+                isFiringItemStarShower = false;
+            }
+        }
+        else if (itemToCast.usableItemType == EnumData.UsableItemTypes.CentaurBow)
+        {
+            if (IsHeroAbleToFireProjectiles())
+            {
+                if (!waitingActionForItemCentaurBowMove.Perform())
+                {
+                    isFiringItemCentaurBow = true;
+                    waitingActionForItemCentaurBowMove.ReInitialiseTimerToBegin(GameConfig.itemCentaurBowMoveAttackRateTickRate);
+                }
+                else
+                {
+                    isFiringItemCentaurBow = false;
                 }
             }
         }
@@ -740,18 +793,38 @@ public abstract class Hero : Actor
         if (itemToCast.usableItemType == EnumData.UsableItemTypes.EyeLaser)
         {
             isFiringItemEyeLaser = false;
-            waitingActionForItemEyeLaserMove.ReInitialiseTimerToEnd(itemEyeLaserMoveAttackRateTickRate);
+            waitingActionForItemEyeLaserMove.ReInitialiseTimerToEnd(GameConfig.itemEyeLaserMoveAttackRateTickRate);
         }
         else if (itemToCast.usableItemType == EnumData.UsableItemTypes.Fireball)
         {
             isFiringItemFireball = false;
-            waitingActionForItemFireballMove.ReInitialiseTimerToEnd(itemFireballMoveAttackRateTickRate);
+            waitingActionForItemFireballMove.ReInitialiseTimerToEnd(GameConfig.itemFireballMoveAttackRateTickRate);
+        }
+        else if (itemToCast.usableItemType == EnumData.UsableItemTypes.StarShower)
+        {
+            isFiringItemStarShower = false;
+            waitingActionForItemStarShowerMove.ReInitialiseTimerToEnd(GameConfig.itemStarShowerMoveAttackRateTickRate);
+        }
+        else if (itemToCast.usableItemType == EnumData.UsableItemTypes.CentaurBow)
+        {
+            isFiringItemCentaurBow = false;
+            waitingActionForItemCentaurBowMove.ReInitialiseTimerToEnd(GameConfig.itemCentaurBowMoveAttackRateTickRate);
         }
     }
 
     public void SpawnItem()
     {
         if (itemToCast.usableItemType == EnumData.UsableItemTypes.Minion)
+        {
+            Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing, EnumData.GameObjectEnums.BoulderDisappearing))
+            {
+                //send command to server of placement
+                SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, cellToCheckFor);
+                ClientSend.SpawnItemCommand(spawnItemCommand);
+            }
+        }
+        else if (itemToCast.usableItemType == EnumData.UsableItemTypes.PermamnentBlock)
         {
             Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
             if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing, EnumData.GameObjectEnums.BoulderDisappearing))
@@ -774,7 +847,7 @@ public abstract class Hero : Actor
         else if(itemToCast.usableItemType == EnumData.UsableItemTypes.Boulder)
         {
             Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing))
+            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor)&& !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.NoBoulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing))
             {
                 //send command to server of placement
                 SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, cellToCheckFor);
@@ -812,6 +885,16 @@ public abstract class Hero : Actor
                 SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, Vector3Int.zero);
                 ClientSend.SpawnItemCommand(spawnItemCommand);
             }
+        }
+        else if (itemToCast.usableItemType == EnumData.UsableItemTypes.AeloianMight)
+        {
+            SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, Vector3Int.zero);
+            ClientSend.SpawnItemCommand(spawnItemCommand);
+        }
+        else if (itemToCast.usableItemType == EnumData.UsableItemTypes.QuickSand)
+        {
+            SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, Vector3Int.zero);
+            ClientSend.SpawnItemCommand(spawnItemCommand);
         }
     }
     

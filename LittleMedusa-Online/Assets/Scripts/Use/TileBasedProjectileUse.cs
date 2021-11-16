@@ -38,27 +38,11 @@ public class TileBasedProjectileUse : Use
             
             if (Vector3.Distance(liveProjectile.transform.position, finalPos) >= 0.05f)
             {
-                TileData tileData = GridManager.instance.GetTileAtCellPoint(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position), EnumData.TileType.Portal);
-                if (tileData!=null)
+                TileData portalTile = GridManager.instance.GetTileAtCellPoint(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position), EnumData.TileType.Portal);
+                if (portalTile != null)
                 {
-                    Portal portal = tileData.GetComponent<Portal>();
-                    if (ownerId == portal.portalEntranceDic[GridManager.instance.grid.WorldToCell(liveProjectile.transform.position)].portalOwner)
-                    { 
-                        
-                    }
-                    if (MultiplayerManager.instance.isServer && )
-                    {
-                        if ()
-                        {
-                            TeleportProjectiles(projectileUtil, portalEntranceDic[portalCellPosition].portalOutlet);
-                        }
-                        portal.ProjectileUnitEnter(liveProjectile, );
-                    }
-                    else
-                    {
-                        EndOfUse();
-                        return;
-                    }
+                    Portal portal = portalTile.GetComponent<Portal>();
+                    portal.ProjectileUnitEnter(liveProjectile, GridManager.instance.grid.WorldToCell(liveProjectile.transform.position));
                 }
 
                 if (projectileTypeThrown == EnumData.Projectiles.TidalWave

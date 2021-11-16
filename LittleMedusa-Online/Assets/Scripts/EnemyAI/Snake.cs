@@ -45,6 +45,10 @@ public class Snake : Enemy
         {
             return;
         }
+        if (isMovementFreezed)
+        {
+            return;
+        }
         if (!isPrimaryMoveActive && !isSecondaryMoveActive)
         {
             inLineRange = senseInLineAction.Perform();
@@ -164,6 +168,10 @@ public class Snake : Enemy
         {
             return;
         }
+        if (isMovementFreezed)
+        {
+            return;
+        }
         if (!CanOccupy(currentMovePointCellPosition))
         {
             OnCantOccupySpace();
@@ -186,7 +194,10 @@ public class Snake : Enemy
         {
             return;
         }
-        
+        if (isMovementFreezed)
+        {
+            return;
+        }
 
 
         if (isPrimaryMoveActive)
@@ -224,6 +235,10 @@ public class Snake : Enemy
             return;
         }
         if (isPetrified)
+        {
+            return;
+        }
+        if (isMovementFreezed)
         {
             return;
         }
@@ -327,6 +342,14 @@ public class Snake : Enemy
         if (isPetrified)
         {
             petrificationAction.Perform();
+            return;
+        }
+        if (isMovementFreezed)
+        {
+            if (!completedMotionToMovePoint)
+            {
+                actorTransform.position = Vector3.MoveTowards(actorTransform.position, movePoint.position, petrificationSnapSpeed * Time.fixedDeltaTime);
+            }
             return;
         }
         if (isMelleAttacking)

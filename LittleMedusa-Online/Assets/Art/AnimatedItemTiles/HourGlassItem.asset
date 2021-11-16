@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: HourGlassItem
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: -855298285791758126, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: 9180251791023625898, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -549789443665989942, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -5167413608083449488, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -8408763834710030297, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: 1144234645273286238, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: 4141612904334516676, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -5589664403440696418, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: 992728304312703659, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -2136464288153343608, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -2943368869531217807, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -3853403381307622619, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -3724514210783730073, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: 4829742239670414492, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -4703073973657460086, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -4758693601636551281, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: 301033883459096901, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -408045873104549462, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -8617238355990386545, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: 778608710654788459, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -3956352792666799710, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -1283591933742412677, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  - {fileID: -8722967648577535633, guid: e46492d189f37de49afccd9430867ecd, type: 3}
+  m_MinSpeed: 1
+  m_MaxSpeed: 1
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 1
