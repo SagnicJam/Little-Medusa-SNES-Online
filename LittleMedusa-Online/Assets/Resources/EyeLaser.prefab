@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 866084665
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7718515357799426450, guid: 8e34980fdb1e55847988ce0586fb2f16,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -166,7 +166,6 @@ MonoBehaviour:
   dispersionRadius: 0
   dispersionSpeed: 0
   dispersedGO: {fileID: 0}
-  dispersedGOCollider: {fileID: 0}
   frameLooper: {fileID: 8787909664814902808}
   isDynamicTravellingSprites: 0
   projectileTravelRightSprite: {fileID: -295879850061160071, guid: 8e34980fdb1e55847988ce0586fb2f16,

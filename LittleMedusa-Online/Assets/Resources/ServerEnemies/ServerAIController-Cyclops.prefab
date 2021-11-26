@@ -202,6 +202,7 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  isGhostTile: 0
   solidifyTile: 0
   isItem: 0
   killUnitsInstantlyIfInTheirRegion: 0
@@ -222,7 +223,7 @@ MonoBehaviour:
   primaryMoveAttackRateTickRate: 100
   secondaryMoveAttackRateTickRate: 0
   pushSpeed: 6
-  faceDirectionInit: 0
+  faceDirectionInit: 2
   flySpeed: 0
   flyingTickCount: 0
   leftIdleSprite: []

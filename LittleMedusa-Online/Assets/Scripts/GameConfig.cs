@@ -8,6 +8,7 @@ public class GameConfig
     public const int arrowDamage=3;
     public const int dispersedFireBallDamage=4;
     public const int starshowerDamage=3;
+    public const float fractionToConsiderAsInput=2.01f;
 
     public const int itemEyeLaserMoveAttackRateTickRate=20;
     public const int itemFireballMoveAttackRateTickRate=20;

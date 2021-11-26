@@ -380,7 +380,10 @@ public abstract class Hero : Actor
 
     public override void OnHeadCollidingWithAPetrifiedNonPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead)
     {
-        StopPush(this);
+        if (!IsActorOnArrows() && !IsActorOnMirror())
+        {
+            StopPush(this);
+        }
         isHeadCollisionWithOtherActor = false;
     }
 
@@ -392,13 +395,19 @@ public abstract class Hero : Actor
 
     public override void OnHeadCollidingWithAPetrifiedPushedObjectWhereIAmPushedAndAmPetrified(Actor collidedActorWithMyHead)
     {
-        StopPush(this);
+        if(!IsActorOnArrows()&&!IsActorOnMirror())
+        {
+            StopPush(this);
+        }
         isHeadCollisionWithOtherActor = false;
     }
 
     public override void OnHeadCollidingWithAPetrifiedPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead)
     {
-        StopPush(this);
+        if (!IsActorOnArrows() && !IsActorOnMirror())
+        {
+            StopPush(this);
+        }
         isHeadCollisionWithOtherActor = false;
     }
 
@@ -432,18 +441,43 @@ public abstract class Hero : Actor
         {
             collidedActorWithMyHead.TakeDamage(currentHP);
         }
-        StopPush(this);
+        if(!IsActorOnArrows()&&!IsActorOnMirror())
+        {
+            StopPush(this);
+        }
         isHeadCollisionWithOtherActor = false;
     }
 
     public override void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndNotPetrified(Actor collidedActorWithMyHead)
     {
-        if (!(collidedActorWithMyHead is Hero))
+        if (!IsActorOnArrows() && !IsActorOnMirror())
         {
-            collidedActorWithMyHead.TakeDamage(currentHP);
+            if (!(collidedActorWithMyHead is Hero))
+            {
+                collidedActorWithMyHead.TakeDamage(currentHP);
+            }
+            StopPush(this);
         }
-        StopPush(this);
         isHeadCollisionWithOtherActor = false;
+    }
+    public override void OnBodyCollidedWithUpArrowTile(Vector3Int arrowTileCellPos)
+    {
+        ShiftToUpTile();
+    }
+
+    public override void OnBodyCollidedWithDownArrowTile(Vector3Int arrowTileCellPos)
+    {
+        ShiftToDownTile();
+    }
+
+    public override void OnBodyCollidedWithLeftArrowTile(Vector3Int arrowTileCellPos)
+    {
+        ShiftToLeftTile();
+    }
+
+    public override void OnBodyCollidedWithRightArrowTile(Vector3Int arrowTileCellPos)
+    {
+        ShiftToRightTile();
     }
 
     public override void OnBodyCollidedWithPortalTiles(TileData tileData)
@@ -523,6 +557,24 @@ public abstract class Hero : Actor
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.EyeLaserItem, false, false);
         itemToCast = new CastItem(EnumData.CastItemTypes.ClientProjectiles, EnumData.UsableItemTypes.EyeLaser, 5);
+    }
+
+    public override void OnBodyCollidedWithArrowDirectionalItemTiles(Vector3Int cellPos)
+    {
+        GridManager.instance.SetTile(cellPos, EnumData.TileType.ArrowDirectionItem, false, false);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.ArrowDirectional, 1);
+    }
+
+    public override void OnBodyCollidedWithMirrorItemTiles(Vector3Int cellPos)
+    {
+        GridManager.instance.SetTile(cellPos, EnumData.TileType.MirrorItem, false, false);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.MirrorItem, 1);
+    }
+
+    public override void OnBodyCollidedWithGorgonGlassItemTiles(Vector3Int cellPos)
+    {
+        GridManager.instance.SetTile(cellPos, EnumData.TileType.GorgonGlassItem, false, false);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.GorgonGlass, 1);
     }
 
     public override void OnBodyCollidedWithBoulderItemTiles(Vector3Int cellPos)
@@ -609,23 +661,14 @@ public abstract class Hero : Actor
                 return true;
             }
         }
-        /*else */
         else if (GridManager.instance.IsCellBlockedForUnitMotionAtPos(pos))
         {
             return false;
         }
-        //else if (IsActorOnArrows() && GridManager.instance.IsCellContainingMonsterLinkedWithDifferentChainOnCellPos(pos, this))
-        //{
-        //    return false;
-        //}
-        //else if (IsActorOnArrows() && GridManager.instance.IsCellContainingPetrifiedMonsterOnCell(pos, this))
-        //{
-        //    return false;
-        //}
-        //else if (IsActorOnMirror() && GridManager.instance.IsCellContainingPetrifiedMonsterOnCell(pos, this))
-        //{
-        //    return false;
-        //}
+        else if((IsActorOnArrows() || IsActorOnMirror())&& GridManager.instance.HasPetrifiedObject(pos))
+        {
+            return false;
+        }
         else
         {
             return true;
@@ -834,7 +877,7 @@ public abstract class Hero : Actor
                 ClientSend.SpawnItemCommand(spawnItemCommand);
             }
         }
-        else if(itemToCast.usableItemType == EnumData.UsableItemTypes.CereberausHead)
+        else if (itemToCast.usableItemType == EnumData.UsableItemTypes.CereberausHead)
         {
             Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
             if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing, EnumData.GameObjectEnums.BoulderDisappearing))
@@ -844,10 +887,40 @@ public abstract class Hero : Actor
                 ClientSend.SpawnItemCommand(spawnItemCommand);
             }
         }
-        else if(itemToCast.usableItemType == EnumData.UsableItemTypes.Boulder)
+        else if (itemToCast.usableItemType == EnumData.UsableItemTypes.Boulder)
         {
             Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor)&& !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.NoBoulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing))
+            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.TileType.NoBoulder) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing))
+            {
+                //send command to server of placement
+                SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, cellToCheckFor);
+                ClientSend.SpawnItemCommand(spawnItemCommand);
+            }
+        }
+        else if (itemToCast.usableItemType == EnumData.UsableItemTypes.ArrowDirectional)
+        {
+            Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing))
+            {
+                //send command to server of placement
+                SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, cellToCheckFor);
+                ClientSend.SpawnItemCommand(spawnItemCommand);
+            }
+        }
+        else if (itemToCast.usableItemType == EnumData.UsableItemTypes.MirrorItem)
+        {
+            Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing))
+            {
+                //send command to server of placement
+                SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, cellToCheckFor);
+                ClientSend.SpawnItemCommand(spawnItemCommand);
+            }
+        }
+        else if (itemToCast.usableItemType == EnumData.UsableItemTypes.GorgonGlass)
+        {
+            Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+            if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToCheckFor) && !GridManager.instance.HasTileAtCellPoint(cellToCheckFor, EnumData.GameObjectEnums.BoulderAppearing))
             {
                 //send command to server of placement
                 SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, cellToCheckFor);

@@ -10,6 +10,7 @@ public class TileData : MonoBehaviour
     public bool blockUnitMotion;
     public bool blockPetrifiedObjects;
     public bool blockProjectiles;
+    public bool isGhostTile;
     public bool solidifyTile;
     public bool isItem;
     public bool killUnitsInstantlyIfInTheirRegion;
@@ -213,6 +214,7 @@ public class TileData : MonoBehaviour
                     blockProjectiles = false;
                     solidifyTile = false;
                     isItem = true;
+                    isGhostTile = true;
                     break;
                 case EnumData.TileType.HeartItem:
                     blockFlyingUnits = false;
@@ -377,6 +379,33 @@ public class TileData : MonoBehaviour
                     isItem = true;
                     break;
                 case EnumData.TileType.CentaurBowItem:
+                    blockFlyingUnits = false;
+                    blockToSpawnObjectsPlacement = true;
+                    blockUnitMotion = false;
+                    blockPetrifiedObjects = false;
+                    blockProjectiles = false;
+                    solidifyTile = false;
+                    isItem = true;
+                    break;
+                case EnumData.TileType.ArrowDirectionItem:
+                    blockFlyingUnits = false;
+                    blockToSpawnObjectsPlacement = true;
+                    blockUnitMotion = false;
+                    blockPetrifiedObjects = false;
+                    blockProjectiles = false;
+                    solidifyTile = false;
+                    isItem = true;
+                    break;
+                case EnumData.TileType.MirrorItem:
+                    blockFlyingUnits = false;
+                    blockToSpawnObjectsPlacement = true;
+                    blockUnitMotion = false;
+                    blockPetrifiedObjects = false;
+                    blockProjectiles = false;
+                    solidifyTile = false;
+                    isItem = true;
+                    break;
+                case EnumData.TileType.GorgonGlassItem:
                     blockFlyingUnits = false;
                     blockToSpawnObjectsPlacement = true;
                     blockUnitMotion = false;

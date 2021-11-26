@@ -14,17 +14,36 @@ public class Medusa : Hero
         {
             if (completedMotionToMovePoint)
             {
+                Mapper m = currentMapper;
+                if (m != null && m is OneDNonCheckingMapper oneDNonCheckingMapper)
+                {
+                    if(GridManager.instance.IsCellContainingUpArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        oneDNonCheckingMapper.face = FaceDirection.Up;
+                    }
+                    else if (GridManager.instance.IsCellContainingDownArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        oneDNonCheckingMapper.face = FaceDirection.Down;
+                    }
+                    else if (GridManager.instance.IsCellContainingLeftArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        oneDNonCheckingMapper.face = FaceDirection.Left;
+                    }
+                    else if (GridManager.instance.IsCellContainingRightArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        oneDNonCheckingMapper.face = FaceDirection.Right;
+                    }
+                    else
+                    {
+                        oneDNonCheckingMapper.face = Facing;
+                    }
+                }
                 CheckSwitchCellIndex();
+
                 if (GridManager.instance.IsCellBlockedForPetrifiedUnitMotionAtPos(currentMovePointCellPosition))
                 {
                     StopPush(this);
                     return;
-                }
-
-                Mapper m = currentMapper;
-                if (m != null && m is OneDNonCheckingMapper oneDNonCheckingMapper)
-                {
-                    oneDNonCheckingMapper.face = Facing;
                 }
             }
             else
@@ -462,7 +481,7 @@ public class Medusa : Hero
                 Facing = FaceDirection.Right;
             }
 
-            if ((inputs[(int)EnumData.MedusaInputs.Up]|| inputs[(int)EnumData.MedusaInputs.Left]|| inputs[(int)EnumData.MedusaInputs.Down]|| inputs[(int)EnumData.MedusaInputs.Right]))
+            if ((inputs[(int)EnumData.MedusaInputs.Up] || inputs[(int)EnumData.MedusaInputs.Left] || inputs[(int)EnumData.MedusaInputs.Down] || inputs[(int)EnumData.MedusaInputs.Right]))
             {
                 //Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
@@ -470,14 +489,14 @@ public class Medusa : Hero
                 currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
                 //}
             }
-           
+
         }
         else
         {
             if (!inputs[(int)EnumData.MedusaInputs.Up] && previousInputs[(int)EnumData.MedusaInputs.Up] != inputs[(int)EnumData.MedusaInputs.Up])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
-                if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
+                if (fractionCovered < GridManager.instance.grid.cellSize.y / GameConfig.fractionToConsiderAsInput)
                 {
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
@@ -485,7 +504,7 @@ public class Medusa : Hero
             else if (!inputs[(int)EnumData.MedusaInputs.Left] && previousInputs[(int)EnumData.MedusaInputs.Left] != inputs[(int)EnumData.MedusaInputs.Left])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
-                if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
+                if (fractionCovered < GridManager.instance.grid.cellSize.x / GameConfig.fractionToConsiderAsInput)
                 {
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
@@ -493,7 +512,7 @@ public class Medusa : Hero
             else if (!inputs[(int)EnumData.MedusaInputs.Down] && previousInputs[(int)EnumData.MedusaInputs.Down] != inputs[(int)EnumData.MedusaInputs.Down])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
-                if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
+                if (fractionCovered < GridManager.instance.grid.cellSize.y / GameConfig.fractionToConsiderAsInput)
                 {
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
@@ -501,13 +520,12 @@ public class Medusa : Hero
             else if (!inputs[(int)EnumData.MedusaInputs.Right] && previousInputs[(int)EnumData.MedusaInputs.Right] != inputs[(int)EnumData.MedusaInputs.Right])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
-                if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
+                if (fractionCovered < GridManager.instance.grid.cellSize.x / GameConfig.fractionToConsiderAsInput)
                 {
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
             }
         }
-
     }
 
     public override void ProcessInputMovementsControl()
@@ -563,6 +581,11 @@ public class Medusa : Hero
     public bool landPlayer;
     public bool useItem;
 
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawCube(actorTransform.position, GameConfig.boxCastCellSizePercent* GridManager.instance.grid.cellSize);
+    //}
+
     public override void DealInput()
     {
         if (!inGame || isPushed || isPetrified || isPhysicsControlled|| isInputFreezed)
@@ -584,6 +607,66 @@ public class Medusa : Hero
             left = false;
             down = false;
             right = false;
+        }
+        else if(!isInFlyingState&&!isRespawnningPlayer&& GridManager.instance.IsCellContainingUpArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+        {
+            up = true;
+            left = false;
+            down = false;
+            right = false;
+        }
+        else if(!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingDownArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+        {
+            up = false;
+            left = false;
+            down = true;
+            right = false;
+        }
+        else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingLeftArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+        {
+            up = false;
+            left = true;
+            down = false;
+            right = false;
+        }
+        else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingRightArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+        {
+            up = false;
+            left = false;
+            down = false;
+            right = true;
+        }
+        else if(!isInFlyingState&&!isRespawnningPlayer&& GridManager.instance.IsCellContainingMirrorAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position))
+            &&(!GridManager.instance.IsCellBlockedForUnitMotionAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position+GridManager.instance.GetFacingDirectionOffsetVector3(Facing)))
+            &&!GridManager.instance.HasPetrifiedObject(GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing)))))
+        {
+            switch (Facing)
+            {
+                case FaceDirection.Up:
+                    up = true;
+                    left = false;
+                    down = false;
+                    right = false;
+                    break;
+                case FaceDirection.Down:
+                    up = false;
+                    left = false;
+                    down = true;
+                    right = false;
+                    break;
+                case FaceDirection.Left:
+                    up = false;
+                    left = true;
+                    down = false;
+                    right = false;
+                    break;
+                case FaceDirection.Right:
+                    up = false;
+                    left = false;
+                    down = false;
+                    right = true;
+                    break;
+            }
         }
         else
         {

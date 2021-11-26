@@ -96,7 +96,10 @@ public class EnumData
         QuickSand,
         PermamnentBlock,
         StarShower,
-        CentaurBow
+        CentaurBow,
+        ArrowDirectional,
+        MirrorItem,
+        GorgonGlass
     }
 
     public enum PlayerStates
@@ -161,6 +164,9 @@ public class EnumData
         PermamnentBlockItem,
         StarShowerItem,
         CentaurBowItem,
+        ArrowDirectionItem,
+        MirrorItem,
+        GorgonGlassItem
     }
 
     public enum GameObjectEnums

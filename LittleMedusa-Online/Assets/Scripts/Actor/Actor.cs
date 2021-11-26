@@ -70,7 +70,7 @@ public abstract class Actor : TileData
     public bool triggerFaceChangeEvent;
     public int normalSpeed;
     public int flyingTickCountTemp;
-
+    
     public int ownerId;
     public Attack currentAttack;
     public Vector3Int positionToSpawnProjectile;
@@ -621,7 +621,7 @@ public abstract class Actor : TileData
     //Will run on  server when received from client
     public virtual void Petrify()
     {
-        if (isPhysicsControlled||isPushed)
+        if (isPhysicsControlled||isPushed||IsActorOnArrows()||IsActorOnMirror())
         {
             return;
         }
@@ -956,6 +956,8 @@ public abstract class Actor : TileData
 
     public void StopPush(Actor actorToStop)
     {
+        //Debug.LogError("Stop Push");
+        //Debug.Break();
         actorToStop.currentMapper = null;
         actorToStop.OnPushStop();
         actorToStop.OnCantOccupySpace();
@@ -972,12 +974,15 @@ public abstract class Actor : TileData
                 else
                 {
                     //Debug.Log("Stopping for : " + actorMePushing.gameObject.GetInstanceID());
-                    actorPushingMe.StopPush(actorPushingMe);
+                    if(!actorPushingMe.IsActorOnArrows()&&!actorPushingMe.IsActorOnMirror())
+                    {
+                        actorPushingMe.StopPush(actorPushingMe);
+                    }
                 }
 
             }
         }
-        if(tilePushingMe!=null)
+        if (tilePushingMe != null)
         {
             tilePushingMe.EndOfUse();
         }
@@ -1046,6 +1051,10 @@ public abstract class Actor : TileData
         {
             return;
         }
+        if (isRespawnningPlayer || isInFlyingState)
+        {
+            return;
+        }
         hit2DArrThisFrame = new List<RaycastHit2D>(Physics2D.BoxCastAll(actorTransform.position, GridManager.instance.grid.cellSize * GameConfig.boxCastCellSizePercent, 0, actorTransform.position, 0));
         for (int i = 0; i < hit2DArrThisFrame.Count; i++)
         {
@@ -1071,14 +1080,36 @@ public abstract class Actor : TileData
 
     void CustomTriggerExit(Collider2D collider)
     {
-
     }
 
     void CustomTriggerEnter(Collider2D collider)
     {
+       
+
         TileData collidedTile = collider.GetComponent<TileData>();
         if(collidedTile!=null)
         {
+           
+            if(!isInFlyingState)
+            {
+                if (collidedTile.tileType == EnumData.TileType.UpArrow)
+                {
+                    OnBodyCollidedWithUpArrowTile(currentMovePointCellPosition);
+                }
+                if (collidedTile.tileType == EnumData.TileType.DownArrow)
+                {
+                    OnBodyCollidedWithDownArrowTile(currentMovePointCellPosition);
+                }
+                if (collidedTile.tileType == EnumData.TileType.LeftArrow)
+                {
+                    OnBodyCollidedWithLeftArrowTile(currentMovePointCellPosition);
+                }
+                if (collidedTile.tileType == EnumData.TileType.RightArrow)
+                {
+                    OnBodyCollidedWithRightArrowTile(currentMovePointCellPosition);
+                }
+            }
+            
             if (!isPushed && !isPetrified)
             {
                 if (collidedTile.tileType == EnumData.TileType.IcarusWingsItem)
@@ -1089,19 +1120,56 @@ public abstract class Actor : TileData
         }
     }
 
+    public void ShiftToUpTile()
+    {
+        Facing = FaceDirection.Up;
+    }
+
+    public void ShiftToDownTile()
+    {
+        Facing = FaceDirection.Down;
+    }
+
+    public void ShiftToLeftTile()
+    {
+        Facing = FaceDirection.Left;
+    }
+
+    public void ShiftToRightTile()
+    {
+        Facing = FaceDirection.Right;
+    }
+
+    public bool IsActorOnArrows()
+    {
+        return !isInFlyingState && (GridManager.instance.IsCellContainingUpArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)) ||
+            GridManager.instance.IsCellContainingDownArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)) ||
+            GridManager.instance.IsCellContainingLeftArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)) ||
+            GridManager.instance.IsCellContainingRightArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)));
+    }
+
+    public bool IsActorOnMirror()
+    {
+        return !isInFlyingState && GridManager.instance.IsCellContainingMirrorAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position));
+    }
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         //Debug.LogError("chal raha hai na "+gamePhysics.gameCollider2D.enabled);
-        if(isGhost)
+        TileData collidedTile = collider.GetComponent<TileData>();
+        if (isGhost)
         {
             return;
         }
-        TileData collidedTile = collider.GetComponent<TileData>();
-        if(collidedTile!=null)
+        if (isRespawnningPlayer || isInFlyingState)
+        {
+            return;
+        }
+        if (collidedTile!=null)
         {
             if (!isPushed && !isPetrified)
             {
-                if (collidedTile.tileType == EnumData.TileType.IcarusWingsItem)
+                if (collidedTile.tileType == EnumData.TileType.IcarusWingsItem && GridManager.instance.IsCellGhostTile(currentMovePointCellPosition))
                 {
                     OnBodyCollidedWithIcarausWingsItemTiles(currentMovePointCellPosition);
                 }
@@ -1234,24 +1302,46 @@ public abstract class Actor : TileData
                 {
                     OnBodyCollidedWithCentaurBowItemTiles(currentMovePointCellPosition);
                 }
+                else if (collidedTile.tileType == EnumData.TileType.ArrowDirectionItem)
+                {
+                    OnBodyCollidedWithArrowDirectionalItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.MirrorItem)
+                {
+                    OnBodyCollidedWithMirrorItemTiles(currentMovePointCellPosition);
+                }
+                else if (collidedTile.tileType == EnumData.TileType.GorgonGlassItem)
+                {
+                    OnBodyCollidedWithGorgonGlassItemTiles(currentMovePointCellPosition);
+                }
             }
         }
         
 
         ProjectileUtil projectileUtilCollidedWithMyHead = collider.GetComponent<ProjectileUtil>();
+
         if (projectileUtilCollidedWithMyHead != null)
         {
-            if(projectileUtilCollidedWithMyHead.pU.gameObjectInstanceId!=this.gameObject.GetInstanceID())
+            if(!(projectileUtilCollidedWithMyHead.pU.projectileTypeThrown==EnumData.Projectiles.EyeLaser||
+                projectileUtilCollidedWithMyHead.pU.projectileTypeThrown == EnumData.Projectiles.EyeLaserMirrorKnight ||
+                projectileUtilCollidedWithMyHead.pU.projectileTypeThrown == EnumData.Projectiles.EyeLaserPortal))
             {
-                if(GridManager.instance.IsHeadCollision(projectileUtilCollidedWithMyHead.transform.position, actorTransform.position, Facing))
+                if (projectileUtilCollidedWithMyHead.pU.gameObjectInstanceId != this.gameObject.GetInstanceID())
                 {
-                    if(isPushed)
+                    if (GridManager.instance.IsHeadCollision(projectileUtilCollidedWithMyHead.transform.position, actorTransform.position, Facing))
                     {
-                        StopPush(this);
-                        return;
+                        if (isPushed)
+                        {
+                            if(!IsActorOnArrows()&&!IsActorOnMirror())
+                            {
+                                StopPush(this);
+                                return;
+                            }
+                        }
                     }
                 }
             }
+            
         }
 
         if (collidedTile is Actor collidedActorWithMyHead)
@@ -1436,9 +1526,15 @@ public abstract class Actor : TileData
     public abstract void OnBodyCollidedWithEarthquakeItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithFireballItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithFlamePillarItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithArrowDirectionalItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithMirrorItemTiles(Vector3Int cellPos);
+    public abstract void OnBodyCollidedWithGorgonGlassItemTiles(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithHourGlassTile(Vector3Int cellPos);
     public abstract void OnBodyCollidedWithPortalTiles(TileData tileData);
-
+    public abstract void OnBodyCollidedWithUpArrowTile(Vector3Int arrowTileCellPos);
+    public abstract void OnBodyCollidedWithDownArrowTile(Vector3Int arrowTileCellPos);
+    public abstract void OnBodyCollidedWithLeftArrowTile(Vector3Int arrowTileCellPos);
+    public abstract void OnBodyCollidedWithRightArrowTile(Vector3Int arrowTileCellPos);
     public abstract void OnPushStart();
     public abstract void OnPushStop();
 

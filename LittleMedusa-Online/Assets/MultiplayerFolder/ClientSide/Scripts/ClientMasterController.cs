@@ -231,6 +231,7 @@ public class ClientMasterController : MonoBehaviour
 
     private void ProcessInputsLocally(bool[]inputs,bool[] previousInputs)
     {
+        localPlayer.ProcessCollisionEnter();
         localPlayer.ProcessMovementInputs(inputs, previousInputs);
         localPlayer.ProcessEventsInputs(inputs, previousInputs);
         localPlayer.ProcessAnimationsInputs(inputs, previousInputs);
@@ -285,10 +286,10 @@ public class ClientMasterController : MonoBehaviour
             {
                 //Debug.Log("<color=yellow>prediction done using sequnce no: </color>" + localClientInputCommands[i].sequenceNumber + "<color=green> inputs: </color>" + localClientInputCommands[i].commands[0] + localClientInputCommands[i].commands[1] + localClientInputCommands[i].commands[2] + localClientInputCommands[i].commands[3] + " Previous commands " + localClientInputCommands[i].previousCommands[0] + localClientInputCommands[i].previousCommands[1] + localClientInputCommands[i].previousCommands[2] + localClientInputCommands[i].previousCommands[3]);
                 //Debug.Log(serverPlayer.movePoint.position + "--" + serverPlayer.currentMovePointCellPosition + "Before" + serverPlayer.actorTransform.position + "<color=yellow>Before prediction done using sequnce no: </color>" + localClientInputCommands[i].sequenceNumber);
-                serverPlayer.ProcessMovementInputs(la.commands, la.previousCommands);
-                
-                serverPlayer.ProcessInputMovementsControl();
+
                 serverPlayer.ProcessCollisionEnter();
+                serverPlayer.ProcessMovementInputs(la.commands, la.previousCommands);
+                serverPlayer.ProcessInputMovementsControl();
                 serverPlayer.ProcessFlyingControl();
                 //Debug.Log(serverPlayer.movePoint.position + "--" + serverPlayer.currentMovePointCellPosition + "After wards" + serverPlayer.actorTransform.position + "<color=yellow>After prediction done using sequnce no: </color>" + localClientInputCommands[i].sequenceNumber + "<color=green> inputs: </color>" + localClientInputCommands[i].commands[0] + localClientInputCommands[i].commands[1] + localClientInputCommands[i].commands[2] + localClientInputCommands[i].commands[3] + " Previous commands " + localClientInputCommands[i].previousCommands[0] + localClientInputCommands[i].previousCommands[1] + localClientInputCommands[i].previousCommands[2] + localClientInputCommands[i].previousCommands[3]);
             }
@@ -360,10 +361,12 @@ public class ClientMasterController : MonoBehaviour
             serverPlayer.SetActorAnimationState(playerStateUpdates.playerAnimationEvents);
             serverPlayer.SetAuthoratativeStates(playerStateUpdates.playerAuthoratativeStates);
 
+
             UpdatePredictedGhost(playerStateUpdates);
             if (Vector3.Distance(serverPlayer.actorTransform.position, localPlayer.actorTransform.position) >= positionThreshold)
             {
                 Debug.Log("Correction regarding position difference " + serverPlayer.actorTransform.position + "local---server" + localPlayer.actorTransform.position + "<color=red>Corrected player position</color>" + playerStateUpdates.playerProcessedSequenceNumber);
+                //Debug.Break();
                 PositionUpdates positionUpdates = new PositionUpdates(serverPlayer.actorTransform.position, serverPlayer.currentMovePointCellPosition, serverPlayer.previousMovePointCellPosition,
                     (int)serverPlayer.Facing, (int)serverPlayer.PreviousFacingDirection);
                 localPlayer.SetActorPositionalState(positionUpdates);
@@ -727,7 +730,7 @@ public struct RespawnPlayerCommand
         this.sequenceNumber = sequenceNumber;
     }
 }
-
+[System.Serializable]
 public struct InputCommands
 {
     public int sequenceNumber;

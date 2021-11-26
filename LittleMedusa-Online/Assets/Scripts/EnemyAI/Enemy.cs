@@ -95,7 +95,19 @@ public abstract class Enemy : Actor
 
     public override bool CanOccupy(Vector3Int pos)
     {
-        if (GridManager.instance.IsCellBlockedForUnitMotionAtPos(pos)||GridManager.instance.HasPetrifiedObject(pos))
+        if (!isPushed && GridManager.instance.IsCellBlockedForUnitMotionAtPos(pos))
+        {
+            return false;
+        }
+        else if (isPushed && isPetrified && !GridManager.instance.IsCellBlockedForPetrifiedUnitMotionAtPos(pos))
+        {
+            return false;
+        }
+        else if (isPushed && !isPetrified && GridManager.instance.IsCellBlockedForUnitMotionAtPos(pos))
+        {
+            return false;
+        }
+        else if (isPushed && (IsActorOnArrows() || IsActorOnMirror()) && GridManager.instance.IsCellContainingPushedMonsterOnCell(pos, this))
         {
             return false;
         }
@@ -137,7 +149,15 @@ public abstract class Enemy : Actor
 
     public override void Petrify()
     {
-        if(!isPetrified)
+        if (isPhysicsControlled || isPushed || IsActorOnArrows() || IsActorOnMirror())
+        {
+            return;
+        }
+        if (this is Minnataur)
+        {
+            return;
+        }
+        if (!isPetrified)
         {
             if (petrificationSpriteArr.Length > 0)
             {
@@ -187,7 +207,10 @@ public abstract class Enemy : Actor
         }
         else
         {
-            StopPush(this);
+            if (!IsActorOnArrows() && !IsActorOnMirror())
+            {
+                StopPush(this);
+            }
         }
         isHeadCollisionWithOtherActor = false;
     }
@@ -200,7 +223,10 @@ public abstract class Enemy : Actor
         }
         else
         {
-            StopPush(this);
+            if (!IsActorOnArrows() && !IsActorOnMirror())
+            {
+                StopPush(this);
+            }
         }
         isHeadCollisionWithOtherActor = false;
     }
@@ -248,7 +274,10 @@ public abstract class Enemy : Actor
 
     public override void OnHeadCollidingWithAPetrifiedPushedObjectWhereIAmPushedAndAmPetrified(Actor collidedActorWithMyHead)
     {
-        StopPush(this);
+        if(!IsActorOnArrows()&&!IsActorOnMirror())
+        {
+            StopPush(this);
+        }
         isHeadCollisionWithOtherActor = false;
     }
 
@@ -282,8 +311,11 @@ public abstract class Enemy : Actor
 
     public override void OnHeadCollidingWithANonPetrifiedPushedObjectWhereIAmPushedAndAmPetrified(Actor collidedActorWithMyHead)
     {
-        collidedActorWithMyHead.TakeDamage(collidedActorWithMyHead.currentHP);
-        StopPush(this);
+        if (!IsActorOnArrows() && !IsActorOnMirror())
+        {
+            collidedActorWithMyHead.TakeDamage(collidedActorWithMyHead.currentHP);
+            StopPush(this);
+        }
         isHeadCollisionWithOtherActor = false;
     }
 
@@ -310,6 +342,52 @@ public abstract class Enemy : Actor
     {
         Portal portal = tileData.GetComponent<Portal>();
         portal.ActorUnitEnter(this, currentMovePointCellPosition);
+    }
+    public override void OnBodyCollidedWithUpArrowTile(Vector3Int arrowTileCellPos)
+    {
+        if (GridManager.instance.HasTileAtCellPoint(arrowTileCellPos, EnumData.TileType.UpArrow))
+        {
+            ShiftToUpTile();
+            followingTarget = false;
+        }
+    }
+
+    public override void OnBodyCollidedWithDownArrowTile(Vector3Int arrowTileCellPos)
+    {
+        if (GridManager.instance.HasTileAtCellPoint(arrowTileCellPos, EnumData.TileType.DownArrow))
+        {
+            ShiftToDownTile();
+            followingTarget = false;
+        }
+    }
+
+    public override void OnBodyCollidedWithLeftArrowTile(Vector3Int arrowTileCellPos)
+    {
+        if (GridManager.instance.HasTileAtCellPoint(arrowTileCellPos, EnumData.TileType.LeftArrow))
+        {
+            ShiftToLeftTile();
+            followingTarget = false;
+        }
+    }
+
+    public override void OnBodyCollidedWithRightArrowTile(Vector3Int arrowTileCellPos)
+    {
+        if (GridManager.instance.HasTileAtCellPoint(arrowTileCellPos, EnumData.TileType.RightArrow))
+        {
+            ShiftToRightTile();
+            followingTarget = false;
+        }
+    }
+    public override void OnBodyCollidedWithArrowDirectionalItemTiles(Vector3Int cellPos)
+    {
+    }
+
+    public override void OnBodyCollidedWithMirrorItemTiles(Vector3Int cellPos)
+    {
+    }
+
+    public override void OnBodyCollidedWithGorgonGlassItemTiles(Vector3Int cellPos)
+    {
     }
     public override void OnBodyCollidedWithAeloianItemTiles(Vector3Int cellPos)
     {

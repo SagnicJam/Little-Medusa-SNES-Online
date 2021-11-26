@@ -25,6 +25,11 @@ public class SenseInLineAction : Actions
             Debug.LogError("monster sensing is not set");
             return false;
         }
+
+        if(monsterSensing.IsActorOnArrows() || monsterSensing.IsActorOnMirror())
+        {
+            return false;
+        }
         Debug.DrawLine(monsterSensing.transform.position, monsterSensing.transform.position + lengthOfDetection * GridManager.instance.GetFacingDirectionOffsetVector3(monsterSensing.Facing), Color.blue);
 
         if (monsterSensing.completedMotionToMovePoint)

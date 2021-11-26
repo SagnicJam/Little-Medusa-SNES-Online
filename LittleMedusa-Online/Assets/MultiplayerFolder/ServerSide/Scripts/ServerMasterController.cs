@@ -1444,6 +1444,103 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
+    void PlaceGorgonGlassRequestImplementation(OnWorkDone onSuccess)
+    {
+        if (!CanDoAction("PlaceGorgonGlassRequestImplementation"))
+        {
+            return;
+        }
+
+        //get all floor tiles
+
+        //remove floor tiles
+        //convert floor tiles to mirror tiles
+
+        List<Vector3Int> allNormalFloorCellPos = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.Normal);
+        List<Vector3Int> allNoBoulderFloorCellPos = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.NoBoulder);
+
+        foreach (Vector3Int item in allNormalFloorCellPos)
+        {
+            GridManager.instance.SetTile(item, EnumData.TileType.Mirror, true, false);
+            List<TileData> tdList = GridManager.instance.GetAllTileDataInCellPos(item);
+            foreach (TileData td in tdList)
+            {
+                GridManager.instance.SetTile(item, td.tileType, false, false);
+            }
+        }
+
+        foreach (Vector3Int item in allNoBoulderFloorCellPos)
+        {
+            GridManager.instance.SetTile(item, EnumData.TileType.Mirror, true, false);
+            List<TileData> tdList = GridManager.instance.GetAllTileDataInCellPos(item);
+            foreach (TileData td in tdList)
+            {
+                GridManager.instance.SetTile(item, td.tileType, false, false);
+            }
+        }
+        onSuccess?.Invoke();
+    }
+
+    void PlaceMirrorRequestImplementation(Vector3Int cellPositionToPlaceDirectionalMirror, OnWorkDone onSuccess)
+    {
+        if (!CanDoAction("PlaceMirrorRequestImplementation"))
+        {
+            return;
+        }
+        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellPositionToPlaceDirectionalMirror))
+        {
+            Debug.Log("Setting tile mirror on " + cellPositionToPlaceDirectionalMirror);
+            GridManager.instance.SetTile(cellPositionToPlaceDirectionalMirror, EnumData.TileType.Mirror, true, false);
+            List<TileData> tdList = GridManager.instance.GetAllTileDataInCellPos(cellPositionToPlaceDirectionalMirror);
+            foreach (TileData item in tdList)
+            {
+                GridManager.instance.SetTile(cellPositionToPlaceDirectionalMirror, item.tileType, false, false);
+            }
+            onSuccess?.Invoke();
+        }
+        else
+        {
+            Debug.LogError("Cell is blocked for mirror placement : " + cellPositionToPlaceDirectionalMirror);
+        }
+    }
+
+    void PlaceArrowDirectionalRequestImplementation(int direction,Vector3Int cellPositionToPlaceDirectionalArrow, OnWorkDone onSuccess)
+    {
+        if (!CanDoAction("PlaceArrowDirectionalRequestImplementation"))
+        {
+            return;
+        }
+        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellPositionToPlaceDirectionalArrow))
+        {
+            Debug.Log("Setting tile arrow on " + cellPositionToPlaceDirectionalArrow);
+            switch((FaceDirection)direction)
+            {
+                case FaceDirection.Up:
+                    GridManager.instance.SetTile(cellPositionToPlaceDirectionalArrow, EnumData.TileType.UpArrow, true, false);
+                    break;
+                case FaceDirection.Down:
+                    GridManager.instance.SetTile(cellPositionToPlaceDirectionalArrow, EnumData.TileType.DownArrow, true, false);
+                    break;
+                case FaceDirection.Left:
+                    GridManager.instance.SetTile(cellPositionToPlaceDirectionalArrow, EnumData.TileType.LeftArrow, true, false);
+                    break;
+                case FaceDirection.Right:
+                    GridManager.instance.SetTile(cellPositionToPlaceDirectionalArrow, EnumData.TileType.RightArrow, true, false);
+                    break;
+            }
+            List<TileData> tdList = GridManager.instance.GetAllTileDataInCellPos(cellPositionToPlaceDirectionalArrow);
+            foreach (TileData item in tdList)
+            {
+                GridManager.instance.SetTile(cellPositionToPlaceDirectionalArrow, item.tileType, false, false);
+            }
+            onSuccess?.Invoke();
+        }
+        else
+        {
+            Debug.LogError("Cell is blocked for arrow placement : " + cellPositionToPlaceDirectionalArrow);
+        }
+    }
+
     void PlaceBoulderRequestImplementation(Vector3Int cellPositionToPlaceBoulder,OnWorkDone onSuccess)
     {
         if (!CanDoAction("PlaceBoulderRequestImplementation"))
@@ -1488,6 +1585,15 @@ public class ServerMasterController : MonoBehaviour
             {
                 case EnumData.UsableItemTypes.Boulder:
                     PlaceBoulderRequestImplementation(spawnCell, onSuccess);
+                    break;
+                case EnumData.UsableItemTypes.ArrowDirectional:
+                    PlaceArrowDirectionalRequestImplementation(direction,spawnCell, onSuccess);
+                    break;
+                case EnumData.UsableItemTypes.MirrorItem:
+                    PlaceMirrorRequestImplementation(spawnCell, onSuccess);
+                    break;
+                case EnumData.UsableItemTypes.GorgonGlass:
+                    PlaceGorgonGlassRequestImplementation(onSuccess);
                     break;
                 case EnumData.UsableItemTypes.Pitfall:
                     CastPitfallImplementation(direction, onSuccess);
@@ -1935,6 +2041,8 @@ public class ServerMasterController : MonoBehaviour
                 latestPlayerInputPackage = inputPackageCorrespondingToSeq;
                 playerSequenceNumberProcessed = inputPackageCorrespondingToSeq.sequenceNumber;
 
+
+                serverInstanceHero.ProcessCollisionEnter();
                 serverInstanceHero.ProcessMovementInputs(inputPackageCorrespondingToSeq.commands
                     , inputPackageCorrespondingToSeq.previousCommands);
 
@@ -1953,7 +2061,8 @@ public class ServerMasterController : MonoBehaviour
                 {
                     //Debug.LogError("Could not find any inputToProcess for  seq: " + (sequenceNumberProcessed + 1));
                     playerSequenceNumberProcessed = playerSequenceNumberProcessed + 1;
-
+                    
+                    serverInstanceHero.ProcessCollisionEnter();
                     serverInstanceHero.ProcessMovementInputs(latestPlayerInputPackage.commands
                     , latestPlayerInputPackage.previousCommands);
 

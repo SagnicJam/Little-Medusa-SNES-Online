@@ -496,7 +496,10 @@ public class ProjectileUtil : MonoBehaviour
             {
                 if (pU.actorMePushing != null)
                 {
-                    pU.actorMePushing.StopPushWithoutDamage(pU.actorMePushing);
+                    if(!pU.actorMePushing.IsActorOnArrows()&&!pU.actorMePushing.IsActorOnMirror())
+                    {
+                        pU.actorMePushing.StopPushWithoutDamage(pU.actorMePushing);
+                    }
                 }
 
             }

@@ -128,17 +128,35 @@ public class Posidanna : Hero
         {
             if (completedMotionToMovePoint)
             {
+                Mapper m = currentMapper;
+                if (m != null && m is OneDNonCheckingMapper oneDNonCheckingMapper)
+                {
+                    if (GridManager.instance.IsCellContainingUpArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        oneDNonCheckingMapper.face = FaceDirection.Up;
+                    }
+                    else if (GridManager.instance.IsCellContainingDownArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        oneDNonCheckingMapper.face = FaceDirection.Down;
+                    }
+                    else if (GridManager.instance.IsCellContainingLeftArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        oneDNonCheckingMapper.face = FaceDirection.Left;
+                    }
+                    else if (GridManager.instance.IsCellContainingRightArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        oneDNonCheckingMapper.face = FaceDirection.Right;
+                    }
+                    else
+                    {
+                        oneDNonCheckingMapper.face = Facing;
+                    }
+                }
                 CheckSwitchCellIndex();
                 if (GridManager.instance.IsCellBlockedForPetrifiedUnitMotionAtPos(currentMovePointCellPosition))
                 {
                     StopPush(this);
                     return;
-                }
-
-                Mapper m = currentMapper;
-                if (m != null && m is OneDNonCheckingMapper oneDNonCheckingMapper)
-                {
-                    oneDNonCheckingMapper.face = Facing;
                 }
             }
             else
@@ -314,7 +332,7 @@ public class Posidanna : Hero
         }
         if (isFiringPrimaryProjectile)
         {
-            FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
+            //fire
         }
         if (isFiringItemEyeLaser)
         {
@@ -396,7 +414,10 @@ public class Posidanna : Hero
         {
             if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
             {
-                FireProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Up);
+                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Down);
+                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Left);
+                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Right);
                 if (MultiplayerManager.instance.isServer)
                 {
                     itemToCast.itemCount--;
@@ -407,7 +428,7 @@ public class Posidanna : Hero
         {
             if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
             {
-                FireProjectile(new Attack(GameConfig.arrowDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.Arrow), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                FireProjectile(new Attack(GameConfig.arrowDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.CentaurBow), GridManager.instance.grid.WorldToCell(actorTransform.position));
                 if (MultiplayerManager.instance.isServer)
                 {
                     itemToCast.itemCount--;
@@ -486,7 +507,7 @@ public class Posidanna : Hero
             if (!inputs[(int)EnumData.PosidannaInputs.Up] && previousInputs[(int)EnumData.PosidannaInputs.Up] != inputs[(int)EnumData.PosidannaInputs.Up])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
-                if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
+                if (fractionCovered < GridManager.instance.grid.cellSize.y / GameConfig.fractionToConsiderAsInput)
                 {
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
@@ -494,7 +515,7 @@ public class Posidanna : Hero
             else if (!inputs[(int)EnumData.PosidannaInputs.Left] && previousInputs[(int)EnumData.PosidannaInputs.Left] != inputs[(int)EnumData.PosidannaInputs.Left])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
-                if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
+                if (fractionCovered < GridManager.instance.grid.cellSize.x / GameConfig.fractionToConsiderAsInput)
                 {
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
@@ -502,7 +523,7 @@ public class Posidanna : Hero
             else if (!inputs[(int)EnumData.PosidannaInputs.Down] && previousInputs[(int)EnumData.PosidannaInputs.Down] != inputs[(int)EnumData.PosidannaInputs.Down])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
-                if (fractionCovered < GridManager.instance.grid.cellSize.y / 2f)
+                if (fractionCovered < GridManager.instance.grid.cellSize.y / GameConfig.fractionToConsiderAsInput)
                 {
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
@@ -510,7 +531,7 @@ public class Posidanna : Hero
             else if (!inputs[(int)EnumData.PosidannaInputs.Right] && previousInputs[(int)EnumData.PosidannaInputs.Right] != inputs[(int)EnumData.PosidannaInputs.Right])
             {
                 float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
-                if (fractionCovered < GridManager.instance.grid.cellSize.x / 2f)
+                if (fractionCovered < GridManager.instance.grid.cellSize.x / GameConfig.fractionToConsiderAsInput)
                 {
                     currentMovePointCellPosition = previousMovePointCellPosition;
                 }
@@ -549,6 +570,64 @@ public class Posidanna : Hero
             left = false;
             down = false;
             right = false;
+        }
+        else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingUpArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+        {
+            up = true;
+            left = false;
+            down = false;
+            right = false;
+        }
+        else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingDownArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+        {
+            up = false;
+            left = false;
+            down = true;
+            right = false;
+        }
+        else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingLeftArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+        {
+            up = false;
+            left = true;
+            down = false;
+            right = false;
+        }
+        else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingRightArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+        {
+            up = false;
+            left = false;
+            down = false;
+            right = true;
+        }
+        else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingMirrorAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)) && !GridManager.instance.IsCellBlockedForUnitMotionAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing))))
+        {
+            switch (Facing)
+            {
+                case FaceDirection.Up:
+                    up = true;
+                    left = false;
+                    down = false;
+                    right = false;
+                    break;
+                case FaceDirection.Down:
+                    up = false;
+                    left = false;
+                    down = true;
+                    right = false;
+                    break;
+                case FaceDirection.Left:
+                    up = false;
+                    left = true;
+                    down = false;
+                    right = false;
+                    break;
+                case FaceDirection.Right:
+                    up = false;
+                    left = false;
+                    down = false;
+                    right = true;
+                    break;
+            }
         }
         else
         {

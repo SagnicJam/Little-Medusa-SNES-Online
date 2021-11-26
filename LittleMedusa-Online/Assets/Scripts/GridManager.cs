@@ -205,7 +205,84 @@ public class GridManager : MonoBehaviour
         //Debug.LogError("Could not find any direction change");
         return actor.PreviousFacingDirection;
     }
+    public bool IsCellContainingDownArrowAtPos(Vector3Int cellPos)
+    {
+        Vector3 objectPosition = cellToworld(cellPos);
 
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+
+            if (td != null && td.tileType == EnumData.TileType.DownArrow)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool IsCellContainingLeftArrowAtPos(Vector3Int cellPos)
+    {
+        Vector3 objectPosition = cellToworld(cellPos);
+
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+
+            if (td != null && td.tileType == EnumData.TileType.LeftArrow)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool IsCellContainingRightArrowAtPos(Vector3Int cellPos)
+    {
+        Vector3 objectPosition = cellToworld(cellPos);
+
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+
+            if (td != null && td.tileType == EnumData.TileType.RightArrow)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool IsCellContainingUpArrowAtPos(Vector3Int cellPos)
+    {
+        Vector3 objectPosition = cellToworld(cellPos);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+
+            if (td != null && td.tileType == EnumData.TileType.UpArrow)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool IsCellGhostTile(Vector3Int cellPosToCheckFor)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+            if (td != null && td.isGhostTile)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public bool IsCellBlockedForProjectiles(Vector3Int cellPosToCheckFor)
     {
@@ -653,6 +730,23 @@ public class GridManager : MonoBehaviour
         return false;
     }
 
+
+    public bool IsCellContainingPetrifiedMonsterOnCell(Vector3Int cellPosToCheckFor, Actor actorCalling)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            Enemy monster = hit2DArr[i].collider.gameObject.GetComponent<Enemy>();
+
+            if (monster != null && actorCalling.GetInstanceID() != monster.gameObject.GetInstanceID() && monster.isPetrified)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public bool IsCellKillableForSpawnAtPos(Vector3Int cellPosToCheckFor)
     {
         Vector3 objectPosition = cellToworld(cellPosToCheckFor);
@@ -1031,6 +1125,23 @@ public class GridManager : MonoBehaviour
         }
         return false;
     }
+
+    public bool IsCellContainingPushedMonsterOnCell(Vector3Int cellPosToCheckFor, Actor actorCalling)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            Enemy monster = hit2DArr[i].collider.gameObject.GetComponent<Enemy>();
+
+            if (monster != null && monster.gameObject.GetInstanceID() != actorCalling.gameObject.GetInstanceID() && monster.isPushed)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public bool HasPetrifiedObject(Vector3Int cellPosToCheckFor)
     {
         Vector3 objectPosition = cellToworld(cellPosToCheckFor);
@@ -1039,6 +1150,12 @@ public class GridManager : MonoBehaviour
         {
             Actor actor = hit2DArr[i].collider.gameObject.GetComponent<Actor>();
             if (actor != null && actor.isPetrified)
+            {
+                return true;
+            }
+
+            ClientEnemyManager clientEnemyManager = hit2DArr[i].collider.gameObject.GetComponent<ClientEnemyManager>();
+            if (clientEnemyManager != null && (clientEnemyManager.currentEnemyState == EnumData.EnemyState.Petrified))
             {
                 return true;
             }

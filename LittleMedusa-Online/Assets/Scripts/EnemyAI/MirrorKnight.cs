@@ -69,7 +69,7 @@ public class MirrorKnight : Enemy
                 }
                 else
                 {
-                    if (!senseInCircleAction.Perform())
+                    if (!senseInCircleAction.Perform() || (IsActorOnArrows() || IsActorOnMirror()))
                     {
                         FinishFollowing();
                     }
@@ -90,6 +90,43 @@ public class MirrorKnight : Enemy
             }
             if (completedMotionToMovePoint)
             {
+                if (IsActorOnArrows())
+                {
+                    if (GridManager.instance.IsCellContainingUpArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        currentMapper = new OneDNonCheckingMapper(FaceDirection.Up);
+                    }
+                    else if (GridManager.instance.IsCellContainingDownArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        currentMapper = new OneDNonCheckingMapper(FaceDirection.Down);
+                    }
+                    else if (GridManager.instance.IsCellContainingLeftArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        currentMapper = new OneDNonCheckingMapper(FaceDirection.Left);
+                    }
+                    else if (GridManager.instance.IsCellContainingRightArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        currentMapper = new OneDNonCheckingMapper(FaceDirection.Right);
+                    }
+                }
+                else if (IsActorOnMirror())
+                {
+                    if (GridManager.instance.IsCellBlockedForUnitMotionAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing))) || (GridManager.instance.HasPetrifiedObject(GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing))) && GridManager.instance.IsCellContainingPushedMonsterOnCell(GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing)), this)))
+                    {
+                        currentMapper = wandererMapper;
+                        CheckSwitchCellIndex();
+                        currentMapper = new OneDNonCheckingMapper(Facing);
+                        return;
+                    }
+                    else
+                    {
+                        currentMapper = new OneDNonCheckingMapper(Facing);
+                    }
+                }
+                else
+                {
+                    currentMapper = wandererMapper;
+                }
                 CheckSwitchCellIndex();
             }
         }
@@ -205,6 +242,30 @@ public class MirrorKnight : Enemy
         {
             if (completedMotionToMovePoint)
             {
+                Mapper m = currentMapper;
+                if (m != null && m is OneDNonCheckingMapper oneDNonCheckingMapper)
+                {
+                    if (GridManager.instance.IsCellContainingUpArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        oneDNonCheckingMapper.face = FaceDirection.Up;
+                    }
+                    else if (GridManager.instance.IsCellContainingDownArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        oneDNonCheckingMapper.face = FaceDirection.Down;
+                    }
+                    else if (GridManager.instance.IsCellContainingLeftArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        oneDNonCheckingMapper.face = FaceDirection.Left;
+                    }
+                    else if (GridManager.instance.IsCellContainingRightArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    {
+                        oneDNonCheckingMapper.face = FaceDirection.Right;
+                    }
+                    else
+                    {
+                        oneDNonCheckingMapper.face = Facing;
+                    }
+                }
                 CheckSwitchCellIndex();
                 if (GridManager.instance.IsCellBlockedForPetrifiedUnitMotionAtPos(currentMovePointCellPosition))
                 {
@@ -217,12 +278,6 @@ public class MirrorKnight : Enemy
                         TakeDamage(currentHP);
                     }
                     return;
-                }
-
-                Mapper m = currentMapper;
-                if (m != null && m is OneDNonCheckingMapper oneDNonCheckingMapper)
-                {
-                    oneDNonCheckingMapper.face = Facing;
                 }
             }
             else
@@ -308,7 +363,7 @@ public class MirrorKnight : Enemy
     bool previousIsPrimaryMoveActive;
     private void FixedUpdate()
     {
-        newIsPrimaryMoveActive = IsPlayerInRangeForMelleAttack();
+        newIsPrimaryMoveActive = IsPlayerInRangeForMelleAttack() && !IsActorOnArrows() && !IsActorOnMirror();
 
         UpdateMovementState(newIsPrimaryMoveActive, false);
         PerformMovement();

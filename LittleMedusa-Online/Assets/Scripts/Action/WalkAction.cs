@@ -29,6 +29,13 @@ public class WalkAction : Actions
 
     public void MoveActorToMovePointCell()
     {
-        actorWalking.actorTransform.position = Vector3.MoveTowards(actorWalking.actorTransform.position, actorWalking.movePoint.position, actorWalking.walkSpeed * Time.fixedDeltaTime);
+        if(actorWalking.IsActorOnArrows()||actorWalking.IsActorOnMirror())
+        {
+            actorWalking.actorTransform.position = Vector3.MoveTowards(actorWalking.actorTransform.position, actorWalking.movePoint.position, actorWalking.pushSpeed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            actorWalking.actorTransform.position = Vector3.MoveTowards(actorWalking.actorTransform.position, actorWalking.movePoint.position, actorWalking.walkSpeed * Time.fixedDeltaTime);
+        }
     }
 }

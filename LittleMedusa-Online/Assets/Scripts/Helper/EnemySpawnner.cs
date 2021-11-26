@@ -31,10 +31,13 @@ public class EnemySpawnner : MonoBehaviour
         totalEnemyToSpawn = enemyCount;
     }
 
+    int x;
     void SpawnNewEnemy()
     {
         currentEnemyCount++;
-        InstantiateEnemy(spawnIndexList[Random.Range(0, spawnIndexList.Count)]);
+        //InstantiateEnemy(spawnIndexList[Random.Range(0, spawnIndexList.Count)]);
+        x++;
+        InstantiateEnemy(spawnIndexList[x% spawnIndexList.Count]);
     }
 
     void InstantiateEnemy(Vector3Int cellPos)
