@@ -120,7 +120,7 @@ public class ServerSideGameManager : MonoBehaviour
         
         DealItemSpawn();
         DealCereberausHeadRotation();
-        DealWorldDestruction();
+        //DealWorldDestruction();
         DealMatchStartTime();
         //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
 
@@ -232,17 +232,17 @@ public class ServerSideGameManager : MonoBehaviour
 
         if(cellPosForItemTiles.Count>0 && cellPosForItemTiles.Count <= maxItemCount)
         {
-            GridManager.instance.SetTile(
-                cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
-            , itemTilesType[UnityEngine.Random.Range(0, itemTilesType.Count)],
-            true,
-            false);
+            //GridManager.instance.SetTile(
+            //    cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
+            //, itemTilesType[UnityEngine.Random.Range(0, itemTilesType.Count)],
+            //true,
+            //false);
 
-           // GridManager.instance.SetTile(
-           //    cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
-           //, EnumData.TileType.CentaurBowItem,
-           //true,
-           //false);
+            GridManager.instance.SetTile(
+               cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
+           , EnumData.TileType.PortalItem,
+           true,
+           false);
         }
     }
 

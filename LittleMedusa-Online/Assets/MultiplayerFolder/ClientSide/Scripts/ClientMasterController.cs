@@ -367,10 +367,10 @@ public class ClientMasterController : MonoBehaviour
             {
                 Debug.Log("Correction regarding position difference " + serverPlayer.actorTransform.position + "local---server" + localPlayer.actorTransform.position + "<color=red>Corrected player position</color>" + playerStateUpdates.playerProcessedSequenceNumber);
                 //Debug.Break();
-                PositionUpdates positionUpdates = new PositionUpdates(serverPlayer.actorTransform.position, serverPlayer.currentMovePointCellPosition, serverPlayer.previousMovePointCellPosition,
-                    (int)serverPlayer.Facing, (int)serverPlayer.PreviousFacingDirection);
-                localPlayer.SetActorPositionalState(positionUpdates);
-                localPlayer.SetFlyingTickCount(new PlayerFlyData(serverPlayer.flyingTickCountTemp));
+                //PositionUpdates positionUpdates = new PositionUpdates(serverPlayer.actorTransform.position, serverPlayer.currentMovePointCellPosition, serverPlayer.previousMovePointCellPosition,
+                //    (int)serverPlayer.Facing, (int)serverPlayer.PreviousFacingDirection);
+                //localPlayer.SetActorPositionalState(positionUpdates);
+                //localPlayer.SetFlyingTickCount(new PlayerFlyData(serverPlayer.flyingTickCountTemp));
             }
         }
         else

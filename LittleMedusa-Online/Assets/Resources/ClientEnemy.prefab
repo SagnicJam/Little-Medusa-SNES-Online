@@ -97,8 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7881f7b01d4f8bb42a9a8821161377f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfMinionColor: {r: 0.4911769, g: 1, b: 0.2783019, a: 1}
-  enemyMinionColor: {r: 1, g: 0.36320752, b: 0.36320752, a: 1}
+  medusaColor: {r: 1, g: 0.21568629, b: 0.5921569, a: 1}
+  posidannaColor: {r: 0.16078432, g: 0.45882356, b: 1, a: 1}
+  helimisColor: {r: 0.09411766, g: 0.427451, b: 0.25882354, a: 1}
+  avernaColor: {r: 0.64705884, g: 0, b: 0.0627451, a: 1}
+  ermolaiColor: {r: 0.9058824, g: 0.427451, b: 0.09411766, a: 1}
   spriteRenderer: {fileID: 4381202891389670505}
   id: 0
   currentEnemyState: 0
@@ -106,6 +109,7 @@ MonoBehaviour:
   currentEnemyData:
     uid: 0
     leaderNetworkId: 0
+    leadercharacterType: 0
     enemyType: 0
     faceDirection: 0
     animationIndexNumber: 0
@@ -600,16 +604,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileType: 31
+  gameObjectEnums: 0
   blockFlyingUnits: 0
   blockToSpawnObjectsPlacement: 0
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  isGhostTile: 0
   solidifyTile: 0
-  isPlayer: 0
+  isItem: 0
   killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
-  overrideInspectorValues: 0
 --- !u!50 &4483263510518873030
 Rigidbody2D:
   serializedVersion: 4

@@ -1666,7 +1666,29 @@ public class ServerMasterController : MonoBehaviour
         if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellPositionToPlaceMinion))
         {
             Debug.Log("Setting tile minion on " + cellPositionToPlaceMinion);
-            GridManager.instance.enemySpawnner.InstantiateEnemy(cellPositionToPlaceMinion, direction, serverInstanceHero.ownerId);
+            int heroType=-1;
+            if(serverInstanceHero is Medusa)
+            {
+                heroType = (int)EnumData.Heroes.Medusa;
+            }
+            else if(serverInstanceHero is Posidanna)
+            {
+                heroType = (int)EnumData.Heroes.Posidanna;
+            }
+            else if (serverInstanceHero is Heliemis)
+            {
+                heroType = (int)EnumData.Heroes.Heliemis;
+            }
+            else if (serverInstanceHero is Ermolai)
+            {
+                heroType = (int)EnumData.Heroes.Ermolai;
+            }
+            else if (serverInstanceHero is Averna)
+            {
+                heroType = (int)EnumData.Heroes.Averna;
+            }
+
+            GridManager.instance.enemySpawnner.InstantiateEnemy(cellPositionToPlaceMinion, direction, serverInstanceHero.ownerId, heroType);
             onSuccess?.Invoke();
         }
         else

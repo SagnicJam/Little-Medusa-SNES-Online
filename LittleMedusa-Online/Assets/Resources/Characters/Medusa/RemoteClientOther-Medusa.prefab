@@ -422,6 +422,7 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  isGhostTile: 0
   solidifyTile: 0
   isItem: 0
   killUnitsInstantlyIfInTheirRegion: 0
@@ -736,8 +737,11 @@ MonoBehaviour:
   isFiringPrimaryProjectile: 0
   isFiringItemEyeLaser: 0
   isFiringItemFireball: 0
+  isFiringItemStarShower: 0
+  isFiringItemCentaurBow: 0
   isInvincible: 0
   isRespawnningPlayer: 0
+  isMovementFreezed: 0
   inCharacterSelectionScreen: 0
   inGame: 0
   triggerFaceChangeEvent: 0
@@ -762,9 +766,6 @@ MonoBehaviour:
   actorMePushing: {fileID: 0}
   petrificationColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0.6509804}
   invincibleColor: {r: 1, g: 0.9577489, b: 0, a: 0.6509804}
-  itemEyeLaserMoveAttackRateTickRate: 20
-  itemFireballMoveAttackRateTickRate: 20
-  bubbleShieldItemMoveAttackRateTickRate: 120
   healthFillImage: {fileID: 4201844236452040917}
   currentLifeStockText: {fileID: 4170652754415583038}
   statusSprite: {fileID: 6358492327092538958}
@@ -858,7 +859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4156775103115991783
 Transform:
   m_ObjectHideFlags: 0

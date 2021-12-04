@@ -5,8 +5,11 @@ using UnityEngine;
 public class ClientEnemyManager : MonoBehaviour
 {
     [Header("Tweak Params")]
-    public Color selfMinionColor;
-    public Color enemyMinionColor;
+    public Color medusaColor;
+    public Color posidannaColor;
+    public Color helimisColor;
+    public Color avernaColor;
+    public Color ermolaiColor;
 
     [Header("Scene references")]
     public SpriteRenderer spriteRenderer;
@@ -28,19 +31,29 @@ public class ClientEnemyManager : MonoBehaviour
     public Sprite[] currentAnimationSpriteGroup;
 
 
-    public void SetEnemyColor(int leaderNetworkId)
+    public void SetEnemyColor(int leaderNetworkId,int leaderCharacterType)
     {
         if(leaderNetworkId == 0)
         {
             return;
         }
-        if (leaderNetworkId == Client.instance.myID)
+        switch((EnumData.Heroes)leaderCharacterType)
         {
-            spriteRenderer.color = selfMinionColor;
-        }
-        else
-        {
-            spriteRenderer.color = enemyMinionColor;
+            case EnumData.Heroes.Medusa:
+                spriteRenderer.color = medusaColor;
+                break;
+            case EnumData.Heroes.Posidanna:
+                spriteRenderer.color = posidannaColor;
+                break;
+            case EnumData.Heroes.Heliemis:
+                spriteRenderer.color = helimisColor;
+                break;
+            case EnumData.Heroes.Averna:
+                spriteRenderer.color = avernaColor;
+                break;
+            case EnumData.Heroes.Ermolai:
+                spriteRenderer.color = ermolaiColor;
+                break;
         }
     }
 
@@ -170,16 +183,18 @@ public struct EnemyData
 {
     public int uid;
     public int leaderNetworkId;
+    public int leadercharacterType;
     public int enemyType;
     public int faceDirection;
     public int animationIndexNumber;
     public int enemyState;
     public Vector3 enemyPosition;
 
-    public EnemyData(int uid,int leaderNetworkId, int enemyType,int animationIndexNumber, int faceDirection, int enemyState, Vector3 enemyPosition)
+    public EnemyData(int uid,int leaderNetworkId,int leadercharacterType, int enemyType,int animationIndexNumber, int faceDirection, int enemyState, Vector3 enemyPosition)
     {
         this.uid = uid;
         this.leaderNetworkId = leaderNetworkId;
+        this.leadercharacterType = leadercharacterType;
         this.enemyType = enemyType;
         this.animationIndexNumber = animationIndexNumber;
         this.faceDirection = faceDirection;

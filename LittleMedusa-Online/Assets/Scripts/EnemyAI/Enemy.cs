@@ -24,6 +24,7 @@ public abstract class Enemy : Actor
     public bool followingTarget;
     public bool isSpawnned;
     public int leaderNetworkId;
+    public int leadercharacterType;
     public Hero heroToChase;
 
     [Header("Enemy stats")]

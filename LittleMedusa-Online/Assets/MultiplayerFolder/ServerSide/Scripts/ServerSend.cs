@@ -158,6 +158,8 @@ public class ServerSend
 
                 packet.Write(keyValuePair.Value.leaderNetworkId);
 
+                packet.Write(keyValuePair.Value.leadercharacterType);
+
                 packet.Write(keyValuePair.Value.enemyType);
 
                 packet.Write(keyValuePair.Value.animationIndexNumber);
@@ -240,6 +242,7 @@ public class ServerSend
                     compressedPacked.Write(keyValuePair.Key);
 
                     compressedPacked.Write(keyValuePair.Value.leaderNetworkId);
+                    compressedPacked.Write(keyValuePair.Value.leadercharacterType);
 
                     compressedPacked.Write(keyValuePair.Value.enemyType);
 
@@ -319,6 +322,7 @@ public class ServerSend
                         compressedPacked.Write(keyValuePair.Key);
 
                         compressedPacked.Write(keyValuePair.Value.leaderNetworkId);
+                        compressedPacked.Write(keyValuePair.Value.leadercharacterType);
 
                         compressedPacked.Write(keyValuePair.Value.enemyType);
 

@@ -663,6 +663,7 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  isGhostTile: 0
   solidifyTile: 0
   isItem: 0
   killUnitsInstantlyIfInTheirRegion: 0
@@ -996,6 +997,7 @@ MonoBehaviour:
   previousMovePointCellPosition: {x: 0, y: 0, z: 0}
   actorPushingMe: {fileID: 0}
   actorMePushing: {fileID: 0}
+  heroType: 3
   petrificationColor: {r: 0.4039216, g: 0.4039216, b: 0.4039216, a: 0.6509804}
   invincibleColor: {r: 1, g: 0.9333334, b: 0, a: 0.6509804}
   healthFillImage: {fileID: 237778869680218058}

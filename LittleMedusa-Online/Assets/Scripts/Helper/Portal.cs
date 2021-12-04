@@ -20,9 +20,9 @@ public class Portal : MonoBehaviour
                 GridManager.instance.SetTile(portalOutlet, EnumData.TileType.Portal, true, false);
                 portalEntranceDic.Add(portalInLet, new PortalInfo(portalOwner, portalOutlet));
 
-                IEnumerator ie = PortalTimer(portalInLet);
-                StopCoroutine(ie);
-                StartCoroutine(ie);
+                //IEnumerator ie = PortalTimer(portalInLet);
+                //StopCoroutine(ie);
+                //StartCoroutine(ie);
                 onSuccess?.Invoke();
             }
             else

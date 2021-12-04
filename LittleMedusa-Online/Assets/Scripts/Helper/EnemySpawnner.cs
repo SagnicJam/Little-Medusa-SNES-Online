@@ -50,11 +50,12 @@ public class EnemySpawnner : MonoBehaviour
         actor.currentMovePointCellPosition = GridManager.instance.grid.WorldToCell(actor.transform.position);
     }
 
-    public void InstantiateEnemy(Vector3Int cellPos,int direction,int leaderId)
+    public void InstantiateEnemy(Vector3Int cellPos,int direction,int leaderId,int leadercharacterType)
     {
         GameObject enemy = Instantiate(enemyPrefab[(int)monsterToSpawn]);
         Enemy actor = enemy.GetComponentInChildren<Enemy>();
         actor.leaderNetworkId = leaderId;
+        actor.leadercharacterType = leadercharacterType;
         actor.Facing = (FaceDirection)direction;
         actor.transform.position = GridManager.instance.cellToworld(cellPos);
         actor.transform.rotation = Quaternion.identity;

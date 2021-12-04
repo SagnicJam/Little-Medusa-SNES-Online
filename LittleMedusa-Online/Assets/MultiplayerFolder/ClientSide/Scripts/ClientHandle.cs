@@ -116,6 +116,8 @@ public class ClientHandle : MonoBehaviour
 
             int leaderNetworkId = packet.ReadInt();
 
+            int leadercharacterType = packet.ReadInt();
+
             int enemyType = packet.ReadInt();
 
             int animationIndexNumber = packet.ReadInt();
@@ -126,7 +128,7 @@ public class ClientHandle : MonoBehaviour
 
             Vector3 enemyPosition = packet.ReadVector3();
 
-            keyValueEnemyPairs.Add(uid, new EnemyData(uid, leaderNetworkId, enemyType, animationIndexNumber,faceDirection, enemyState, enemyPosition));
+            keyValueEnemyPairs.Add(uid, new EnemyData(uid, leaderNetworkId, leadercharacterType, enemyType, animationIndexNumber,faceDirection, enemyState, enemyPosition));
         }
 
         int animationStaticTileCount = packet.ReadInt();
@@ -222,13 +224,14 @@ public class ClientHandle : MonoBehaviour
             {
                 int enemyId = decompressedPacket.ReadInt();
                 int leaderNetworkId = decompressedPacket.ReadInt();
+                int leadercharacterType = decompressedPacket.ReadInt();
                 int enemyType = decompressedPacket.ReadInt();
                 int animationIndexNumber = decompressedPacket.ReadInt();
                 int faceDirection = decompressedPacket.ReadInt();
                 int enemyState = decompressedPacket.ReadInt();
                 Vector3 enemyPosition = decompressedPacket.ReadVector3();
 
-                enemyValuePairs.Add(enemyId, new EnemyData(enemyId, leaderNetworkId, enemyType, animationIndexNumber, faceDirection, enemyState, enemyPosition));
+                enemyValuePairs.Add(enemyId, new EnemyData(enemyId, leaderNetworkId, leadercharacterType, enemyType, animationIndexNumber, faceDirection, enemyState, enemyPosition));
             }
 
             Dictionary<int, AnimatingStaticTile> keyValuePairsAnimation = new Dictionary<int, AnimatingStaticTile>();
@@ -304,13 +307,14 @@ public class ClientHandle : MonoBehaviour
                 {
                     int enemyId = decompressedPacket.ReadInt();
                     int leaderNetworkId = decompressedPacket.ReadInt();
+                    int leadercharacterType = decompressedPacket.ReadInt();
                     int enemyType = decompressedPacket.ReadInt();
                     int animationIndexNumber = decompressedPacket.ReadInt();
                     int faceDirection = decompressedPacket.ReadInt();
                     int enemyState = decompressedPacket.ReadInt();
                     Vector3 enemyPosition = decompressedPacket.ReadVector3();
 
-                    previousEnemyValuePairs.Add(enemyId, new EnemyData(enemyId, leaderNetworkId, enemyType, animationIndexNumber, faceDirection, enemyState, enemyPosition));
+                    previousEnemyValuePairs.Add(enemyId, new EnemyData(enemyId, leaderNetworkId, leadercharacterType, enemyType, animationIndexNumber, faceDirection, enemyState, enemyPosition));
                 }
 
                 Dictionary<int, AnimatingStaticTile> keyValuePairsAnimation = new Dictionary<int, AnimatingStaticTile>();

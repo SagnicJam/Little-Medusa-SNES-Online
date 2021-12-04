@@ -236,7 +236,7 @@ public class ClientSideGameManager : MonoBehaviour
                 }
                 ClientEnemyManager newClientEnemyManager = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ClientEnemyManager>();
 
-                newClientEnemyManager.SetEnemyColor(kvp.Value.leaderNetworkId);
+                newClientEnemyManager.SetEnemyColor(kvp.Value.leaderNetworkId, kvp.Value.leadercharacterType);
                 newClientEnemyManager.SetEnemyData(kvp.Value);
                 enemyDatasDic.Add(kvp.Key,newClientEnemyManager);
             }
@@ -398,7 +398,7 @@ public class ClientSideGameManager : MonoBehaviour
                             return;
                         }
                         ClientEnemyManager newClientManager = GridManager.InstantiateGameObject(gToSpawn).GetComponent<ClientEnemyManager>();
-                        newClientManager.SetEnemyColor(kvp.Value.leaderNetworkId);
+                        newClientManager.SetEnemyColor(kvp.Value.leaderNetworkId, kvp.Value.leadercharacterType);
                         newClientManager.SetEnemyData(kvp.Value);
 
                         enemyDatasDic.Add(kvp.Key, newClientManager);
