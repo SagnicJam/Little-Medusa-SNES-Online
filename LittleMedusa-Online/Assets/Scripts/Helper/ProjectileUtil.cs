@@ -52,13 +52,17 @@ public class ProjectileUtil : MonoBehaviour
             networkUid = nextProjectileID;
             nextProjectileID++;
             ProjectileData projectileData = new ProjectileData(networkUid,pU.actorUsing.ownerId, (int)pU.projectileTypeThrown, pU.liveProjectile.transform.position, (int)pU.tileMovementDirection);
-            if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave)
+            if (pU.actorUsing != null)
             {
-                if (pU.actorUsing != null)
+                if (pU.actorUsing is Hero serverHero)
                 {
-                    if (pU.actorUsing is Hero serverHero)
+                    if(pU.projectileTypeThrown == EnumData.Projectiles.TidalWave)
                     {
                         serverHero.tidalWaveUsedCount--;
+                    }
+                    else if (pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
+                    {
+                        serverHero.flamePillarUsedCount--;
                     }
                 }
             }
@@ -73,7 +77,20 @@ public class ProjectileUtil : MonoBehaviour
                 chainIDLinkedTo = ++GridManager.chainIDGlobal;
             }
         }
+        else
+        {
 
+            if (pU.projectileTypeThrown == EnumData.Projectiles.FireBall)
+            {
+                if (pU.actorUsing != null)
+                {
+                    if (pU.actorUsing is Hero serverHero)
+                    {
+                        serverHero.fireballUsedCount--;
+                    }
+                }
+            }
+        }
         if (frameLooper != null)
         {
             if (isDynamicTravellingSprites)
@@ -435,7 +452,6 @@ public class ProjectileUtil : MonoBehaviour
                             pU.EndOfUse();
                         }
                     }
-
                 }
             }
         }
@@ -458,7 +474,6 @@ public class ProjectileUtil : MonoBehaviour
                             pU.EndOfUse();
                         }
                     }
-
                 }
             }
         }
@@ -510,25 +525,37 @@ public class ProjectileUtil : MonoBehaviour
                         pU.actorMePushing.StopPushWithoutDamage(pU.actorMePushing);
                     }
                 }
-
             }
-
-            if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave)
+            if (pU.actorUsing != null)
             {
-                if (pU.actorUsing != null)
+                if (pU.actorUsing is Hero serverHero)
                 {
-                    if (pU.actorUsing is Hero serverHero)
+                    if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave)
                     {
                         serverHero.tidalWaveUsedCount++;
                     }
+                    else if (pU.projectileTypeThrown == EnumData.Projectiles.FlamePillar)
+                    {
+                        serverHero.flamePillarUsedCount++;
+                    }
                 }
             }
-
+            
             ServerSideGameManager.projectilesDic.Remove(networkUid);
         }
         if (pU.projectileTypeThrown == EnumData.Projectiles.FireBall|| pU.projectileTypeThrown == EnumData.Projectiles.FireBallMirrorKnight)
         {
             //Debug.LogError("DestroyProjectile");
+            if (pU.projectileTypeThrown == EnumData.Projectiles.FireBall)
+            {
+                if (pU.actorUsing != null)
+                {
+                    if (pU.actorUsing is Hero serverHero)
+                    {   
+                        serverHero.fireballUsedCount++;
+                    }
+                }
+            }
             GridManager.instance.Disperse( dispersedGO
                 , dispersionRadius
                 , dispersionSpeed

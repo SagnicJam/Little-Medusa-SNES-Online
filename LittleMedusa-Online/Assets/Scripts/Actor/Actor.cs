@@ -997,6 +997,21 @@ public abstract class Actor : TileData
         actorToStop.isPushed = false;
     }
 
+    public void KillPlayer()
+    {
+        currentHP =0;
+        //Death occurs
+        if (currentStockLives > 0)
+        {
+            currentStockLives--;
+            Debug.Log("Respawn Player");
+            UnPetrify();
+            MakeUnInvincible();
+            RespawnPlayer();
+            Die();
+        }
+    }
+
     public void TakeDamage(int damageReceived)
     {
         if(isInvincible)
@@ -1014,6 +1029,7 @@ public abstract class Actor : TileData
                 currentStockLives--;
                 Debug.Log("Respawn Player");
                 UnPetrify();
+                MakeUnInvincible();
                 RespawnPlayer();
                 Die();
             }

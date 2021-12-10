@@ -17,6 +17,7 @@ public class GridManager : MonoBehaviour
     public TornadoTracker tornadoTracker;
     public BoulderTracker boulderTracker;
     public PortalTracker portalTracker;
+    public GorgonGlassTracker gorgonGlassTracker;
 
     public EnemySpawnner enemySpawnner;
 
@@ -1179,6 +1180,21 @@ public class GridManager : MonoBehaviour
         {
             Actor actor = hit2DArr[i].collider.gameObject.GetComponent<Actor>();
             if (actor != null && actor.ownerId == leaderId)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool IsCellBlockedForRespawningUnitsAtPos(Vector3Int cellPosToCheckFor)
+    {
+        Vector3 objectPosition = cellToworld(cellPosToCheckFor);
+        RaycastHit2D[] hit2DArr = Physics2D.BoxCastAll(objectPosition, grid.cellSize * GameConfig.boxCastCellSizePercent, 0, objectPosition, 0);
+        for (int i = 0; i < hit2DArr.Length; i++)
+        {
+            TileData td = hit2DArr[i].collider.gameObject.GetComponent<TileData>();
+
+            if (td != null && td.blockRespawningUnit)
             {
                 return true;
             }

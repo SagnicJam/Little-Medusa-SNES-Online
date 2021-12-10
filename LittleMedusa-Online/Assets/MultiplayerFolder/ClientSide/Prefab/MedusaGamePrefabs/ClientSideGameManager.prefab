@@ -261,10 +261,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idealSnapshotBufferCount: 8
   maxedOutSnapshotBufferCount: 20
+  updateRate: 3
   localPlayerPrefab: {fileID: 3850397219797001265, guid: 7e6b2515965c54a44ae32d496ed1630f,
     type: 3}
   playerPrefab: {fileID: 324947179142357826, guid: a5305e183b7ce294c9d19ba63d0d6def,
     type: 3}
+  updateRateTemp: 0
   currentWorldStateUpdateProcessingMode: 0
   serverWorldSequenceNumberProcessed: 0
   snapShotBufferSize: 0

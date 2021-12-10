@@ -19,6 +19,7 @@ public class GameConfig
     public const int bubbleShieldItemMoveAttackRateTickRate=120;
 
     public const int portalExistenceTickCount=500;
+    public const int gorgonGlassTickCount=500;
 
     public const int aeloianMightTickCount = 35;
     public const int quickSandTimerTickCount = 100;
@@ -32,6 +33,8 @@ public class GameConfig
     public const int boulderPlacementLimit = 5;
     public const int tornadoPlacementLimit = 2;
     public const int tidalWaveLimit = 1;
+    public const int fireballLimit = 3;
+    public const int flamePillarLimit = 3;
 
     public const int boulderItemUses=5;
     public const int centaurbowItemUses=5;

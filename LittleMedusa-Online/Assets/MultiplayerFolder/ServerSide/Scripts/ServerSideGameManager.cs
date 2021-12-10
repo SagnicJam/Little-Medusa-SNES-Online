@@ -120,7 +120,7 @@ public class ServerSideGameManager : MonoBehaviour
         
         DealItemSpawn();
         DealCereberausHeadRotation();
-        DealWorldDestruction();
+        //DealWorldDestruction();
         DealMatchStartTime();
         //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
 
@@ -240,7 +240,7 @@ public class ServerSideGameManager : MonoBehaviour
 
             GridManager.instance.SetTile(
                cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
-           , EnumData.TileType.CereberausHeadItem,
+           , EnumData.TileType.ArrowDirectionItem,
            true,
            false);
         }

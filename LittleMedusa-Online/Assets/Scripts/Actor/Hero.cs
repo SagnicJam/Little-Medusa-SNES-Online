@@ -24,6 +24,8 @@ public abstract class Hero : Actor
     public int boulderUsedCount;
     public int tidalWaveUsedCount;
     public int tornadoPlacedUsedCount;
+    public int fireballUsedCount;
+    public int flamePillarUsedCount;
 
     public CastItem itemToCast;
 
@@ -50,6 +52,8 @@ public abstract class Hero : Actor
         boulderUsedCount = GameConfig.boulderPlacementLimit;
         tidalWaveUsedCount = GameConfig.tidalWaveLimit;
         tornadoPlacedUsedCount = GameConfig.tornadoPlacementLimit;
+        fireballUsedCount = GameConfig.fireballLimit;
+        flamePillarUsedCount = GameConfig.flamePillarLimit;
     }
 
     public override void MakeInvincible()
@@ -657,7 +661,7 @@ public abstract class Hero : Actor
     {
         if (isRespawnningPlayer)
         {
-            if (GridManager.instance.IsCellBlockedForFlyingUnitsAtPos(pos))
+            if (GridManager.instance.IsCellBlockedForRespawningUnitsAtPos(pos))
             {
                 return false;
             }
@@ -709,12 +713,12 @@ public abstract class Hero : Actor
         {
             if (!isPushed)
             {
-                TakeDamage(currentHP);
+                KillPlayer();
             }
         }
         else
         {
-            TakeDamage(currentHP);
+            KillPlayer();
         }
     }
 

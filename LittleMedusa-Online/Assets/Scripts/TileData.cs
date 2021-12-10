@@ -6,6 +6,7 @@ public class TileData : MonoBehaviour
     public EnumData.TileType tileType;
     public EnumData.GameObjectEnums gameObjectEnums;
     public bool blockFlyingUnits;
+    public bool blockRespawningUnit;
     public bool blockToSpawnObjectsPlacement;
     public bool blockUnitMotion;
     public bool blockPetrifiedObjects;
@@ -25,6 +26,7 @@ public class TileData : MonoBehaviour
             {
                 case EnumData.TileType.None:
                     blockFlyingUnits = true;
+                    blockRespawningUnit = true;
                     blockToSpawnObjectsPlacement = true;
                     blockUnitMotion = true;
                     blockPetrifiedObjects = true;
@@ -164,7 +166,7 @@ public class TileData : MonoBehaviour
                     blockFlyingUnits = false;
                     blockToSpawnObjectsPlacement = true;
                     blockUnitMotion = false;
-                    blockPetrifiedObjects = false;
+                    blockPetrifiedObjects = true;
                     blockProjectiles = false;
                     break;
                 case EnumData.TileType.Tornado:

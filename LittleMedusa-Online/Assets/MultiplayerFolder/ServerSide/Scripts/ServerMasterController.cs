@@ -1442,7 +1442,7 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void PlaceGorgonGlassRequestImplementation(OnWorkDone onSuccess)
+    void PlaceGorgonGlassRequestImplementation(OnWorkDone onSuccessfullyItemPlaced)
     {
         if (!CanDoAction("PlaceGorgonGlassRequestImplementation"))
         {
@@ -1453,30 +1453,7 @@ public class ServerMasterController : MonoBehaviour
 
         //remove floor tiles
         //convert floor tiles to mirror tiles
-
-        List<Vector3Int> allNormalFloorCellPos = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.Normal);
-        List<Vector3Int> allNoBoulderFloorCellPos = GridManager.instance.GetAllPositionForTileMap(EnumData.TileType.NoBoulder);
-
-        foreach (Vector3Int item in allNormalFloorCellPos)
-        {
-            GridManager.instance.SetTile(item, EnumData.TileType.Mirror, true, false);
-            List<TileData> tdList = GridManager.instance.GetAllTileDataInCellPos(item);
-            foreach (TileData td in tdList)
-            {
-                GridManager.instance.SetTile(item, td.tileType, false, false);
-            }
-        }
-
-        foreach (Vector3Int item in allNoBoulderFloorCellPos)
-        {
-            GridManager.instance.SetTile(item, EnumData.TileType.Mirror, true, false);
-            List<TileData> tdList = GridManager.instance.GetAllTileDataInCellPos(item);
-            foreach (TileData td in tdList)
-            {
-                GridManager.instance.SetTile(item, td.tileType, false, false);
-            }
-        }
-        onSuccess?.Invoke();
+        GridManager.instance.gorgonGlassTracker.PlaceGorgonTile(OnSuccessfullyUsedItem);
     }
 
     void PlaceMirrorRequestImplementation(Vector3Int cellPositionToPlaceDirectionalMirror, OnWorkDone onSuccess)
@@ -1750,14 +1727,35 @@ public class ServerMasterController : MonoBehaviour
         {
             return;
         }
-        if (serverInstanceHero.IsProjectilePlacable(predictedCell, (FaceDirection)direction))
+        if (serverInstanceHero.flamePillarUsedCount > 0)
         {
-            serverInstanceHero.CastFlamePillar(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FlamePillar),predictedCell);
+            if (serverInstanceHero.IsProjectilePlacable(predictedCell, (FaceDirection)direction))
+            {
+                serverInstanceHero.CastFlamePillar(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FlamePillar), predictedCell);
+                onItemSuccessfullyUsed?.Invoke();
+            }
+        }
+        else
+        {
+            Debug.Log("Exhausted flame pillar use count");
+        }
+    }
+
+    void TidalWaveFirePlayerRequestImplementation(Vector3Int predictedCell, OnWorkDone onItemSuccessfullyUsed)
+    {
+        if (!CanDoAction("TidalWaveFirePlayerRequestImplementation"))
+        {
+            return;
+        }
+        if (serverInstanceHero.tidalWaveUsedCount > 0)
+        {
+            Debug.Log("TidalWaveFirePlayerRequestImplementation ");
+            serverInstanceHero.FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.TidalWave), predictedCell);
             onItemSuccessfullyUsed?.Invoke();
         }
         else
         {
-            Debug.LogError("Hero is not averna!");
+            Debug.Log("Exhausted tidal wave use count");
         }
     }
 
@@ -1815,19 +1813,7 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void TidalWaveFirePlayerRequestImplementation(Vector3Int predictedCell,OnWorkDone onItemSuccessfullyUsed)
-    {
-        if (!CanDoAction("TidalWaveFirePlayerRequestImplementation"))
-        {
-            return;
-        }
-        if (serverInstanceHero.tidalWaveUsedCount > 0)
-        {
-            Debug.Log("TidalWaveFirePlayerRequestImplementation ");
-            serverInstanceHero.FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.TidalWave), predictedCell);
-            onItemSuccessfullyUsed?.Invoke();
-        }
-    }
+    
 
     void CastPortalImplementation(int direction, OnWorkDone onSuccess)
     {

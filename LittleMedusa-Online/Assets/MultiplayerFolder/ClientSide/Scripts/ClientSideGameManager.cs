@@ -9,12 +9,14 @@ public class ClientSideGameManager : MonoBehaviour
     [Header("Tweak paramters")]
     public int idealSnapshotBufferCount;
     public int maxedOutSnapshotBufferCount;
+    public int updateRate = 15;
 
     [Header("Unit Templates")]
     public GameObject localPlayerPrefab;
     public GameObject playerPrefab;
 
     [Header("Live Data")]
+    public int updateRateTemp;
     public ProcessMode currentWorldStateUpdateProcessingMode;
     public int serverWorldSequenceNumberProcessed=0;
     public int snapShotBufferSize=0;
@@ -273,32 +275,45 @@ public class ClientSideGameManager : MonoBehaviour
         latestWorldUpdate = newWorldUpdate;
     }
 
+   
+
     void UpdateWorld(WorldUpdate newWorldUpdate)
     {
         if(latestWorldUpdate.worldGridItems!=null)
         {
-            for (int i = 0; i < latestWorldUpdate.worldGridItems.Length; i++)
+            if(updateRateTemp>=updateRate)
             {
-                for (int j = 0; j < latestWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList.Count; j++)
+                updateRateTemp = 0;
+                //implement
+                for (int i = 0; i < latestWorldUpdate.worldGridItems.Length; i++)
                 {
-                    if(!newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList.Contains(latestWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList[j]))
+                    for (int j = 0; j < latestWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList.Count; j++)
                     {
-                        //delete old
-                        GridManager.instance.SetTile(latestWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList[j], (EnumData.TileType)latestWorldUpdate.worldGridItems[i].tileType,false, true);
+                        if (!newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList.Contains(latestWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList[j]))
+                        {
+                            //delete old
+                            GridManager.instance.SetTile(latestWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList[j], (EnumData.TileType)latestWorldUpdate.worldGridItems[i].tileType, false, true);
+                        }
                     }
                 }
-            }
-            for (int i = 0; i < newWorldUpdate.worldGridItems.Length; i++)
-            {
-                for (int j = 0; j < newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList.Count; j++)
+                for (int i = 0; i < newWorldUpdate.worldGridItems.Length; i++)
                 {
-                    if (!latestWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList.Contains(newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList[j]))
+                    for (int j = 0; j < newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList.Count; j++)
                     {
-                        //add new
-                        GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true, true);
+                        if (!latestWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList.Contains(newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList[j]))
+                        {
+                            //add new
+                            GridManager.instance.SetTile(newWorldUpdate.worldGridItems[i].updatedCellGridWorldPositionList[j], (EnumData.TileType)newWorldUpdate.worldGridItems[i].tileType, true, true);
+                        }
                     }
                 }
+                latestWorldUpdate.worldGridItems = newWorldUpdate.worldGridItems;
             }
+            else
+            {
+                updateRateTemp++;
+            }
+            
 
             foreach(KeyValuePair<int,ProjectileData>kvp in latestWorldUpdate.projectileDatas)
             {
@@ -477,8 +492,12 @@ public class ClientSideGameManager : MonoBehaviour
 
         MultiplayerManager.instance.matchStartTimeText.text = Mathf.RoundToInt(newWorldUpdate.gameData.matchStartTime * Time.fixedDeltaTime).ToString();
 
-        latestWorldUpdate = newWorldUpdate;
+        latestWorldUpdate.sequenceNumber = newWorldUpdate.sequenceNumber;
+        latestWorldUpdate.animatingTileDatas = newWorldUpdate.animatingTileDatas;
+        latestWorldUpdate.enemyDatas = newWorldUpdate.enemyDatas;
+        latestWorldUpdate.gameData = newWorldUpdate.gameData;
+        latestWorldUpdate.portalEntranceDic = newWorldUpdate.portalEntranceDic;
+        latestWorldUpdate.projectileDatas = newWorldUpdate.projectileDatas;
     }
 }
-
 

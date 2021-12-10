@@ -326,8 +326,10 @@ public class Ermolai : Hero
         }
         if (isFiringItemFireball)
         {
-            FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
-
+            if (fireballUsedCount > 0)
+            {
+                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+            }
         }
         if (isFiringItemStarShower)
         {
@@ -381,12 +383,15 @@ public class Ermolai : Hero
         }
         if (isFiringItemFireball)
         {
-            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            if (fireballUsedCount > 0)
             {
-                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
-                if (MultiplayerManager.instance.isServer)
+                if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
                 {
-                    itemToCast.itemCount--;
+                    FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                    if (MultiplayerManager.instance.isServer)
+                    {
+                        itemToCast.itemCount--;
+                    }
                 }
             }
         }
@@ -616,6 +621,30 @@ public class Ermolai : Hero
             left = Input.GetKey(KeyCode.A);
             down = Input.GetKey(KeyCode.S);
             right = Input.GetKey(KeyCode.D);
+
+            if (completedMotionToMovePoint)
+            {
+                if (!CanOccupy(GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing))))
+                {
+                    if (Facing == FaceDirection.Up)
+                    {
+                        up = false;
+                    }
+                    else if (Facing == FaceDirection.Down)
+                    {
+                        down = false;
+                    }
+                    else if (Facing == FaceDirection.Left)
+                    {
+                        left = false;
+                    }
+                    else if (Facing == FaceDirection.Right)
+                    {
+                        right = false;
+                    }
+                }
+            }
+
             castPitfall = Input.GetKey(KeyCode.J);
             castEarthQuake = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Averna : Hero
 {
+
+
     public override void Start()
     {
         base.Start();
@@ -343,7 +345,10 @@ public class Averna : Hero
         }
         if (isFiringPrimaryProjectile)
         {
-            FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+            if(fireballUsedCount>0)
+            {
+                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+            }
         }
         if (isFiringItemEyeLaser)
         {
@@ -352,8 +357,10 @@ public class Averna : Hero
         }
         if (isFiringItemFireball)
         {
-            FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
-
+            if (fireballUsedCount > 0)
+            {
+                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+            }
         }
         if (isFiringItemStarShower)
         {
@@ -392,7 +399,10 @@ public class Averna : Hero
         }
         if (isFiringPrimaryProjectile)
         {
-            FireProjectile(new Attack(0,EnumData.AttackTypes.ProjectileAttack,EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+            if (fireballUsedCount > 0)
+            {
+                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+            }
         }
         if (isFiringItemEyeLaser)
         {
@@ -407,12 +417,15 @@ public class Averna : Hero
         }
         if (isFiringItemFireball)
         {
-            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            if (fireballUsedCount > 0)
             {
-                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
-                if (MultiplayerManager.instance.isServer)
+                if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
                 {
-                    itemToCast.itemCount--;
+                    FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                    if (MultiplayerManager.instance.isServer)
+                    {
+                        itemToCast.itemCount--;
+                    }
                 }
             }
         }
@@ -641,6 +654,30 @@ public class Averna : Hero
             left = Input.GetKey(KeyCode.A);
             down = Input.GetKey(KeyCode.S);
             right = Input.GetKey(KeyCode.D);
+
+            if (completedMotionToMovePoint)
+            {
+                if (!CanOccupy(GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing))))
+                {
+                    if (Facing == FaceDirection.Up)
+                    {
+                        up = false;
+                    }
+                    else if (Facing == FaceDirection.Down)
+                    {
+                        down = false;
+                    }
+                    else if (Facing == FaceDirection.Left)
+                    {
+                        left = false;
+                    }
+                    else if (Facing == FaceDirection.Right)
+                    {
+                        right = false;
+                    }
+                }
+            }
+
             shootFireBall = Input.GetKey(KeyCode.J);
             castFlamePillar = Input.GetKey(KeyCode.K);
             respawnPlayer = Input.GetKey(KeyCode.Return);

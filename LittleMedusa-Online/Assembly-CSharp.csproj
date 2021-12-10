@@ -133,6 +133,7 @@
     <Compile Include="Assets\Scripts\Helper\EnemySpawnner.cs" />
     <Compile Include="Assets\Scripts\Helper\FrameLooper.cs" />
     <Compile Include="Assets\Scripts\Helper\GamePhysics.cs" />
+    <Compile Include="Assets\Scripts\Helper\GorgonGlassTracker.cs" />
     <Compile Include="Assets\Scripts\Helper\JoinOrderText.cs" />
     <Compile Include="Assets\Scripts\Helper\MatchConditionManager.cs" />
     <Compile Include="Assets\Scripts\Helper\PortalTracker.cs" />
