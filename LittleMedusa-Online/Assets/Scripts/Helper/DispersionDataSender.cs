@@ -11,7 +11,7 @@ public class DispersionDataSender : MonoBehaviour
         {
             networkUid = ProjectileUtil.nextProjectileID;
             ProjectileUtil.nextProjectileID++;
-            ProjectileData projectileData = new ProjectileData(networkUid, (int)EnumData.Projectiles.DispersedFireBallMirrorKnight, transform.position, 0);
+            ProjectileData projectileData = new ProjectileData(networkUid,0, (int)EnumData.Projectiles.DispersedFireBallMirrorKnight, transform.position, 0);
             ServerSideGameManager.projectilesDic.Add(networkUid, projectileData);
         }
     }

@@ -532,11 +532,10 @@ public class ServerMasterController : MonoBehaviour
             FireTidalWaveCommand tidalWaveFireCommand;
             if (tidalWaveFireRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out tidalWaveFireCommand))
             {
-                int direction = tidalWaveFireCommand.direction;
                 Vector3Int cellPredicted = tidalWaveFireCommand.predictedCell;
                 tidalWaveFireRequestReceivedFromClientToServerDic.Remove(tidalWaveFireCommand.sequenceNoForFiringTidalWaveCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                TidalWaveFirePlayerRequestImplementation(direction,cellPredicted,null);
+                TidalWaveFirePlayerRequestImplementation(cellPredicted,null);
             }
         }
 
@@ -546,11 +545,10 @@ public class ServerMasterController : MonoBehaviour
             FireTidalWaveCommand tidalWaveFireCommand;
             if (tidalWaveFireRequestReceivedFromClientToServerDic.TryGetValue(sequenceNoToCheckReliablilityEventFor, out tidalWaveFireCommand))
             {
-                int direction = tidalWaveFireCommand.direction;
                 Vector3Int cellPredicted = tidalWaveFireCommand.predictedCell;
                 tidalWaveFireRequestReceivedFromClientToServerDic.Remove(tidalWaveFireCommand.sequenceNoForFiringTidalWaveCommand);
                 //do server rollback here to check to check if damage actually occured on server
-                TidalWaveFirePlayerRequestImplementation(direction, cellPredicted,null);
+                TidalWaveFirePlayerRequestImplementation(cellPredicted,null);
             }
         }
     }
@@ -1541,21 +1539,19 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void PlaceBoulderRequestImplementation(Vector3Int cellPositionToPlaceBoulder,OnWorkDone onSuccess)
+    void PlaceBoulderRequestImplementation(Vector3Int cellPositionToPlaceBoulder,OnWorkDone onItemSuccessfullyUsed)
     {
         if (!CanDoAction("PlaceBoulderRequestImplementation"))
         {
             return;
         }
-        if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellPositionToPlaceBoulder))
+        if (serverInstanceHero.boulderUsedCount > 0)
         {
-            Debug.Log("Setting tile boulder on "+cellPositionToPlaceBoulder);
-            GridManager.instance.SetTile(cellPositionToPlaceBoulder, EnumData.TileType.Boulder, true, false);
-            onSuccess?.Invoke();
+            GridManager.instance.boulderTracker.PlaceMedusaBoulderObject(serverInstanceHero, cellPositionToPlaceBoulder, onItemSuccessfullyUsed);
         }
         else
         {
-            Debug.LogError("Cell is blocked for boulder placement : " + cellPositionToPlaceBoulder);
+            Debug.LogError("boulders exhausted!!");
         }
     }
 
@@ -1565,15 +1561,7 @@ public class ServerMasterController : MonoBehaviour
         {
             return;
         }
-        if (GridManager.instance.HasTileAtCellPoint(cellPositionToRemoveBoulder, EnumData.TileType.Boulder))
-        {
-            Debug.Log("Remove tile boulder on " + cellPositionToRemoveBoulder);
-            GridManager.instance.SetTile(cellPositionToRemoveBoulder, EnumData.TileType.Boulder, false, false);
-        }
-        else
-        {
-            Debug.LogError("Doesnot have any tile at cell point: " + cellPositionToRemoveBoulder);
-        }
+        GridManager.instance.boulderTracker.RemoveBoulder(cellPositionToRemoveBoulder);
     }
 
     void SpawnItemImplementation(int direction,int spawnItemType, Vector3Int spawnCell)
@@ -1614,7 +1602,7 @@ public class ServerMasterController : MonoBehaviour
                     PlaceCereberausHeadImplementation(direction, spawnCell, onSuccess);
                     break;
                 case EnumData.UsableItemTypes.TidalWave:
-                    TidalWaveFirePlayerRequestImplementation(direction,spawnCell, onSuccess);
+                    TidalWaveFirePlayerRequestImplementation(spawnCell, onSuccess);
                     break;
                 case EnumData.UsableItemTypes.BubbleShield:
                     CastBubbleShieldForPlayerImplementation(spawnCell, onSuccess);
@@ -1756,7 +1744,7 @@ public class ServerMasterController : MonoBehaviour
         onSuccess?.Invoke();
     }
 
-    void CastFlamePillarForPlayerImplementation(int direction,Vector3Int predictedCell,OnWorkDone onSuccess)
+    void CastFlamePillarForPlayerImplementation(int direction,Vector3Int predictedCell,OnWorkDone onItemSuccessfullyUsed)
     {
         if (!CanDoAction("CastFlamePillarForPlayerImplementation"))
         {
@@ -1765,7 +1753,7 @@ public class ServerMasterController : MonoBehaviour
         if (serverInstanceHero.IsProjectilePlacable(predictedCell, (FaceDirection)direction))
         {
             serverInstanceHero.CastFlamePillar(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FlamePillar),predictedCell);
-            onSuccess?.Invoke();
+            onItemSuccessfullyUsed?.Invoke();
         }
         else
         {
@@ -1773,7 +1761,7 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void CastBubbleShieldForPlayerImplementation(Vector3Int predictedCell,OnWorkDone onSuccess)
+    void CastBubbleShieldForPlayerImplementation(Vector3Int predictedCell,OnWorkDone onItemSuccessfullyUsed)
     {
         if (!CanDoAction("CastBubbleShieldForPlayerImplementation"))
         {
@@ -1823,25 +1811,21 @@ public class ServerMasterController : MonoBehaviour
 
         if(isProjectilePlacableUp|| isProjectilePlacableDown|| isProjectilePlacableLeft|| isProjectilePlacableRight)
         {
-            onSuccess?.Invoke();
+            onItemSuccessfullyUsed?.Invoke();
         }
     }
 
-    void TidalWaveFirePlayerRequestImplementation(int direction,Vector3Int predictedCell,OnWorkDone onSuccess)
+    void TidalWaveFirePlayerRequestImplementation(Vector3Int predictedCell,OnWorkDone onItemSuccessfullyUsed)
     {
         if (!CanDoAction("TidalWaveFirePlayerRequestImplementation"))
         {
             return;
         }
-        Debug.Log("TidalWaveFirePlayerRequestImplementation ");
-        if (serverInstanceHero.IsProjectilePlacable(predictedCell, (FaceDirection)direction))
+        if (serverInstanceHero.tidalWaveUsedCount > 0)
         {
+            Debug.Log("TidalWaveFirePlayerRequestImplementation ");
             serverInstanceHero.FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.TidalWave), predictedCell);
-            onSuccess?.Invoke();
-        }
-        else
-        {
-            Debug.LogError("TidalWave-Hero is not able to fire projectiles");
+            onItemSuccessfullyUsed?.Invoke();
         }
     }
 
@@ -1855,7 +1839,7 @@ public class ServerMasterController : MonoBehaviour
         Vector3Int cellToPlacePortalOn = GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)direction));
         if (!GridManager.instance.IsCellBlockedForSpawnObjectPlacementAtPos(cellToPlacePortalOn))
         {
-            GridManager.instance.portal.PlacePortal(serverInstanceHero.ownerId, cellToPlacePortalOn, onSuccess);
+            GridManager.instance.portalTracker.PlacePortal(serverInstanceHero.ownerId, cellToPlacePortalOn, onSuccess);
         }
         else
         {
@@ -1863,26 +1847,26 @@ public class ServerMasterController : MonoBehaviour
         }
     }
 
-    void CastTornadoForPlayerImplementation(int direction, OnWorkDone onSuccess)
+    void CastTornadoForPlayerImplementation(int direction, OnWorkDone onItemSuccessfullyUsed)
     {
         if (!CanDoAction("CastTornadoForPlayerImplementation"))
         {
             return;
         }
-        Debug.Log("CastTornadoForPlayerImplementation ");
-        if (serverInstanceHero.IsHeroAbleToFireProjectiles((FaceDirection)direction))
+        
+
+        if (serverInstanceHero.tornadoPlacedUsedCount > 0)
         {
-            Vector3Int cellToPlaceTornadoOn = GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position+GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)direction));
-            GridManager.instance.tornado.PlaceTornadoObject(serverInstanceHero.ownerId, cellToPlaceTornadoOn);
-            onSuccess?.Invoke();
+            Vector3Int cellToPlaceTornadoOn = GridManager.instance.grid.WorldToCell(serverInstanceHero.actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3((FaceDirection)direction));
+            GridManager.instance.tornadoTracker.PlaceTornadoObject(serverInstanceHero, direction, cellToPlaceTornadoOn, onItemSuccessfullyUsed);
         }
         else
         {
-            Debug.LogError("Tornado-Hero is not able to fire projectiles");
+            Debug.Log("Tornado placement limit exceeded");
         }
     }
 
-    void MightyWindFirePlayerRequestImplementation(int direction,Vector3Int cellPredicted,OnWorkDone onSuccess)
+    void MightyWindFirePlayerRequestImplementation(int direction,Vector3Int cellPredicted,OnWorkDone onItemSuccessfullyUsed)
     {
         if (!CanDoAction("MightyWindFirePlayerRequestImplementation"))
         {
@@ -1894,7 +1878,7 @@ public class ServerMasterController : MonoBehaviour
             serverInstanceHero.FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.MightyWind),
                 cellPredicted);
 
-            onSuccess?.Invoke();
+            onItemSuccessfullyUsed?.Invoke();
         }
         else
         {

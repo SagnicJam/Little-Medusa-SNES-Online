@@ -130,7 +130,6 @@ public class ClientSideGameManager : MonoBehaviour
                     UpdateWorld(worldUpdatePackageCorrespondingToSeq);
 
                     serverWorldSequenceNumberProcessed = worldUpdatePackageCorrespondingToSeq.sequenceNumber;
-
                 }
                 else
                 {
@@ -269,7 +268,7 @@ public class ClientSideGameManager : MonoBehaviour
             }
         }
 
-        GridManager.instance.portal.portalEntranceDic = newWorldUpdate.portalEntranceDic;
+        GridManager.instance.portalTracker.portalEntranceDic = newWorldUpdate.portalEntranceDic;
         MultiplayerManager.instance.matchStartTimeText.text = Mathf.RoundToInt(newWorldUpdate.gameData.matchStartTime * Time.fixedDeltaTime).ToString();
         latestWorldUpdate = newWorldUpdate;
     }
@@ -474,7 +473,7 @@ public class ClientSideGameManager : MonoBehaviour
                 }
             }
         }
-        GridManager.instance.portal.portalEntranceDic = newWorldUpdate.portalEntranceDic;
+        GridManager.instance.portalTracker.portalEntranceDic = newWorldUpdate.portalEntranceDic;
 
         MultiplayerManager.instance.matchStartTimeText.text = Mathf.RoundToInt(newWorldUpdate.gameData.matchStartTime * Time.fixedDeltaTime).ToString();
 

@@ -12,8 +12,12 @@ public class GridManager : MonoBehaviour
     [Header("Scene references")]
     public AStar aStar;
     public Grid grid;
-    public Tornado tornado;
-    public Portal portal;
+
+    [Header("Element Trackers")]
+    public TornadoTracker tornadoTracker;
+    public BoulderTracker boulderTracker;
+    public PortalTracker portalTracker;
+
     public EnemySpawnner enemySpawnner;
 
     [Header("Tweak Params")]

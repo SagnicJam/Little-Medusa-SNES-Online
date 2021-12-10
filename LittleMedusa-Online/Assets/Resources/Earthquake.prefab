@@ -106,9 +106,10 @@ MonoBehaviour:
   blockUnitMotion: 0
   blockPetrifiedObjects: 0
   blockProjectiles: 0
+  isGhostTile: 0
   solidifyTile: 0
   isItem: 0
-  killUnitsInstantlyIfInTheirRegion: 1
+  killUnitsInstantlyIfInTheirRegion: 0
   isPhysicsControlled: 0
 --- !u!61 &1556058073448711710
 BoxCollider2D:

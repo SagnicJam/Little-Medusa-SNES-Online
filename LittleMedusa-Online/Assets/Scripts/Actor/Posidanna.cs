@@ -4,11 +4,6 @@ using UnityEngine;
 using System;
 public class Posidanna : Hero
 {
-    public override void Start()
-    {
-        base.Start();
-    }
-
     public override bool IsHeroAbleToFireProjectiles()
     {
         Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
@@ -257,13 +252,10 @@ public class Posidanna : Hero
             {
                 if (inputs[(int)EnumData.PosidannaInputs.ShootTidalWave] && previousInputs[(int)EnumData.PosidannaInputs.ShootTidalWave] != inputs[(int)EnumData.PosidannaInputs.ShootTidalWave])
                 {
-                    if (IsHeroAbleToFireProjectiles())
-                    {
-                        FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(GetLocalSequenceNo(), (int)Facing, GridManager.instance.grid.WorldToCell(actorTransform.position));
-                        ClientSend.FireTidalWave(fireTidalWaveCommand);
-                        isFiringServerProjectiles = true;
-                        onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
-                    }
+                    FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(GetLocalSequenceNo(), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                    ClientSend.FireTidalWave(fireTidalWaveCommand);
+                    isFiringServerProjectiles = true;
+                    onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
                 }
                 else if (inputs[(int)EnumData.PosidannaInputs.CastBubbleShield] && previousInputs[(int)EnumData.PosidannaInputs.CastBubbleShield] != inputs[(int)EnumData.PosidannaInputs.CastBubbleShield] && secondaryAttackReady)
                 {

@@ -78,11 +78,10 @@ public class ServerHandle
 
     public static void PlayerFiringTidalWaveCommandReceived(int fromClient, Packet packet)
     {
-        int direction = packet.ReadInt();
         Vector3Int predictedCell = packet.ReadVector3Int();
         int sequenceNumber = packet.ReadInt();
 
-        FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(sequenceNumber, direction, predictedCell);
+        FireTidalWaveCommand fireTidalWaveCommand = new FireTidalWaveCommand(sequenceNumber, predictedCell);
         Server.clients[fromClient].serverMasterController.AccumulateFiringTidalWaveRequestToBePlayedOnServerFromClient(fireTidalWaveCommand);
     }
 

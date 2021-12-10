@@ -21,6 +21,10 @@ public abstract class Hero : Actor
     public bool isFiringServerProjectiles;
     public bool bubbleShieldAttackReady;
 
+    public int boulderUsedCount;
+    public int tidalWaveUsedCount;
+    public int tornadoPlacedUsedCount;
+
     public CastItem itemToCast;
 
     [Header("Actions")]
@@ -42,6 +46,10 @@ public abstract class Hero : Actor
 
         waitingActionForItemFireballMove.Initialise(this);
         waitingActionForItemFireballMove.ReInitialiseTimerToEnd(GameConfig.itemFireballMoveAttackRateTickRate);
+
+        boulderUsedCount = GameConfig.boulderPlacementLimit;
+        tidalWaveUsedCount = GameConfig.tidalWaveLimit;
+        tornadoPlacedUsedCount = GameConfig.tornadoPlacementLimit;
     }
 
     public override void MakeInvincible()
@@ -278,11 +286,6 @@ public abstract class Hero : Actor
     {
         //do damage
         //start timer for hole in gridmanager
-        Actor actor = GridManager.instance.GetActorOnPos(cell);
-        if (actor != null)
-        {
-            actor.TakeDamage(actor.currentHP);
-        }
         GridManager.instance.SetTile(cell, EnumData.TileType.Hole, true, false);
         GridManager.instance.SetTile(cell, EnumData.TileType.Normal, false, false);
         GridManager.instance.SwitchTileAfter(cell, EnumData.TileType.Hole,EnumData.TileType.Normal);
@@ -482,7 +485,7 @@ public abstract class Hero : Actor
 
     public override void OnBodyCollidedWithPortalTiles(TileData tileData)
     {
-        Portal portal = tileData.GetComponent<Portal>();
+        PortalTracker portal = tileData.GetComponent<PortalTracker>();
         portal.ActorUnitEnter(this,currentMovePointCellPosition);
     }
 
@@ -495,31 +498,31 @@ public abstract class Hero : Actor
     public override void OnBodyCollidedWithAeloianItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.AeloianMightItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.AeloianMight, 1);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.AeloianMight, GameConfig.aeloianmightItemUses);
     }
 
     public override void OnBodyCollidedWithQuicksandItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.QuickSandItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.QuickSand, 1);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.QuickSand, GameConfig.quicksandItemUses);
     }
 
     public override void OnBodyCollidedWithPermamentBlockItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.PermamnentBlockItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.PermamnentBlock, 1);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.PermamnentBlock, GameConfig.permanentblockItemUses);
     }
 
     public override void OnBodyCollidedWithStarShowerItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.StarShowerItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.ClientProjectiles, EnumData.UsableItemTypes.StarShower, 1);
+        itemToCast = new CastItem(EnumData.CastItemTypes.ClientProjectiles, EnumData.UsableItemTypes.StarShower, GameConfig.starshowerItemUses);
     }
 
     public override void OnBodyCollidedWithCentaurBowItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.CentaurBowItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.ClientProjectiles, EnumData.UsableItemTypes.CentaurBow, 10);
+        itemToCast = new CastItem(EnumData.CastItemTypes.ClientProjectiles, EnumData.UsableItemTypes.CentaurBow, GameConfig.centaurbowItemUses);
     }
 
     public override void OnBodyCollidedWithIcarausWingsItemTiles(Vector3Int icarausCollectedOnTilePos)
@@ -544,97 +547,110 @@ public abstract class Hero : Actor
     public override void OnBodyCollidedWithCereberausHeadItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.CereberausHeadItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.CereberausHead,1);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.CereberausHead, GameConfig.cereberausHeadItemUses);
     }
 
     public override void OnBodyCollidedWithMinionItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.MinionItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.Minion, 1);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.Minion, GameConfig.minionItemUses);
     }
 
     public override void OnBodyCollidedWithEyeLaserItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.EyeLaserItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.ClientProjectiles, EnumData.UsableItemTypes.EyeLaser, 5);
+        itemToCast = new CastItem(EnumData.CastItemTypes.ClientProjectiles, EnumData.UsableItemTypes.EyeLaser, GameConfig.eyelaserItemUses);
     }
 
     public override void OnBodyCollidedWithArrowDirectionalItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.ArrowDirectionItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.ArrowDirectional, 1);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.ArrowDirectional, GameConfig.arrowplacementItemUses);
     }
 
     public override void OnBodyCollidedWithMirrorItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.MirrorItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.MirrorItem, 1);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.MirrorItem, GameConfig.mirrorplacementItemUses);
     }
 
     public override void OnBodyCollidedWithGorgonGlassItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.GorgonGlassItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.GorgonGlass, 1);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.GorgonGlass, GameConfig.gorgonglassItemUses);
     }
 
     public override void OnBodyCollidedWithBoulderItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.BoulderItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.Boulder, 5);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.Boulder, GameConfig.boulderItemUses);
     }
 
     public override void OnBodyCollidedWithTidalWaveItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.TidalWaveItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.ServerProjectiles, EnumData.UsableItemTypes.TidalWave, 5);
+        itemToCast = new CastItem(EnumData.CastItemTypes.ServerProjectiles, EnumData.UsableItemTypes.TidalWave, GameConfig.tidalwaveItemUses);
     }
 
     public override void OnBodyCollidedWithBubbleShieldItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.BubbleShieldItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.ServerProjectiles, EnumData.UsableItemTypes.BubbleShield, 5);
+        itemToCast = new CastItem(EnumData.CastItemTypes.ServerProjectiles, EnumData.UsableItemTypes.BubbleShield, GameConfig.bubbleshieldItemUses);
     }
 
     public override void OnBodyCollidedWithMightyWindItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.MightyWindItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.ServerProjectiles, EnumData.UsableItemTypes.MightyWind, 5);
+        itemToCast = new CastItem(EnumData.CastItemTypes.ServerProjectiles, EnumData.UsableItemTypes.MightyWind, GameConfig.mightywindItemUses);
     }
 
     public override void OnBodyCollidedWithTornadoItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.TornadoPullItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.Tornado, 5);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.Tornado, GameConfig.tornadoItemUses);
     }
 
     public override void OnBodyCollidedWithPortalItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.PortalItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.Portal, 1);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.Portal, GameConfig.portalItemUses);
     }
 
     public override void OnBodyCollidedWithPitfallItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.PitfallItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.Pitfall, 5);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems, EnumData.UsableItemTypes.Pitfall, GameConfig.pitfallItemUses);
     }
 
     public override void OnBodyCollidedWithEarthquakeItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.EarthQuakeItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems,EnumData.UsableItemTypes.Earthquake, 5);
+        itemToCast = new CastItem(EnumData.CastItemTypes.SpawnnableItems,EnumData.UsableItemTypes.Earthquake, GameConfig.earthquakeItemUses);
+    }
+
+    public override void OnBodyCollidedWithEarthquakeTiles(int tileSpawnnerId)
+    {
+        if (tileSpawnnerId != ownerId)
+        {
+            TakeDamage(GameConfig.earthquakeDamage);
+        }
+    }
+
+    public override void OnBodyCollidedWithCereberausFireTiles()
+    {
+        TakeDamage(GameConfig.cereberausFireDamage);
     }
 
     public override void OnBodyCollidedWithFireballItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.FireballItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.ClientProjectiles, EnumData.UsableItemTypes.Fireball, 5);
+        itemToCast = new CastItem(EnumData.CastItemTypes.ClientProjectiles, EnumData.UsableItemTypes.Fireball, GameConfig.fireballItemUses);
     }
 
     public override void OnBodyCollidedWithFlamePillarItemTiles(Vector3Int cellPos)
     {
         GridManager.instance.SetTile(cellPos, EnumData.TileType.FlamePillarItem, false, false);
-        itemToCast = new CastItem(EnumData.CastItemTypes.ServerProjectiles, EnumData.UsableItemTypes.FlamePillar, 5);
+        itemToCast = new CastItem(EnumData.CastItemTypes.ServerProjectiles, EnumData.UsableItemTypes.FlamePillar, GameConfig.flamepillarItemUses);
     }
 
     public override bool CanOccupy(Vector3Int pos)
@@ -687,11 +703,11 @@ public abstract class Hero : Actor
         walkSpeed = normalSpeed;
     }
 
-    public override void OnBodyCollidingWithKillingTiles(int killingTileSpawnerId, TileData tileData)
+    public override void OnBodyCollidingWithKillingTiles(TileData tileData)
     {
-        if(tileData.gameObjectEnums==EnumData.GameObjectEnums.Earthquake)
+        if (tileData.tileType == EnumData.TileType.Hole)
         {
-            if(killingTileSpawnerId != ownerId)
+            if (!isPushed)
             {
                 TakeDamage(currentHP);
             }
@@ -704,7 +720,7 @@ public abstract class Hero : Actor
 
     public override void OnBodyCollidingWithTornadoEffectTiles(TileData tileData)
     {
-        GridManager.instance.tornado.OnEnterTornadoRegion(tileData,this);
+        GridManager.instance.tornadoTracker.OnEnterTornadoRegion(tileData,this);
     }
 
     public override void OnCantOccupySpace()
@@ -726,13 +742,10 @@ public abstract class Hero : Actor
     {
         if (itemToCast.usableItemType == EnumData.UsableItemTypes.TidalWave)
         {
-            if (IsHeroAbleToFireProjectiles())
-            {
-                SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, GridManager.instance.grid.WorldToCell(actorTransform.position));
-                ClientSend.SpawnItemCommand(spawnItemCommand);
-                isFiringServerProjectiles = true;
-                onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
-            }
+            SpawnItemCommand spawnItemCommand = new SpawnItemCommand(GetLocalSequenceNo(), (int)Facing, (int)itemToCast.usableItemType, GridManager.instance.grid.WorldToCell(actorTransform.position));
+            ClientSend.SpawnItemCommand(spawnItemCommand);
+            isFiringServerProjectiles = true;
+            onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
         }
         else if (itemToCast.usableItemType == EnumData.UsableItemTypes.BubbleShield)
         {

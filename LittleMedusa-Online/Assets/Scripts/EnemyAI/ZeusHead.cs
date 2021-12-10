@@ -405,12 +405,12 @@ public class ZeusHead : Enemy
         currentMapper = wandererMapper;
     }
 
-    public override void OnBodyCollidingWithKillingTiles(int killingTileSpawnerId, TileData tileData)
+    public override void OnBodyCollidingWithKillingTiles(TileData tileData)
     {
         if(tileData.gameObjectEnums != EnumData.GameObjectEnums.LightningBolt &&
             tileData.gameObjectEnums != EnumData.GameObjectEnums.ThunderStruck)
         {
-            base.OnBodyCollidingWithKillingTiles(killingTileSpawnerId,tileData);
+            base.OnBodyCollidingWithKillingTiles(tileData);
         }
     }
 }

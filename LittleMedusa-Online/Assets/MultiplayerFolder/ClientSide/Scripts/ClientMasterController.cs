@@ -366,11 +366,10 @@ public class ClientMasterController : MonoBehaviour
             if (Vector3.Distance(serverPlayer.actorTransform.position, localPlayer.actorTransform.position) >= positionThreshold)
             {
                 Debug.Log("Correction regarding position difference " + serverPlayer.actorTransform.position + "local---server" + localPlayer.actorTransform.position + "<color=red>Corrected player position</color>" + playerStateUpdates.playerProcessedSequenceNumber);
-                //Debug.Break();
-                //PositionUpdates positionUpdates = new PositionUpdates(serverPlayer.actorTransform.position, serverPlayer.currentMovePointCellPosition, serverPlayer.previousMovePointCellPosition,
-                //    (int)serverPlayer.Facing, (int)serverPlayer.PreviousFacingDirection);
-                //localPlayer.SetActorPositionalState(positionUpdates);
-                //localPlayer.SetFlyingTickCount(new PlayerFlyData(serverPlayer.flyingTickCountTemp));
+                PositionUpdates positionUpdates = new PositionUpdates(serverPlayer.actorTransform.position, serverPlayer.currentMovePointCellPosition, serverPlayer.previousMovePointCellPosition,
+                    (int)serverPlayer.Facing, (int)serverPlayer.PreviousFacingDirection);
+                localPlayer.SetActorPositionalState(positionUpdates);
+                localPlayer.SetFlyingTickCount(new PlayerFlyData(serverPlayer.flyingTickCountTemp));
             }
         }
         else
@@ -380,6 +379,8 @@ public class ClientMasterController : MonoBehaviour
         }
     }
     
+
+
 
     public void AccumulateDataToBePlayedOnClientFromServer(PlayerStateUpdates playerStateUpdates)
     {
@@ -560,13 +561,11 @@ public struct PetrificationCommand
 public struct FireTidalWaveCommand
 {
     public int sequenceNoForFiringTidalWaveCommand;
-    public int direction;
     public Vector3Int predictedCell;
 
-    public FireTidalWaveCommand(int sequenceNoForFiringTidalWaveCommand,int direction,Vector3Int predictedCell)
+    public FireTidalWaveCommand(int sequenceNoForFiringTidalWaveCommand,Vector3Int predictedCell)
     {
         this.sequenceNoForFiringTidalWaveCommand = sequenceNoForFiringTidalWaveCommand;
-        this.direction = direction;
         this.predictedCell = predictedCell;
     }
 }

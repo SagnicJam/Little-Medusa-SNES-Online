@@ -134,6 +134,7 @@ public class TileData : MonoBehaviour
                     blockPetrifiedObjects = false;
                     blockProjectiles = false;
                     solidifyTile = false;
+                    killUnitsInstantlyIfInTheirRegion = true;
                     break;
                 case EnumData.TileType.NoBoulder:
                     blockFlyingUnits = false;
@@ -183,9 +184,9 @@ public class TileData : MonoBehaviour
                     solidifyTile = true;
                     break;
                 case EnumData.TileType.VoidDeathTiles:
-                    blockFlyingUnits = false;
+                    blockFlyingUnits = true;
                     blockToSpawnObjectsPlacement = true;
-                    blockUnitMotion = false;
+                    blockUnitMotion = true;
                     blockPetrifiedObjects = false;
                     blockProjectiles = true;
                     killUnitsInstantlyIfInTheirRegion = true;

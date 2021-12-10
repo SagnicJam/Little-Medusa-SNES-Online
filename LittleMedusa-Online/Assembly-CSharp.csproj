@@ -121,6 +121,7 @@
     <Compile Include="Assets\Scripts\FindMatchScreen.cs" />
     <Compile Include="Assets\Scripts\GameConfig.cs" />
     <Compile Include="Assets\Scripts\GridManager.cs" />
+    <Compile Include="Assets\Scripts\Helper\BoulderTracker.cs" />
     <Compile Include="Assets\Scripts\Helper\ByteSizeManupulator.cs" />
     <Compile Include="Assets\Scripts\Helper\CharacterSelectButton.cs" />
     <Compile Include="Assets\Scripts\Helper\CharacterSelectionScreen.cs" />
@@ -134,12 +135,12 @@
     <Compile Include="Assets\Scripts\Helper\GamePhysics.cs" />
     <Compile Include="Assets\Scripts\Helper\JoinOrderText.cs" />
     <Compile Include="Assets\Scripts\Helper\MatchConditionManager.cs" />
-    <Compile Include="Assets\Scripts\Helper\Portal.cs" />
+    <Compile Include="Assets\Scripts\Helper\PortalTracker.cs" />
     <Compile Include="Assets\Scripts\Helper\ProjectileUtil.cs" />
     <Compile Include="Assets\Scripts\Helper\StaticAnimatingTileManager.cs" />
     <Compile Include="Assets\Scripts\Helper\StaticAnimatingTileUtil.cs" />
-    <Compile Include="Assets\Scripts\Helper\Tornado.cs" />
     <Compile Include="Assets\Scripts\Helper\TornadoCollider.cs" />
+    <Compile Include="Assets\Scripts\Helper\TornadoTracker.cs" />
     <Compile Include="Assets\Scripts\InputControllers\AvernaInputController.cs" />
     <Compile Include="Assets\Scripts\InputControllers\ErmolaiInputController.cs" />
     <Compile Include="Assets\Scripts\InputControllers\HeliemisInputController.cs" />

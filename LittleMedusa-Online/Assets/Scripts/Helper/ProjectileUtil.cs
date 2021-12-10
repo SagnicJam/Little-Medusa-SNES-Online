@@ -44,7 +44,6 @@ public class ProjectileUtil : MonoBehaviour
     public static int nextProjectileID = 1;
     public int networkUid;
 
-
     public void Initialise(TileBasedProjectileUse pU)
     {
         this.pU = pU;
@@ -52,7 +51,17 @@ public class ProjectileUtil : MonoBehaviour
         {
             networkUid = nextProjectileID;
             nextProjectileID++;
-            ProjectileData projectileData = new ProjectileData(networkUid, (int)pU.projectileTypeThrown, pU.liveProjectile.transform.position, (int)pU.tileMovementDirection);
+            ProjectileData projectileData = new ProjectileData(networkUid,pU.actorUsing.ownerId, (int)pU.projectileTypeThrown, pU.liveProjectile.transform.position, (int)pU.tileMovementDirection);
+            if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave)
+            {
+                if (pU.actorUsing != null)
+                {
+                    if (pU.actorUsing is Hero serverHero)
+                    {
+                        serverHero.tidalWaveUsedCount--;
+                    }
+                }
+            }
             ServerSideGameManager.projectilesDic.Add(networkUid, projectileData);
 
             if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave ||
@@ -503,6 +512,18 @@ public class ProjectileUtil : MonoBehaviour
                 }
 
             }
+
+            if (pU.projectileTypeThrown == EnumData.Projectiles.TidalWave)
+            {
+                if (pU.actorUsing != null)
+                {
+                    if (pU.actorUsing is Hero serverHero)
+                    {
+                        serverHero.tidalWaveUsedCount++;
+                    }
+                }
+            }
+
             ServerSideGameManager.projectilesDic.Remove(networkUid);
         }
         if (pU.projectileTypeThrown == EnumData.Projectiles.FireBall|| pU.projectileTypeThrown == EnumData.Projectiles.FireBallMirrorKnight)

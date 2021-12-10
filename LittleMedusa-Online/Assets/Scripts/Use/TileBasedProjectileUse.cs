@@ -38,11 +38,13 @@ public class TileBasedProjectileUse : Use
             
             if (Vector3.Distance(liveProjectile.transform.position, finalPos) >= 0.05f)
             {
-                TileData portalTile = GridManager.instance.GetTileAtCellPoint(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position), EnumData.TileType.Portal);
+                Vector3Int currentProjectileCell = GridManager.instance.grid.WorldToCell(liveProjectile.transform.position);
+
+                TileData portalTile = GridManager.instance.GetTileAtCellPoint(currentProjectileCell, EnumData.TileType.Portal);
                 if (portalTile != null)
                 {
-                    Portal portal = portalTile.GetComponent<Portal>();
-                    portal.ProjectileUnitEnter(liveProjectile, GridManager.instance.grid.WorldToCell(liveProjectile.transform.position));
+                    PortalTracker portal = portalTile.GetComponent<PortalTracker>();
+                    portal.ProjectileUnitEnter(liveProjectile, currentProjectileCell);
                 }
 
                 if (projectileTypeThrown == EnumData.Projectiles.TidalWave
@@ -50,19 +52,21 @@ public class TileBasedProjectileUse : Use
                     projectileTypeThrown == EnumData.Projectiles.FlamePillar ||
                     projectileTypeThrown == EnumData.Projectiles.MightyWind|| projectileTypeThrown == EnumData.Projectiles.MightyWindMirrorKnight)
                 {
-                    if (GridManager.instance.HasTileAtCellPoint(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position),EnumData.TileType.Boulder))
+
+                    if (GridManager.instance.HasTileAtCellPoint(currentProjectileCell, EnumData.TileType.Boulder))
                     {
-                        GridManager.instance.SetTile(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position),EnumData.TileType.Boulder,false,false);
+                        GridManager.instance.boulderTracker.RemoveBoulder(currentProjectileCell);
                     }
                     liveProjectile.transform.position = Vector3.MoveTowards(liveProjectile.transform.position, finalPos, Time.fixedDeltaTime * liveProjectile.projectileSpeed);
-                    if (currentValidPosCell != GridManager.instance.grid.WorldToCell(liveProjectile.transform.position))
+                    if (currentValidPosCell != currentProjectileCell)
                     {
                         previousValidPosCell = currentValidPosCell;
-                        currentValidPosCell = GridManager.instance.grid.WorldToCell(liveProjectile.transform.position);
+                        currentValidPosCell = currentProjectileCell;
                     }
 
-                    if (GridManager.instance.IsCellBlockedForProjectiles(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position)))
+                    if (GridManager.instance.IsCellBlockedForProjectiles(currentProjectileCell))
                     {
+                        
                         EndOfUse();
                         return;
                     }
@@ -79,17 +83,17 @@ public class TileBasedProjectileUse : Use
                     }
                     else
                     {
-                        if (GridManager.instance.IsCellBlockedForProjectiles(GridManager.instance.grid.WorldToCell(liveProjectile.transform.position)))
+                        if (GridManager.instance.IsCellBlockedForProjectiles(currentProjectileCell))
                         {
                             EndOfUse();
                             return;
                         }
                     }
                     liveProjectile.transform.position = Vector3.MoveTowards(liveProjectile.transform.position, finalPos, Time.fixedDeltaTime * liveProjectile.projectileSpeed);
-                    if (currentValidPosCell != GridManager.instance.grid.WorldToCell(liveProjectile.transform.position))
+                    if (currentValidPosCell != currentProjectileCell)
                     {
                         previousValidPosCell = currentValidPosCell;
-                        currentValidPosCell = GridManager.instance.grid.WorldToCell(liveProjectile.transform.position);
+                        currentValidPosCell = currentProjectileCell;
                     }
                 }
             }

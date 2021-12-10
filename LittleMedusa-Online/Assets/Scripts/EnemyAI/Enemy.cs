@@ -332,16 +332,27 @@ public abstract class Enemy : Actor
 
     public override void OnBodyCollidingWithTornadoEffectTiles(TileData tileData)
     {
-        GridManager.instance.tornado.OnEnterTornadoRegion(tileData, this);
+        GridManager.instance.tornadoTracker.OnEnterTornadoRegion(tileData, this);
     }
 
-    public override void OnBodyCollidingWithKillingTiles(int killingTileSpawnerId,TileData tileData)
+    public override void OnBodyCollidingWithKillingTiles(TileData tileData)
     {
-        TakeDamage(currentHP);
+        if (tileData.tileType == EnumData.TileType.Hole)
+        {
+            if (!isPushed)
+            {
+                TakeDamage(currentHP);
+            }
+        }
+        else
+        {
+            TakeDamage(currentHP);
+        }
     }
+
     public override void OnBodyCollidedWithPortalTiles(TileData tileData)
     {
-        Portal portal = tileData.GetComponent<Portal>();
+        PortalTracker portal = tileData.GetComponent<PortalTracker>();
         portal.ActorUnitEnter(this, currentMovePointCellPosition);
     }
     public override void OnBodyCollidedWithUpArrowTile(Vector3Int arrowTileCellPos)
@@ -463,6 +474,16 @@ public abstract class Enemy : Actor
 
     public override void OnBodyCollidedWithEarthquakeItemTiles(Vector3Int cellPos)
     {
+    }
+
+    public override void OnBodyCollidedWithEarthquakeTiles(int tileSpawnnerId)
+    {
+        TakeDamage(currentHP);
+    }
+
+    public override void OnBodyCollidedWithCereberausFireTiles()
+    {
+        TakeDamage(currentHP);
     }
 
     public override void OnBodyCollidedWithFireballItemTiles(Vector3Int cellPos)

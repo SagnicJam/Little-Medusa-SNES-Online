@@ -99,6 +99,7 @@ public class ClientHandle : MonoBehaviour
         for (int i = 0; i < projectileDatasCount; i++)
         {
             int uid = packet.ReadInt();
+            int projectileOwnerId = packet.ReadInt();
 
             int projectileTileType = packet.ReadInt();
 
@@ -106,7 +107,7 @@ public class ClientHandle : MonoBehaviour
 
             int faceDirection = packet.ReadInt();
 
-            keyValuePairs.Add(uid, new ProjectileData(uid,projectileTileType, projectilePosition, faceDirection));
+            keyValuePairs.Add(uid, new ProjectileData(uid, projectileOwnerId, projectileTileType, projectilePosition, faceDirection));
         }
 
         int enemyDatasCount = packet.ReadInt();
@@ -211,11 +212,12 @@ public class ClientHandle : MonoBehaviour
             for (int i = 0; i < projectileDatasCount; i++)
             {
                 int projectileId = decompressedPacket.ReadInt();
+                int projectileOwnerId = decompressedPacket.ReadInt();
                 int projectileTileType = decompressedPacket.ReadInt();
                 Vector3 projectilePosition = decompressedPacket.ReadVector3();
                 int faceDirection = decompressedPacket.ReadInt();
 
-                keyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileTileType, projectilePosition, faceDirection));
+                keyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileOwnerId, projectileTileType, projectilePosition, faceDirection));
             }
 
             Dictionary<int, EnemyData> enemyValuePairs = new Dictionary<int, EnemyData>();
@@ -294,11 +296,12 @@ public class ClientHandle : MonoBehaviour
                 for (int k = 0; k < previousProjectileDatasCount; k++)
                 {
                     int projectileId = decompressedPacket.ReadInt();
+                    int projectileOwnerId = decompressedPacket.ReadInt();
                     int projectileTileType = decompressedPacket.ReadInt();
                     Vector3 projectilePosition = decompressedPacket.ReadVector3();
                     int faceDirection = decompressedPacket.ReadInt();
 
-                    previouskeyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileTileType, projectilePosition, faceDirection));
+                    previouskeyValuePairs.Add(projectileId, new ProjectileData(projectileId, projectileOwnerId, projectileTileType, projectilePosition, faceDirection));
                 }
 
                 Dictionary<int, EnemyData> previousEnemyValuePairs = new Dictionary<int, EnemyData>();

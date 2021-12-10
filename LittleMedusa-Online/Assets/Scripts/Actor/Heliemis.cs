@@ -325,7 +325,6 @@ public class Heliemis : Hero
         if (isFiringItemEyeLaser)
         {
             FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
-
         }
         if (isFiringItemFireball)
         {

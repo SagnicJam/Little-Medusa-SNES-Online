@@ -52,7 +52,6 @@ public class ClientSend : MonoBehaviour
     {
         using (Packet packet = new Packet((int)ClientPackets.playerFiringTidalWaveCommand))
         {
-            packet.Write(fireTidalWaveCommand.direction);
             packet.Write(fireTidalWaveCommand.predictedCell);
             packet.Write(fireTidalWaveCommand.sequenceNoForFiringTidalWaveCommand);
             SendTCPData(packet);

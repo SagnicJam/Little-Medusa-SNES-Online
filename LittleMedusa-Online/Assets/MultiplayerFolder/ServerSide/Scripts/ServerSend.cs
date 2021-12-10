@@ -144,11 +144,14 @@ public class ServerSend
             {
                 packet.Write(keyValuePair.Key);
 
+                packet.Write(keyValuePair.Value.projectileOwnerId);
+
                 packet.Write(keyValuePair.Value.projectileType);
 
                 packet.Write(keyValuePair.Value.projectilePosition);
 
                 packet.Write(keyValuePair.Value.faceDirection);
+
             }
 
             packet.Write(worldUpdate.enemyDatas.Count);
@@ -229,6 +232,8 @@ public class ServerSend
                 {
                     compressedPacked.Write(keyValuePair.Key);
 
+                    compressedPacked.Write(keyValuePair.Value.projectileOwnerId);
+
                     compressedPacked.Write(keyValuePair.Value.projectileType);
 
                     compressedPacked.Write(keyValuePair.Value.projectilePosition);
@@ -308,6 +313,8 @@ public class ServerSend
                     foreach (KeyValuePair<int, ProjectileData> keyValuePair in previousWorldUpdatePacks[i].previousWorldUpdates[j].projectileDatas)
                     {
                         compressedPacked.Write(keyValuePair.Key);
+
+                        compressedPacked.Write(keyValuePair.Value.projectileOwnerId);
 
                         compressedPacked.Write(keyValuePair.Value.projectileType);
 

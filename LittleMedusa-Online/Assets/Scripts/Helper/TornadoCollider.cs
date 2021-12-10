@@ -14,7 +14,7 @@ public class TornadoCollider : MonoBehaviour
         Actor collidedActor = collider.GetComponent<Actor>();
         if (collidedActor != null&&collidedActor.ownerId!=ownerCasting)
         {
-            if(collidedActor.isPhysicsControlled&&collidedActor.gamePhysics.tilePullPositions.Contains(transform.position))
+            if((collidedActor.isPhysicsControlled||collidedActor.isRespawnningPlayer)&&collidedActor.gamePhysics.tilePullPositions.Contains(transform.position))
             {
                 return;
             }

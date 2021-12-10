@@ -120,7 +120,7 @@ public class ServerSideGameManager : MonoBehaviour
         
         DealItemSpawn();
         DealCereberausHeadRotation();
-        //DealWorldDestruction();
+        DealWorldDestruction();
         DealMatchStartTime();
         //////Debug.Log("<color=blue>inputsequence </color>"+ playerMovingCommandSequenceNumber + "<color=blue>inputs </color> "+ inputs[0]+" "+inputs[1]+" "+inputs[2]+" "+inputs[3]);
 
@@ -136,7 +136,7 @@ public class ServerSideGameManager : MonoBehaviour
 
 
         GameData gameData = new GameData((int)currentGameState, timeToStartMatch);
-        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), gameData, new Dictionary<int, ProjectileData>(projectilesDic), new Dictionary<int, EnemyData>(enemiesDic), new Dictionary<int, AnimatingStaticTile>(animatingStaticTileDic), GridManager.instance.portal.portalEntranceDic));
+        worldUpdatesToBeSentFromServerToClient.Add(new WorldUpdate(serverWorldSequenceNumber, worldGridItemList.ToArray(), gameData, new Dictionary<int, ProjectileData>(projectilesDic), new Dictionary<int, EnemyData>(enemiesDic), new Dictionary<int, AnimatingStaticTile>(animatingStaticTileDic), GridManager.instance.portalTracker.portalEntranceDic));
 
         //Local client sending data
         if (worldUpdatesToBeSentFromServerToClient.Count >= snapShotsInOnePacket)
@@ -240,7 +240,7 @@ public class ServerSideGameManager : MonoBehaviour
 
             GridManager.instance.SetTile(
                cellPosForItemTiles[UnityEngine.Random.Range(0, cellPosForItemTiles.Count)]
-           , EnumData.TileType.PortalItem,
+           , EnumData.TileType.CereberausHeadItem,
            true,
            false);
         }
@@ -450,13 +450,15 @@ public struct GameData
 public struct ProjectileData
 {
     public int uid;
+    public int projectileOwnerId;
     public int projectileType;
     public Vector3 projectilePosition;
     public int faceDirection;
 
-    public ProjectileData(int uid, int projectileType, Vector3 projectilePosition, int faceDirection)
+    public ProjectileData(int uid,int projectileOwnerId, int projectileType, Vector3 projectilePosition, int faceDirection)
     {
         this.uid = uid;
+        this.projectileOwnerId = projectileOwnerId;
         this.projectileType = projectileType;
         this.projectilePosition = projectilePosition;
         this.faceDirection = faceDirection;
