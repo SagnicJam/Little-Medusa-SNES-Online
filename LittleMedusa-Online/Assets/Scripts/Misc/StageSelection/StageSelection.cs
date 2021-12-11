@@ -33,4 +33,10 @@ public class StageSelection : MonoBehaviour
     {
         return (int)imageOptionArray[snapper.selectedIndex].GetComponent<StageSelect>().battleRoyaleMaps;
     }
+
+    public void InitialiseWithPreviousMapSelected(int mapSelected)
+    {
+        snapper.InitialiseStageSelection(mapSelected);
+        TurnOnSelectedPanel();
+    }
 }

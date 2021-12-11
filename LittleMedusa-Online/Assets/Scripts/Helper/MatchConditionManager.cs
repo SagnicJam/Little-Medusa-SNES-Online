@@ -48,7 +48,12 @@ public class MatchConditionManager : MonoBehaviour
             if (amount > 10)
             {
                 tMP_InputField.text = 10.ToString();
-                Debug.LogError("Cant be larger than 10");
+                Debug.Log("Cant be larger than 10");
+            }
+            else if(amount<0)
+            {
+                tMP_InputField.text = 0.ToString();
+                Debug.Log("Cant be less than 0");
             }
         }
         else
@@ -60,6 +65,7 @@ public class MatchConditionManager : MonoBehaviour
     public void OpenStageSelectionMenu()
     {
         mapSelectedPrevious = mapSelected;
+        stageSelection.InitialiseWithPreviousMapSelected(mapSelectedPrevious);
     }
 
     public void EnableStartGame()
@@ -77,16 +83,8 @@ public class MatchConditionManager : MonoBehaviour
         int enemyCountAmount = 0;
         if (int.TryParse(enemyCountInputFieldText.text, out enemyCountAmount))
         {
-            if (enemyCountAmount <= 10)
-            {
-                enemyCount = enemyCountAmount;
-            }
-            else
-            {
-                enemyCount = 10;
-                enemyCountInputFieldText.text = 10.ToString();
-                Debug.LogError("Cant be larger than 10");
-            }
+            enemyCountInputFieldText.text = enemyCountAmount.ToString();
+            enemyCount = enemyCountAmount;
         }
         else
         {

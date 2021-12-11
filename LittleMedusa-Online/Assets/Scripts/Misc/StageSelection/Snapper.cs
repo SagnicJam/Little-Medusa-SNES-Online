@@ -106,6 +106,12 @@ public class Snapper : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointerD
         yield break;
     }
 
+    public void InitialiseStageSelection(int previouslySelectedMap)
+    {
+        selectedIndex = previouslySelectedMap;
+        contentRect.anchoredPosition = new Vector2(centrePositionX - selectedIndex * (spacing + childWidth), contentRect.anchoredPosition.y);
+    }
+
     void UpdateContentNormalisedPosition()
     {
         contentAbsPosValue = maxX-contentRect.anchoredPosition.x;
