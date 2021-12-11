@@ -8,7 +8,9 @@ public struct Room
     [field:SerializeField]
     public int RoomId { get; set; }
     [field: SerializeField]
-    public int RoomSize { get; set; }
+    public int MinRoomSize { get; set; }
+    [field: SerializeField]
+    public int MaxRoomSize { get; set; }
     [field: SerializeField]
     public string RoomName { get; set; }
     [field: SerializeField]

@@ -7,8 +7,16 @@ using System;
 
 public class MatchConditionManager : MonoBehaviour
 {
+    public StageSelection stageSelection;
+    public TMP_InputField enemyCountInputFieldText;
+    public TMP_Dropdown enemyType_tMP_Dropdown;
+
     public Button startGameButtonGO;
     public int roomId;
+
+    public int enemyCountPrevious;
+    public int enemyTypePrevious;
+    public int mapSelectedPrevious;
 
     public int enemyCount;
     public int enemyType;
@@ -17,6 +25,41 @@ public class MatchConditionManager : MonoBehaviour
     public void Initialise(int roomId)
     {
         this.roomId = roomId;
+        enemyCount = 1;
+        enemyType = 0;
+        mapSelected = 0;
+    }
+
+    public void OpenPrematchConditionMenu()
+    {
+        enemyCountPrevious = enemyCount;
+        enemyTypePrevious = enemyType;
+
+        enemyType_tMP_Dropdown.SetValueWithoutNotify(enemyType);
+        enemyCountInputFieldText.text = enemyCount.ToString();
+    }
+
+    public void SetCount(TMP_InputField tMP_InputField)
+    {
+        string inputString = tMP_InputField.text;
+        int amount = 0;
+        if (int.TryParse(inputString, out amount))
+        {
+            if (amount > 10)
+            {
+                tMP_InputField.text = 10.ToString();
+                Debug.LogError("Cant be larger than 10");
+            }
+        }
+        else
+        {
+            Debug.LogError("Could not parse string");
+        }
+    }
+
+    public void OpenStageSelectionMenu()
+    {
+        mapSelectedPrevious = mapSelected;
     }
 
     public void EnableStartGame()
@@ -29,20 +72,19 @@ public class MatchConditionManager : MonoBehaviour
         startGameButtonGO.gameObject.SetActive(false);
     }
 
-    public void SetCount(TMP_InputField tMP_InputField)
+    public void ConfirmPrematchConditions()
     {
-        string inputString = tMP_InputField.text;
-        int amount = 0;
-        if (int.TryParse(inputString,out amount))
+        int enemyCountAmount = 0;
+        if (int.TryParse(enemyCountInputFieldText.text, out enemyCountAmount))
         {
-            if(amount<=10)
+            if (enemyCountAmount <= 10)
             {
-                enemyCount = amount;
+                enemyCount = enemyCountAmount;
             }
             else
             {
                 enemyCount = 10;
-                tMP_InputField.text = 10.ToString();
+                enemyCountInputFieldText.text = 10.ToString();
                 Debug.LogError("Cant be larger than 10");
             }
         }
@@ -50,16 +92,24 @@ public class MatchConditionManager : MonoBehaviour
         {
             Debug.LogError("Could not parse string");
         }
+
+        enemyType = enemyType_tMP_Dropdown.value;
     }
 
-    public void SetEnemyType(TMP_Dropdown tMP_Dropdown)
+    public void CancelPrematchConditions()
     {
-        enemyType = tMP_Dropdown.value;
+        enemyCount = enemyCountPrevious;
+        enemyType = enemyTypePrevious;
     }
 
-    public void SetMap(int mapSelected)
+    public void ConfirmStage()
     {
-        this.mapSelected = mapSelected;
+        mapSelected = stageSelection.GetSelectedBattleRoyaleMap();
+    }
+
+    public void CancelStage()
+    {
+        mapSelected = mapSelectedPrevious;
     }
 
     public void StartMatch()

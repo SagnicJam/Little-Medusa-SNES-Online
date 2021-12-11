@@ -8,6 +8,9 @@ public class EnterNameScreen : MonoBehaviour
     
     public void EstablishConnection()
     {
-        MultiplayerManager.instance.EstablishConnection(nameField.text);
+        if(!string.IsNullOrEmpty(nameField.text))
+        {
+            MultiplayerManager.instance.EstablishConnection(nameField.text);
+        }
     }
 }

@@ -6,11 +6,13 @@ using TMPro;
 public class LobbyScreen : MonoBehaviour,ILobby
 {
     public TMP_InputField roomNameText;
-    public TMP_InputField roomSizeText;
+    public TMP_InputField minroomSizeText;
+    public TMP_InputField maxroomSizeText;
 
     public static LobbyScreen instance;
 
-    public int roomSize;
+    public int minroomSize;
+    public int maxroomSize;
 
     void Awake()
     {
@@ -23,7 +25,7 @@ public class LobbyScreen : MonoBehaviour,ILobby
         GetLobby();
     }
 
-    public void SetCount(TMP_InputField tMP_InputField)
+    public void SetMinCount(TMP_InputField tMP_InputField)
     {
         string inputString = tMP_InputField.text;
         int amount = 0;
@@ -31,17 +33,46 @@ public class LobbyScreen : MonoBehaviour,ILobby
         {
             if (amount <= 4&&amount>0)
             {
-                roomSize = amount;
+                minroomSize = amount;
             }
             else if (amount < 1)
             {
-                roomSize = 1;
+                minroomSize = 1;
                 tMP_InputField.text = 1.ToString();
                 Debug.LogError("Cant be smaller than 1");
             }
             else
             {
-                roomSize = 4;
+                minroomSize = 4;
+                tMP_InputField.text = 4.ToString();
+                Debug.LogError("Cant be larger than 4");
+            }
+        }
+        else
+        {
+            Debug.LogError("Could not parse string");
+        }
+    }
+
+    public void SetMaxCount(TMP_InputField tMP_InputField)
+    {
+        string inputString = tMP_InputField.text;
+        int amount = 0;
+        if (int.TryParse(inputString, out amount))
+        {
+            if (amount <= 4 && amount > 0)
+            {
+                maxroomSize = amount;
+            }
+            else if (amount < 1)
+            {
+                maxroomSize = 1;
+                tMP_InputField.text = 1.ToString();
+                Debug.LogError("Cant be smaller than 1");
+            }
+            else
+            {
+                maxroomSize = 4;
                 tMP_InputField.text = 4.ToString();
                 Debug.LogError("Cant be larger than 4");
             }
@@ -54,18 +85,32 @@ public class LobbyScreen : MonoBehaviour,ILobby
 
     public void CreateRoomWithName()
     {
-        roomSize=2;
+        minroomSize = 1;
+        maxroomSize = 4;
         RoomDto roomDto;
-        if (int.TryParse(roomSizeText.text,out roomSize))
+        if (int.TryParse(minroomSizeText.text,out minroomSize))
         {
-            roomDto = new RoomDto(roomNameText.text, roomSize);
+            if(int.TryParse(maxroomSizeText.text, out maxroomSize))
+            {
+                if(maxroomSize>=minroomSize)
+                {
+                    roomDto = new RoomDto(roomNameText.text, minroomSize, maxroomSize);
+                    if (!string.IsNullOrEmpty(roomDto.RoomName))
+                    {
+                        CreateRoom(roomDto);
+                    }
+                }
+            }
         }
         else
         {
-            Debug.LogError("default room size set to 2");
-            roomDto = new RoomDto(roomNameText.text, 2);
+            roomDto = new RoomDto(roomNameText.text, 1,4);
+            if (!string.IsNullOrEmpty(roomDto.RoomName))
+            {
+                CreateRoom(roomDto);
+            }
         }
-        CreateRoom(roomDto);
+        
     }
 
     public void JoinSpecificRoom(Room room)

@@ -26,13 +26,13 @@ public class RoomList : MonoBehaviour,IRoomList
 
     public void OnNewRoomAdded(Room room)
     {
-        Debug.Log("OnNewRoomAdded " + room.RoomName + " with Room Size: " + room.RoomSize + " room Id: " + room.RoomId);
+        Debug.Log("OnNewRoomAdded " + room.RoomName + " with min Room Size: " + room.MinRoomSize +" and max room size "+ room.MaxRoomSize + " room Id: " + room.RoomId);
         AddNewRoom(room);
     }
 
     public void OnRoomDeleted(Room room)
     {
-        Debug.Log("OnRoomDeleted " + room.RoomName + " with Room Size: " + room.RoomSize);
+        Debug.Log("OnRoomDeleted " + room.RoomName + " with min Room Size: " + room.MinRoomSize + " and max room size " + room.MaxRoomSize);
         RemoveRoom(room);
     }
 

@@ -5,10 +5,12 @@ using UnityEngine;
 public struct RoomDto
 {
     public string RoomName;
-    public int RoomSize;
-    public RoomDto(string roomName,int roomSize)
+    public int MinRoomSize;
+    public int MaxRoomSize;
+    public RoomDto(string roomName,int minRoomSize,int maxRoomSize)
     {
         RoomName = roomName;
-        RoomSize = roomSize;
+        MinRoomSize = minRoomSize;
+        MaxRoomSize = maxRoomSize;
     }
 }
