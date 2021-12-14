@@ -1,29 +1,31 @@
 ﻿using UnityEngine;
 using TMPro;
-
-public class Loader : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public GameObject loaderGO;
-    public GameObject messageGO;
-    public TextMeshProUGUI messageUI;
-
-    public void SetMessage(string message)
+    public class Loader : MonoBehaviour
     {
-        loaderGO.SetActive(false);
-        messageGO.SetActive(true);
-        messageUI.text = message;
-        Debug.Log("setting message");
-    }
+        public GameObject loaderGO;
+        public GameObject messageGO;
+        public TextMeshProUGUI messageUI;
 
-    public void StartLoading()
-    {
-        loaderGO.SetActive(true);
-        messageGO.SetActive(false);
-        Debug.Log("Loading");
-    }
+        public void SetMessage(string message)
+        {
+            loaderGO.SetActive(false);
+            messageGO.SetActive(true);
+            messageUI.text = message;
+            Debug.Log("setting message");
+        }
 
-    public void Close()
-    {
-        Destroy(gameObject);
+        public void StartLoading()
+        {
+            loaderGO.SetActive(true);
+            messageGO.SetActive(false);
+            Debug.Log("Loading");
+        }
+
+        public void Close()
+        {
+            Destroy(gameObject);
+        }
     }
 }

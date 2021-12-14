@@ -1,53 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class AvernaInputController : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public Actor localPlayer;
-    public ClientMasterController clientMasterController;
-
-    public bool up;
-    public bool left;
-    public bool down;
-    public bool right;
-    public bool shootFireBall;
-    public bool castFlamePillar;
-    public bool respawnPlayer;
-
-    private void Awake()
+    public class AvernaInputController : MonoBehaviour
     {
-        clientMasterController.getInputs = GetAvernaInputs;
-    }
+        public Actor localPlayer;
+        public ClientMasterController clientMasterController;
 
-    private void FixedUpdate()
-    {
-        if (localPlayer.isPushed || localPlayer.isPetrified)
+        public bool up;
+        public bool left;
+        public bool down;
+        public bool right;
+        public bool shootFireBall;
+        public bool castFlamePillar;
+        public bool respawnPlayer;
+
+        private void Awake()
         {
-            up = false;
-            left = false;
-            down = false;
-            right = false;
-            shootFireBall = false;
-            castFlamePillar = false;
-            respawnPlayer = false;
+            clientMasterController.getInputs = GetAvernaInputs;
         }
-        else
-        {
-            up = Input.GetKey(KeyCode.W);
-            left = Input.GetKey(KeyCode.A);
-            down = Input.GetKey(KeyCode.S);
-            right = Input.GetKey(KeyCode.D);
-            shootFireBall = Input.GetKey(KeyCode.J);
-            castFlamePillar = Input.GetKey(KeyCode.K);
-            respawnPlayer = Input.GetKey(KeyCode.Return);
-        }
-    }
 
-    public bool[] GetAvernaInputs()
-    {
-        bool[] inputs = new bool[]
-                {
+        private void FixedUpdate()
+        {
+            if (localPlayer.isPushed || localPlayer.isPetrified)
+            {
+                up = false;
+                left = false;
+                down = false;
+                right = false;
+                shootFireBall = false;
+                castFlamePillar = false;
+                respawnPlayer = false;
+            }
+            else
+            {
+                up = Input.GetKey(KeyCode.W);
+                left = Input.GetKey(KeyCode.A);
+                down = Input.GetKey(KeyCode.S);
+                right = Input.GetKey(KeyCode.D);
+                shootFireBall = Input.GetKey(KeyCode.J);
+                castFlamePillar = Input.GetKey(KeyCode.K);
+                respawnPlayer = Input.GetKey(KeyCode.Return);
+            }
+        }
+
+        public bool[] GetAvernaInputs()
+        {
+            bool[] inputs = new bool[]
+                    {
                 up,
                 left,
                 down,
@@ -55,7 +56,8 @@ public class AvernaInputController : MonoBehaviour
                 shootFireBall,
                 castFlamePillar,
                 respawnPlayer
-                };
-        return inputs;
+                    };
+            return inputs;
+        }
     }
 }

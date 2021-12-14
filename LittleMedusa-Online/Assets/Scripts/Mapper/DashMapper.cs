@@ -1,32 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class DashMapper : Mapper
+namespace MedusaMultiplayer
 {
-    public FaceDirection faceDirection;
-    public int tileToDash;
-
-    public void InitialiseDirection(FaceDirection faceDirection)
+    public class DashMapper : Mapper
     {
-        this.faceDirection = faceDirection;
-    }
+        public FaceDirection faceDirection;
+        public int tileToDash;
 
-    public void InitialiseTileLength(int tileToDash)
-    {
-        this.tileToDash = tileToDash;
-    }
+        public void InitialiseDirection(FaceDirection faceDirection)
+        {
+            this.faceDirection = faceDirection;
+        }
 
-    public override Vector3Int GetNewPathPoint(Actor tobeMappedActor)
-    {
-        Enemy enemyToBeMapped = (Enemy)tobeMappedActor;
-        Vector3Int posToAnalyseForNextPoint = tobeMappedActor.currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(enemyToBeMapped.Facing));
-        tileToDash--;
-        return posToAnalyseForNextPoint;
-    }
+        public void InitialiseTileLength(int tileToDash)
+        {
+            this.tileToDash = tileToDash;
+        }
 
-    public bool IsDashComplete()
-    {
-        return tileToDash < 0;
+        public override Vector3Int GetNewPathPoint(Actor tobeMappedActor)
+        {
+            Enemy enemyToBeMapped = (Enemy)tobeMappedActor;
+            Vector3Int posToAnalyseForNextPoint = tobeMappedActor.currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(enemyToBeMapped.Facing));
+            tileToDash--;
+            return posToAnalyseForNextPoint;
+        }
+
+        public bool IsDashComplete()
+        {
+            return tileToDash < 0;
+        }
     }
 }

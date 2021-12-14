@@ -64,11 +64,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\API\Account\AccountManager.cs" />
-    <Compile Include="Assets\API\Account\Controller\AccountController.cs" />
-    <Compile Include="Assets\API\Account\Interfaces\IAccount.cs" />
-    <Compile Include="Assets\API\Account\Model\AccountModel.cs" />
-    <Compile Include="Assets\API\Account\View\AccountView.cs" />
     <Compile Include="Assets\MultiplayerFolder\ClientSide\Scripts\CameraController.cs" />
     <Compile Include="Assets\MultiplayerFolder\ClientSide\Scripts\CharacterSelection.cs" />
     <Compile Include="Assets\MultiplayerFolder\ClientSide\Scripts\Client.cs" />

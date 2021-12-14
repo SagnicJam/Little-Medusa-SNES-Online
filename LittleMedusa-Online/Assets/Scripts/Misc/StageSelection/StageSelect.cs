@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class StageSelect : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public EnumData.BattleRoyaleMaps battleRoyaleMaps;
+    public class StageSelect : MonoBehaviour
+    {
+        public EnumData.BattleRoyaleMaps battleRoyaleMaps;
+    }
 }

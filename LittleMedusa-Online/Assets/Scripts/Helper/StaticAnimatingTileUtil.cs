@@ -1,52 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class StaticAnimatingTileUtil : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public bool isServerNetworked;
-    public static int nextStaticAnimationTileID = 1;
-    public int networkUid;
-
-    public EnumData.StaticAnimatingTiles animationTileType;
-    
-    public FrameLooper fl;
-
-    public void Initialise(Vector3Int pos)
+    public class StaticAnimatingTileUtil : MonoBehaviour
     {
-        if (isServerNetworked)
-        {
-            networkUid = nextStaticAnimationTileID;
-            nextStaticAnimationTileID++;
+        public bool isServerNetworked;
+        public static int nextStaticAnimationTileID = 1;
+        public int networkUid;
 
-            AnimatingStaticTile animatingStaticTile = new AnimatingStaticTile(networkUid, (int)animationTileType, fl.spriteIndexToShowCache, pos);
-            ServerSideGameManager.animatingStaticTileDic.Add(networkUid, animatingStaticTile);
-        }
-    }
+        public EnumData.StaticAnimatingTiles animationTileType;
 
-    public void DestroyObject()
-    {
-        if (ServerSideGameManager.animatingStaticTileDic.ContainsKey(networkUid))
-        {
-            ServerSideGameManager.animatingStaticTileDic.Remove(networkUid);
-            Destroy(gameObject);
-        }
-    }
+        public FrameLooper fl;
 
-    private void FixedUpdate()
-    {
-        if (isServerNetworked)
+        public void Initialise(Vector3Int pos)
         {
-            AnimatingStaticTile animatingStaticTile;
-            if (ServerSideGameManager.animatingStaticTileDic.TryGetValue(networkUid, out animatingStaticTile))
+            if (isServerNetworked)
             {
-                animatingStaticTile.animationSpriteIndex = fl.spriteIndexToShowCache;
-                ServerSideGameManager.animatingStaticTileDic.Remove(networkUid);
+                networkUid = nextStaticAnimationTileID;
+                nextStaticAnimationTileID++;
+
+                AnimatingStaticTile animatingStaticTile = new AnimatingStaticTile(networkUid, (int)animationTileType, fl.spriteIndexToShowCache, pos);
                 ServerSideGameManager.animatingStaticTileDic.Add(networkUid, animatingStaticTile);
             }
-            else
+        }
+
+        public void DestroyObject()
+        {
+            if (ServerSideGameManager.animatingStaticTileDic.ContainsKey(networkUid))
             {
-                Debug.LogError("Doesnot contain the key to set projectile position for");
+                ServerSideGameManager.animatingStaticTileDic.Remove(networkUid);
+                Destroy(gameObject);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (isServerNetworked)
+            {
+                AnimatingStaticTile animatingStaticTile;
+                if (ServerSideGameManager.animatingStaticTileDic.TryGetValue(networkUid, out animatingStaticTile))
+                {
+                    animatingStaticTile.animationSpriteIndex = fl.spriteIndexToShowCache;
+                    ServerSideGameManager.animatingStaticTileDic.Remove(networkUid);
+                    ServerSideGameManager.animatingStaticTileDic.Add(networkUid, animatingStaticTile);
+                }
+                else
+                {
+                    Debug.LogError("Doesnot contain the key to set projectile position for");
+                }
             }
         }
     }

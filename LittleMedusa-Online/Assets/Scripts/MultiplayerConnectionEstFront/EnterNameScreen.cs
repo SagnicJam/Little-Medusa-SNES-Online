@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public class EnterNameScreen : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public TMP_InputField nameField;
-    
-    public void EstablishConnection()
+    public class EnterNameScreen : MonoBehaviour
     {
-        if(!string.IsNullOrEmpty(nameField.text))
+        public TMP_InputField nameField;
+
+        public void EstablishConnection()
         {
-            MultiplayerManager.instance.EstablishConnection(nameField.text);
+            if (!string.IsNullOrEmpty(nameField.text))
+            {
+                MultiplayerManager.instance.EstablishConnection(nameField.text);
+            }
         }
     }
 }

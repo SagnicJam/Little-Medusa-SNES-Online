@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public struct PlayerInfoData
+namespace MedusaMultiplayer
 {
-    public PlayerInfoData(string connectionId, string name)
+    public struct PlayerInfoData
     {
-        this.connectionId = connectionId;
-        Name = name;
+        public PlayerInfoData(string connectionId, string name)
+        {
+            this.connectionId = connectionId;
+            Name = name;
+        }
+        public string connectionId { get; set; }
+        public string Name { get; set; }
     }
-    public string connectionId { get; set; }
-    public string Name { get; set; }
 }

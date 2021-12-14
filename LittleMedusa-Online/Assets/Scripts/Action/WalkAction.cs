@@ -2,40 +2,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class WalkAction : Actions
+namespace MedusaMultiplayer
 {
-    Actor actorWalking;
-
-    public override void Initialise(Actor actorActingThisAction)
+    public class WalkAction : Actions
     {
-        actorWalking = actorActingThisAction;
-    }
+        Actor actorWalking;
 
-    public override bool Perform()
-    {
-        if (actorWalking == null)
+        public override void Initialise(Actor actorActingThisAction)
         {
-            Debug.Log("actor not set");
-            return false;
+            actorWalking = actorActingThisAction;
         }
-        if (actorWalking.completedMotionToMovePoint)
-        {
-            return false;
-        }
-        MoveActorToMovePointCell();
-        return true;
-    }
 
-    public void MoveActorToMovePointCell()
-    {
-        if(actorWalking.IsActorOnArrows()||actorWalking.IsActorOnMirror())
+        public override bool Perform()
         {
-            actorWalking.actorTransform.position = Vector3.MoveTowards(actorWalking.actorTransform.position, actorWalking.movePoint.position, actorWalking.pushSpeed * Time.fixedDeltaTime);
+            if (actorWalking == null)
+            {
+                Debug.Log("actor not set");
+                return false;
+            }
+            if (actorWalking.completedMotionToMovePoint)
+            {
+                return false;
+            }
+            MoveActorToMovePointCell();
+            return true;
         }
-        else
+
+        public void MoveActorToMovePointCell()
         {
-            actorWalking.actorTransform.position = Vector3.MoveTowards(actorWalking.actorTransform.position, actorWalking.movePoint.position, actorWalking.walkSpeed * Time.fixedDeltaTime);
+            if (actorWalking.IsActorOnArrows() || actorWalking.IsActorOnMirror())
+            {
+                actorWalking.actorTransform.position = Vector3.MoveTowards(actorWalking.actorTransform.position, actorWalking.movePoint.position, actorWalking.pushSpeed * Time.fixedDeltaTime);
+            }
+            else
+            {
+                actorWalking.actorTransform.position = Vector3.MoveTowards(actorWalking.actorTransform.position, actorWalking.movePoint.position, actorWalking.walkSpeed * Time.fixedDeltaTime);
+            }
         }
     }
 }

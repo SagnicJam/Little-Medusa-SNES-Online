@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public class PlayerInfo : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public TextMeshProUGUI playerNameText;
-    public PlayerInfoData player;
-
-    public void Initialise(PlayerInfoData player)
+    public class PlayerInfo : MonoBehaviour
     {
-        this.player = player;
-        playerNameText.text = this.player.Name;
+        public TextMeshProUGUI playerNameText;
+        public PlayerInfoData player;
+
+        public void Initialise(PlayerInfoData player)
+        {
+            this.player = player;
+            playerNameText.text = this.player.Name;
+        }
     }
 }

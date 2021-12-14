@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class FindMatchScreen : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public void LeaveQueue()
+    public class FindMatchScreen : MonoBehaviour
     {
-        //SignalRCoreConnect.instance.LeaveQueue();
+        public void LeaveQueue()
+        {
+            //SignalRCoreConnect.instance.LeaveQueue();
+        }
     }
 }

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-
-public interface ILobby
+namespace MedusaMultiplayer
 {
-    Task CreateRoom(RoomDto roomDto);
-    Task JoinRoom(Room room);
-    Task JoinRandomRoom();
-    Task LeaveRoom(Room room);
-    Task GetLobby();
+    public interface ILobby
+    {
+        Task CreateRoom(RoomDto roomDto);
+        Task JoinRoom(Room room);
+        Task JoinRandomRoom();
+        Task LeaveRoom(Room room);
+        Task GetLobby();
+    }
 }

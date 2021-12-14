@@ -1,39 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CameraController : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public PlayerManager player;
-    public float sensitivity = 100f;
-    public float clampAngle = 85f;
-
-    private float verticalRotation;
-    private float horizontalRotation;
-
-    private void Start()
+    public class CameraController : MonoBehaviour
     {
-        verticalRotation = transform.localEulerAngles.x;
-        horizontalRotation = player.transform.eulerAngles.y;
-    }
+        public PlayerManager player;
+        public float sensitivity = 100f;
+        public float clampAngle = 85f;
 
-    private void Update()
-    {
-        Look();
-        Debug.DrawRay(transform.position, transform.forward * 2, Color.red);
-    }
+        private float verticalRotation;
+        private float horizontalRotation;
 
-    private void Look()
-    {
-        float _mouseVertical = -Input.GetAxis("Mouse Y");
-        float _mouseHorizontal = Input.GetAxis("Mouse X");
+        private void Start()
+        {
+            verticalRotation = transform.localEulerAngles.x;
+            horizontalRotation = player.transform.eulerAngles.y;
+        }
 
-        verticalRotation += _mouseVertical * sensitivity * Time.deltaTime;
-        horizontalRotation += _mouseHorizontal * sensitivity * Time.deltaTime;
+        private void Update()
+        {
+            Look();
+            Debug.DrawRay(transform.position, transform.forward * 2, Color.red);
+        }
 
-        verticalRotation = Mathf.Clamp(verticalRotation, -clampAngle, clampAngle);
+        private void Look()
+        {
+            float _mouseVertical = -Input.GetAxis("Mouse Y");
+            float _mouseHorizontal = Input.GetAxis("Mouse X");
 
-        transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
-        player.transform.rotation = Quaternion.Euler(0f, horizontalRotation, 0f);
+            verticalRotation += _mouseVertical * sensitivity * Time.deltaTime;
+            horizontalRotation += _mouseHorizontal * sensitivity * Time.deltaTime;
+
+            verticalRotation = Mathf.Clamp(verticalRotation, -clampAngle, clampAngle);
+
+            transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+            player.transform.rotation = Quaternion.Euler(0f, horizontalRotation, 0f);
+        }
     }
 }

@@ -1,55 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class WaitingForNextAction : Actions
+namespace MedusaMultiplayer
 {
-    public bool isWaitingForNextActionCheck;
-    float NextCheckTime;
-
-    public Actor actor;
-
-    public override void Initialise(Actor actorActingThisAction)
+    public class WaitingForNextAction : Actions
     {
-        actor = actorActingThisAction;
-    }
+        public bool isWaitingForNextActionCheck;
+        float NextCheckTime;
 
-    public void ReInitialiseTimerToBegin(float waitDuration)
-    {
-        NextCheckTime =  waitDuration;
-        waitingTimer = 0;
-        isWaitingForNextActionCheck = true;
-    }
+        public Actor actor;
 
-    public void ReInitialiseTimerToEnd(float waitDuration)
-    {
-        NextCheckTime = waitDuration;
-        waitingTimer = NextCheckTime;
-        isWaitingForNextActionCheck = true;
-    }
-
-    public void CompleteTimer()
-    {
-        waitingTimer = NextCheckTime;
-        isWaitingForNextActionCheck = false;
-    }
-
-    public float waitingTimer=0;
-
-    public override bool Perform()
-    {
-        if (!isWaitingForNextActionCheck)
-            return false;
-        if (waitingTimer >= NextCheckTime)
+        public override void Initialise(Actor actorActingThisAction)
         {
-            waitingTimer = 0f;
-            isWaitingForNextActionCheck = false;
-            return false;
+            actor = actorActingThisAction;
         }
-        else
+
+        public void ReInitialiseTimerToBegin(float waitDuration)
         {
-            waitingTimer ++;
-            return true;
+            NextCheckTime = waitDuration;
+            waitingTimer = 0;
+            isWaitingForNextActionCheck = true;
+        }
+
+        public void ReInitialiseTimerToEnd(float waitDuration)
+        {
+            NextCheckTime = waitDuration;
+            waitingTimer = NextCheckTime;
+            isWaitingForNextActionCheck = true;
+        }
+
+        public void CompleteTimer()
+        {
+            waitingTimer = NextCheckTime;
+            isWaitingForNextActionCheck = false;
+        }
+
+        public float waitingTimer = 0;
+
+        public override bool Perform()
+        {
+            if (!isWaitingForNextActionCheck)
+                return false;
+            if (waitingTimer >= NextCheckTime)
+            {
+                waitingTimer = 0f;
+                isWaitingForNextActionCheck = false;
+                return false;
+            }
+            else
+            {
+                waitingTimer++;
+                return true;
+            }
         }
     }
 }

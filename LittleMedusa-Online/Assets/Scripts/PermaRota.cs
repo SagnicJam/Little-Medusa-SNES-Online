@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PermaRota : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public float speed;
-
-    private void FixedUpdate()
+    public class PermaRota : MonoBehaviour
     {
-        transform.Rotate(transform.forward,speed*Time.fixedDeltaTime);
+        public float speed;
+
+        private void FixedUpdate()
+        {
+            transform.Rotate(transform.forward, speed * Time.fixedDeltaTime);
+        }
     }
 }

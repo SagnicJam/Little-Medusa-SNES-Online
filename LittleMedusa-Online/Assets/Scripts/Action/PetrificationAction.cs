@@ -1,89 +1,91 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PetrificationAction : Actions
+namespace MedusaMultiplayer
 {
-    //Blink blink;
-    Actor actorGettingPetrified;
-    int petrificationTime;
-
-    public override void Initialise(Actor actorActingThisAction)
+    public class PetrificationAction : Actions
     {
-        actorGettingPetrified = actorActingThisAction;
-        //blink = actorGettingPetrified.GetComponent<Blink>();
-    }
+        //Blink blink;
+        Actor actorGettingPetrified;
+        int petrificationTime;
 
-    public void ReInitialise()
-    {
-        petrificationTime = actorGettingPetrified.petrificationTimeTickRate;
-        //blink.StopBlink(Color.white);
-    }
-
-
-    public override bool Perform()
-    {
-        if(actorGettingPetrified == null)
+        public override void Initialise(Actor actorActingThisAction)
         {
-            Debug.LogError("monster not set");
-            return false;
+            actorGettingPetrified = actorActingThisAction;
+            //blink = actorGettingPetrified.GetComponent<Blink>();
         }
 
-        if(MultiplayerManager.instance.isServer)
+        public void ReInitialise()
         {
-            if (petrificationTime > 0)
+            petrificationTime = actorGettingPetrified.petrificationTimeTickRate;
+            //blink.StopBlink(Color.white);
+        }
+
+
+        public override bool Perform()
+        {
+            if (actorGettingPetrified == null)
             {
-                if (!actorGettingPetrified.completedMotionToMovePoint)
-                {
-                    actorGettingPetrified.actorTransform.position = Vector3.MoveTowards(actorGettingPetrified.actorTransform.position, actorGettingPetrified.movePoint.position, actorGettingPetrified.petrificationSnapSpeed * Time.fixedDeltaTime);
-                }
-                petrificationTime --;
-                return true;
-            }
-            else
-            {
-                //blink.StopBlink(Color.white);
-                //actorGettingPetrified.UpdateBasicWalkingSprite();
-                actorGettingPetrified.UnPetrify();
+                Debug.LogError("monster not set");
                 return false;
             }
 
-        }
-        else
-        {
-            return true;
-        }
-        //petrificationTime -= Time.fixedDeltaTime;
-        //if(petrificationTime> GameConfig.petrificationDuration- GameConfig.showHitSpriteAtPetrificationDuration)
-        //{
-        //    //actorGettingPetrified.frameLooper.SetStaticFrame(actorGettingPetrified.onHitSprite);
-        //}
-        //else
-        //{
-        //    //actorGettingPetrified.frameLooper.SetStaticFrame(actorGettingPetrified.onPetrifiedSprite);
-        //    //if(petrificationTime<=GameConfig.flashSpriteDuration)
-        //    //{
-        //    //    if(!blink.isBlinking)
-        //    //    {
-        //    //        blink.StartBlink(Color.white);
-        //    //    }
-        //    //}
-        //}
+            if (MultiplayerManager.instance.isServer)
+            {
+                if (petrificationTime > 0)
+                {
+                    if (!actorGettingPetrified.completedMotionToMovePoint)
+                    {
+                        actorGettingPetrified.actorTransform.position = Vector3.MoveTowards(actorGettingPetrified.actorTransform.position, actorGettingPetrified.movePoint.position, actorGettingPetrified.petrificationSnapSpeed * Time.fixedDeltaTime);
+                    }
+                    petrificationTime--;
+                    return true;
+                }
+                else
+                {
+                    //blink.StopBlink(Color.white);
+                    //actorGettingPetrified.UpdateBasicWalkingSprite();
+                    actorGettingPetrified.UnPetrify();
+                    return false;
+                }
 
-        //if (petrificationTime > 0)
-        //{
-        //    if(!actorGettingPetrified.completedMotionToMovePoint)
-        //    {
-        //        actorGettingPetrified.transform.position = Vector3.MoveTowards(actorGettingPetrified.transform.position, actorGettingPetrified.movePoint.position, GameConfig.actorSnapSpeed * Time.fixedDeltaTime);
-        //    }
-        //    return true;
-        //}
-        //else
-        //{
+            }
+            else
+            {
+                return true;
+            }
+            //petrificationTime -= Time.fixedDeltaTime;
+            //if(petrificationTime> GameConfig.petrificationDuration- GameConfig.showHitSpriteAtPetrificationDuration)
+            //{
+            //    //actorGettingPetrified.frameLooper.SetStaticFrame(actorGettingPetrified.onHitSprite);
+            //}
+            //else
+            //{
+            //    //actorGettingPetrified.frameLooper.SetStaticFrame(actorGettingPetrified.onPetrifiedSprite);
+            //    //if(petrificationTime<=GameConfig.flashSpriteDuration)
+            //    //{
+            //    //    if(!blink.isBlinking)
+            //    //    {
+            //    //        blink.StartBlink(Color.white);
+            //    //    }
+            //    //}
+            //}
+
+            //if (petrificationTime > 0)
+            //{
+            //    if(!actorGettingPetrified.completedMotionToMovePoint)
+            //    {
+            //        actorGettingPetrified.transform.position = Vector3.MoveTowards(actorGettingPetrified.transform.position, actorGettingPetrified.movePoint.position, GameConfig.actorSnapSpeed * Time.fixedDeltaTime);
+            //    }
+            //    return true;
+            //}
+            //else
+            //{
             //blink.StopBlink(Color.white);
             //actorGettingPetrified.UpdateBasicWalkingSprite();
             //actorGettingPetrified.UnPetrify();
-        //    return false;
-        //}
+            //    return false;
+            //}
+        }
     }
 }

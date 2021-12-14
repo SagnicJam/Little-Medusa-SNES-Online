@@ -4,153 +4,156 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
-
-public class MatchConditionManager : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public StageSelection stageSelection;
-    public TMP_InputField enemyCountInputFieldText;
-    public TMP_Dropdown enemyType_tMP_Dropdown;
-
-    public Button startGameButtonGO;
-    public int roomId;
-
-    public int enemyCountPrevious;
-    public int enemyTypePrevious;
-    public int mapSelectedPrevious;
-
-    public int enemyCount;
-    public int enemyType;
-    public int mapSelected;
-
-    public void Initialise(int roomId)
+    public class MatchConditionManager : MonoBehaviour
     {
-        this.roomId = roomId;
-        enemyCount = 1;
-        enemyType = 0;
-        mapSelected = 0;
-    }
+        public StageSelection stageSelection;
+        public TMP_InputField enemyCountInputFieldText;
+        public TMP_Dropdown enemyType_tMP_Dropdown;
 
-    public void OpenPrematchConditionMenu()
-    {
-        enemyCountPrevious = enemyCount;
-        enemyTypePrevious = enemyType;
+        public Button startGameButtonGO;
+        public int roomId;
 
-        enemyType_tMP_Dropdown.SetValueWithoutNotify(enemyType);
-        enemyCountInputFieldText.text = enemyCount.ToString();
-    }
+        public int enemyCountPrevious;
+        public int enemyTypePrevious;
+        public int mapSelectedPrevious;
 
-    public void SetCount(TMP_InputField tMP_InputField)
-    {
-        string inputString = tMP_InputField.text;
-        int amount = 0;
-        if (int.TryParse(inputString, out amount))
+        public int enemyCount;
+        public int enemyType;
+        public int mapSelected;
+
+        public void Initialise(int roomId)
         {
-            if (amount > 10)
+            this.roomId = roomId;
+            enemyCount = 1;
+            enemyType = 0;
+            mapSelected = 0;
+        }
+
+        public void OpenPrematchConditionMenu()
+        {
+            enemyCountPrevious = enemyCount;
+            enemyTypePrevious = enemyType;
+
+            enemyType_tMP_Dropdown.SetValueWithoutNotify(enemyType);
+            enemyCountInputFieldText.text = enemyCount.ToString();
+        }
+
+        public void SetCount(TMP_InputField tMP_InputField)
+        {
+            string inputString = tMP_InputField.text;
+            int amount = 0;
+            if (int.TryParse(inputString, out amount))
             {
-                tMP_InputField.text = 10.ToString();
-                Debug.Log("Cant be larger than 10");
+                if (amount > 10)
+                {
+                    tMP_InputField.text = 10.ToString();
+                    Debug.Log("Cant be larger than 10");
+                }
+                else if (amount < 0)
+                {
+                    tMP_InputField.text = 0.ToString();
+                    Debug.Log("Cant be less than 0");
+                }
             }
-            else if(amount<0)
+            else
             {
-                tMP_InputField.text = 0.ToString();
-                Debug.Log("Cant be less than 0");
+                Debug.LogError("Could not parse string");
             }
         }
-        else
+
+        public void OpenStageSelectionMenu()
         {
-            Debug.LogError("Could not parse string");
-        }
-    }
-
-    public void OpenStageSelectionMenu()
-    {
-        mapSelectedPrevious = mapSelected;
-        stageSelection.InitialiseWithPreviousMapSelected(mapSelectedPrevious);
-    }
-
-    public void EnableStartGame()
-    {
-        startGameButtonGO.gameObject.SetActive(true);
-    }
-
-    public void DisableStartGame()
-    {
-        startGameButtonGO.gameObject.SetActive(false);
-    }
-
-    public void ConfirmPrematchConditions()
-    {
-        int enemyCountAmount = 0;
-        if (int.TryParse(enemyCountInputFieldText.text, out enemyCountAmount))
-        {
-            enemyCountInputFieldText.text = enemyCountAmount.ToString();
-            enemyCount = enemyCountAmount;
-        }
-        else
-        {
-            Debug.LogError("Could not parse string");
+            mapSelectedPrevious = mapSelected;
+            stageSelection.InitialiseWithPreviousMapSelected(mapSelectedPrevious);
         }
 
-        enemyType = enemyType_tMP_Dropdown.value;
-    }
+        public void EnableStartGame()
+        {
+            startGameButtonGO.gameObject.SetActive(true);
+        }
 
-    public void CancelPrematchConditions()
-    {
-        enemyCount = enemyCountPrevious;
-        enemyType = enemyTypePrevious;
-    }
+        public void DisableStartGame()
+        {
+            startGameButtonGO.gameObject.SetActive(false);
+        }
 
-    public void ConfirmStage()
-    {
-        mapSelected = stageSelection.GetSelectedBattleRoyaleMap();
-    }
-
-    public void CancelStage()
-    {
-        mapSelected = mapSelectedPrevious;
-    }
-
-    public void StartMatch()
-    {
-        SignalRCoreConnect.instance.SendAsyncData<MatchBeginDto, Match>("StartMatch", new MatchBeginDto {
-            matchId = roomId,
-            matchConditionDto =  new MatchConditionDto
+        public void ConfirmPrematchConditions()
+        {
+            int enemyCountAmount = 0;
+            if (int.TryParse(enemyCountInputFieldText.text, out enemyCountAmount))
             {
-                enemy = enemyType,
-                enemyCount = enemyCount,
-                map = mapSelected
+                enemyCountInputFieldText.text = enemyCountAmount.ToString();
+                enemyCount = enemyCountAmount;
             }
-        }, onMatchStartedByRoomOwner);
-    }
+            else
+            {
+                Debug.LogError("Could not parse string");
+            }
 
-    void onMatchStartedByRoomOwner(Match match)
-    {
-        Debug.Log("Match started by room owner on match process id: "+match.ProcessID);
-        MultiplayerManager.instance.DestroyMatchOptions();
-    }
-}
-[Serializable]
-public struct MatchBeginDto
-{
-    [field:SerializeField]
-    public int matchId { get; set; }
-    [field: SerializeField]
-    public MatchConditionDto matchConditionDto { get; set; }
-}
-[Serializable]
-public struct MatchConditionDto
-{
-    [field: SerializeField]
-    public int enemy { get; set; }
-    [field: SerializeField]
-    public int enemyCount { get; set; }
-    [field: SerializeField]
-    public int map { get; set; }
+            enemyType = enemyType_tMP_Dropdown.value;
+        }
 
-    public MatchConditionDto(int enemy, int enemyCount, int map)
+        public void CancelPrematchConditions()
+        {
+            enemyCount = enemyCountPrevious;
+            enemyType = enemyTypePrevious;
+        }
+
+        public void ConfirmStage()
+        {
+            mapSelected = stageSelection.GetSelectedBattleRoyaleMap();
+        }
+
+        public void CancelStage()
+        {
+            mapSelected = mapSelectedPrevious;
+        }
+
+        public void StartMatch()
+        {
+            SignalRCoreConnect.instance.SendAsyncData<MatchBeginDto, Match>("StartMatch", new MatchBeginDto
+            {
+                matchId = roomId,
+                matchConditionDto = new MatchConditionDto
+                {
+                    enemy = enemyType,
+                    enemyCount = enemyCount,
+                    map = mapSelected
+                }
+            }, onMatchStartedByRoomOwner);
+        }
+
+        void onMatchStartedByRoomOwner(Match match)
+        {
+            Debug.Log("Match started by room owner on match process id: " + match.ProcessID);
+            MultiplayerManager.instance.DestroyMatchOptions();
+        }
+    }
+    [Serializable]
+    public struct MatchBeginDto
     {
-        this.enemy = enemy;
-        this.enemyCount = enemyCount;
-        this.map = map;
+        [field: SerializeField]
+        public int matchId { get; set; }
+        [field: SerializeField]
+        public MatchConditionDto matchConditionDto { get; set; }
+    }
+    [Serializable]
+    public struct MatchConditionDto
+    {
+        [field: SerializeField]
+        public int enemy { get; set; }
+        [field: SerializeField]
+        public int enemyCount { get; set; }
+        [field: SerializeField]
+        public int map { get; set; }
+
+        public MatchConditionDto(int enemy, int enemyCount, int map)
+        {
+            this.enemy = enemy;
+            this.enemyCount = enemyCount;
+            this.map = map;
+        }
     }
 }

@@ -2,119 +2,122 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class MoveUseAnimationAction : Actions
+namespace MedusaMultiplayer
 {
-    public OnUsed<Actor> onMoveUseActionOver;
-    public OnUsed<Actor> onMoveUseActionBegin;
-
-    public float animationDuration;
-    public float walkAnimationDuration;
-    public bool canPerformMoveUseAnimations;
-    public bool isCancellingMovePlayerInputDriven;
-
-    Actor actorUsingMove;
-    MoveAnimationSprites moveAnimationSprites;
-
-    public override void Initialise(Actor actorActingThisAction)
+    public class MoveUseAnimationAction : Actions
     {
-        actorUsingMove = actorActingThisAction;
-    }
+        public OnUsed<Actor> onMoveUseActionOver;
+        public OnUsed<Actor> onMoveUseActionBegin;
 
-    public void SetAnimationSpeedAndSpritesOnUsage(float animationDuration, float walkAnimationDuration, MoveAnimationSprites moveAnimationSprites)
-    {
-        this.animationDuration = animationDuration;
-        this.walkAnimationDuration = walkAnimationDuration;
-        this.moveAnimationSprites = moveAnimationSprites;
-    }
+        public float animationDuration;
+        public float walkAnimationDuration;
+        public bool canPerformMoveUseAnimations;
+        public bool isCancellingMovePlayerInputDriven;
 
+        Actor actorUsingMove;
+        MoveAnimationSprites moveAnimationSprites;
 
-    public bool initialiseSprite;
-    public bool isBeingUsed;
-
-    public override bool Perform()
-    {
-        if (actorUsingMove.isPetrified)
+        public override void Initialise(Actor actorActingThisAction)
         {
-            return false;
+            actorUsingMove = actorActingThisAction;
         }
-        if (!canPerformMoveUseAnimations)
+
+        public void SetAnimationSpeedAndSpritesOnUsage(float animationDuration, float walkAnimationDuration, MoveAnimationSprites moveAnimationSprites)
         {
-            return false;
+            this.animationDuration = animationDuration;
+            this.walkAnimationDuration = walkAnimationDuration;
+            this.moveAnimationSprites = moveAnimationSprites;
         }
-        if (!initialiseSprite)
+
+
+        public bool initialiseSprite;
+        public bool isBeingUsed;
+
+        public override bool Perform()
         {
-            if (onMoveUseActionBegin != null)
+            if (actorUsingMove.isPetrified)
             {
-                onMoveUseActionBegin.Invoke(actorUsingMove);
+                return false;
             }
-            //Debug.Log("initialiseSprite");
-            actorUsingMove.frameLooper.animationDuration = animationDuration;
-            switch (actorUsingMove.Facing)
+            if (!canPerformMoveUseAnimations)
             {
-                case FaceDirection.Down:
-                    actorUsingMove.frameLooper.UpdateSpriteArr(moveAnimationSprites.downMove);
-                    break;
-                case FaceDirection.Up:
-                    actorUsingMove.frameLooper.UpdateSpriteArr(moveAnimationSprites.upMove);
-                    break;
-                case FaceDirection.Left:
-                    actorUsingMove.frameLooper.UpdateSpriteArr(moveAnimationSprites.leftMove);
-                    break;
-                case FaceDirection.Right:
-                    actorUsingMove.frameLooper.UpdateSpriteArr(moveAnimationSprites.rightMove);
-                    break;
+                return false;
             }
-            initialiseSprite = true;
-            isBeingUsed = true;
-        }
-        else
-        {
-            actorUsingMove.frameLooper.UpdateAnimationFrame();
-            if (!actorUsingMove.frameLooper.IsLoopComplete)
+            if (!initialiseSprite)
             {
-                return true;
+                if (onMoveUseActionBegin != null)
+                {
+                    onMoveUseActionBegin.Invoke(actorUsingMove);
+                }
+                //Debug.Log("initialiseSprite");
+                actorUsingMove.frameLooper.animationDuration = animationDuration;
+                switch (actorUsingMove.Facing)
+                {
+                    case FaceDirection.Down:
+                        actorUsingMove.frameLooper.UpdateSpriteArr(moveAnimationSprites.downMove);
+                        break;
+                    case FaceDirection.Up:
+                        actorUsingMove.frameLooper.UpdateSpriteArr(moveAnimationSprites.upMove);
+                        break;
+                    case FaceDirection.Left:
+                        actorUsingMove.frameLooper.UpdateSpriteArr(moveAnimationSprites.leftMove);
+                        break;
+                    case FaceDirection.Right:
+                        actorUsingMove.frameLooper.UpdateSpriteArr(moveAnimationSprites.rightMove);
+                        break;
+                }
+                initialiseSprite = true;
+                isBeingUsed = true;
             }
             else
             {
-                CancelMoveUsage();
-                if (onMoveUseActionOver != null)
+                actorUsingMove.frameLooper.UpdateAnimationFrame();
+                if (!actorUsingMove.frameLooper.IsLoopComplete)
                 {
-                    onMoveUseActionOver.Invoke(actorUsingMove);
+                    return true;
                 }
-                return false;
+                else
+                {
+                    CancelMoveUsage();
+                    if (onMoveUseActionOver != null)
+                    {
+                        onMoveUseActionOver.Invoke(actorUsingMove);
+                    }
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        public void CancelMoveUsage()
+        {
+            //Debug.Log("CancelMoveUsage");
+            initialiseSprite = false;
+            isBeingUsed = false;
+            canPerformMoveUseAnimations = false;
+            //Debug.Log("normalSpeed "+ normalSpeed);
+            actorUsingMove.frameLooper.animationDuration = walkAnimationDuration;
+            if (!isCancellingMovePlayerInputDriven)
+            {
+                actorUsingMove.UpdateBasicWalkingSprite();
             }
         }
-        return false;
-    }
 
-    public void CancelMoveUsage()
-    {
-        //Debug.Log("CancelMoveUsage");
-        initialiseSprite = false;
-        isBeingUsed = false;
-        canPerformMoveUseAnimations = false;
-        //Debug.Log("normalSpeed "+ normalSpeed);
-        actorUsingMove.frameLooper.animationDuration = walkAnimationDuration;
-        if (!isCancellingMovePlayerInputDriven)
+        [Serializable]
+        public class MoveAnimationSprites
         {
-            actorUsingMove.UpdateBasicWalkingSprite();
-        }
-    }
+            public Sprite[] upMove;
+            public Sprite[] downMove;
+            public Sprite[] leftMove;
+            public Sprite[] rightMove;
 
-    [Serializable]
-    public class MoveAnimationSprites
-    {
-        public Sprite[] upMove;
-        public Sprite[] downMove;
-        public Sprite[] leftMove;
-        public Sprite[] rightMove;
-
-        public MoveAnimationSprites(Sprite[] upMove, Sprite[] downMove, Sprite[] leftMove, Sprite[] rightMove)
-        {
-            this.upMove = upMove;
-            this.downMove = downMove;
-            this.leftMove = leftMove;
-            this.rightMove = rightMove;
+            public MoveAnimationSprites(Sprite[] upMove, Sprite[] downMove, Sprite[] leftMove, Sprite[] rightMove)
+            {
+                this.upMove = upMove;
+                this.downMove = downMove;
+                this.leftMove = leftMove;
+                this.rightMove = rightMove;
+            }
         }
     }
 }

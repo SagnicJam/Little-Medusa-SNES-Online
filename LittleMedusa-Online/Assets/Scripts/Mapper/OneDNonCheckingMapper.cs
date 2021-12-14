@@ -1,19 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class OneDNonCheckingMapper : Mapper
+namespace MedusaMultiplayer
 {
-    public FaceDirection face;
-    public OneDNonCheckingMapper(FaceDirection face)
+    public class OneDNonCheckingMapper : Mapper
     {
-        this.face = face;
-    }
+        public FaceDirection face;
+        public OneDNonCheckingMapper(FaceDirection face)
+        {
+            this.face = face;
+        }
 
-    public override Vector3Int GetNewPathPoint(Actor tobeMappedActor)
-    {
-        Vector3Int posToAnalyseForNextPoint = tobeMappedActor.currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(face));
+        public override Vector3Int GetNewPathPoint(Actor tobeMappedActor)
+        {
+            Vector3Int posToAnalyseForNextPoint = tobeMappedActor.currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(face));
 
-        return posToAnalyseForNextPoint;
+            return posToAnalyseForNextPoint;
+        }
     }
 }

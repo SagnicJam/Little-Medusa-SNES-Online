@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class JoinOrderText : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public Text characterPlayerText;
+    public class JoinOrderText : MonoBehaviour
+    {
+        public Text characterPlayerText;
+    }
 }

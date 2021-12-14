@@ -1,43 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerManager : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public int id;
-    public string connectionId;
-    public string username;
-
-    public ClientMasterController masterController;
-
-    public void Initialise(int id,string connectionId,string username, PlayerStateUpdates playerStateUpdates,bool hasAuthority)
+    public class PlayerManager : MonoBehaviour
     {
-        this.id = id;
-        this.connectionId = connectionId;
-        this.username = username;
+        public int id;
+        public string connectionId;
+        public string username;
 
-        if(hasAuthority)
+        public ClientMasterController masterController;
+
+        public void Initialise(int id, string connectionId, string username, PlayerStateUpdates playerStateUpdates, bool hasAuthority)
         {
-            masterController.clientPlayer.InitialiseClientActor(masterController, connectionId, id);
-            masterController.localPlayer.InitialiseClientActor(masterController, connectionId, id);
-            masterController.getInputs = masterController.localPlayer.GetHeroInputs;
-            CharacterSelectionScreen.instance.clientlocalActor = masterController.localPlayer;
+            this.id = id;
+            this.connectionId = connectionId;
+            this.username = username;
 
-            masterController.serverPlayer.InitialiseClientActor(masterController, connectionId, id);
+            if (hasAuthority)
+            {
+                masterController.clientPlayer.InitialiseClientActor(masterController, connectionId, id);
+                masterController.localPlayer.InitialiseClientActor(masterController, connectionId, id);
+                masterController.getInputs = masterController.localPlayer.GetHeroInputs;
+                CharacterSelectionScreen.instance.clientlocalActor = masterController.localPlayer;
 
-            masterController.clientPlayer.InitialiseActor(playerStateUpdates);
-            masterController.localPlayer.InitialiseActor(playerStateUpdates);
-            masterController.serverPlayer.InitialiseActor(playerStateUpdates);
+                masterController.serverPlayer.InitialiseClientActor(masterController, connectionId, id);
 
+                masterController.clientPlayer.InitialiseActor(playerStateUpdates);
+                masterController.localPlayer.InitialiseActor(playerStateUpdates);
+                masterController.serverPlayer.InitialiseActor(playerStateUpdates);
+
+            }
+            else
+            {
+                masterController.clientPlayer.InitialiseClientActor(masterController, connectionId, id);
+                masterController.clientPlayer.InitialiseActor(playerStateUpdates);
+            }
+            masterController.latestPlayerStateUpdate = playerStateUpdates;
+            masterController.hasAuthority = hasAuthority;
+            masterController.serverSequenceNumberToBeProcessed = playerStateUpdates.playerServerSequenceNumber;
+            masterController.isInitialised = true;
         }
-        else
-        {
-            masterController.clientPlayer.InitialiseClientActor(masterController, connectionId, id);
-            masterController.clientPlayer.InitialiseActor(playerStateUpdates);
-        }
-        masterController.latestPlayerStateUpdate = playerStateUpdates;
-        masterController.hasAuthority = hasAuthority;
-        masterController.serverSequenceNumberToBeProcessed = playerStateUpdates.playerServerSequenceNumber;
-        masterController.isInitialised = true;
     }
 }

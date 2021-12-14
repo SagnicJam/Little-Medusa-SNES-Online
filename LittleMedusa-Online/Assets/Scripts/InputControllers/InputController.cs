@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class InputController : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public Hero localPlayer;
-    public ClientMasterController clientMasterController;
-    private void FixedUpdate()
+    public class InputController : MonoBehaviour
     {
-        localPlayer.DealInput();
+        public Hero localPlayer;
+        public ClientMasterController clientMasterController;
+        private void FixedUpdate()
+        {
+            localPlayer.DealInput();
+        }
     }
 }

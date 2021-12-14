@@ -1,24 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class TornadoCollider : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public int ownerCasting;
-    public void InitialiseOwner(int owner)
+    public class TornadoCollider : MonoBehaviour
     {
-        ownerCasting = owner;
-    }
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        Actor collidedActor = collider.GetComponent<Actor>();
-        if (collidedActor != null&&collidedActor.ownerId!=ownerCasting)
+        public int ownerCasting;
+        public void InitialiseOwner(int owner)
         {
-            if((collidedActor.isPhysicsControlled||collidedActor.isRespawnningPlayer)&&collidedActor.gamePhysics.tilePullPositions.Contains(transform.position))
+            ownerCasting = owner;
+        }
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            Actor collidedActor = collider.GetComponent<Actor>();
+            if (collidedActor != null && collidedActor.ownerId != ownerCasting)
             {
-                return;
+                if ((collidedActor.isPhysicsControlled || collidedActor.isRespawnningPlayer) && collidedActor.gamePhysics.tilePullPositions.Contains(transform.position))
+                {
+                    return;
+                }
+                collidedActor.OnBodyCollidingWithTornadoEffectTiles(this.GetComponent<TileData>());
             }
-            collidedActor.OnBodyCollidingWithTornadoEffectTiles(this.GetComponent<TileData>());
         }
     }
 }

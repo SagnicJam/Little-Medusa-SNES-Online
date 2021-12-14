@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-
-public interface IMatchMake
+namespace MedusaMultiplayer
 {
-    Task JoinQueue();
-    Task OnMatchMakingCompleted(int matchId);
-    void OnClientMatchStarted(int matchId);
-    void OnMatchFound();
-    Task LeaveQueue();
-    Task AbortMatch(int matchId);
-    Task OnMatchEnded(int matchId);
-    Task OnMatchAborted(int matchId);
+    public interface IMatchMake
+    {
+        Task JoinQueue();
+        Task OnMatchMakingCompleted(int matchId);
+        void OnClientMatchStarted(int matchId);
+        void OnMatchFound();
+        Task LeaveQueue();
+        Task AbortMatch(int matchId);
+        Task OnMatchEnded(int matchId);
+        Task OnMatchAborted(int matchId);
+    }
 }

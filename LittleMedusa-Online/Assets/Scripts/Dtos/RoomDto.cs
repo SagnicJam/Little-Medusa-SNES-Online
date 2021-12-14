@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public struct RoomDto
+namespace MedusaMultiplayer
 {
-    public string RoomName;
-    public int MinRoomSize;
-    public int MaxRoomSize;
-    public RoomDto(string roomName,int minRoomSize,int maxRoomSize)
+    public struct RoomDto
     {
-        RoomName = roomName;
-        MinRoomSize = minRoomSize;
-        MaxRoomSize = maxRoomSize;
+        public string RoomName;
+        public int MinRoomSize;
+        public int MaxRoomSize;
+        public RoomDto(string roomName, int minRoomSize, int maxRoomSize)
+        {
+            RoomName = roomName;
+            MinRoomSize = minRoomSize;
+            MaxRoomSize = maxRoomSize;
+        }
     }
 }

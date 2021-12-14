@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CharacterSelection : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public EnumData.Heroes currentlySelectedHero;
+    public class CharacterSelection : MonoBehaviour
+    {
+        public EnumData.Heroes currentlySelectedHero;
+    }
 }

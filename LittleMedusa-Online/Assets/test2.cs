@@ -2,34 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class test2 : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public Rigidbody rb;
-    public test test;
-    public float x;
-    PhysicsScene physicsScene;
-
-
-    private void Start()
+    public class test2 : MonoBehaviour
     {
-        Scene scene = SceneManager.GetActiveScene();
-        physicsScene = scene.GetPhysicsScene();
-        Physics.autoSimulation = false;
+        public Rigidbody rb;
+        public test test;
+        public float x;
+        PhysicsScene physicsScene;
 
-        for (int i = 0; i < 100; i++)
+
+        private void Start()
         {
-            //transform.Translate((Vector3.forward * Time.fixedDeltaTime * 4));
-            rb.velocity = Vector3.forward  * 4;
-            Debug.Log("wuhh! transform "+ rb.transform.position);
-            Debug.Log("wuhh! physics " + rb.position);
-            //Physics.SyncTransforms();
-            physicsScene.Simulate(Time.fixedDeltaTime);
-        }
-    }
+            Scene scene = SceneManager.GetActiveScene();
+            physicsScene = scene.GetPhysicsScene();
+            Physics.autoSimulation = false;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("other 2: " + other.name);
-        //test.IsKepe = true;
+            for (int i = 0; i < 100; i++)
+            {
+                //transform.Translate((Vector3.forward * Time.fixedDeltaTime * 4));
+                rb.velocity = Vector3.forward * 4;
+                Debug.Log("wuhh! transform " + rb.transform.position);
+                Debug.Log("wuhh! physics " + rb.position);
+                //Physics.SyncTransforms();
+                physicsScene.Simulate(Time.fixedDeltaTime);
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log("other 2: " + other.name);
+            //test.IsKepe = true;
+        }
     }
 }

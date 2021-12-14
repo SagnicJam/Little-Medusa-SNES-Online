@@ -1,69 +1,71 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ProjectileManager : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public int id;
-
-    public bool isSpriteDependedonRotation;
-
-    public bool isRotationControlledByTransform;
-
-    public SpriteRenderer sp;
-
-    public Sprite leftSprite;
-    public Sprite rightSprite;
-    public Sprite upSprite;
-    public Sprite downSprite;
-
-    public void OnInititialise(int id)
+    public class ProjectileManager : MonoBehaviour
     {
-        this.id = id;
-    }
+        public int id;
 
-    public void SetPosition(Vector3 position)
-    {
-        //Debug.Log("position: "+position);
-        transform.position = position;
-    }
+        public bool isSpriteDependedonRotation;
 
-    public void SetFaceDirection(int faceDirection)
-    {
-        if (isRotationControlledByTransform)
+        public bool isRotationControlledByTransform;
+
+        public SpriteRenderer sp;
+
+        public Sprite leftSprite;
+        public Sprite rightSprite;
+        public Sprite upSprite;
+        public Sprite downSprite;
+
+        public void OnInititialise(int id)
         {
-            switch ((FaceDirection)faceDirection)
-            {
-                case FaceDirection.Down:
-                    transform.rotation = Quaternion.Euler(0, 0, 0);
-                    break;
-                case FaceDirection.Up:
-                    transform.rotation = Quaternion.Euler(0, 0, 180);
-                    break;
-                case FaceDirection.Left:
-                    transform.rotation = Quaternion.Euler(0, 0, -90);
-                    break;
-                case FaceDirection.Right:
-                    transform.rotation = Quaternion.Euler(0, 0, 90);
-                    break;
-            }
+            this.id = id;
         }
-        else if(isSpriteDependedonRotation)
+
+        public void SetPosition(Vector3 position)
         {
-            switch ((FaceDirection)faceDirection)
+            //Debug.Log("position: "+position);
+            transform.position = position;
+        }
+
+        public void SetFaceDirection(int faceDirection)
+        {
+            if (isRotationControlledByTransform)
             {
-                case FaceDirection.Down:
-                    sp.sprite = downSprite;
-                    break;
-                case FaceDirection.Up:
-                    sp.sprite = upSprite;
-                    break;
-                case FaceDirection.Left:
-                    sp.sprite = leftSprite;
-                    break;
-                case FaceDirection.Right:
-                    sp.sprite = rightSprite;
-                    break;
+                switch ((FaceDirection)faceDirection)
+                {
+                    case FaceDirection.Down:
+                        transform.rotation = Quaternion.Euler(0, 0, 0);
+                        break;
+                    case FaceDirection.Up:
+                        transform.rotation = Quaternion.Euler(0, 0, 180);
+                        break;
+                    case FaceDirection.Left:
+                        transform.rotation = Quaternion.Euler(0, 0, -90);
+                        break;
+                    case FaceDirection.Right:
+                        transform.rotation = Quaternion.Euler(0, 0, 90);
+                        break;
+                }
+            }
+            else if (isSpriteDependedonRotation)
+            {
+                switch ((FaceDirection)faceDirection)
+                {
+                    case FaceDirection.Down:
+                        sp.sprite = downSprite;
+                        break;
+                    case FaceDirection.Up:
+                        sp.sprite = upSprite;
+                        break;
+                    case FaceDirection.Left:
+                        sp.sprite = leftSprite;
+                        break;
+                    case FaceDirection.Right:
+                        sp.sprite = rightSprite;
+                        break;
+                }
             }
         }
     }

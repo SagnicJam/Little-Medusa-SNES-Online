@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public delegate void OnUsed<T>(T obj);
-public class DynamicItem
+namespace MedusaMultiplayer
 {
-    public OnUsed<Actor> onUsed;
+    public delegate void OnUsed<T>(T obj);
+    public class DynamicItem
+    {
+        public OnUsed<Actor> onUsed;
 
-    public Attack ranged;
-    public Use activate;
+        public Attack ranged;
+        public Use activate;
+    }
 }

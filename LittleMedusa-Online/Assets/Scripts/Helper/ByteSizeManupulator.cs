@@ -1,42 +1,44 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-
-public class ByteSizeManupulator
+namespace MedusaMultiplayer
 {
-    private static int BUFFER_SIZE = 64 * 1024; //64kB
-
-    public static byte[] Compress(byte[] inputData)
+    public class ByteSizeManupulator
     {
-        if (inputData == null)
-            throw new ArgumentNullException("inputData must be non-null");
+        private static int BUFFER_SIZE = 64 * 1024; //64kB
 
-        using (var compressIntoMs = new MemoryStream())
+        public static byte[] Compress(byte[] inputData)
         {
-            using (var gzs = new BufferedStream(new GZipStream(compressIntoMs,
-             CompressionMode.Compress), BUFFER_SIZE))
-            {
-                gzs.Write(inputData, 0, inputData.Length);
-            }
-            return compressIntoMs.ToArray();
-        }
-    }
+            if (inputData == null)
+                throw new ArgumentNullException("inputData must be non-null");
 
-    public static byte[] Decompress(byte[] inputData)
-    {
-        if (inputData == null)
-            throw new ArgumentNullException("inputData must be non-null");
-
-        using (var compressedMs = new MemoryStream(inputData))
-        {
-            using (var decompressedMs = new MemoryStream())
+            using (var compressIntoMs = new MemoryStream())
             {
-                using (var gzs = new BufferedStream(new GZipStream(compressedMs,
-                 CompressionMode.Decompress), BUFFER_SIZE))
+                using (var gzs = new BufferedStream(new GZipStream(compressIntoMs,
+                 CompressionMode.Compress), BUFFER_SIZE))
                 {
-                    gzs.CopyTo(decompressedMs);
+                    gzs.Write(inputData, 0, inputData.Length);
                 }
-                return decompressedMs.ToArray();
+                return compressIntoMs.ToArray();
+            }
+        }
+
+        public static byte[] Decompress(byte[] inputData)
+        {
+            if (inputData == null)
+                throw new ArgumentNullException("inputData must be non-null");
+
+            using (var compressedMs = new MemoryStream(inputData))
+            {
+                using (var decompressedMs = new MemoryStream())
+                {
+                    using (var gzs = new BufferedStream(new GZipStream(compressedMs,
+                     CompressionMode.Decompress), BUFFER_SIZE))
+                    {
+                        gzs.CopyTo(decompressedMs);
+                    }
+                    return decompressedMs.ToArray();
+                }
             }
         }
     }

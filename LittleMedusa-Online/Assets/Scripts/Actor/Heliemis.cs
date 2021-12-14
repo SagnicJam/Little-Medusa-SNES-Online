@@ -1,395 +1,422 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Heliemis : Hero
+namespace MedusaMultiplayer
 {
-    public override bool IsHeroAbleToFireProjectiles()
+    public class Heliemis : Hero
     {
-        Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
-        if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
+        public override bool IsHeroAbleToFireProjectiles()
         {
-            return true;
-        }
-        return false;
-    }
-
-    public override bool IsHeroAbleToFireProjectiles(FaceDirection direction)
-    {
-        Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(direction);
-        if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
-        {
-            return true;
-        }
-        return false;
-    }
-    public override void ProcessAnimationsInputs(bool[] inputs, bool[] previousInputs)
-    {
-        if (isRespawnningPlayer)
-        {
-            return;
-        }
-        if (isPushed)
-        {
-            return;
-        }
-        if (isPetrified)
-        {
-            return;
+            Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing);
+            if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
+            {
+                return true;
+            }
+            return false;
         }
 
-        if (!isInFlyingState)
+        public override bool IsHeroAbleToFireProjectiles(FaceDirection direction)
         {
-            if (isFlying)
+            Vector3 objectPosition = actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(direction);
+            if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
             {
-                isFlying = false;
-                UpdateFrameSprites();
+                return true;
             }
-            if (inputs[(int)EnumData.HeliemisInputs.ShootMightyWind])
+            return false;
+        }
+        public override void ProcessAnimationsInputs(bool[] inputs, bool[] previousInputs)
+        {
+            if (isRespawnningPlayer)
             {
-                if (!isUsingPrimaryMove)
-                {
-                    isUsingPrimaryMove = true;
-                    UpdateFrameSprites();
-                }
+                return;
             }
-            else if (!inputs[(int)EnumData.HeliemisInputs.ShootMightyWind])
+            if (isPushed)
             {
-                if (isUsingPrimaryMove)
-                {
-                    isUsingPrimaryMove = false;
-                    UpdateFrameSprites();
-                }
+                return;
+            }
+            if (isPetrified)
+            {
+                return;
             }
 
-            if (inputs[(int)EnumData.HeliemisInputs.Up] || inputs[(int)EnumData.HeliemisInputs.Down] || inputs[(int)EnumData.HeliemisInputs.Left] || inputs[(int)EnumData.HeliemisInputs.Right])
-            {
-                if (!isWalking)
-                {
-                    isWalking = true;
-                    UpdateFrameSprites();
-                }
-            }
-            else if (!(inputs[(int)EnumData.HeliemisInputs.Up] || inputs[(int)EnumData.HeliemisInputs.Down] || inputs[(int)EnumData.HeliemisInputs.Left] || inputs[(int)EnumData.HeliemisInputs.Right]))
-            {
-                if (isWalking)
-                {
-                    isWalking = false;
-                    UpdateFrameSprites();
-                }
-            }
-        }
-        else
-        {
-            if (!isFlying)
-            {
-                isWalking = false;
-                isFlying = true;
-                UpdateFrameSprites();
-            }
-        }
-    }
-
-    public override void ProcessFlyingControl()
-    {
-        if (flyingTickCountTemp > 0)
-        {
-            flyingTickCountTemp--;
-            //is flying
             if (!isInFlyingState)
             {
-                //Start flying here
-                FlyPlayer();
-            }
-        }
-        else
-        {
-            if (isInFlyingState)
-            {
-                //land here
-                LandPlayer(GridManager.instance.grid.WorldToCell(actorTransform.position));
-            }
-        }
-    }
-
-    public override void ProcessAuthoratativeEvents()
-    {
-        if (isRespawnningPlayer)
-        {
-            return;
-        }
-        if (isPushed)
-        {
-            if (completedMotionToMovePoint)
-            {
-                Mapper m = currentMapper;
-                if (m != null && m is OneDNonCheckingMapper oneDNonCheckingMapper)
+                if (isFlying)
                 {
-                    if (GridManager.instance.IsCellContainingUpArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                    isFlying = false;
+                    UpdateFrameSprites();
+                }
+                if (inputs[(int)EnumData.HeliemisInputs.ShootMightyWind])
+                {
+                    if (!isUsingPrimaryMove)
                     {
-                        oneDNonCheckingMapper.face = FaceDirection.Up;
-                    }
-                    else if (GridManager.instance.IsCellContainingDownArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-                    {
-                        oneDNonCheckingMapper.face = FaceDirection.Down;
-                    }
-                    else if (GridManager.instance.IsCellContainingLeftArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-                    {
-                        oneDNonCheckingMapper.face = FaceDirection.Left;
-                    }
-                    else if (GridManager.instance.IsCellContainingRightArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-                    {
-                        oneDNonCheckingMapper.face = FaceDirection.Right;
-                    }
-                    else
-                    {
-                        oneDNonCheckingMapper.face = Facing;
+                        isUsingPrimaryMove = true;
+                        UpdateFrameSprites();
                     }
                 }
-                CheckSwitchCellIndex();
-                if (GridManager.instance.IsCellBlockedForPetrifiedUnitMotionAtPos(currentMovePointCellPosition))
+                else if (!inputs[(int)EnumData.HeliemisInputs.ShootMightyWind])
                 {
-                    StopPush(this);
-                    return;
+                    if (isUsingPrimaryMove)
+                    {
+                        isUsingPrimaryMove = false;
+                        UpdateFrameSprites();
+                    }
+                }
+
+                if (inputs[(int)EnumData.HeliemisInputs.Up] || inputs[(int)EnumData.HeliemisInputs.Down] || inputs[(int)EnumData.HeliemisInputs.Left] || inputs[(int)EnumData.HeliemisInputs.Right])
+                {
+                    if (!isWalking)
+                    {
+                        isWalking = true;
+                        UpdateFrameSprites();
+                    }
+                }
+                else if (!(inputs[(int)EnumData.HeliemisInputs.Up] || inputs[(int)EnumData.HeliemisInputs.Down] || inputs[(int)EnumData.HeliemisInputs.Left] || inputs[(int)EnumData.HeliemisInputs.Right]))
+                {
+                    if (isWalking)
+                    {
+                        isWalking = false;
+                        UpdateFrameSprites();
+                    }
                 }
             }
             else
             {
-                if (GridManager.instance.HasTileAtCellPoint(currentMovePointCellPosition, EnumData.TileType.Empty))
+                if (!isFlying)
                 {
-                    StopPushMeOnly(this);
-                    return;
-                }
-                if (GridManager.instance.IsCellBlockedForPetrifiedUnitMotionAtPos(currentMovePointCellPosition))
-                {
-                    StopPush(this);
-                    return;
-                }
-                walkAction.MoveActorToMovePointCell();
-            }
-            return;
-        }
-        if (isPetrified)
-        {
-            petrificationAction.Perform();
-            return;
-        }
-        if (isInvincible)
-        {
-            if (!waitingForInvinciblityToOver.Perform())
-            {
-                MakeUnInvincible();
-            }
-            return;
-        }
-    }
-
-    public override void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
-    {
-        if (!isInFlyingState)
-        {
-            if (itemToCast != null && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
-            {
-                if (itemToCast.itemCount > 0 && inputs[(int)EnumData.HeliemisInputs.UseItem])
-                {
-                    SpawnClientProjectiles();
-                }
-                else if (itemToCast.itemCount <= 0 || (!inputs[(int)EnumData.HeliemisInputs.UseItem] && previousInputs[(int)EnumData.HeliemisInputs.UseItem] != inputs[(int)EnumData.HeliemisInputs.UseItem]))
-                {
-                    ResetClientProjectilesVars();
+                    isWalking = false;
+                    isFlying = true;
+                    UpdateFrameSprites();
                 }
             }
         }
 
-        if (!MultiplayerManager.instance.isServer && hasAuthority())
+        public override void ProcessFlyingControl()
         {
-            if (completedMotionToMovePoint)
+            if (flyingTickCountTemp > 0)
+            {
+                flyingTickCountTemp--;
+                //is flying
+                if (!isInFlyingState)
+                {
+                    //Start flying here
+                    FlyPlayer();
+                }
+            }
+            else
             {
                 if (isInFlyingState)
                 {
-                    if (inputs[(int)EnumData.HeliemisInputs.LandPlayer] && previousInputs[(int)EnumData.HeliemisInputs.LandPlayer] != inputs[(int)EnumData.HeliemisInputs.LandPlayer])
-                    {
-                        if (isInFlyingState)
-                        {
-                            //land here
-                            flyingTickCountTemp = 0;
+                    //land here
+                    LandPlayer(GridManager.instance.grid.WorldToCell(actorTransform.position));
+                }
+            }
+        }
 
-                            LandPlayerCommand landPlayerCommand = new LandPlayerCommand(GetLocalSequenceNo());
-                            ClientSend.LandPlayer(landPlayerCommand);
+        public override void ProcessAuthoratativeEvents()
+        {
+            if (isRespawnningPlayer)
+            {
+                return;
+            }
+            if (isPushed)
+            {
+                if (completedMotionToMovePoint)
+                {
+                    Mapper m = currentMapper;
+                    if (m != null && m is OneDNonCheckingMapper oneDNonCheckingMapper)
+                    {
+                        if (GridManager.instance.IsCellContainingUpArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                        {
+                            oneDNonCheckingMapper.face = FaceDirection.Up;
                         }
+                        else if (GridManager.instance.IsCellContainingDownArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                        {
+                            oneDNonCheckingMapper.face = FaceDirection.Down;
+                        }
+                        else if (GridManager.instance.IsCellContainingLeftArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                        {
+                            oneDNonCheckingMapper.face = FaceDirection.Left;
+                        }
+                        else if (GridManager.instance.IsCellContainingRightArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+                        {
+                            oneDNonCheckingMapper.face = FaceDirection.Right;
+                        }
+                        else
+                        {
+                            oneDNonCheckingMapper.face = Facing;
+                        }
+                    }
+                    CheckSwitchCellIndex();
+                    if (GridManager.instance.IsCellBlockedForPetrifiedUnitMotionAtPos(currentMovePointCellPosition))
+                    {
+                        StopPush(this);
+                        return;
                     }
                 }
                 else
                 {
-                    if (inputs[(int)EnumData.HeliemisInputs.RespawnPlayer] && previousInputs[(int)EnumData.HeliemisInputs.RespawnPlayer] != inputs[(int)EnumData.HeliemisInputs.RespawnPlayer])
+                    if (GridManager.instance.HasTileAtCellPoint(currentMovePointCellPosition, EnumData.TileType.Empty))
                     {
-                        Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
-                        if (IsPlayerSpawnable(cellToCheckFor))
+                        StopPushMeOnly(this);
+                        return;
+                    }
+                    if (GridManager.instance.IsCellBlockedForPetrifiedUnitMotionAtPos(currentMovePointCellPosition))
+                    {
+                        StopPush(this);
+                        return;
+                    }
+                    walkAction.MoveActorToMovePointCell();
+                }
+                return;
+            }
+            if (isPetrified)
+            {
+                petrificationAction.Perform();
+                return;
+            }
+            if (isInvincible)
+            {
+                if (!waitingForInvinciblityToOver.Perform())
+                {
+                    MakeUnInvincible();
+                }
+                return;
+            }
+        }
+
+        public override void ProcessEventsInputs(bool[] inputs, bool[] previousInputs)
+        {
+            if (!isInFlyingState)
+            {
+                if (itemToCast != null && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+                {
+                    if (itemToCast.itemCount > 0 && inputs[(int)EnumData.HeliemisInputs.UseItem])
+                    {
+                        SpawnClientProjectiles();
+                    }
+                    else if (itemToCast.itemCount <= 0 || (!inputs[(int)EnumData.HeliemisInputs.UseItem] && previousInputs[(int)EnumData.HeliemisInputs.UseItem] != inputs[(int)EnumData.HeliemisInputs.UseItem]))
+                    {
+                        ResetClientProjectilesVars();
+                    }
+                }
+            }
+
+            if (!MultiplayerManager.instance.isServer && hasAuthority())
+            {
+                if (completedMotionToMovePoint)
+                {
+                    if (isInFlyingState)
+                    {
+                        if (inputs[(int)EnumData.HeliemisInputs.LandPlayer] && previousInputs[(int)EnumData.HeliemisInputs.LandPlayer] != inputs[(int)EnumData.HeliemisInputs.LandPlayer])
                         {
-                            //Respawn player command
-                            RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo());
-                            ClientSend.RespawnPlayer(respawnPlayerCommand);
-                        }
-                        else
-                        {
-                            Debug.LogError("Invalid location to spawn player");
+                            if (isInFlyingState)
+                            {
+                                //land here
+                                flyingTickCountTemp = 0;
+
+                                LandPlayerCommand landPlayerCommand = new LandPlayerCommand(GetLocalSequenceNo());
+                                ClientSend.LandPlayer(landPlayerCommand);
+                            }
                         }
                     }
-                    else if (inputs[(int)EnumData.HeliemisInputs.PlaceTornado] && previousInputs[(int)EnumData.HeliemisInputs.PlaceTornado] != inputs[(int)EnumData.HeliemisInputs.PlaceTornado])
+                    else
                     {
-                        Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                        if (!GridManager.instance.IsCellBlockedForUnitMotionAtPos(cellToCheck))
+                        if (inputs[(int)EnumData.HeliemisInputs.RespawnPlayer] && previousInputs[(int)EnumData.HeliemisInputs.RespawnPlayer] != inputs[(int)EnumData.HeliemisInputs.RespawnPlayer])
                         {
-                            PlaceTornadoCommand placeTornoadoCommand = new PlaceTornadoCommand(GetLocalSequenceNo(), (int)Facing);
-                            ClientSend.PlaceTornadoCommand(placeTornoadoCommand);
+                            Vector3Int cellToCheckFor = GridManager.instance.grid.WorldToCell(actorTransform.position);
+                            if (IsPlayerSpawnable(cellToCheckFor))
+                            {
+                                //Respawn player command
+                                RespawnPlayerCommand respawnPlayerCommand = new RespawnPlayerCommand(GetLocalSequenceNo());
+                                ClientSend.RespawnPlayer(respawnPlayerCommand);
+                            }
+                            else
+                            {
+                                Debug.LogError("Invalid location to spawn player");
+                            }
+                        }
+                        else if (inputs[(int)EnumData.HeliemisInputs.PlaceTornado] && previousInputs[(int)EnumData.HeliemisInputs.PlaceTornado] != inputs[(int)EnumData.HeliemisInputs.PlaceTornado])
+                        {
+                            Vector3Int cellToCheck = GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                            if (!GridManager.instance.IsCellBlockedForUnitMotionAtPos(cellToCheck))
+                            {
+                                PlaceTornadoCommand placeTornoadoCommand = new PlaceTornadoCommand(GetLocalSequenceNo(), (int)Facing);
+                                ClientSend.PlaceTornadoCommand(placeTornoadoCommand);
+                            }
+                        }
+                        else if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.SpawnnableItems)
+                        {
+                            if (inputs[(int)EnumData.HeliemisInputs.UseItem] && previousInputs[(int)EnumData.HeliemisInputs.UseItem] != inputs[(int)EnumData.HeliemisInputs.UseItem])
+                            {
+                                SpawnItem();
+                            }
                         }
                     }
-                    else if (itemToCast!=null&& itemToCast.itemCount > 0&& itemToCast.castableItemType == EnumData.CastItemTypes.SpawnnableItems)
+                }
+                bubbleShieldAttackReady = !waitingActionForBubbleShieldItemMove.Perform();
+
+                if (!isInFlyingState)
+                {
+                    if (inputs[(int)EnumData.HeliemisInputs.ShootMightyWind] && previousInputs[(int)EnumData.HeliemisInputs.ShootMightyWind] != inputs[(int)EnumData.HeliemisInputs.ShootMightyWind])
+                    {
+                        if (IsHeroAbleToFireProjectiles())
+                        {
+                            FireMightyWindCommand fireMightyWindCommand = new FireMightyWindCommand(GetLocalSequenceNo(), (int)Facing, GridManager.instance.grid.WorldToCell(actorTransform.position));
+                            ClientSend.FireMightyWind(fireMightyWindCommand);
+                            isFiringServerProjectiles = true;
+                            onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
+                        }
+                    }
+                    else if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ServerProjectiles)
                     {
                         if (inputs[(int)EnumData.HeliemisInputs.UseItem] && previousInputs[(int)EnumData.HeliemisInputs.UseItem] != inputs[(int)EnumData.HeliemisInputs.UseItem])
                         {
-                            SpawnItem();
+                            SpawnServerProjectiles();
                         }
                     }
                 }
             }
-            bubbleShieldAttackReady = !waitingActionForBubbleShieldItemMove.Perform();
+        }
 
-            if (!isInFlyingState)
+        public override void ProcessInputAnimationControl()
+        {
+            if (isRespawnningPlayer)
             {
-                if (inputs[(int)EnumData.HeliemisInputs.ShootMightyWind] && previousInputs[(int)EnumData.HeliemisInputs.ShootMightyWind] != inputs[(int)EnumData.HeliemisInputs.ShootMightyWind])
-                {
-                    if (IsHeroAbleToFireProjectiles())
-                    {
-                        FireMightyWindCommand fireMightyWindCommand = new FireMightyWindCommand(GetLocalSequenceNo(), (int)Facing, GridManager.instance.grid.WorldToCell(actorTransform.position));
-                        ClientSend.FireMightyWind(fireMightyWindCommand);
-                        isFiringServerProjectiles = true;
-                        onCompletedMotionToPoint = () => { isFiringServerProjectiles = false; onCompletedMotionToPoint = null; };
-                    }
-                }
-                else if (itemToCast!=null&& itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ServerProjectiles)
-                {
-                    if (inputs[(int)EnumData.HeliemisInputs.UseItem] && previousInputs[(int)EnumData.HeliemisInputs.UseItem] != inputs[(int)EnumData.HeliemisInputs.UseItem])
-                    {
-                        SpawnServerProjectiles();
-                    }
-                }
+                return;
             }
-        }
-    }
 
-    public override void ProcessInputAnimationControl()
-    {
-        if (isRespawnningPlayer)
-        {
-            return;
-        }
-        
-        if (isPushed)
-        {
-            return;
-        }
-        if (isPetrified)
-        {
-            return;
-        }
-        if (triggerFaceChangeEvent)
-        {
-            UpdateFrameSprites();
-            triggerFaceChangeEvent = false;
-        }
-        frameLooper.UpdateAnimationFrame();
-    }
-    public override void ProcessRemoteClientInputEventControl()
-    {
-        if (isRespawnningPlayer)
-        {
-            return;
-        }
-        if (isInFlyingState)
-        {
-            return;
-        }
-        if (isInputFreezed)
-        {
-            return;
-        }
-        if (isPushed)
-        {
-            return;
-        }
-        if (isPetrified)
-        {
-            return;
-        }
-        if (isFiringItemEyeLaser)
-        {
-            FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
-        }
-        if (isFiringItemFireball)
-        {
-            if (fireballUsedCount > 0)
+            if (isPushed)
             {
-                FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                return;
             }
+            if (isPetrified)
+            {
+                return;
+            }
+            if (triggerFaceChangeEvent)
+            {
+                UpdateFrameSprites();
+                triggerFaceChangeEvent = false;
+            }
+            frameLooper.UpdateAnimationFrame();
         }
-        if (isFiringItemStarShower)
+        public override void ProcessRemoteClientInputEventControl()
         {
-            FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Up);
-            FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Down);
-            FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Left);
-            FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Right);
-        }
-        if (isFiringItemCentaurBow)
-        {
-            FireProjectile(new Attack(GameConfig.arrowDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.CentaurBow), GridManager.instance.grid.WorldToCell(actorTransform.position));
-
-        }
-    }
-    public override void ProcessInputEventControl()
-    {
-        if (isRespawnningPlayer)
-        {
-            return;
-        }
-        if (isInFlyingState)
-        {
-            return;
-        }
-        if (isInputFreezed)
-        {
-            return;
-        }
-        if (isPushed)
-        {
-            return;
-        }
-        if (isPetrified)
-        {
-            return;
-        }
-        if (isFiringPrimaryProjectile)
-        {
-            //Fire(this);
-        }
-        if (isFiringItemEyeLaser)
-        {
-            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+            if (isRespawnningPlayer)
+            {
+                return;
+            }
+            if (isInFlyingState)
+            {
+                return;
+            }
+            if (isInputFreezed)
+            {
+                return;
+            }
+            if (isPushed)
+            {
+                return;
+            }
+            if (isPetrified)
+            {
+                return;
+            }
+            if (isFiringItemEyeLaser)
             {
                 FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
-                if (MultiplayerManager.instance.isServer)
+            }
+            if (isFiringItemFireball)
+            {
+                if (fireballUsedCount > 0)
                 {
-                    itemToCast.itemCount--;
+                    FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
                 }
             }
+            if (isFiringItemStarShower)
+            {
+                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Up);
+                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Down);
+                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Left);
+                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Right);
+            }
+            if (isFiringItemCentaurBow)
+            {
+                FireProjectile(new Attack(GameConfig.arrowDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.CentaurBow), GridManager.instance.grid.WorldToCell(actorTransform.position));
+
+            }
         }
-        if (isFiringItemFireball)
+        public override void ProcessInputEventControl()
         {
-            if (fireballUsedCount > 0)
+            if (isRespawnningPlayer)
+            {
+                return;
+            }
+            if (isInFlyingState)
+            {
+                return;
+            }
+            if (isInputFreezed)
+            {
+                return;
+            }
+            if (isPushed)
+            {
+                return;
+            }
+            if (isPetrified)
+            {
+                return;
+            }
+            if (isFiringPrimaryProjectile)
+            {
+                //Fire(this);
+            }
+            if (isFiringItemEyeLaser)
             {
                 if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
                 {
-                    FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                    FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.EyeLaser), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                    if (MultiplayerManager.instance.isServer)
+                    {
+                        itemToCast.itemCount--;
+                    }
+                }
+            }
+            if (isFiringItemFireball)
+            {
+                if (fireballUsedCount > 0)
+                {
+                    if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+                    {
+                        FireProjectile(new Attack(0, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.FireBall), GridManager.instance.grid.WorldToCell(actorTransform.position));
+                        if (MultiplayerManager.instance.isServer)
+                        {
+                            itemToCast.itemCount--;
+                        }
+                    }
+                }
+            }
+            if (isFiringItemStarShower)
+            {
+                if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+                {
+                    FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Up);
+                    FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Down);
+                    FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Left);
+                    FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Right);
+                    if (MultiplayerManager.instance.isServer)
+                    {
+                        itemToCast.itemCount--;
+                    }
+                }
+            }
+            if (isFiringItemCentaurBow)
+            {
+                if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
+                {
+                    FireProjectile(new Attack(GameConfig.arrowDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.CentaurBow), GridManager.instance.grid.WorldToCell(actorTransform.position));
                     if (MultiplayerManager.instance.isServer)
                     {
                         itemToCast.itemCount--;
@@ -397,267 +424,241 @@ public class Heliemis : Hero
                 }
             }
         }
-        if (isFiringItemStarShower)
-        {
-            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
-            {
-                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Up);
-                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Down);
-                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Left);
-                FireDirectionalProjectile(new Attack(GameConfig.starshowerDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.StarShower), GridManager.instance.grid.WorldToCell(actorTransform.position), FaceDirection.Right);
-                if (MultiplayerManager.instance.isServer)
-                {
-                    itemToCast.itemCount--;
-                }
-            }
-        }
-        if (isFiringItemCentaurBow)
-        {
-            if (itemToCast != null && itemToCast.itemCount > 0 && itemToCast.castableItemType == EnumData.CastItemTypes.ClientProjectiles)
-            {
-                FireProjectile(new Attack(GameConfig.arrowDamage, EnumData.AttackTypes.ProjectileAttack, EnumData.Projectiles.CentaurBow), GridManager.instance.grid.WorldToCell(actorTransform.position));
-                if (MultiplayerManager.instance.isServer)
-                {
-                    itemToCast.itemCount--;
-                }
-            }
-        }
-    }
 
-    public override void ProcessInputMovementsControl()
-    {
-        if(isPhysicsControlled)
+        public override void ProcessInputMovementsControl()
         {
-            return;
+            if (isPhysicsControlled)
+            {
+                return;
+            }
+            if (isPushed)
+            {
+                return;
+            }
+            if (isPetrified)
+            {
+                return;
+            }
+            if (!CanOccupy(currentMovePointCellPosition))
+            {
+                OnCantOccupySpace();
+                return;
+            }
+            walkAction.Perform();
         }
-        if (isPushed)
-        {
-            return;
-        }
-        if (isPetrified)
-        {
-            return;
-        }
-        if (!CanOccupy(currentMovePointCellPosition))
-        {
-            OnCantOccupySpace();
-            return;
-        }
-        walkAction.Perform();
-    }
 
-    public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
-    {
-        if(isPhysicsControlled)
+        public override void ProcessMovementInputs(bool[] inputs, bool[] previousInputs)
         {
-            return;
-        }
-        if (isPushed)
-        {
-            return;
-        }
-        if (isPetrified)
-        {
-            return;
-        }
-        if (completedMotionToMovePoint)
-        {
-            if (inputs[(int)EnumData.HeliemisInputs.Up])
+            if (isPhysicsControlled)
             {
-                Facing = FaceDirection.Up;
+                return;
             }
-            else if (inputs[(int)EnumData.HeliemisInputs.Left])
+            if (isPushed)
             {
-                Facing = FaceDirection.Left;
+                return;
             }
-            else if (inputs[(int)EnumData.HeliemisInputs.Down])
+            if (isPetrified)
             {
-                Facing = FaceDirection.Down;
+                return;
             }
-            else if (inputs[(int)EnumData.HeliemisInputs.Right])
-            {
-                Facing = FaceDirection.Right;
-            }
-
-            if ((inputs[(int)EnumData.HeliemisInputs.Up] || inputs[(int)EnumData.HeliemisInputs.Left] || inputs[(int)EnumData.HeliemisInputs.Down] || inputs[(int)EnumData.HeliemisInputs.Right]))
-            {
-                //Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
-                //{
-                currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
-                //}
-            }
-
-        }
-        else
-        {
-            if (!inputs[(int)EnumData.HeliemisInputs.Up] && previousInputs[(int)EnumData.HeliemisInputs.Up] != inputs[(int)EnumData.HeliemisInputs.Up])
-            {
-                float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
-                if (fractionCovered < GridManager.instance.grid.cellSize.y / GameConfig.fractionToConsiderAsInput)
-                {
-                    currentMovePointCellPosition = previousMovePointCellPosition;
-                }
-            }
-            else if (!inputs[(int)EnumData.HeliemisInputs.Left] && previousInputs[(int)EnumData.HeliemisInputs.Left] != inputs[(int)EnumData.HeliemisInputs.Left])
-            {
-                float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
-                if (fractionCovered < GridManager.instance.grid.cellSize.x / GameConfig.fractionToConsiderAsInput)
-                {
-                    currentMovePointCellPosition = previousMovePointCellPosition;
-                }
-            }
-            else if (!inputs[(int)EnumData.HeliemisInputs.Down] && previousInputs[(int)EnumData.HeliemisInputs.Down] != inputs[(int)EnumData.HeliemisInputs.Down])
-            {
-                float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
-                if (fractionCovered < GridManager.instance.grid.cellSize.y / GameConfig.fractionToConsiderAsInput)
-                {
-                    currentMovePointCellPosition = previousMovePointCellPosition;
-                }
-            }
-            else if (!inputs[(int)EnumData.HeliemisInputs.Right] && previousInputs[(int)EnumData.HeliemisInputs.Right] != inputs[(int)EnumData.HeliemisInputs.Right])
-            {
-                float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
-                if (fractionCovered < GridManager.instance.grid.cellSize.x / GameConfig.fractionToConsiderAsInput)
-                {
-                    currentMovePointCellPosition = previousMovePointCellPosition;
-                }
-            }
-        }
-    }
-
-    [Header("Input")]
-    public bool up;
-    public bool left;
-    public bool down;
-    public bool right;
-    public bool shootMightyWind;
-    public bool placeTornado;
-    public bool respawnPlayer;
-    public bool landPlayer;
-    public bool useItem;
-
-    public override void DealInput()
-    {
-        if (!inGame || isPushed || isPetrified || isPhysicsControlled||isInputFreezed)
-        {
-            up = false;
-            left = false;
-            down = false;
-            right = false;
-            shootMightyWind = false;
-            placeTornado = false;
-            respawnPlayer = false;
-            landPlayer = false;
-            useItem = false;
-        }
-        else if(isFiringServerProjectiles || isMovementFreezed)
-        {
-            up = false;
-            left = false;
-            down = false;
-            right = false;
-        }
-        else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingUpArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-        {
-            up = true;
-            left = false;
-            down = false;
-            right = false;
-        }
-        else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingDownArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-        {
-            up = false;
-            left = false;
-            down = true;
-            right = false;
-        }
-        else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingLeftArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-        {
-            up = false;
-            left = true;
-            down = false;
-            right = false;
-        }
-        else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingRightArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
-        {
-            up = false;
-            left = false;
-            down = false;
-            right = true;
-        }
-        else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingMirrorAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)) && !GridManager.instance.IsCellBlockedForUnitMotionAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing))))
-        {
-            switch (Facing)
-            {
-                case FaceDirection.Up:
-                    up = true;
-                    left = false;
-                    down = false;
-                    right = false;
-                    break;
-                case FaceDirection.Down:
-                    up = false;
-                    left = false;
-                    down = true;
-                    right = false;
-                    break;
-                case FaceDirection.Left:
-                    up = false;
-                    left = true;
-                    down = false;
-                    right = false;
-                    break;
-                case FaceDirection.Right:
-                    up = false;
-                    left = false;
-                    down = false;
-                    right = true;
-                    break;
-            }
-        }
-        else
-        {
-            up = Input.GetKey(KeyCode.W);
-            left = Input.GetKey(KeyCode.A);
-            down = Input.GetKey(KeyCode.S);
-            right = Input.GetKey(KeyCode.D);
-
             if (completedMotionToMovePoint)
             {
-                if (!CanOccupy(GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing))))
+                if (inputs[(int)EnumData.HeliemisInputs.Up])
                 {
-                    if (Facing == FaceDirection.Up)
+                    Facing = FaceDirection.Up;
+                }
+                else if (inputs[(int)EnumData.HeliemisInputs.Left])
+                {
+                    Facing = FaceDirection.Left;
+                }
+                else if (inputs[(int)EnumData.HeliemisInputs.Down])
+                {
+                    Facing = FaceDirection.Down;
+                }
+                else if (inputs[(int)EnumData.HeliemisInputs.Right])
+                {
+                    Facing = FaceDirection.Right;
+                }
+
+                if ((inputs[(int)EnumData.HeliemisInputs.Up] || inputs[(int)EnumData.HeliemisInputs.Left] || inputs[(int)EnumData.HeliemisInputs.Down] || inputs[(int)EnumData.HeliemisInputs.Right]))
+                {
+                    //Vector3Int checkForCellPos = currentMovePointCellPosition + GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                    //if (!IsActorPathBlockedForInputDrivenMovementByAnotherActor(Facing)&&CanOccupy(checkForCellPos))
+                    //{
+                    currentMovePointCellPosition += GridManager.instance.grid.WorldToCell(GridManager.instance.GetFacingDirectionOffsetVector3(Facing));
+                    //}
+                }
+
+            }
+            else
+            {
+                if (!inputs[(int)EnumData.HeliemisInputs.Up] && previousInputs[(int)EnumData.HeliemisInputs.Up] != inputs[(int)EnumData.HeliemisInputs.Up])
+                {
+                    float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
+                    if (fractionCovered < GridManager.instance.grid.cellSize.y / GameConfig.fractionToConsiderAsInput)
                     {
-                        up = false;
+                        currentMovePointCellPosition = previousMovePointCellPosition;
                     }
-                    else if (Facing == FaceDirection.Down)
+                }
+                else if (!inputs[(int)EnumData.HeliemisInputs.Left] && previousInputs[(int)EnumData.HeliemisInputs.Left] != inputs[(int)EnumData.HeliemisInputs.Left])
+                {
+                    float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
+                    if (fractionCovered < GridManager.instance.grid.cellSize.x / GameConfig.fractionToConsiderAsInput)
                     {
-                        down = false;
+                        currentMovePointCellPosition = previousMovePointCellPosition;
                     }
-                    else if (Facing == FaceDirection.Left)
+                }
+                else if (!inputs[(int)EnumData.HeliemisInputs.Down] && previousInputs[(int)EnumData.HeliemisInputs.Down] != inputs[(int)EnumData.HeliemisInputs.Down])
+                {
+                    float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.y);
+                    if (fractionCovered < GridManager.instance.grid.cellSize.y / GameConfig.fractionToConsiderAsInput)
                     {
-                        left = false;
+                        currentMovePointCellPosition = previousMovePointCellPosition;
                     }
-                    else if (Facing == FaceDirection.Right)
+                }
+                else if (!inputs[(int)EnumData.HeliemisInputs.Right] && previousInputs[(int)EnumData.HeliemisInputs.Right] != inputs[(int)EnumData.HeliemisInputs.Right])
+                {
+                    float fractionCovered = 1f - (Vector3.Distance(actorTransform.position, movePoint.position) / GridManager.instance.grid.cellSize.x);
+                    if (fractionCovered < GridManager.instance.grid.cellSize.x / GameConfig.fractionToConsiderAsInput)
                     {
-                        right = false;
+                        currentMovePointCellPosition = previousMovePointCellPosition;
                     }
                 }
             }
-
-            shootMightyWind = Input.GetKey(KeyCode.J);
-            placeTornado = Input.GetKey(KeyCode.K);
-            respawnPlayer = Input.GetKey(KeyCode.Return);
-            landPlayer = Input.GetKey(KeyCode.K);
-            useItem = Input.GetKey(KeyCode.I);
         }
-    }
 
-    public override bool[] GetHeroInputs()
-    {
-        bool[] inputs = new bool[]
+        [Header("Input")]
+        public bool up;
+        public bool left;
+        public bool down;
+        public bool right;
+        public bool shootMightyWind;
+        public bool placeTornado;
+        public bool respawnPlayer;
+        public bool landPlayer;
+        public bool useItem;
+
+        public override void DealInput()
+        {
+            if (!inGame || isPushed || isPetrified || isPhysicsControlled || isInputFreezed)
+            {
+                up = false;
+                left = false;
+                down = false;
+                right = false;
+                shootMightyWind = false;
+                placeTornado = false;
+                respawnPlayer = false;
+                landPlayer = false;
+                useItem = false;
+            }
+            else if (isFiringServerProjectiles || isMovementFreezed)
+            {
+                up = false;
+                left = false;
+                down = false;
+                right = false;
+            }
+            else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingUpArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+            {
+                up = true;
+                left = false;
+                down = false;
+                right = false;
+            }
+            else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingDownArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+            {
+                up = false;
+                left = false;
+                down = true;
+                right = false;
+            }
+            else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingLeftArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+            {
+                up = false;
+                left = true;
+                down = false;
+                right = false;
+            }
+            else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingRightArrowAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)))
+            {
+                up = false;
+                left = false;
+                down = false;
+                right = true;
+            }
+            else if (!isInFlyingState && !isRespawnningPlayer && GridManager.instance.IsCellContainingMirrorAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position)) && !GridManager.instance.IsCellBlockedForUnitMotionAtPos(GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing))))
+            {
+                switch (Facing)
                 {
+                    case FaceDirection.Up:
+                        up = true;
+                        left = false;
+                        down = false;
+                        right = false;
+                        break;
+                    case FaceDirection.Down:
+                        up = false;
+                        left = false;
+                        down = true;
+                        right = false;
+                        break;
+                    case FaceDirection.Left:
+                        up = false;
+                        left = true;
+                        down = false;
+                        right = false;
+                        break;
+                    case FaceDirection.Right:
+                        up = false;
+                        left = false;
+                        down = false;
+                        right = true;
+                        break;
+                }
+            }
+            else
+            {
+                up = Input.GetKey(KeyCode.W);
+                left = Input.GetKey(KeyCode.A);
+                down = Input.GetKey(KeyCode.S);
+                right = Input.GetKey(KeyCode.D);
+
+                if (completedMotionToMovePoint)
+                {
+                    if (!CanOccupy(GridManager.instance.grid.WorldToCell(actorTransform.position + GridManager.instance.GetFacingDirectionOffsetVector3(Facing))))
+                    {
+                        if (Facing == FaceDirection.Up)
+                        {
+                            up = false;
+                        }
+                        else if (Facing == FaceDirection.Down)
+                        {
+                            down = false;
+                        }
+                        else if (Facing == FaceDirection.Left)
+                        {
+                            left = false;
+                        }
+                        else if (Facing == FaceDirection.Right)
+                        {
+                            right = false;
+                        }
+                    }
+                }
+
+                shootMightyWind = Input.GetKey(KeyCode.J);
+                placeTornado = Input.GetKey(KeyCode.K);
+                respawnPlayer = Input.GetKey(KeyCode.Return);
+                landPlayer = Input.GetKey(KeyCode.K);
+                useItem = Input.GetKey(KeyCode.I);
+            }
+        }
+
+        public override bool[] GetHeroInputs()
+        {
+            bool[] inputs = new bool[]
+                    {
                 up,
                 left,
                 down,
@@ -667,17 +668,18 @@ public class Heliemis : Hero
                 respawnPlayer,
                 landPlayer,
                 useItem
-                };
-        return inputs;
-    }
-
-    public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection facing)
-    {
-        Vector3 objectPosition = GridManager.instance.cellToworld(predictedPos) + GridManager.instance.GetFacingDirectionOffsetVector3(facing);
-        if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
-        {
-            return true;
+                    };
+            return inputs;
         }
-        return false;
+
+        public override bool IsProjectilePlacable(Vector3Int predictedPos, FaceDirection facing)
+        {
+            Vector3 objectPosition = GridManager.instance.cellToworld(predictedPos) + GridManager.instance.GetFacingDirectionOffsetVector3(facing);
+            if (!GridManager.instance.IsPositionBlockedForProjectiles(objectPosition))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -4,176 +4,153 @@ using UnityEngine;
 using System.Net;
 using System.Net.Sockets;
 using System;
-
-public class Client : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public static Client instance;
-    public static int dataBufferSize = 4096;
-
-    //Server ip
-    public string ip = "127.0.0.1";
-
-    public int myID = 0;
-
-    public TCP tcp;
-    public UDP udp;
-
-    private bool isConnected = false;
-    private delegate void PacketHandler(Packet packet);
-    private static Dictionary<int, PacketHandler> packetHandlers;
-
-    private void OnApplicationQuit()
+    public class Client : MonoBehaviour
     {
-        Disconnect();
-    }
+        public static Client instance;
+        public static int dataBufferSize = 4096;
 
-    private void Awake()
-    {
-        if(instance==null)
+        //Server ip
+        public string ip = "127.0.0.1";
+
+        public int myID = 0;
+
+        public TCP tcp;
+        public UDP udp;
+
+        private bool isConnected = false;
+        private delegate void PacketHandler(Packet packet);
+        private static Dictionary<int, PacketHandler> packetHandlers;
+
+        private void OnApplicationQuit()
         {
-            instance = this;
+            Disconnect();
         }
-        else if(instance != this)
+
+        private void Awake()
         {
-            Debug.Log("Instance already exists, destroying object");
-            Destroy(this);
-        }
-    }
-
-    private void Start()
-    {
-        ConnectedToServer();
-    }
-
-    void ConnectedToServer()
-    {
-        tcp = new TCP();
-        udp = new UDP();
-
-        Debug.Log("Connected to server called");
-        InitialiseClientData();
-        isConnected = true;
-        tcp.Connect();
-    }
-
-    public class TCP
-    {
-        public TcpClient socket;
-        private NetworkStream stream;
-        private Packet receivedData;
-        private byte[] receiveBuffer;
-
-        public void Connect()
-        {
-            socket = new TcpClient
+            if (instance == null)
             {
-                ReceiveBufferSize = dataBufferSize,
-                SendBufferSize = dataBufferSize
-            };
-
-            receiveBuffer = new byte[dataBufferSize];
-            Debug.Log("Connecting at ip: "+instance.ip+" port: "+MultiplayerManager.instance.serverPort);
-            socket.BeginConnect(instance.ip, MultiplayerManager.instance.serverPort, ConnectCallback,socket);
-        }
-
-        private void ConnectCallback(IAsyncResult result)
-        {
-            Debug.Log("Connect call back received");
-            socket.EndConnect(result);
-            if (!socket.Connected)
-            {
-                Debug.LogError("Socket connection failed");
-                return;
+                instance = this;
             }
-            stream = socket.GetStream();
-
-            receivedData = new Packet();
-
-            //Enables data to be read from server
-            stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
-        }
-
-        public void SendData(Packet packet)
-        {
-            try
+            else if (instance != this)
             {
-                if(socket!=null)
-                {
-                    stream.BeginWrite(packet.ToArray(),0,packet.Length(),null,null);
-                }
-                else
-                {
-                    Debug.LogError("Socket is null");
-                }
-            }
-            catch(Exception ex)
-            {
-                Debug.LogError($"Error sending data to server via TCP: {ex}");
+                Debug.Log("Instance already exists, destroying object");
+                Destroy(this);
             }
         }
 
-        private void ReceiveCallback(IAsyncResult result)
+        private void Start()
         {
-            try
+            ConnectedToServer();
+        }
+
+        void ConnectedToServer()
+        {
+            tcp = new TCP();
+            udp = new UDP();
+
+            Debug.Log("Connected to server called");
+            InitialiseClientData();
+            isConnected = true;
+            tcp.Connect();
+        }
+
+        public class TCP
+        {
+            public TcpClient socket;
+            private NetworkStream stream;
+            private Packet receivedData;
+            private byte[] receiveBuffer;
+
+            public void Connect()
             {
-                int byteLength = stream.EndRead(result);
-                if (byteLength <= 0)
+                socket = new TcpClient
                 {
-                    //disconnect
-                    instance.Disconnect();
+                    ReceiveBufferSize = dataBufferSize,
+                    SendBufferSize = dataBufferSize
+                };
+
+                receiveBuffer = new byte[dataBufferSize];
+                Debug.Log("Connecting at ip: " + instance.ip + " port: " + MultiplayerManager.instance.serverPort);
+                socket.BeginConnect(instance.ip, MultiplayerManager.instance.serverPort, ConnectCallback, socket);
+            }
+
+            private void ConnectCallback(IAsyncResult result)
+            {
+                Debug.Log("Connect call back received");
+                socket.EndConnect(result);
+                if (!socket.Connected)
+                {
+                    Debug.LogError("Socket connection failed");
                     return;
                 }
+                stream = socket.GetStream();
 
-                byte[] data = new byte[byteLength];
-                Array.Copy(receiveBuffer, data, byteLength);
+                receivedData = new Packet();
 
-                //handle data
-
-                //In tcp the data comes in form of bytes arr so therefore one packet can be split between two deliveris
-                //This is because in tcp one packet can be split between two deliveries so we should not reset the packet if we havent received all of them
-                receivedData.Reset(HandleData(data));
-
+                //Enables data to be read from server
                 stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
             }
-            catch (Exception ex)
-            {
-                Debug.LogError($"Error receiving TCP data: {ex}");
-                Disconnect();
-                //Disconnect
-            }
-        }
 
-        private bool HandleData(byte[] data)
-        {
-            int packetLength = 0;
-            receivedData.SetBytes(data);
-
-            //If we have the start of any packet
-            //because int has 4 bytes and we are sending int at the start of our packet
-            if(receivedData.UnreadLength() >= 4)
+            public void SendData(Packet packet)
             {
-                packetLength = receivedData.ReadInt();
-                if(packetLength<=0)
+                try
                 {
-                    return true;
+                    if (socket != null)
+                    {
+                        stream.BeginWrite(packet.ToArray(), 0, packet.Length(), null, null);
+                    }
+                    else
+                    {
+                        Debug.LogError("Socket is null");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Error sending data to server via TCP: {ex}");
                 }
             }
 
-            while(packetLength>0&&packetLength<=receivedData.UnreadLength())
+            private void ReceiveCallback(IAsyncResult result)
             {
-                byte[] packetBytes = receivedData.ReadBytes(packetLength);
-
-                ThreadManager.ExecuteOnMainThread(() =>
+                try
                 {
-                    using (Packet packet = new Packet(packetBytes))
+                    int byteLength = stream.EndRead(result);
+                    if (byteLength <= 0)
                     {
-                        int packketId = packet.ReadInt();
-                        packetHandlers[packketId](packet);
+                        //disconnect
+                        instance.Disconnect();
+                        return;
                     }
-                });
 
-                packetLength = 0;
+                    byte[] data = new byte[byteLength];
+                    Array.Copy(receiveBuffer, data, byteLength);
 
+                    //handle data
+
+                    //In tcp the data comes in form of bytes arr so therefore one packet can be split between two deliveris
+                    //This is because in tcp one packet can be split between two deliveries so we should not reset the packet if we havent received all of them
+                    receivedData.Reset(HandleData(data));
+
+                    stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Error receiving TCP data: {ex}");
+                    Disconnect();
+                    //Disconnect
+                }
+            }
+
+            private bool HandleData(byte[] data)
+            {
+                int packetLength = 0;
+                receivedData.SetBytes(data);
+
+                //If we have the start of any packet
+                //because int has 4 bytes and we are sending int at the start of our packet
                 if (receivedData.UnreadLength() >= 4)
                 {
                     packetLength = receivedData.ReadInt();
@@ -182,123 +159,147 @@ public class Client : MonoBehaviour
                         return true;
                     }
                 }
-            }
 
-            if(packetLength<=1)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private void Disconnect()
-        {
-            instance.Disconnect();
-
-            stream = null;
-            receivedData = null;
-            receiveBuffer = null;
-            socket = null;
-        }
-    }
-
-    public class UDP
-    {
-        public UdpClient socket;
-        public IPEndPoint endPoint;
-
-        public UDP()
-        {
-            endPoint = new IPEndPoint(IPAddress.Parse(instance.ip),MultiplayerManager.instance.serverPort);
-        }
-
-        public void Connect(int localPort)
-        {
-            socket = new UdpClient(localPort); 
-
-            socket.Connect(endPoint);
-            socket.BeginReceive(ReceiveCallback, null);
-
-            using (Packet packet = new Packet())
-            {
-                SendData(packet);
-            }
-        }
-
-        public void SendData(Packet packet)
-        {
-            try
-            {
-                packet.InsertInt(instance.myID);
-                if (socket != null)
+                while (packetLength > 0 && packetLength <= receivedData.UnreadLength())
                 {
-                    socket.BeginSend(packet.ToArray(), packet.Length(), null, null);
-                }
-                else
-                {
-                    Debug.LogError("Socket is null");
-                }
-            }
-            catch(Exception ex)
-            {
-                Debug.LogError($"Error send data to server via UDP {ex}");
-            }
-        }
+                    byte[] packetBytes = receivedData.ReadBytes(packetLength);
 
-        private void ReceiveCallback(IAsyncResult result)
-        {
-            try
-            {
-                byte[] data = socket.EndReceive(result,ref endPoint);
-                socket.BeginReceive(ReceiveCallback,null);
+                    ThreadManager.ExecuteOnMainThread(() =>
+                    {
+                        using (Packet packet = new Packet(packetBytes))
+                        {
+                            int packketId = packet.ReadInt();
+                            packetHandlers[packketId](packet);
+                        }
+                    });
 
-                if(data.Length<4)
-                {
-                    //Check for more checks here
-                    //Disconnect
-                    instance.Disconnect();
-                    return;
+                    packetLength = 0;
+
+                    if (receivedData.UnreadLength() >= 4)
+                    {
+                        packetLength = receivedData.ReadInt();
+                        if (packetLength <= 0)
+                        {
+                            return true;
+                        }
+                    }
                 }
 
-                HandleData(data);
+                if (packetLength <= 1)
+                {
+                    return true;
+                }
+
+                return false;
             }
-            catch(Exception ex)
+
+            private void Disconnect()
             {
-                //disconnect
-                Disconnect();
-                Debug.LogError($"Error while receiveing data data to server via UDP {ex}");
+                instance.Disconnect();
+
+                stream = null;
+                receivedData = null;
+                receiveBuffer = null;
+                socket = null;
             }
         }
 
-        private void HandleData(byte[] data)
+        public class UDP
         {
-            using (Packet packet = new Packet(data))
+            public UdpClient socket;
+            public IPEndPoint endPoint;
+
+            public UDP()
             {
-                int packetLength = packet.ReadInt();
-                data = packet.ReadBytes(packetLength);
+                endPoint = new IPEndPoint(IPAddress.Parse(instance.ip), MultiplayerManager.instance.serverPort);
             }
 
-            ThreadManager.ExecuteOnMainThread(()=> 
+            public void Connect(int localPort)
+            {
+                socket = new UdpClient(localPort);
+
+                socket.Connect(endPoint);
+                socket.BeginReceive(ReceiveCallback, null);
+
+                using (Packet packet = new Packet())
+                {
+                    SendData(packet);
+                }
+            }
+
+            public void SendData(Packet packet)
+            {
+                try
+                {
+                    packet.InsertInt(instance.myID);
+                    if (socket != null)
+                    {
+                        socket.BeginSend(packet.ToArray(), packet.Length(), null, null);
+                    }
+                    else
+                    {
+                        Debug.LogError("Socket is null");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Error send data to server via UDP {ex}");
+                }
+            }
+
+            private void ReceiveCallback(IAsyncResult result)
+            {
+                try
+                {
+                    byte[] data = socket.EndReceive(result, ref endPoint);
+                    socket.BeginReceive(ReceiveCallback, null);
+
+                    if (data.Length < 4)
+                    {
+                        //Check for more checks here
+                        //Disconnect
+                        instance.Disconnect();
+                        return;
+                    }
+
+                    HandleData(data);
+                }
+                catch (Exception ex)
+                {
+                    //disconnect
+                    Disconnect();
+                    Debug.LogError($"Error while receiveing data data to server via UDP {ex}");
+                }
+            }
+
+            private void HandleData(byte[] data)
             {
                 using (Packet packet = new Packet(data))
                 {
-                    int packetId = packet.ReadInt();
-                    packetHandlers[packetId](packet);
+                    int packetLength = packet.ReadInt();
+                    data = packet.ReadBytes(packetLength);
                 }
-            });
+
+                ThreadManager.ExecuteOnMainThread(() =>
+                {
+                    using (Packet packet = new Packet(data))
+                    {
+                        int packetId = packet.ReadInt();
+                        packetHandlers[packetId](packet);
+                    }
+                });
+            }
+
+            private void Disconnect()
+            {
+                instance.Disconnect();
+                endPoint = null;
+            }
         }
 
-        private void Disconnect()
+        private void InitialiseClientData()
         {
-            instance.Disconnect();
-            endPoint = null;
-        }
-    }
-
-    private void InitialiseClientData()
-    {
-        packetHandlers = new Dictionary<int, PacketHandler>()
+            packetHandlers = new Dictionary<int, PacketHandler>()
         {
             { (int)ServerPackets.welcome,ClientHandle.Welcome},
             { (int)ServerPackets.spawnPlayer,ClientHandle.SpawnedPlayer},
@@ -307,18 +308,19 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.worldUpdates,ClientHandle.WorldStateUpdated},
             { (int)ServerPackets.playerDisconnected,ClientHandle.PlayerDisconnected}
         };
-        Debug.Log("Initialise client data");
-    }
+            Debug.Log("Initialise client data");
+        }
 
-    private void Disconnect()
-    {
-        if(isConnected)
+        private void Disconnect()
         {
-            isConnected = false;
-            tcp.socket.Close();
-            udp.socket.Close();
-            Debug.Log("Disconnected from server");
-            //Leave Match here
+            if (isConnected)
+            {
+                isConnected = false;
+                tcp.socket.Close();
+                udp.socket.Close();
+                Debug.Log("Disconnected from server");
+                //Leave Match here
+            }
         }
     }
 }

@@ -1,26 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class StaticAnimatingTileManager : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public int id;
-    public Sprite[] spArr;
-
-    public SpriteRenderer spRenderer;
-
-    public void SetID(int id)
+    public class StaticAnimatingTileManager : MonoBehaviour
     {
-        this.id = id;
-    }
+        public int id;
+        public Sprite[] spArr;
 
-    public void SetPosition(Vector3Int v)
-    {
-        transform.position = GridManager.instance.cellToworld(v);
-    }
+        public SpriteRenderer spRenderer;
 
-    public void SetSprite(int index)
-    {
-        spRenderer.sprite = spArr[index];
+        public void SetID(int id)
+        {
+            this.id = id;
+        }
+
+        public void SetPosition(Vector3Int v)
+        {
+            transform.position = GridManager.instance.cellToworld(v);
+        }
+
+        public void SetSprite(int index)
+        {
+            spRenderer.sprite = spArr[index];
+        }
     }
 }

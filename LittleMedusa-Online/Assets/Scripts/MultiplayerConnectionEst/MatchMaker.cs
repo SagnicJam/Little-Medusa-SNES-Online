@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MatchMaker : MonoBehaviour
+namespace MedusaMultiplayer
 {
-    public void JoinQueue()
+    public class MatchMaker : MonoBehaviour
     {
-        //SignalRCoreConnect.instance.JoinQueue();
+        public void JoinQueue()
+        {
+            //SignalRCoreConnect.instance.JoinQueue();
+        }
     }
 }
